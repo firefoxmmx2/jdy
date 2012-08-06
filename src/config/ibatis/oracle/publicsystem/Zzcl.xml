@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="zzcl" type="com.aisino2.publicsystem.domain.Zzcl"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--纸质材料(t_zzcl)-->
+	<resultMap id="zzclResult" class="zzcl">
+		<result property="qyid" column="qyid" />
+		<result property="zzclid" column="zzclid" />
+		<result property="tpmc" column="tpmc" />
+		<result property="tplx" column="tplx" />
+		<result property="tpnr" column="tpnr" />
+	</resultMap>
+	<!--纸质材料(t_zzcl)-->
+	<resultMap id="zzclListResult" class="zzcl">
+		<result property="qyid" column="qyid" />
+		<result property="zzclid" column="zzclid" />
+		<result property="tpmc" column="tpmc" />
+		<result property="tplx" column="tplx" />
+	</resultMap>
+	<sql id="t_zzclWhere">
+			<isNotEmpty prepend="and" property="qyid">
+				a.qyid=#qyid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zzclid">
+				a.zzclid=#zzclid#
+			</isNotEmpty>
+			<isNotEmpty  prepend="and" property="tplx">
+				a.tplx=#tplx#
+			</isNotEmpty>
+	</sql>
+	<sql id="t_zzclPageWhere" >
+		<include refid="t_zzclWhere" />	</sql>
+	<sql id="t_zzclListWhere" >
+		<include refid="t_zzclWhere" />	</sql>
+	<sql id="t_zzclSelectWhere"  >
+		<include refid="t_zzclWhere" />	</sql>
+	<!--纸质材料(t_zzcl)-->
+	<insert id="insertZzcl"  parameterClass="zzcl">
+		insert into t_zzcl (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="qyid">
+				qyid
+			</isNotNull>
+			<isNotNull prepend="," property="zzclid">
+				zzclid
+			</isNotNull>
+			<isNotNull prepend="," property="tpmc">
+				tpmc
+			</isNotNull>
+			<isNotNull prepend="," property="tplx">
+				tplx
+			</isNotNull>
+			<isNotNull prepend="," property="tpnr">
+				tpnr
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="qyid">
+				#qyid#
+			</isNotNull>
+			<isNotNull prepend="," property="zzclid">
+				#zzclid#
+			</isNotNull>
+			<isNotNull prepend="," property="tpmc">
+				#tpmc#
+			</isNotNull>
+			<isNotNull prepend="," property="tplx">
+				#tplx#
+			</isNotNull>
+			<isNotNull prepend="," property="tpnr">
+				#tpnr#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--纸质材料(t_zzcl)-->
+	<update id="updateZzcl" parameterClass="zzcl">
+		update t_zzcl a set a.zzclid=a.zzclid
+		<dynamic prepend="">
+			<isNotNull prepend="," property="qyid">
+				qyid=#qyid#
+			</isNotNull>
+			
+		</dynamic>
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_zzclWhere" />
+		</dynamic>
+	</update>
+	<!--纸质材料(t_zzcl)-->
+	<delete id="deleteZzcl" parameterClass="zzcl">
+		delete from t_zzcl a where 1=1 
+		<dynamic prepend="">
+			<include refid="t_zzclWhere" />
+		</dynamic>
+	</delete>
+	<!--纸质材料(t_zzcl)-->
+	<select id="getZzclList" resultMap="zzclListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.qyid qyid,a.zzclid zzclid,a.tpmc tpmc,a.tplx tplx,a.tpnr tpnr
+		from t_zzcl a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_zzclPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--纸质材料(t_zzcl)-->
+	<select id="getZzclListCount" resultClass="int" parameterClass="map">
+		select count(1) a from t_zzcl a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_zzclPageWhere" />
+		</dynamic>
+	</select>
+	<!--纸质材料(t_zzcl)-->
+	<select id="getZzclListNoPage" resultMap="zzclListResult" parameterClass="zzcl">
+		select a.qyid qyid,a.zzclid zzclid,a.tpmc tpmc,a.tplx tplx,a.tpnr tpnr
+		from t_zzcl a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_zzclListWhere" />
+		</dynamic>
+		order by a.qyid,a.zzclid
+	</select>
+	<!--纸质材料(t_zzcl)-->
+	<select id="getZzcl" resultMap="zzclResult" parameterClass="zzcl">
+		select a.qyid qyid,a.zzclid zzclid,a.tpmc tpmc,a.tplx tplx,a.tpnr tpnr
+		from t_zzcl a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_zzclSelectWhere" />
+		</dynamic>
+		order by a.qyid,a.zzclid
+	</select>
+	<!--纸质材料(t_zzcl)不查询BLOB-->
+	<select id="getZzclNoBlob" resultMap="zzclListResult" parameterClass="zzcl">
+		select a.qyid qyid,a.zzclid zzclid,a.tpmc tpmc,a.tplx tplx
+		from t_zzcl a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_zzclSelectWhere" />
+		</dynamic>
+		order by a.qyid,a.zzclid
+	</select>
+</sqlMap>

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="qyzajbtj" type="com.aisino2.publicsystem.domain.Qyzajbtj"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<resultMap id="qyzajbtjResult" class="qyzajbtj">
+		<result property="ajc" column="ajc" />
+		<result property="bjc" column="bjc" />
+		<result property="cjc" column="cjc" />
+		<result property="qtc" column="qtc" />
+		<result property="dsjgdm" column="dsjgdm"/>
+		<result property="dsjgmc" column="dsjgmc"/>
+		<result property="fxjdm" column="fxjdm"/>
+		<result property="fxjmc" column="fxjmc"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="gxdwdm" column="gxdwdm"/>
+		<result property="qybm" column="qybm"/>
+		<result property="qymc" column="qymc"/>
+		<result property="hylbdm" column="hylbdm"/>
+	</resultMap>
+	<resultMap id="qyzajbbgtjResult" class="qyzajbtj">
+		<result property="ygdd" column="ygdd" />
+		<result property="yddg" column="yddg" />
+		<result property="dsjgdm" column="dsjgdm"/>
+		<result property="dsjgmc" column="dsjgmc"/>
+		<result property="fxjdm" column="fxjdm"/>
+		<result property="fxjmc" column="fxjmc"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="gxdwdm" column="gxdwdm"/>
+		<result property="qybm" column="qybm"/>
+		<result property="qymc" column="qymc"/>
+		<result property="hylbdm" column="hylbdm"/>
+	</resultMap>
+	<resultMap id="qyjbxxbgtjResult" class="qyzajbtj">
+		<result property="qybm" column="qybm"/>
+		<result property="qymc" column="qymc"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="gxdwdm" column="gxdwdm"/>
+		<result property="zabdm" column="zabdm" />
+		<result property="zajbmc" column="zajbmc" />
+		<result property="yzabdm" column="yzabdm" />
+		<result property="yzajbmc" column="yzajbmc" />
+		<result property="bgsj" column="bgsj"/>
+	</resultMap>
+	<resultMap id="qyzaxxtjResult" class="qyzajbtj">
+		<result property="qybm" column="qybm"/>
+		<result property="qymc" column="qymc"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="gxdwdm" column="gxdwdm"/>
+		<result property="qyid" column="qyid" />
+	</resultMap>
+	<select id="getQyzajbtjList" resultMap="qyzajbtjResult" parameterClass="map">
+		select m.* from (select rownum rowno, x.* from ( select z.* from 
+		(select 
+			 count(case when t.zabdm='1' then 1 end) ajc,
+			 count(case when t.zabdm='2' then 1 end) bjc,
+			 count(case when t.zabdm='3' then 1 end) cjc,
+			 count(case when t.zabdm='4' then 1 end) qtc
+			 <isNotEmpty prepend="," property="selectConditon">
+				$selectConditon$
+			 </isNotEmpty>
+		from 
+		(select t.zajbmc,t.zabdm,t.hylbdm,t.qymc,t.qybm,t.lrsj,
+				<isEmpty  prepend=" " property="cityFlag">
+					(select d.departname as dsjgmc from t_department d where substr(t.gxdwbm, 0, 4)||'00000000'=d.departcode) as dsjgmc,
+	 				 substr(t.gxdwbm,0,4)||'00000000' as dsjgdm,
+	 				(select d.departname as fxjmc from t_department d where substr(t.gxdwbm, 0, 6)||'000000'=d.departcode) as fxjmc,
+	 				 substr(t.gxdwbm,0,6)||'000000' as fxjdm,
+				</isEmpty>
+ 				<isEqual   prepend=" " property="cityFlag"  compareValue="1">
+ 					(select d.departname as dsjgmc from t_department d where substr(t.gxdwbm, 0, 2)||'0000000000'=d.departcode) as dsjgmc,
+	 				 substr(t.gxdwbm,0,2)||'0000000000' as dsjgdm,
+	 				(select d.departname as fxjmc from t_department d where substr(t.gxdwbm, 0, 6)||'000000'=d.departcode) as fxjmc,
+	 				 substr(t.gxdwbm,0,6)||'000000' as fxjdm,
+ 				</isEqual>
+ 				(select d.departname as gxdwmc from t_department d where substr(t.gxdwbm, 0, 8)||'0000'=d.departcode) as gxdwmc,
+ 				substr(t.gxdwbm,0,8)||'0000' as gxdwdm
+ 				from t_qyjbxx t ,t_department d where   t.gxdwbm(+)=d.departcode and t.scbz=0)  t
+ 		where  1=1
+ 			<isNotEmpty prepend="and" property="gxdwdm">
+				t.gxdwdm=#gxdwdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="fxjdm">
+				t.fxjdm=#fxjdm# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dsjgdm">
+				t.dsjgdm=#dsjgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qybm">
+				t.qybm=#qybm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				t.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qssj">
+				t.lrsj &gt;=#qssj:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jzsj">
+				t.lrsj &lt; #jzsj:DATE#+1
+			</isNotEmpty>
+			<isNotEmpty prepend=" " property="groupBy">
+				 group by $groupBy$
+			</isNotEmpty>
+		)  z order by $pageSort$ ) x ) m where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<select id="getQyzajbtjListCount" resultClass="int" parameterClass="map">
+		select count(1) from 
+		(select 
+			 count(case when t.zabdm='1' then 1 end) ajc,
+			 count(case when t.zabdm='2' then 1 end) bjc,
+			 count(case when t.zabdm='3' then 1 end) cjc,
+			 count(case when t.zabdm='4' then 1 end) qtc
+			 <isNotEmpty prepend="," property="selectConditon">
+				$selectConditon$
+			 </isNotEmpty>
+		from 
+		(select t.zajbmc,t.zabdm,t.hylbdm,t.qymc,t.qybm,t.lrsj,
+ 				<isEmpty  prepend=" " property="cityFlag">
+					(select d.departname as dsjgmc from t_department d where substr(t.gxdwbm, 0, 4)||'00000000'=d.departcode) as dsjgmc,
+	 				 substr(t.gxdwbm,0,4)||'00000000' as dsjgdm,
+	 				(select d.departname as fxjmc from t_department d where substr(t.gxdwbm, 0, 6)||'000000'=d.departcode) as fxjmc,
+	 				 substr(t.gxdwbm,0,6)||'000000' as fxjdm,
+				</isEmpty>
+ 				<isEqual   prepend=" " property="cityFlag"  compareValue="1">
+ 					(select d.departname as dsjgmc from t_department d where substr(t.gxdwbm, 0, 2)||'0000000000'=d.departcode) as dsjgmc,
+	 				 substr(t.gxdwbm,0,2)||'0000000000' as dsjgdm,
+	 				(select d.departname as fxjmc from t_department d where substr(t.gxdwbm, 0, 6)||'000000'=d.departcode) as fxjmc,
+	 				 substr(t.gxdwbm,0,6)||'000000' as fxjdm,
+ 				</isEqual>
+ 				(select d.departname as gxdwmc from t_department d where substr(t.gxdwbm, 0, 8)||'0000'=d.departcode) as gxdwmc,
+ 				substr(t.gxdwbm,0,8)||'0000' as gxdwdm
+ 				from t_qyjbxx t ,t_department d where  t.gxdwbm(+)=d.departcode and t.scbz=0)  t
+ 		where  1=1
+ 			<isNotEmpty prepend="and" property="gxdwdm">
+				t.gxdwdm=#gxdwdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="fxjdm">
+				t.fxjdm=#fxjdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dsjgdm">
+				t.dsjgdm=#dsjgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qybm">
+				t.qybm=#qybm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				t.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qssj">
+				t.lrsj &gt;=#qssj:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jzsj">
+				t.lrsj &lt; #jzsj:DATE#+1
+			</isNotEmpty>
+			<isNotEmpty prepend=" " property="groupBy">
+				 group by $groupBy$
+			</isNotEmpty>)
+	</select>
+	<!-- 企业治安基本查询统计 -->
+	<select id="getQyzajbbgtjList" resultMap="qyzajbbgtjResult" parameterClass="map">
+		select m.* from (select rownum rowno, x.* from ( select z.* from 
+			(select 
+				count(case when  t.zabdm &lt; tl.zabdm then 1 end) ygdd,
+				count(case when  t.zabdm &gt; tl.zabdm then 1 end) yddg
+				<isNotEmpty prepend="," property="selectConditon">
+					$selectConditon$
+				 </isNotEmpty>
+			from 
+				(select 
+				t.zajbmc,t.zabdm,t.hylbdm,t.qymc,t.qybm,t.lrsj,
+				<isEmpty  prepend=" " property="cityFlag">
+					(select d.departname as dsjgmc from t_department d where substr(t.gxdwbm, 0, 4)||'00000000'=d.departcode) as dsjgmc,
+	 				 substr(t.gxdwbm,0,4)||'00000000' as dsjgdm,
+	 				(select d.departname as fxjmc from t_department d where substr(t.gxdwbm, 0, 6)||'000000'=d.departcode) as fxjmc,
+	 				 substr(t.gxdwbm,0,6)||'000000' as fxjdm,
+				</isEmpty>
+ 				<isEqual   prepend=" " property="cityFlag"  compareValue="1">
+ 					(select d.departname as dsjgmc from t_department d where substr(t.gxdwbm, 0, 2)||'0000000000'=d.departcode) as dsjgmc,
+	 				 substr(t.gxdwbm,0,2)||'0000000000' as dsjgdm,
+	 				(select d.departname as fxjmc from t_department d where substr(t.gxdwbm, 0, 6)||'000000'=d.departcode) as fxjmc,
+	 				 substr(t.gxdwbm,0,6)||'000000' as fxjdm,
+ 				</isEqual>
+				(select d.departname as gxdwmc from t_department d where substr(t.gxdwbm, 0, 8)||'0000'=d.departcode) as gxdwmc,
+				substr(t.gxdwbm,0,8)||'0000' as gxdwdm
+				from t_qyjbxx t ,t_department d where t.gxdwbm=d.departcode and t.scbz=0) t,t_qyjbxx_ls  tl
+			where  t.qybm=tl.qybm and tl.qylsid in (select max(qylsid) from t_qyjbxx_ls group by qybm)
+			<isNotEmpty prepend="and" property="gxdwdm">
+				t.gxdwdm=#gxdwdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="fxjdm">
+				t.fxjdm=#fxjdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dsjgdm">
+				t.dsjgdm=#dsjgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qybm">
+				t.qybm=#qybm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				t.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qssj">
+				t.lrsj &gt;=#qssj:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jzsj">
+				t.lrsj &lt; #jzsj:DATE#+1
+			</isNotEmpty>
+			<isNotEmpty prepend=" " property="groupBy">
+				 group by $groupBy$
+			</isNotEmpty>
+			)  z order by $pageSort$ ) x ) m where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<select id="getQyzajbbgtjListCount" resultClass="int" parameterClass="map">
+			select count(1) from 
+			(select 
+				count(case when  t.zabdm &lt; tl.zabdm then 1 end) ygdd,
+				count(case when  t.zabdm &gt; tl.zabdm then 1 end) yddg
+				<isNotEmpty prepend="," property="selectConditon">
+					$selectConditon$
+				 </isNotEmpty>
+			from 
+				(select 
+				t.zajbmc,t.zabdm,t.hylbdm,t.qymc,t.qybm,t.lrsj,
+				<isEmpty  prepend=" " property="cityFlag">
+					(select d.departname as dsjgmc from t_department d where substr(t.gxdwbm, 0, 4)||'00000000'=d.departcode) as dsjgmc,
+	 				 substr(t.gxdwbm,0,4)||'00000000' as dsjgdm,
+	 				(select d.departname as fxjmc from t_department d where substr(t.gxdwbm, 0, 6)||'000000'=d.departcode) as fxjmc,
+	 				 substr(t.gxdwbm,0,6)||'000000' as fxjdm,
+				</isEmpty>
+ 				<isEqual   prepend=" " property="cityFlag"  compareValue="1">
+ 					(select d.departname as dsjgmc from t_department d where substr(t.gxdwbm, 0, 2)||'0000000000'=d.departcode) as dsjgmc,
+	 				 substr(t.gxdwbm,0,2)||'0000000000' as dsjgdm,
+	 				(select d.departname as fxjmc from t_department d where substr(t.gxdwbm, 0, 6)||'000000'=d.departcode) as fxjmc,
+	 				 substr(t.gxdwbm,0,6)||'000000' as fxjdm,
+ 				</isEqual>
+				(select d.departname as gxdwmc from t_department d where substr(t.gxdwbm, 0, 8)||'0000'=d.departcode) as gxdwmc,
+				substr(t.gxdwbm,0,8)||'0000' as gxdwdm
+				from t_qyjbxx t ,t_department d where t.gxdwbm=d.departcode and t.scbz=0) t,t_qyjbxx_ls  tl
+			where  t.qybm=tl.qybm and tl.qylsid in (select max(qylsid) from t_qyjbxx_ls group by qybm)
+			<isNotEmpty prepend="and" property="gxdwdm">
+				t.gxdwdm=#gxdwdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="fxjdm">
+				t.fxjdm=#fxjdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dsjgdm">
+				t.dsjgdm=#dsjgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qybm">
+				t.qybm=#qybm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				t.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qssj">
+				t.lrsj &gt;=#qssj:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jzsj">
+				t.lrsj &lt; #jzsj:DATE#+1
+			</isNotEmpty>
+			<isNotEmpty prepend=" " property="groupBy">
+				 group by $groupBy$
+			</isNotEmpty>
+			)
+	</select>
+	<select id="getQyjbxxbgtjList" resultMap="qyjbxxbgtjResult" parameterClass="map">
+		select m.* from (select rownum rowno, x.* from ( select z.* from 
+			(select 
+			t.qybm,
+			t.qymc,
+			t.gxdwbm gxdwdm,
+			t.gxdwmc,
+			t.zabdm,
+			t.zajbmc,
+			tl.zabdm yzabdm,
+			tl.zajbmc yzajbmc,
+			tl.ztgbrq bgsj
+		from t_qyjbxx t ,t_qyjbxx_ls tl
+		where t.qybm=tl.qybm and tl.qylsid in (select max(t.qylsid) from t_qyjbxx_ls t group by t.qybm) and t.scbz=0
+		<isEqual prepend="and" property="relation"  compareValue="1">
+			t.zabdm &lt; tl.zabdm
+		</isEqual>
+		<isEqual prepend="and" property="relation"  compareValue="2"> 
+			t.zabdm &gt; tl.zabdm
+		</isEqual>
+		<isNotEmpty prepend="and" property="hylbdm">
+			t.hylbdm=#hylbdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwdm">
+			t.gxdwbm like '$gxdwdm$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qybm">
+			t.qybm = #qybm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qssj">
+			t.lrsj &gt;=#qssj:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jzsj">
+			t.lrsj &lt; #jzsj:DATE#+1
+		</isNotEmpty>
+		)  z order by $pageSort$ ) x ) m where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<select id="getQyjbxxbgtjListCount" resultClass="int" parameterClass="map" >
+		select 
+			count(1)
+		from t_qyjbxx t ,t_qyjbxx_ls tl
+		where t.qybm=tl.qybm and tl.qylsid in (select max(t.qylsid) from t_qyjbxx_ls t group by t.qybm) and t.scbz=0
+		<isEqual prepend="and" property="relation"  compareValue="1">
+			t.zabdm &lt; tl.zabdm
+		</isEqual>
+		<isEqual prepend="and" property="relation"  compareValue="2"> 
+			t.zabdm &gt; tl.zabdm
+		</isEqual>
+		<isNotEmpty prepend="and" property="hylbdm">
+			t.hylbdm=#hylbdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwdm">
+			t.gxdwbm like '$gxdwdm$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qybm">
+			t.qybm = #qybm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qssj">
+			t.lrsj &gt;=#qssj:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jzsj">
+			t.lrsj &lt; #jzsj:DATE#+1
+		</isNotEmpty>
+	</select>
+	<select id="getQyzaxxList" resultMap="qyzaxxtjResult" parameterClass="map">
+		select m.* from (select rownum rowno, x.* from ( select z.* from 
+			(select 
+			t.qyid,
+			t.qybm,
+			t.qymc,
+			t.gxdwbm gxdwdm,
+			t.gxdwmc
+		from t_qyjbxx t 
+		where  t.scbz=0
+		<isNotEmpty prepend="and" property="hylbdm">
+			t.hylbdm=#hylbdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwdm">
+			t.gxdwbm like '$gxdwdm$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qybm">
+			t.qybm = #qybm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="zabdm">
+			t.zabdm = #zabdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qssj">
+			t.lrsj &gt;=#qssj:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jzsj">
+			t.lrsj &lt; #jzsj:DATE#+1
+		</isNotEmpty>
+		)  z order by $pageSort$ ) x ) m where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<select id="getQyzaxxListCount" resultClass="int" parameterClass="map">
+		select 
+			count(1)
+		from t_qyjbxx t 
+		where  t.scbz=0
+		<isNotEmpty prepend="and" property="hylbdm">
+			t.hylbdm=#hylbdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwdm">
+			t.gxdwbm like '$gxdwdm$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qybm">
+			t.qybm = #qybm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="zabdm">
+			t.zabdm = #zabdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qssj">
+			t.lrsj &gt;=#qssj:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jzsj">
+			t.lrsj &lt; #jzsj:DATE#+1
+		</isNotEmpty>
+	</select>
+</sqlMap>

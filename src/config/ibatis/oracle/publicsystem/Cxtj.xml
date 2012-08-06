@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="cxtj" type="com.aisino2.publicsystem.domain.Cxtj"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--查询统计(t_cxtj)-->
+	<resultMap id="cxtjResult" class="cxtj">
+		<result property="cxtjid" column="cxtjid" />
+		<result property="tjrq" column="tjrq" />
+		<result property="hylbdm" column="hylbdm" />
+		<result property="hylb" column="hylb" />
+		<result property="dsjgdm" column="dsjgdm" />
+		<result property="dsjgmc" column="dsjgmc" />
+		<result property="fxjdm" column="fxjdm" />
+		<result property="fxjmc" column="fxjmc" />
+		<result property="gxdwdm" column="gxdwdm" />
+		<result property="gxdwmc" column="gxdwmc" />
+		<result property="qybm" column="qybm" />
+		<result property="qymc" column="qymc" />
+		<result property="hj" column="hj" />
+	</resultMap>
+	<!--查询统计(t_cxtj)-->
+	<resultMap id="cxtjListResult" class="cxtj">
+		<result property="cxtjid" column="cxtjid"/>
+		<result property="tjrq" column="tjrq"/>
+		<result property="hylbdm" column="hylbdm"/>
+		<result property="hylb" column="hylb"/>
+		<result property="dsjgdm" column="dsjgdm"/>
+		<result property="dsjgmc" column="dsjgmc"/>
+		<result property="fxjdm" column="fxjdm"/>
+		<result property="fxjmc" column="fxjmc"/>
+		<result property="gxdwdm" column="gxdwdm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="qybm" column="qybm"/>
+		<result property="qymc" column="qymc"/>
+		<result property="hj" column="hj"/>
+	</resultMap>
+	<sql id="t_cxtjWhere">
+			<isNotEmpty prepend="and" property="cxtjid">
+				a.cxtjid=#cxtjid#
+			</isNotEmpty>
+	</sql>
+	<sql id="t_cxtjPageWhere" >
+		<include refid="t_cxtjWhere" />	</sql>
+	<sql id="t_cxtjListWhere" >
+		<include refid="t_cxtjWhere" />	</sql>
+	<sql id="t_cxtjSelectWhere"  >
+		<include refid="t_cxtjWhere" />	</sql>
+
+	<!--查询统计(t_cxtj)-->
+	<select id="getCxtjList" resultMap="cxtjListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.cxtjid cxtjid,a.tjrq tjrq,a.hylbdm hylbdm,a.hylb hylb,a.dsjgdm dsjgdm,a.dsjgmc dsjgmc,a.fxjdm fxjdm,a.fxjmc fxjmc,a.gxdwdm gxdwdm,a.gxdwmc gxdwmc,a.qybm qybm,a.qymc qymc,a.hj hj
+		from t_cxtj a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_cxtjPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--查询统计(t_cxtj)-->
+	<select id="getCxtjListCount" resultClass="int" parameterClass="map">
+		select count(1) a from t_cxtj a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_cxtjPageWhere" />
+		</dynamic>
+	</select>
+	<!--查询统计(t_cxtj)-->
+	<select id="getCxtjListNoPage" resultMap="cxtjListResult" parameterClass="cxtj">
+		select a.cxtjid cxtjid,a.tjrq tjrq,a.hylbdm hylbdm,a.hylb hylb,a.dsjgdm dsjgdm,a.dsjgmc dsjgmc,a.fxjdm fxjdm,a.fxjmc fxjmc,a.gxdwdm gxdwdm,a.gxdwmc gxdwmc,a.qybm qybm,a.qymc qymc,a.hj hj
+		from t_cxtj a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_cxtjListWhere" />
+		</dynamic>
+		order by a.cxtjid
+	</select>
+	<!--查询统计(t_cxtj)-->
+	<select id="getCxtj" resultMap="cxtjResult" parameterClass="cxtj">
+		select a.cxtjid cxtjid,a.tjrq tjrq,a.hylbdm hylbdm,a.hylb hylb,a.dsjgdm dsjgdm,a.dsjgmc dsjgmc,a.fxjdm fxjdm,a.fxjmc fxjmc,a.gxdwdm gxdwdm,a.gxdwmc gxdwmc,a.qybm qybm,a.qymc qymc,a.hj hj
+		from t_cxtj a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_cxtjSelectWhere" />
+		</dynamic>
+		order by a.cxtjid
+	</select>
+	
+	<!-- 以下为添加的统计 -->
+	<!-- 日常检查统计 -->
+	<resultMap id="rcjctjListResult" class="cxtj">
+		<result property="qyzs" column="qyzs" />
+		<result property="yjcqys" column="yjcqys" />
+		<result property="wjcqys" column="wjcqys" />
+		<result property="rcjccs" column="rcjccs" />
+		<result property="mjjczjccs" column="mjjczjccs" />
+		<result property="ssddsjgdm" column="ssddsjgdm" />
+		<result property="ssddsjgmc" column="ssddsjgmc" />
+		<result property="ssdxjgajgdm" column="ssdxjgajgdm" />
+		<result property="ssdxjgajgmc" column="ssdxjgajgmc" />
+		<result property="gxdwbm" column="gxdwbm" />
+		<result property="gxdwmc" column="gxdwmc" />
+	</resultMap>
+	<resultMap id="rcjctjListqyxxResult" class="cxtj">
+		<result property="qyid" column="qyid" />
+		<result property="qybm" column="qybm" />
+		<result property="qymc" column="qymc" />
+		<result property="gxdwbm" column="gxdwbm" />
+		<result property="gxdwmc" column="gxdwmc" />
+		<result property="zrs" column="zrs" />
+		<result property="lxdh" column="lxdh" />
+		<result property="hylbdm" column="hylbdm" />
+		<result property="hylb" column="hylb" />
+		<result property="yyztdm" column="yyztdm" />
+		<result property="yyztmc" column="yyztmc" />
+		<result property="zjztdm" column="zjztdm" />
+		<result property="zjztmc" column="zjztmc" />
+	</resultMap>
+	<resultMap id="rcjctjListrcjcxxResult" class="cxtj">
+		<result property="rcjcid" column="rcjcid" />
+		<result property="jcrq" column="jcrq" />
+		<result property="qymc" column="qymc" />
+		<result property="gxdwmc" column="gxdwmc" />
+		<result property="jcfs" column="jcfs" />
+		<result property="fxwt" column="fxwt" />
+		<result property="cljg" column="cljg" />
+		<result property="jcrxm" column="jcrxm" />
+		<result property="mjjczbh" column="mjjczbh" />
+		<result property="jcjgmc" column="jcjgmc" />
+	</resultMap>
+	<!--日常检查统计-->
+	<select id="getRcjctjList" resultMap="rcjctjListResult" parameterClass="map">
+		select x.* from (select rownum rowno,z.* from 
+		(
+		select count(distinct a.qyid) qyzs,count(distinct b.qyid) yjcqys,count(distinct a.qyid)-count(distinct b.qyid) wjcqys,count(b.rcjcid) rcjccs,count(b.mjjczbh) mjjczjccs,
+        $selectTab$
+        from t_qyjbxx a,
+        (select * from t_rcjc 
+        	where scbz=0
+        	<isNotEmpty prepend="and" property="qsrq">
+				jcrq &gt;=#qsrq:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jzrq">
+				jcrq &lt;#jzrq:DATE#+1
+			</isNotEmpty>
+    	) b
+        where a.qyid = b.qyid(+) and (a.yyztdm='1' or a.yyztdm='11') 
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="scbz">
+				a.scbz=#scbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zjztdm">
+				a.zjztdm=#zjztdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zxbz">
+				a.zxbz=#zxbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				a.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				a.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="groupBy">
+				group by $groupBy$
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="pageSort">
+				order by $pageSort$
+			</isNotEmpty>
+		</dynamic>
+		)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--日常检查统计-->
+	<select id="getRcjctjListCount" resultClass="int" parameterClass="map">
+		select count(1) a from (
+		select count(distinct a.qyid) qyzs,count(distinct b.qyid) yjcqys,count(distinct a.qyid)-count(distinct b.qyid) wjcqys,count(b.rcjcid) rcjccs,count(b.mjjczbh) mjjczjccs,
+        $selectTab$
+        from t_qyjbxx a,
+        (select * from t_rcjc 
+        	where scbz=0
+        	<isNotEmpty prepend="and" property="qsrq">
+				jcrq &gt;=#qsrq:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jzrq">
+				jcrq &lt;#jzrq:DATE#+1
+			</isNotEmpty>
+    	) b
+        where a.qyid = b.qyid(+) and (a.yyztdm='1' or a.yyztdm='11') 
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="scbz">
+				a.scbz=#scbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zjztdm">
+				a.zjztdm=#zjztdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zxbz">
+				a.zxbz=#zxbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				a.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				a.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="groupBy">
+				group by $groupBy$
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="pageSort">
+				order by $pageSort$
+			</isNotEmpty>
+		</dynamic>
+		) z
+	</select>
+	<select id="getRcjctjListqyxx" resultMap="rcjctjListqyxxResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(
+		select a.qyid,a.qybm,a.qymc,a.gxdwbm,a.gxdwmc,a.zrs,a.lxdh,a.hylbdm,a.hylb,a.yyztdm,a.yyztmc,a.zjztdm,a.zjztmc 
+		from t_qyjbxx a
+		where 1=1 and (a.yyztdm='1' or a.yyztdm='11') 
+		<dynamic prepend="">
+			<isNotEmpty prepend="" property="rcjcbz">
+				<isEqual  prepend="and" property="rcjcbz" compareValue="1">
+					a.qyid in 
+				</isEqual>
+				<isEqual  prepend="and" property="rcjcbz" compareValue="0">
+					a.qyid not in 
+				</isEqual>
+				(select distinct qyid from t_rcjc b where scbz=0
+				<isNotEmpty prepend="and" property="qsrq">
+					jcrq &gt;=#qsrq:DATE#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="jzrq">
+					jcrq &lt;#jzrq:DATE#+1
+				</isNotEmpty>
+				)
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zjztdm">
+				a.zjztdm=#zjztdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zxbz">
+				a.zxbz=#zxbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="scbz">
+				a.scbz=#scbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				a.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				a.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+		</dynamic>
+		order by $pageSort$
+		)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<select id="getRcjctjListqyxxCount" resultClass="int" parameterClass="map">
+		select count(1) a from (
+		select a.qyid,a.qybm,a.qymc,a.gxdwbm,a.gxdwmc,a.zrs,a.lxdh,a.hylbdm,a.hylb,a.yyztdm,a.yyztmc,a.zjztdm,a.zjztmc 
+		from t_qyjbxx a
+		where 1=1  and (a.yyztdm='1' or a.yyztdm='11') 
+		<dynamic prepend="">
+			<isNotEmpty prepend="" property="rcjcbz">
+				<isEqual  prepend="and" property="rcjcbz" compareValue="1">
+					a.qyid in 
+				</isEqual>
+				<isEqual  prepend="and" property="rcjcbz" compareValue="0">
+					a.qyid not in 
+				</isEqual>
+				(select distinct qyid from t_rcjc b where scbz=0
+				<isNotEmpty prepend="and" property="qsrq">
+					jcrq &gt;=#qsrq:DATE#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="jzrq">
+					jcrq &lt;#jzrq:DATE#+1
+				</isNotEmpty>
+				)
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zjztdm">
+				a.zjztdm=#zjztdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zxbz">
+				a.zxbz=#zxbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="scbz">
+				a.scbz=#scbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				a.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				a.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+		</dynamic>
+		order by $pageSort$
+		) z
+	</select>
+	<select id="getRcjctjListrcjcxx" resultMap="rcjctjListrcjcxxResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(
+		select a.rcjcid,trunc(a.jcrq) jcrq,b.qymc,b.gxdwmc,a.jcfs,a.fxwt,a.cljg,a.jcrxm,a.mjjczbh,a.jcjgmc
+    	from t_rcjc a,t_qyjbxx b
+    	where a.qyid=b.qyid and a.scbz=0 and (b.yyztdm='1' or b.yyztdm='11')
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="qsrq">
+				a.jcrq &gt;=#qsrq:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jzrq">
+				a.jcrq &lt;#jzrq:DATE#+1
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zjztdm">
+				b.zjztdm=#zjztdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zxbz">
+				b.zxbz=#zxbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="scbz">
+				b.scbz=#scbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				b.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				b.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				b.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				b.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="mjjczbz">
+				<isEqual  prepend="and" property="mjjczbz" compareValue="1">
+					a.mjjczbh is not null
+				</isEqual>
+			</isNotEmpty>
+		</dynamic>
+		order by $pageSort$
+		)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<select id="getRcjctjListrcjcxxCount" resultClass="int" parameterClass="map">
+		select count(1) a from (
+		select a.rcjcid,trunc(a.jcrq) jcrq,b.qymc,b.gxdwmc,a.jcfs,a.fxwt,a.cljg,a.jcrxm,a.mjjczbh,a.jcjgmc
+    	from t_rcjc a,t_qyjbxx b
+    	where a.qyid=b.qyid and a.scbz=0 and (b.yyztdm='1' or b.yyztdm='11')
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="qsrq">
+				a.jcrq &gt;=#qsrq:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jzrq">
+				a.jcrq &lt;#jzrq:DATE#+1
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zjztdm">
+				b.zjztdm=#zjztdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="zxbz">
+				b.zxbz=#zxbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="scbz">
+				b.scbz=#scbz#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				b.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				b.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				b.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				b.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="mjjczbz">
+				<isEqual  prepend="and" property="mjjczbz" compareValue="1">
+					a.mjjczbh is not null
+				</isEqual>
+			</isNotEmpty>
+		</dynamic>
+		order by $pageSort$
+		) z
+	</select>
+	<!-- 场所分类统计 -->
+	<resultMap id="csfltjListResult" class="cxtj">
+		<result property="qyzs" column="qyzs" />
+		<result property="zjs" column="zjs" />
+		<result property="zjl" column="zjl" />
+		<result property="gwyl" column="gwyl" />
+		<result property="yysdzyxt" column="yysdzyxt" />
+		<result property="qtylcs" column="qtylcs" />
+		<result property="snxyam" column="snxyam" />
+		<result property="mrmfzy" column="mrmfzy" />
+		<result property="qtfwcs" column="qtfwcs" />
+		<result property="ggcs" column="ggcs" />
+		<result property="dsjgdm" column="dsjgdm"/>
+		<result property="dsjgmc" column="dsjgmc"/>
+		<result property="fxjdm" column="fxjdm"/>
+		<result property="fxjmc" column="fxjmc"/>
+		<result property="gxdwdm" column="gxdwdm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+	</resultMap>
+	<select id="getCsfltjList" resultMap="csfltjListResult" parameterClass="map">
+		select nvl(tj.qyzs,0) qyzs,nvl(tj.zjs,0) zjs,
+			   decode(nvl(tj.qyzs,0),0,0,round(nvl(tj.zjs,0)/nvl(tj.qyzs,0)*100,2)) as zjl,
+			   nvl(tj.gwyl,0) gwyl,nvl(tj.yysdzyxt,0) yysdzyxt,nvl(tj.qtylcs,0) qtylcs,
+			   nvl(tj.snxyam,0) snxyam,nvl(tj.mrmfzy,0) mrmfzy,nvl(tj.qtfwcs,0) qtfwcs,
+			   nvl(tj.ggcs,0) ggcs,
+			   $selectTab$
+		from t_department dept,
+			(select count(1) qyzs,
+					sum (case when a.zjztdm='1' then 1 else 0 end) zjs,
+					sum(case when a.hylbdm='J' and a.qyzflbm='J01' then 1 else 0 end) gwyl,
+					sum(case when a.hylbdm='J' and a.qyzflbm='J02' then 1 else 0 end) yysdzyxt,
+					sum(case when a.hylbdm='J' and a.qyzflbm='J99' then 1 else 0 end) qtylcs,
+					sum(case when a.hylbdm='J' and a.qyzflbm='H01' then 1 else 0 end) snxyam,
+					sum(case when a.hylbdm='J' and a.qyzflbm='H02' then 1 else 0 end) mrmfzy,
+					sum(case when a.hylbdm='J' and a.qyzflbm='H99' then 1 else 0 end) qtfwcs,
+					sum(case when a.hylbdm='K' then 1 else 0 end) ggcs
+	        		<isNotEmpty prepend="," property="groupBy">
+						$groupBy$
+					</isNotEmpty>
+	       			from t_qyjbxx a
+	        		where a.scbz=0 and a.zxbz='0' and a.yyztdm='1' and (a.zt in('1','2') or to_number(a.zt)&gt;=90)
+					<isEmpty prepend="and" property="allhylbdm">
+						a.hylbdm in ('J','K')
+					</isEmpty>
+					<isNotEmpty prepend="and" property="qsrq">
+						a.lrsj &gt;=#qsrq:DATE#
+					</isNotEmpty>
+					<isNotEmpty prepend="and" property="jzrq">
+						a.lrsj &lt;#jzrq:DATE#+1
+					</isNotEmpty>
+					<isNotEmpty prepend="and" property="ssddsjgdm">
+						a.ssddsjgdm=#ssddsjgdm#
+				   	</isNotEmpty>
+					<isNotEmpty prepend="and" property="ssdxjgajgdm">
+						a.ssdxjgajgdm=#ssdxjgajgdm#
+					</isNotEmpty>
+					<isNotEmpty prepend="and" property="gxdwbm">
+						a.gxdwbm=#gxdwbm#
+					</isNotEmpty>
+					<isNotEmpty prepend="" property="groupBy">
+						group by $groupBy$
+					</isNotEmpty>)tj
+			where 1=1 $whereFlg$ 
+			<isNotEmpty prepend="and" property="deptcode">
+				dept.departcode like '$deptcode$%'
+			</isNotEmpty>
+		 	<isNotEmpty prepend="and" property="deptlevel">
+		 		dept.departlevel &lt;=#deptlevel# 
+		 		<isNotEmpty prepend="and" property="mindeptlevel">
+		 			dept.departlevel &gt;= #mindeptlevel# 
+				</isNotEmpty>
+			</isNotEmpty>
+			order by dept.departcode	
+	</select>
+	<select id="getCsfltjListCount" resultClass="int" parameterClass="map">
+		select 1 a from dual
+	</select>
+	<!-- 场所营业状态统计 -->
+	<resultMap id="csyyzttjListResult" class="cxtj">
+		<result property="qyzs" column="qyzs" />
+		<result property="yy" column="yy" />
+		<result property="zjs" column="zjs" />
+		<result property="zzty" column="zzty" />
+		<result property="llty" column="llty" />
+		<result property="xy" column="xy" />
+		<result property="zx" column="zx" />
+		<result property="qt" column="qt" />
+		<result property="dsjgdm" column="dsjgdm"/>
+		<result property="dsjgmc" column="dsjgmc"/>
+		<result property="fxjdm" column="fxjdm"/>
+		<result property="fxjmc" column="fxjmc"/>
+		<result property="gxdwdm" column="gxdwdm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+	</resultMap>
+	<select id="getCsyyzttjList" resultMap="csyyzttjListResult" parameterClass="map">
+		select nvl(tj.qyzs,0) qyzs,nvl(tj.yy,0) yy,nvl(tj.zjs,0) zjs,nvl(tj.zzty,0) zzty,nvl(tj.llty,0) llty,
+				nvl(tj.xy,0) xy,nvl(tj.zx,0) zx,nvl(tj.qt,0) qt,
+				$selectTab$
+		from t_department dept,
+			(select count(1) qyzs,
+				sum (case when a.yyztdm='1' then 1 else 0 end) yy,
+				sum (case when a.yyztdm='1' and a.zjztdm='1' then 1 else 0 end) zjs,
+				sum (case when a.yyztdm='2' then 1 else 0 end) zzty,
+				sum (case when a.yyztdm='3' then 1 else 0 end) llty,
+				sum (case when a.yyztdm='4' then 1 else 0 end) xy,
+				sum (case when a.yyztdm='5' then 1 else 0 end) zx,
+				sum (case when a.yyztdm='6' then 1 else 0 end) qt
+				<isNotEmpty prepend="," property="groupBy">
+					$groupBy$
+				</isNotEmpty>
+        		from t_qyjbxx a
+	        	where a.scbz=0 and (a.zt in('1','2') or to_number(a.zt)&gt;=90)
+				<isEmpty prepend="and" property="allhylbdm">
+					a.hylbdm in ('J','K')
+				</isEmpty>
+				<isNotEmpty prepend="and" property="qsrq">
+					a.lrsj &gt;=#qsrq:DATE#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="jzrq">
+					a.lrsj &lt;#jzrq:DATE#+1
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ssddsjgdm">
+					a.ssddsjgdm=#ssddsjgdm#
+			   	</isNotEmpty>
+				<isNotEmpty prepend="and" property="ssdxjgajgdm">
+					a.ssdxjgajgdm=#ssdxjgajgdm#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="gxdwbm">
+					a.gxdwbm=#gxdwbm#
+				</isNotEmpty>
+				<isNotEmpty prepend="" property="groupBy">
+					group by $groupBy$
+				</isNotEmpty>) tj
+		where 1=1 $whereFlg$ 
+			<isNotEmpty prepend="and" property="deptcode">
+				dept.departcode like '$deptcode$%'
+			</isNotEmpty>
+		 	<isNotEmpty prepend="and" property="deptlevel">
+		 		dept.departlevel &lt;=#deptlevel# 
+		 		<isNotEmpty prepend="and" property="mindeptlevel">
+		 			dept.departlevel &gt;= #mindeptlevel# 
+				</isNotEmpty>
+			</isNotEmpty>
+		order by dept.departcode
+	</select>
+	<select id="getCsyyzttjListCount" resultClass="int" parameterClass="map">
+		select 1 a from dual
+	</select>
+</sqlMap>

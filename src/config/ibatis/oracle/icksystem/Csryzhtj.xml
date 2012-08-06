@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="csryzhtj" type="com.aisino2.icksystem.domain.Csryzhtj"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--IC卡日志记录(t_ickrzjl)-->
+	<resultMap id="csryzhtjListResultTJ" class="csryzhtj">
+		<result property="dsjgdm" column="dsjgdm"/>
+		<result property="dsjgmc" column="dsjgmc"/>
+		<result property="fxjdm" column="fxjdm"/>
+		<result property="fxjmc" column="fxjmc"/>
+		<result property="gxdwdm" column="gxdwdm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="css" column="css"/>
+		<result property="xzcss" column="xzcss"/>
+		<result property="zjcss" column="zjcss"/>
+		<result property="xzzjcss" column="xzzjcss"/>
+		<result property="xzzjl" column="xzzjl"/>
+		<result property="rcjccs" column="rcjccs"/>
+		<result property="cfcss" column="cfcss"/>
+		<result property="jlcss" column="jlcss"/>
+		<result property="facss" column="facss"/>
+		<result property="cyrys" column="cyrys"/>
+		<result property="xzrys" column="xzrys"/>
+		<result property="zxrys" column="zxrys"/>
+		<result property="cfrs" column="cfrs"/>
+		<result property="jlrs" column="jlrs"/>
+		<result property="zhztrs" column="zhztrs"/>
+		<result property="yxbjs" column="yxbjs"/>
+		<result property="hfs" column="hfs"/>
+		<result property="bjhfl" column="bjhfl"/>
+		<result property="sccss" column="sccss"/>
+		<result property="csskscl" column="csskscl"/>
+		<result property="yyrzsccss" column="yyrzsccss"/>
+		<result property="skrs" column="skrs"/>
+		<result property="ryskscl" column="ryskscl"/>
+	</resultMap>
+	
+	<!--场所人员综合统计(t_csryzhtj)-->
+	<select id="getCsryzhtjList" resultMap="csryzhtjListResultTJ" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from (
+		select nvl(tj.css,0) css,nvl(tj.xzcss,0) xzcss,nvl(tj.zjcss,0) zjcss,nvl(tj.xzzjcss,0) xzzjcss,
+		decode(nvl(tj.xzcss,0),0,0,round(nvl(tj.xzzjcss,0)/nvl(tj.xzcss,0)*100,2)) as xzzjl,
+		nvl(tj.rcjccs,0) rcjccs,nvl(tj.cfcss,0) cfcss,nvl(tj.jlcss,0) jlcss,nvl(tj.facss,0) facss,
+		nvl(tj.cyrys,0) cyrys,nvl(tj.xzrys,0) xzrys,nvl(tj.zxrys,0) zxrys,nvl(tj.cfrs,0) cfrs,nvl(tj.jlrs,0) jlrs,
+		nvl(tj.zhztrs,0) zhztrs,nvl(tj.yxbjs,0) yxbjs,nvl(tj.hfs,0) hfs,
+		decode(nvl(tj.yxbjs,0),0,0,round(nvl(tj.hfs,0)/nvl(tj.yxbjs,0)*100,2)) as bjhfl,
+		nvl(qysc.sccss,0) sccss,
+		decode(nvl(tj.zjcss,0),0,0,round(nvl(qysc.sccss,0)/nvl(tj.zjcss,0)*100,2)) csskscl,
+		nvl(yyrz.yyrzsccss,0) yyrzsccss,
+		nvl(rysc.skrs,0) skrs,
+		decode(nvl(tj.cyrys,0),0,0,round(nvl(rysc.skrs,0)/nvl(tj.cyrys,0)*100,2)) ryskscl,
+		$selectTab$ 
+		from t_department dept,
+		(select 
+		sum(case when a.tjrq = #jzrq:DATE# then a.css else 0 end) as css,
+		sum(a.xzcss) as xzcss,
+		sum(case when a.tjrq = #jzrq:DATE# then a.zjcss else 0 end) as zjcss,
+		sum(a.xzzjcss) as xzzjcss,
+		sum(a.rcjccs) as rcjccs,
+		sum(a.cfcss) as cfcss,
+		sum(a.jlcss) as jlcss,
+		sum(a.facss) as facss,
+		sum(case when a.tjrq = #jzrq:DATE# then a.cyrys else 0 end) as cyrys,
+		sum(a.xzrys) as xzrys,
+		sum(a.zxrys) as zxrys,
+		sum(a.cfrs) as cfrs,
+		sum(a.jlrs) as jlrs,	
+		sum(a.hfs) as hfs,
+		sum(a.yxbjs) as yxbjs,
+		sum(a.zhztrs) as zhztrs,
+		$selectConditon$
+		from t_csryzhtj a 
+		where 1=1
+		<isNotEmpty prepend="and" property="qsrq">
+			tjrq &gt;=#qsrq:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jzrq">
+			tjrq &lt;#jzrq:DATE#+1
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="dsjgdm">
+			a.dsjgdm=#dsjgdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fxjdm">
+			a.fxjdm=#fxjdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			a.gxdwdm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="groupBy">
+			group by $groupBy$
+		</isNotEmpty>)tj,
+		(select count(distinct qybm) sccss,$selectConditon$ from t_qysctj 
+		where sskrs>0
+		<isNotEmpty prepend="and" property="qsrq">
+			tjrq &gt;=#qsrq:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jzrq">
+			tjrq &lt;#jzrq:DATE#+1
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="dsjgdm">
+			dsjgdm=#dsjgdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fxjdm">
+			fxjdm=#fxjdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			gxdwdm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="groupBy">
+			group by $groupBy$
+		</isNotEmpty>) qysc,
+		(select count(distinct qyid) yyrzsccss,$selectConditon$ from t_qyyyrztj 
+		where rzscbs='1'
+		<isNotEmpty prepend="and" property="qsrq">
+			tjrq &gt;=#qsrq:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jzrq">
+			tjrq &lt;#jzrq:DATE#+1
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="dsjgdm">
+			dsjgdm=#dsjgdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fxjdm">
+			fxjdm=#fxjdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			gxdwdm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="groupBy">
+			group by $groupBy$
+		</isNotEmpty>) yyrz,
+		(select count(distinct a.kh) skrs,$selectConditon2$ from t_qyryskjl a,t_qyryxx b,t_qyjbxx c 
+		where a.cyrybh=b.cyrybh and b.qyid=c.qyid and b.scbz=0 and c.scbz=0 and b.zxbz='0'
+		<isNotEmpty prepend="and" property="qsrq">
+			a.sksj &gt;=#qsrq:DATE#
+			<isNotEmpty prepend="+" property="tjjzsj">
+				(#tjjzsj#)/24
+			</isNotEmpty>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jzrq">
+			a.sksj &lt;#jzrq:DATE#+1
+			<isNotEmpty prepend="+" property="tjjzsj">
+				(#tjjzsj#)/24
+			</isNotEmpty>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ssddsjgdm">
+			c.ssddsjgdm=#dsjgdm#
+	   	</isNotEmpty>
+		<isNotEmpty prepend="and" property="ssdxjgajgdm">
+			c.ssdxjgajgdm=#fxjdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			c.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="groupBy">
+			group by $groupBy2$
+		</isNotEmpty>) rysc
+		where 1=1
+		$whereFlg$ 
+		<isNotEmpty prepend="and" property="deptcode">
+			dept.departcode like '$deptcode$%'
+		</isNotEmpty>
+	 	<isNotEmpty prepend="and" property="deptlevel">
+	 		dept.departlevel &lt;=#deptlevel# 
+	 		<isNotEmpty prepend="and" property="mindeptlevel">
+	 			dept.departlevel &gt;= #mindeptlevel# 
+			</isNotEmpty>
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="groupBy">
+			order by $groupBy$
+		</isNotEmpty>
+		)  z where rownum &lt;= $endRow$) x where rowno &gt;$beginRow$
+	</select>
+	<!--场所人员综合统计(t_csryzhtj)-->
+	<select id="getCsryzhtjListCount" resultClass="int" parameterClass="map">
+		select count(1) a from dual
+	</select>
+
+</sqlMap>

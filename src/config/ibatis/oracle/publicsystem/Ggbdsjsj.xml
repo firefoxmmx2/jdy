@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="ggbdsjsj" type="com.aisino2.publicsystem.domain.Ggbdsjsj"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<resultMap id="ggbdsjsjResult" class="ggbdsjsj">
+		<result property="bdsjsjid" column="bdsjsjid" />
+		<result property="wpmc" column="wpmc" />
+		<result property="wpjp" column="wpjp" />
+		<result property="wpqp" column="wpqp" />
+		<result property="sjch" column="sjch" />
+		<result property="qymc" column="qymc" />
+		<result property="qydz" column="qydz" />
+		<result property="gxdwbm" column="gxdwbm" />
+		<result property="gxdwmc" column="gxdwmc" />
+		<result property="hylbdm" column="hylbdm" />
+		<result property="hylb" column="hylb" />
+		<result property="ywbm" column="ywbm" />
+		<result property="ywbzj" column="ywbzj" />
+		<result property="ywbyzj" column="ywbyzj" />
+		<result property="xrsj" column="xrsj" />
+		<result property="gxsj" column="gxsj" />
+		<result property="wxsj" column="wxsj" />
+		<result property="biduiflag" column="biduiflag" />
+		<result property="sfyx" column="sfyx" />
+	</resultMap>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<resultMap id="ggbdsjsjListResult" class="ggbdsjsj">
+		<result property="bdsjsjid" column="bdsjsjid"/>
+		<result property="wpmc" column="wpmc"/>
+		<result property="wpjp" column="wpjp"/>
+		<result property="wpqp" column="wpqp"/>
+		<result property="sjch" column="sjch"/>
+		<result property="qymc" column="qymc"/>
+		<result property="qydz" column="qydz"/>
+		<result property="gxdwbm" column="gxdwbm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="hylbdm" column="hylbdm"/>
+		<result property="hylb" column="hylb"/>
+		<result property="ywbm" column="ywbm"/>
+		<result property="ywbzj" column="ywbzj"/>
+		<result property="ywbyzj" column="ywbyzj"/>
+		<result property="xrsj" column="xrsj"/>
+		<result property="gxsj" column="gxsj"/>
+		<result property="wxsj" column="wxsj" />
+		<result property="biduiflag" column="biduiflag"/>
+		<result property="sfyx" column="sfyx" />
+	</resultMap>
+	<sql id="T_GGBDSJSJWhere">
+		<isNotEmpty prepend="and" property="bdsjsjid">
+			a.bdsjsjid=#bdsjsjid#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ywbm">
+			a.ywbm=#ywbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ywbzj">
+			a.ywbzj=#ywbzj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ywbyzj">
+			a.ywbyzj=#ywbyzj#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDSJSJPageWhere" >
+		<include refid="T_GGBDSJSJWhere" />	
+		<isNotEmpty prepend="and" property="sjch">
+			a.sjch=#sjch#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+			a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+			a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDSJSJListWhere" >
+		<include refid="T_GGBDSJSJWhere" />	
+		<isNotEmpty prepend="and" property="sjch">
+			a.sjch=#sjch#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+			a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+			a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDSJSJSelectWhere"  >
+		<include refid="T_GGBDSJSJWhere" />
+		<isNotEmpty prepend="and" property="sjch">
+			a.sjch=#sjch#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+			a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+			a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<insert id="insertGgbdsjsj"  parameterClass="ggbdsjsj">
+		insert into T_GGBDSJSJ (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="bdsjsjid">
+				bdsjsjid
+			</isNotNull>
+			<isNotNull prepend="," property="wpmc">
+				wpmc
+			</isNotNull>
+			<isNotNull prepend="," property="wpjp">
+				wpjp
+			</isNotNull>
+			<isNotNull prepend="," property="wpqp">
+				wpqp
+			</isNotNull>
+			<isNotNull prepend="," property="sjch">
+				sjch
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				qymc
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				qydz
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				gxdwbm
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				gxdwmc
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				hylbdm
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				hylb
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				ywbm
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				ywbzj
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				ywbyzj
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				xrsj
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				gxsj
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				wxsj
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				biduiflag
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				sfyx
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="bdsjsjid">
+				#bdsjsjid#
+			</isNotNull>
+			<isNotNull prepend="," property="wpmc">
+				#wpmc#
+			</isNotNull>
+			<isNotNull prepend="," property="wpjp">
+				#wpjp#
+			</isNotNull>
+			<isNotNull prepend="," property="wpqp">
+				#wpqp#
+			</isNotNull>
+			<isNotNull prepend="," property="sjch">
+				#sjch#
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				#qymc#
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				#qydz#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				#gxdwbm#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				#gxdwmc#
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				#hylbdm#
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				#hylb#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				#ywbm#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				#ywbzj#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				#ywbyzj#
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				#xrsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				#gxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				#wxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				#biduiflag#
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				#sfyx#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<update id="updateGgbdsjsj" parameterClass="ggbdsjsj">
+		update T_GGBDSJSJ a set a.bdsjsjid=a.bdsjsjid
+		<dynamic prepend="">
+			<isNotNull prepend="," property="wpmc">
+				wpmc=#wpmc#
+			</isNotNull>
+			<isNotNull prepend="," property="wpjp">
+				wpjp=#wpjp#
+			</isNotNull>
+			<isNotNull prepend="," property="wpqp">
+				wpqp=#wpqp#
+			</isNotNull>
+			<isNotNull prepend="," property="sjch">
+				sjch=#sjch#
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				qymc=#qymc#
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				qydz=#qydz#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				gxdwbm=#gxdwbm#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				gxdwmc=#gxdwmc#
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				hylbdm=#hylbdm#
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				hylb=#hylb#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				ywbm=#ywbm#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				ywbzj=#ywbzj#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				ywbyzj=#ywbyzj#
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				xrsj=#xrsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				gxsj=#gxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				wxsj=#wxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				biduiflag=#biduiflag#
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				sfyx=#sfyx#
+			</isNotNull>
+		</dynamic>
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJSJWhere" />
+		</dynamic>
+	</update>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<delete id="deleteGgbdsjsj" parameterClass="ggbdsjsj">
+		delete from T_GGBDSJSJ a where 1=1 
+		<dynamic prepend="">
+			<include refid="T_GGBDSJSJWhere" />
+		</dynamic>
+	</delete>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<select id="getGgbdsjsjList" resultMap="ggbdsjsjListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.bdsjsjid bdsjsjid,a.wpmc wpmc,a.wpjp wpjp,a.wpqp wpqp,a.sjch sjch,a.qymc qymc,a.qydz qydz,
+		a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,
+		a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDSJSJ a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJSJPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<select id="getGgbdsjsjListCount" resultClass="int" parameterClass="map">
+		select count(1) a from T_GGBDSJSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJSJPageWhere" />
+		</dynamic>
+	</select>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<select id="getGgbdsjsjListNoPage" resultMap="ggbdsjsjListResult" parameterClass="ggbdsjsj">
+		select a.bdsjsjid bdsjsjid,a.wpmc wpmc,a.wpjp wpjp,a.wpqp wpqp,a.sjch sjch,a.qymc qymc,a.qydz qydz,
+		a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,
+		a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDSJSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJSJListWhere" />
+		</dynamic>
+		order by a.bdsjsjid
+	</select>
+	<!--公共比对手机数据表(T_GGBDSJSJ)-->
+	<select id="getGgbdsjsj" resultMap="ggbdsjsjResult" parameterClass="ggbdsjsj">
+		select a.bdsjsjid bdsjsjid,a.wpmc wpmc,a.wpjp wpjp,a.wpqp wpqp,a.sjch sjch,a.qymc qymc,a.qydz qydz,
+		a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,
+		a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDSJSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJSJSelectWhere" />
+		</dynamic>
+		order by a.bdsjsjid
+	</select>
+</sqlMap>
