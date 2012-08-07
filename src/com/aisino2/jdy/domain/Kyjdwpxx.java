@@ -18,10 +18,6 @@ public class Kyjdwpxx implements Serializable {
      */
     private String kyywdjxh;
 	/**
-	 * #物流单号
-	 */
-	private String wldh;
-	/**
 	 * #可疑物品描述
 	 */
 	private String kywpms;
@@ -38,17 +34,22 @@ public class Kyjdwpxx implements Serializable {
 	 */
 	private Date bgsj;
 	
+	/**
+	 * 对应的揽件基本信息
+	 */
+	private Ljjbxx ljjbxx;
+	
+	public Ljjbxx getLjjbxx() {
+		return ljjbxx;
+	}
+	public void setLjjbxx(Ljjbxx ljjbxx) {
+		this.ljjbxx = ljjbxx;
+	}
 	public String getKyywdjxh() {
 		return kyywdjxh;
 	}
 	public void setKyywdjxh(String kyywdjxh) {
 		this.kyywdjxh = kyywdjxh;
-	}
-	public String getWldh() {
-		return wldh;
-	}
-	public void setWldh(String wldh) {
-		this.wldh = wldh;
 	}
 	public String getKywpms() {
 		return kywpms;
