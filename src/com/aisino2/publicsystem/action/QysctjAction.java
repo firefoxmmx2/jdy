@@ -1,4 +1,4 @@
-package com.aisino2.publicsystem.action;
+﻿package com.aisino2.publicsystem.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +18,6 @@ import com.aisino2.core.web.PageAction;
 import com.aisino2.publicsystem.domain.Qysctj;
 import com.aisino2.publicsystem.service.IQysctjService;
 import com.aisino2.sysadmin.domain.Globalpar;
-import com.aisino2.ylfwzagl.domain.Wsyicktj;
 
 public class QysctjAction extends PageAction{
 	private IQysctjService qysctjService;
