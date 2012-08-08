@@ -6,4 +6,67 @@
 		<flushInterval hours="24"/>
 	</cacheModel>
 	
+	<resultMap class="jddxzpxx" id="jddxzpxx_rm">
+		<result property="id" column="id"/>
+		<result property="zpnr" column="zpnr"/>
+		<result property="scsj" column="scsj"/>
+		<result property="rdrjbxx_id" column="rdrjbxx_id"/>
+	</resultMap>
+
+	<sql id="jddxzpxxWhere">
+		<isNotEmpty prepend="and" property="id">
+			jddxzpxx.id = #id#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="rdrjbxx_id">
+			jddxzpxx.rdrjbxx_id = #rdrjbxx_id#
+		</isNotEmpty>
+	</sql>
+	<insert id="jddxzpxx.insert" parameterClass="jddxzpxx">
+		insert into t_jddxzpxx (
+			<dynamic prepend=" ">
+				<isNotNull property="id" prepend=","> 
+					id
+				</isNotNull>
+				<isNotNull property="zpnr" prepend=","> 
+					zpnr
+				</isNotNull>
+				<isNotNull property="scsj" prepend=","> 
+					scsj
+				</isNotNull>
+				<isNotNull property="rdrjbxx_id" prepend=","> 
+					rdrjbxx_id
+				</isNotNull>
+			</dynamic>
+			
+		)
+		values(
+			<dynamic prepend=" ">
+				<isNotNull property="id" prepend=","> 
+					#id#
+				</isNotNull>
+				<isNotNull property="zpnr" prepend=","> 
+					#zpnr#
+				</isNotNull>
+				<isNotNull property="scsj" prepend=","> 
+					#scsj#
+				</isNotNull>
+				<isNotNull property="rdrjbxx_id" prepend=","> 
+					#rdrjbxx_id#
+				</isNotNull>
+			</dynamic>
+		)
+		
+	</insert>	
+	
+	<delete id="jddxzpxx.delete" parameterClass="jddxzpxx">
+		delete from t_jddxzpxx jddxzpxx 
+		where 
+		<dynamic prepend=" ">
+			<include refid="jddxzpxxWhere"/>
+		</dynamic>
+	</delete>
+	
+	<select id="jddxzpxx.getByRdrjbxxId" resultClass="jddxzpxx" parameterClass="Integer">
+		select * from t_jddxzpxx where rdrjbxx_id=#value#
+	</select>
 </sqlMap>

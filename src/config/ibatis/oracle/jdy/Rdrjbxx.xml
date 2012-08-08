@@ -1,9 +1,176 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
-	<typeAlias alias="rdrjbxx" type="com.aisino2.jdy.domain.Rdrjbxx"/>
+	<typeAlias alias="Rdrjbxx" type="com.aisino2.jdy.domain.Rdrjbxx"/>
 	<cacheModel id="oneDayCategory" type="LRU">
 		<flushInterval hours="24"/>
 	</cacheModel>
 	
+	<!-- 寄递对象信息结果集 -->
+	<resultMap class="Rdrjbxx" id="rdrjbxx_rm">
+		<result property="id" column="id"/>
+		<result property="xm" column="xm"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="zjlx" column="zjlx"/>
+		<result property="ssx" column="ssx"/>
+		<result property="xxdx" column="xxdz"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="gddh" column="gddh"/>
+	</resultMap>
+<!-- 	寄递对象信息带照片 -->
+	<resultMap class="Rdrjbxx" id="rdrjbxx_zpxx_rm" extends="rdrjbxx_rm">
+		<result property="zpxx" column="id" select="jddxzpxx.getByRdrjbxxId"/>
+	</resultMap>
+	
+	<sql id="RdrjbxxWhere">
+		<isNotEmpty prepend="and" property="id">
+			Rdrjbxx.id=#id#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="zjhm">
+			Rdrjbxx.zjhm=#zjhm#
+		</isNotEmpty>
+	</sql>
+	
+	<sql id="RdrjbxxPageWhere">
+		<include refid="RdrjbxxWhere"/>
+	</sql>
+	
+	<insert id="Rdrjbxx.insert" parameterClass="Rdrjbxx">
+		insert into t_rdrjbxx(
+			<dynamic prepend=" ">
+				<isNotNull property="id" prepend=","> 
+					id
+				</isNotNull>
+				<isNotNull property="xm" prepend=","> 
+					xm
+				</isNotNull>
+				<isNotNull property="zjhm" prepend=","> 
+					zjhm
+				</isNotNull>
+				<isNotNull property="zjlx" prepend=","> 
+					zjlx
+				</isNotNull>
+				<isNotNull property="ssx" prepend=","> 
+					ssx
+				</isNotNull>
+				<isNotNull property="xxdx" prepend=","> 
+					xxdx
+				</isNotNull>
+				<isNotNull property="lxdh" prepend=","> 
+					lxdh
+				</isNotNull>
+				<isNotNull property="gddh" prepend=","> 
+					gddh
+				</isNotNull>
+			</dynamic>
+		)
+		values(
+			<dynamic>
+				<isNotNull property="id" prepend=","> 
+					#id#
+				</isNotNull>
+				<isNotNull property="xm" prepend=","> 
+					#xm#
+				</isNotNull>
+				<isNotNull property="zjhm" prepend=","> 
+					#zjhm#
+				</isNotNull>
+				<isNotNull property="zjlx" prepend=","> 
+					#zjlx#
+				</isNotNull>
+				<isNotNull property="ssx" prepend=","> 
+					#ssx#
+				</isNotNull>
+				<isNotNull property="xxdx" prepend=","> 
+					#xxdx#
+				</isNotNull>
+				<isNotNull property="lxdh" prepend=","> 
+					#lxdh#
+				</isNotNull>
+				<isNotNull property="gddh" prepend=","> 
+					#gddh#
+				</isNotNull>
+			</dynamic>
+		)
+	</insert>
+	
+	<update id="Rdrjbxx.update" parameterClass="Rdrjbxx">
+		update t_Rdrjbxx Rdrjbxx
+			id = id
+			<dynamic prepend=",">
+				<isNotNull property="xm" prepend=","> 
+					xm=#xm#
+				</isNotNull>
+				<isNotNull property="zjhm" prepend=","> 
+					zjhm=#zjhm#
+				</isNotNull>
+				<isNotNull property="zjlx" prepend=","> 
+					zjlx=#zjlx#
+				</isNotNull>
+				<isNotNull property="ssx" prepend=","> 
+					ssx=#ssx#
+				</isNotNull>
+				<isNotNull property="xxdx" prepend=","> 
+					xxdx=#xxdx#
+				</isNotNull>
+				<isNotNull property="lxdh" prepend=","> 
+					lxdh=#lxdh#
+				</isNotNull>
+				<isNotNull property="gddh" prepend=","> 
+					gddh=#gddh#
+				</isNotNull>
+			</dynamic>
+			
+			where 
+				<dynamic prepend=" ">
+					<include refid="RdrjbxxWhere"/>
+				</dynamic>
+				
+	</update>
+	
+	<delete id="Rdrjbxx.delete" parameterClass="Rdrjbxx">
+		delete from t_Rdrjbxx Rdrjbxx where 
+			<dynamic prepend=" ">
+				<include refid="RdrjbxxWhere"/>
+			</dynamic>
+	</delete>
+	
+	<select id="Rdrjbxx.get" resultMap="rdrjbxx_zpxx_rm" parameterClass="Rdrjbxx" cacheModel="oneDayCategory">
+		select Rdrjbxx.* from t_Rdrjbxx where 
+		<dynamic prepend=" ">
+			<include refid="RdrjbxxWhere"/>
+		</dynamic>
+	</select>
+	
+	<select id="Rdrjbxx.getList" resultMap="rdrjbxx_rm" parameterClass="Rdrjbxx" cacheModel="oneDayCategory">
+		select Rdrjbxx.* from t_Rdrjbxx Rdrjbxx 
+		where
+		<dynamic prepend=" ">
+			<include refid="RdrjbxxPageWhere"/>
+		</dynamic>
+	</select>
+	
+	<select id="Rdrjbxx.getListPageCount" resultClass="Integer" parameterClass="map" cacheModel="oneDayCategory">
+		select count(1) from t_Rdrjbxx Rdrjbxx
+		where 
+		<dynamic prepend=" ">
+			<include refid="RdrjbxxPageWhere"/>
+		</dynamic>
+	
+	</select>
+	<select id="Rdrjbxx.getListPage" resultMap="rdrjbxx_rm" parameterClass="map" cacheModel="oneDayCategory">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select Rdrjbxx.*
+		from t_Rdrjbxx Rdrjbxx 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="RdrjbxxPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	
+	<select id="Rdrjbxx.getById" parameterClass="Integer" resultMap="rdrjbxx_zpxx_rm">
+		select * from t_rdrjbxx where id=#value#
+	</select>
 </sqlMap>

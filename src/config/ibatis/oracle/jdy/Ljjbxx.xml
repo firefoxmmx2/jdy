@@ -6,4 +6,25 @@
 		<flushInterval hours="24"/>
 	</cacheModel>
 	
+	<resultMap class="ljjbxx" id="ljjbxx_base_rm">
+		<result property="djxh" column="djxh" />
+		<result property="ljsj" column="ljsj" />
+		<result property="ljtbsj" column="ljtbsj" />
+		<result property="wldh" column="wldh"/>
+	</resultMap>
+	
+	<resultMap class="ljjbxx" id="ljjbxx_rm" extends="ljjbxx_base_rm">
+		<result property="jjr.id" column="jjr_id" />
+		<result property="sjr.id" column="sjr_id" />
+		<result property="ljr.cyrybh" column="ljrbh" />
+		<result property="ljtbr.cyrybh" column="ljtbrbh" />
+	</resultMap>
+	<resultMap class="ljjbxx" id="ljjbxx_mx_rm" extends="ljjbxx_base_rm">
+		<result property="jjr" column="jjr_id" select="Rdrjbxx.getById"/>
+		<result property="sjr" column="sjr_id" select="Rdrjbxx.getById"/>
+		<result property="ljr" column="ljrbh" select=""/>
+		<result property="ljtbr" column="ljtbrbh" select=""/>
+	</resultMap>
+	
+	<select id=""></select>
 </sqlMap>
