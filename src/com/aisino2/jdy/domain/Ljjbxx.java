@@ -46,6 +46,17 @@ public class Ljjbxx implements Serializable {
      */
     private List<Jdpxx> jdp_list;
     
+    /**
+     *  物流单号
+     */
+    private String wldh;
+    
+	public String getWldh() {
+		return wldh;
+	}
+	public void setWldh(String wldh) {
+		this.wldh = wldh;
+	}
 	public List<Jdpxx> getJdp_list() {
 		return jdp_list;
 	}
