@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="jdpxx" type="com.aisino2.jdy.domain.Jdpxx"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	
+</sqlMap>

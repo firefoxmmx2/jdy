@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true" lazyLoadingEnabled="false" maxRequests="20" maxSessions="10" maxTransactions="50" useStatementNamespaces="true"/>
+	
+<!-- 	寄递品信息 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Jdpxx.xml"/>
+<!-- 	可疑寄递物品信息 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Kyjdwpxx.xml"/>
+<!-- 	揽件基本信息 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Ljjbxx.xml"/>
+<!-- 	派件基本信息 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Pjjbxx.xml"/>
+<!-- 	寄递对象基本信息 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Rdrjbxx.xml"/>
+<!-- 	寄递对象照片信息 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Jddxzpxx.xml"/>
+</sqlMapConfig>
