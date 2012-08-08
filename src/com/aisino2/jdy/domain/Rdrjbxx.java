@@ -48,6 +48,20 @@ public class Rdrjbxx implements Serializable {
 	 */
 	private String zjlx;
 
+	/**
+	 * 照片信息
+	 */
+	private Jddxzpxx zpxx;
+	
+	
+	public Jddxzpxx getZpxx() {
+		return zpxx;
+	}
+
+	public void setZpxx(Jddxzpxx zpxx) {
+		this.zpxx = zpxx;
+	}
+
 	public Integer getId() {
 		return id;
 	}
