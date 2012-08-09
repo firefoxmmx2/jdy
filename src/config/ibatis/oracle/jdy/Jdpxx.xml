@@ -86,7 +86,7 @@
 	<update id="jdpxx.update" parameterClass="jdpxx">
 		update t_jdpxx jdpxx 
 		set id=id
-		<dynamic prepend=" ">
+		<dynamic prepend=",">
 			<isNotNull prepend="," property="id">
 				id=#id#
 			</isNotNull>
