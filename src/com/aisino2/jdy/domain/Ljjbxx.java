@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.domain.Qyryxx;
 
 /**
  * 揽件基本信息
+ * @author hooxin
+ *
+ */
+/**
  * @author hooxin
  *
  */
@@ -51,6 +56,17 @@ public class Ljjbxx implements Serializable {
      */
     private String wldh;
     
+    /**
+     *  添加企业信息，关联查询
+     */
+    private Qyjbxx qyjbxx;
+    
+	public Qyjbxx getQyjbxx() {
+		return qyjbxx;
+	}
+	public void setQyjbxx(Qyjbxx qyjbxx) {
+		this.qyjbxx = qyjbxx;
+	}
 	public String getWldh() {
 		return wldh;
 	}
