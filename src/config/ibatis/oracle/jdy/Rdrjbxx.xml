@@ -13,7 +13,7 @@
 		<result property="zjhm" column="zjhm"/>
 		<result property="zjlx" column="zjlx"/>
 		<result property="ssx" column="ssx"/>
-		<result property="xxdx" column="xxdz"/>
+		<result property="xxdz" column="xxdz"/>
 		<result property="lxdh" column="lxdh"/>
 		<result property="gddh" column="gddh"/>
 	</resultMap>
