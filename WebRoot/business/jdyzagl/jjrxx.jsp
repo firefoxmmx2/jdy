@@ -9,19 +9,19 @@
 				  <table>
 				    <tr>
 					    <td class="red">寄件人姓名</td>
-						<td class="detailtd"><input type="text" id="a_gwyqcqzbm" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="lj_xm" class="inputstyle" value="" /></td>
 				    </tr>
 				    <tr height="20">
 						<td class="red">证件类型</td>
-						<td class="detailtd"><input type="text" id="a_gwyqcqzbm" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="lj_zjlx" class="inputstyle" value="" /></td>
 					</tr>
 					<tr height="20">
 						<td class="red">证件号码</td>
-						<td class="detailtd"><input type="text" id="a_gwyqcqzbm" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="lj_zjhm" class="inputstyle" value="" /></td>
 					</tr>
 					<tr height="20">
 						<td class="red">寄件地址</td>
-						<td class="detailtd"><input type="text" id="a_gwyqcqzbm" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="lj_ssx" class="inputstyle" value="" /></td>
 					</tr>
 				  </table>
 				 </td>
@@ -36,17 +36,17 @@
 			   <table>
 			     <tr height="20">
 					<td class="red">现住地详址</td>
-					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="t_xzdxz"  ></td>
+					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="lj_xxdz"  ></td>
 				 </tr>
 				 <tr height="20">
 					<td class="distd">单位名称</td>
-					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="t_xzdxz"  ></td>
+					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="lj_dw"  ></td>
 				</tr>
 			    <tr height="20">
 					<td class="red">手机</td>
-					<td><input type="text" id="a_gwyqcqzbm" style="width:80px" value=""></td>
+					<td><input type="text" id="lj_lxdh" style="width:80px" value=""></td>
 					<td>固话</td>
-					<td><input type="text" id="a_gwyqcqzbm" style="width:80px" value=""></td>
+					<td><input type="text" id="lj_gddh" style="width:80px" value=""></td>
 				 </tr>
 			   </table>
 			   </td>

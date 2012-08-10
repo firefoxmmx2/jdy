@@ -8,7 +8,7 @@
 				  <table>
 				    <tr>
 					    <td class="red">收件人姓名</td>
-						<td class="detailtd"><input type="text" id="a_gwyqcqzbm" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="lj_" class="inputstyle" value="" /></td>
 				    </tr>
 				    <tr height="20">
 						<td class="red">证件类型</td>
