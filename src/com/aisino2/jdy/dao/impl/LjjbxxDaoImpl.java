@@ -1,5 +1,6 @@
 package com.aisino2.jdy.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 	public Page findLjjbxxsForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {	
 		
-		String sCol="";
+		String sCol=" ljjbxx.djxh ";
 		if(sort == null)
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
@@ -67,17 +68,15 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 				sCol = "ljjbxx.ljtbsj "+ sort;
 			else 
 				sCol=" ljjbxx.djxh ";
-		}else{
-			sCol=" ljjbxx.djxh ";
 		}
+		
 		map.put("pageSort", sCol);
 		return queryForPage("ljjbxx.getListPage", map, pageno,pagesize);
 	}
 
 	@Override
 	public String generateDjxh(String qybm) {
-		// TODO Auto-generated method stub
-		return null;
+		return (String) queryForObject("ljjbxx.generateDjxh", qybm);
 	}
 
 }
