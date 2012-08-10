@@ -71,6 +71,9 @@ public class KyjdwpxxDaoImpl extends BaseDao implements IKyjdwpxxDao {
 				sCol = "kyjdwpxx.xm "+ sort;
 			else if("7".equals(sort))
 				sCol = "kyjdwpxx.bgsj "+ sort;
+			//生成代码用，按照业务登记序号排序
+			else if("99".equals(sort))
+				sCol = "kyjdwpxx.kyywdjxh "+ sort;
 			else 
 				sCol=" ljjbxx.djxh ";
 		}else{
@@ -82,7 +85,6 @@ public class KyjdwpxxDaoImpl extends BaseDao implements IKyjdwpxxDao {
 
 	@Override
 	public String generateDjxh(String qybm) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

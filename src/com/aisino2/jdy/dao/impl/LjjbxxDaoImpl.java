@@ -12,8 +12,13 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 
 	@Override
 	public Ljjbxx insert(Ljjbxx ljjbxx) {
-		if(ljjbxx.getQyjbxx() != null && ljjbxx.getQyjbxx().getQybm()!=null){
-			ljjbxx.setDjxh(generateDjxh(ljjbxx.getQyjbxx().getQybm()));
+		if(ljjbxx.getDjxh()==null){
+			if(ljjbxx.getQyjbxx() != null && ljjbxx.getQyjbxx().getQybm()!=null){
+				ljjbxx.setDjxh(generateDjxh(ljjbxx.getQyjbxx().getQybm()));
+			}
+			else {
+				throw new RuntimeException("要么外部传入登记序号，要么传入企业编码，不可同时为空");
+			}
 		}
 		insert("ljjbxx.insert", ljjbxx);
 		return ljjbxx;
