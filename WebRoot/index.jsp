@@ -103,6 +103,7 @@
 		<script language="javascript" type="text/javascript" src="javascript/gad-cxtj-ksdld.js"></script>
 		<script language="javascript" type="text/javascript" src="javascript/gad-cxtj-csld.js"></script>
 		<script language="javascript" type="text/javascript" src="javascript/hylb-link-qyzfl.js"></script>
+		<script language="javascript" type="text/javascript" src="business/jdyzagl/jdycomm.js"></script><!-- 寄递业提交方法所需js -->
 		<!-- to have Ingrid save her state (selected rows, page number, column sort & direction); just include the jQ cookie plugin -->
 		<script language="javascript" type="text/javascript" src="javascript/jquery.cookie.js"></script>
 		<script src="javascript/ui.datepicker.js" language="javascript" type="text/javascript"
