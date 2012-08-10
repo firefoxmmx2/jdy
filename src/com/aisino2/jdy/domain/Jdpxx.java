@@ -29,6 +29,19 @@ public class Jdpxx implements Serializable {
 	 * #关联的揽件信息实体
 	 */
 	private Ljjbxx ljjbxx;
+	
+	/**
+	 * 是否删除标志
+	 */
+	private String sfscbz;
+	
+	
+	public String getSfscbz() {
+		return sfscbz;
+	}
+	public void setSfscbz(String sfscbz) {
+		this.sfscbz = sfscbz;
+	}
 	public Integer getId() {
 		return id;
 	}
