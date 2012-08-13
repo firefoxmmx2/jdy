@@ -1,6 +1,5 @@
 package com.aisino2.jdy.dao.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,7 @@ import com.aisino2.jdy.domain.Ljjbxx;
 
 public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 
-	@Override
+	
 	public Ljjbxx insert(Ljjbxx ljjbxx) {
 		if(ljjbxx.getDjxh()==null){
 			if(ljjbxx.getQyjbxx() != null && ljjbxx.getQyjbxx().getQybm()!=null){
@@ -25,22 +24,22 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 		return ljjbxx;
 	}
 
-	@Override
+	
 	public void update(Ljjbxx ljjbxx) {
 		update("ljjbxx.update", ljjbxx);
 	}
 
-	@Override
+	
 	public void delete(Ljjbxx ljjbxx) {
 		delete("ljjbxx.delete",ljjbxx);
 	}
 
-	@Override
+	
 	public List<Ljjbxx> findLjjbxxs(Ljjbxx ljjbxx) {
 		return queryForList("ljjbxx.getList", ljjbxx);
 	}
 
-	@Override
+	
 	public Page findLjjbxxsForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {	
 		
@@ -74,7 +73,7 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 		return queryForPage("ljjbxx.getListPage", map, pageno,pagesize);
 	}
 
-	@Override
+	
 	public String generateDjxh(String qybm) {
 		return (String) queryForObject("ljjbxx.generateDjxh", qybm);
 	}
