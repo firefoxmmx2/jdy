@@ -257,4 +257,8 @@
 	<select id="ljjbxx.getByDjxh" parameterClass="String" resultMap="ljjbxx_mx_rm">
 		select * from t_ljjbxx ljjbxx where ljjbxx.djxh=#value#
 	</select>
+<!-- 	生成登记序号用的查询 -->
+	<select id="ljjbxx.getForGenerateDjxh" parameterClass="String" resultClass="String">
+		select djxh from t_ljjbxx where djxh like '$value$%' and rownum &lt;=1 order by djxh desc
+	</select>
 </sqlMap>
