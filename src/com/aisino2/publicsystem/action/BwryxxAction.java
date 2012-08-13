@@ -14,7 +14,6 @@ import com.aisino2.cache.CacheManager;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.publicsystem.domain.Baryxx;
 import com.aisino2.publicsystem.domain.Bwryxx;
 import com.aisino2.publicsystem.service.IBwryxxService;
 import com.aisino2.sysadmin.Constants;

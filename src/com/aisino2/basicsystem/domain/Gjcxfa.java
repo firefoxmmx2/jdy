@@ -2,7 +2,6 @@ package com.aisino2.basicsystem.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 import com.aisino2.core.domain.BaseObject;
 

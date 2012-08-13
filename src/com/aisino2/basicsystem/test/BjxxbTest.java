@@ -1,13 +1,10 @@
 package com.aisino2.basicsystem.test;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Date;
 
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
-import com.aisino2.core.test.BaseTestCase;
 import com.aisino2.basicsystem.domain.Bjxxb;
 import com.aisino2.basicsystem.service.IBjxxbService;
 

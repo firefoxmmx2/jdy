@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IDtcxtjDao;
 import com.aisino2.basicsystem.domain.Dtcxtj;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class DtcxtjDaoImpl extends BaseDao implements IDtcxtjDao {
 	/** @param 动态查询条件(t_dtcxtj) 增加 */

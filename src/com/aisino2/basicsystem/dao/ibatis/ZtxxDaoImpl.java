@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.aisino2.basicsystem.dao.IZtxxDao;
-import com.aisino2.basicsystem.domain.Bjxxb;
-import com.aisino2.basicsystem.domain.Yjxxb;
 import com.aisino2.basicsystem.domain.Ztxx;
 import com.aisino2.core.dao.BaseDao;
 import com.aisino2.core.dao.Page;

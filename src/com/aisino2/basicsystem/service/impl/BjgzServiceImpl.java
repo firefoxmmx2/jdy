@@ -3,12 +3,11 @@ package com.aisino2.basicsystem.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.basicsystem.dao.IBjgzDao;
+import com.aisino2.basicsystem.domain.Bjgz;
+import com.aisino2.basicsystem.service.IBjgzService;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.basicsystem.domain.Bjgz;
-import com.aisino2.basicsystem.dao.IBjgzDao;
-import com.aisino2.basicsystem.service.IBjgzService;
 
 public class BjgzServiceImpl extends BaseService implements IBjgzService {
 

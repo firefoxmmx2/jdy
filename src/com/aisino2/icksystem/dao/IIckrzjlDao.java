@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Ickrzjl;
 public interface IIckrzjlDao {
 	/** @param IC卡日志记录(t_ickrzjl) 增加 */

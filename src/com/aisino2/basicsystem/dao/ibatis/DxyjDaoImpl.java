@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IDxyjDao;
 import com.aisino2.basicsystem.domain.Dxyj;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class DxyjDaoImpl extends BaseDao implements IDxyjDao {
 	/** @param 短信预警(t_dxyj) 增加 */

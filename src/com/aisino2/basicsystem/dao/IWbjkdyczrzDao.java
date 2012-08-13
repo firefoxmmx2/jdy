@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Wbjkdyczrz;
+import com.aisino2.core.dao.Page;
 public interface IWbjkdyczrzDao {
 	/** @param 外部接口调用操作日志(t_wbjkdyczrz) 增加 */
 	Wbjkdyczrz insertWbjkdyczrz(Wbjkdyczrz wbjkdyczrz);

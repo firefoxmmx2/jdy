@@ -1,15 +1,14 @@
 package com.aisino2.icksystem.dao.ibatis;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.aisino2.cache.CacheManager;
 import com.aisino2.core.dao.BaseDao;
 import com.aisino2.core.dao.Page;
-import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.icksystem.dao.IIckSendDaoWS;
 import com.aisino2.icksystem.domain.SendIckInfoWs;
+import com.aisino2.sysadmin.domain.Globalpar;
 
 public class IckSendDaoWsImpl extends BaseDao implements IIckSendDaoWS {
 	

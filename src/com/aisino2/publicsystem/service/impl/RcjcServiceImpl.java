@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Rcjc;
 import com.aisino2.publicsystem.dao.IRcjcDao;
+import com.aisino2.publicsystem.domain.Rcjc;
 import com.aisino2.publicsystem.service.IRcjcService;
 
 public class RcjcServiceImpl extends BaseService implements IRcjcService {

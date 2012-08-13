@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Qyffl;
 import com.aisino2.publicsystem.dao.IQyfflDao;
+import com.aisino2.publicsystem.domain.Qyffl;
 import com.aisino2.publicsystem.service.IQyfflService;
 
 public class QyfflServiceImpl extends BaseService implements IQyfflService {

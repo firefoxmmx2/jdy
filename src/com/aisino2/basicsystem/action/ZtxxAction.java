@@ -1,7 +1,6 @@
 package com.aisino2.basicsystem.action;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.aisino2.basicsystem.domain.Cjtj;
 import com.aisino2.basicsystem.domain.Ztxx;
 import com.aisino2.basicsystem.service.IZtxxService;
 import com.aisino2.common.PageUtil;

@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Qyrysh;
 import com.aisino2.publicsystem.dao.IQyryshDao;
+import com.aisino2.publicsystem.domain.Qyrysh;
 import com.aisino2.publicsystem.service.IQyryshService;
 
 public class QyryshServiceImpl extends BaseService implements IQyryshService {

@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.St_device;
 public interface ISt_deviceDao {
 	/** @param 无线终端设备(ST_DEVICE) 增加 */

@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Icksl;
 public interface IIckslDao {
 	/** @param IC卡受理(t_icksl) 增加 */

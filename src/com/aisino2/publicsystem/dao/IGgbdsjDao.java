@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Ggbdsj;
 public interface IGgbdsjDao {
 	/** @param 公共比对数据表(T_GGBDSJ) 增加 */

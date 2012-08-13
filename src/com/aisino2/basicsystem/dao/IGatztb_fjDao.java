@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Gatztb_fj;
+import com.aisino2.core.dao.Page;
 public interface IGatztb_fjDao {
 	/** @param 公安通知通报_附件(t_gatztb_fj) 增加 */
 	Gatztb_fj insertGatztb_fj(Gatztb_fj gatztb_fj);

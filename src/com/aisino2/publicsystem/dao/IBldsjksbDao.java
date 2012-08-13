@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Bldsjksb;
 public interface IBldsjksbDao {
 	/** @param 闭路电视监控设备(t_bldsjksb) 增加 */

@@ -6,11 +6,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Ggbdclsj;
-import com.aisino2.publicsystem.domain.Ggbdsjsj;
-import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.dao.IGgbdclsjDao;
+import com.aisino2.publicsystem.domain.Ggbdclsj;
 import com.aisino2.publicsystem.service.IGgbdclsjService;
 
 public class GgbdclsjServiceImpl extends BaseService implements IGgbdclsjService {

@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Baryxx;
 public interface IBaryxxDao {
 	/** @param 保安人员信息(t_baryxx) 增加 */

@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.web.PageAction;
-import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.basicsystem.domain.Bjgz;
 import com.aisino2.basicsystem.service.IBjgzService;
+import com.aisino2.core.dao.Page;
+import com.aisino2.core.web.PageAction;
 
 public class BjgzAction extends PageAction{
 	private IBjgzService bjgzService;

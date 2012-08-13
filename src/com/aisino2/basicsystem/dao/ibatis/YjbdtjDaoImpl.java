@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IYjbdtjDao;
 import com.aisino2.basicsystem.domain.Yjbdtj;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class YjbdtjDaoImpl extends BaseDao implements IYjbdtjDao {
 	/** @param 预警比对条件(t_yjbdtj) 增加 */

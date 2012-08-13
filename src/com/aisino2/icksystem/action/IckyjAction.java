@@ -15,12 +15,11 @@ import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
+import com.aisino2.icksystem.domain.Ickyj;
+import com.aisino2.icksystem.service.IIckyjService;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.sysadmin.domain.User;
-import com.aisino2.icksystem.domain.Ickyj;
-import com.aisino2.icksystem.domain.Qyryskjl;
-import com.aisino2.icksystem.service.IIckyjService;
 
 public class IckyjAction extends PageAction{
 	private IIckyjService ickyjService;

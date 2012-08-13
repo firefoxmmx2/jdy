@@ -9,7 +9,6 @@ import com.aisino2.cache.CacheManager;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.publicsystem.domain.Qyryxx_lsxx;
-import com.aisino2.publicsystem.domain.Wgcyryxx;
 import com.aisino2.publicsystem.service.IQyryxx_lsxxService;
 import com.aisino2.sysadmin.domain.Dict_item;
 

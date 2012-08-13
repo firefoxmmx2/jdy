@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Lhjc;
 public interface ILhjcDao {
 	/** @param 联合检查(t_lhjc) 增加 */

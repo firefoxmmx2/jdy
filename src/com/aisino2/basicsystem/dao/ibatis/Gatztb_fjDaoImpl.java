@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IGatztb_fjDao;
 import com.aisino2.basicsystem.domain.Gatztb_fj;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class Gatztb_fjDaoImpl extends BaseDao implements IGatztb_fjDao {
 	/** @param 公安通知通报_附件(t_gatztb_fj) 增加 */

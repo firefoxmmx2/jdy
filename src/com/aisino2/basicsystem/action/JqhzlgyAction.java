@@ -1,27 +1,23 @@
 package com.aisino2.basicsystem.action;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.aisino2.basicsystem.domain.Jqhzlgy;
 import com.aisino2.basicsystem.service.IJqhzlgyService;
-import com.aisino2.sysadmin.Constants;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
+import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.Department;
-import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.sysadmin.domain.User;
-import com.opensymphony.xwork2.ActionContext;
 
 public class JqhzlgyAction extends PageAction {
 	private IJqhzlgyService jqhzlgyService;

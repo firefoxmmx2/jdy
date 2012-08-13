@@ -7,15 +7,15 @@ import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.web.PageAction;
-import com.aisino2.sysadmin.Constants;
-import com.aisino2.sysadmin.domain.User;
 import com.aisino2.basicsystem.domain.Dtcxpx;
 import com.aisino2.basicsystem.domain.Dtcxtj;
 import com.aisino2.basicsystem.domain.Gjcxfa;
 import com.aisino2.basicsystem.domain.Zdycxtj;
 import com.aisino2.basicsystem.service.IGjcxfaService;
+import com.aisino2.core.dao.Page;
+import com.aisino2.core.web.PageAction;
+import com.aisino2.sysadmin.Constants;
+import com.aisino2.sysadmin.domain.User;
 
 public class GjcxfaAction extends PageAction{
 	private IGjcxfaService gjcxfaService;

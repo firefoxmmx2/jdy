@@ -1,13 +1,10 @@
 package com.aisino2.basicsystem.test;
 
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Date;
 
-import com.aisino2.common.DateToString;
-import com.aisino2.core.test.BaseTestCase;
 import com.aisino2.basicsystem.domain.Qgztjx;
 import com.aisino2.basicsystem.service.IQgztjxService;
+import com.aisino2.core.test.BaseTestCase;
 
 public class QgztjxTest extends BaseTestCase {
 

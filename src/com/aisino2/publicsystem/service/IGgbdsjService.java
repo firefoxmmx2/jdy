@@ -2,10 +2,7 @@ package com.aisino2.publicsystem.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.publicsystem.domain.Ggbdclsj;
 import com.aisino2.publicsystem.domain.Ggbdsj;
 
 public interface IGgbdsjService {

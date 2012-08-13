@@ -2,9 +2,8 @@ package com.aisino2.publicsystem.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Date;
+import java.util.List;
 
 import com.aisino2.common.ImageUtil;
 import com.aisino2.core.test.BaseTestCase;

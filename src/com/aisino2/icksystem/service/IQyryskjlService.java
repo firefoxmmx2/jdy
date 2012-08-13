@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-import com.aisino2.icksystem.domain.Qyryskjl;
 import com.aisino2.icksystem.domain.Icksl;
+import com.aisino2.icksystem.domain.Qyryskjl;
 
 public interface IQyryskjlService {
 	/** @param 企业人员刷卡记录(t_csryskjl) 增加 */

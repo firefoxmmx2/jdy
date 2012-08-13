@@ -4,11 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-import com.aisino2.publicsystem.domain.Qyry_zp;
-import com.aisino2.publicsystem.domain.Qyryxx;
-import com.aisino2.publicsystem.domain.Wgcyryxx;
-import com.aisino2.icksystem.domain.Ickrzjl;
 import com.aisino2.icksystem.domain.Icksl;
+import com.aisino2.publicsystem.domain.Qyryxx;
 
 public interface IIckslService {
 	/** @param IC卡受理(t_icksl) 增加 */

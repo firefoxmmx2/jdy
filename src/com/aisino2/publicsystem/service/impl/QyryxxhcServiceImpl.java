@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import com.aisino2.common.DepartmentUtil;
+import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
 import com.aisino2.publicsystem.dao.IQyryxxhcDao;
@@ -18,8 +20,6 @@ import com.aisino2.publicsystem.service.IQyryxxService;
 import com.aisino2.publicsystem.service.IQyryxxhcService;
 import com.aisino2.sysadmin.domain.Department;
 import com.aisino2.sysadmin.service.IDepartmentService;
-import com.aisino2.common.DepartmentUtil;
-import com.aisino2.common.StringUtil;
 
 public class QyryxxhcServiceImpl extends BaseService implements IQyryxxhcService {
 

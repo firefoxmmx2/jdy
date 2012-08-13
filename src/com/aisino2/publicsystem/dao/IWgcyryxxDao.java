@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Wgcyryxx;
 public interface IWgcyryxxDao {
 	/** @param 外国从业人员信息(t_wgcyryxx) 增加 */

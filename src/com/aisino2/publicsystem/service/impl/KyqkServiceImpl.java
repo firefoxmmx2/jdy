@@ -6,9 +6,8 @@ import java.util.Map;
 import com.aisino2.basicsystem.dao.IScbmDao;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Kyqk;
 import com.aisino2.publicsystem.dao.IKyqkDao;
+import com.aisino2.publicsystem.domain.Kyqk;
 import com.aisino2.publicsystem.service.IKyqkService;
 
 public class KyqkServiceImpl extends BaseService implements IKyqkService {

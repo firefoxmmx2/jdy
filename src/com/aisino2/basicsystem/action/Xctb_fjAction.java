@@ -1,26 +1,19 @@
 package com.aisino2.basicsystem.action;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.aisino2.basicsystem.domain.Xctb_fj;
 import com.aisino2.basicsystem.service.IXctb_fjService;
-import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-
 import com.opensymphony.xwork2.ActionContext;
 
 public class Xctb_fjAction extends PageAction{

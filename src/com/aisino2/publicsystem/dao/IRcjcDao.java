@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Rcjc;
 public interface IRcjcDao {
 	/** @param 日常检查(t_rcjc) 增加 */

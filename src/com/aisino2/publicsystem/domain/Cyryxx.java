@@ -1,7 +1,6 @@
 package com.aisino2.publicsystem.domain;
 
 import com.aisino2.core.domain.BaseObject;
-import com.aisino2.publicsystem.domain.Qyryxx;
 
 public class Cyryxx  extends BaseObject{
 	private Qyryxx qyryxx;//公共模块企业人员信息

@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Ztryskxxtj;
 public interface IZtryskxxtjDao {
 	/** @param 走台人员刷卡信息统计明细(t_ztryskxxtj) 增加 */

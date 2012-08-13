@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IBkwpkbxxDao;
 import com.aisino2.basicsystem.domain.Bkwpkbxx;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class BkwpkbxxDaoImpl extends BaseDao implements IBkwpkbxxDao {
 	/** @param 布控物品基本信息(t_bkwpkbxx) 增加 */

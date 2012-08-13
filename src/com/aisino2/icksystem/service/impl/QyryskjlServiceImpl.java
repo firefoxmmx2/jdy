@@ -6,13 +6,12 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.icksystem.domain.Qyryskjl;
-import com.aisino2.icksystem.domain.Icksl;
-import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.icksystem.dao.IQyryskjlDao;
-import com.aisino2.icksystem.service.IQyryskjlService;
+import com.aisino2.icksystem.domain.Icksl;
+import com.aisino2.icksystem.domain.Qyryskjl;
 import com.aisino2.icksystem.service.IIckslService;
+import com.aisino2.icksystem.service.IQyryskjlService;
+import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.service.IQyjbxxService;
 
 public class QyryskjlServiceImpl extends BaseService implements IQyryskjlService {

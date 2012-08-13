@@ -29,7 +29,6 @@ import com.aisino2.publicsystem.domain.Pmt;
 import com.aisino2.publicsystem.domain.Qyffl;
 import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.domain.Qyjbxx_ls;
-import com.aisino2.publicsystem.domain.Qyryxx;
 import com.aisino2.publicsystem.domain.Qyzjb;
 import com.aisino2.publicsystem.domain.Zjb_ls;
 import com.aisino2.publicsystem.domain.Zzcl;

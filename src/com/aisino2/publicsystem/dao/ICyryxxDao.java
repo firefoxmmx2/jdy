@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Qyryxx;
 public interface ICyryxxDao {
 	/** @param 从业人员信息(t_qyryxx) 分页查询  采集点查询*/

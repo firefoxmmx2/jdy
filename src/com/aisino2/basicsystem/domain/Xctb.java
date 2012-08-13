@@ -1,7 +1,7 @@
 package com.aisino2.basicsystem.domain;
 
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 import com.aisino2.core.domain.BaseObject;
 

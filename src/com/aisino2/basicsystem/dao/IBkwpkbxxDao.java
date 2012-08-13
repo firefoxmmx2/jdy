@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Bkwpkbxx;
+import com.aisino2.core.dao.Page;
 public interface IBkwpkbxxDao {
 	/** @param 布控物品基本信息(t_bkwpkbxx) 增加 */
 	Bkwpkbxx insertBkwpkbxx(Bkwpkbxx bkwpkbxx);

@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Wgtzrxx;
 import com.aisino2.publicsystem.dao.IWgtzrxxDao;
+import com.aisino2.publicsystem.domain.Wgtzrxx;
 import com.aisino2.publicsystem.service.IWgtzrxxService;
 
 public class WgtzrxxServiceImpl extends BaseService implements IWgtzrxxService {

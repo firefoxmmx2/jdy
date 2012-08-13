@@ -109,7 +109,7 @@
 		</dynamic>
 	</update>
 	
-	<select id="jdpxx.getList" cacheModel="oneDayCategory" parameterClass="jdpxx" resultMap="jdpxx_rm">
+	<select id="jdpxx.getList" parameterClass="jdpxx" resultMap="jdpxx_rm">
 		select jdpxx.* from t_jdpxx jdpxx 
 		where
 		<dynamic prepend=" ">
@@ -117,7 +117,7 @@
 		</dynamic>
 	</select>
 	
-	<select id="jdpxx.getListPageCount" cacheModel="oneDayCategory" parameterClass="map" resultClass="Integer">
+	<select id="jdpxx.getListPageCount" parameterClass="map" resultClass="Integer">
 		select count(1)
 		from t_jdpxx jdpxx 
 		where 1=1
@@ -126,7 +126,7 @@
 		</dynamic>
 	</select>
 	
-	<select id="jdpxx.getListPage" cacheModel="oneDayCategory" parameterClass="map" resultMap="jdpxx_rm">
+	<select id="jdpxx.getListPage"  parameterClass="map" resultMap="jdpxx_rm">
 		select x.* from (
 		select rownum rowno,z.* from 
 		(select jdpxx.*
@@ -138,7 +138,7 @@
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 	
-	<select id="jdpxx.getById" cacheModel="oneDayCategory" parameterClass="Integer" resultMap="jdpxx_rm">
+	<select id="jdpxx.getById"  parameterClass="Integer" resultMap="jdpxx_rm">
 		select * from t_jdpxx where id=#value#
 	</select>
 </sqlMap>

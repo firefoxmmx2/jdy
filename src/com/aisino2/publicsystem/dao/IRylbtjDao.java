@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Rylbtj;
 public interface IRylbtjDao {
 	/** @param 人员类别统计(t_rylbtj) 增加 */

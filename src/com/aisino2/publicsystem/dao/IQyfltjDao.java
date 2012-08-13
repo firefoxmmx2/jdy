@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Qyfltj;
 public interface IQyfltjDao {
 	/** @param 企业分类统计(t_qyfltj) 增加 */

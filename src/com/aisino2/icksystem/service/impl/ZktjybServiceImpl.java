@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.icksystem.domain.Zktjyb;
 import com.aisino2.icksystem.dao.IZktjybDao;
+import com.aisino2.icksystem.domain.Zktjyb;
 import com.aisino2.icksystem.service.IZktjybService;
 
 public class ZktjybServiceImpl extends BaseService implements IZktjybService {

@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Wpbjgz;
+import com.aisino2.core.dao.Page;
 public interface IWpbjgzDao {
 	/** @param 物品报警规则(t_wpbjgz) 增加 */
 	Wpbjgz insertWpbjgz(Wpbjgz wpbjgz);

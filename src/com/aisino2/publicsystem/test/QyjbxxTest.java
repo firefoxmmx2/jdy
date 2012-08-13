@@ -1,13 +1,11 @@
 package com.aisino2.publicsystem.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.LinkedList;
-import java.util.Date;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
 import com.aisino2.publicsystem.domain.Aqjcsb;
@@ -16,7 +14,6 @@ import com.aisino2.publicsystem.domain.Bldsjksb;
 import com.aisino2.publicsystem.domain.Pmt;
 import com.aisino2.publicsystem.domain.Qyffl;
 import com.aisino2.publicsystem.domain.Qyjbxx;
-import com.aisino2.publicsystem.domain.QyjbxxModel;
 import com.aisino2.publicsystem.domain.Qyzjb;
 import com.aisino2.publicsystem.domain.Wgtzrxx;
 import com.aisino2.publicsystem.service.IQyfflService;

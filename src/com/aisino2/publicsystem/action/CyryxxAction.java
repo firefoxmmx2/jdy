@@ -21,22 +21,20 @@ import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.icksystem.domain.Icksl;
 import com.aisino2.icksystem.service.IIckslService;
-import com.aisino2.publicsystem.action.QyryxxAction;
 import com.aisino2.publicsystem.domain.Garkktbsj;
 import com.aisino2.publicsystem.domain.Qyry_zp;
 import com.aisino2.publicsystem.domain.Qyryxx;
 import com.aisino2.publicsystem.domain.Qyryxx_lsxx;
 import com.aisino2.publicsystem.domain.Qyryxxhc;
 import com.aisino2.publicsystem.domain.Wgcyryxx;
+import com.aisino2.publicsystem.service.ICyryxxService;
 import com.aisino2.publicsystem.service.IGarkktbsjService;
-import com.aisino2.publicsystem.service.IQyry_zpService;
 import com.aisino2.publicsystem.service.IQyryxxService;
 import com.aisino2.publicsystem.service.IQyryxxhcService;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.sysadmin.domain.User;
-import com.aisino2.publicsystem.service.ICyryxxService;
 
 public class CyryxxAction extends QyryxxAction {
 	

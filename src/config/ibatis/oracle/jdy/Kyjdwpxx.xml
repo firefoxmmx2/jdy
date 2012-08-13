@@ -6,4 +6,8 @@
 		<flushInterval hours="24"/>
 	</cacheModel>
 	
+	<!-- 	生成登记序号用的查询 -->
+	<select id="kyjdwpxx.getForGenerateDjxh" parameterClass="String" resultClass="String">
+		select kyywdjxh from t_kyjdwpxx where kyywdjxh like '$value$%' and rownum &lt;=1 order by kyywdjxh desc
+	</select>
 </sqlMap>

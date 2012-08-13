@@ -1,12 +1,9 @@
 package com.aisino2.publicsystem.test;
 
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Date;
 
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
-import com.aisino2.core.test.BaseTestCase;
 import com.aisino2.publicsystem.domain.Qyjbxx_ls;
 import com.aisino2.publicsystem.service.IQyjbxx_lsService;
 

@@ -3,9 +3,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Yjxxb;
+import com.aisino2.core.dao.Page;
 public interface IYjxxbDao {
 	/** @param 预警信息表(t_yjxxb) 增加 */
 	Yjxxb insertYjxxb(Yjxxb yjxxb);

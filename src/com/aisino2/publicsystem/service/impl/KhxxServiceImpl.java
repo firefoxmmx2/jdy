@@ -24,11 +24,10 @@ import com.aisino2.basicsystem.service.IQgztjxService;
 import com.aisino2.basicsystem.service.IQgztjx_kzService;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Khxx;
-import com.aisino2.publicsystem.domain.Wgkhxx;
 import com.aisino2.publicsystem.dao.IKhxxDao;
 import com.aisino2.publicsystem.dao.IWgkhxxDao;
+import com.aisino2.publicsystem.domain.Khxx;
+import com.aisino2.publicsystem.domain.Wgkhxx;
 import com.aisino2.publicsystem.service.IKhxxService;
 
 public class KhxxServiceImpl extends BaseService implements IKhxxService {

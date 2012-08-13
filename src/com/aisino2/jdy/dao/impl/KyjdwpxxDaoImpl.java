@@ -1,5 +1,7 @@
 package com.aisino2.jdy.dao.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -85,7 +87,15 @@ public class KyjdwpxxDaoImpl extends BaseDao implements IKyjdwpxxDao {
 
 	
 	public String generateDjxh(String qybm) {
-		return null;
+		 String djxh = (String) queryForObject("kyjdwpxx.getForGenerateDjxh", qybm);
+		 if(djxh==null){
+			 djxh=qybm + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "001"; 
+		 }
+		 else{
+			 Integer xh = Integer.parseInt(djxh.substring(19,djxh.length())) + 1;
+			 djxh = djxh.substring(0,19) + String.format("%03d", xh);
+		 }
+		return djxh;
 	}
 
 }

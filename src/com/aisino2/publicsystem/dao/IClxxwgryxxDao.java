@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Clxxwgryxx;
 public interface IClxxwgryxxDao {
 	/** @param 车辆信息外国人员信息(t_clxxwgryxx) 增加 */

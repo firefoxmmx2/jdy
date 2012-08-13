@@ -14,6 +14,7 @@
 		<result property="ljsj" column="ljsj" />
 		<result property="ljtbsj" column="ljtbsj" />
 		<result property="wldh" column="wldh"/>
+		<result property="sfbj" column="sfbj"/>
 	</resultMap>
 <!-- 	揽件信息基本结果，不关联详情 -->
 	<resultMap class="ljjbxx" id="ljjbxx_rm" extends="ljjbxx_base_rm">
@@ -97,6 +98,10 @@
 				ljjbxx.ljrbh=#ljr.cyrybh#
 			</isNotEmpty>
 		</isNotEmpty>
+		
+		<isNotEmpty prepend="and" property="sfbj">
+			ljjbxx.sfbj = #sfbj#
+		</isNotEmpty>
 	</sql>
 <!-- 	通过从业人员编号得到从业人员信息 -->
 	<select id="getQyryxxByCyrybh" resultMap="qyryxxResult" parameterClass="String" > 
@@ -135,6 +140,9 @@
 			<isNotNull prepend="," property="ljtbr.cyrybh">
 				ljtbrbh
 			</isNotNull>
+			<isNotNull prepend="," property="sfbj">
+				sfbj
+			</isNotNull>
 		</dynamic>
 		)
 		values (
@@ -162,6 +170,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="ljtbr.cyrybh">
 				#ljtbr.cyrybh#
+			</isNotNull>
+			<isNotNull prepend="," property="sfbj">
+				#sfbj#
 			</isNotNull>
 		</dynamic>
 		)
@@ -203,6 +214,9 @@
 			<isNotNull prepend="," property="ljtbr.cyrybh">
 				ljtbrbh=#ljtbr.cyrybh#
 			</isNotNull>
+			<isNotNull prepend="," property="sfbj">
+				sfbj=#sfbj#
+			</isNotNull>
 		</dynamic>
 		where
 		<dynamic prepend=" ">
@@ -220,7 +234,7 @@
 	</select>
 <!-- 	获取揽件信息列表 -->
 	<select id="ljjbxx.getList" parameterClass="ljjbxx" resultMap="ljjbxx_list_rm">
-		select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj
+		select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj
 		,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm
 		,sjr.xm sjr_xm,sjr.zjlx jsr_zjlx,sjr.zjhm sjr_zjhm
 		,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
@@ -242,7 +256,7 @@
 	<select id="ljjbxx.getListPage" parameterClass="map" resultMap="ljjbxx_list_rm">
 		select x.* from (
 		select rownum rowno,z.* from 
-		(	select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj
+		(	select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj
 			,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm
 			,sjr.xm sjr_xm,sjr.zjlx jsr_zjlx,sjr.zjhm sjr_zjhm
 			,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
@@ -253,8 +267,12 @@
 		</dynamic>
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
-	
+<!-- 	通过登记序号获取唯一揽件数据 -->
 	<select id="ljjbxx.getByDjxh" parameterClass="String" resultMap="ljjbxx_mx_rm">
 		select * from t_ljjbxx ljjbxx where ljjbxx.djxh=#value#
+	</select>
+<!-- 	生成登记序号用的查询 -->
+	<select id="ljjbxx.getForGenerateDjxh" parameterClass="String" resultClass="String">
+		select djxh from t_ljjbxx where djxh like '$value$%' and rownum &lt;=1 order by djxh desc
 	</select>
 </sqlMap>

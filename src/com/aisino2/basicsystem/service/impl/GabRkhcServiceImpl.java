@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
-import sun.misc.BASE64Decoder;
 
 import org.codehaus.xfire.XFire;
 import org.codehaus.xfire.XFireFactory;
@@ -13,7 +12,8 @@ import org.codehaus.xfire.client.XFireProxy;
 import org.codehaus.xfire.client.XFireProxyFactory;
 import org.codehaus.xfire.service.Service;
 import org.codehaus.xfire.service.binding.ObjectServiceFactory;
-import org.codehaus.xfire.transport.http.HttpTransport;
+
+import sun.misc.BASE64Decoder;
 
 import com.aisino2.basicsystem.domain.Gabrkhc;
 import com.aisino2.basicsystem.domain.Gabrkxx;

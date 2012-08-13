@@ -1,7 +1,6 @@
 package com.aisino2.tjfx.service.impl;
 
 import com.aisino2.core.service.BaseService;
-
 import com.aisino2.tjfx.dao.ITjfxDao;
 import com.aisino2.tjfx.service.ITjfxService;
 

@@ -13,10 +13,10 @@ import com.aisino2.cache.CacheResult;
 import com.aisino2.common.Base64;
 import com.aisino2.common.DateToString;
 import com.aisino2.core.web.BaseAction;
-import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.icksystem.domain.SendIckInfoWs;
 import com.aisino2.icksystem.domain.Zzzxsc;
 import com.aisino2.icksystem.service.IIckSendServiceWS;
+import com.aisino2.sysadmin.domain.Globalpar;
 
 public class ZzzxfsAction extends BaseAction{
 	

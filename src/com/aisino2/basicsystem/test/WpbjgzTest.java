@@ -1,12 +1,8 @@
 package com.aisino2.basicsystem.test;
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Date;
-
-import com.aisino2.core.test.BaseTestCase;
 import com.aisino2.basicsystem.domain.Wpbjgz;
 import com.aisino2.basicsystem.service.IWpbjgzService;
+import com.aisino2.core.test.BaseTestCase;
 
 public class WpbjgzTest extends BaseTestCase {
 

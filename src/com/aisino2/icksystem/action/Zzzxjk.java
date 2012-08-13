@@ -10,8 +10,6 @@ import java.net.MalformedURLException;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.stream.XMLStreamReader;
-
 import org.codehaus.xfire.client.Client;
 import org.dom4j.Document;
 import org.dom4j.Element;

@@ -13,11 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.aisino2.basicsystem.domain.Gatztb_fj;
+import com.aisino2.basicsystem.service.IGatztb_fjService;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.basicsystem.domain.Gatztb_fj;
-import com.aisino2.basicsystem.domain.Xctb_fj;
-import com.aisino2.basicsystem.service.IGatztb_fjService;
 import com.opensymphony.xwork2.ActionContext;
 
 public class Gatztb_fjAction extends PageAction{

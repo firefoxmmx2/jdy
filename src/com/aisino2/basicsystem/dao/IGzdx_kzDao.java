@@ -3,9 +3,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Gzdx_kz;
+import com.aisino2.core.dao.Page;
 public interface IGzdx_kzDao {
 	/** @param 关注对象快照(t_gzdx_kz) 增加 */
 	Gzdx_kz insertGzdx_kz(Gzdx_kz gzdx_kz);

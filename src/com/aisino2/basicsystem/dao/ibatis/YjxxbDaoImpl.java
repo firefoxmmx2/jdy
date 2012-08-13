@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IYjxxbDao;
 import com.aisino2.basicsystem.domain.Yjxxb;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class YjxxbDaoImpl extends BaseDao implements IYjxxbDao {
 	/** @param 预警信息表(t_yjxxb) 增加 */

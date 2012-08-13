@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IBdqclxxkzDao;
 import com.aisino2.basicsystem.domain.Bdqclxxkz;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class BdqclxxkzDaoImpl extends BaseDao implements IBdqclxxkzDao {
 	/** @param 被盗抢车辆信息_快照(t_bdqclxxkz) 增加 */

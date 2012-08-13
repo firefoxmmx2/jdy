@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.icksystem.domain.Zzzxsc;
 import com.aisino2.icksystem.dao.IZzzxscDao;
+import com.aisino2.icksystem.domain.Zzzxsc;
 import com.aisino2.icksystem.service.IZzzxscService;
 
 public class ZzzxscServiceImpl extends BaseService implements IZzzxscService {

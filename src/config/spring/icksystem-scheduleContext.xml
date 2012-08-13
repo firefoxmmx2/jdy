@@ -15,32 +15,32 @@
        http://www.springframework.org/schema/context/spring-context-2.0.xsd">
 
 	<!-- 制卡状态置位及自动审核照片start -->
-    <bean id="methodCheckZkztAndZpsh"  class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
-        <property name="targetObject">
-            <ref bean="ickslAction" />
-        </property>
-        <property name="targetMethod">
-            <value>checkZkztAndZpsh</value>
-        </property>
-    </bean>
+<!--     <bean id="methodCheckZkztAndZpsh"  class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean"> -->
+<!--         <property name="targetObject"> -->
+<!--             <ref bean="ickslAction" /> -->
+<!--         </property> -->
+<!--         <property name="targetMethod"> -->
+<!--             <value>checkZkztAndZpsh</value> -->
+<!--         </property> -->
+<!--     </bean> -->
     
-    <bean id="scheduledCheckZkztAndZpsh"   class="org.springframework.scheduling.timer.ScheduledTimerTask">
-        <property name="delay">
-            <value>60000</value>
-        </property>
-        <property name="period">
-            <value>60000</value>
-        </property>
-        <property name="timerTask">
-            <ref bean="methodCheckZkztAndZpsh" />
-        </property>
-    </bean>  
+<!--     <bean id="scheduledCheckZkztAndZpsh"   class="org.springframework.scheduling.timer.ScheduledTimerTask"> -->
+<!--         <property name="delay"> -->
+<!--             <value>60000</value> -->
+<!--         </property> -->
+<!--         <property name="period"> -->
+<!--             <value>60000</value> -->
+<!--         </property> -->
+<!--         <property name="timerTask"> -->
+<!--             <ref bean="methodCheckZkztAndZpsh" /> -->
+<!--         </property> -->
+<!--     </bean>   -->
 	<!-- 制卡状态置位及自动审核照片end -->
-	<bean id="timerFactoryIcksystem" class="org.springframework.scheduling.timer.TimerFactoryBean">
-       <property name="scheduledTimerTasks">
-         <list>
-              <ref local="scheduledCheckZkztAndZpsh"/>
-         </list>
-       </property>
-    </bean>
+<!-- 	<bean id="timerFactoryIcksystem" class="org.springframework.scheduling.timer.TimerFactoryBean"> -->
+<!--        <property name="scheduledTimerTasks"> -->
+<!--          <list> -->
+<!--               <ref local="scheduledCheckZkztAndZpsh"/> -->
+<!--          </list> -->
+<!--        </property> -->
+<!--     </bean> -->
 </beans>

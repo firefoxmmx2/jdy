@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Qyjbxx_ls;
 public interface IQyjbxx_lsDao {
 	/** @param 企业基本信息—历史(t_qyjbxx_ls) 增加 */

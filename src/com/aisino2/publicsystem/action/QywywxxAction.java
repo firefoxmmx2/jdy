@@ -18,7 +18,6 @@ import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.domain.Qywywxx;
-import com.aisino2.publicsystem.domain.Qyyyrz;
 import com.aisino2.publicsystem.service.IQyjbxxService;
 import com.aisino2.publicsystem.service.IQywywxxService;
 import com.aisino2.sysadmin.Constants;

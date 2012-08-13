@@ -1,8 +1,6 @@
 package com.aisino2.basicsystem.service;
 
-import java.io.IOException;
 import com.aisino2.basicsystem.domain.Gabrkxx;
-import com.neusoft.webservice.*;
 public interface IGabRkhcService {
 	//OutJbxxChxxBean getOutJbxxBean(String gmsfzh);
 	//OutSigJbxxBean[] getOutBeanJbxxs(OutJbxxChxxBean outBean);

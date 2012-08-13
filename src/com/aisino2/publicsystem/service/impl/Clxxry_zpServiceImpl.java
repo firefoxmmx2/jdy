@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Clxxry_zp;
 import com.aisino2.publicsystem.dao.IClxxry_zpDao;
+import com.aisino2.publicsystem.domain.Clxxry_zp;
 import com.aisino2.publicsystem.service.IClxxry_zpService;
 
 public class Clxxry_zpServiceImpl extends BaseService implements IClxxry_zpService {

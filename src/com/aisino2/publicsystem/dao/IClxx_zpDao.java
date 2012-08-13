@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Clxx_zp;
 public interface IClxx_zpDao {
 	/** @param 车辆信息_照片(t_clxx_zp) 增加 */

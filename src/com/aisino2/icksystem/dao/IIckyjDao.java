@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Ickyj;
 public interface IIckyjDao {
 	/** @param IC卡预警(t_ickyj) 增加 */

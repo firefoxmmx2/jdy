@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Dxbj;
+import com.aisino2.core.dao.Page;
 public interface IDxbjDao {
 	/** @param 短信报警(t_dxbj) 增加 */
 	Dxbj insertDxbj(Dxbj dxbj);

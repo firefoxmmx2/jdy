@@ -1,8 +1,5 @@
 package com.aisino2.basicsystem.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,11 +8,8 @@ import org.dom4j.Element;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.aisino2.cache.CacheManager;
 import com.aisino2.common.XmlReader;
-import com.aisino2.core.util.DateUtil;
 import com.aisino2.sysadmin.Constants;
-import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.User;
 
 public class QyxxExpYzyImpl {

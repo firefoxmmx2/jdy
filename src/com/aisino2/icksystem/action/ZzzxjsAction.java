@@ -11,25 +11,19 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
-
-import com.aisino2.cache.CacheManager;
 import com.aisino2.cache.CacheResult;
 import com.aisino2.common.DateToString;
-import com.aisino2.common.FileToString;
-
 import com.aisino2.core.web.BaseAction;
-import com.aisino2.sysadmin.domain.Globalpar;
-import com.aisino2.icksystem.service.IIckAcceptServiceWS;
-import com.aisino2.icksystem.domain.Icksl;
-
-import com.aisino2.icksystem.domain.Ickzb;
-import com.aisino2.icksystem.domain.Icksl_ickzb;
-import com.aisino2.icksystem.domain.Wldj;
-import com.aisino2.icksystem.domain.Icksl_wldj;
 import com.aisino2.icksystem.domain.AcceptIckInfoWs;
 import com.aisino2.icksystem.domain.AcceptIckWlInfoWs;
 import com.aisino2.icksystem.domain.AcceptIckZbInfoWs;
+import com.aisino2.icksystem.domain.Icksl;
+import com.aisino2.icksystem.domain.Icksl_ickzb;
+import com.aisino2.icksystem.domain.Icksl_wldj;
+import com.aisino2.icksystem.domain.Ickzb;
+import com.aisino2.icksystem.domain.Wldj;
+import com.aisino2.icksystem.service.IIckAcceptServiceWS;
+import com.aisino2.sysadmin.domain.Globalpar;
 
 public class ZzzxjsAction   extends BaseAction{
 	

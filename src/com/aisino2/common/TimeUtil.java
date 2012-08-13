@@ -1,7 +1,6 @@
 package com.aisino2.common;
 
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
