@@ -5,29 +5,39 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-import com.aisino2.jdy.dao.impl.LjjbxxDaoImpl;
+import com.aisino2.jdy.dao.IJdpxxDao;
+import com.aisino2.jdy.dao.IKyjdwpxxDao;
+import com.aisino2.jdy.dao.ILjjbxxDao;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.service.ILjjbxxService;
 
 public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
+	/**注入揽件基本信息**/
+	private ILjjbxxDao ljjbxxDao;
+	/**注入揽件物品信息**/
+	private IJdpxxDao jdpxxDao;
+	/**注入可疑寄递物品信息对象**/
+	private IKyjdwpxxDao kyjdwpxxDao;
 	
-	private LjjbxxDaoImpl ljjbxxdao;
-	
-	public LjjbxxDaoImpl getLjjbxxdao() {
-		return ljjbxxdao;
+	public void setKyjdwpxxDao(IKyjdwpxxDao kyjdwpxxDao) {
+		this.kyjdwpxxDao = kyjdwpxxDao;
+	}
+	public void setJdpxxDao(IJdpxxDao jdpxxDao) {
+		this.jdpxxDao = jdpxxDao;
+	}
+	public void setLjjbxxDao(ILjjbxxDao ljjbxxDao) {
+		this.ljjbxxDao = ljjbxxDao;
 	}
 
-	public void setLjjbxxdao(LjjbxxDaoImpl ljjbxxdao) {
-		this.ljjbxxdao = ljjbxxdao;
-	}
+	
+	
 
-	/**
-	 * 添加揽件信息
-	 * @param ljjbxx
-	 * @return
-	 */
+	
 	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) {
 		// TODO Auto-generated method stub
+		ljjbxx.getLjr();
+		
+		ljjbxxDao.insert(ljjbxx);
 		return null;
 	}
 
@@ -61,5 +71,11 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	/**
+	 * 添加揽件信息
+	 * @param ljjbxx
+	 * @return
+	 */
 
 }

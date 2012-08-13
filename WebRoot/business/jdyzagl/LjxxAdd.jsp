@@ -6,7 +6,7 @@
 var trNum=0;
 $(document).ready(function() {	
 	daggleDiv("ljjbxxadd_detail");//div拖动
-	dzcl_pageUrl="../../bazagl/insert_baybmjbxx.action";
+	dzcl_pageUrl="jdy/queryListjdp_ljxx.action";
 	
 	detailid="zxzybaydwdzcl_detail";
 	daggleDiv(detailid);
@@ -50,9 +50,9 @@ function tianJiaZxzybaydwDzcl(cllb){
 }
 //寄递物品信息保存时添加到列表---添加行的方法
 function jdwpxxadd(){ 
-	var jdwp_jdplx=$("#jdwp_jdplx").val();
-	var jdwp_jdpmc=$("#jdwp_jdpmc").val();
-	var jdwp_jdpsm=$("#jdwp_jdpsm").val();
+	var jdwp_jdplx=$("#jdwp_jdplx").val();//寄递品类型
+	var jdwp_jdpmc=$("#jdwp_jdpmc").val();//寄递品名称
+	var jdwp_jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
 	trNum++;
 		var addTableTr="";
 		//获取行数
@@ -150,6 +150,7 @@ function addVerify(){
 //揽件信息保存方法
 function  ljxxbaocun(){
 	if (addVerify()){
+		alert("是不是执行的这点");
 		var params = getSubmitParams("[name*=lj.]");
 		jQuery.post("jdy/insert_ljxx.action",params,addback,"json");
 	}
@@ -204,9 +205,9 @@ function addback(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="distd">登记序号</td>
-			<td class="detailtd"><input type="text" id="l" name="lj.djxh" class="inputstyle" value="" /></td>
+			<td class="detailtd"><input type="text" id="lj.djxh" name="lj.djxh" class="inputstyle" value="" /></td>
 			<td class="red">物流单号</td>
-			<td class="detailtd"><input type="text" id="lj.wldh" class="inputstyle" value="" /></td>
+			<td class="detailtd"><input type="text" id="lj.wldh" name="lj.wldh" class="inputstyle" value="" /></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -232,11 +233,11 @@ function addback(){
 			<table id="YwwffzjlTable"  width="100%">
 			  <thead>
 			    <tr>       
-			     	<th name="lj._xh">序号</th>
-			     	<th name="lj._bzw">标志位</th>
-			     	<th name="lj._jdpmc">内件品名</th>
-			     	<th name="lj._jdpsm">数量</th>
-			     	<th name="lj._jdplx">类型</th>
+			     	<th name="lj.xh">序号</th>
+			     	<th name="lj.sfscbz">标志位</th>
+			     	<th name="lj.jdpmc">内件品名</th>
+			     	<th name="lj.jdpsm">数量</th>
+			     	<th name="lj.jdplx">类型</th>
 					<th name="">操作</th>
 			    </tr>
 			  </thead>
@@ -248,9 +249,9 @@ function addback(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="red">揽件人</td>
-			<td class="detailtd"><input type="text" id="lj.xm" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj.xm"   name="lj.xm" class="inputstyle" value=""></td>
 			<td class="red">揽件时间</td>
-			<td class="detailtd"><input type="text" id="lj.ljsj" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj.ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
 		</tr>
 	</table>
 	</fieldset>

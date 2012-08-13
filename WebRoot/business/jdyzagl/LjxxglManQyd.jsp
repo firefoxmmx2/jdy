@@ -6,26 +6,28 @@
 <script type="text/javascript">
 //默认加载执行内容
 $(document).ready(function() {
-	pageUrl="bazagl/querylist_baybmjbxx.action";
+	pageUrl="jdy/queryListlj_ljxx.action";
 	
 	//添加揽件信息的DIV
-	detailid="ljjbxx_detail";
+	detailid="ljjbxxadd_detail";
 	daggleDiv(detailid);
 	$("#"+detailid).hide();
 	//定义gird数据信息
 	divnid="LjjbxxDate";
 	tableid="LjjbxxTable";
-	//tables=$("#"+divnid).html();
+	tables=$("#"+divnid).html();
 	setPageListLjxx(1);
 }); 
 //页面gird加载方法
 function setPageListLjxx(pageno,url){	
 	if (manVerify_bm()){
-		//$("#"+divnid).html(tables);
-		createXML("ljxx_");
+	    $("#"+divnid).html(tables);
+		//createXML("ljxx_");
+		var params = getSubmitParams("[name*=lj.]");
 		if (url==null || url=="undefined"){
 			url=pageUrl;
 		}
+		alert(url);
 		var mygrid1 = $("#LjjbxxTable").ingrid({ 
 										url: url,	
 										onRowSelect:null,
@@ -63,33 +65,33 @@ function setLjxxAdd(){
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_wldh" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx.wldh" name="ljxx.wldh" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄件人姓名</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_xm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx.jjr.xm" name="ljxx.jjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄件人证件类型</td>
-					<td width="23%" class="pagetd"><select id="ljxx_jjrzjlx" class="select1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="ljxx.jjr.zjlx" name="ljxx.jjr.zjlx" class="select1"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">寄件人证件号码</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrzjhm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx.jjr.zjhm" name="ljxx.jjr.zjhm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄递品大类</td>
-					<td width="23%" class="pagetd"><select id="ljxx_jjrzjlx" class="select1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="ljxx.jdplx1d" name="ljxx.jdplx1d" class="select1"><option></option></select></td>
 					<td width="10%" class="pagedistd">寄递品小类</td>
-					<td width="23%" class="pagetd"><select id="ljxx_jjrzjlx" class="select1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="ljxx.jdplx"  name="ljxx.jdplx" clss="select1"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">揽件员</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrzjhm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx.jjr.xm" name="ljxx.jjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">揽件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="baybmjbxx_shsjf" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx.ljsj" name="ljxx.ljsj" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="baybmjbxx_shsjt" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx.ljsj" name="ljxx.ljsj" class="inputstyle" value=""></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
     		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
     		    	<tr>
-    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageList_bm(1);">查询</a></td>
+    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListLjxx(1);">查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setLjxxAdd();'>添加</a></td>
     		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='setBayAdd();'>导出</a></td>
     		    	</tr>
@@ -113,15 +115,15 @@ function setLjxxAdd(){
 	<table id="LjjbxxTable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="l_xm">登记序号</th>
-	    	<th name="l_xm">物流单号</th>
-	    	<th name="l_xm">寄件人姓名</th>
-	    	<th name="l_xm">证件类型</th>
-	    	<th name="l_xm">证件号码</th>
-	    	<th name="l_xm">寄递品大类</th>
-	    	<th name="l_xm">寄递品小类</th>
-	    	<th name="l_xm">揽件员</th>
-	    	<th name="l_xm">登记时间</th>
+	    	<th name="l_djxh">登记序号</th>
+	    	<th name="l_wldh">物流单号</th>
+	    	<th name="l_jjrxm">寄件人姓名</th>
+	    	<th name="l_zjlx">证件类型</th>
+	    	<th name="l_zjhm">证件号码</th>
+	    	<th name="l_jdpdl">寄递品大类</th>
+	    	<th name="l_jdpxl">寄递品小类</th>
+	    	<th name="l_ljy">揽件员</th>
+	    	<th name="l_ljsj">登记时间</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
