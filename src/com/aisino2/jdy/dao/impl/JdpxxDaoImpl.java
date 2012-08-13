@@ -10,34 +10,34 @@ import com.aisino2.jdy.domain.Jdpxx;
 
 public class JdpxxDaoImpl extends BaseDao implements IJdpxxDao {
 
-	@Override
+	
 	public Jdpxx insert(Jdpxx jdpxx) {
 		jdpxx.setId(this.getNextID("jdpxx_id"));
 		insert("jdpxx.insert",jdpxx);
 		return jdpxx;
 	}
 
-	@Override
+	
 	public void update(Jdpxx jdpxx) {
 		update("jdpxx.update", jdpxx);
 	}
 
-	@Override
+	
 	public void delete(Jdpxx jdpxx) {
 		delete("jdpxx.delete",jdpxx);
 	}
 
-	@Override
+	
 	public Jdpxx get(Jdpxx jdpxx) {
 		return (Jdpxx) queryForObject("jdpxx.get", jdpxx);
 	}
 
-	@Override
+	
 	public List<Jdpxx> findJdpxxs(Jdpxx jdpxx) {
 		return queryForList("jdpxx.getList", jdpxx);
 	}
 
-	@Override
+	
 	public Page findJdpxxsForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {
 		String sCol="";

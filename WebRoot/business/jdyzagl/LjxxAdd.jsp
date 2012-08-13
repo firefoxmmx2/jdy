@@ -6,7 +6,7 @@
 var trNum=0;
 $(document).ready(function() {	
 	daggleDiv("ljjbxxadd_detail");//div拖动
-	dzcl_pageUrl="";
+	dzcl_pageUrl="../../bazagl/insert_baybmjbxx.action";
 	
 	detailid="zxzybaydwdzcl_detail";
 	daggleDiv(detailid);
@@ -232,11 +232,11 @@ function addback(){
 			<table id="YwwffzjlTable"  width="100%">
 			  <thead>
 			    <tr>       
-			     	<th name="jdwp_xh">序号</th>
-			     	<th name="jdwp_bzw">标志位</th>
-			     	<th name="jdwp_jdpmc">内件品名</th>
-			     	<th name="jdwp_jdpmc">数量</th>
-			     	<th name="jdwp_jdplx">类型</th>
+			     	<th name="lj._xh">序号</th>
+			     	<th name="lj._bzw">标志位</th>
+			     	<th name="lj._jdpmc">内件品名</th>
+			     	<th name="lj._jdpsm">数量</th>
+			     	<th name="lj._jdplx">类型</th>
 					<th name="">操作</th>
 			    </tr>
 			  </thead>
@@ -248,9 +248,9 @@ function addback(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="red">揽件人</td>
-			<td class="detailtd"><input type="text" id="a_gwyqcqzbm" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj.xm" class="inputstyle" value=""></td>
 			<td class="red">揽件时间</td>
-			<td class="detailtd"><input type="text" id="a_gwyqcqzqxdm" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj.ljsj" class="inputstyle" value=""></td>
 		</tr>
 	</table>
 	</fieldset>

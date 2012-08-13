@@ -10,30 +10,40 @@ import com.aisino2.jdy.domain.Ljjbxx;
 
 public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 
+
 	public Ljjbxx insert(Ljjbxx ljjbxx) {
-		if(ljjbxx.getQyjbxx() != null && ljjbxx.getQyjbxx().getQybm()!=null){
-			ljjbxx.setDjxh(generateDjxh(ljjbxx.getQyjbxx().getQybm()));
+		if(ljjbxx.getDjxh()==null){
+			if(ljjbxx.getQyjbxx() != null && ljjbxx.getQyjbxx().getQybm()!=null){
+				ljjbxx.setDjxh(generateDjxh(ljjbxx.getQyjbxx().getQybm()));
+			}
+			else {
+				throw new RuntimeException("要么外部传入登记序号，要么传入企业编码，不可同时为空");
+			}
 		}
 		insert("ljjbxx.insert", ljjbxx);
 		return ljjbxx;
 	}
 
+
 	public void update(Ljjbxx ljjbxx) {
 		update("ljjbxx.update", ljjbxx);
 	}
+
 
 	public void delete(Ljjbxx ljjbxx) {
 		delete("ljjbxx.delete",ljjbxx);
 	}
 
+
 	public List<Ljjbxx> findLjjbxxs(Ljjbxx ljjbxx) {
 		return queryForList("ljjbxx.getList", ljjbxx);
 	}
 
+
 	public Page findLjjbxxsForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {	
 		
-		String sCol="";
+		String sCol=" ljjbxx.djxh ";
 		if(sort == null)
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
@@ -57,16 +67,15 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 				sCol = "ljjbxx.ljtbsj "+ sort;
 			else 
 				sCol=" ljjbxx.djxh ";
-		}else{
-			sCol=" ljjbxx.djxh ";
 		}
+		
 		map.put("pageSort", sCol);
 		return queryForPage("ljjbxx.getListPage", map, pageno,pagesize);
 	}
 
+
 	public String generateDjxh(String qybm) {
-		// TODO Auto-generated method stub
-		return null;
+		return (String) queryForObject("ljjbxx.generateDjxh", qybm);
 	}
 
 }
