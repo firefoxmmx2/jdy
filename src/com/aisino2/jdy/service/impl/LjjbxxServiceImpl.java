@@ -10,16 +10,15 @@ import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.service.ILjjbxxService;
 
 public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
+	/**注入揽件基本信息**/
+	//private LjjbxxDaoImpl LjjbxxDaoImpl;
+	/**注入揽件物品信息**/
+	/**注入人员信息对象**/
+	/**注入人员照片信息对象**/
+	/**注入可疑寄递物品信息对象**/
 	
-	private LjjbxxDaoImpl ljjbxxdao;
 	
-	public LjjbxxDaoImpl getLjjbxxdao() {
-		return ljjbxxdao;
-	}
 
-	public void setLjjbxxdao(LjjbxxDaoImpl ljjbxxdao) {
-		this.ljjbxxdao = ljjbxxdao;
-	}
 
 	/**
 	 * 添加揽件信息
@@ -27,7 +26,13 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	 * @return
 	 */
 	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) {
-		// TODO Auto-generated method stub
+		/**
+		 * 插入揽件物品信息表
+		 */
+		
+		ljjbxx.getLjr();
+		ljjbxx.getLjsj();
+		//LjjbxxDaoImpl.insert(ljjbxx);
 		return null;
 	}
 
