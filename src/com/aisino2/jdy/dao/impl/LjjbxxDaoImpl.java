@@ -75,7 +75,7 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 
 	
 	public String generateDjxh(String qybm) {
-		return (String) queryForObject("ljjbxx.generateDjxh", qybm);
+		return (String) queryForObject("ljjbxx.getForGenerateDjxh", qybm);
 	}
 
 }
