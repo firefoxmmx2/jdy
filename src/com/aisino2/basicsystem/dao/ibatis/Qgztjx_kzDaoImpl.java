@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IQgztjx_kzDao;
 import com.aisino2.basicsystem.domain.Qgztjx_kz;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class Qgztjx_kzDaoImpl extends BaseDao implements IQgztjx_kzDao {
 	/** @param 全国在逃简项快照(t_qgztjx_kz) 增加 */

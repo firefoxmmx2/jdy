@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Pmt;
 public interface IPmtDao {
 	/** @param 平面图(t_pmt) 增加 */

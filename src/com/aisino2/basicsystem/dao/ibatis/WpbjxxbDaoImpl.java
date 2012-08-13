@@ -4,16 +4,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IWpbjxxbDao;
 import com.aisino2.basicsystem.domain.BaojingTemp;
-import com.aisino2.basicsystem.domain.Bjgz;
-import com.aisino2.basicsystem.domain.Bjxxb;
 import com.aisino2.basicsystem.domain.WpbaojingTemp;
 import com.aisino2.basicsystem.domain.Wpbjgz;
 import com.aisino2.basicsystem.domain.Wpbjxxb;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class WpbjxxbDaoImpl extends BaseDao implements IWpbjxxbDao {
 	/** @param 物品报警信息表(t_wpbjxxb) 增加 */

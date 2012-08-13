@@ -1,6 +1,7 @@
 package com.aisino2.basicsystem.service;
 
 import java.util.List;
+
 import com.aisino2.basicsystem.domain.YlcsjbxxForTree;
 import com.aisino2.sysadmin.domain.Department;
 

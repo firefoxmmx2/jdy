@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Gatztbhf;
+import com.aisino2.core.dao.Page;
 public interface IGatztbhfDao {
 	/** @param 公安通知通报回复(t_gatztbhf) 增加 */
 	Gatztbhf insertGatztbhf(Gatztbhf gatztbhf);

@@ -3,12 +3,11 @@ package com.aisino2.basicsystem.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.basicsystem.dao.IGatztb_fjDao;
+import com.aisino2.basicsystem.domain.Gatztb_fj;
+import com.aisino2.basicsystem.service.IGatztb_fjService;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.basicsystem.domain.Gatztb_fj;
-import com.aisino2.basicsystem.dao.IGatztb_fjDao;
-import com.aisino2.basicsystem.service.IGatztb_fjService;
 
 public class Gatztb_fjServiceImpl extends BaseService implements IGatztb_fjService {
 

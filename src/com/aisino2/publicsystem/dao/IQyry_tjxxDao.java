@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Qyry_tjxx;
 public interface IQyry_tjxxDao {
 	/** @param 企业人员体检信息(t_qyry_tjxx) 增加 */

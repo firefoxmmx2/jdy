@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Cjdtjrb;
 public interface ICjdtjrbDao {
 	/** @param 采集端统计日报(t_cjdtjrb) 增加 */

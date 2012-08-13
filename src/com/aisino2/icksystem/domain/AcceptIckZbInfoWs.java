@@ -2,8 +2,6 @@ package com.aisino2.icksystem.domain;
 
 import java.util.List;
 
-import com.aisino2.icksystem.domain.Icksl;
-import com.aisino2.icksystem.domain.Ickzb;
 import com.aisino2.core.domain.BaseObject;
 
 public class AcceptIckZbInfoWs extends BaseObject {

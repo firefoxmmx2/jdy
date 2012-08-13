@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Cljbxx;
 public interface ICljbxxDao {
 	/** @param 车辆基本信息(t_cljbxx) 增加 */

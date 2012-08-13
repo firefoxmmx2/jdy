@@ -1,9 +1,7 @@
 package com.aisino2.basicsystem.test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.PropertyConfigurator;

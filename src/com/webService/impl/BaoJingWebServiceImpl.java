@@ -1,15 +1,10 @@
 package com.webService.impl;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -18,11 +13,7 @@ import com.aisino2.basicsystem.dao.IBjxxbDao;
 import com.aisino2.cache.CacheManager;
 import com.aisino2.common.NullEntityResolver;
 import com.aisino2.common.StringUtil;
-import com.aisino2.sysadmin.Constants;
-import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.Globalpar;
-import com.aisino2.sysadmin.domain.User;
-import com.opensymphony.xwork2.ActionContext;
 import com.webService.IBaoJingWebService;
 public class BaoJingWebServiceImpl implements IBaoJingWebService{
 	

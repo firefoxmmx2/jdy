@@ -1,18 +1,12 @@
 package com.aisino2.icksystem.test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Date;
 import java.util.Map;
 
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
-import com.aisino2.core.test.BaseTestCase;
 import com.aisino2.icksystem.domain.Icksl;
 import com.aisino2.icksystem.service.IIckslService;
-import com.aisino2.publicsystem.domain.Qyryxx;
 
 public class IckslTest extends AbstractTransactionalDataSourceSpringContextTests {
 	

@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Xctb_fj;
+import com.aisino2.core.dao.Page;
 public interface IXctb_fjDao {
 	/** @param 协查通报_附件(t_xctb_fj) 增加 */
 	Xctb_fj insertXctb_fj(Xctb_fj xctb_fj);

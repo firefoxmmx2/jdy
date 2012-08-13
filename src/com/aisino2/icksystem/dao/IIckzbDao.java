@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Ickzb;
 public interface IIckzbDao {
 	/** @param IC卡组包(t_ickzb) 增加 */

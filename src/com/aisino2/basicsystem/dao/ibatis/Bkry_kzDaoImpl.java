@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IBkry_kzDao;
 import com.aisino2.basicsystem.domain.Bkry_kz;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class Bkry_kzDaoImpl extends BaseDao implements IBkry_kzDao {
 	/** @param 布控人员快照(t_bkry_kz) 增加 */

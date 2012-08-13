@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Zjb_ls;
 import com.aisino2.publicsystem.dao.IZjb_lsDao;
+import com.aisino2.publicsystem.domain.Zjb_ls;
 import com.aisino2.publicsystem.service.IZjb_lsService;
 
 public class Zjb_lsServiceImpl extends BaseService implements IZjb_lsService {

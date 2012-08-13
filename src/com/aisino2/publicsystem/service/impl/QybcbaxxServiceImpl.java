@@ -7,11 +7,11 @@ import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
 import com.aisino2.publicsystem.dao.IQybaxxDao;
 import com.aisino2.publicsystem.dao.IQybcbaxxDao;
+import com.aisino2.publicsystem.dao.ITjclxxDao;
 import com.aisino2.publicsystem.domain.Qybaxx;
 import com.aisino2.publicsystem.domain.Qybcbaxx;
-import com.aisino2.publicsystem.service.IQybcbaxxService;
-import com.aisino2.publicsystem.dao.ITjclxxDao;
 import com.aisino2.publicsystem.domain.Tjclxx;
+import com.aisino2.publicsystem.service.IQybcbaxxService;
 
 public class QybcbaxxServiceImpl extends BaseService implements IQybcbaxxService {
 

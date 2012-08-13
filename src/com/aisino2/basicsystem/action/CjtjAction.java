@@ -1,7 +1,6 @@
 package com.aisino2.basicsystem.action;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,17 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.springframework.context.support.StaticApplicationContext;
 
 import com.aisino2.basicsystem.domain.Cjtj;
 import com.aisino2.basicsystem.service.ICjtjService;
 import com.aisino2.common.PageUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.publicsystem.domain.Qyfltj;
 import com.aisino2.sysadmin.domain.Globalpar;
 import com.opensymphony.xwork2.ActionContext;
-import com.sun.java_cup.internal.internal_error;
 
 public class CjtjAction extends PageAction {
 	private ICjtjService cjtjService;

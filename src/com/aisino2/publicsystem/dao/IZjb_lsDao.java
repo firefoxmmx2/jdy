@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Zjb_ls;
 public interface IZjb_lsDao {
 	/** @param 证件历史表(t_zjb_ls) 增加 */

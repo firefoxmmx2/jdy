@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Garkktbsj;
 public interface IGarkktbsjDao {
 	/** @param 公安人口库同步数据(t_garkktbsj) 增加 */

@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Yjbdtj;
+import com.aisino2.core.dao.Page;
 public interface IYjbdtjDao {
 	/** @param 预警比对条件(t_yjbdtj) 增加 */
 	Yjbdtj insertYjbdtj(Yjbdtj yjbdtj);

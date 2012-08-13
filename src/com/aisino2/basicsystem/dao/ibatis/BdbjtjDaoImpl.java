@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.aisino2.basicsystem.dao.IBdbjtjDao;
 import com.aisino2.basicsystem.domain.Bdbjtj;
-import com.aisino2.core.dao.Page;
 import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 
 public class BdbjtjDaoImpl extends BaseDao implements IBdbjtjDao {

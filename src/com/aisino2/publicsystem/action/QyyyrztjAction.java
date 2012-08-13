@@ -17,8 +17,6 @@ import com.aisino2.common.DepartmentUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.publicsystem.domain.Qyfltj;
-import com.aisino2.publicsystem.domain.Qyyyrz;
 import com.aisino2.publicsystem.domain.Qyyyrztj;
 import com.aisino2.publicsystem.service.IQyyyrzService;
 import com.aisino2.publicsystem.service.IQyyyrztjService;

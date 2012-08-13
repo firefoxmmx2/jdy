@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Qyjcxx;
 public interface IQyjcxxDao {
 	/** @param 企业奖惩信息(t_qyjcxx) 增加 */

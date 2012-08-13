@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Qycf;
+import com.aisino2.core.dao.Page;
 public interface IQycfDao {
 	/** @param 企业处罚(t_qycf) 增加 */
 	Qycf insertQycf(Qycf qycf);

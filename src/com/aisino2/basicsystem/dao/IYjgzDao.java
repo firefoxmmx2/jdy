@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Yjgz;
+import com.aisino2.core.dao.Page;
 public interface IYjgzDao {
 	/** @param 预警规则(t_yjgz) 增加 */
 	Yjgz insertYjgz(Yjgz yjgz);

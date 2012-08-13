@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+  <package name="jdy" extends="json-default" namespace="/jdy">
+    <!-- 揽件信息action -->
+    <action name="*_ljxx" method="{1}" class="ljxxAction">
+      <result type="json"/>
+    </action>
+  </package>
+</struts>

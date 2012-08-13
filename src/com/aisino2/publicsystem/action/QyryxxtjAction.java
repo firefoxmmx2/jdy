@@ -14,7 +14,6 @@ import org.apache.struts2.ServletActionContext;
 import com.aisino2.common.DepartmentUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.publicsystem.domain.Cxtj;
 import com.aisino2.publicsystem.domain.Qyryxxtj;
 import com.aisino2.publicsystem.domain.Qysctj;
 import com.aisino2.publicsystem.service.IQyryxxtjService;

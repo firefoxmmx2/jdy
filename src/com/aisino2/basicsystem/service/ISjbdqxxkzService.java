@@ -3,8 +3,8 @@ package com.aisino2.basicsystem.service;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
 import com.aisino2.basicsystem.domain.Sjbdqxxkz;
+import com.aisino2.core.dao.Page;
 
 public interface ISjbdqxxkzService {
 	/** @param 手机被盗抢信息_快照(t_sjbdqxxkz) 增加 */

@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IXctbjsdwDao;
 import com.aisino2.basicsystem.domain.Xctbjsdw;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class XctbjsdwDaoImpl extends BaseDao implements IXctbjsdwDao {
 	/** @param 协查通报接收单位(t_xctbjsdw) 增加 */

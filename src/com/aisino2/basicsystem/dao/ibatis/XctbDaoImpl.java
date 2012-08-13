@@ -5,9 +5,6 @@ import java.util.Map;
 
 import com.aisino2.basicsystem.dao.IXctbDao;
 import com.aisino2.basicsystem.domain.Xctb;
-import com.aisino2.basicsystem.domain.Xctb_fj;
-import com.aisino2.basicsystem.domain.Xctbhf;
-import com.aisino2.basicsystem.domain.Xctbjsdw;
 import com.aisino2.core.dao.BaseDao;
 import com.aisino2.core.dao.Page;
 

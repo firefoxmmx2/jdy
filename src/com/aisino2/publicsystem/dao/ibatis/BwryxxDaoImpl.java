@@ -3,11 +3,9 @@ package com.aisino2.publicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
 import com.aisino2.core.dao.BaseDao;
-
+import com.aisino2.core.dao.Page;
 import com.aisino2.publicsystem.dao.IBwryxxDao;
-import com.aisino2.publicsystem.domain.Baryxx;
 import com.aisino2.publicsystem.domain.Bwryxx;
 
 public class BwryxxDaoImpl extends BaseDao implements IBwryxxDao {

@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.icksystem.domain.Icksl_lsb;
 import com.aisino2.icksystem.dao.IIcksl_lsbDao;
+import com.aisino2.icksystem.domain.Icksl_lsb;
 import com.aisino2.icksystem.service.IIcksl_lsbService;
 
 public class Icksl_lsbServiceImpl extends BaseService implements IIcksl_lsbService {

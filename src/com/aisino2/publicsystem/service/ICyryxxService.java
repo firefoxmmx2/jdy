@@ -5,8 +5,6 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.publicsystem.domain.Qyryxx;
-import com.aisino2.publicsystem.domain.Qyry_zp;
-import com.aisino2.publicsystem.domain.Wgcyryxx;
 
 public interface ICyryxxService {
 	

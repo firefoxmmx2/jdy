@@ -13,10 +13,10 @@ import org.apache.struts2.ServletActionContext;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.icksystem.domain.Skxx;
 import com.aisino2.icksystem.domain.Ycskqy;
 import com.aisino2.icksystem.service.IYcskqyService;
+import com.aisino2.sysadmin.domain.Globalpar;
 
 public class YcskqyAction extends PageAction{
 	private IYcskqyService ycskqyService;

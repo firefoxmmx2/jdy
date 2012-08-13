@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Wgcyryxx;
 import com.aisino2.publicsystem.dao.IWgcyryxxDao;
+import com.aisino2.publicsystem.domain.Wgcyryxx;
 import com.aisino2.publicsystem.service.IWgcyryxxService;
 
 public class WgcyryxxServiceImpl extends BaseService implements IWgcyryxxService {

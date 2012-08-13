@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Aqjcsb;
 public interface IAqjcsbDao {
 	/** @param 安全检查设备(t_aqjcsb) 增加 */

@@ -3,12 +3,11 @@ package com.aisino2.basicsystem.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.basicsystem.dao.IXctb_fjDao;
+import com.aisino2.basicsystem.domain.Xctb_fj;
+import com.aisino2.basicsystem.service.IXctb_fjService;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.basicsystem.domain.Xctb_fj;
-import com.aisino2.basicsystem.dao.IXctb_fjDao;
-import com.aisino2.basicsystem.service.IXctb_fjService;
 
 public class Xctb_fjServiceImpl extends BaseService implements IXctb_fjService {
 

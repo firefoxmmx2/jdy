@@ -5,17 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
-import sun.text.CompactShortArray.Iterator;
-
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.sysadmin.domain.Role;
 import com.aisino2.sysadmin.domain.Role_func;
-import com.aisino2.sysadmin.service.IRoleService;
 import com.aisino2.sysadmin.service.IRole_funcService;
 
 public class Role_FuncAction extends PageAction{

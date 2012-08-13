@@ -10,7 +10,7 @@ import com.aisino2.jdy.domain.Ljjbxx;
 
 public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 
-	
+
 	public Ljjbxx insert(Ljjbxx ljjbxx) {
 		if(ljjbxx.getDjxh()==null){
 			if(ljjbxx.getQyjbxx() != null && ljjbxx.getQyjbxx().getQybm()!=null){
@@ -24,22 +24,22 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 		return ljjbxx;
 	}
 
-	
+
 	public void update(Ljjbxx ljjbxx) {
 		update("ljjbxx.update", ljjbxx);
 	}
 
-	
+
 	public void delete(Ljjbxx ljjbxx) {
 		delete("ljjbxx.delete",ljjbxx);
 	}
 
-	
+
 	public List<Ljjbxx> findLjjbxxs(Ljjbxx ljjbxx) {
 		return queryForList("ljjbxx.getList", ljjbxx);
 	}
 
-	
+
 	public Page findLjjbxxsForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {	
 		
@@ -73,7 +73,7 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 		return queryForPage("ljjbxx.getListPage", map, pageno,pagesize);
 	}
 
-	
+
 	public String generateDjxh(String qybm) {
 		return (String) queryForObject("ljjbxx.getForGenerateDjxh", qybm);
 	}

@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Rylbtj;
 import com.aisino2.publicsystem.dao.IRylbtjDao;
+import com.aisino2.publicsystem.domain.Rylbtj;
 import com.aisino2.publicsystem.service.IRylbtjService;
 
 public class RylbtjServiceImpl extends BaseService implements IRylbtjService {

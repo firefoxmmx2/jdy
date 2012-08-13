@@ -1,16 +1,12 @@
 package com.aisino2.publicsystem.dao.ibatis;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
 import com.aisino2.core.dao.BaseDao;
-
+import com.aisino2.core.dao.Page;
 import com.aisino2.publicsystem.dao.ICyryxxDao;
 import com.aisino2.publicsystem.domain.Qyryxx;
-import com.aisino2.publicsystem.domain.Cyryxx;
 
 public class CyryxxDaoImpl extends BaseDao implements ICyryxxDao {
 	

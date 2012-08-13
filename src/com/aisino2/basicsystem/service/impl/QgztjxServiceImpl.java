@@ -1,7 +1,6 @@
 package com.aisino2.basicsystem.service.impl;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,12 +8,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.basicsystem.dao.IQgztjxDao;
+import com.aisino2.basicsystem.domain.Qgztjx;
+import com.aisino2.basicsystem.service.IQgztjxService;
 import com.aisino2.cache.CacheManager;
-import com.aisino2.cache.CacheResult;
 import com.aisino2.common.DateToString;
 import com.aisino2.common.FileUtils;
 import com.aisino2.common.FtpFile;
-import com.aisino2.common.Javazip;
 import com.aisino2.common.ReadFile;
 import com.aisino2.common.StringUtils;
 import com.aisino2.core.dao.Page;
@@ -23,10 +23,6 @@ import com.aisino2.core.util.PinYinUtil;
 import com.aisino2.core.util.StringUtil;
 import com.aisino2.core.util.ZipUtil;
 import com.aisino2.sysadmin.domain.Dict_item;
-
-import com.aisino2.basicsystem.domain.Qgztjx;
-import com.aisino2.basicsystem.dao.IQgztjxDao;
-import com.aisino2.basicsystem.service.IQgztjxService;
 
 public class QgztjxServiceImpl extends BaseService implements IQgztjxService {
 

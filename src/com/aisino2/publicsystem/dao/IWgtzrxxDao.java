@@ -3,7 +3,6 @@ package com.aisino2.publicsystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.publicsystem.domain.Wgtzrxx;
 public interface IWgtzrxxDao {
 	/** @param 外国投资人信息(t_wgtzrxx) 增加 */

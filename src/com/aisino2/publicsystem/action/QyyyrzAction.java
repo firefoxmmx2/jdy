@@ -1,23 +1,22 @@
 package com.aisino2.publicsystem.action;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.aisino2.cache.CacheManager;
+import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.publicsystem.domain.Qyjbxx;
-import com.aisino2.publicsystem.domain.Qyryxx;
 import com.aisino2.publicsystem.domain.Qyyyrz;
 import com.aisino2.publicsystem.service.IQyjbxxService;
 import com.aisino2.publicsystem.service.IQyryxxService;
@@ -26,9 +25,6 @@ import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.User;
 import com.opensymphony.xwork2.ActionContext;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.poi.util.SystemOutLogger;
-import com.aisino2.common.QjblUtil;
 
 public class QyyyrzAction extends PageAction{
 	private IQyyyrzService qyyyrzService;

@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.web.PageAction;
 import com.aisino2.basicsystem.domain.Yjxxb;
 import com.aisino2.basicsystem.service.IYjxxbService;
+import com.aisino2.core.dao.Page;
+import com.aisino2.core.web.PageAction;
 
 public class YjxxbAction extends PageAction{
 	private IYjxxbService yjxxbService;

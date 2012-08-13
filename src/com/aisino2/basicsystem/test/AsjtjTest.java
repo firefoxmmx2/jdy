@@ -1,15 +1,10 @@
 package com.aisino2.basicsystem.test;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Date;
 import java.util.Map;
 
-import com.aisino2.core.test.BaseTestCase;
-import com.aisino2.basicsystem.domain.Bkry;
 import com.aisino2.basicsystem.service.IAsjtjService;
-import com.aisino2.basicsystem.service.IBkryService;
+import com.aisino2.core.test.BaseTestCase;
 
 public class AsjtjTest extends BaseTestCase {
 

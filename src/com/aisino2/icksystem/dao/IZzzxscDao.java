@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Zzzxsc;
 public interface IZzzxscDao {
 	/** @param 制证中心上传(t_zzzxsc) 增加 */

@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Bdqclxxlsb;
+import com.aisino2.core.dao.Page;
 public interface IBdqclxxlsbDao {
 	/** @param 被盗抢车辆信息临时表(t_bdqclxxlsb) 增加 */
 	Bdqclxxlsb insertBdqclxxlsb(Bdqclxxlsb bdqclxxlsb);

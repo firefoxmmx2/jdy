@@ -10,7 +10,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import com.aisino2.basicsystem.dao.IWpbjxxbDao;
 import com.aisino2.basicsystem.domain.Bdqclxx;
 import com.aisino2.basicsystem.domain.Bdqclxxkz;
-import com.aisino2.basicsystem.domain.Bjxxb;
 import com.aisino2.basicsystem.domain.Bkcl;
 import com.aisino2.basicsystem.domain.Bkclkz;
 import com.aisino2.basicsystem.domain.Bksj;

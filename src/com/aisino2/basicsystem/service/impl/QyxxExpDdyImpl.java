@@ -1,6 +1,5 @@
 package com.aisino2.basicsystem.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.aisino2.common.XmlReader;
-import com.aisino2.core.util.DateUtil;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.User;
 

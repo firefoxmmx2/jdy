@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IDtcxpxDao;
 import com.aisino2.basicsystem.domain.Dtcxpx;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class DtcxpxDaoImpl extends BaseDao implements IDtcxpxDao {
 	/** @param 动态查询排序(t_dtcxpx) 增加 */

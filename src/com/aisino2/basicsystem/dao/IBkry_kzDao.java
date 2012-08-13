@@ -2,9 +2,8 @@ package com.aisino2.basicsystem.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-
 import com.aisino2.basicsystem.domain.Bkry_kz;
+import com.aisino2.core.dao.Page;
 public interface IBkry_kzDao {
 	/** @param 布控人员快照(t_bkry_kz) 增加 */
 	Bkry_kz insertBkry_kz(Bkry_kz bkry_kz);

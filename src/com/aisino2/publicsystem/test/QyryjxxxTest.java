@@ -1,12 +1,8 @@
 package com.aisino2.publicsystem.test;
 
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Date;
 
 import com.aisino2.core.test.BaseTestCase;
-import com.aisino2.publicsystem.domain.Qyryjxxx;
-import com.aisino2.publicsystem.service.IQyryjxxxService;
 
 public class QyryjxxxTest extends BaseTestCase {
 

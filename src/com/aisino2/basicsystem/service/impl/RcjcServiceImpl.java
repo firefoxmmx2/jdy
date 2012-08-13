@@ -4,13 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.basicsystem.dao.IRcjcDao;
 import com.aisino2.basicsystem.dao.IScbmDao;
+import com.aisino2.basicsystem.domain.TyRcjc;
+import com.aisino2.basicsystem.service.IRcjcService;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.basicsystem.domain.TyRcjc;
-import com.aisino2.basicsystem.dao.IRcjcDao;
-import com.aisino2.basicsystem.service.IRcjcService;
 
 public class RcjcServiceImpl extends BaseService implements IRcjcService {
 

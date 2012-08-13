@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Zktjyb;
 public interface IZktjybDao {
 	/** @param 制卡统计月报(t_zktjyb) 增加 */

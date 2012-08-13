@@ -7,8 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.struts2.ServletActionContext;
 
+import org.apache.struts2.ServletActionContext;
 
 import com.aisino2.cache.CacheManager;
 import com.aisino2.common.StringUtil;

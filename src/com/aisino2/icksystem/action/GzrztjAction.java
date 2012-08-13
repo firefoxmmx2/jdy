@@ -20,7 +20,6 @@ import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.User;
 import com.opensymphony.xwork2.ActionContext;
-import com.aisino2.common.DateUtil;
 
 public class GzrztjAction extends PageAction {
 	private IGzrztjService gzrztjService;

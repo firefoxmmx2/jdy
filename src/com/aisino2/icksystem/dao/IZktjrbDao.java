@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Zktjrb;
 public interface IZktjrbDao {
 	/** @param 制卡统计日报(t_zktjrb) 增加 */

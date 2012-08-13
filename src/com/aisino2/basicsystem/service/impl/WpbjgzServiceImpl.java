@@ -3,12 +3,11 @@ package com.aisino2.basicsystem.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.basicsystem.dao.IWpbjgzDao;
+import com.aisino2.basicsystem.domain.Wpbjgz;
+import com.aisino2.basicsystem.service.IWpbjgzService;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.basicsystem.domain.Wpbjgz;
-import com.aisino2.basicsystem.dao.IWpbjgzDao;
-import com.aisino2.basicsystem.service.IWpbjgzService;
 
 public class WpbjgzServiceImpl extends BaseService implements IWpbjgzService {
 

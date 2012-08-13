@@ -188,19 +188,19 @@
 		<location>/public/403.jsp</location>
 	</error-page>
 
-	<taglib>
-		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
-		<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>/tags/struts-menu</taglib-uri>
-		<taglib-location>/WEB-INF/tld/struts-menu.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>/tags/struts-menu-el</taglib-uri>
-		<taglib-location>
-			/WEB-INF/tld/struts-menu-el.tld
-		</taglib-location>
-	</taglib>
+<!-- 	<taglib> -->
+<!-- 		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri> -->
+<!-- 		<taglib-location>/WEB-INF/tld/c.tld</taglib-location> -->
+<!-- 	</taglib> -->
+<!-- 	<taglib> -->
+<!-- 		<taglib-uri>/tags/struts-menu</taglib-uri> -->
+<!-- 		<taglib-location>/WEB-INF/tld/struts-menu.tld</taglib-location> -->
+<!-- 	</taglib> -->
+<!-- 	<taglib> -->
+<!-- 		<taglib-uri>/tags/struts-menu-el</taglib-uri> -->
+<!-- 		<taglib-location> -->
+<!-- 			/WEB-INF/tld/struts-menu-el.tld -->
+<!-- 		</taglib-location> -->
+<!-- 	</taglib> -->
 </web-app>
 

@@ -14,7 +14,6 @@ import org.apache.struts2.ServletActionContext;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.publicsystem.domain.Qyscbcf;
-import com.aisino2.publicsystem.domain.Qysctj;
 import com.aisino2.publicsystem.service.IQyscbcfService;
 import com.aisino2.sysadmin.domain.Globalpar;
 

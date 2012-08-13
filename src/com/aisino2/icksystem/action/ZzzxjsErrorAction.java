@@ -1,12 +1,6 @@
 package com.aisino2.icksystem.action;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.dom4j.Document;
@@ -16,15 +10,11 @@ import org.dom4j.Element;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.aisino2.cache.CacheResult;
-import com.aisino2.core.xml.XMLDocument;
-import com.aisino2.core.xml.XMLElement;
 import com.aisino2.core.web.BaseAction;
-import com.aisino2.sysadmin.domain.Globalpar;
-import com.aisino2.icksystem.service.IIckAcceptErrorServiceWS;
-
-import com.aisino2.icksystem.domain.Icksl;
-
 import com.aisino2.icksystem.domain.AcceptIckInfoWs;
+import com.aisino2.icksystem.domain.Icksl;
+import com.aisino2.icksystem.service.IIckAcceptErrorServiceWS;
+import com.aisino2.sysadmin.domain.Globalpar;
 
 
 public class ZzzxjsErrorAction   extends BaseAction{

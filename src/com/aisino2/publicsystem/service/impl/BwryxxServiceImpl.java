@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Bwryxx;
 import com.aisino2.publicsystem.dao.IBwryxxDao;
+import com.aisino2.publicsystem.domain.Bwryxx;
 import com.aisino2.publicsystem.service.IBwryxxService;
 
 public class BwryxxServiceImpl extends BaseService implements IBwryxxService {

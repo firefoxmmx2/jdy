@@ -2,8 +2,8 @@ package com.aisino2.basicsystem.dao.ibatis;
 
 import java.util.Map;
 
-import com.aisino2.core.dao.BaseDao;
 import com.aisino2.basicsystem.dao.IScbmDao;
+import com.aisino2.core.dao.BaseDao;
 
 
 public class ScbmDaoImpl  extends BaseDao implements IScbmDao {

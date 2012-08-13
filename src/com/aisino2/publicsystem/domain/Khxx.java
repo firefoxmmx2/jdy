@@ -1,8 +1,5 @@
 package com.aisino2.publicsystem.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Date;
 import java.util.Map;
 
 import com.aisino2.core.domain.BaseObject;

@@ -1,11 +1,8 @@
 package com.aisino2.icksystem.dao;
-import java.util.Date;
-import java.util.List;
+import java.util.List;
 import java.util.Map;
 
-import com.aisino2.common.DateToString;
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Wldj;
 public interface IWldjDao {
 	/** @param 物流登记信息(t_wldj) 增加 */

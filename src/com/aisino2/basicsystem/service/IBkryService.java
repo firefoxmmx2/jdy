@@ -3,9 +3,8 @@ package com.aisino2.basicsystem.service;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
 import com.aisino2.basicsystem.domain.Bkry;
-import com.aisino2.basicsystem.domain.Gzdx;
+import com.aisino2.core.dao.Page;
 
 public interface IBkryService {
 	/** @param 布控人员(t_bkry) 增加 */

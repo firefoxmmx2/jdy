@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.icksystem.domain.Icksl_wldj;
 import com.aisino2.icksystem.dao.IIcksl_wldjDao;
+import com.aisino2.icksystem.domain.Icksl_wldj;
 import com.aisino2.icksystem.service.IIcksl_wldjService;
 
 public class Icksl_wldjServiceImpl extends BaseService implements IIcksl_wldjService {

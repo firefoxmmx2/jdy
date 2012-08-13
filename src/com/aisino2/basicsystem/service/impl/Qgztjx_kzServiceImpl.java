@@ -3,12 +3,11 @@ package com.aisino2.basicsystem.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.basicsystem.dao.IQgztjx_kzDao;
+import com.aisino2.basicsystem.domain.Qgztjx_kz;
+import com.aisino2.basicsystem.service.IQgztjx_kzService;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.basicsystem.domain.Qgztjx_kz;
-import com.aisino2.basicsystem.dao.IQgztjx_kzDao;
-import com.aisino2.basicsystem.service.IQgztjx_kzService;
 
 public class Qgztjx_kzServiceImpl extends BaseService implements IQgztjx_kzService {
 

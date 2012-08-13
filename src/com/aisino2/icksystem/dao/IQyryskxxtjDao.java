@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Qyryskxxtj;
 public interface IQyryskxxtjDao {
 	/** @param 刷卡信息统计明细(t_skxxtjmx) 增加 */

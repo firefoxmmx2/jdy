@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.publicsystem.domain.Qyyyzttj;
 import com.aisino2.publicsystem.dao.IQyyyzttjDao;
+import com.aisino2.publicsystem.domain.Qyyyzttj;
 import com.aisino2.publicsystem.service.IQyyyzttjService;
 
 public class QyyyzttjServiceImpl extends BaseService implements IQyyyzttjService {

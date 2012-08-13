@@ -3,11 +3,10 @@ package com.aisino2.basicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
-import com.aisino2.core.dao.BaseDao;
-
 import com.aisino2.basicsystem.dao.IBjgzDao;
 import com.aisino2.basicsystem.domain.Bjgz;
+import com.aisino2.core.dao.BaseDao;
+import com.aisino2.core.dao.Page;
 
 public class BjgzDaoImpl extends BaseDao implements IBjgzDao {
 	/** @param 报警规则(t_bjgz) 增加 */

@@ -2,15 +2,12 @@ package com.aisino2.strutsmenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
-import com.aisino2.sysadmin.Constants;
 
 import net.sf.navigator.menu.MenuComponent;
 import net.sf.navigator.menu.MenuRepository;

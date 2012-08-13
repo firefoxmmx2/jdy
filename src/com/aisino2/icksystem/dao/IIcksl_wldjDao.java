@@ -3,7 +3,6 @@ package com.aisino2.icksystem.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.icksystem.domain.Icksl_wldj;
 public interface IIcksl_wldjDao {
 	/** @param IC卡受理_物流登记信息(t_icksl_wldj) 增加 */

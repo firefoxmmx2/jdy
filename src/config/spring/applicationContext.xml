@@ -16,7 +16,7 @@
 	</bean>
  
 	<bean id="dataSysadmin" class="org.springframework.jndi.JndiObjectFactoryBean">
-    	<property name="jndiName" value="jdbc/OracleSysadmin"/>
+    	<property name="jndiName" value="java:comp/env/jdbc/OracleSysadmin"/>
 	</bean>
  	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
