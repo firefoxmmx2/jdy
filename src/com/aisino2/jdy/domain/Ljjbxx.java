@@ -60,7 +60,17 @@ public class Ljjbxx implements Serializable {
      *  添加企业信息，关联查询
      */
     private Qyjbxx qyjbxx;
+    /**
+     * 是否补件
+     */
+    private String sfbj;
     
+	public String getSfbj() {
+		return sfbj;
+	}
+	public void setSfbj(String sfbj) {
+		this.sfbj = sfbj;
+	}
 	public Qyjbxx getQyjbxx() {
 		return qyjbxx;
 	}
