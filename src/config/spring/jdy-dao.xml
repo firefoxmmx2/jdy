@@ -20,4 +20,9 @@
 	<bean id="KyjdwpxxDaoImpl" class="com.aisino2.jdy.dao.impl.KyjdwpxxDaoImpl">
 		<property name="sqlMapClient" ref="sqlMapJdysys" />
 	</bean>
+<!-- 	派件信息 -->
+	<bean id="PjjbxxDaoImpl" class="com.aisino2.jdy.dao.impl.PjjbxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+	
 </beans>
