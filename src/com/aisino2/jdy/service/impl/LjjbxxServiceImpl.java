@@ -5,34 +5,39 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-import com.aisino2.jdy.dao.impl.LjjbxxDaoImpl;
+import com.aisino2.jdy.dao.IJdpxxDao;
+import com.aisino2.jdy.dao.IKyjdwpxxDao;
+import com.aisino2.jdy.dao.ILjjbxxDao;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.service.ILjjbxxService;
 
 public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	/**注入揽件基本信息**/
-	//private LjjbxxDaoImpl LjjbxxDaoImpl;
+	private ILjjbxxDao ljjbxxDao;
 	/**注入揽件物品信息**/
-	/**注入人员信息对象**/
-	/**注入人员照片信息对象**/
+	private IJdpxxDao jdpxxDao;
 	/**注入可疑寄递物品信息对象**/
+	private IKyjdwpxxDao kyjdwpxxDao;
+	
+	public void setKyjdwpxxDao(IKyjdwpxxDao kyjdwpxxDao) {
+		this.kyjdwpxxDao = kyjdwpxxDao;
+	}
+	public void setJdpxxDao(IJdpxxDao jdpxxDao) {
+		this.jdpxxDao = jdpxxDao;
+	}
+	public void setLjjbxxDao(ILjjbxxDao ljjbxxDao) {
+		this.ljjbxxDao = ljjbxxDao;
+	}
+
 	
 	
 
-
-	/**
-	 * 添加揽件信息
-	 * @param ljjbxx
-	 * @return
-	 */
+	
 	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) {
-		/**
-		 * 插入揽件物品信息表
-		 */
-		
+		// TODO Auto-generated method stub
 		ljjbxx.getLjr();
-		ljjbxx.getLjsj();
-		//LjjbxxDaoImpl.insert(ljjbxx);
+		
+		ljjbxxDao.insert(ljjbxx);
 		return null;
 	}
 
@@ -66,5 +71,11 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	/**
+	 * 添加揽件信息
+	 * @param ljjbxx
+	 * @return
+	 */
 
 }

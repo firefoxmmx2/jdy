@@ -10,40 +10,33 @@ import com.aisino2.jdy.domain.Rdrjbxx;
 
 public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
 
-	@Override
 	public Rdrjbxx insert(Rdrjbxx rdrjbxx) {
 		rdrjbxx.setId(this.getNextID("rdrjbxx_id"));
 		insert("Rdrjbxx.insert", rdrjbxx);
 		return rdrjbxx;
 	}
 
-	@Override
 	public void update(Rdrjbxx rdrjbxx) {
 		update("Rdrjbxx.update", rdrjbxx);
 	}
 
-	@Override
 	public void delete(Rdrjbxx rdrjbxx) {
 		delete("Rdrjbxx.delete", rdrjbxx);
 	}
 
-	@Override
 	public Rdrjbxx get(Rdrjbxx rdrjbxx) {
 		return (Rdrjbxx) queryForObject("Rdrjbxx.get", rdrjbxx);
 	}
 
-	@Override
 	public List<Rdrjbxx> findRdrjbxxs(Rdrjbxx rdrjbxx) {
 		
 		return queryForList("Rdrjbxx.getList", rdrjbxx);
 	}
 
-	@Override
 	public List<Rdrjbxx> findRdrjbxxs(Rdrjbxx rdrjbxx, String dir, String sort) {
 		return null;
 	}
 
-	@Override
 	public Page findRdrjbxxsForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {
 		String sCol="";
