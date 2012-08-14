@@ -16,12 +16,8 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	private ILjjbxxDao ljjbxxDao;
 	/**注入揽件物品信息**/
 	private IJdpxxDao jdpxxDao;
-	/**注入可疑寄递物品信息对象**/
-	private IKyjdwpxxDao kyjdwpxxDao;
 	
-	public void setKyjdwpxxDao(IKyjdwpxxDao kyjdwpxxDao) {
-		this.kyjdwpxxDao = kyjdwpxxDao;
-	}
+	
 	public void setJdpxxDao(IJdpxxDao jdpxxDao) {
 		this.jdpxxDao = jdpxxDao;
 	}
