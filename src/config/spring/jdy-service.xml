@@ -16,5 +16,8 @@
 		<property name="ljjbxxService" ref="LjjbxxServiceImpl" />
 		<property name="rdrjbxxService" ref="RdrjbxxServiceImpl" />
 	</bean>
-	
+<!-- 	寄递品服务 -->
+	<bean id="JdpxxServiceImpl" class="com.aisino2.jdy.service.impl.JdpxxServiceImpl">
+		<property name="jdpxxDao" ref="JdpxxDaoImpl"/>
+	</bean>
 </beans>
