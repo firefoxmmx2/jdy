@@ -5,4 +5,8 @@
   <bean id="ljxxAction" class="com.aisino2.jdy.action.LjxxAction" scope="prototype">  
       <property name="ljjbxxService" ref="LjjbxxServiceImpl"/> 
   </bean>  
+<!--   派件信息 -->
+  <bean id="PjxxAction" class="com.aisino2.jdy.action.PjxxAction" scope="prototype">
+      <property name="pjjbxxService" ref="PjjbxxServiceImpl"/>
+  </bean>
 </beans>
