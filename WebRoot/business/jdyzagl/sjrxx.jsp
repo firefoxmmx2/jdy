@@ -8,19 +8,23 @@
 				  <table>
 				    <tr>
 					    <td class="red">收件人姓名</td>
-						<td class="detailtd"><input type="text" id="lj.sjr.xm"   name="lj.sjr.xm" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="lj_sjrxm"   name="lj.sjr.xm" class="inputstyle" value="" /></td>
 				    </tr>
 				    <tr height="20">
 						<td class="red">证件类型</td>
-						<td class="detailtd"><input type="text" id="lj.sjr.zjlx" name="lj.sjr.xm" class="inputstyle" value="" /></td>
+						<td class="detailtd">
+					          <select id="lj_sjrzjlx">
+								<option></option>
+							  </select>
+						</td>
 					</tr>
 					<tr height="20">
 						<td class="red">证件号码</td>
-						<td class="detailtd"><input type="text" id="lj.sjr.zjhm" name="lj.sjr.zjhm" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="lj_sjrzjhm" name="lj.sjr.zjhm" class="inputstyle" value="" /></td>
 					</tr>
 					<tr height="20">
 						<td class="red">收件地址</td>
-						<td class="detailtd"><input type="text" id="lj.sjr.ssx"  name="lj.sjr.ssx" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="lj_sjrssx"  name="lj.sjr.ssx" class="inputstyle" value="" /></td>
 					</tr>
 				  </table>
 				 </td>
@@ -35,17 +39,17 @@
 			   <table>
 			     <tr height="20">
 					<td class="red">现住地详址</td>
-					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="lj.sjr.xxdz" name="lj.sjr.xxdz"  /></td>
+					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="lj_sjrxxdz" name="lj.sjr.xxdz"  /></td>
 				 </tr>
 				 <tr height="20">
 					<td class="distd">单位名称</td>
-					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="lj.sjr.dw" name="lj.sjr.dw"  /></td>
+					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="lj_sjrdw" name="lj.sjr.dw"  /></td>
 				</tr>
 			    <tr height="20">
 					<td class="red">手机</td>
-					<td><input type="text" id="lj.sjr.lxdh"   name="lj.sjr.lxdh" style="width:80px" value="" /></td>
+					<td><input type="text" id="lj_sjrlxdh"   name="lj.sjr.lxdh" style="width:80px" value="" /></td>
 					<td>固话</td>
-					<td><input type="text" id="lj.sjr.gddh"   name="lj.sjr.gddh" style="width:80px" value="" /></td>
+					<td><input type="text" id="lj_sjrgddh"   name="lj.sjr.gddh" style="width:80px" value="" /></td>
 				 </tr>
 			   </table>
 			   </td>

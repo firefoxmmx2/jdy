@@ -2,11 +2,18 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
+<script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 <script type="text/javascript">
-
+$(document).ready(function() {
+	//寄递物品联动下拉列表
+	selectboxlink("jdwp_jdpdl","jdwp_jdpxl","dm_jdwpdl");
+})
 //寄递物品信息保存时验证方法
 function jdfpxxtjVerify(){
-	
+	if (!checkControlValue("jdwp_jdpdl","Select",1,4,null,1,"大类不能为空"))
+		return false;
+	if (!checkControlValue("jdwp_jdpxl","Select",1,4,null,1,"小类不能为空"))
+		return false;
 	if (!checkControlValue("jdwp_jdpmc","String",1,30,null,1,"内件品名"))
 		return false;
 	if (!checkControlValue("jdwp_jdpsm","Float",0,9999.9,1,1,"数量"))
@@ -35,11 +42,19 @@ function jdwpxxtj(){
 <table>
 	<tr>
 		<td class="red" >大类</td>
-		<td class="pagetd"><select id="dl" class="select1"><option>物品</option></select></td>
+        <td class="detailtd">
+	          <select id="jdwp_jdpdl">
+				<option></option>
+			  </select>
+		</td>
 	</tr>
 	<tr>
 		<td class="red">小类</td>
-		<td class="pagetd"><select id="jdwp_jdplx" class="select1"><option>药品</option></select></td>
+		<td class="detailtd">
+	          <select id="jdwp_jdpxl">
+				<option></option>
+			  </select>
+		</td>
 	</tr>
 	<tr>
 		<td class="red">内件品名</td>

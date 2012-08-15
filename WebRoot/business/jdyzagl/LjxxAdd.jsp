@@ -5,6 +5,22 @@
 <script type="text/javascript">
 var trNum=0;
 $(document).ready(function() {	
+	//揽件时间选择
+	$("#lj_ljsj").attr("readonly","true");
+	$("#lj_ljsj").datepicker();
+	//户籍省市县--寄件人
+	$("#lj_jjrssx").click( function() {
+		getDict_item("lj_jjrssx", "lj_jjrssxdm", "dm_xzqh");
+	});
+	//户籍省市县--收件人
+	$("#lj_sjrssx").click( function() {
+		getDict_item("lj_sjrssx", "lj_sjrssxdm", "dm_xzqh");
+	});
+	//证件类型--寄件人
+	getDictItemBox("lj_jjrzjlx","","dm_zjlx");
+	//证件类型--收件人
+	getDictItemBox("lj_sjrzjlx","","dm_zjlx");
+	
 	daggleDiv("ljjbxxadd_detail");//div拖动
 	dzcl_pageUrl="jdy/queryListjdp_ljxx.action";
 	
@@ -17,7 +33,7 @@ $(document).ready(function() {
 	dzcl_tables=$("#"+dzcl_divnid).html();
 	setPageList_ywwffzjlzmfj(1);
 }); 
-//有无违法犯罪记录grid
+//寄递品信息grid
 function setPageList_ywwffzjlzmfj(pageno,url){	
 	if (true){
 		$("#"+dzcl_divnid).html(dzcl_tables);	
@@ -50,7 +66,7 @@ function tianJiaZxzybaydwDzcl(cllb){
 }
 //寄递物品信息保存时添加到列表---添加行的方法
 function jdwpxxadd(){ 
-	var jdwp_jdplx=$("#jdwp_jdplx").val();//寄递品类型
+	var jdwp_jdplx=$("#jdwp_jdpxl").val();//寄递品类型
 	var jdwp_jdpmc=$("#jdwp_jdpmc").val();//寄递品名称
 	var jdwp_jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
 	trNum++;
@@ -129,7 +145,7 @@ function getObject(obj){
 		var shanchuTrParent = shanchuTr.parent();
 		//标志位修改成1表示新添加之后又做了删除，2表示已经做了录入需要对数据库进行删除
 		$(shanchuTr).find("td").eq(1).text("1");
-		shanchuTr.hide();
+		shanchuTr.remove();
 		$("shanchuTrParent td:nth-child(2)").text();
 		var tr_class;
 		shanchuTrParent.find("tr").each(function(i){
@@ -139,18 +155,74 @@ function getObject(obj){
 					tr_class = "grid-row-style1";
 					
 				jQuery(this).attr("class",tr_class);
-			});
+		});
 	}
 }
+$("#lj_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
+	//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+	var zjhm = $("#lj_jjrzjhm").attr("value").toUpperCase();
+	if(zjhm!=""){
+		if(isIdCardNo(zjhm)){
+			//证件号码就用用户自己填写的，如15位的不在去转换为18位
+			//15位转18位
+			if(zjhm.length==15){
+				valSfzCardIsRight("lj_jjrzjhm","请正证件号码!");
+			}
+		}
+	}
+});
+$("#lj_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
+	//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+	var zjhm = $("#lj_jjrzjhm").attr("value").toUpperCase();
+	if(zjhm!=""){
+		if(isIdCardNo(zjhm)){
+			//证件号码就用用户自己填写的，如15位的不在去转换为18位
+			//15位转18位
+			if(zjhm.length==15){
+				valSfzCardIsRight("lj_jjrzjhm","请正证件号码!");
+			}
+		}
+	}
+});
 //揽件信息添加页面验证方法
 function addVerify(){
+	if (!checkControlValue("lj_wldh","String",1,30,null,1,"物流单号"))
+		return false;
+	if (!checkControlValue("lj_jjrxm","String",1,30,null,1,"寄件人姓名"))
+		return false;
+	if (!checkControlValue("lj_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
+		return false;
+	if (!checkControlValue("lj_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
+		return false;
+	if (!checkControlValue("lj_jjrssx","String",1,70,null,1,"寄件地址"))
+		return false;
+	if (!checkControlValue("lj_jjrxxdz","String",1,70,null,1,"寄件人现住地详址"))
+		return false;
+	if (!checkControlValue("lj_jjrlxdh","String",1,20,null,1,"寄件人手机"))
+		return false;
+	if (!checkControlValue("lj_sjrxm","String",1,30,null,1,"收件人姓名"))
+		return false;
+	if (!checkControlValue("lj_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
+		return false;
+	if (!checkControlValue("lj_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
+		return false;
+	if (!checkControlValue("lj_sjrssx","String",1,70,null,1,"收件地址"))
+		return false;
+	if (!checkControlValue("lj_sjrxxdz","String",1,70,null,1,"收件人现住地详址"))
+		return false;
+	if (!checkControlValue("lj_sjrlxdh","String",1,20,null,1,"收件人手机"))
+		return false;
+	if (!checkControlValue("lj_xm","String",1,30,null,1,"揽件人"))
+		return false;
+	if (!checkControlValue("lj_ljsj","Date",null,null,null,1,"揽件日期"))
+		return false;
 	
     return true;
 }
 //揽件信息保存方法
 function  ljxxbaocun(){
 	if (addVerify()){
-		alert("是不是执行的这点");
+		alert("提交方法");
 		var params = getSubmitParams("[name*=lj.]");
 		jQuery.post("jdy/insert_ljxx.action",params,addback,"json");
 	}
@@ -205,9 +277,9 @@ function addback(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="distd">登记序号</td>
-			<td class="detailtd"><input type="text" id="lj.djxh" name="lj.djxh" class="inputstyle" value="" /></td>
+			<td class="detailtd"><input type="text" id="lj_djxh" name="lj.djxh" class="readonly" value="" /></td>
 			<td class="red">物流单号</td>
-			<td class="detailtd"><input type="text" id="lj.wldh" name="lj.wldh" class="inputstyle" value="" /></td>
+			<td class="detailtd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value="" /></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -249,9 +321,9 @@ function addback(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="red">揽件人</td>
-			<td class="detailtd"><input type="text" id="lj.xm"   name="lj.xm" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj_xm"   name="lj.xm" class="inputstyle" value=""></td>
 			<td class="red">揽件时间</td>
-			<td class="detailtd"><input type="text" id="lj.ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
 		</tr>
 	</table>
 	</fieldset>
