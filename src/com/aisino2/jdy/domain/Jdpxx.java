@@ -35,7 +35,30 @@ public class Jdpxx implements Serializable {
 	 */
 	private String sfscbz;
 	
+	/**
+	 * 寄递品重量
+	 */
+	private String jdpzl;
 	
+	/**
+	 * 寄递品体积
+	 */
+	private String jdptj;
+	
+	
+	
+	public String getJdpzl() {
+		return jdpzl;
+	}
+	public void setJdpzl(String jdpzl) {
+		this.jdpzl = jdpzl;
+	}
+	public String getJdptj() {
+		return jdptj;
+	}
+	public void setJdptj(String jdptj) {
+		this.jdptj = jdptj;
+	}
 	public String getSfscbz() {
 		return sfscbz;
 	}
