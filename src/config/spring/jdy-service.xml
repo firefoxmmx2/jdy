@@ -4,6 +4,7 @@
 	<bean id="LjjbxxServiceImpl" class="com.aisino2.jdy.service.impl.LjjbxxServiceImpl">
 		<property name="ljjbxxDao" ref="LjjbxxDaoImpl" />
 		<property name="jdpxxDao" ref="JdpxxDaoImpl" />
+		<property name="rdrjbxxDao" ref="RdrjbxxDaoImpl" />
 	</bean>
 <!-- 	寄递对象服务 -->
 	<bean id="RdrjbxxServiceImpl" class="com.aisino2.jdy.service.impl.RdrjbxxServiceImpl">
