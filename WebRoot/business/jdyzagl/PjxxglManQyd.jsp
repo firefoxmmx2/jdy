@@ -1,12 +1,142 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div>派件信息管理</div>
-</body>
-</html>
+<%@ include file="/public/user-info.jsp" %>
+<script type="text/javascript">
+	var pjxx_detail_div="pjjbxx_detail";
+	var pjxx_detail_width=950;
+	var pjxx_grid_div="pjjbxxDiv";
+	var pjxx_grid_table = "pjjbxxTable";
+	var pjxx_grid_table_html;
+	var pjxx_page_url = "jdy/querylist_pjxx.action";
+	var pjxx_add_page_url = "business/jdyzagl/PjxxAdd.jsp";
+	$(function(){
+		
+		$('#pjxx_jjr_zjlx').selectBox({code:'dm_zjlx'});
+		$('.date').attr("readOnly",true).datepicker();
+		
+		loadPagePjxxQuery(pjxx_grid_div);
+		
+	});
+	
+	function loadPagePjxxQuery(divpageid){
+		pjxx_grid_table_html=$("#"+divpageid).html();
+		pjxxQueryPageList(1,'#');
+	}
+	
+	function setPjxxQueryList(pageno,url){
+	 	$("#"+pjxx_grid_div).html(pjxx_grid_table_html);
+		params = getSubmitParams("#pjjbxx_man_qyd [id*=pjxx_]",params);
+		if (url==null || url=="undefined"){
+			url=pjxx_page_url;
+		}
+		return url;
+	 }
+	//页面gird加载方法
+	function pjxxQueryPageList(pageno,url){	
+		if (manVerify_pjxx()){
+		    url=setPjxxQueryList(pageno,url);
+			var mygrid1 = $("#"+pjxx_grid_table).ingrid({ 
+											url: url,	
+											onRowSelect:null,
+											height: pageHeight-267,
+	                                        ingridPageParams:sXML,
+	                                        ingridExtraParams:params,
+											pageNumber: pageno,
+											colIndex: [0],
+											noSortColIndex:[8],
+											//hideColIndex:[1],
+											isHaveMorenPaixuClass: true, //加默认排序样式
+											morenPaixuCol: 7, //第一默认排序	
+											morenPaixuFangshi:'desc', //默认排序方式 
+											alignCenterColIndex: [1,2,8],
+											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%","11%"]									
+										});				
+			}
+	}	
+	//新增派件信息方法
+	function setPjxxAdd(){
+		setWidth(pjxx_detail_div,pjxx_detail_width);
+		setUrl(pjxx_detail_div,pjxx_add_page_url);
+		bindDocument(pjxx_detail_div);
+	}
+	//验证
+	function manVerify_pjxx(){
+		return true;
+	}
+</script>
+
+<table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="pjjbxx_man_qyd">
+  <tr>
+    <td class="queryfont">派件信息管理</td>
+  </tr>
+  <tr>
+    <td class="tdbg">
+    	<input type="hidden" name="pjxx.pjr.cyrybh" id="pjxx_pjr_cyrybh"/>
+    	<input type="hidden" name="pjxx.ljjbxx.qyjbxx.qybm" id="pjxx_qyjbxx_qybm" value="<%=qybm %>" />
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
+				<tr>
+					<td width="10%" class="pagedistd">物流单号</td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_wldh" name="pjxx.ljjbxx.wldh" class="inputstyle" value=""></td>
+					<td width="10%" class="pagedistd">收件人姓名</td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_jjr_xm" name="pjxx.ljjbxx.jjr.xm" class="inputstyle" value=""></td>
+					<td width="10%" class="pagedistd">收件人证件类型</td>
+					<td width="23%" class="pagetd"><select id="pjxx_jjr_zjlx" name="pjxx.ljjbxx.jjr.zjlx" class="select1"><option></option></select></td>
+				</tr>
+				<tr>
+					<td width="10%" class="pagedistd">收件人证件号码</td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_jjr_zjhm" name="pjxx.ljjbxx.jjr.zjhm" class="inputstyle" value=""></td>
+					<td width="10%" class="pagedistd">派件时间</td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjf" name="pjsjf" class="inputstyle date" value=""></td>
+					<td width="10%" class="pagedistd">至</td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjt" name="pjsjt" class="inputstyle date" value=""></td>
+				</tr>
+				<tr>
+					<td width="10%" class="pagedistd">派件员</td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjr_xm" name="pjxx.pjr.xm" class="inputstyle" value=""></td>
+					<td width="10%" class="pagedistd">派件登记时间</td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjf" name="pjtbsjf" class="inputstyle date" value=""></td>
+					<td width="10%" class="pagedistd">至</td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjt" name="pjtbsjt" class="inputstyle date" value=""></td>
+				</tr>
+    		<tr>
+    		  <td colspan="6">
+    		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
+    		    	<tr>
+    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="pjxxQueryPageList(1);">查询</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setPjxxAdd();'>添加</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='importPjxx();'>导入</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='exportPjxx();'>导出</a></td>
+    		    	</tr>
+    		  	</table>
+    		  </td>
+    		</tr>
+    	</table> 
+    </td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="3"></td>
+	</tr>
+</table>
+<div id="pjjbxx_detail" class="page-layout" src="#"
+		style="top:5px; left:160px;display: none;">
+</div>	
+
+<div id="pjjbxxDiv" style="width:100%;">
+	<table id="pjjbxxTable" width="100%">
+	  <thead>
+	    <tr>       
+	    	<th name="l_djxh">登记序号</th>
+	    	<th name="l_wldh">物流单号</th>
+	    	<th name="l_jjrxm">收件人姓名</th>
+	    	<th name="l_zjlx">证件类型</th>
+	    	<th name="l_zjhm">证件号码</th>
+	    	<th name="l_jdpdl">派件时间</th>
+	    	<th name="l_ljy">派件员</th>
+	    	<th name="l_ljsj">登记时间</th>
+			<th name="">操作</th>
+	    </tr>
+	  </thead>
+	</table>	
+</div>
