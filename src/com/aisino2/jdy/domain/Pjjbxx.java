@@ -40,6 +40,51 @@ public class Pjjbxx implements Serializable {
 	 */
 	private Date pjtbsj;
 	
+//	查询列表用的
+	private String djxh;
+	private String wldh;
+	private String sjr_xm;
+	private String sjr_zjlx;
+	private String sjr_zjhm;
+	private String pjr_xm;
+	
+	
+	public String getDjxh() {
+		return djxh;
+	}
+	public void setDjxh(String djxh) {
+		this.djxh = djxh;
+	}
+	public String getWldh() {
+		return wldh;
+	}
+	public void setWldh(String wldh) {
+		this.wldh = wldh;
+	}
+	public String getSjr_xm() {
+		return sjr_xm;
+	}
+	public void setSjr_xm(String sjr_xm) {
+		this.sjr_xm = sjr_xm;
+	}
+	public String getSjr_zjlx() {
+		return sjr_zjlx;
+	}
+	public void setSjr_zjlx(String sjr_zjlx) {
+		this.sjr_zjlx = sjr_zjlx;
+	}
+	public String getSjr_zjhm() {
+		return sjr_zjhm;
+	}
+	public void setSjr_zjhm(String sjr_zjhm) {
+		this.sjr_zjhm = sjr_zjhm;
+	}
+	public String getPjr_xm() {
+		return pjr_xm;
+	}
+	public void setPjr_xm(String pjr_xm) {
+		this.pjr_xm = pjr_xm;
+	}
 	public Integer getId() {
 		return id;
 	}
