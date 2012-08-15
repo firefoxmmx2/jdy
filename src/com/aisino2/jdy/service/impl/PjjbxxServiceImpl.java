@@ -115,4 +115,11 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 		return pjjbxxDao.findPjjbxxsForPage(map, pageno, pagesize, dir, sort);
 	}
 
+	@Override
+	public Pjjbxx getPjjbxx(Pjjbxx pjjbxx) {
+		if(pjjbxx == null || pjjbxx.getId() == null)
+			throw new RuntimeException("获取单个派件信息ID不能为空");
+		return pjjbxxDao.get(pjjbxx);
+	}
+
 }

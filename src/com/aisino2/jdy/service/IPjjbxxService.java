@@ -54,4 +54,11 @@ public interface IPjjbxxService {
 	 * @return
 	 */
 	Page findPjjbxxsForPage(Map<String, Object> map,int pageno,int pagesize,String dir,String sort);
+	
+	/**
+	 * 获取单个派件信息
+	 * @param pjjbxx
+	 * @return
+	 */
+	Pjjbxx getPjjbxx(Pjjbxx pjjbxx);
 }
