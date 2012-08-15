@@ -7,5 +7,9 @@
     <action name="*_ljxx" method="{1}" class="ljxxAction">
       <result type="json"/>
     </action>
+<!--     派件信息 -->
+    <action name="*_pjxx" method="{1}" class="PjxxAction">
+      <result type="json"/>
+    </action>
   </package>
 </struts>
