@@ -23,7 +23,7 @@
 		<result property="ljr.cyrybh" column="ljrbh" />
 		<result property="ljtbr.cyrybh" column="ljtbrbh" />
 <!-- 		企业id -->
-		<result property="qyjbxx.qyid" column="qyid"/>
+		<result property="qyjbxx.qybm" column="qybm"/>
 	</resultMap>
 <!-- 	揽件信息结果 ，关联详情 -->
 	<resultMap class="ljjbxx" id="ljjbxx_mx_rm" extends="ljjbxx_base_rm">
@@ -32,7 +32,7 @@
 		<result property="ljr" column="ljrbh" select="getQyryxxByCyrybh"/>
 		<result property="ljtbr" column="ljtbrbh" select="getQyryxxByCyrybh"/>
 <!-- 		企业信息 -->
-		<result property="qyjbxx" column="qyid" select="getQyjbxxByQyid"/>
+		<result property="qyjbxx" column="qybm" select="getQyjbxxByQybm"/>
 	</resultMap>
 <!--  揽件信息列表	收件人结果 -->
 	<resultMap class="Rdrjbxx" id="ljjbxx_list_sjr_rm">
@@ -59,7 +59,7 @@
 		<result property="ljr.cyrybh" column="ljr_cyrybh"/>
 		
 <!-- 		企业信息 -->
-		<result property="qyjbxx.qyid" column="qyid"/>
+		<result property="qyjbxx.qyid" column="qyjbxx_qyid"/>
 		<result property="qyjbxx.qybm" column="qyjbxx_qybm"/>
 		<result property="qyjbxx.qymc" column="qyjbxx_qymc"/>
 		<result property="qyjbxx.gxdwbm" column="qyjbxx_gxdwbm"/>
@@ -115,9 +115,9 @@
 		</isNotEmpty>
 <!-- 		企业信息查询 -->
 		<isNotEmpty prepend="" property="qyjbxx" >
-			<isNotEmpty prepend="and" property="qyjbxx.qyid">
-				ljjbxx.qyid = #qyjbxx.qyid#
-			</isNotEmpty>
+<!-- 			<isNotEmpty prepend="and" property="qyjbxx.qyid"> -->
+<!-- 				ljjbxx.qyid = #qyjbxx.qyid# -->
+<!-- 			</isNotEmpty> -->
 			<isNotEmpty prepend="and" property="qyjbxx.qybm">
 				qyjbxx.qybm = #qyjbxx.qybm#
 			</isNotEmpty>
@@ -141,7 +141,7 @@
 		and a.cyrybh=#value#
 	</select>
 <!-- 	通过企业ID获取企业信息 -->
-	<select id="getQyjbxxByQyid" resultMap="qyjbxxResult" parameterClass="Integer">
+	<select id="getQyjbxxByQybm" resultMap="qyjbxxResult" parameterClass="String">
 		select a.qyid qyid,a.hylbdm hylbdm,a.hylb hylb,a.qybm qybm,a.qymc qymc,a.qyqp qyqp,
 		a.qyjp qyjp,a.qyzflbm qyzflbm,a.qyzflmc qyzflmc,a.qyfflbm qyfflbm,a.qyfflmc qyfflmc,
 		a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.ssdxjgajgdm ssdxjgajgdm,a.ssdxjgajgmc ssdxjgajgmc,
@@ -162,7 +162,7 @@
 	    a.thxkzyxqz thxkzyxqz,a.yyzzfzrq yyzzfzrq,a.yyzzyxqz yyzzyxqz,a.xfshyjsbh xfshyjsbh,a.xfshyjsfzjg xfshyjsfzjg,a.xfshyjsfzjgdm xfshyjsfzjgdm,
 	    a.xfshyjsfzrq xfshyjsfzrq,a.gdjycscqbh gdjycscqbh,a.gdjycssyqbh gdjycssyqbh,(select t.cyrybh from t_qyryxx t where t.scbz=0 and t.zjhm=a.dwfzrzjhm and t.qyid=a.qyid and rownum &lt;= 1) dwfzrcyrybh ,
 		a.sfjy sfjy,a.ssxdm ssxdm,a.ssxmc ssxmc from t_qyjbxx a
-		where a.qyid=#value#
+		where a.qybm=#value#
 	</select>
 <!-- 	插入揽件信息 -->
 	<insert id="ljjbxx.insert" parameterClass="ljjbxx">
@@ -195,8 +195,8 @@
 			<isNotNull prepend="," property="sfbj">
 				sfbj
 			</isNotNull>
-			<isNotNull prepend="," property="qyjbxx.qyid">
-				qyid
+			<isNotNull prepend="," property="qyjbxx.qybm">
+				qybm
 			</isNotNull>
 		</dynamic>
 		)
@@ -229,8 +229,8 @@
 			<isNotNull prepend="," property="sfbj">
 				#sfbj#
 			</isNotNull>
-			<isNotNull prepend="," property="qyjbxx.qyid">
-				#qyjbxx.qyid#
+			<isNotNull prepend="," property="qyjbxx.qybm">
+				#qyjbxx.qybm#
 			</isNotNull>
 		</dynamic>
 		)
@@ -275,8 +275,8 @@
 			<isNotNull prepend="," property="sfbj">
 				sfbj=#sfbj#
 			</isNotNull>
-			<isNotNull prepend="," property="qyjbxx.qyid">
-				qyid = #qyjbxx.qyid#
+			<isNotNull prepend="," property="qyjbxx.qybm">
+				qybm = #qyjbxx.qybm#
 			</isNotNull>
 		</dynamic>
 		where
@@ -300,12 +300,12 @@
 		,sjr.xm sjr_xm,sjr.zjlx jsr_zjlx,sjr.zjhm sjr_zjhm
 		,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
 <!-- 		企业信息 -->
-		,ljjbxx.qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc, qyjbxx
+		,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc, qyjbxx
 		,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
 		
 		from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr,t_qyjbxx qyjbxx 
 		where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh
-				and ljjbxx.qyid = qyjbxx.qyid
+				and qyjbxx.qybm = ljjbxx.qybm
 		<dynamic prepend=" ">
 			<include refid="ljjbxxPageWhere"/>
 		</dynamic>
@@ -327,11 +327,11 @@
 			,sjr.xm sjr_xm,sjr.zjlx jsr_zjlx,sjr.zjhm sjr_zjhm
 			,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
 			<!-- 		企业信息 -->
-		,ljjbxx.qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc, qyjbxx
+		,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc, qyjbxx
 		,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
 			from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr ,t_qyjbxx qyjbxx
 		where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh
-				and ljjbxx.qyid = qyjbxx.qyid
+				and qyjbxx.qybm = ljjbxx.qybm
 		<dynamic prepend=" ">
 			<include refid="ljjbxxPageWhere" />
 		</dynamic>

@@ -72,6 +72,18 @@
 					sjr.zjlx = #ljjbxx.sjr.zjhm#
 				</isNotEmpty>
 			</isNotEmpty>
+<!-- 			企业信息 -->
+			<isNotEmpty prepend="" property="ljjbxx.qyjbxx">
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.qyid">
+					qyjbxx.qyid = #ljjbxx.qyjbxx.qyid#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.qybm">
+					qyjbxx.qybm = #ljjbxx.qyjbxx.qybm#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.qymc">
+					qyjbxx.qymc like '$ljjbxx.qyjbxx.qymc$%'
+				</isNotEmpty>
+			</isNotEmpty>
 		</isNotEmpty>
 <!-- 		派件人 -->
 		<isNotEmpty prepend="" property="pjr">
@@ -90,6 +102,13 @@
 			pjjbxx.pjtbsj &lt;= #pjtbsjt#
 		</isNotEmpty>
 		
+<!-- 		派件时间 -->
+		<isNotEmpty prepend="and" property="pjsjf">
+			pjjbxx.pjsj >= #pjsjf#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="pjsjt">
+			pjjbxx.pjsj &lt;= #pjsjt#
+		</isNotEmpty>
 	</sql>
 	
 <!-- 	插入派件 -->
@@ -205,8 +224,12 @@
 			,pjjbxx.pjtbrbh, pjtbr.xm pjtbr_xm
 			,ljjbxx.djxh ljjbxx_djxh,ljjbxx.wldh ljjbxx_wldh
 		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
+<!-- 			关联企业信息 -->
+			,t_qyjbxx qyjbxx
 		where pjjbxx.ljjbxx_id=ljjbxx.djxh and ljjbxx.jjr_id = jjr.id and ljjbxx.sjr_id = sjr.id 
 			  and pjjbxx.pjrbh=pjr.cyrybh and pjjbxx.pjtbrbh = pjtbr.cyrybh
+<!-- 			关联企业信息 -->			  
+			  and qyjbxx.qybm = ljjbxx.qybm
 		<dynamic prepend=" ">
 			<include refid="pjjbxxWhere"/>
 		</dynamic>			  
@@ -216,8 +239,12 @@
 	<select id="pjjbxx.getListPageCount" parameterClass="map" resultClass="Integer"> 
 		select count(1)
 		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
+			<!-- 			关联企业信息 -->
+			,t_qyjbxx qyjbxx
 		where pjjbxx.ljjbxx_id=ljjbxx.djxh and ljjbxx.jjr_id = jjr.id and ljjbxx.sjr_id = sjr.id 
 			  and pjjbxx.pjrbh=pjr.cyrybh and pjjbxx.pjtbrbh = pjtbr.cyrybh
+			  <!-- 			关联企业信息 -->			  
+			  and qyjbxx.qybm = ljjbxx.qybm
 		<dynamic prepend=" ">
 			<include refid="pjjbxxWhere"/>
 		</dynamic>	
@@ -233,9 +260,14 @@
 			,pjjbxx.pjrbh, pjr.xm pjr_xm
 			,pjjbxx.pjtbrbh, pjtbr.xm pjtbr_xm
 			,ljjbxx.djxh ljjbxx_djxh,ljjbxx.wldh ljjbxx_wldh
+			
 		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
+		<!-- 			关联企业信息 -->
+			,t_qyjbxx qyjbxx
 		where pjjbxx.ljjbxx_id=ljjbxx.djxh and ljjbxx.jjr_id = jjr.id and ljjbxx.sjr_id = sjr.id 
 			  and pjjbxx.pjrbh=pjr.cyrybh and pjjbxx.pjtbrbh = pjtbr.cyrybh
+			   <!-- 			关联企业信息 -->			  
+			  and qyjbxx.qybm = ljjbxx.qybm
 		<dynamic prepend=" ">
 			<include refid="pjjbxxWhere"/>
 		</dynamic>	
