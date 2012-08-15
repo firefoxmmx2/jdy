@@ -2,6 +2,8 @@
 <!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
 <sqlMapConfig>
 	<settings cacheModelsEnabled="true" enhancementEnabled="true" lazyLoadingEnabled="false" maxRequests="20" maxSessions="10" maxTransactions="50" useStatementNamespaces="true"/>
+	<!--企业基本信息(t_qyjbxx)-->
+	<sqlMap resource="config/ibatis/oracle/publicsystem/Qyjbxx.xml"/>
 	<!--企业人员信息(t_qyryxx)-->
 	<sqlMap resource="config/ibatis/oracle/publicsystem/Qyryxx.xml"/>
 <!-- 	寄递品信息 -->
