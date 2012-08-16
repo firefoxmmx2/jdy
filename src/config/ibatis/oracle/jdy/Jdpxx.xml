@@ -12,6 +12,9 @@
 		<result property="jdpmc" column="jdpmc"/>
 		<result property="jdpsm" column="jdpsm"/>
 		<result property="ljjbxx.djxh" column="ljjbxx_id"/>
+<!-- 		8.16 添加 寄递品体积和寄递品重量 -->
+		<result property="jdptj" column="jdptj"/>
+		<result property="jdpzl" column="jdpzl"/>
 	</resultMap>
 	
 	<resultMap class="jdpxx" id="jdpxx_ljxx_rm" extends="jdpxx_rm">
@@ -52,6 +55,12 @@
 			<isNotNull prepend="," property="ljjbxx.djxh">
 				ljjbxx_id
 			</isNotNull>
+			<isNotNull prepend="," property="jdptj">
+				jdptj
+			</isNotNull>
+			<isNotNull prepend="," property="jdpzl">
+				jdpzl
+			</isNotNull>
 		</dynamic>
 		)
 		values(
@@ -71,6 +80,12 @@
 			<isNotNull prepend="," property="ljjbxx.djxh">
 				#ljjbxx.djxh#
 			</isNotNull>
+			<isNotNull prepend="," property="jdptj">
+				#jdptj#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpzl">
+				#jdpzl#
+			</isNotNull>
 		</dynamic>
 		)
 	</insert>	
@@ -87,9 +102,6 @@
 		update t_jdpxx jdpxx 
 		set id=id
 		<dynamic prepend=",">
-			<isNotNull prepend="," property="id">
-				id=#id#
-			</isNotNull>
 			<isNotNull prepend="," property="jdplx">
 				jdplx=#jdplx#
 			</isNotNull>
@@ -101,6 +113,12 @@
 			</isNotNull>
 			<isNotNull prepend="," property="ljjbxx.djxh">
 				ljjbxx_id=#ljjbxx.djxh#
+			</isNotNull>
+			<isNotNull prepend="," property="jdptj">
+				jdptj=#jdptj#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpzl">
+				jdpzl=#jdpzl#
 			</isNotNull>
 		</dynamic>
 		where
