@@ -201,7 +201,10 @@ public class PjxxAction extends PageAction {
 		if(pjsjt!=null){
 			params.put("pjsjt", pjsjt);
 		}
-		
+		//派件人
+		if(pjxx.getPjr()!=null){
+			params.put("pjr", pjxx.getPjr());
+		}
 		Page pageinfo = pjjbxxService.findPjjbxxsForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
