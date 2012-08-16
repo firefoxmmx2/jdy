@@ -55,13 +55,13 @@
 	
 	<sql id="pjjbxxPageWhere">
 		<include refid="pjjbxxWhere"/>
-		<isNotEmpty prepend="" property="ljjbxx">
+		<isNotEmpty prepend=" " property="ljjbxx">
 <!-- 		物流单号  -->
 			<isNotEmpty prepend="and" property="ljjbxx.wldh">
 				ljjbxx.wldh=#ljjbxx.wldh#
 			</isNotEmpty>
 <!-- 			收件人 -->
-			<isNotEmpty prepend="" property="ljjbxx.sjr">
+			<isNotEmpty prepend=" " property="ljjbxx.sjr">
 				<isNotEmpty prepend="and" property="ljjbxx.sjr.xm">
 					sjr.xm like '%$ljjbxx.sjr.xm$%'
 				</isNotEmpty>
@@ -73,7 +73,7 @@
 				</isNotEmpty>
 			</isNotEmpty>
 <!-- 			企业信息 -->
-			<isNotEmpty prepend="" property="ljjbxx.qyjbxx">
+			<isNotEmpty prepend=" " property="ljjbxx.qyjbxx">
 				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.qyid">
 					qyjbxx.qyid = #ljjbxx.qyjbxx.qyid#
 				</isNotEmpty>
@@ -86,7 +86,7 @@
 			</isNotEmpty>
 		</isNotEmpty>
 <!-- 		派件人 -->
-		<isNotEmpty prepend="" property="pjr">
+		<isNotEmpty prepend=" " property="pjr">
 			<isNotEmpty prepend="and" property="pjr.cyrybh"> 
 				pjjbxx.pjrbh = #pjr.cyrybh#
 			</isNotEmpty>
@@ -231,7 +231,7 @@
 <!-- 			关联企业信息 -->			  
 			  and qyjbxx.qybm = ljjbxx.qybm
 		<dynamic prepend=" ">
-			<include refid="pjjbxxWhere"/>
+			<include refid="pjjbxxPageWhere"/>
 		</dynamic>			  
 	</select>
 	
@@ -246,7 +246,7 @@
 			  <!-- 			关联企业信息 -->			  
 			  and qyjbxx.qybm = ljjbxx.qybm
 		<dynamic prepend=" ">
-			<include refid="pjjbxxWhere"/>
+			<include refid="pjjbxxPageWhere"/>
 		</dynamic>	
 	</select>
 	
@@ -269,7 +269,7 @@
 			   <!-- 			关联企业信息 -->			  
 			  and qyjbxx.qybm = ljjbxx.qybm
 		<dynamic prepend=" ">
-			<include refid="pjjbxxWhere"/>
+			<include refid="pjjbxxPageWhere"/>
 		</dynamic>	
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
