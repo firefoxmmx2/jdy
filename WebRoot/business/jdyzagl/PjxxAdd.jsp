@@ -17,8 +17,16 @@ $(function() {
 	//去掉寄件人收件人省市县提交名称
 	$('#pjxxadd_jjrssx').attr("name",null);
 	$('#pjxxadd_sjrssx').attr("name",null);
+	//添加寄递对象证件类型的提交名称
+	$("#pjxxadd_jjrzjlx").attr("name","pjxx.ljjbxx.jjr.zjlx");
+	$("#pjxxadd_sjrzjlx").attr("name","pjxx.ljjbxx.sjr.zjlx");
+	
+	//派件人
+	$('#pjxxadd_pjr_xm').attr('readOnly',true).click(function(){
+		getTyRY_item('pjxxadd_pjr_xm','pjxxadd_pjr_cyrybh','<%=qybm%>');
+	});
 	//派件时间选择
-	$("#pjxxadd_pjsj").attr("readOnly",true).datepicker();
+	$("#pjxxadd_pjsj").val('<%=datetime%>').attr("readOnly",true).datepicker();
 	
 	//户籍省市县--寄件人
 	$("#pjxxadd_jjrssx").click( function() {
@@ -244,15 +252,11 @@ function pjxx_add_verify(){
 		return false;
 	if (!checkControlValue("pjxxadd_sjrlxdh","String",1,20,null,1,"收件人手机"))
 		return false;
-	if (!checkControlValue("pjxxadd_xm","String",1,30,null,1,"揽件人"))
-		return false;
-	if (!checkControlValue("pjxxadd_ljsj","Date",null,null,null,1,"揽件日期"))
-		return false;
 	
   return true;
 }
 //揽件信息保存方法
-function  add_pjxx(){
+function add_pjxx(){
 	if (pjxx_add_verify()){
 		alert("提交方法");
 		var params = getSubmitParams("#pjjbxx_add [name*=pjxx.]");
@@ -279,19 +283,16 @@ function close_pjxx_add_page(){
 */
 function wldh_completion(wldh_el){
 	var url='jdy/query_ljxx.action';
-	alert(wldh_el.val());
 	var params = {'lj.wldh':wldh_el.val()};
 	
 	$.post(url,params,function(data){
 		$('#pjjbxx_add [name*=pjxx.ljjbxx.]').each(function(idx){
 			$this = $(this);
 			
-			alert($this.attr("name"));
 			if($this.attr("tagName").toLowerCase() == 'select'){
 				$this.setValue(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
 			}
 			else{
-				
 				$this.val(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
 			}
 				
@@ -374,11 +375,11 @@ function wldh_completion(wldh_el){
 	<legend>代收人信息</legend>
 	<table width="100%" >
 		<tr height="20">
-			<td class="red">代收人</td>
+			<td >代收人</td>
 			<td class="detailtd"><input type="text" id="pjxxadd_dsr_xm"   name="pjxx.dsr.xm" class="inputstyle" ></td>
-			<td class="red">证件类型</td>
+			<td >证件类型</td>
 			<td class="detailtd"><select id="pjxxadd_dsr_zjlx" name="pjxx.dsr.zjlx"></select></td>
-			<td class="red">证件号码</td>
+			<td >证件号码</td>
 			<td class="detailtd"><input type="text" id="pjxxadd_dsr_zjhm" name="pjxx.dsr.zjhm" class="inputstyle" ></td>
 		</tr>
 	</table>
