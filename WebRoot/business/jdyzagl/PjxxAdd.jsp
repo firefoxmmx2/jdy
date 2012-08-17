@@ -5,48 +5,83 @@
 <%@include file="../../public/user-info.jsp" %>
 <script type="text/javascript">
 var trNum=0;
-$(document).ready(function() {	
+$(function() {	
 	//修改页面所有原有揽件信息元素
 	$('#pjjbxx_add [id*=lj_]').each(function(idx){
 		var $this = $(this);
 		var id = $this.attr('id');
 		var name = $this.attr('name');
-		$this.attr("id", id.replace('lj_','pjxx_','g') );
+		$this.attr("id", id.replace('lj_','pjxxadd_','g') );
 		$this.attr("name", "pjxx."+name.replace("lj\.","ljjbxx\.","g"));
 	});
 	//去掉寄件人收件人省市县提交名称
-	$('#pjxx_jjrssx').attr("name",null);
-	$('#pjxx_sjrssx').attr("name",null);
+	$('#pjxxadd_jjrssx').attr("name",null);
+	$('#pjxxadd_sjrssx').attr("name",null);
 	//派件时间选择
-	$("#pjxx_pjsj").attr("readOnly",true).datepicker();
+	$("#pjxxadd_pjsj").attr("readOnly",true).datepicker();
 	
 	//户籍省市县--寄件人
-	$("#pjxx_jjrssx").click( function() {
-		getDict_item("pjxx_jjrssx", "pjxx_jjrssxdm", "dm_xzqh");
+	$("#pjxxadd_jjrssx").click( function() {
+		getDict_item("pjxxadd_jjrssx", "pjxxadd_jjrssxdm", "dm_xzqh");
 	});
 	//户籍省市县--收件人
-	$("#pjxx_sjrssx").click( function() {
-		getDict_item("pjxx_sjrssx", "pjxx_sjrssxdm", "dm_xzqh");
+	$("#pjxxadd_sjrssx").click( function() {
+		getDict_item("pjxxadd_sjrssx", "pjxxadd_sjrssxdm", "dm_xzqh");
 	});
 	//证件类型--寄件人
-	getDictItemBox("pjxx_jjrzjlx","","dm_zjlx");
+	getDictItemBox("pjxxadd_jjrzjlx","","dm_zjlx");
 	//证件类型--收件人
-	getDictItemBox("pjxx_sjrzjlx","","dm_zjlx");
+	getDictItemBox("pjxxadd_sjrzjlx","","dm_zjlx");
 	//代收人的证件类型
-	getDictItemBox("pjxx_dsr_zjlx","","dm_zjlx");
+	getDictItemBox("pjxxadd_dsr_zjlx","","dm_zjlx");
 	dzcl_pageUrl="jdy/queryListjdp_ljxx.action";
 	
 	detailid="zxzybaydwdzcl_detail";
 	daggleDiv(detailid);
 	$("#"+detailid).hide();
 	
+	$("#pjxxadd_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
+		//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+		var zjhm = $("#pjxxadd_jjrzjhm").attr("value").toUpperCase();
+		if(zjhm!=""){
+			if(isIdCardNo(zjhm)){
+				//证件号码就用用户自己填写的，如15位的不在去转换为18位
+				//15位转18位
+				if(zjhm.length==15){
+					valSfzCardIsRight("pjxxadd_jjrzjhm","请正证件号码!");
+				}
+			}
+		}
+	});
+	$("#pjxxadd_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
+		//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+		var zjhm = $("#pjxxadd_jjrzjhm").attr("value").toUpperCase();
+		if(zjhm!=""){
+			if(isIdCardNo(zjhm)){
+				//证件号码就用用户自己填写的，如15位的不在去转换为18位
+				//15位转18位
+				if(zjhm.length==15){
+					valSfzCardIsRight("pjxxadd_jjrzjhm","请正证件号码!");
+				}
+			}
+		}
+	});
+	
 	dzcl_divnid="YwwffzjlData";
 	dzcl_tableid="YwwffzjlTable";
 	dzcl_tables=$("#"+dzcl_divnid).html();
 	setPageList_ywwffzjlzmfj(1,'#');
-	
 	//物流单号查询
-	$('#pjxx_wldh').keyup(wldh_completion); 
+	$(document).unbind("keydown");
+	$('#pjxxadd_wldh').unbind("keydown").keydown(function(e){
+		if(e.keyCode == 13){
+			wldh_completion($(this));	
+		}
+		
+	});
+	
+});
+
 //寄递品信息grid
 function setPageList_ywwffzjlzmfj(pageno,url){	
 	if (true){
@@ -180,66 +215,41 @@ function getObject(obj){
 		});
 	}
 }
-$("#pjxx_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
-	//如果身份证证号填写不为15或18位，则直接返回让他重新填写
-	var zjhm = $("#pjxx_jjrzjhm").attr("value").toUpperCase();
-	if(zjhm!=""){
-		if(isIdCardNo(zjhm)){
-			//证件号码就用用户自己填写的，如15位的不在去转换为18位
-			//15位转18位
-			if(zjhm.length==15){
-				valSfzCardIsRight("pjxx_jjrzjhm","请正证件号码!");
-			}
-		}
-	}
-});
-$("#pjxx_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
-	//如果身份证证号填写不为15或18位，则直接返回让他重新填写
-	var zjhm = $("#pjxx_jjrzjhm").attr("value").toUpperCase();
-	if(zjhm!=""){
-		if(isIdCardNo(zjhm)){
-			//证件号码就用用户自己填写的，如15位的不在去转换为18位
-			//15位转18位
-			if(zjhm.length==15){
-				valSfzCardIsRight("pjxx_jjrzjhm","请正证件号码!");
-			}
-		}
-	}
-});
+
 //揽件信息添加页面验证方法
 function pjxx_add_verify(){
-	if (!checkControlValue("pjxx_wldh","String",1,30,null,1,"物流单号"))
+	if (!checkControlValue("pjxxadd_wldh","String",1,30,null,1,"物流单号"))
 		return false;
-	if (!checkControlValue("pjxx_jjrxm","String",1,30,null,1,"寄件人姓名"))
+	if (!checkControlValue("pjxxadd_jjrxm","String",1,30,null,1,"寄件人姓名"))
 		return false;
-	if (!checkControlValue("pjxx_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
+	if (!checkControlValue("pjxxadd_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
 		return false;
-	if (!checkControlValue("pjxx_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
+	if (!checkControlValue("pjxxadd_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
 		return false;
-	if (!checkControlValue("pjxx_jjrssx","String",1,70,null,1,"寄件地址"))
+	if (!checkControlValue("pjxxadd_jjrssx","String",1,70,null,1,"寄件地址"))
 		return false;
-	if (!checkControlValue("pjxx_jjrxxdz","String",1,70,null,1,"寄件人现住地详址"))
+	if (!checkControlValue("pjxxadd_jjrxxdz","String",1,70,null,1,"寄件人现住地详址"))
 		return false;
-	if (!checkControlValue("pjxx_jjrlxdh","String",1,20,null,1,"寄件人手机"))
+	if (!checkControlValue("pjxxadd_jjrlxdh","String",1,20,null,1,"寄件人手机"))
 		return false;
-	if (!checkControlValue("pjxx_sjrxm","String",1,30,null,1,"收件人姓名"))
+	if (!checkControlValue("pjxxadd_sjrxm","String",1,30,null,1,"收件人姓名"))
 		return false;
-	if (!checkControlValue("pjxx_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
+	if (!checkControlValue("pjxxadd_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
 		return false;
-	if (!checkControlValue("pjxx_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
+	if (!checkControlValue("pjxxadd_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
 		return false;
-	if (!checkControlValue("pjxx_sjrssx","String",1,70,null,1,"收件地址"))
+	if (!checkControlValue("pjxxadd_sjrssx","String",1,70,null,1,"收件地址"))
 		return false;
-	if (!checkControlValue("pjxx_sjrxxdz","String",1,70,null,1,"收件人现住地详址"))
+	if (!checkControlValue("pjxxadd_sjrxxdz","String",1,70,null,1,"收件人现住地详址"))
 		return false;
-	if (!checkControlValue("pjxx_sjrlxdh","String",1,20,null,1,"收件人手机"))
+	if (!checkControlValue("pjxxadd_sjrlxdh","String",1,20,null,1,"收件人手机"))
 		return false;
-	if (!checkControlValue("pjxx_xm","String",1,30,null,1,"揽件人"))
+	if (!checkControlValue("pjxxadd_xm","String",1,30,null,1,"揽件人"))
 		return false;
-	if (!checkControlValue("pjxx_ljsj","Date",null,null,null,1,"揽件日期"))
+	if (!checkControlValue("pjxxadd_ljsj","Date",null,null,null,1,"揽件日期"))
 		return false;
 	
-    return true;
+  return true;
 }
 //揽件信息保存方法
 function  add_pjxx(){
@@ -263,17 +273,30 @@ function add_pjxx_back(){
 function close_pjxx_add_page(){
 	$('#'+pjxx_detail_div).hideAndRemove("show");
 }
-/***
- * 物流单号补全揽件信息
- */
-function wldh_completion(){
+
+/*
+* 物流单号补全揽件信息
+*/
+function wldh_completion(wldh_el){
 	var url='jdy/query_ljxx.action';
-	var params = {'lj.wldh',$(this).val()};
+	alert(wldh_el.val());
+	var params = {'lj.wldh':wldh_el.val()};
 	
 	$.post(url,params,function(data){
-		$('#pjjbxx_add [name*=pjxx.ljjbxx.]').
+		$('#pjjbxx_add [name*=pjxx.ljjbxx.]').each(function(idx){
+			$this = $(this);
+			
+			alert($this.attr("name"));
+			if($this.attr("tagName").toLowerCase() == 'select'){
+				$this.setValue(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
+			}
+			else{
+				
+				$this.val(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
+			}
+				
+		});
 	}, 'json');
-});
 }
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
@@ -286,9 +309,9 @@ function wldh_completion(){
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="pjjbxx_add">
 <tr>
 <td>
-<input type="hidden" name="pjxx.pjr.cyrybh" id="pjxx_pjr_cyrybh">
-<input type="hidden" name="pjxx.ljjbxx.jjr.ssx" id="pjxx_jjrssxdm">
-<input type="hidden" name="pjxx.ljjbxx.sjr.ssx" id="pjxx_sjrssxdm">
+<input type="hidden" name="pjxx.pjr.cyrybh" id="pjxxadd_pjr_cyrybh">
+<input type="hidden" name="pjxx.ljjbxx.jjr.ssx" id="pjxxadd_jjrssxdm">
+<input type="hidden" name="pjxx.ljjbxx.sjr.ssx" id="pjxxadd_sjrssxdm">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td>
@@ -300,7 +323,12 @@ function wldh_completion(){
 			<td class="distd">登记序号</td>
 			<td class="detailtd"><input type="text" id="lj_djxh" name="lj.djxh" class="readonly"/></td>
 			<td class="red">物流单号</td>
-			<td class="detailtd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle"  /></td>
+			<td class="detailtd">
+				<input type="text" id="pjxxadd_wldh" name="pjxx.ljjbxx.wldh" class="inputstyle"  />
+				<span style="margin-left: 15px;">
+					<a id="scan_wldh_btn" href="#" class="submitbutton">扫描</a>
+				</span>
+			</td>
 		</tr>
 	</table>
 	</fieldset>
@@ -347,11 +375,11 @@ function wldh_completion(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="red">代收人</td>
-			<td class="detailtd"><input type="text" id="pjxx_dsr_xm"   name="pjxx.dsr.xm" class="inputstyle" ></td>
+			<td class="detailtd"><input type="text" id="pjxxadd_dsr_xm"   name="pjxx.dsr.xm" class="inputstyle" ></td>
 			<td class="red">证件类型</td>
-			<td class="detailtd"><select id="pjxx_dsr_zjlx" name="pjxx.dsr.zjlx"></select></td>
+			<td class="detailtd"><select id="pjxxadd_dsr_zjlx" name="pjxx.dsr.zjlx"></select></td>
 			<td class="red">证件号码</td>
-			<td class="detailtd"><input type="text" id="pjxx_dsr_zjhm" name="pjxx.dsr.zjhm" class="inputstyle" ></td>
+			<td class="detailtd"><input type="text" id="pjxxadd_dsr_zjhm" name="pjxx.dsr.zjhm" class="inputstyle" ></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -360,9 +388,9 @@ function wldh_completion(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="red">派件人</td>
-			<td class="detailtd"><input type="text" id="pjxx_pjr_xm" name="pjxx.pjr.xm" class="inputstyle" ></td>
+			<td class="detailtd"><input type="text" id="pjxxadd_pjr_xm" name="pjxx.pjr.xm" class="inputstyle" ></td>
 			<td class="red">派件时间</td>
-			<td class="detailtd"><input type="text" id="pjxx_pjsj" name="pjxx.pjsj" class="inputstyle" ></td>
+			<td class="detailtd"><input type="text" id="pjxxadd_pjsj" name="pjxx.pjsj" class="inputstyle" ></td>
 		</tr>
 	</table>
 	</fieldset>

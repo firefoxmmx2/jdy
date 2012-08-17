@@ -49,6 +49,7 @@ public class LjxxAction extends PageAction{
 	public void setResult(String result) {
 		this.result = result;
 	}
+	
 	public void setLjjbxxService(ILjjbxxService ljjbxxService) {
 		this.ljjbxxService = ljjbxxService;
 	}
