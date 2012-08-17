@@ -29,9 +29,9 @@
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="insert*"/>
-			<tx:method name="delete*"/>
-			<tx:method name="update*"/>
+			<tx:method name="insert*" rollback-for="Exception"/>
+			<tx:method name="delete*" rollback-for="Exception"/>
+			<tx:method name="update*" rollback-for="Exception"/>
 			<tx:method name="*" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
