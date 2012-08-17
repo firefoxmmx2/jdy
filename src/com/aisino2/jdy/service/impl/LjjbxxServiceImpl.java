@@ -47,30 +47,33 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) {
 		
 			/***向寄递对象表打入人员信息的数据--得到人员信息ID后再插入到揽件表中去***/
-			//首先判断证件号码，表中是否存在，若不存在则插入
 			Rdrjbxx setRddrjbxx = new Rdrjbxx();
 			setRddrjbxx.setZjhm(ljjbxx.getJjr().getZjhm());
 			setRddrjbxx=rdrjbxxDao.get(setRddrjbxx);
-			if(setRddrjbxx!=null){
-				Rdrjbxx rddrjbxx = new Rdrjbxx();
+			Rdrjbxx Rdrjbxxjjr = new Rdrjbxx();//存放寄件人ID
+			Rdrjbxx Rdrjbxxsjr = new Rdrjbxx();//存放收件人ID
+			if(setRddrjbxx==null){//判断证件号码，表中是否存在，若不存在则插入
 				/***向寄递对象--人员信息表插入数据***/
-				rdrjbxxDao.insert(rddrjbxx);
+				setRddrjbxx=rdrjbxxDao.insert(ljjbxx.getJjr());
+				Rdrjbxxjjr.setId(setRddrjbxx.getId());
 			}
 			setRddrjbxx.setZjhm(ljjbxx.getSjr().getZjhm());
 			setRddrjbxx=rdrjbxxDao.get(setRddrjbxx);
-			if(setRddrjbxx!=null){
-				Rdrjbxx rddrjbxx = new Rdrjbxx();
+			if(setRddrjbxx==null){//判断证件号码，表中是否存在，若不存在则插入
 				/***向寄递对象--人员信息表插入数据***/
-				rdrjbxxDao.insert(rddrjbxx);
+				setRddrjbxx=rdrjbxxDao.insert(ljjbxx.getSjr());
+				Rdrjbxxsjr.setId(setRddrjbxx.getId());
 			}
-			Ljjbxx setljjbxx = new Ljjbxx();
 			/***向揽件信息表打入揽件数据***/
-			ljjbxxDao.insert(setljjbxx);
+			ljjbxx.setJjr(Rdrjbxxjjr);
+			ljjbxx.setSjr(Rdrjbxxsjr);
+			ljjbxxDao.insert(ljjbxx);
 			/***向寄递物品表插入数据***/
-			Jdpxx setjbpxx = new Jdpxx();
-			jdpxxDao.insert(setjbpxx);
-			
-			
+			if(ljjbxx.getJdp_list()!=null && ljjbxx.getJdp_list().size()>0){
+				for(int i=0;i<ljjbxx.getJdp_list().size();i++){
+					jdpxxDao.insert(ljjbxx.getJdp_list().get(i));
+				}
+			}
 		return setLjjbxx;
 	}
 
