@@ -137,6 +137,7 @@ public class PjxxAction extends PageAction {
 			throw new RuntimeException("需要添加的派件信息参数不能为空");
 		pjjbxxService.insertPjjbxx(pjxx);
 		
+		this.result=SUCCESS;
 		return SUCCESS;
 	}
 	
@@ -150,6 +151,7 @@ public class PjxxAction extends PageAction {
 			throw new RuntimeException("需要删除的派件信息参数不能为空");
 		pjjbxxService.deletePjjbxx(pjxx);
 		
+		this.result=SUCCESS;
 		return SUCCESS;
 	}
 	
@@ -163,6 +165,7 @@ public class PjxxAction extends PageAction {
 			throw new RuntimeException("需要修改的派件信息参数不能为空");
 		pjjbxxService.updatePjjbxx(pjxx);
 		
+		this.result=SUCCESS;
 		return SUCCESS;
 	}
 	

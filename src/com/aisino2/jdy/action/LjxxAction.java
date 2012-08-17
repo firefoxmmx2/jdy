@@ -126,6 +126,8 @@ public class LjxxAction extends PageAction{
 	 */
 	public String query() throws Exception{
 		lj = ljjbxxService.getLjjbxx(lj);
+		
+		this.result = "success";
 		return SUCCESS;
 	}
 }
