@@ -11,7 +11,7 @@ import com.aisino2.jdy.domain.Rdrjbxx;
 public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
 
 	public Rdrjbxx insert(Rdrjbxx rdrjbxx) {
-		rdrjbxx.setId(this.getNextID("rdrjbxx_id"));
+		rdrjbxx.setId(getNextID("rdrjbxx_id"));
 		insert("Rdrjbxx.insert", rdrjbxx);
 		return rdrjbxx;
 	}

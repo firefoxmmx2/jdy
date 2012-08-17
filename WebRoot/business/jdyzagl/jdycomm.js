@@ -99,7 +99,6 @@ function getDictitem(config) {
  */
 var degsz = new Array();//第二个数组
 function createszff(childList){
-	
 	if (childList!=null && childList.length>0){
 		var thNameArr = new Array();
 		var listTrId;
