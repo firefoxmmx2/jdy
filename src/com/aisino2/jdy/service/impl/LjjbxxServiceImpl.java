@@ -113,8 +113,11 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	}
 	
 	public Ljjbxx getLjjbxx(Ljjbxx ljjbxx) {
-		if(ljjbxx == null || ljjbxx.getDjxh() == null || ljjbxx.getDjxh().trim().length()==0)
-			throw new RuntimeException("要获取的揽件信息的登记序号为空");
+		if(ljjbxx == null || 
+				((ljjbxx.getDjxh() == null || ljjbxx.getDjxh().trim().length()==0) 
+				&& 
+				(ljjbxx.getWldh() == null || ljjbxx.getWldh().trim().length()==0)) )
+			throw new RuntimeException("要获取的揽件信息的登记序号或者物流单号为空");
 		ljjbxx = ljjbxxDao.get(ljjbxx);
 		return ljjbxx;
 	}
