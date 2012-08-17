@@ -33,6 +33,8 @@
 		<result property="ljtbr" column="ljtbrbh" select="getQyryxxByCyrybh"/>
 <!-- 		企业信息 -->
 		<result property="qyjbxx" column="qybm" select="getQyjbxxByQybm"/>
+<!-- 		寄递品信息 -->
+		<result property="jdp_list" column="djxh" select="jdpxx.getListByLjjbxxId"/>
 	</resultMap>
 <!--  揽件信息列表	收件人结果 -->
 	<resultMap class="Rdrjbxx" id="ljjbxx_list_sjr_rm">

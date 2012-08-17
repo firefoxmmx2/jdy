@@ -89,4 +89,10 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 		 return djxh;
 	}
 
+
+	public Ljjbxx get(Ljjbxx ljjbxx) {
+		
+		return (Ljjbxx) queryForObject("ljjbxx.get", ljjbxx);
+	}
+
 }

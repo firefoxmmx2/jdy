@@ -18,4 +18,9 @@ public interface ILjjbxxDao {
 	
 	String generateDjxh(String qybm);
 	
+	/**
+	 * 获取单一的揽件信息
+	 * @return
+	 */
+	Ljjbxx get(Ljjbxx ljjbxx);
 }

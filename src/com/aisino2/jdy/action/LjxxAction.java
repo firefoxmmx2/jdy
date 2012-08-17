@@ -119,4 +119,13 @@ public class LjxxAction extends PageAction{
 		return "success";
 	} 
 	
+	/**
+	 * 单一获取
+	 * @return
+	 * @throws Exception
+	 */
+	public String query() throws Exception{
+		lj = ljjbxxService.getLjjbxx(lj);
+		return SUCCESS;
+	}
 }

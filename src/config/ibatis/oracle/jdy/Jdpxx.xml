@@ -156,7 +156,15 @@
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 	
-	<select id="jdpxx.getById"  parameterClass="Integer" resultMap="jdpxx_rm">
-		select * from t_jdpxx where id=#value#
+	<select id="jdpxx.getListByLjjbxxId"  parameterClass="String" resultMap="jdpxx_rm">
+		select * from t_jdpxx where ljjbxx_id=#value#
+	</select>
+	
+	<select id="jdpxx.get" parameterClass="jdpxx" resultMap="jdpxx_rm">
+		select * from t_jdpxx jdpxx
+		where 
+		<dynamic prepend=" ">
+			<include refid="jdpxxWhere"/>
+		</dynamic>
 	</select>
 </sqlMap>

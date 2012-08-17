@@ -62,4 +62,11 @@ public interface ILjjbxxService {
 	 * @return
 	 */
 	String generateLjdjxh(String qybm);
+	
+	/**
+	 * 获取单一的揽件信息
+	 * @param ljjbxx
+	 * @return
+	 */
+	Ljjbxx getLjjbxx(Ljjbxx ljjbxx);
 }
