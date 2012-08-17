@@ -3,7 +3,7 @@
 <%@ include file="/public/user-info.jsp" %>
 <script type="text/javascript">
 	var pjxx_detail_div="pjjbxx_detail";
-	var pjxx_detail_width=950;
+	var pjxx_detail_width=900;
 	var pjxx_grid_div="pjjbxxDiv";
 	var pjxx_grid_table = "pjjbxxTable";
 	var pjxx_grid_table_html;
@@ -13,9 +13,12 @@
 		
 		$('#pjxx_jjr_zjlx').selectBox({code:'dm_zjlx'});
 		$('.date').attr("readOnly",true).datepicker();
-		
+		$('#pjxx_pjr_xm').click(function(){
+			//pjxx_pjr_cyrybh pjxx_pjr_cyrybh
+		});
 		loadPagePjxxQuery(pjxx_grid_div);
 		
+		daggleDiv(pjxx_detail_div);
 	});
 	
 	function loadPagePjxxQuery(divpageid){

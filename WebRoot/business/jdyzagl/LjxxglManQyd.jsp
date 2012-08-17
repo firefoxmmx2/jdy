@@ -27,7 +27,6 @@ function setPageListLjxx(pageno,url){
 		if (url==null || url=="undefined"){
 			url=pageUrl;
 		}
-		alert(url);
 		var mygrid1 = $("#LjjbxxTable").ingrid({ 
 										url: url,	
 										onRowSelect:null,
@@ -54,6 +53,11 @@ function setLjxxAdd(){
 	setWidth("ljjbxxadd_detail",950);
 	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxAdd.jsp");
 	bindDocument("ljjbxxadd_detail");
+	//$("#tep_Comm_tag").val("jdyAdd");
+	//return GB_showCenter("business/jdyzagl/Comm.jsp",510,950);
+	//$("#ljjbxxadd_detail").empty();
+	//$("#ljjbxxadd_detail").load("business/jdyzagl/LjxxAdd.jsp");
+	//$("#ljjbxxadd_detail").show();
 }
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder">
@@ -65,27 +69,27 @@ function setLjxxAdd(){
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx.wldh" name="ljxx.wldh" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_wldh" name="ljxx.wldh" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄件人姓名</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx.jjr.xm" name="ljxx.jjr.xm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrxm" name="ljxx.jjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄件人证件类型</td>
-					<td width="23%" class="pagetd"><select id="ljxx.jjr.zjlx" name="ljxx.jjr.zjlx" class="select1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="ljxx_jjrzjlx" name="ljxx.jjr.zjlx" class="select1"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">寄件人证件号码</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx.jjr.zjhm" name="ljxx.jjr.zjhm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrzjhm" name="ljxx.jjr.zjhm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄递品大类</td>
-					<td width="23%" class="pagetd"><select id="ljxx.jdplx1d" name="ljxx.jdplx1d" class="select1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="ljxx_jdplx1d" name="ljxx.jdplx1d" class="select1"><option></option></select></td>
 					<td width="10%" class="pagedistd">寄递品小类</td>
-					<td width="23%" class="pagetd"><select id="ljxx.jdplx"  name="ljxx.jdplx" clss="select1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="ljxx_jdplx"  name="ljxx.jdplx" clss="select1"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">揽件员</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx.jjr.xm" name="ljxx.jjr.xm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrxm" name="ljxx.jjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">揽件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx.ljsj" name="ljxx.ljsj" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsj" name="ljxx.ljsj" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx.ljsj" name="ljxx.ljsj" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsj" name="ljxx.ljsj" class="inputstyle" value=""></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
