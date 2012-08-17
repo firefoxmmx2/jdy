@@ -80,13 +80,13 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	}
 
 	public void deleteLjjbxx(Ljjbxx ljjbxx) {
-		// TODO Auto-generated method stub
-		
+		if(ljjbxx==null || ljjbxx.getDjxh()==null || ljjbxx.getDjxh().trim().length()==0)
+			throw new RuntimeException("需要删除的揽件登记序号为空");
+		ljjbxxDao.delete(ljjbxx);
 	}
 
 	public List<Ljjbxx> findLjjbxx(Ljjbxx ljjbxx) {
-		// TODO Auto-generated method stub
-		return null;
+		return ljjbxxDao.findLjjbxxs(ljjbxx);
 	}
 
 	public List<Ljjbxx> findLjjbxx(Ljjbxx ljjbxx, String dir, String sort) {
@@ -96,19 +96,20 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 
 	public Page findLjjbxxForPage(Map<String, Object> para, int pageno,
 			int pagesize, String dir, String sort) {
-		// TODO Auto-generated method stub
-		return null;
+		return ljjbxxDao.findLjjbxxsForPage(para, pageno, pagesize, dir, sort);
 	}
 
 	public String generateLjdjxh(String qybm) {
-		// TODO Auto-generated method stub
-		return null;
+		if(qybm == null || qybm.trim().length()==0)
+			throw new RuntimeException("需要生成的揽件登记序号的企业编码为空");
+		return ljjbxxDao.generateDjxh(qybm);
 	}
-
-	/**
-	 * 添加揽件信息
-	 * @param ljjbxx
-	 * @return
-	 */
+	
+	public Ljjbxx getLjjbxx(Ljjbxx ljjbxx) {
+		if(ljjbxx == null || ljjbxx.getDjxh() == null || ljjbxx.getDjxh().trim().length()==0)
+			throw new RuntimeException("要获取的揽件信息的登记序号为空");
+		ljjbxx = ljjbxxDao.get(ljjbxx);
+		return ljjbxx;
+	}
 
 }
