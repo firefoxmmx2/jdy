@@ -194,7 +194,6 @@ $("#lj_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判
 });
 //揽件信息添加页面验证方法
 function addVerify(){
-	
 	if (!checkControlValue("lj_wldh","String",1,30,null,1,"物流单号"))
 		return false;
 	if (!checkControlValue("lj_jjrxm","String",1,30,null,1,"寄件人姓名"))
@@ -221,7 +220,7 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_sjrlxdh","String",1,20,null,1,"收件人手机"))
 		return false;
-	if (!checkControlValue("lj_xm","String",1,30,null,1,"揽件人"))
+	if (!checkControlValue("lj_ljr_xm","String",1,30,null,1,"揽件人"))
 		return false;
 	if (!checkControlValue("lj_ljsj","Date",null,null,null,1,"揽件日期"))
 		return false;
@@ -230,17 +229,25 @@ function addVerify(){
 }
 //揽件信息保存方法
 function  ljxxbaocun(){
-	if (true){
+	if (addVerify()){
 		var childList1 = new Array("YwwffzjlData");
 		createszff(childList1);//调用解析页面ingrid的方法
 		var params = getSubmitParams("[name*=lj.]");
 		alert("最后的数组="+degsz);
-		for (var i=0;i<degsz.length;i++){
-			alert("执行进来没得");
-				alert(degsz[i][2]);
-				params["lj.jdpmc["+i+"]" = degsz[i][2];
+		alert(degsz!="" && degsz.length>0);
+		if(degsz!="" && degsz.length>0){
+			for (var i=0;i<degsz.length;i++){
+					params["lj.jdp_list["+i+"].jdplx"] = degsz[i][4];
+					params["lj.jdp_list["+i+"].jdpmc"] = degsz[i][2];
+					params["lj.jdp_list["+i+"].jdpsm"] = degsz[i][3];
+					params["lj.jdp_list["+i+"].sfscbz"] = degsz[i][1];
+					params["lj.jdp_list["+i+"].jdpzl"] = degsz[i][5];
+					params["lj.jdp_list["+i+"].jdptj"] = degsz[i][6];
+			}
+		}else{
+            jAlert("寄递品信息不能为空！",'验证信息');
+            return false;
 		}
-		return;
 		jQuery.post("jdy/insert_ljxx.action",params,addback,"json");
 	}
 }
@@ -343,7 +350,7 @@ function addback(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="red">揽件人</td>
-			<td class="detailtd"><input type="text" id="lj_xm"   name="lj.xm" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj_ljr_xm"   name="lj.ljr.xm" class="inputstyle" value=""></td>
 			<td class="red">揽件时间</td>
 			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
 		</tr>
