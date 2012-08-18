@@ -1,5 +1,7 @@
 package com.aisino2.jdy.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -71,10 +73,12 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			/***向揽件信息表打入揽件数据***/
 			ljjbxx.setJjr(Rdrjbxxjjr);
 			ljjbxx.setSjr(Rdrjbxxsjr);
-			ljjbxxDao.insert(ljjbxx);
+			ljjbxx.setLjtbsj(new Date());
+			ljjbxx = ljjbxxDao.insert(ljjbxx);
 			/***向寄递物品表插入数据***/
 			if(ljjbxx.getJdp_list()!=null && ljjbxx.getJdp_list().size()>0){
 				for(int i=0;i<ljjbxx.getJdp_list().size();i++){
+					ljjbxx.getJdp_list().get(i).setLjjbxx(ljjbxx);
 					jdpxxDao.insert(ljjbxx.getJdp_list().get(i));
 				}
 			}
@@ -114,6 +118,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 					jdpxxDao.delete(jdp);
 				}
 				else{
+					jdp.setLjjbxx(ljjbxx);
 					jdpxxDao.insert(jdp);
 				}
 			}
