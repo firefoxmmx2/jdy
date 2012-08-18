@@ -2,6 +2,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
+<%@include file="../../public/user-info.jsp" %>
 <script type="text/javascript">
 var trNum=0;
 var dataid="";
@@ -11,12 +12,12 @@ $(document).ready(function() {
 	$("#lj_ljsj").attr("readonly","true");
 	$("#lj_ljsj").datepicker();
 	//户籍省市县--寄件人
-	$("#lj_jjrssx").click( function() {
-		getDict_item("lj_jjrssx", "lj_jjrssxdm", "dm_xzqh");
+	$("#jjrssxmc").click( function() {
+		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
 	});
 	//户籍省市县--收件人
-	$("#lj_sjrssx").click( function() {
-		getDict_item("lj_sjrssx", "lj_sjrssxdm", "dm_xzqh");
+	$("#sjrssxmc").click( function() {
+		getDict_item("sjrssxmc", "lj_sjrssx", "dm_xzqh");
 	});
 	//证件类型--寄件人
 	getDictItemBox("lj_jjrzjlx","","dm_zjlx");
@@ -167,6 +168,7 @@ function getObject(obj){
 	}
 }
 $("#lj_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
+	
 	//如果身份证证号填写不为15或18位，则直接返回让他重新填写
 	var zjhm = $("#lj_jjrzjhm").attr("value").toUpperCase();
 	if(zjhm!=""){
@@ -202,7 +204,7 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
 		return false;
-	if (!checkControlValue("lj_jjrssx","String",1,70,null,1,"寄件地址"))
+	if (!checkControlValue("jjrssxmc","String",1,70,null,1,"寄件地址"))
 		return false;
 	if (!checkControlValue("lj_jjrxxdz","String",1,70,null,1,"寄件人现住地详址"))
 		return false;
@@ -214,7 +216,7 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
 		return false;
-	if (!checkControlValue("lj_sjrssx","String",1,70,null,1,"收件地址"))
+	if (!checkControlValue("sjrssxmc","String",1,70,null,1,"收件地址"))
 		return false;
 	if (!checkControlValue("lj_sjrxxdz","String",1,70,null,1,"收件人现住地详址"))
 		return false;
@@ -230,19 +232,19 @@ function addVerify(){
 //揽件信息保存方法
 function  ljxxbaocun(){
 	if (addVerify()){
-		var childList1 = new Array("YwwffzjlData");
-		createszff(childList1);//调用解析页面ingrid的方法
 		var params = getSubmitParams("[name*=lj.]");
-		alert("最后的数组="+degsz);
-		alert(degsz!="" && degsz.length>0);
-		if(degsz!="" && degsz.length>0){
-			for (var i=0;i<degsz.length;i++){
-					params["lj.jdp_list["+i+"].jdplx"] = degsz[i][4];
-					params["lj.jdp_list["+i+"].jdpmc"] = degsz[i][2];
-					params["lj.jdp_list["+i+"].jdpsm"] = degsz[i][3];
-					params["lj.jdp_list["+i+"].sfscbz"] = degsz[i][1];
-					params["lj.jdp_list["+i+"].jdpzl"] = degsz[i][5];
-					params["lj.jdp_list["+i+"].jdptj"] = degsz[i][6];
+		var childList1 = new Array("YwwffzjlData");
+		var jsjxsz = new Array();//保存解析之后返回的数组
+		jsjxsz=createszff(childList1);//调用解析页面ingrid的方法
+		alert("最后的数组="+jsjxsz);
+		if(jsjxsz!="" && jsjxsz.length>0){
+			for (var i=0;i<jsjxsz.length;i++){
+					params["lj.jdp_list["+i+"].jdplx"] = jsjxsz[i][4];
+					params["lj.jdp_list["+i+"].jdpmc"] = jsjxsz[i][2];
+					params["lj.jdp_list["+i+"].jdpsm"] = jsjxsz[i][3];
+					params["lj.jdp_list["+i+"].sfscbz"] = jsjxsz[i][1];
+					params["lj.jdp_list["+i+"].jdpzl"] = jsjxsz[i][5];
+					params["lj.jdp_list["+i+"].jdptj"] = jsjxsz[i][6];
 			}
 		}else{
             jAlert("寄递品信息不能为空！",'验证信息');
@@ -262,6 +264,8 @@ function addback(){
 	}		
 }
 </script>
+<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
+<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
       <td align="left" class="title1">寄递品信息登记</td>
@@ -301,7 +305,7 @@ function addback(){
 	<table width="100%" >
 		<tr height="20">
 			<td class="distd">登记序号</td>
-			<td class="detailtd"><input type="text" id="lj_djxh" name="lj.djxh" class="readonly" value="" /></td>
+			<td class="detailtd"><input type="text" id="lj_djxh" class="readonly" value="" /></td>
 			<td class="red">物流单号</td>
 			<td class="detailtd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value="" /></td>
 		</tr>

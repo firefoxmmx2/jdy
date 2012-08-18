@@ -24,7 +24,7 @@
 					</tr>
 					<tr height="20">
 						<td class="red">收件地址</td>
-						<td class="detailtd"><input type="text" id="lj_sjrssx"  name="lj.sjr.ssx" class="inputstyle" value="" /></td>
+						<td class="detailtd"><input type="text" id="sjrssxmc"  name="lj.sjr.ssxmc" class="inputstyle" value="" /></td>
 					</tr>
 				  </table>
 				 </td>
