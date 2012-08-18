@@ -136,8 +136,12 @@
 	</delete>
 	
 	<select id="Rdrjbxx.get" resultMap="rdrjbxx_zpxx_rm" parameterClass="Rdrjbxx" >
+<<<<<<< HEAD
 		select  Rdrjbxx.* from t_Rdrjbxx Rdrjbxx 
 	    where 
+=======
+		select * from t_Rdrjbxx Rdrjbxx where 
+>>>>>>> branch 'master' of git@github.com:firefoxmmx2/jdy.git
 		<dynamic prepend=" ">
 			<include refid="RdrjbxxWhere"/>
 		</dynamic>

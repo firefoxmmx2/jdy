@@ -36,6 +36,9 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 				|| pjjbxx.getLjjbxx().getDjxh().trim().length() == 0) {
 			pjjbxx.setLjjbxx(ljjbxxService.insertLjjbxx(pjjbxx.getLjjbxx()));
 		}
+		else{
+			ljjbxxService.updateLjjbxx(pjjbxx.getLjjbxx());
+		}
 		
 //		如果在修改派件信息的时候修改的代收人信息，当身份证 和 以前的身份证不一样的时候，
 //		新添加一个人员对象为新的代收人。
