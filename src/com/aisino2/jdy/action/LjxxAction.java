@@ -88,24 +88,18 @@ public class LjxxAction extends PageAction{
      * @author renhao
      */
 	public String insert() throws Exception{
-		try {
-			HttpSession session = this.getRequest().getSession();
-			User user = (User)session.getAttribute(Constants.userKey);
-			
-			ljjbxxService.insertLjjbxx(lj);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
-        return "success";
+		HttpSession session = this.getRequest().getSession();
+		User user = (User)session.getAttribute(Constants.userKey);
+		ljjbxxService.insertLjjbxx(lj);
+		this.result=SUCCESS;
+		return SUCCESS;
     }
 	
 	public String queryListlj() throws Exception {
 			
 		Map map = new HashMap();
 		Page page =	ljjbxxService.findLjjbxxForPage(map, 1, totalrows, tabledata, result);
-		
 		totalpage = page.getTotalPages();
 		totalrows = page.getTotalRows();
 		lLjjbxx = page.getData();
