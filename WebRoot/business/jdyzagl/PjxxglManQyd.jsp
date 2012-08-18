@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/public/user-info.jsp" %>
+<script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
+<script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
 <script type="text/javascript">
 	var pjxx_detail_div="pjjbxx_detail";
 	var pjxx_detail_width=900;
@@ -14,7 +16,7 @@
 		$('#pjxx_jjr_zjlx').selectBox({code:'dm_zjlx'});
 		$('.date').attr("readOnly",true).datepicker();
 		$('#pjxx_pjr_xm').click(function(){
-			//pjxx_pjr_cyrybh pjxx_pjr_cyrybh
+			getTyRY_item('pjxx_pjr_xm','pjxx_pjr_cyrybh','<%=qybm%>');
 		});
 		loadPagePjxxQuery(pjxx_grid_div);
 		

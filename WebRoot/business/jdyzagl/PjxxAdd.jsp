@@ -15,8 +15,8 @@ $(function() {
 		$this.attr("name", "pjxx."+name.replace("lj\.","ljjbxx\.","g"));
 	});
 	//去掉寄件人收件人省市县提交名称
-	$('#pjxxadd_jjrssx').attr("name",null);
-	$('#pjxxadd_sjrssx').attr("name",null);
+	$('#pjxxadd_jjrssx').removeAttr("name");
+	$('#pjxxadd_sjrssx').removeAttr("name");
 	//添加寄递对象证件类型的提交名称
 	$("#pjxxadd_jjrzjlx").attr("name","pjxx.ljjbxx.jjr.zjlx");
 	$("#pjxxadd_sjrzjlx").attr("name","pjxx.ljjbxx.sjr.zjlx");
@@ -26,7 +26,7 @@ $(function() {
 		getTyRY_item('pjxxadd_pjr_xm','pjxxadd_pjr_cyrybh','<%=qybm%>');
 	});
 	//派件时间选择
-	$("#pjxxadd_pjsj").val('<%=datetime%>').attr("readOnly",true).datepicker();
+	$("#pjxxadd_pjsj").val('<%=dateNow%>').attr("readOnly",true).datepicker();
 	
 	//户籍省市县--寄件人
 	$("#pjxxadd_jjrssx").click( function() {
@@ -130,7 +130,15 @@ function jdwpxxadd(){
 	var jdwp_jdptj=$('#jdwp_jdptj').val();//体积
 	var jdwp_jdplx_mc=$("#jdwp_jdpxl").attr("title");//寄递品类型名称
 	
-	trNum++;
+	var rowData = {
+			jdplx:jdwp_jdplx,
+			jdpmc:jdwp_jdpmc,
+			jdpsm:jdwp_jdpsm,
+			jdpzl:jdwp_jdpzl,
+			jdptj:jdwp_jdptj
+	};
+	rowData = $.toJSON(rowData);
+		trNum++;
 		var addTableTr="";
 		//获取行数
 		var trLen= $("#YwwffzjlTable").find("tr").length;
@@ -140,15 +148,15 @@ function jdwpxxadd(){
 		if((trLen-1)%2==1)
 			tr_class = "grid-row-style2";
 		//设置行的属性和样式	
-		addTableTr += "<tr _selected='false' name='Tr' class='"+tr_class+"' id='"+trNum+"'>";
+		addTableTr += "<tr _selected='false' name='Tr' class='"+tr_class+"' id='"+trNum+"' rowData='"+rowData+"'>";
 		//设置每列的属性
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_xh"+trNum+"'>"+trNum+"</td>";
-	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_bzw"+trNum+"' data='"+jdwp_jdpmc+"'>"+jdwp_jdpmc+"</td>";
+	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_bzw"+trNum+"'>"+jdwp_jdpmc+"</td>";
 	    
-	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sl"+trNum+"' data='"+jdwp_jdpsm+"'>"+jdwp_jdpsm+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_lx"+trNum+"' data='"+jdwp_jdplx+"'>"+jdwp_jdplx_mc+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_njpm"+trNum+"' data='"+jdwp_jdpzl+"'>"+jdwp_jdpzl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_zl"+trNum+"' data='"+jdwp_jdptj+"'>"+jdwp_jdptj+"</td>";
+	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sl"+trNum+"'>"+jdwp_jdpsm+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_lx"+trNum+"'>"+jdwp_jdplx_mc+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_njpm"+trNum+"'>"+jdwp_jdpzl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_zl"+trNum+"'>"+jdwp_jdptj+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
 		+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
 		+"</td>";
@@ -156,10 +164,10 @@ function jdwpxxadd(){
 		if(addTableTr!=""){
 			$("#YwwffzjlTable").append(addTableTr);
 			//清空附件上传页面数据
-			$("#jdwp_jdpmc").val(null);
-			$("#jdwp_jdpsm").val(null);
-			$('#jdwp_jdpzl').val(null);//重量
-			$('#jdwp_jdptj').val(null);//体积
+			$("#jdwp_jdpmc").removeAttr("value");
+			$("#jdwp_jdpsm").removeAttr("value");
+			$('#jdwp_jdpzl').removeAttr("value");//重量
+			$('#jdwp_jdptj').removeAttr("value");//体积
 			addTrEvent($("#YwwffzjlTable").find("tr:last"));
 		}
 }
@@ -252,28 +260,68 @@ function pjxx_add_verify(){
 		return false;
 	if (!checkControlValue("pjxxadd_sjrlxdh","String",1,20,null,1,"收件人手机"))
 		return false;
-	
+	if (!checkControlValue("pjxxadd_pjr_xm","String",1,20,null,1,"派件人"))
+		return false;
+	if (!checkControlValue("pjxxadd_pjsj","String",1,20,null,1,"派件日期"))
+		return false;
   return true;
 }
 //揽件信息保存方法
-function add_pjxx(){
+function add_pjxx(mode){
 	if (pjxx_add_verify()){
-		alert("提交方法");
 		var params = getSubmitParams("#pjjbxx_add [name*=pjxx.]");
-		jQuery.post("jdy/insert_pjxx.action",params,add_pjxx_back,"json");
+		$('#YwwffzjlData tbody tr').each(function(idx){
+			var $tr = $(this);
+			var rowData = $.evalJSON($tr.attr("rowData"));
+			for(var key in rowData){
+				params["pjxx.ljjbxx.jdp_list["+idx+"]."+key] = rowData[key];
+			}
+			
+		});
+		if(mode == 'again')
+			jQuery.post("jdy/insert_pjxx.action",params,add_pjxx_again_callback,"json");
+			//add_pjxx_again_callback({result:"success"})
+		else
+			jQuery.post("jdy/insert_pjxx.action",params,add_pjxx_back,"json");
 	}
 }
 //提交方法回调函数
-function add_pjxx_back(){
+function add_pjxx_back(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
-		parent.parent.setPageListLjxx($("#pageNo").attr("value"));
-		location.reload();
+		//parent.parent.setPageListLjxx($("#pageNo").attr("value"));
+		//location.reload();
+		pjxxQueryPageList();
+		close_pjxx_add_page();
 	}else{
 		jAlert(json.result,'错误信息');
 	}		
 }
-
+//保存并且新增的回调
+function add_pjxx_again_callback(json){
+	if  (json.result=="success"){
+		jAlert(addMessage,'提示信息');
+		
+		//清楚所有揽件信息
+		$('#pjjbxx_add [name*=pjxx.ljjbxx.]').each(function(){
+			$this = $(this);
+			if($this.attr('tagName').toLowerCase() == 'select'){
+				$this.setValue('');
+			}
+			else
+				$this.removeAttr("value");
+		});
+		$('#pjxxadd_jjrssx').removeAttr('value');
+		$('#pjxxadd_sjrssx').removeAttr('value');
+		$('#YwwffzjlData tbody tr').remove();
+		$('#pjxxadd_dsr_xm').removeAttr('value');
+		$('#pjxxadd_dsr_zjhm').removeAttr('value');
+		$('#pjxxadd_dsr_zjlx').setValue('');
+		
+	}else{
+		jAlert(json.result,'错误信息');
+	}		
+}
 function close_pjxx_add_page(){
 	$('#'+pjxx_detail_div).hideAndRemove("show");
 }
@@ -286,17 +334,20 @@ function wldh_completion(wldh_el){
 	var params = {'lj.wldh':wldh_el.val()};
 	
 	$.post(url,params,function(data){
-		$('#pjjbxx_add [name*=pjxx.ljjbxx.]').each(function(idx){
-			$this = $(this);
-			
-			if($this.attr("tagName").toLowerCase() == 'select'){
-				$this.setValue(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
-			}
-			else{
-				$this.val(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
-			}
+		if(data.lj){
+			$('#pjjbxx_add [name*=pjxx.ljjbxx.]').each(function(idx){
+				$this = $(this);
 				
-		});
+				if($this.attr("tagName").toLowerCase() == 'select'){
+					$this.setValue(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
+				}
+				else{
+					$this.val(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
+				}
+					
+			});
+		}
+		
 	}, 'json');
 }
 </script>
@@ -390,7 +441,7 @@ function wldh_completion(wldh_el){
 		<tr height="20">
 			<td class="red">派件人</td>
 			<td class="detailtd"><input type="text" id="pjxxadd_pjr_xm" name="pjxx.pjr.xm" class="inputstyle" ></td>
-			<td class="red">派件时间</td>
+			<td class="red">派件日期</td>
 			<td class="detailtd"><input type="text" id="pjxxadd_pjsj" name="pjxx.pjsj" class="inputstyle" ></td>
 		</tr>
 	</table>
@@ -406,7 +457,7 @@ function wldh_completion(wldh_el){
 		<table ALIGN="center" >
 			<tr>
 				<td ><a href="#" id="pjjbxx_add_button" hidefocus="true" class="submitbutton" title="保存" onclick='add_pjxx();'>保存</a></td>
-				<td ><a href="#" id="pjjbxx_add_again_button" hidefocus="true" class="submitbutton" title="保存新增" onclick='valadateCode();'>保存新增</a></td>
+				<td ><a href="#" id="pjjbxx_add_again_button" hidefocus="true" class="submitbutton" title="保存新增" onclick='add_pjxx("again");'>保存新增</a></td>
 				<td ><a href="#" id="pjjbxx_goback" hidefocus="true" class="submitbutton" title="返回" onclick='close_pjxx_add_page();'>返回</a></td>			
 			</tr>
 		</table>
