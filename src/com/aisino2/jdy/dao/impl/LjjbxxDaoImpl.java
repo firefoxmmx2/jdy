@@ -14,7 +14,7 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 
 
 	public Ljjbxx insert(Ljjbxx ljjbxx) {
-		if(ljjbxx.getDjxh()==null){
+		if(ljjbxx.getDjxh()==null || ljjbxx.getDjxh()==""){
 			if(ljjbxx.getQyjbxx() != null && ljjbxx.getQyjbxx().getQybm()!=null){
 				ljjbxx.setDjxh(generateDjxh(ljjbxx.getQyjbxx().getQybm()));
 			}
