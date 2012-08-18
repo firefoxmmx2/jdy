@@ -38,7 +38,7 @@
 	<insert id="Rdrjbxx.insert" parameterClass="Rdrjbxx">
 		insert into t_rdrjbxx(
 			<dynamic prepend=" ">
-				<isNotNull property="id" prepend=""> 
+				<isNotNull property="id" prepend=","> 
 					id
 				</isNotNull>
 				<isNotNull property="xm" prepend=","> 
@@ -53,8 +53,8 @@
 				<isNotNull property="ssx" prepend=","> 
 					ssx
 				</isNotNull>
-				<isNotNull property="xxdx" prepend=","> 
-					xxdx
+				<isNotNull property="xxdz" prepend=","> 
+					xxdz
 				</isNotNull>
 				<isNotNull property="lxdh" prepend=","> 
 					lxdh
@@ -81,8 +81,8 @@
 				<isNotNull property="ssx" prepend=","> 
 					#ssx#
 				</isNotNull>
-				<isNotNull property="xxdx" prepend=","> 
-					#xxdx#
+				<isNotNull property="xxdz" prepend=","> 
+					#xxdz#
 				</isNotNull>
 				<isNotNull property="lxdh" prepend=","> 
 					#lxdh#
@@ -110,8 +110,8 @@
 				<isNotNull property="ssx" prepend=","> 
 					ssx=#ssx#
 				</isNotNull>
-				<isNotNull property="xxdx" prepend=","> 
-					xxdx=#xxdx#
+				<isNotNull property="xxdz" prepend=","> 
+					xxdz=#xxdz#
 				</isNotNull>
 				<isNotNull property="lxdh" prepend=","> 
 					lxdh=#lxdh#
@@ -136,7 +136,8 @@
 	</delete>
 	
 	<select id="Rdrjbxx.get" resultMap="rdrjbxx_zpxx_rm" parameterClass="Rdrjbxx" >
-		select Rdrjbxx.xm xm,Rdrjbxx.zjhm zjhm from t_Rdrjbxx Rdrjbxx where 
+		select  Rdrjbxx.* from t_Rdrjbxx Rdrjbxx 
+	    where 
 		<dynamic prepend=" ">
 			<include refid="RdrjbxxWhere"/>
 		</dynamic>
