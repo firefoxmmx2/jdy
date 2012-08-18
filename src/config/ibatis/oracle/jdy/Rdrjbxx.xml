@@ -136,7 +136,7 @@
 	</delete>
 	
 	<select id="Rdrjbxx.get" resultMap="rdrjbxx_zpxx_rm" parameterClass="Rdrjbxx" >
-		select Rdrjbxx.xm xm,Rdrjbxx.zjhm zjhm from t_Rdrjbxx Rdrjbxx where 
+		select * from t_Rdrjbxx Rdrjbxx where 
 		<dynamic prepend=" ">
 			<include refid="RdrjbxxWhere"/>
 		</dynamic>
