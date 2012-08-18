@@ -56,12 +56,16 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 				/***向寄递对象--人员信息表插入数据***/
 				setRddrjbxx=rdrjbxxDao.insert(ljjbxx.getJjr());
 				Rdrjbxxjjr.setId(setRddrjbxx.getId());
+			}else{
+				Rdrjbxxjjr.setId(setRddrjbxx.getId());
 			}
 			setRddrjbxx.setZjhm(ljjbxx.getSjr().getZjhm());
 			setRddrjbxx=rdrjbxxDao.get(setRddrjbxx);
 			if(setRddrjbxx==null){//判断证件号码，表中是否存在，若不存在则插入
 				/***向寄递对象--人员信息表插入数据***/
 				setRddrjbxx=rdrjbxxDao.insert(ljjbxx.getSjr());
+				Rdrjbxxsjr.setId(setRddrjbxx.getId());
+			}else{
 				Rdrjbxxsjr.setId(setRddrjbxx.getId());
 			}
 			/***向揽件信息表打入揽件数据***/

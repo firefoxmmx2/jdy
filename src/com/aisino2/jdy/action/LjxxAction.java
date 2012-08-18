@@ -95,7 +95,6 @@ public class LjxxAction extends PageAction{
 			ljjbxxService.insertLjjbxx(lj);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		

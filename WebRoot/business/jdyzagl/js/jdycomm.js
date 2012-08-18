@@ -97,8 +97,8 @@ function getDictitem(config) {
  *将前台ingrid组合成数组的方法
  *
  */
-var degsz = new Array();//第二个数组
 function createszff(childList){
+	var degsz = new Array();//第二个数组
 	if (childList!=null && childList.length>0){
 		var thNameArr = new Array();
 		var listTrId;
@@ -147,4 +147,5 @@ function createszff(childList){
 		//alert("最后的值="+deg);
 		//alert("最后的数组="+degsz);
 	}
+	return degsz;
 }
