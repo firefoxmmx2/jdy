@@ -3,6 +3,10 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
+
+<%
+	qybm = "T023310005002";
+%>
 <script type="text/javascript">
 var trNum=0;
 $(function() {	
@@ -13,7 +17,10 @@ $(function() {
 		var name = $this.attr('name');
 		$this.attr("id", id.replace('lj_','pjxxadd_','g') );
 		$this.attr("name", "pjxx."+name.replace("lj\.","ljjbxx\.","g"));
+		$this.removeAttr("value");
 	});
+	$('#jjrssxmc').attr('id','pjxxadd_jjrssx');
+	$('#sjrssxmc').attr('id','pjxxadd_sjrssx');
 	//去掉寄件人收件人省市县提交名称
 	$('#pjxxadd_jjrssx').removeAttr("name");
 	$('#pjxxadd_sjrssx').removeAttr("name");
@@ -361,6 +368,7 @@ function wldh_completion(wldh_el){
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="pjjbxx_add">
 <tr>
 <td>
+<input type="hidden" name="pjxx.ljjbxx.qyjbxx.qybm" value="<%=qybm%>">
 <input type="hidden" name="pjxx.pjr.cyrybh" id="pjxxadd_pjr_cyrybh">
 <input type="hidden" name="pjxx.ljjbxx.jjr.ssx" id="pjxxadd_jjrssxdm">
 <input type="hidden" name="pjxx.ljjbxx.sjr.ssx" id="pjxxadd_sjrssxdm">
