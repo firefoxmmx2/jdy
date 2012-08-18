@@ -1,12 +1,14 @@
 package com.aisino2.jdy.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
 import com.aisino2.jdy.dao.IJdpxxDao;
-import com.aisino2.jdy.dao.IKyjdwpxxDao;
 import com.aisino2.jdy.dao.ILjjbxxDao;
 import com.aisino2.jdy.dao.IRdrjbxxDao;
 import com.aisino2.jdy.domain.Jdpxx;
@@ -71,10 +73,12 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			/***向揽件信息表打入揽件数据***/
 			ljjbxx.setJjr(Rdrjbxxjjr);
 			ljjbxx.setSjr(Rdrjbxxsjr);
-			ljjbxxDao.insert(ljjbxx);
+			ljjbxx.setLjtbsj(new Date());
+			ljjbxx = ljjbxxDao.insert(ljjbxx);
 			/***向寄递物品表插入数据***/
 			if(ljjbxx.getJdp_list()!=null && ljjbxx.getJdp_list().size()>0){
 				for(int i=0;i<ljjbxx.getJdp_list().size();i++){
+					ljjbxx.getJdp_list().get(i).setLjjbxx(ljjbxx);
 					jdpxxDao.insert(ljjbxx.getJdp_list().get(i));
 				}
 			}
@@ -82,8 +86,44 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	}
 
 	public void updateLjjbxx(Ljjbxx ljjbxx) {
-		// TODO Auto-generated method stub
-		
+		if(ljjbxx==null || !StringUtil.isNotEmpty(ljjbxx.getDjxh()))
+			throw new RuntimeException("需要修改的揽件信息登记序号为空");
+//		修改寄件人
+		if(ljjbxx.getJjr()!=null && StringUtil.isNotEmpty(ljjbxx.getJjr().getZjhm())){
+			Rdrjbxx old_jjr = rdrjbxxDao.get(ljjbxx.getJjr());
+			//在寄件人不存在的时候，添加一个新的寄件人，在存的时候，更新这个寄件人的信息。
+			if(old_jjr == null){
+				ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
+			}
+			else{
+				rdrjbxxDao.update(ljjbxx.getJjr());
+			}
+		}
+//		修改收件人
+		if(ljjbxx.getSjr()!=null && StringUtil.isNotEmpty(ljjbxx.getSjr().getZjhm())){
+			Rdrjbxx old_sjr = rdrjbxxDao.get(ljjbxx.getSjr());
+			//在收件人不存在的时候，添加一个新的收件人，在存的时候，更新这个收件人的信息。
+			if(old_sjr==null){
+				ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
+			}
+			else {
+				rdrjbxxDao.update(ljjbxx.getSjr());
+			}
+		}
+//		修改寄递品信息
+		if(ljjbxx.getJdp_list()!=null && ljjbxx.getJdp_list().size()>0){
+			for(Jdpxx jdp : ljjbxx.getJdp_list()){
+//				删除标志，当他为Y的时候，出数据库中删除这个寄递品
+				if(jdp.getSfscbz().equals("Y")){
+					jdpxxDao.delete(jdp);
+				}
+				else{
+					jdp.setLjjbxx(ljjbxx);
+					jdpxxDao.insert(jdp);
+				}
+			}
+		}
+		ljjbxxDao.update(ljjbxx);
 	}
 
 	public void deleteLjjbxx(Ljjbxx ljjbxx) {

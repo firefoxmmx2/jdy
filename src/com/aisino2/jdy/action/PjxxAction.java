@@ -8,9 +8,11 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Pjjbxx;
 import com.aisino2.jdy.service.IPjjbxxService;
+import com.aisino2.publicsystem.domain.Qyryxx;
+import com.aisino2.sysadmin.Constants;
+import com.aisino2.sysadmin.domain.User;
 
 /**
  * 派件信息
@@ -135,6 +137,11 @@ public class PjxxAction extends PageAction {
 	public String insert() throws Exception{
 		if(pjxx == null)
 			throw new RuntimeException("需要添加的派件信息参数不能为空");
+		User curr_user = (User) this.getRequest().getSession().getAttribute(Constants.userKey);
+		
+		Qyryxx pjtbr = new Qyryxx();
+		pjtbr.setCyrybh(curr_user.getCyrybh());
+		pjxx.setPjtbsj(new Date());
 		pjjbxxService.insertPjjbxx(pjxx);
 		
 		this.result=SUCCESS;

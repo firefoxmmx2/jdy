@@ -8,21 +8,6 @@ var trNum=0;
 var dataid="";
 var ljjdpxx = new Array();
 $(document).ready(function() {	
-	//揽件时间选择
-	$("#lj_ljsj").attr("readonly","true");
-	$("#lj_ljsj").datepicker();
-	//户籍省市县--寄件人
-	$("#jjrssxmc").click( function() {
-		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
-	});
-	//户籍省市县--收件人
-	$("#sjrssxmc").click( function() {
-		getDict_item("sjrssxmc", "lj_sjrssx", "dm_xzqh");
-	});
-	//证件类型--寄件人
-	getDictItemBox("lj_jjrzjlx","","dm_zjlx");
-	//证件类型--收件人
-	getDictItemBox("lj_sjrzjlx","","dm_zjlx");
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
 	dzcl_pageUrl="jdy/queryListjdp_ljxx.action";
@@ -231,12 +216,16 @@ function addVerify(){
 }
 //揽件信息保存方法
 function  ljxxbaocun(){
+	//设置企业编码，之后要删除这里的设置
+	$("#lj_qyjbxx").val("0123456789")
+	//alert("企业编码="+$("#lj_qyjbxx").val());
 	if (addVerify()){
-		var params = getSubmitParams("[name*=lj.]");
+		var params = getSubmitParams("#ljjbxx_add [name*=lj.]");
+		//var params = getSubmitParams("#pjjbxx_add [name*=pjxx.]");
 		var childList1 = new Array("YwwffzjlData");
 		var jsjxsz = new Array();//保存解析之后返回的数组
 		jsjxsz=createszff(childList1);//调用解析页面ingrid的方法
-		alert("最后的数组="+jsjxsz);
+		//alert("最后的数组="+jsjxsz);
 		if(jsjxsz!="" && jsjxsz.length>0){
 			for (var i=0;i<jsjxsz.length;i++){
 					params["lj.jdp_list["+i+"].jdplx"] = jsjxsz[i][4];
@@ -254,26 +243,27 @@ function  ljxxbaocun(){
 	}
 }
 //提交方法回调函数
-function addback(){
+function addback(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
-		parent.parent.setPageListLjxx($("#pageNo").attr("value"));
-		location.reload();
+		$("#ljjbxxadd_detail").close();
+		setPageListLjxx(1);
 	}else{
 		jAlert(json.result,'错误信息');
 	}		
 }
 </script>
-<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
-<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
       <td align="left" class="title1">寄递品信息登记</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
-<table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0">
+<table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="ljjbxx_add">
 <tr>
+<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
+<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
+<input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
 <td valign="top">
 	    	<table width="100%"  border="0" align="left" cellpadding="0" cellspacing="0">
 	      	<tr>

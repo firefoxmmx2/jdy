@@ -14,6 +14,8 @@ import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.service.ILjjbxxService;
+import com.aisino2.publicsystem.domain.Qyjbxx;
+import com.aisino2.publicsystem.domain.Qyryxx;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.User;
 /**
@@ -88,6 +90,13 @@ public class LjxxAction extends PageAction{
      * @author renhao
      */
 	public String insert() throws Exception{
+	    HttpSession session = this.getRequest().getSession();
+		User user = (User)session.getAttribute(Constants.userKey);
+		Qyryxx ljtbr = new Qyryxx();
+		ljtbr.setCyrybh(user.getCyrybh());
+		lj.setLjtbr(ljtbr);
+		
+		
 		ljjbxxService.insertLjjbxx(lj);
 		this.result=SUCCESS;
 		return SUCCESS;
