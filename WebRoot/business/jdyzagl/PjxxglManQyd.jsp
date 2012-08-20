@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/public/user-info.jsp" %>
-<script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
+<%
+	qybm = "T023310005002";
+%>
+
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
+<script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
+
 <script type="text/javascript">
 	var pjxx_detail_div="pjjbxx_detail";
 	var pjxx_detail_width=900;
@@ -11,6 +16,8 @@
 	var pjxx_grid_table_html;
 	var pjxx_page_url = "jdy/querylist_pjxx.action";
 	var pjxx_add_page_url = "business/jdyzagl/PjxxAdd.jsp";
+	var pjxx_update_page_url="business/jdyzagl/PjxxModify.jsp";
+	
 	$(function(){
 		
 		$('#pjxx_jjr_zjlx').selectBox({code:'dm_zjlx'});
@@ -68,6 +75,13 @@
 	function manVerify_pjxx(){
 		return true;
 	}
+	//派件信息修改
+	function setPjxxUpdate(id){
+		dataid = id;
+		setWidth(pjxx_detail_div,pjxx_detail_width);
+		setUrl(pjxx_detail_div,pjxx_update_page_url);
+		bindDocument(pjxx_detail_div);
+	} 
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="pjjbxx_man_qyd">
