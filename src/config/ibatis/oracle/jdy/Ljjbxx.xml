@@ -250,9 +250,6 @@
 		update from t_ljjbxx ljjbxx
 		set djxh = djxh
 		<dynamic prepend=",">
-			<isNotNull prepend="," property="djxh">
-				djxh=#djxh#
-			</isNotNull>
 			<isNotNull prepend="," property="ljsj">
 				ljsj=#ljsj#
 			</isNotNull>
