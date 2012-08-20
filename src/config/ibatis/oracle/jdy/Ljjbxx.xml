@@ -247,7 +247,7 @@
 	</delete>
 	
 	<update id="ljjbxx.update" parameterClass="ljjbxx">
-		update from t_ljjbxx ljjbxx
+		update t_ljjbxx ljjbxx
 		set djxh = djxh
 		<dynamic prepend=",">
 			<isNotNull prepend="," property="ljsj">
