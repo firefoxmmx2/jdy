@@ -259,6 +259,16 @@ public class PjxxAction extends PageAction {
 		lDetail.add("详情");
 		lCol.add(lDetail);
 
+		List lUpdate=new ArrayList();
+		lUpdate.add("setPjxxUpdate");
+		lUpdate.add("修改");
+		lCol.add(lUpdate);
+		
+		List lDelete=new ArrayList();
+		lDelete.add("setPjxxDelete");
+		lDelete.add("删除");
+		lCol.add(lDelete);
+		
 		for(Pjjbxx pj : lData){
 			pj.setDjxh(pj.getLjjbxx().getDjxh());
 			pj.setWldh(pj.getLjjbxx().getWldh());
@@ -269,7 +279,7 @@ public class PjxxAction extends PageAction {
 			
 		}
 		Pjjbxx setpjxx = new Pjjbxx();
-		this.setDataCustomer(setpjxx, lData, lPro, null, lCol);
+		this.setData(setpjxx, lData, lPro, lCol);
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
