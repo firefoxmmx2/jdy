@@ -66,21 +66,28 @@ public class LjxxAction extends PageAction{
 	private void setTableDate_ljjbxx(List lData) {
 		// TODO Auto-generated method stub
 		List lPro = new ArrayList();
-		lPro.add("baybmid");
-		lPro.add("xm");
-		lPro.add("xbmc");
-		lPro.add("gmsfhm");
-		lPro.add("hjdpcsmjhcsj");
-
+		lPro.add("id");
+		lPro.add("djxh");
+		lPro.add("wldh");
+		lPro.add("jjrxm");
+		lPro.add("zjlx");
+		lPro.add("ljy");
+		lPro.add("ljtbsj");
+		
 		List lCol = new ArrayList();
 		
 		List lDetail = new ArrayList();
-		lDetail.add("setBayDetail");
+		lDetail.add("setLjxxDetail");
 		lDetail.add("详情");
 		lCol.add(lDetail);
+		List lUpdate = new ArrayList();
+		lUpdate.add("setLjxxUpdate");
+		lUpdate.add("修改");
+		lCol.add(lUpdate);
 
-		Ljjbxx getLjjbxx = new Ljjbxx();
-		this.setDataCustomer(getLjjbxx, lData, lPro, null, lCol);
+		
+		Ljjbxx setLjxx = new Ljjbxx();
+		this.setDataCustomer(setLjxx, lData, lPro, null, lCol);
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
@@ -96,9 +103,9 @@ public class LjxxAction extends PageAction{
 		ljtbr.setCyrybh(user.getCyrybh());
 		lj.setLjtbr(ljtbr);
 		
-		
 		ljjbxxService.insertLjjbxx(lj);
-		this.result=SUCCESS;
+		
+		this.result="success";
 		return SUCCESS;
     }
 	

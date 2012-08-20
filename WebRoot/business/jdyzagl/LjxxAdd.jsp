@@ -3,11 +3,36 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
+<%
+	qybm = "T023310001000";
+%>
 <script type="text/javascript">
 var trNum=0;
 var dataid="";
 var ljjdpxx = new Array();
 $(document).ready(function() {	
+	//添加寄递对象证件类型的提交名称
+	$("#lj_jjrzjlx").attr("name","lj.jjr.zjlx");
+	$("#lj_sjrzjlx").attr("name","lj.sjr.zjlx");
+	//揽件时间选择
+	$("#lj_ljsj").attr("readonly","true");
+	$("#lj_ljsj").datepicker();
+	//户籍省市县--寄件人
+	$("#jjrssxmc").click( function() {
+		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
+	});
+	//户籍省市县--收件人
+	$("#sjrssxmc").click( function() {
+		getDict_item("sjrssxmc", "lj_sjrssx", "dm_xzqh");
+	});
+	//证件类型--寄件人
+	getDictItemBox("lj_jjrzjlx","lj_jjrzjlxdm","dm_zjlx");
+	//证件类型--收件人
+	getDictItemBox("lj_sjrzjlx","lj_sjrzjlxdm","dm_zjlx");
+	//揽件人
+	$('#lj_ljr_xm').attr('readOnly',true).click(function(){
+		getTyRY_item('lj_ljr_xm','lj_ljr_cyrybh','<%=qybm%>');
+	});
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
 	dzcl_pageUrl="jdy/queryListjdp_ljxx.action";
@@ -153,15 +178,16 @@ function getObject(obj){
 	}
 }
 $("#lj_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
-	
 	//如果身份证证号填写不为15或18位，则直接返回让他重新填写
 	var zjhm = $("#lj_jjrzjhm").attr("value").toUpperCase();
-	if(zjhm!=""){
-		if(isIdCardNo(zjhm)){
-			//证件号码就用用户自己填写的，如15位的不在去转换为18位
-			//15位转18位
-			if(zjhm.length==15){
-				valSfzCardIsRight("lj_jjrzjhm","请正证件号码!");
+	if($("#lj_jjrzjlx").val()=="11"){
+		if(zjhm!=""){
+			if(isIdCardNo(zjhm)){
+				//证件号码就用用户自己填写的，如15位的不在去转换为18位
+				//15位转18位
+				if(zjhm.length==15){
+					valSfzCardIsRight("lj_jjrzjhm","请正证件号码!");
+				}
 			}
 		}
 	}
@@ -169,12 +195,14 @@ $("#lj_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判
 $("#lj_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
 	//如果身份证证号填写不为15或18位，则直接返回让他重新填写
 	var zjhm = $("#lj_jjrzjhm").attr("value").toUpperCase();
-	if(zjhm!=""){
-		if(isIdCardNo(zjhm)){
-			//证件号码就用用户自己填写的，如15位的不在去转换为18位
-			//15位转18位
-			if(zjhm.length==15){
-				valSfzCardIsRight("lj_jjrzjhm","请正证件号码!");
+	if($("#lj_sjrzjlx").val()=="11"){
+		if(zjhm!=""){
+			if(isIdCardNo(zjhm)){
+				//证件号码就用用户自己填写的，如15位的不在去转换为18位
+				//15位转18位
+				if(zjhm.length==15){
+					valSfzCardIsRight("lj_jjrzjhm","请正证件号码!");
+				}
 			}
 		}
 	}
@@ -217,7 +245,7 @@ function addVerify(){
 //揽件信息保存方法
 function  ljxxbaocun(){
 	//设置企业编码，之后要删除这里的设置
-	$("#lj_qyjbxx").val("0123456789")
+	//$("#lj_qyjbxx").val("0123456789")
 	//alert("企业编码="+$("#lj_qyjbxx").val());
 	if (addVerify()){
 		var params = getSubmitParams("#ljjbxx_add [name*=lj.]");
@@ -246,8 +274,8 @@ function  ljxxbaocun(){
 function addback(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
-		$("#ljjbxxadd_detail").close();
-		setPageListLjxx(1);
+		$("#ljjbxxadd_detail").hideAndRemove("show");
+		//setPageListLjxx(1);
 	}else{
 		jAlert(json.result,'错误信息');
 	}		
@@ -259,11 +287,8 @@ function addback(json){
       <td align="right"><a href="#" id="closeDiv" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
-<table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="ljjbxx_add">
+<table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0">
 <tr>
-<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
-<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
-<input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
 <td valign="top">
 	    	<table width="100%"  border="0" align="left" cellpadding="0" cellspacing="0">
 	      	<tr>
@@ -287,7 +312,11 @@ function addback(json){
 </td>
 </tr>
 <tr>
-<table width="100%" border="0" cellspacing="0" cellpadding="0"  id="add">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="ljjbxx_add">
+<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
+<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
+<input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
+<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>">
 <tr>
   <td>
     <fieldset>
