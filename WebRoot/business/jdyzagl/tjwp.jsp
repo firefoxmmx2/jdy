@@ -5,7 +5,8 @@
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 <script type="text/javascript">
 $(document).ready(function() {
-	
+	//寄递物品联动下拉列表
+	selectboxlink("jdwp_jdpdl","jdwp_jdpxl","dm_jdwpdl");
 })
 //寄递物品信息保存时验证方法
 function jdfpxxtjVerify(){
