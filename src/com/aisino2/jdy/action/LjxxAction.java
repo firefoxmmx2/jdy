@@ -90,12 +90,13 @@ public class LjxxAction extends PageAction{
      * @author renhao
      */
 	public String insert() throws Exception{
-		
-		HttpSession session = this.getRequest().getSession();
+	    HttpSession session = this.getRequest().getSession();
 		User user = (User)session.getAttribute(Constants.userKey);
 		Qyryxx ljtbr = new Qyryxx();
 		ljtbr.setCyrybh(user.getCyrybh());
 		lj.setLjtbr(ljtbr);
+		
+		
 		ljjbxxService.insertLjjbxx(lj);
 		this.result=SUCCESS;
 		return SUCCESS;
@@ -103,8 +104,11 @@ public class LjxxAction extends PageAction{
 	
 	public String queryListlj() throws Exception {
 			
-		Map map = new HashMap();
-		Page page =	ljjbxxService.findLjjbxxForPage(map, 1, totalrows, tabledata, result);
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		
+		Page page =	ljjbxxService.findLjjbxxForPage(params, 1, totalrows, tabledata, result);
+		
 		totalpage = page.getTotalPages();
 		totalrows = page.getTotalRows();
 		lLjjbxx = page.getData();
@@ -112,7 +116,7 @@ public class LjxxAction extends PageAction{
 		
 		
 		this.result = "success";
-		return "success";
+		return SUCCESS;
 	} 
 	
 	/**
@@ -121,6 +125,7 @@ public class LjxxAction extends PageAction{
 	 * @throws Exception
 	 */
 	public String query() throws Exception{
+		
 		lj = ljjbxxService.getLjjbxx(lj);
 		
 		this.result = "success";
