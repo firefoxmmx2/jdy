@@ -96,6 +96,7 @@
 	
 	<update id="Rdrjbxx.update" parameterClass="Rdrjbxx">
 		update t_Rdrjbxx Rdrjbxx
+			set
 			id = id
 			<dynamic prepend=",">
 				<isNotNull property="xm" prepend=","> 
