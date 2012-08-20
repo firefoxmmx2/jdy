@@ -40,6 +40,8 @@ public class Pjjbxx implements Serializable {
 	 */
 	private Date pjtbsj;
 	
+	private String sfscbz;
+	
 //	查询列表用的
 	private String djxh;
 	private String wldh;
@@ -49,6 +51,13 @@ public class Pjjbxx implements Serializable {
 	private String pjr_xm;
 	
 	
+	
+	public String getSfscbz() {
+		return sfscbz;
+	}
+	public void setSfscbz(String sfscbz) {
+		this.sfscbz = sfscbz;
+	}
 	public String getDjxh() {
 		return djxh;
 	}

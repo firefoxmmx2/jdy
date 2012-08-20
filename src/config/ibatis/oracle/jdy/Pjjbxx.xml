@@ -10,6 +10,7 @@
 		<result property="id" column="id"/>
 		<result property="pjsj" column="pjsj"/>
 		<result property="pjtbsj" column="pjtbsj"/>
+		<result property="sfscbz" column="sfscbz"/>
 	</resultMap>
 <!-- 	派件基本信息 不包含关联内容 -->
 	<resultMap class="pjjbxx" id="pjjbxx_rm" extends="pjjbxx_base_rm">
@@ -109,6 +110,11 @@
 		<isNotEmpty prepend="and" property="pjsjt">
 			pjjbxx.pjsj &lt;= #pjsjt#
 		</isNotEmpty>
+		
+<!-- 		是否删除 -->
+		<isNotEmpty prepend="and" property="sfscbz">
+			pjjbxx.sfscbz = #sfscbz#
+		</isNotEmpty>
 	</sql>
 	
 <!-- 	插入派件 -->
@@ -198,6 +204,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="ljjbxx.djxh">
 				ljjbxx_id = #ljjbxx.djxh#
+			</isNotNull>
+			<isNotNull prepend="," property="sfscbz">
+				sfscbz = #sfscbz#
 			</isNotNull>
 		</dynamic>
 		where
