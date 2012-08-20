@@ -17,6 +17,7 @@
 	var pjxx_page_url = "jdy/querylist_pjxx.action";
 	var pjxx_add_page_url = "business/jdyzagl/PjxxAdd.jsp";
 	var pjxx_update_page_url="business/jdyzagl/PjxxModify.jsp";
+	var pjxx_delete_url="jdy/delete_pjxx.action";
 	
 	$(function(){
 		
@@ -82,6 +83,10 @@
 		setUrl(pjxx_detail_div,pjxx_update_page_url);
 		bindDocument(pjxx_detail_div);
 	} 
+	//派件信息删除
+	function setPjxxDelete(id) {
+		$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+	}
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="pjjbxx_man_qyd">
@@ -92,6 +97,8 @@
     <td class="tdbg">
     	<input type="hidden" name="pjxx.pjr.cyrybh" id="pjxx_pjr_cyrybh"/>
     	<input type="hidden" name="pjxx.ljjbxx.qyjbxx.qybm" id="pjxx_qyjbxx_qybm" value="<%=qybm %>" />
+    	<%--是否删除标志 --%>
+    	<input type="hidden" name="pjxx.sfscbz" id="pjxx_sfscbz" value="N"/>
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
