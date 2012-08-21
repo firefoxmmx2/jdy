@@ -15,6 +15,10 @@
 <!-- 		8.16 添加 寄递品体积和寄递品重量 -->
 		<result property="jdptj" column="jdptj"/>
 		<result property="jdpzl" column="jdpzl"/>
+<!-- 		添加冗余字段大类，大类名称和类型名称 -->
+		<result property="jdplxmc" column="jdplxmc"/>
+		<result property="jdpdlx" column="jdpdlx"/>
+		<result property="jdpdlxmc" column="jdpdlxmc"/>
 	</resultMap>
 	
 	<resultMap class="jdpxx" id="jdpxx_ljxx_rm" extends="jdpxx_rm">
@@ -61,6 +65,15 @@
 			<isNotNull prepend="," property="jdpzl">
 				jdpzl
 			</isNotNull>
+			<isNotNull prepend="," property="jdplxmc">
+				jdplxmc
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlx">
+				jdpdlx
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlxmc">
+				jdpdlxmc
+			</isNotNull>
 		</dynamic>
 		)
 		values(
@@ -85,6 +98,16 @@
 			</isNotNull>
 			<isNotNull prepend="," property="jdpzl">
 				#jdpzl#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="jdplxmc">
+				#jdplxmc#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlx">
+				#jdpdlx#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlxmc">
+				#jdpdlxmc#
 			</isNotNull>
 		</dynamic>
 		)
@@ -120,6 +143,17 @@
 			<isNotNull prepend="," property="jdpzl">
 				jdpzl=#jdpzl#
 			</isNotNull>
+			
+			<isNotNull prepend="," property="jdplxmc">
+				jdplxmc=#jdplxmc#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlx">
+				jdpdlx=#jdpdlx#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlxmc">
+				jdpdlxmc=#jdpdlxmc#
+			</isNotNull>
+			
 		</dynamic>
 		where
 		<dynamic prepend=" ">
