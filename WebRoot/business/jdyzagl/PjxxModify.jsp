@@ -372,38 +372,73 @@ function loadData(){
 	var params = {'pjxx.id':$('#pjjbxxmod_id').val()};
 	
 	$.post(url,params,function(data){
-		$('#pjjbxx_mod [name*=pjxx.]').each(function(idx){
-			$this = $(this);
-			if($this.attr("tagName").toLowerCase() == 'select'){
-				try{
-					$this.setValue(eval("data." + $this.attr("name")));
-				}catch (e) {
-					//alert($this.attr("name"));
-					//alert(eval("data." + $this.attr("name")))
-					//return;
+		if(data.pjxx){
+			//初始化数据
+			$('#pjjbxx_mod [name*=pjxx.]').each(function(idx){
+				$this = $(this);
+				if($this.attr("tagName").toLowerCase() == 'select'){
+					try{
+						$this.setValue(eval("data." + $this.attr("name")));
+					}catch (e) {
+						//alert($this.attr("name"));
+						//alert(eval("data." + $this.attr("name")))
+						//return;
+					}
+					
 				}
-				
-			}
-			else{
-				try{
-					$this.val(eval("data." + $this.attr("name")));
-				}catch (e) {
-					//alert($this.attr("name"));
-					//alert(eval("data." + $this.attr("name")))
-					//return;
+				else{
+					try{
+						$this.val(eval("data." + $this.attr("name")));
+					}catch (e) {
+						//alert($this.attr("name"));
+						//alert(eval("data." + $this.attr("name")))
+						//return;
+					}
+					
 				}
+					
 				
+			});
+			//初始化寄递品信息
+			if(data.pjxx.ljjbxx.jdp_list && data.pjxx.ljjbxx.jdp_list.length>0){
+				var jdp_list=data.pjxx.ljjbxx.jdp_list;
+				for(var i=0;i<jdp_list.length;i++){
+					jdwpxxadd(jdp_list[i]);
+				}
 			}
-				
 			
-		});
-		//初始化寄递品信息
-		if(data.pjxx.ljjbxx.jdp_list && data.pjxx.ljjbxx.jdp_list.length>0){
-			var jdp_list=data.pjxx.ljjbxx.jdp_list;
-			for(var i=0;i<jdp_list.length;i++){
-				jdwpxxadd(jdp_list[i]);
+			//修改时间限定
+			if(data.overUpdateTime){
+				//只读化数据
+				$('#pjjbxx_mod [id*=pjjbxxmod_]').attr("readOnly",true).addClass('readonly');
+				$('#pjjbxx_mod .red').removeClass('red');
+				$('#pjjbxx_mod_button').parent('td').remove();
+				$('#pjjbxx_goback').attr('title','关闭').text('关闭');
+				//去掉身份证扫描框
+				$('#pjjbxx_mod a:contains("二代证读取")').each(function(){
+					$(this).parents("table").eq(0).remove();
+				});
+				//去掉寄件人和收件人的选择器
+				$('#pjjbxxmod_jjrssx').unbind('click');
+				$('#pjjbxxmod_sjrssx').unbind('click');
+				//去掉派件人的人员选择器
+				$('#pjjbxxmod_pjr_xm').unbind('click');
+				//去掉寄递品添加按钮
+				$('#pjjbxx_mod a[id=addbutton]').remove();
+				//去掉寄递品信息的操作动作
+				function clear(){
+					$('#YwwffzjlData tbody tr').each(function(){
+						$(this).find('td:last').html('');
+					})
+				}
+				
+				setTimeout(clear,600);
 			}
 		}
+		else{
+			jAlert('该派件信息已经不存在','提示');
+		}
+		
 	}, 'json');
 }
 </script>
