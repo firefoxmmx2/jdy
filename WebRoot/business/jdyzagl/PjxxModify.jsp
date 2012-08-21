@@ -25,9 +25,8 @@ $(function() {
 	
 	$('#jjrssxmc').attr('id','pjjbxxmod_jjrssx');
 	$('#sjrssxmc').attr('id','pjjbxxmod_sjrssx');
-	//去掉寄件人收件人省市县提交名称
-	$('#pjjbxxmod_jjrssx').removeAttr("name");
-	$('#pjjbxxmod_sjrssx').removeAttr("name");
+	$('#pjjbxxmod_jjrssx').attr("name","pjxx.ljjbxx.jjr.ssxmc");
+	$('#pjjbxxmod_sjrssx').attr("name","pjxx.ljjbxx.sjr.ssxmc");
 	//添加寄递对象证件类型的提交名称
 	$("#pjjbxxmod_jjrzjlx").attr("name","pjxx.ljjbxx.jjr.zjlx");
 	$("#pjjbxxmod_sjrzjlx").attr("name","pjxx.ljjbxx.sjr.zjlx");
@@ -142,12 +141,10 @@ function jdwpxxadd(record){
 		rowData.jdpsm=record.jdpsm;
 		rowData.jdpzl=record.jdpzl;
 		rowData.jdptj=record.jdptj;
-		var jdplx = rowData.jdplx;
-		var jdplx_dict_item = getDictitem({dictcode:"dm_jdwpdl",value: jdplx});
- 		if(jdplx_dict_item && jdplx_dict_item.length > 0){
- 			jdwp_jdplx_mc = jdplx_dict_item[0].display_name;
- 		}
- 			
+		rowData.jdplxmc=record.jdplxmc;
+		rowData.jdpdlx=record.jdpdlx;
+		rowData.jdpdlxmc=record.jdpdlxmc;
+		
 	}
 	else{
 		rowData.jdplx=$("#jdwp_jdpxl").val();//寄递品类型
@@ -155,7 +152,9 @@ function jdwpxxadd(record){
 		rowData.jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
 		rowData.jdpzl=$('#jdwp_jdpzl').val();//重量
 		rowData.jdptj=$('#jdwp_jdptj').val();//体积
-		jdwp_jdplx_mc=$("#jdwp_jdpxl").attr("title");//寄递品类型名称
+		rowData.jdplxmc=$("#jdwp_jdpxl").attr("title");//寄递品类型名称
+		rowData.jdpdlx=$('#jdwp_jdpdl').val();
+		rowData.jdpdlxmc=$('#jdwp_jdpdl').attr('title');
 	}
 	
 	
@@ -180,7 +179,7 @@ function jdwpxxadd(record){
     addTableTr += "<td class='grid-col-style1' _colid='2' id='l_xh"+trNum+"'>"+trNum+"</td>";
     addTableTr += "<td class='grid-col-style1' _colid='2' id='l_bzw"+trNum+"'>"+rowData.jdpmc+"</td>";
     addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sl"+trNum+"'>"+rowData.jdpsm+"</td>";
-	addTableTr += "<td class='grid-col-style1' _colid='2' id='l_lx"+trNum+"'>"+jdwp_jdplx_mc+"</td>";
+	addTableTr += "<td class='grid-col-style1' _colid='2' id='l_lx"+trNum+"'>"+rowData.jdplxmc+"</td>";
 	addTableTr += "<td class='grid-col-style1' _colid='2' id='l_njpm"+trNum+"'>"+rowData.jdpzl+"</td>";
 	addTableTr += "<td class='grid-col-style1' _colid='2' id='l_zl"+trNum+"'>"+rowData.jdptj+"</td>";
 	addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
@@ -352,7 +351,7 @@ function  modify_pjxx(){
 	}
 }
 //提交方法回调函数
-function modify_pjxx_back(){
+function modify_pjxx_back(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
 // 		parent.parent.setPageListLjxx($("#pageNo").attr("value"));
@@ -398,14 +397,6 @@ function loadData(){
 				
 			
 		});
-		var ssx_dict_item = getDictitem({dictcode:'dm_xzqh',value:$('#pjjbxxmod_jjrssxdm').val()})
-		if(ssx_dict_item && ssx_dict_item.length>0){
-			$('#pjjbxxmod_jjrssx').val(ssx_dict_item[0].display_name);
-		}
-		ssx_dict_item = getDictitem({dictcode:'dm_xzqh',value:$('#pjjbxxmod_sjrssxdm').val()})
-		if(ssx_dict_item && ssx_dict_item.length>0){
-			$('#pjjbxxmod_sjrssx').val(ssx_dict_item[0].display_name);
-		}
 		//初始化寄递品信息
 		if(data.pjxx.ljjbxx.jdp_list && data.pjxx.ljjbxx.jdp_list.length>0){
 			var jdp_list=data.pjxx.ljjbxx.jdp_list;
