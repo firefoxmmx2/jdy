@@ -53,7 +53,20 @@ public class Rdrjbxx implements Serializable {
 	 */
 	private Jddxzpxx zpxx;
 	
+	/**
+	 * 省市县名称 （冗余） 
+	 */
+	private String ssxmc;
 	
+	
+	public String getSsxmc() {
+		return ssxmc;
+	}
+
+	public void setSsxmc(String ssxmc) {
+		this.ssxmc = ssxmc;
+	}
+
 	public Jddxzpxx getZpxx() {
 		return zpxx;
 	}

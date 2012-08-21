@@ -87,6 +87,27 @@
 	function setPjxxDelete(id) {
 		$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
 	}
+	/**
+	派件信息详情
+	*/
+	function setPjxxDetail(id) {
+		dataid = id;
+		detailDialog(pjxx_detail_div, pjxx_detail_width, pjxx_update_page_url, null,function(data){
+			$('#pjjbxx_mod [id*=pjjbxxmod_]').attr("readOnly",true).addClass('readonly');
+			$('#pjjbxx_mod .red').removeClass('red');
+			$('#pjjbxx_mod_button').parent('td').remove();
+			$('#pjjbxx_goback').attr('title','关闭').text('关闭');
+			//去掉身份证扫描框
+			$('#pjjbxx_mod a:contains("二代证读取")').each(function(){
+				$(this).parents("table").eq(0).remove();
+			});
+			//去掉寄件人和收件人的选择器
+			$('#pjjbxxmod_jjrssx').unbind('click');
+			$('#pjjbxxmod_sjrssx').unbind('click');
+			//去掉派件人的人员选择器
+			$('#pjjbxxmod_pjr_xm').unbind('click');
+		});
+	}
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="pjjbxx_man_qyd">

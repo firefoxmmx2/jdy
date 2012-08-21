@@ -215,6 +215,10 @@ public class PjxxAction extends PageAction {
 		if(pjxx.getPjr()!=null){
 			params.put("pjr", pjxx.getPjr());
 		}
+		//是否删除标志
+		if(pjxx.getSfscbz()!=null){
+			params.put("sfscbz", pjxx.getSfscbz());
+		}
 		Page pageinfo = pjjbxxService.findPjjbxxsForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();

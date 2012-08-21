@@ -14,9 +14,22 @@ public class Jdpxx implements Serializable {
 	 */
 	private Integer id;
 	/**
+	 * 寄递品大类
+	 */
+	private String jdpdlx;
+	/**
+	 * 寄递品大类名称
+	 */
+	private String jdpdlxmc;
+	/**
 	 *  #寄递品类型
 	 */
 	private String jdplx;
+	
+	/**
+	 * 寄递品类型名称
+	 */
+	private String jdplxmc;
 	/**
 	 * #寄递品名称
 	 */
@@ -47,6 +60,24 @@ public class Jdpxx implements Serializable {
 	
 	
 	
+	public String getJdpdlx() {
+		return jdpdlx;
+	}
+	public void setJdpdlx(String jdpdlx) {
+		this.jdpdlx = jdpdlx;
+	}
+	public String getJdpdlxmc() {
+		return jdpdlxmc;
+	}
+	public void setJdpdlxmc(String jdpdlxmc) {
+		this.jdpdlxmc = jdpdlxmc;
+	}
+	public String getJdplxmc() {
+		return jdplxmc;
+	}
+	public void setJdplxmc(String jdplxmc) {
+		this.jdplxmc = jdplxmc;
+	}
 	public String getJdpzl() {
 		return jdpzl;
 	}
