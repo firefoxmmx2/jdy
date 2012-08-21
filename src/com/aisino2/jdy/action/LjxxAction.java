@@ -12,6 +12,7 @@ import com.aisino2.common.PageUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
+import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.service.ILjjbxxService;
 import com.aisino2.publicsystem.domain.Qyjbxx;
@@ -26,6 +27,7 @@ public class LjxxAction extends PageAction{
     
 	private ILjjbxxService ljjbxxService;
 	private Ljjbxx lj;
+	private Jdpxx jdpxx;
 	private String tabledata = "";
 	private int totalrows = 0;
 	private String result = "";
@@ -60,6 +62,13 @@ public class LjxxAction extends PageAction{
 	}
 	public void setLj(Ljjbxx lj) {
 		this.lj = lj;
+	}
+	public Jdpxx getJdpxx() {
+		return jdpxx;
+	}
+
+	public void setJdpxx(Jdpxx jdpxx) {
+		this.jdpxx = jdpxx;
 	}
 	
 	/***揽件基本信息主页面setable方法***/
@@ -113,6 +122,24 @@ public class LjxxAction extends PageAction{
 			
 		Map<String, Object> params = new HashMap<String, Object>();
 		
+		if(lj !=null){
+//			if(lj.getWldh()!=""){//物流单号
+//				params.put("wldh", lj.getWldh());
+//			}
+//			if(lj.getJjr().getXm()!=""){//寄件人姓名
+//				params.put("xm", lj.getJjr().getXm());
+//			}
+//			if(lj.getJjr().getZjlx()!=""){//证件类型
+//				params.put("zjlx", lj.getJjr().getZjlx());
+//			}
+//			if(lj.getJjr().getZjhm()!=""){//证件号码
+//				params.put("zjhm", lj.getJjr().getZjhm());
+//			}
+//			if(lj.getLjr().getCyrybh()!=""){//揽件员
+//				params.put("ljr", lj.getLjr().getCyrybh());
+//			}
+		}
+
 		
 		Page page =	ljjbxxService.findLjjbxxForPage(params, 1, totalrows, tabledata, result);
 		
