@@ -64,7 +64,19 @@ public class Ljjbxx implements Serializable {
      * 是否补件
      */
     private String sfbj;
+    /*
+     * 删除标志位
+     */
+    private String scbzw;
     
+    
+    
+	public String getScbzw() {
+		return scbzw;
+	}
+	public void setScbzw(String scbzw) {
+		this.scbzw = scbzw;
+	}
 	public String getSfbj() {
 		return sfbj;
 	}
