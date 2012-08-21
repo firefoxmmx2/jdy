@@ -22,9 +22,8 @@ $(function() {
 	});
 	$('#jjrssxmc').attr('id','pjxxadd_jjrssx');
 	$('#sjrssxmc').attr('id','pjxxadd_sjrssx');
-	//去掉寄件人收件人省市县提交名称
-	$('#pjxxadd_jjrssx').removeAttr("name");
-	$('#pjxxadd_sjrssx').removeAttr("name");
+	$('#pjxxadd_jjrssx').attr("name","pjxx.ljjbxx.jjr.ssxmc");
+	$('#pjxxadd_sjrssx').attr("name","pjxx.ljjbxx.sjr.ssxmc");
 	//添加寄递对象证件类型的提交名称
 	$("#pjxxadd_jjrzjlx").attr("name","pjxx.ljjbxx.jjr.zjlx");
 	$("#pjxxadd_sjrzjlx").attr("name","pjxx.ljjbxx.sjr.zjlx");
@@ -130,20 +129,24 @@ function tianJiaZxzybaydwDzcl(cllb){
 	bindDocument("zxzybaydwdzcl_detail");
 }
 //寄递物品信息保存时添加到列表---添加行的方法
-function jdwpxxadd(){ 
+function jdwpxxadd(){
 	var jdwp_jdplx=$("#jdwp_jdpxl").val();//寄递品类型
 	var jdwp_jdpmc=$("#jdwp_jdpmc").val();//寄递品名称
 	var jdwp_jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
 	var jdwp_jdpzl=$('#jdwp_jdpzl').val();//重量
 	var jdwp_jdptj=$('#jdwp_jdptj').val();//体积
 	var jdwp_jdplx_mc=$("#jdwp_jdpxl").attr("title");//寄递品类型名称
-	
+	var jdwp_jdpdl=$('#jdwp_jdpdl').val();
+	var jdwp_jdpdl_mc=$('#jdwp_jdpdl').attr('title');
 	var rowData = {
 			jdplx:jdwp_jdplx,
 			jdpmc:jdwp_jdpmc,
 			jdpsm:jdwp_jdpsm,
 			jdpzl:jdwp_jdpzl,
-			jdptj:jdwp_jdptj
+			jdptj:jdwp_jdptj,
+			jdplxmc:jdwp_jdplx_mc,
+			jdpdlx:jdwp_jdpdl,
+			jdpdlxmc:jdwp_jdpdl_mc
 	};
 	rowData = $.toJSON(rowData);
 		trNum++;

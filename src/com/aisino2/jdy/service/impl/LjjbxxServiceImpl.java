@@ -113,8 +113,10 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 //		修改寄递品信息
 		if(ljjbxx.getJdp_list()!=null && ljjbxx.getJdp_list().size()>0){
 			for(Jdpxx jdp : ljjbxx.getJdp_list()){
+				if(jdp==null)
+					continue;
 //				删除标志，当他为Y的时候，出数据库中删除这个寄递品
-				if(jdp.getSfscbz().equals("Y")){
+				if(StringUtil.isNotEmpty(jdp.getSfscbz()) && jdp.getSfscbz().equals("Y")){
 					jdpxxDao.delete(jdp);
 				}
 				else{

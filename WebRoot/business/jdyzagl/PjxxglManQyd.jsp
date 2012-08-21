@@ -106,6 +106,17 @@
 			$('#pjjbxxmod_sjrssx').unbind('click');
 			//去掉派件人的人员选择器
 			$('#pjjbxxmod_pjr_xm').unbind('click');
+			//去掉寄递品添加按钮
+			$('#pjjbxx_mod a[id=addbutton]').remove();
+			//去掉寄递品信息的操作动作
+			function clear(){
+				$('#YwwffzjlData tbody tr').each(function(){
+					$(this).find('td:last').html('');
+				})
+			}
+			
+			setTimeout(clear,600);
+			
 		});
 	}
 </script>

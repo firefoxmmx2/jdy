@@ -1,17 +1,21 @@
 package com.aisino2.jdy.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.cache.CacheManager;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Pjjbxx;
 import com.aisino2.jdy.service.IPjjbxxService;
 import com.aisino2.publicsystem.domain.Qyryxx;
 import com.aisino2.sysadmin.Constants;
+import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.User;
 
 /**
@@ -51,8 +55,19 @@ public class PjxxAction extends PageAction {
 	
 	private List<Pjjbxx> lPjjbxxList;
 	
+	private boolean overUpdateTime;
 	
 	
+	
+	
+	public boolean isOverUpdateTime() {
+		return overUpdateTime;
+	}
+
+	public void setOverUpdateTime(boolean overUpdateTime) {
+		this.overUpdateTime = overUpdateTime;
+	}
+
 	public int getTotalrows() {
 		return totalrows;
 	}
@@ -170,6 +185,7 @@ public class PjxxAction extends PageAction {
 	public String update() throws Exception{
 		if(pjxx == null)
 			throw new RuntimeException("需要修改的派件信息参数不能为空");
+		
 		pjjbxxService.updatePjjbxx(pjxx);
 		
 		this.result=SUCCESS;
@@ -239,7 +255,15 @@ public class PjxxAction extends PageAction {
 		if(pjxx == null)
 			throw new RuntimeException("需要获取的派件信息参数不能为空");
 		pjxx = pjjbxxService.getPjjbxx(pjxx);
-		
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar updateOverTimeCalender =  sdf.getCalendar();
+		updateOverTimeCalender.setTime(pjxx.getPjtbsj());
+		updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
+		if((now.compareTo(updateOverTimeCalender.getTime())) >= 0)
+			overUpdateTime=true;
+		else
+			overUpdateTime=false;
 		return SUCCESS;
 	}
 	
@@ -279,7 +303,10 @@ public class PjxxAction extends PageAction {
 			pj.setPjr_xm(pj.getPjr().getXm());
 			pj.setSjr_xm(pj.getLjjbxx().getSjr().getXm());
 			pj.setSjr_zjhm(pj.getLjjbxx().getSjr().getZjhm());
-			pj.setSjr_zjlx(pj.getLjjbxx().getSjr().getZjlx());
+			Dict_item dict_item = new Dict_item();
+			dict_item.setDict_code("dm_zjlx");
+			dict_item.setFact_value(pj.getLjjbxx().getSjr().getZjlx());
+			pj.setSjr_zjlx(CacheManager.getCacheDictitemOne(dict_item).getDisplay_name());
 			
 		}
 		Pjjbxx setpjxx = new Pjjbxx();
