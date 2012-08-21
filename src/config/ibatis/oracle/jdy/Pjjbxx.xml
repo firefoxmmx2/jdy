@@ -10,6 +10,7 @@
 		<result property="id" column="id"/>
 		<result property="pjsj" column="pjsj"/>
 		<result property="pjtbsj" column="pjtbsj"/>
+		<result property="sfscbz" column="sfscbz" />
 	</resultMap>
 <!-- 	派件基本信息 不包含关联内容 -->
 	<resultMap class="pjjbxx" id="pjjbxx_rm" extends="pjjbxx_base_rm">
@@ -109,6 +110,11 @@
 		<isNotEmpty prepend="and" property="pjsjt">
 			pjjbxx.pjsj &lt;= #pjsjt#
 		</isNotEmpty>
+		
+<!-- 		是否删除 -->
+		<isNotEmpty prepend="and" property="sfscbz">
+			pjjbxx.sfscbz = #sfscbz#
+		</isNotEmpty>
 	</sql>
 	
 <!-- 	插入派件 -->
@@ -199,6 +205,9 @@
 			<isNotNull prepend="," property="ljjbxx.djxh">
 				ljjbxx_id = #ljjbxx.djxh#
 			</isNotNull>
+			<isNotNull prepend="," property="sfscbz">
+				sfscbz = #sfscbz#
+			</isNotNull>
 		</dynamic>
 		where
 		<dynamic prepend=" ">
@@ -217,7 +226,7 @@
 	
 <!-- 	获取派件信息列表 -->
 	<select id="pjjbxx.getList" parameterClass="pjjbxx" resultMap="pjjbxx_list_rm">
-		select pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj
+		select pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj,pjjbxx.sfscbz
 			,jjr.xm ljjbxx_jjr_xm, jjr.id ljjbxx_jjr_id, jjr.zjlx ljjbxx_jjr_zjlx, jjr.zjhm ljjbxx_jjr_zjhm
 			,sjr.xm ljjbxx_sjr_xm, sjr.id ljjbxx_sjr_id, sjr.zjlx ljjbxx_sjr_zjlx, sjr.zjhm ljjbxx_sjr_zjhm
 			,pjjbxx.pjrbh, pjr.xm pjr_xm
@@ -254,7 +263,7 @@
 	<select id="pjjbxx.getListPage" parameterClass="map" resultMap="pjjbxx_list_rm">
 		select x.* from (
 		select rownum rowno,z.* from 
-		(	select pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj
+		(	select pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj,pjjbxx.sfscbz
 			,jjr.xm ljjbxx_jjr_xm, jjr.id ljjbxx_jjr_id, jjr.zjlx ljjbxx_jjr_zjlx, jjr.zjhm ljjbxx_jjr_zjhm
 			,sjr.xm ljjbxx_sjr_xm, sjr.id ljjbxx_sjr_id, sjr.zjlx ljjbxx_sjr_zjlx, sjr.zjhm ljjbxx_sjr_zjhm
 			,pjjbxx.pjrbh, pjr.xm pjr_xm

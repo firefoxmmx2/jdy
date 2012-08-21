@@ -16,7 +16,8 @@ $(function() {
 		var id = $this.attr('id');
 		var name = $this.attr('name');
 		$this.attr("id", id.replace('lj_','pjxxadd_','g') );
-		$this.attr("name", "pjxx."+name.replace("lj\.","ljjbxx\.","g"));
+		if(name)
+			$this.attr("name", "pjxx."+name.replace("lj\.","ljjbxx\.","g"));
 		$this.removeAttr("value");
 	});
 	$('#jjrssxmc').attr('id','pjxxadd_jjrssx');
@@ -353,6 +354,14 @@ function wldh_completion(wldh_el){
 				}
 					
 			});
+			var ssx_dict_item = getDictitem({dictcode:'dm_xzqh',value:$('#pjxxadd_jjrssxdm').val()})
+			if(ssx_dict_item && ssx_dict_item.length>0){
+				$('#pjxxadd_jjrssx').val(ssx_dict_item[0].display_name);
+			}
+			ssx_dict_item = getDictitem({dictcode:'dm_xzqh',value:$('#pjxxadd_sjrssxdm').val()})
+			if(ssx_dict_item && ssx_dict_item.length>0){
+				$('#pjxxadd_sjrssx').val(ssx_dict_item[0].display_name);
+			}
 		}
 		
 	}, 'json');
