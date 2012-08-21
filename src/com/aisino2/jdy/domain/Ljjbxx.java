@@ -69,7 +69,36 @@ public class Ljjbxx implements Serializable {
      */
     private String scbzw;
     
+    //查询列表需要的值
+    private String jjrxm;//寄件人姓名
+	private String jjrzjlx;//寄件人证件类型
+    private String jjrzjhm;//寄件人证件号码
+    private String ljyxm;//揽件人姓名
     
+    public String getJjrxm() {
+		return jjrxm;
+	}
+	public void setJjrxm(String jjrxm) {
+		this.jjrxm = jjrxm;
+	}
+	public String getJjrzjlx() {
+		return jjrzjlx;
+	}
+	public void setJjrzjlx(String jjrzjlx) {
+		this.jjrzjlx = jjrzjlx;
+	}
+	public String getJjrzjhm() {
+		return jjrzjhm;
+	}
+	public void setJjrzjhm(String jjrzjhm) {
+		this.jjrzjhm = jjrzjhm;
+	}
+	public String getLjyxm() {
+		return ljyxm;
+	}
+	public void setLjyxm(String ljyxm) {
+		this.ljyxm = ljyxm;
+	}
     
 	public String getScbzw() {
 		return scbzw;
