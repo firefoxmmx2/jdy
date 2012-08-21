@@ -277,6 +277,9 @@
 			<isNotNull prepend="," property="qyjbxx.qybm">
 				qybm = #qyjbxx.qybm#
 			</isNotNull>
+			<isNotNull prepend="," property="scbzw">
+				scbzw=#scbzw#
+			</isNotNull>
 		</dynamic>
 		where
 		<dynamic prepend=" ">
