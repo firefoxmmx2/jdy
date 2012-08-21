@@ -10,7 +10,6 @@
 //默认加载执行内容
 $(document).ready(function() {
 	pageUrl="jdy/queryListlj_ljxx.action";
-	
 	//添加揽件信息的DIV
 	detailid="ljjbxxadd_detail";
 	daggleDiv(detailid);
@@ -21,19 +20,34 @@ $(document).ready(function() {
 	tables=$("#"+divnid).html();
 	
 	//寄递物品联动下拉列表
-	selectboxlink("lj_jdpdlx","lj_jdpxlx","dm_jdwpdl");
+	selectboxlink("jdpdlx","jdpxlx","dm_jdwpdl");
 	//证件类型--寄件人
-	getDictItemBox("lj_jjrzjlx1","lj_jjrzjlxdm","dm_zjlx");
+	getDictItemBox("lj_jjrzjlx1","lj_jjrzjlx1dm","dm_zjlx");
 	//揽件人
 	$('#lj_ljrxm').attr('readOnly',true).click(function(){
 		getTyRY_item('lj_ljrxm','lj_ljr_cyrybh','<%=qybm%>');
 	})	
+	//页面时间格式
+	$('.date').attr("readOnly",true).datepicker();
+	
 	setPageListlj(1);
 }); 
 //页面gird加载方法
 function setPageListlj(pageno,url){	
 	if (manVerify_bm()){
 	    $("#"+divnid).html(tables);
+		//alert("寄件人证件类型="+$("#lj_jjrzjlx1").val());
+		//alert("寄递品大类="+$("#lj_jdpdlx").val());
+		//alert("寄递品小类="+$("#lj_jdpxlx").val());
+		if($("#jdpdlx").val()!=""){
+			$("#lj_jdwp_jdplx").val($("#jdpdlx").val());
+		}
+		if($("#jdpxlx").val()!=""){
+			$("#lj_jdwp_jdplx").val($("#jdpxlx").val());
+		}
+		if($("#jdpdlx").val()!=""&&$("#jdpxlx").val()!=""){
+			$("#lj_jdwp_jdplx").val($("#jdpxlx").val());
+		}
 		var params = getSubmitParams("#ljjbxx_man_qyd [name*=lj.]");
 		if (url==null || url=="undefined"){
 			url=pageUrl;
@@ -62,7 +76,7 @@ function manVerify_bm(){
 //新增揽件信息方法
 function setljAdd(){
 	setWidth("ljjbxxadd_detail",950);
-	setUrl("ljjbxxadd_detail","business/jdyzagl/ljxxAdd.jsp");
+	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxAdd.jsp");
 	bindDocument("ljjbxxadd_detail");
 	//$("#tep_Comm_tag").val("jdyAdd");
 	//return GB_showCenter("business/jdyzagl/Comm.jsp",510,950);
@@ -78,31 +92,31 @@ function setljAdd(){
   <tr>
     <td class="tdbg">
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="ljjbxx_man_qyd">
-    	<input type="hidden" name="lj.jjr.zjlx" id="lj_jjrzjlxdm"/>
-    	<input type="hidden" name="lj.qyjbxx.qybm" id="lj_qyjbxx_qybm" value="<%=qybm %>" />
+    	<input type="hidden" id="lj_jdwp_jdplx" name="lj.jdwp.jdplx" /><!-- 寄递品类型-->
+    	<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>" /><!-- 揽件人 -->
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
 					<td width="23%" class="pagetd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄件人姓名</td>
 					<td width="23%" class="pagetd"><input type="text" id="lj_jjrxm" name="lj.jjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄件人证件类型</td>
-					<td width="23%" class="pagetd"><select id="lj_jjrzjlx1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="lj_jjrzjlx1" name="lj.jjr.zjlx"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">寄件人证件号码</td>
 					<td width="23%" class="pagetd"><input type="text" id="lj_jjrzjhm" name="lj.jjr.zjhm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">寄递品大类</td>
-					<td width="23%" class="pagetd"><select id="lj_jdpdlx"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="jdpdlx"><option></option></select></td>
 					<td width="10%" class="pagedistd">寄递品小类</td>
-					<td width="23%" class="pagetd"><select id="lj_jdpxlx"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="jdpxlx"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">揽件员</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljrxm"  class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_ljrxm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">揽件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsjf" class="inputstyle date" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsjt" class="inputstyle date" value=""></td>
 				</tr>
     		<tr>
     		  <td colspan="6">

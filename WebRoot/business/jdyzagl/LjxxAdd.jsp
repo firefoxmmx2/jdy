@@ -4,7 +4,7 @@
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
 <%
-	qybm = "T023310001000";
+	qybm = "T023310005002";
 %>
 <script type="text/javascript">
 var trNum=0;
