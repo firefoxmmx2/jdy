@@ -34,7 +34,11 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 
 
 	public void delete(Ljjbxx ljjbxx) {
-		delete("ljjbxx.delete",ljjbxx);
+		//delete("ljjbxx.delete",ljjbxx);
+		/*
+		 * 这里不做物理删除，只修改其标志位：scbzw
+		 */
+		update("ljjbxx.update", ljjbxx);
 	}
 
 
