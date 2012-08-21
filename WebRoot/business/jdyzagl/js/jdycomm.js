@@ -149,3 +149,26 @@ function createszff(childList){
 	}
 	return degsz;
 }
+
+/**
+ * 弹出窗口
+ * 
+ * @param detailid
+ *            对话框容器ID
+ * @param width
+ *            对话框的宽度
+ * @param url
+ *            对话框加载的内容地址
+ * @param config
+ *            需要传递给对话框的参数，使用JSON格式
+ * @param callback
+ * 			  运行结束后回调
+ */
+function detailDialog(detailid, width, url, config,callback) {
+	setWidth(detailid, width);
+	$("#" + detailid).empty();
+	$("#" + detailid).load(url, config,callback);
+	$("#" + detailid).show("slow");
+	upAllPage(detailid);
+	bindDocument(detailid);
+}
