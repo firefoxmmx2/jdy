@@ -56,7 +56,10 @@ function setQyzflDic(hylbdm,qyzflId){
 	    $("#"+qyzflId).selectBox({code:"dm_qyzfl(lgy)"});
     }else if("Y01"==hylbdm){//开锁业
 	    $("#"+qyzflId).selectBox({code:"dm_qyzfl(ksy)"});
-    }else {
+    }else if ("Y" == hylbdm){//寄递业
+    	 $("#"+qyzflId).selectBox({code:"dm_qyzfl(jdy)"});
+    }
+    else {
 	    $("#"+qyzflId).selectBox({clear:"1"});
     }
 }
@@ -225,7 +228,10 @@ function setallQyzflDic(hylbdm,qyzflId){
 	    $("#"+qyzflId).selectBox({code:"dm_qyzfl(ysy)"});
     }else if("'Y01'"==hylbdm){// 开锁业
 	    $("#"+qyzflId).selectBox({code:"dm_qyzfl(ksy)"});
-    }else {
+    }else if("'Y'"==hylbdm){//寄递业
+    	$("#"+qyzflId).selectBox({code:"dm_qyzfl(jdy)"});
+    }
+    else {
 	    $("#"+qyzflId).selectBox({clear:"1"});
     }
  	}
