@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/public/user-info.jsp" %>
-<%
-	qybm = "T023310005002";
-%>
 
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
 <script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
