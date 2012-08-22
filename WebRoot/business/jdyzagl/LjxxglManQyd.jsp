@@ -10,6 +10,7 @@
 //默认加载执行内容
 $(document).ready(function() {
 	pageUrl="jdy/queryListlj_ljxx.action";
+	detailWidth="950";
 	//添加揽件信息的DIV
 	detailid="ljjbxxadd_detail";
 	daggleDiv(detailid);
@@ -58,6 +59,7 @@ function setPageListlj(pageno,url){
 										onRowSelect:null,
 										height: pageHeight-267,
                                         ingridPageParams:sXML,
+                                        ingridExtraParams:params,
 										pageNumber: pageno,
 										//colIndex: [0],
 										noSortColIndex:[11],
@@ -87,14 +89,15 @@ function setljAdd(){
 }
 //揽件信息修改
 function setLjxxUpdate(id){
-	//alert("进入改方法");
-	dataid = id;
-	setWidth("ljjbxxadd_detail",950);
-	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxModify.jsp");
-	bindDocument("ljjbxxadd_detail");
+	alert("进入改方法");
+	//dataid = id;
+	//alert("这个有值否="+id);
+	//setWidth("ljjbxxadd_detail",950);
+	//setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxModify.jsp");
+	//bindDocument("ljjbxxadd_detail");
+	setQuery(id,"business/jdyzagl/LjxxModify.jsp");
 } 
 function setLjxxDetail(id){
-	//alert("进入改方法");
 	dataid = id;
 	setWidth("ljjbxxadd_detail",950);
 	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxDetail.jsp");

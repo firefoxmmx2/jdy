@@ -35,7 +35,7 @@ $(document).ready(function() {
 	});
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
-	dzcl_pageUrl="jdy/queryListjdp_ljxx.action";
+	dzcl_pageUrl="#";
 	
 	detailid="zxzybaydwdzcl_detail";
 	daggleDiv(detailid);
