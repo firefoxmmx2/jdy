@@ -931,7 +931,8 @@ public class LoginAction extends PageAction{
 					||"203".equals(utype[i]) 
 					||"202".equals(utype[i])
 			        ||"222".equals(utype[i]) 
-					||"242".equals(utype[i])){
+					||"242".equals(utype[i])
+					||"252".equals(utype[i])){
 				loginuser = userService.getQybmByCyrybh(loginuser);
 				break;
 			}else if ("13".equals(utype[i])
@@ -950,7 +951,8 @@ public class LoginAction extends PageAction{
 					||"163".equals(utype[i])
 			        ||"223".equals(utype[i])
 			        ||"233".equals(utype[i])
-					||"243".equals(utype[i])) {
+					||"243".equals(utype[i])
+					||"253".equals(utype[i])) {
 				loginuser.setSsdwbm(loginuser.getUseraccount());
 				loginuser.setSsdwmc(loginuser.getUsername());
 				break;
