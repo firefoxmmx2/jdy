@@ -89,13 +89,11 @@ function setljAdd(){
 }
 //揽件信息修改
 function setLjxxUpdate(id){
-	alert("进入改方法");
-	//dataid = id;
-	//alert("这个有值否="+id);
-	//setWidth("ljjbxxadd_detail",950);
-	//setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxModify.jsp");
-	//bindDocument("ljjbxxadd_detail");
-	setQuery(id,"business/jdyzagl/LjxxModify.jsp");
+	$("#"+ljjbxxadd_detail).empty();
+	dataid = id;
+	setWidth("ljjbxxadd_detail",950);
+	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxModify.jsp");
+	bindDocument("ljjbxxadd_detail");
 } 
 function setLjxxDetail(id){
 	dataid = id;
@@ -120,15 +118,15 @@ function setLjxxDelete(id) {
     	<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>" /><!-- 揽件人 -->
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_wldh" name="lj.wldh" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄件人姓名</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_jjrxm" name="lj.jjr.xm" class="inputstyle" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrxm" name="lj.jjr.xm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄件人证件类型</td>
-					<td width="23%" class="pagetd"><select id="lj_jjrzjlx1" name="lj.jjr.zjlx"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="ljxx_jjrzjlx1" name="lj.jjr.zjlx"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">寄件人证件号码</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_jjrzjhm" name="lj.jjr.zjhm" class="inputstyle" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrzjhm" name="lj.jjr.zjhm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄递品大类</td>
 					<td width="23%" class="pagetd"><select id="jdpdlx"><option></option></select></td>
 					<td width="10%" class="pagedistd">寄递品小类</td>
@@ -136,11 +134,11 @@ function setLjxxDelete(id) {
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">揽件员</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljrxm" class="inputstyle" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljrxm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">揽件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsjf" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsj" name="lj.ljsjf" class="inputstyle date" value="" /></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsjt" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsj" name="lj.ljsjt" class="inputstyle date" value="" /></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
