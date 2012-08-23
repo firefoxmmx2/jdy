@@ -63,8 +63,8 @@
 				<isNotNull property="gddh" prepend=","> 
 					gddh
 				</isNotNull>
-				<isNotNull property="gddh" prepend=","> 
-					ssx
+				<isNotNull property="ssxmc" prepend=","> 
+					ssxmc
 				</isNotNull>
 			</dynamic>
 		)
@@ -94,7 +94,7 @@
 				<isNotNull property="gddh" prepend=","> 
 					#gddh#
 				</isNotNull>
-				<isNotNull property="ssx" prepend=","> 
+				<isNotNull property="ssxmc" prepend=","> 
 					#ssxmc#
 				</isNotNull>
 			</dynamic>
