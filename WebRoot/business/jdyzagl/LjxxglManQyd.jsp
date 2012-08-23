@@ -10,6 +10,7 @@
 //默认加载执行内容
 $(document).ready(function() {
 	pageUrl="jdy/queryListlj_ljxx.action";
+	detailWidth="950";
 	//添加揽件信息的DIV
 	detailid="ljjbxxadd_detail";
 	daggleDiv(detailid);
@@ -48,7 +49,8 @@ function setPageListlj(pageno,url){
 		if($("#jdpdlx").val()!=""&&$("#jdpxlx").val()!=""){
 			$("#lj_jdwp_jdplx").val($("#jdpxlx").val());
 		}
-		var params = getSubmitParams("#ljjbxx_man_qyd [name*=lj.]");
+		//var params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]");
+		var aaa=$("#ljjbxx_man_qyd [name*=lj.jjr.xm]").val();
 		if (url==null || url=="undefined"){
 			url=pageUrl;
 		}
@@ -57,15 +59,16 @@ function setPageListlj(pageno,url){
 										onRowSelect:null,
 										height: pageHeight-267,
                                         ingridPageParams:sXML,
+                                        ingridExtraParams:params,
 										pageNumber: pageno,
-										colIndex: [0],
+										//colIndex: [0],
 										noSortColIndex:[11],
 										hideColIndex:[1],
 										isHaveMorenPaixuClass: true, //加默认排序样式
 										morenPaixuCol: 8, //第一默认排序	
 										morenPaixuFangshi:'desc', //默认排序方式 
 										alignCenterColIndex: [1,2,8],
-										colWidths: ["15%","15%","10%","15%","10%","10%","15%","20%"]									
+										colWidths: ["20%","15%","10%","10%","20%","10%","15%","10%"]									
 									});				
 		}
 }	
@@ -84,6 +87,27 @@ function setljAdd(){
 	//$("#ljjbxxadd_detail").load("business/jdyzagl/ljAdd.jsp");
 	//$("#ljjbxxadd_detail").show();
 }
+//揽件信息修改
+function setLjxxUpdate(id){
+	alert("进入改方法");
+	//dataid = id;
+	//alert("这个有值否="+id);
+	//setWidth("ljjbxxadd_detail",950);
+	//setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxModify.jsp");
+	//bindDocument("ljjbxxadd_detail");
+	setQuery(id,"business/jdyzagl/LjxxModify.jsp");
+} 
+function setLjxxDetail(id){
+	dataid = id;
+	setWidth("ljjbxxadd_detail",950);
+	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxDetail.jsp");
+	bindDocument("ljjbxxadd_detail");
+}
+//揽件信息删除
+function setLjxxDelete(id) {
+	//alert("进入该方法");
+	$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+}
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="">
   <tr>
@@ -96,15 +120,15 @@ function setljAdd(){
     	<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>" /><!-- 揽件人 -->
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄件人姓名</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_jjrxm" name="lj.jjr.xm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_jjrxm" name="lj.jjr.xm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄件人证件类型</td>
 					<td width="23%" class="pagetd"><select id="lj_jjrzjlx1" name="lj.jjr.zjlx"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">寄件人证件号码</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_jjrzjhm" name="lj.jjr.zjhm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_jjrzjhm" name="lj.jjr.zjhm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄递品大类</td>
 					<td width="23%" class="pagetd"><select id="jdpdlx"><option></option></select></td>
 					<td width="10%" class="pagedistd">寄递品小类</td>
@@ -112,11 +136,11 @@ function setljAdd(){
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">揽件员</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljrxm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_ljrxm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">揽件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsjf" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsjf" class="inputstyle date" value="" /></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsjt" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_ljsj" name="lj.ljsjt" class="inputstyle date" value="" /></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
@@ -149,9 +173,9 @@ function setljAdd(){
 	    	<th name="l_djxh">登记序号</th>
 	    	<th name="l_wldh">物流单号</th>
 	    	<th name="l_jjrxm">寄件人姓名</th>
-	    	<th name="l_zjlx">证件类型</th>
-	    	<th name="l_zjhm">证件号码</th>
-	    	<th name="l_ljy">揽件员</th>
+	    	<th name="l_jjrzjlx">证件类型</th>
+	    	<th name="l_jjrzjhm">证件号码</th>
+	    	<th name="l_ljyxm">揽件员</th>
 	    	<th name="l_ljtbsj">登记时间</th>
 			<th name="">操作</th>
 	    </tr>

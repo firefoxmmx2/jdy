@@ -35,7 +35,7 @@ $(document).ready(function() {
 	});
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
-	dzcl_pageUrl="#";
+	dzcl_pageUrl="jdy/queryListjdp_ljxx.action";
 	
 	detailid="zxzybaydwdzcl_detail";
 	daggleDiv(detailid);
@@ -384,10 +384,5 @@ function addback(json){
 </table>
 </tr>
 <tr><td height="3"></td></tr>
-<tr height="25" align="center">
-	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存" onclick='ljxxbaocun();'>保存</a></td>
-	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存新增" onclick='valadateCode();'>保存新增</a></td>
-	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");'>返回</a></td>
-</tr>
 </table>
 

@@ -14,6 +14,7 @@ import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Ljjbxx;
+import com.aisino2.jdy.domain.Pjjbxx;
 import com.aisino2.jdy.service.ILjjbxxService;
 import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.domain.Qyryxx;
@@ -31,10 +32,16 @@ public class LjxxAction extends PageAction{
 	private String tabledata = "";
 	private int totalrows = 0;
 	private String result = "";
-	private List lLjjbxx = new ArrayList();
+	private List<Ljjbxx> lLjjbxx = new ArrayList();
 	
-	public List getlLjjbxx() {
+	
+
+	public List<Ljjbxx> getlLjjbxx() {
 		return lLjjbxx;
+	}
+
+	public void setlLjjbxx(List<Ljjbxx> lLjjbxx) {
+		this.lLjjbxx = lLjjbxx;
 	}
 
 	public String getTabledata() {
@@ -121,40 +128,56 @@ public class LjxxAction extends PageAction{
 	 * @return
 	 * @throws Exception
 	 */
-	public String queryListlj() throws Exception {
-			
+//	public String queryListlj() throws Exception {
+//		
+//        //如果派件查询参数不为空的话，配置数据库的查询参数	
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		
+//		if(lj!=null){
+//			if(lj.getWldh()!=""){//物流单号
+//				params.put("wldh", lj.getWldh());
+//			}
+//			if(lj.getJjr().getXm()!=""){//寄件人姓名
+//				params.put("xm", lj.getJjr().getXm());
+//			}
+//			if(lj.getJjr().getZjlx()!=""){//证件类型
+//				params.put("zjlx", lj.getJjr().getZjlx());
+//			}
+//			if(lj.getJjr().getZjhm()!=""){//证件号码
+//				params.put("zjhm", lj.getJjr().getZjhm());
+//			}
+//			if(lj.getLjr().getCyrybh()!=""){//揽件员
+//				params.put("ljr", lj.getLjr().getCyrybh());
+//			}
+//		}
+//
+//		
+//		Page page =	ljjbxxService.findLjjbxxForPage(params, 1, totalrows, tabledata, result);
+//		
+//		totalpage = page.getTotalPages();
+//		totalrows = page.getTotalRows();
+//		lLjjbxx = page.getData();
+//		setTableDate_ljjbxx(lLjjbxx);
+//		
+//		
+//		this.result = "success";
+//		return SUCCESS;
+//	} 
+	public String queryListlj() throws Exception{
+		
+//		如果派件查询参数不为空的话，配置数据库的查询参数
 		Map<String, Object> params = new HashMap<String, Object>();
+	
+		Page pageinfo = ljjbxxService.findLjjbxxForPage(params, pagesize, pagerow, dir, sort);
+		totalpage = pageinfo.getTotalPages();
+		totalrows = pageinfo.getTotalRows();
+		lLjjbxx = pageinfo.getData();
 		
-		if(lj !=null){
-			if(lj.getWldh()!=""){//物流单号
-				params.put("wldh", lj.getWldh());
-			}
-			if(lj.getJjr().getXm()!=""){//寄件人姓名
-				params.put("xm", lj.getJjr().getXm());
-			}
-			if(lj.getJjr().getZjlx()!=""){//证件类型
-				params.put("zjlx", lj.getJjr().getZjlx());
-			}
-			if(lj.getJjr().getZjhm()!=""){//证件号码
-				params.put("zjhm", lj.getJjr().getZjhm());
-			}
-			if(lj.getLjr().getCyrybh()!=""){//揽件员
-				params.put("ljr", lj.getLjr().getCyrybh());
-			}
-		}
-
-		
-		Page page =	ljjbxxService.findLjjbxxForPage(params, 1, totalrows, tabledata, result);
-		
-		totalpage = page.getTotalPages();
-		totalrows = page.getTotalRows();
-		lLjjbxx = page.getData();
-		setTableDate_ljjbxx(lLjjbxx);
-		
+		setTableDate_ljjbxx(pageinfo.getData());
 		
 		this.result = "success";
 		return SUCCESS;
-	} 
+	}
 	
 	/**
 	 * 单一获取
@@ -170,15 +193,16 @@ public class LjxxAction extends PageAction{
 	}
 	
 	/***揽件基本信息主页面setable方法***/
-	private void setTableDate_ljjbxx(List lData) {
+	private void setTableDate_ljjbxx(List<Ljjbxx> lData) {
 		// TODO Auto-generated method stub
 		List lPro = new ArrayList();
-		lPro.add("id");
+		lPro.add("djxh");
 		lPro.add("djxh");
 		lPro.add("wldh");
 		lPro.add("jjrxm");
-		lPro.add("zjlx");
-		lPro.add("ljy");
+		lPro.add("jjrzjlx");
+		lPro.add("jjrzjhm");
+		lPro.add("ljyxm");
 		lPro.add("ljtbsj");
 		
 		List lCol = new ArrayList();
@@ -199,9 +223,36 @@ public class LjxxAction extends PageAction{
 		lDelete.add("删除");
 		lCol.add(lDelete);
 
+		for(Ljjbxx lj : lData){
+			lj.setJjrxm(lj.getJjr().getXm());//寄件人姓名
+			if(lj.getJjr().getZjlx().equals("11")){
+				lj.setJjrzjlx("身份证");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("13")){
+				lj.setJjrzjlx("户口薄");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("90")){
+				lj.setJjrzjlx("军官证");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("91")){
+				lj.setJjrzjlx("警官证");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("92")){
+				lj.setJjrzjlx("士兵证");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("93")){
+				lj.setJjrzjlx("护照");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("99")){
+				lj.setJjrzjlx("其他");//寄件人证件类型
+			}
+			lj.setJjrzjhm(lj.getJjr().getZjhm());//寄件人证件号码
+			lj.setLjyxm(lj.getLjr().getXm());//揽件人姓名
+		}
 		
 		Ljjbxx setLjxx = new Ljjbxx();
-		this.setDataCustomer(setLjxx, lData, lPro, null, lCol);
+		//this.setDataCustomer(setLjxx, lData, lPro, null, lCol);
+		this.setData(setLjxx, lData, lPro, lCol);
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}

@@ -41,6 +41,7 @@
 		<result property="id" column="sjr_id"/>
 		<result property="xm" column="sjr_xm"/>
 		<result property="zjhm" column="sjr_zjhm"/>
+		<result property="zjlx" column="sjr_zjlx"/>
 <!-- 		<result property="zjlx" column="sjr_zjlx"/> -->
 <!-- 		<result property="ssx" column="sjr_ssx"/> -->
 <!-- 		<result property="xxdx" column="sjr_xxdz"/> -->
@@ -52,6 +53,7 @@
 			<result property="id" column="jjr_id"/>
 			<result property="xm" column="jjr_xm"/>
 			<result property="zjhm" column="jjr_zjhm"/>
+			<result property="zjlx" column="jjr_zjlx"/>
 	</resultMap>
 <!-- 	揽件信息列表查询结果 -->
 	<resultMap class="ljjbxx" id="ljjbxx_list_rm" extends="ljjbxx_base_rm">
@@ -299,7 +301,7 @@
 	<select id="ljjbxx.getList" parameterClass="ljjbxx" resultMap="ljjbxx_list_rm">
 		select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj
 		,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm
-		,sjr.xm sjr_xm,sjr.zjlx jsr_zjlx,sjr.zjhm sjr_zjhm
+		,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm
 		,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
 <!-- 		企业信息 -->
 		,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc, qyjbxx
@@ -324,9 +326,9 @@
 	<select id="ljjbxx.getListPage" parameterClass="map" resultMap="ljjbxx_list_rm">
 		select x.* from (
 		select rownum rowno,z.* from 
-		(	select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj
-			,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm
-			,sjr.xm sjr_xm,sjr.zjlx jsr_zjlx,sjr.zjhm sjr_zjhm
+		(	select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh
+			,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm,jjr.id jjr_id
+			,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm,sjr.id sjr_id
 			,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
 			<!-- 		企业信息 -->
 		,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc

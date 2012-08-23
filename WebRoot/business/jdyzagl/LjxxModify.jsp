@@ -8,9 +8,14 @@
 %>
 <script type="text/javascript">
 var trNum=0;
-var dataid="";
 var ljjdpxx = new Array();
 $(document).ready(function() {	
+	Modifyurl="jdy/query_ljxx.action";
+	$('#ljjbxxmodif_id').val(dataid);
+	// setParams("q_");
+	var params = getSubmitParams("#ljjbxx_modify [name*=lj.]");
+	jQuery.post("jdy/query_ljxx.action",params,modifyback,"json");
+	
 	//添加寄递对象证件类型的提交名称
 	$("#lj_jjrzjlx").attr("name","lj.jjr.zjlx");
 	$("#lj_sjrzjlx").attr("name","lj.sjr.zjlx");
@@ -46,6 +51,9 @@ $(document).ready(function() {
 	dzcl_tables=$("#"+dzcl_divnid).html();
 	setPageList_ywwffzjlzmfj(1);
 }); 
+function modifyback(json){
+	
+}
 //寄递品信息grid
 function setPageList_ywwffzjlzmfj(pageno,url){	
 	if (true){
@@ -312,11 +320,12 @@ function addback(json){
 </td>
 </tr>
 <tr>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" id="ljjbxx_add">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="ljjbxx_modify">
 <input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
 <input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
 <input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
 <input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>">
+<input type="hidden" id="ljjbxxmodif_id" name="lj.djxh" value=""><!-- 修改传递过来的ID号 -->
 <tr>
   <td>
     <fieldset>
