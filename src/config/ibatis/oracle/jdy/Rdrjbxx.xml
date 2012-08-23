@@ -17,6 +17,7 @@
 		<result property="lxdh" column="lxdh"/>
 		<result property="gddh" column="gddh"/>
 		<result property="ssxmc" column="ssxmc"/>
+		<result property="dw" column="dw"/>
 	</resultMap>
 <!-- 	寄递对象信息带照片 -->
 	<resultMap class="Rdrjbxx" id="rdrjbxx_zpxx_rm" extends="rdrjbxx_rm">
@@ -63,8 +64,11 @@
 				<isNotNull property="gddh" prepend=","> 
 					gddh
 				</isNotNull>
-				<isNotNull property="gddh" prepend=","> 
-					ssx
+				<isNotNull property="ssxmc" prepend=","> 
+					ssxmc
+				</isNotNull>
+				<isNotNull property="dw" prepend=","> 
+					dw
 				</isNotNull>
 			</dynamic>
 		)
@@ -94,8 +98,11 @@
 				<isNotNull property="gddh" prepend=","> 
 					#gddh#
 				</isNotNull>
-				<isNotNull property="ssx" prepend=","> 
+				<isNotNull property="ssxmc" prepend=","> 
 					#ssxmc#
+				</isNotNull>
+				<isNotNull property="dw" prepend=","> 
+					#dw#
 				</isNotNull>
 			</dynamic>
 		)
@@ -129,6 +136,9 @@
 				</isNotNull>
 				<isNotNull property="ssxmc" prepend=","> 
 					ssxmc=#ssxmc#
+				</isNotNull>
+				<isNotNull property="dw" prepend=","> 
+					dw=#dw#
 				</isNotNull>
 			</dynamic>
 			
