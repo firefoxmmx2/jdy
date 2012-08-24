@@ -165,7 +165,10 @@
 		a.frxb frxb,a.frxbdm frxbdm,a.jyfzrxb jyfzrxb,a.jyfzrxbdm jyfzrxbdm,a.jyxkzfzrq jyxkzfzrq,a.jyxkzyxqz jyxkzyxqz,a.thxkzfzrq thxkzfzrq,
 	    a.thxkzyxqz thxkzyxqz,a.yyzzfzrq yyzzfzrq,a.yyzzyxqz yyzzyxqz,a.xfshyjsbh xfshyjsbh,a.xfshyjsfzjg xfshyjsfzjg,a.xfshyjsfzjgdm xfshyjsfzjgdm,
 	    a.xfshyjsfzrq xfshyjsfzrq,a.gdjycscqbh gdjycscqbh,a.gdjycssyqbh gdjycssyqbh,(select t.cyrybh from t_qyryxx t where t.scbz=0 and t.zjhm=a.dwfzrzjhm and t.qyid=a.qyid and rownum &lt;= 1) dwfzrcyrybh ,
-		a.sfjy sfjy,a.ssxdm ssxdm,a.ssxmc ssxmc from t_qyjbxx a
+		a.sfjy sfjy,a.ssxdm ssxdm,a.ssxmc ssxmc
+		<!-- 		寄递业 -->
+		,a.kdjyxkzbh kdjyxkzbh,a.wstzqypzzsh wstzqypzzsh
+		 from t_qyjbxx a
 		where a.qybm=#value#
 	</select>
 <!-- 	插入揽件信息 -->

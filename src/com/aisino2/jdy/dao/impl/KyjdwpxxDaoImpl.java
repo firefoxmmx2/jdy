@@ -92,8 +92,8 @@ public class KyjdwpxxDaoImpl extends BaseDao implements IKyjdwpxxDao {
 			 djxh=qybm + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "001"; 
 		 }
 		 else{
-			 Integer xh = Integer.parseInt(djxh.substring(19,djxh.length())) + 1;
-			 djxh = djxh.substring(0,19) + String.format("%03d", xh);
+			 Integer xh = Integer.parseInt(djxh.substring(20,djxh.length())) + 1;
+			 djxh = djxh.substring(0,20) + String.format("%03d", xh);
 		 }
 		return djxh;
 	}

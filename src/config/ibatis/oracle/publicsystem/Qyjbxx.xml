@@ -155,7 +155,9 @@
 		<result property="sfjy" column="sfjy"/>
 		<result property="ssxdm" column="ssxdm"/>
 		<result property="ssxmc" column="ssxmc"/>
-		
+<!-- 		寄递业 -->
+		<result property="kdjyxkzbh" column="KDJYXKZBH"/>
+		<result property="wstzqypzzsh" column="WSTZQYPZZSH"/>
 	</resultMap>
 	<!--企业基本信息(t_qyjbxx)-->
 	<resultMap id="qyjbxx_lsListResult" class="qyjbxx_ls">
@@ -252,6 +254,12 @@
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="djrqt">
 				a.djrq &lt; #djrqt:DATE#+1
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="lrsjf">
+				a.lrsj &gt;=#lrsjf:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="lrsjt">
+				a.lrsj &lt; #lrsjt:DATE#+1
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="gxdwbm">
 				a.gxdwbm like '$gxdwbm$%'
@@ -405,6 +413,14 @@
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="lrsj">
 				a.lrsj &gt;=#lrsj:DATE#  and a.lrsj &lt; #lrsj:DATE#+1
+			</isNotEmpty>
+			
+<!-- 			寄递业 -->
+			<isNotEmpty prepend="and" property="kdjyxkzbh">
+				a.kdjyxkzbh = #kdjyxkzbh#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="wstzqypzzsh">
+				a.wstzqypzzsh = #wstzqypzzsh#
 			</isNotEmpty>
 			<include refid="t_qyjbxxWhere" />	
 	</sql>
@@ -770,6 +786,14 @@
 		   <isNotNull prepend="," property="gdjycssyqbh">
 				gdjycssyqbh
 			</isNotNull>			
+			
+<!-- 			寄递业 2012.8.22 -->
+			<isNotNull prepend="," property="kdjyxkzbh">
+				kdjyxkzbh
+			</isNotNull>
+			<isNotNull prepend="," property="wstzqypzzsh">
+				wstzqypzzsh
+			</isNotNull>
 		</dynamic>
 		) values (
 		<dynamic prepend="">
@@ -1127,7 +1151,16 @@
 			</isNotNull>
 			<isNotNull prepend="," property="gdjycssyqbh">
 				#gdjycssyqbh#
-			</isNotNull>			
+			</isNotNull>		
+			
+			<!-- 			寄递业 2012.8.22 -->
+			<isNotNull prepend="," property="kdjyxkzbh">
+				#kdjyxkzbh#
+			</isNotNull>
+			<isNotNull prepend="," property="wstzqypzzsh">
+				#wstzqypzzsh#
+			</isNotNull>
+				
 		</dynamic>
 		)
 	</insert>
@@ -1533,6 +1566,14 @@
 				gdjycssyqbh=#gdjycssyqbh#
 			</isNotNull>
 			
+			<!-- 			寄递业 2012.8.22 -->
+			<isNotNull prepend="," property="kdjyxkzbh">
+				kdjyxkzbh = #kdjyxkzbh#
+			</isNotNull>
+			<isNotNull prepend="," property="wstzqypzzsh">
+				wstzqypzzsh = #wstzqypzzsh#
+			</isNotNull>
+			
 			<isNotEqual property="sbzt" compareValue="1">
 				<isNotEmpty prepend="," property="sbzt">
 					a.sbzt =#sbzt#
@@ -1829,7 +1870,10 @@
 		a.frxb frxb,a.frxbdm frxbdm,a.jyfzrxb jyfzrxb,a.jyfzrxbdm jyfzrxbdm,a.jyxkzfzrq jyxkzfzrq,a.jyxkzyxqz jyxkzyxqz,a.thxkzfzrq thxkzfzrq,
 	    a.thxkzyxqz thxkzyxqz,a.yyzzfzrq yyzzfzrq,a.yyzzyxqz yyzzyxqz,a.xfshyjsbh xfshyjsbh,a.xfshyjsfzjg xfshyjsfzjg,a.xfshyjsfzjgdm xfshyjsfzjgdm,
 	    a.xfshyjsfzrq xfshyjsfzrq,a.gdjycscqbh gdjycscqbh,a.gdjycssyqbh gdjycssyqbh,(select t.cyrybh from t_qyryxx t where t.scbz=0 and t.zjhm=a.dwfzrzjhm and t.qyid=a.qyid and rownum &lt;= 1) dwfzrcyrybh ,
-		a.sfjy sfjy,a.ssxdm ssxdm,a.ssxmc ssxmc from t_qyjbxx a
+		a.sfjy sfjy,a.ssxdm ssxdm,a.ssxmc ssxmc
+<!-- 		寄递业 -->
+		,a.kdjyxkzbh kdjyxkzbh,a.wstzqypzzsh wstzqypzzsh
+		 from t_qyjbxx a
 		where 1=1
 		<dynamic prepend="">
 			<isNotEmpty prepend="and" property="qybm">

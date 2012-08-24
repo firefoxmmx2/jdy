@@ -26,9 +26,12 @@ public class RdrjbxxServiceImpl implements IRdrjbxxService {
 	public Rdrjbxx insertRdrjbxx(Rdrjbxx rdrjbxx) {
 		rdrjbxx = rdrjbxxDao.insert(rdrjbxx);
 		
-		rdrjbxx.getZpxx().setRdrjbxx_id(rdrjbxx.getId());
-		rdrjbxx.getZpxx().setScsj(new Date());
-		jddxzpxxDao.insert(rdrjbxx.getZpxx());
+		if(rdrjbxx.getZpxx()!=null && rdrjbxx.getZpxx().getZpnr()!=null && rdrjbxx.getZpxx().getZpnr().length>0){
+			rdrjbxx.getZpxx().setRdrjbxx_id(rdrjbxx.getId());
+			rdrjbxx.getZpxx().setScsj(new Date());
+			jddxzpxxDao.insert(rdrjbxx.getZpxx());
+		}
+		
 		return rdrjbxx;
 	}
 
