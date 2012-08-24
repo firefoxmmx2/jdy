@@ -345,23 +345,18 @@ function wldh_completion(wldh_el){
 		if(data.lj){
 			$('#pjjbxx_add [name*=pjxx.ljjbxx.]').each(function(idx){
 				$this = $(this);
+				var value = eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]);
+				if(value){
+					if($this.attr("tagName").toLowerCase() == 'select'){
+						$this.setValue(value);
+					}
+					else{
+						$this.val(value);
+					}
+				}
 				
-				if($this.attr("tagName").toLowerCase() == 'select'){
-					$this.setValue(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
-				}
-				else{
-					$this.val(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
-				}
 					
 			});
-			var ssx_dict_item = getDictitem({dictcode:'dm_xzqh',value:$('#pjxxadd_jjrssxdm').val()})
-			if(ssx_dict_item && ssx_dict_item.length>0){
-				$('#pjxxadd_jjrssx').val(ssx_dict_item[0].display_name);
-			}
-			ssx_dict_item = getDictitem({dictcode:'dm_xzqh',value:$('#pjxxadd_sjrssxdm').val()})
-			if(ssx_dict_item && ssx_dict_item.length>0){
-				$('#pjxxadd_sjrssx').val(ssx_dict_item[0].display_name);
-			}
 		}
 		
 	}, 'json');
