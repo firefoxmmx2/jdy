@@ -205,6 +205,12 @@
 			<isNotNull prepend="," property="qyjbxx.qybm">
 				qybm
 			</isNotNull>
+			<isNotNull prepend="," property="ljrbh">
+				ljrbh
+			</isNotNull>
+			<isNotNull prepend="," property="ljtbrbh">
+				ljtbrbh
+			</isNotNull>
 		</dynamic>
 		)
 		values (
@@ -238,6 +244,15 @@
 			</isNotNull>
 			<isNotNull prepend="," property="qyjbxx.qybm">
 				#qyjbxx.qybm#
+			</isNotNull>
+			<isNotNull prepend="," property="ljrbh">
+				#ljrbh#
+			</isNotNull>
+			<isNotNull prepend="," property="ljrbh">
+				#ljrbh#
+			</isNotNull>
+			<isNotNull prepend="," property="ljtbrbh">
+				#ljtbrbh#
 			</isNotNull>
 		</dynamic>
 		)
