@@ -155,7 +155,7 @@ public class PjxxAction extends PageAction {
 		User curr_user = (User) this.getRequest().getSession().getAttribute(Constants.userKey);
 		
 		Qyryxx pjtbr = new Qyryxx();
-		pjtbr.setCyrybh(curr_user.getCyrybh());
+		pjtbr.setCyrybh(curr_user.getUseraccount());
 		pjxx.setPjtbsj(new Date());
 		pjjbxxService.insertPjjbxx(pjxx);
 		
