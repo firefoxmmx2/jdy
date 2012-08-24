@@ -16,9 +16,15 @@
 		<property name="pjjbxxDao" ref="PjjbxxDaoImpl" />
 		<property name="ljjbxxService" ref="LjjbxxServiceImpl" />
 		<property name="rdrjbxxService" ref="RdrjbxxServiceImpl" />
+		<property name="jdyBjService" ref="JdyBjServiceImpl"/>
+		<property name="qyjbxxService" ref="qyjbxxService"/>
 	</bean>
 <!-- 	寄递品服务 -->
 	<bean id="JdpxxServiceImpl" class="com.aisino2.jdy.service.impl.JdpxxServiceImpl">
 		<property name="jdpxxDao" ref="JdpxxDaoImpl"/>
+	</bean>
+<!-- 	寄递业比对 -->
+	<bean id="JdyBjServiceImpl" class="com.aisino2.jdy.service.impl.JdyBjServiceImpl">
+		<property name="ggbdsjService" ref="ggbdsjService"/>
 	</bean>
 </beans>
