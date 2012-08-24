@@ -82,7 +82,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 					jdpxxDao.insert(ljjbxx.getJdp_list().get(i));
 				}
 			}
-		return setLjjbxx;
+		return ljjbxx;
 	}
 
 	public void updateLjjbxx(Ljjbxx ljjbxx) {
@@ -119,7 +119,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 				if(StringUtil.isNotEmpty(jdp.getSfscbz()) && jdp.getSfscbz().equals("Y")){
 					jdpxxDao.delete(jdp);
 				}
-				else{
+				else if( jdp.getSfscbz().equals("N")){
 					jdp.setLjjbxx(ljjbxx);
 					jdpxxDao.insert(jdp);
 				}

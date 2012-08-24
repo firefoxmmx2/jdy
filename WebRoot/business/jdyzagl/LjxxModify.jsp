@@ -4,7 +4,7 @@
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
 <%
-	qybm = "T023310005002";
+	qybm = "T013306005003";
 %>
 <script type="text/javascript">
 var trNum=0;
@@ -12,16 +12,18 @@ var ljjdpxx = new Array();
 $(document).ready(function() {	
 	Modifyurl="jdy/query_ljxx.action";
 	$('#ljjbxxmodif_id').val(dataid);
-	// setParams("q_");
+	//alert("是否有值="+dataid);
 	var params = getSubmitParams("#ljjbxx_modify [name*=lj.]");
 	jQuery.post("jdy/query_ljxx.action",params,modifyback,"json");
 	
 	//添加寄递对象证件类型的提交名称
 	$("#lj_jjrzjlx").attr("name","lj.jjr.zjlx");
 	$("#lj_sjrzjlx").attr("name","lj.sjr.zjlx");
+	//添加寄件地址、收件地址的提交名称
+	$("#jjrssxmc").attr("name","lj.jjr.ssxmc");
+	$("#sjrssxmc").attr("name","lj.sjr.ssxmc");
 	//揽件时间选择
-	$("#lj_ljsj").attr("readonly","true");
-	$("#lj_ljsj").datepicker();
+	$("#ljjbxx_modify [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();
 	//户籍省市县--寄件人
 	$("#jjrssxmc").click( function() {
 		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
@@ -35,8 +37,8 @@ $(document).ready(function() {
 	//证件类型--收件人
 	getDictItemBox("lj_sjrzjlx","lj_sjrzjlxdm","dm_zjlx");
 	//揽件人
-	$('#lj_ljr_xm').attr('readOnly',true).click(function(){
-		getTyRY_item('lj_ljr_xm','lj_ljr_cyrybh','<%=qybm%>');
+	$('#lj_ljrxm_mod').attr('readOnly',true).click(function(){
+		getTyRY_item('lj_ljrxm_mod','lj_ljr_cyrybh','<%=qybm%>');
 	});
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
@@ -52,7 +54,68 @@ $(document).ready(function() {
 	setPageList_ywwffzjlzmfj(1);
 }); 
 function modifyback(json){
+	$("#ljjbxx_modify [id=lj_djxh]").val(json.lj.djxh);//登记序号
+	$("#ljjbxx_modify [id=lj_wldh]").val(json.lj.wldh);//物流单号
 	
+	$("#ljjbxx_modify [id=lj_jjrxm]").val(json.lj.jjr.xm);//寄件人姓名
+	$("#ljjbxx_modify [id=lj_jjrzjlx]").val(json.lj.jjr.zjlx);//寄件人证件类型
+	$("#ljjbxx_modify [id=lj_jjrzjhm]").val(json.lj.jjr.zjhm);//寄件人证件号码
+	$("#ljjbxx_modify [id=jjrssxmc]").val(json.lj.jjr.ssxmc);//寄件地址
+	$("#ljjbxx_modify [id=lj_jjrssx]").val(json.lj.jjr.ssx);//寄件地址代码
+	$("#ljjbxx_modify [id=lj_jjrxxdz]").val(json.lj.jjr.xxdz);//寄件人现住地详址
+	$("#ljjbxx_modify [id=lj_jjrdw]").val(json.lj.jjr.dw);//寄件人单位
+	$("#ljjbxx_modify [id=lj_jjrlxdh]").val(json.lj.jjr.lxdh);//寄件人手机
+	$("#ljjbxx_modify [id=lj_jjrgddh]").val(json.lj.jjr.gddh);//固定电话
+	
+	$("#ljjbxx_modify [id=lj_sjrxm]").val(json.lj.sjr.xm);//收件人姓名
+	$("#ljjbxx_modify [id=lj_sjrzjlx]").val(json.lj.sjr.zjlx);//收件人证件类型
+	$("#ljjbxx_modify [id=lj_sjrzjhm]").val(json.lj.sjr.zjhm);//收件人证件号码
+	$("#ljjbxx_modify [id=sjrssxmc]").val(json.lj.sjr.ssxmc);//收件地址
+	$("#ljjbxx_modify [id=lj_sjrssx]").val(json.lj.sjr.ssx);//寄件地址代码
+	$("#ljjbxx_modify [id=lj_sjrxxdz]").val(json.lj.sjr.xxdz);//收件人现住地详址
+	$("#ljjbxx_modify [id=lj_sjrdw]").val(json.lj.sjr.dw);//收件人单位
+	$("#ljjbxx_modify [id=lj_sjrlxdh]").val(json.lj.sjr.lxdh);//收件人手机
+	$("#ljjbxx_modify [id=lj_sjrgddh]").val(json.lj.sjr.gddh);//固定电话
+	
+	$("#ljjbxx_modify [id=lj_ljrxm_mod]").val(json.lj.ljr.xm);//揽件人
+	$("#ljjbxx_modify [id=lj_ljr_cyrybh]").val(json.lj.ljr.cyrybh);//揽件人编码
+	$("#ljjbxx_modify [id=lj_ljsj]").val(json.lj.ljsj);//揽件日期
+	for(var i=0;i<json.lj.jdp_list.length;i++){
+		//寄递物品信息保存时添加到列表---添加行的方法
+		    var jdwp_id=json.lj.jdp_list[i].id;//寄递品类型
+			var jdwp_jdplx=json.lj.jdp_list[i].jdplx;//寄递品类型
+			var jdwp_jdpmc=json.lj.jdp_list[i].jdpmc;//寄递品名称
+			var jdwp_jdpsm=json.lj.jdp_list[i].jdpsm;//寄递品数量
+			var jdwp_jdpzl=json.lj.jdp_list[i].jdpzl;//寄递品重量
+			var jdwp_jdptj=json.lj.jdp_list[i].jdptj;//寄递品体积
+				var addTableTr1="";
+				//获取行数
+				var trLen1= $("#YwwffzjlTable").find("tr").length;
+				//通过行数判断每行的css
+				var tr_class1 = "grid-row-style1";//当为奇数时的css
+				//当为偶数时的css
+				if((trLen1-1)%2==1)
+					tr_class1 = "grid-row-style2";
+				//设置行的属性和样式	
+				addTableTr1 += "<tr _selected='false' name='Tr' class='"+tr_class1+"' id='"+i+"'>";
+				//设置每列的属性
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+i+"</td>";
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+i+"'>0</td>";
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
+				 addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_id"+i+"'>"+jdwp_id+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='cz_"+i+"'>"
+				+"<A id='delete_"+i+"' class=fontbutton title='删除' onclick=getObjectmod(this) href='#'>删除</A>"
+				+"</td>";
+				addTableTr1 += "</tr>";
+				if(addTableTr1!=""){
+					$("#YwwffzjlTable").append(addTableTr1);
+					addTrEvent($("#YwwffzjlTable").find("tr:last"));
+				}
+	}
 }
 //寄递品信息grid
 function setPageList_ywwffzjlzmfj(pageno,url){	
@@ -75,7 +138,7 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										//hideColIndex:[0,4,5],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["0","30%","30%","20%","0","0","0","20%"]								
+										colWidths: ["0","30%","30%","20%","0","0","0","0","20%"]								
 									});				
 		}
 }
@@ -105,12 +168,13 @@ function jdwpxxadd(){
 		addTableTr += "<tr _selected='false' name='Tr' class='"+tr_class+"' id='"+trNum+"'>";
 		//设置每列的属性
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_xh"+trNum+"'>"+trNum+"</td>";
-	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+trNum+"'>0</td>";
+	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+trNum+"'>N</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+trNum+"'>"+jdwp_jdpmc+"</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+trNum+"'>"+jdwp_jdpsm+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+trNum+"'>"+jdwp_jdplx+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_id"+trNum+"'></td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
 		+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
 		+"</td>";
@@ -162,6 +226,29 @@ function addTrEvent(tr){
 		}
 	});
 }
+//查询出来的寄递品列表删除操作
+function getObjectmod(obj){
+	sFlag="false";
+	var str=$(obj).attr("id").split("_");
+	dataid = str[1];
+	if(str[0] == "delete"){
+		var shanchuTr = $(obj).parent().parent();
+		var shanchuTrParent = shanchuTr.parent();
+		//标志位修改成1表示新添加之后又做了删除，2表示已经做了录入需要对数据库进行删除
+		$(shanchuTr).find("td").eq(1).text("Y");
+		shanchuTr.hide();
+		$("shanchuTrParent td:nth-child(2)").text();
+		var tr_class;
+		shanchuTrParent.find("tr").each(function(i){
+				if(i%2==1)
+					tr_class = "grid-row-style2";
+				else
+					tr_class = "grid-row-style1";
+					
+				jQuery(this).attr("class",tr_class);
+		});
+	}
+}
 //删除动态增加的附件列
 function getObject(obj){
 	sFlag="false";
@@ -171,7 +258,7 @@ function getObject(obj){
 		var shanchuTr = $(obj).parent().parent();
 		var shanchuTrParent = shanchuTr.parent();
 		//标志位修改成1表示新添加之后又做了删除，2表示已经做了录入需要对数据库进行删除
-		$(shanchuTr).find("td").eq(1).text("1");
+		$(shanchuTr).find("td").eq(1).text("N");
 		shanchuTr.remove();
 		$("shanchuTrParent td:nth-child(2)").text();
 		var tr_class;
@@ -243,7 +330,7 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_sjrlxdh","String",1,20,null,1,"收件人手机"))
 		return false;
-	if (!checkControlValue("lj_ljr_xm","String",1,30,null,1,"揽件人"))
+	if (!checkControlValue("lj_ljrxm_mod","String",1,30,null,1,"揽件人"))
 		return false;
 	if (!checkControlValue("lj_ljsj","Date",null,null,null,1,"揽件日期"))
 		return false;
@@ -251,12 +338,15 @@ function addVerify(){
     return true;
 }
 //揽件信息保存方法
-function  ljxxbaocun(){
+function  ljxxmod(){
 	//设置企业编码，之后要删除这里的设置
 	//$("#lj_qyjbxx").val("0123456789")
-	//alert("企业编码="+$("#lj_qyjbxx").val());
+	//alert("寄件地址="+$("#lj_jjrssx").val());
+	//alert("收件地址="+$("#lj_sjrssx").val());
+	//alert("蓝贱人="+$("#ljjbxx_modify [id=lj_ljr_cyrybh]").val());
+	//return;
 	if (addVerify()){
-		var params = getSubmitParams("#ljjbxx_add [name*=lj.]");
+		var params = getSubmitParams("#ljjbxx_modify [name*=lj.]");
 		//var params = getSubmitParams("#pjjbxx_add [name*=pjxx.]");
 		var childList1 = new Array("YwwffzjlData");
 		var jsjxsz = new Array();//保存解析之后返回的数组
@@ -270,12 +360,13 @@ function  ljxxbaocun(){
 					params["lj.jdp_list["+i+"].sfscbz"] = jsjxsz[i][1];
 					params["lj.jdp_list["+i+"].jdpzl"] = jsjxsz[i][5];
 					params["lj.jdp_list["+i+"].jdptj"] = jsjxsz[i][6];
+					params["lj.jdp_list["+i+"].id"] = jsjxsz[i][7];
 			}
 		}else{
             jAlert("寄递品信息不能为空！",'验证信息');
             return false;
 		}
-		jQuery.post("jdy/insert_ljxx.action",params,addback,"json");
+		jQuery.post("jdy/update_ljxx.action",params,addback,"json");
 	}
 }
 //提交方法回调函数
@@ -291,7 +382,7 @@ function addback(json){
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">寄递品信息登记</td>
+      <td align="left" class="title1">寄递品信息修改</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
@@ -324,7 +415,7 @@ function addback(json){
 <input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
 <input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
 <input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
-<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>">
+<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh">
 <input type="hidden" id="ljjbxxmodif_id" name="lj.djxh" value=""><!-- 修改传递过来的ID号 -->
 <tr>
   <td>
@@ -371,6 +462,7 @@ function addback(json){
 			     	<th name="lj_jdplx">类型</th>
 			     	<th name="lj_jdpzl">重量</th>
 			     	<th name="lj_jdptj">体积</th>
+			     	<th name="lj_id">ID</th>
 					<th name="">操作</th>
 			    </tr>
 			  </thead>
@@ -382,7 +474,7 @@ function addback(json){
 	<table width="100%" >
 		<tr height="20">
 			<td class="red">揽件人</td>
-			<td class="detailtd"><input type="text" id="lj_ljr_xm"   name="lj.ljr.xm" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj_ljrxm_mod"   name="lj.ljr.xm" class="inputstyle" value=""></td>
 			<td class="red">揽件时间</td>
 			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
 		</tr>
@@ -394,8 +486,7 @@ function addback(json){
 </tr>
 <tr><td height="3"></td></tr>
 <tr height="25" align="center">
-	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存" onclick='ljxxbaocun();'>保存</a></td>
-	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存新增" onclick='valadateCode();'>保存新增</a></td>
+	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存" onclick='ljxxmod();'>保存</a></td>
 	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");'>返回</a></td>
 </tr>
 </table>

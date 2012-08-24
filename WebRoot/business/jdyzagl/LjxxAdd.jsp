@@ -4,7 +4,7 @@
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
 <%
-	qybm = "T023310005002";
+	qybm = "T013306005003";
 %>
 <script type="text/javascript">
 var trNum=0;
@@ -15,8 +15,7 @@ $(document).ready(function() {
 	$("#lj_jjrzjlx").attr("name","lj.jjr.zjlx");
 	$("#lj_sjrzjlx").attr("name","lj.sjr.zjlx");
 	//揽件时间选择
-	$("#lj_ljsj").attr("readonly","true");
-	$("#lj_ljsj").datepicker();
+	$("#ljjbxx_add [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();
 	//户籍省市县--寄件人
 	$("#jjrssxmc").click( function() {
 		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
@@ -163,7 +162,7 @@ function getObject(obj){
 		var shanchuTr = $(obj).parent().parent();
 		var shanchuTrParent = shanchuTr.parent();
 		//标志位修改成1表示新添加之后又做了删除，2表示已经做了录入需要对数据库进行删除
-		$(shanchuTr).find("td").eq(1).text("1");
+		$(shanchuTr).find("td").eq(1).text("N");
 		shanchuTr.remove();
 		$("shanchuTrParent td:nth-child(2)").text();
 		var tr_class;
@@ -246,7 +245,7 @@ function addVerify(){
 function  ljxxbaocun(){
 	//设置企业编码，之后要删除这里的设置
 	//$("#lj_qyjbxx").val("0123456789")
-	//alert("企业编码="+$("#lj_qyjbxx").val());
+	//alert("蓝贱人编码="+$("#lj_qyjbxx").val());
 	if (addVerify()){
 		var params = getSubmitParams("#ljjbxx_add [name*=lj.]");
 		//var params = getSubmitParams("#pjjbxx_add [name*=pjxx.]");
@@ -316,7 +315,7 @@ function addback(json){
 <input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
 <input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
 <input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
-<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>">
+<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh">
 <tr>
   <td>
     <fieldset>
@@ -375,7 +374,7 @@ function addback(json){
 			<td class="red">揽件人</td>
 			<td class="detailtd"><input type="text" id="lj_ljr_xm"   name="lj.ljr.xm" class="inputstyle" value=""></td>
 			<td class="red">揽件时间</td>
-			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle date"></td>
 		</tr>
 	</table>
 	</fieldset>
