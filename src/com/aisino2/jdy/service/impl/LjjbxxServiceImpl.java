@@ -47,35 +47,12 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 
 	
 	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) {
-		
-			/***向寄递对象表打入人员信息的数据--得到人员信息ID后再插入到揽件表中去***/
-			Rdrjbxx setRddrjbxx = new Rdrjbxx();
-//			setRddrjbxx.setZjhm(ljjbxx.getJjr().getZjhm());
-//			setRddrjbxx=rdrjbxxDao.get(setRddrjbxx);
-			//Rdrjbxx Rdrjbxxjjr = new Rdrjbxx();//存放寄件人ID
-			//Rdrjbxx Rdrjbxxsjr = new Rdrjbxx();//存放收件人ID
-			
-//			if(setRddrjbxx==null){//判断证件号码，表中是否存在，若不存在则插入
-				/***向寄递对象--人员信息表插入数据***/
-				ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
-				//Rdrjbxxjjr.setId(ljjbxx.getJjr().getId());
-//			}else{
-//				Rdrjbxxjjr.setId(setRddrjbxx.getId());
-//			}
-//			setRddrjbxx.setZjhm(ljjbxx.getSjr().getZjhm());
-//			setRddrjbxx=rdrjbxxDao.get(setRddrjbxx);
-//			if(setRddrjbxx==null){//判断证件号码，表中是否存在，若不存在则插入
-				/***向寄递对象--人员信息表插入数据***/
-				//setRddrjbxx=rdrjbxxDao.insert(ljjbxx.getSjr());
-				ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
-				//Rdrjbxxsjr.setId(ljjbxx.getSjr().getId());
-				
-//			}else{
-//				Rdrjbxxsjr.setId(setRddrjbxx.getId());
-//			}
+	
+			/***向寄递对象--人员信息表插入数据***/
+			ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
+			/***向寄递对象--人员信息表插入数据***/
+			ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
 			/***向揽件信息表打入揽件数据***/
-//			ljjbxx.setJjr(Rdrjbxxjjr);
-//			ljjbxx.setSjr(Rdrjbxxsjr);
 			ljjbxx.setLjtbsj(new Date());
 			ljjbxx = ljjbxxDao.insert(ljjbxx);
 			/***向寄递物品表插入数据***/
