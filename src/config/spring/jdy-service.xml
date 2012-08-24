@@ -5,13 +5,13 @@
 		<property name="ljjbxxDao" ref="LjjbxxDaoImpl" />
 		<property name="jdpxxDao" ref="JdpxxDaoImpl" />
 		<property name="rdrjbxxDao" ref="RdrjbxxDaoImpl" />
+		<property name="jdyBjService" ref="JdyBjServiceImpl"/>
+		<property name="qyjbxxService" ref="qyjbxxService"/>
 	</bean>
 <!-- 	寄递对象服务 -->
 	<bean id="RdrjbxxServiceImpl" class="com.aisino2.jdy.service.impl.RdrjbxxServiceImpl">
 		<property name="rdrjbxxDao" ref="RdrjbxxDaoImpl"/>
 		<property name="jddxzpxxDao" ref="JddxzpxxDaoImpl"/>
-		<property name="jdyBjService" ref="JdyBjServiceImpl"/>
-		<property name="qyjbxxService" ref="qyjbxxService"/>
 	</bean>
 <!-- 	派件信息 -->
 	<bean id="PjjbxxServiceImpl" class="com.aisino2.jdy.service.impl.PjjbxxServiceImpl">
