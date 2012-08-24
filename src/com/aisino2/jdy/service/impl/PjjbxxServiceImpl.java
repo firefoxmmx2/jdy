@@ -47,6 +47,11 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 		if (pjjbxx.getLjjbxx().getDjxh() == null
 				|| pjjbxx.getLjjbxx().getDjxh().trim().length() == 0) {
 			pjjbxx.getLjjbxx().setSfbj("Y");
+//			补加的揽件信息 揽件人和揽件填报人就是当前填报的从业人员
+			pjjbxx.getLjjbxx().setLjr(pjjbxx.getPjtbr());
+			pjjbxx.getLjjbxx().setLjsj(pjjbxx.getPjtbsj());
+			pjjbxx.getLjjbxx().setLjtbr(pjjbxx.getPjtbr());
+			pjjbxx.getLjjbxx().setLjtbsj(pjjbxx.getPjtbsj());
 			pjjbxx.setLjjbxx(ljjbxxService.insertLjjbxx(pjjbxx.getLjjbxx()));
 		} else {
 			ljjbxxService.updateLjjbxx(pjjbxx.getLjjbxx());
