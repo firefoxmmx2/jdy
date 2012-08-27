@@ -90,7 +90,8 @@
 		<result property="zzmmmc" column="zzmmmc"/>	
 		<result property="xzdxzqh" column="xzdxzqh"/>	
 		<result property="xzdxzqhdm" column="xzdxzqhdm"/>
-			
+<!-- 		寄递业 快递业务员职业资格证号码-->
+	<result property="kdywyzyzgzhm" column="kdywyzyzgzhm"/>
 	</resultMap>
 	<!--企业人员信息(t_qyryxx)-->
 	<resultMap id="qyryxxListResult" class="qyryxx">
@@ -1028,6 +1029,9 @@
 			<isNull prepend="," property="sbzt"><!-- 开发webservice上报时增加 ，作用为默认插入数据时插入默认值 1-->
 				sbzt
 			</isNull>
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				kdywyzyzgzhm
+			</isNotNull>
 		</dynamic>
 		) values (
 		<dynamic prepend="">
@@ -1268,6 +1272,9 @@
 			<isNull prepend="," property="sbzt">
 				1
 			</isNull>
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				#kdywyzyzgzhm#
+			</isNotNull>
 		</dynamic>
 		)
 	</insert>
@@ -1525,6 +1532,9 @@
 				</isEqual>
 			</isNull>
 			
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				kdywyzyzgzhm = #kdywyzyzgzhm#
+			</isNotNull>
 		</dynamic>
 		where 1=1
 		<dynamic prepend="">
@@ -1606,6 +1616,8 @@
 	<select id="getQyryxx" resultMap="qyryxxResult" parameterClass="qyryxx">
 		select a.xzdxzqh xzdxzqh,a.xzdxzqhdm xzdxzqhdm,a.qyid qyid,a.ryid ryid,a.hylbdm hylbdm,a.hylb hylb,a.cyrybh cyrybh,a.cyrylbdm cyrylbdm,a.cyrylbmc cyrylbmc,a.xm xm,a.qm qm,a.bm bm,a.xmpy xmpy,a.gjdm gjdm,a.gj gj,a.mzdm mzdm,a.minzu minzu,a.xbdm xbdm,a.xb xb,a.csrq csrq,a.hyzkdm hyzkdm,a.hyzk hyzk,a.shengao shengao,a.tizh tizh,a.hjdxzqh hjdxzqh,a.hjdxzqhdm hjdxzqhdm,a.hjdxz hjdxz,a.cyzjdm cyzjdm,a.cyzj cyzj,a.zjhm zjhm,a.zzzhm zzzhm,a.zzdz zzdz,a.gwbh gwbh,a.gwmc gwmc,a.gwzrms gwzrms,a.shouji shouji,a.lxdh lxdh,a.jjlxr jjlxr,a.jjlxrdh jjlxrdh,a.gzdm gzdm,a.gz gz,a.zhiwu zhiwu,a.rzrq rzrq,a.cyryztdm cyryztdm,a.cyryzt cyryzt,a.zxr zxr,a.zxbz zxbz,a.zxsj zxsj,a.lrsj lrsj,a.lrr lrr,a.lrdwbm lrdwbm,a.lrdwmc lrdwmc,a.hcdw hcdw,a.hcr hcr,a.hcsj hcsj,a.zxyy zxyy,a.zkzt zkzt,a.bcsj bcsj,a.dcbs dcbs,a.bz bz,a.scbz scbz,a.biduiflag biduiflag,a.zpwtgyy zpwtgyy,a.zt zt,a.yjbz yjbz,a.yjsj yjsj
 		,b.qymc,b.qybm ,a.lzrq , a.xxdm,a.xx ,a.whcd,a.whcddm  , a.cylbdm , a.cylb,a.djrq,a.hjlbdm,a.hjlbmc,a.zzmmdm,a.zzmmmc
+<!-- 		寄递业 -->
+		, a.kdywyzyzgzhm kdywyzyzgzhm
 		from t_qyryxx a ,t_qyjbxx b
 		where a.qyid=b.qyid
 		<dynamic prepend="">

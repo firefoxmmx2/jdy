@@ -1,5 +1,6 @@
 package com.aisino2.publicsystem.domain;
 
+import java.util.List;
 import java.util.Date;
 
 import com.aisino2.core.domain.BaseObject;
@@ -315,7 +316,20 @@ public class Qyryxx extends BaseObject {
 	
 	
 	private String oldCyrybh;//老版数据库从业人员编号，江苏专用
+
+	/**
+	 * 快递业务员职业资格证号码
+	 * 	 */
+	private String kdywyzyzgzhm;
 	
+	public String getKdywyzyzgzhm() {
+		return kdywyzyzgzhm;
+	}
+
+	public void setKdywyzyzgzhm(String kdywyzyzgzhm) {
+		this.kdywyzyzgzhm = kdywyzyzgzhm;
+	}
+
 	public Date getDjrq() {
 		return djrq;
 	}
