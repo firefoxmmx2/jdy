@@ -275,6 +275,17 @@
 		<td id="lzrq_data" class="detailtd">
 			<input type="text" id="m_lzrq" class="inputstyle" />
 		</td>
+		
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td id="kdywyzyzgzhm_title"  class="distd">
+			快递业务员职业资格证号码
+		</td>
+		<td id="kdywyzyzgzhm_data" class="detailtd">
+			<input type="text" id="m_kdywyzyzgzhm" class="inputstyle" />
+		</td>
 	</tr>
 	<tr id="qyryxxTr15" height="20">		
 					<td id="gwzrms_title" width="12%" class="distd" valign="top">

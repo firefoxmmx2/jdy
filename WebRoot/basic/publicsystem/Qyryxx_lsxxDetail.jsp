@@ -15,7 +15,7 @@
 	}); 
 
 	function updatediv (json) {
-	
+		$('#kdywyzyzgzhm').append(setNull(json.LQyryxx_lsxx[0].kdywyzyzgzhm));
 		//cyrylbdm = 从业人员代码	
 		if(setNull(json.LQyryxx_lsxx[0].cyrylbdm)=='1'){
 			//wjry = 外籍人员	
@@ -77,6 +77,7 @@
 		$("#gj").append(setNull(json.LQyryxx_lsxx[0].gj));
 		$("#cyzj").append(setNull(json.LQyryxx_lsxx[0].cyzj));
 		$("#lrr").append(setNull(json.LQyryxx_lsxx[0].lrr));
+		
 		
 		var zkzt = setNull(json.LQyryxx_lsxx[0].zkzt);
 		if(zkzt==11)
@@ -190,6 +191,12 @@
 		</td>
 		<td class="detailtd2">
 			<span id="hyzk"></span>
+		</td>
+		<td class="distd1">
+			快递业务员职业资格证号码
+		</td>
+		<td class="detailtd2">
+			<span id="kdywyzyzgzhm"></span>
 		</td>
 	</tr>
 
