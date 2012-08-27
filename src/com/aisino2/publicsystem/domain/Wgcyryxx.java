@@ -265,6 +265,17 @@ public class Wgcyryxx extends Qyryxx{
 	/** @ --从业类别名称--cyrylbmc--String--60-- */
 	private String cylb;
 	
+	private String kdywyzyzgzhm;
+	
+	
+	public String getKdywyzyzgzhm() {
+		return kdywyzyzgzhm;
+	}
+
+	public void setKdywyzyzgzhm(String kdywyzyzgzhm) {
+		this.kdywyzyzgzhm = kdywyzyzgzhm;
+	}
+
 	/** @ 企业ID(qyid) */
 	public Integer getQyid() {
 		return qyid;

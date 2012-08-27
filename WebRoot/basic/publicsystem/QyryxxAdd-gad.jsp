@@ -115,7 +115,16 @@
 		<td id="lzrq_title" class="distd">离职日期</td>
 		<td id="lzrq_data" class="detailtd"><input type="text" id="a_lzrq" class="inputstyle"/></td>
 	</tr>
-	
+	<tr>
+		<td></td>
+		<td></td>
+		<td id="kdywyzyzgzhm_title"  class="distd">
+			快递业务员职业资格证号码
+		</td>
+		<td id="kdywyzyzgzhm_data" class="detailtd">
+			<input type="text" id="a_kdywyzyzgzhm" class="inputstyle" />
+		</td>
+	</tr>
 	<tr id="qyryxxTr13" height="20">
 		<td id="sg_title" class="distd">身高（厘米）</td>
 		<td id="sg_data" class="detailtd"><input type="text" class="inputstyle" id="a_shengao"/></td>

@@ -1,5 +1,6 @@
 package com.aisino2.publicsystem.domain;
 
+import java.util.List;
 import java.util.Date;
 
 import com.aisino2.core.domain.BaseObject;
@@ -325,6 +326,28 @@ public class Qyjbxx_ls extends BaseObject {
  
 
 	private String sfjy;//是否兼营
+	
+	private String kdjyxkzbh;//快递经营许可证号
+	
+	private String wstzqypzzsh; //外商投资企业批准证书号
+	
+	
+	public String getKdjyxkzbh() {
+		return kdjyxkzbh;
+	}
+
+	public void setKdjyxkzbh(String kdjyxkzbh) {
+		this.kdjyxkzbh = kdjyxkzbh;
+	}
+
+	public String getWstzqypzzsh() {
+		return wstzqypzzsh;
+	}
+
+	public void setWstzqypzzsh(String wstzqypzzsh) {
+		this.wstzqypzzsh = wstzqypzzsh;
+	}
+
 	public String getSsxdm() {
 		return ssxdm;
 	}

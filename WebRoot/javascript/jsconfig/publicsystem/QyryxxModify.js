@@ -67,7 +67,9 @@ var hylbdm;
 			event.keyCode = 9;
 	}); 
 	
-	function updatediv (json) { 
+	function updatediv (json) {
+		//寄递业 快递业务职业资格证号码
+		$('#m_kdywyzyzgzhm').val(setNull(json.LQyryxx[0].kdywyzyzgzhm));
 	    hylbdm = setNull(json.LQyryxx[0].hylbdm);
 		$("#m_whcddm").setValue(setNull(json.LQyryxx[0].whcddm));
 		$("#m_whcd").val(setNull(json.LQyryxx[0].whcd));

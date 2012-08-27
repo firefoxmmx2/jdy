@@ -90,6 +90,8 @@
 			<result property="cylbdm" column="cylbdm"/>
 			<result property="cylb" column="cylb"/>
 			<result property="djrq" column="djrq"/>
+		<!-- 		寄递业 -->
+		<result property="kdywyzyzgzhm" column="kdywyzyzgzhm" />
 	</resultMap>
 	<!--外国从业人员信息(t_wgcyryxx)-->
 	<resultMap id="wgcyryxxGgListResult" class="wgcyryxx">
@@ -172,7 +174,8 @@
 		<result property="xx" column="xx"/>
 		
 		<result property="whcd" column="whcd"/>
-			<result property="whcddm" column="whcddm"/>
+		<result property="whcddm" column="whcddm"/>
+			
 	</resultMap>
 	
 	
@@ -598,6 +601,9 @@
 			<isNotNull prepend="," property="rjka">
 				rjka
 			</isNotNull>
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				kdywyzyzgzhm
+			</isNotNull>
 		</dynamic>
 		) values (
 		<dynamic prepend="">
@@ -634,6 +640,9 @@
 			<isNotNull prepend="," property="rjka">
 				#rjka#
 			</isNotNull>
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				kdywyzyzgzhm
+			</isNotNull>
 		</dynamic>
 		)
 	</insert>
@@ -668,6 +677,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="rjka">
 				rjka=#rjka#
+			</isNotNull>
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				kdywyzyzgzhm = #kdywyzyzgzhm#
 			</isNotNull>
 		</dynamic>
 		where 1=1
@@ -776,6 +788,8 @@
 		 a.hcdw hcdw,a.hcr hcr,a.hcsj hcsj,a.zxyy zxyy,a.zkzt zkzt,a.bcsj bcsj,a.dcbs dcbs,a.bz bz,
 		 a.scbz scbz,a.biduiflag biduiflag,a.zpwtgyy zpwtgyy,a.zt zt,
 		 b.qybm,b.qymc ,a.lzrq , a.xxdm,a.xx  ,a.whcd,a.whcddm  , a.cylbdm , a.cylb,a.djrq
+		 
+		 ,d.kdywyzyzgzhm kdywyzyzgzhm
 		from  t_qyryxx a ,t_qyjbxx b, t_wgcyryxx d 
 		where  a.qyid=b.qyid   and a.ryid=d.ryid
 		<dynamic prepend="">

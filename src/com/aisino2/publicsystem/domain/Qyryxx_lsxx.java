@@ -1,5 +1,6 @@
 package com.aisino2.publicsystem.domain;
 
+import java.util.List;
 import java.util.Date;
 
 import com.aisino2.core.domain.BaseObject;
@@ -266,6 +267,20 @@ public class Qyryxx_lsxx extends BaseObject {
 	private String whcd;//文化程度
 	private String whcddm;//文化程度代码
 	private String djrq;//文化程度
+	
+	/**
+	 * 快递业务员职业资格证号码
+	 * 	 */
+	private String kdywyzyzgzhm;
+	
+	public String getKdywyzyzgzhm() {
+		return kdywyzyzgzhm;
+	}
+
+	public void setKdywyzyzgzhm(String kdywyzyzgzhm) {
+		this.kdywyzyzgzhm = kdywyzyzgzhm;
+	}
+
 	/** @ 人员历史ID(rylsid) */
 	public Integer getRylsid() {
 		return rylsid;

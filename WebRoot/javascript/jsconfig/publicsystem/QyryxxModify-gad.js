@@ -99,6 +99,7 @@ $(document).ready(function() {
 	}
 	
 	function updatediv (json) {
+		$('#m_kdywyzyzgzhm').val(setNull(json.LQyryxx[0].kdywyzyzgzhm));
 		hylbdm = setNull(json.LQyryxx[0].hylbdm);
 	 	
 		$("#m_whcddm").setValue(setNull(json.LQyryxx[0].whcddm));

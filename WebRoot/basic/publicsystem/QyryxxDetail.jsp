@@ -21,6 +21,8 @@ var hylbdm;
 		Qyryxx_setDetail();
 	}); 
 	function updatediv (json) { 
+		//寄递业 快递人员职业资格证编号
+		$('#kdywyzyzgzhm').append(setNull(json.LQyryxx[0].kdywyzyzgzhm));
 	    hylbdm = setNull(json.LQyryxx[0].hylbdm);
 		$("#whcd").append(setNull(json.LQyryxx[0].whcd));
 		$("#cyrybh").append(setNull(json.LQyryxx[0].cyrybh));
@@ -217,6 +219,8 @@ var hylbdm;
 	    <td id="rzrq_data" class="detailtd2"><span id="rzrq"></span></td>
 	    <td id="lzrq_title" class="distd1">离职日期</td>
 		<td id="lzrq_data" class="detailtd2"><span id="lzrq"></span></td>
+		<td id="kdywyzyzgzhm_title" class="distd1">快递业务员职业资格证号码</td>
+		<td id="kdywyzyzgzhm_data" class="detailtd2"><span id="kdywyzyzgzhm"></span></td>
     </tr>
 	<tr id="zhuxiao">
 	    <td class="distd1">注销时间</td>

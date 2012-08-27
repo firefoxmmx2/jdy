@@ -16,6 +16,7 @@ var hylbdm;
 		//$("#ryImage").attr("src","publicsystem/queryTp_qyryxx.action?ryId="+dataid);
 	}); 
 		function updatediv (json) { 
+		$('#kdywyzyzgzhm').append(setNull(json.LQyryxx[0].kdywyzyzgzhm));
 		hylbdm = setNull(json.LQyryxx[0].hylbdm);
 		$("#cyrybh").append(setNull(json.LQyryxx[0].cyrybh));
 		//$("#xx").append(setNull(json.LQyryxx[0].xx));
@@ -194,6 +195,12 @@ var hylbdm;
 	    <td id="rzrq_data" class="detailtd2"><span id="rzrq"></span></td>
 	    <td id="lzrq_title" class="distd1">离职日期</td>
 		<td id="lzrq_data" class="detailtd2"><span id="lzrq"></span></td>
+		<td class="distd1">
+			快递业务员职业资格证号码
+		</td>
+		<td class="detailtd2">
+			<span id="kdywyzyzgzhm"></span>
+		</td>
     </tr>
     <tr id="qyryxxTr13">
         <td id="sg_title" class="distd1">身高（厘米）</td>

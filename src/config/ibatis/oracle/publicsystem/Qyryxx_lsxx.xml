@@ -95,7 +95,8 @@
 		<result property="yjbz" column="yjbz"/>
 		<result property="yjsj" column="yjsj"/>
 		<result property="djrq" column="djrq"/>
-				
+		<!-- 		寄递业 -->
+		<result property="kdywyzyzgzhm" column="kdywyzyzgzhm"/>		
 	</resultMap>
 	<!--企业人员历史信息(t_qyryxx_lsxx)-->
 	<resultMap id="qyryxx_lsxxBgResult" class="qyryxx_lsxx">
@@ -179,7 +180,8 @@
 		<result property="xxdm" column="xxdm"/>
 		<result property="xx" column="xx"/>
 		<result property="whcd" column="whcd"/>
-		<result property="whcddm" column="whcddm"/>	
+		<result property="whcddm" column="whcddm"/>
+
 	</resultMap>
 	<!--企业人员历史信息(t_qyryxx_lsxx)-->
 	<resultMap id="qyryxx_lsxxListResult" class="qyryxx_lsxx">
@@ -644,8 +646,12 @@
 			<isNotNull prepend="," property="yjsj">
 				yjsj
 			</isNotNull>
+			
 			<isNotNull prepend="," property="djrq">
 				djrq
+			</isNotNull>
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				kdywyzyzgzhm
 			</isNotNull>
 		</dynamic>
 		) values (
@@ -908,6 +914,9 @@
 			<isNotNull prepend="," property="djrq">
 				#djrq#
 			</isNotNull>
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				#kdywyzyzgzhm#
+			</isNotNull>
 		</dynamic>
 		)
 	</insert>
@@ -1169,6 +1178,9 @@
 			<isNotNull prepend="," property="yjsj">
 				yjsj=#yjsj#
 			</isNotNull>
+			<isNotNull prepend="," property="kdywyzyzgzhm">
+				kdywyzyzgzhm = #kdywyzyzgzhm#
+			</isNotNull>
 		</dynamic>
 		where 1=1
 		<dynamic prepend="">
@@ -1229,6 +1241,8 @@
 		       a.qzhm qzhm,a.zatlq zatlq, a.qfjg qfjg,a.rjrq rjrq, a.rjka rjka, a.czlx czlx, a.bgyy bgyy,
 		       a.bglbdm bglbdm, a.bglb bglb, a.gzdm gzdm, a.gz gz, y.qymc, y.qybm, a.lzrq, a.xxdm,
 		       a.xx, a.whcd, a.whcddm, a.cylbdm, a.cylb,  a.yjbz yjbz,a.yjsj yjsj,a.djrq djrq
+<!-- 		       寄递业 -->
+			   , a.kdywyzyzgzhm kdywyzyzgzhm
        from t_qyryxx_lsxx a, t_qyjbxx y
  		where a.qyid = y.qyid
 		<dynamic prepend="">

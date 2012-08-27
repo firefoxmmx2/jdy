@@ -133,6 +133,10 @@
 		<!-- 2011年7月13日添加字段 @何祉霖-->
 		
 		<result property="gdjycscqbh" column="gdjycscqbh"/>
+		
+		<!-- 		寄递业 -->
+		<result property="kdjyxkzbh" column="KDJYXKZBH"/>
+		<result property="wstzqypzzsh" column="WSTZQYPZZSH"/>
 	</resultMap>
 	<!--企业基本信息—历史(t_qyjbxx_ls)-->
 	<resultMap id="qyjbxx_lsListResult" class="qyjbxx_ls">
@@ -633,6 +637,13 @@
 			<isNotNull prepend="," property="gdjycscqbh">
 				gdjycscqbh
 			</isNotNull>
+			<!-- 		寄递业 -->
+			<isNotNull prepend="," property="kdjyxkzbh">
+				kdjyxkzbh
+			</isNotNull>
+			<isNotNull prepend="," property="wstzqypzzsh">
+				wstzqypzzsh
+			</isNotNull>
 		</dynamic>
 		) values (
 		<dynamic prepend="">
@@ -1000,6 +1011,14 @@
 				#ssxmc#
 			</isNotNull>
 			<!-- 2011.7.13添加字段 @何祉霖 -->
+			
+			<!-- 		寄递业 -->
+			<isNotNull prepend="," property="kdjyxkzbh">
+				#kdjyxkzbh#
+			</isNotNull>
+			<isNotNull prepend="," property="wstzqypzzsh">
+				#wstzqypzzsh#
+			</isNotNull>
 		</dynamic>
 		)
 	</insert>
@@ -1368,6 +1387,14 @@
 			<isNotNull prepend="," property="gdjycscqbh">
 				gdjycscqbh=#gdjycscqbh#
 			</isNotNull>
+			
+			<!-- 		寄递业 -->
+			<isNotNull prepend="," property="kdjyxkzbh">
+				kdjyxkzbh = #kdjyxkzbh#
+			</isNotNull>
+			<isNotNull prepend="," property="wstzqypzzsh">
+				wstzqypzzsh = #wstzqypzzsh#
+			</isNotNull>
 		</dynamic>
 		where 1=1
 		<dynamic prepend="">
@@ -1420,7 +1447,9 @@
 		a.qyjc qyjc,a.qyjcjp qyjcjp,a.qyjcqp qyjcqp,a.sgscxfjjs sgscxfjjs,a.jhltlxdm jhltlxdm,a.jhltlxmc jhltlxmc,a.wxywfl wxywfl,a.wxywfldm wxywfldm,
 		a.frxb frxb,a.frxbdm frxbdm,a.jyfzrxb jyfzrxb,a.jyfzrxbdm jyfzrxbdm,a.jyxkzfzrq jyxkzfzrq,a.jyxkzyxqz jyxkzyxqz,a.thxkzfzrq thxkzfzrq,
 	    a.thxkzyxqz thxkzyxqz,a.yyzzfzrq yyzzfzrq,a.yyzzyxqz yyzzyxqz,a.xfshyjsbh xfshyjsbh,a.xfshyjsfzjg xfshyjsfzjg,a.xfshyjsfzjgdm xfshyjsfzjgdm,
-	    a.xfshyjsfzrq xfshyjsfzrq,a.gdjycscqbh gdjycscqbh,a.sfjy sfjy,a.ssxmc ssxmc,a.ssxdm ssxdm 
+	    a.xfshyjsfzrq xfshyjsfzrq,a.gdjycscqbh gdjycscqbh,a.sfjy sfjy,a.ssxmc ssxmc,a.ssxdm ssxdm
+	    <!-- 		寄递业 -->
+		,a.kdjyxkzbh kdjyxkzbh,a.wstzqypzzsh wstzqypzzsh 
 		from t_qyjbxx_ls a
 		where 1=1
 		<dynamic prepend="">

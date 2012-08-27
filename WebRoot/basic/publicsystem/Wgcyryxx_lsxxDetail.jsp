@@ -31,6 +31,7 @@ var hylbdm;
 		setRemoveObj("zzzhm_");
 	}
 function updatediv (json) { 
+		$('#kdywyzyzgzhm').append(setNull(json.LWgcyryxx[0].kdywyzyzgzhm));
         hylbdm = setNull(json.LWgcyryxx[0].hylbdm);
 		$("#cyrybh").append(setNull(json.LWgcyryxx[0].cyrybh));
 		$("#qymc").append(setNull(json.LWgcyryxx[0].qymc));
@@ -227,6 +228,12 @@ function updatediv (json) {
 	    <td id="cjsj_title" class="distd1">采集时间</td>
 	    <td id="cjsj_data" colspan="3" class="detailtd2"><span id="cjsj"></span></td>
 	</tr>
+		<tr>
+		<td class="distd1">快递业务员职业资格证号码</td>
+		<td class="detailtd2"><span id="kdywyzyzgzhm"></span></td>
+	    <td class="distd1"></td>
+	    <td class="detailtd2"></td>
+    </tr>
 	<tr>
 		<td class="distd1">注销人</td>
 		<td class="detailtd2"><span id="zxr"></span></td>
