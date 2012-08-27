@@ -96,6 +96,7 @@ function setLjxxUpdate(id){
 	bindDocument("ljjbxxadd_detail");
 } 
 function setLjxxDetail(id){
+	$("#"+ljjbxxadd_detail).empty();
 	dataid = id;
 	setWidth("ljjbxxadd_detail",950);
 	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxDetail.jsp");
@@ -104,7 +105,7 @@ function setLjxxDetail(id){
 //揽件信息删除
 function setLjxxDelete(id) {
 	//alert("进入该方法");
-	$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+	$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
 }
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="">
