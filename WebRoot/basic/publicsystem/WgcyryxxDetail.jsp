@@ -85,6 +85,8 @@ function updatediv (json) {
 		$("#zxr2").append(setNull(json.LWgcyryxx[0].zxr));
 		//$("#xx").append(setNull(json.LWgcyryxx[0].xx));
 		
+		$('#kdywyzyzgzhm').append(setNull(json.LWgcyryxx[0].kdywyzyzgzhm));
+		
 		if(setNull(json.LWgcyryxx[0].scbz)==1){
 			$('#zhuxiao').empty();
 			$('#shanchu').show();
@@ -239,6 +241,8 @@ function initPage(){
 	    <td id="rzrq_data" class="detailtd2"><span id="rzrq"></span></td>
 	    <td id="lzrq_title" class="distd1">离职日期</td>
 		<td id="lzrq_data" class="detailtd2"><span id="lzrq"></span></td>
+		<td id="kdywyzyzgzhm_title" class="distd1">快递业务员职业资格证号码</td>
+		<td id="kdywyzyzgzhm_data" class="detailtd2"><span id="kdywyzyzgzhm"></span></td>
     </tr>
     
 	
