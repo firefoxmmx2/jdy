@@ -1,6 +1,7 @@
 package com.aisino2.jdy.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Pjjbxx;
+import com.aisino2.jdy.service.IJdpxxService;
 import com.aisino2.jdy.service.ILjjbxxService;
 import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.domain.Qyryxx;
@@ -33,8 +35,25 @@ public class LjxxAction extends PageAction{
 	private int totalrows = 0;
 	private String result = "";
 	private List<Ljjbxx> lLjjbxx = new ArrayList();
+	private Date djsjf;//登记开始时间
+	private Date djsjt;//登记截止时间
 	
 	
+	public Date getDjsjf() {
+		return djsjf;
+	}
+
+	public void setDjsjf(Date djsjf) {
+		this.djsjf = djsjf;
+	}
+
+	public Date getDjsjt() {
+		return djsjt;
+	}
+
+	public void setDjsjt(Date djsjt) {
+		this.djsjt = djsjt;
+	}
 
 	public List<Ljjbxx> getlLjjbxx() {
 		return lLjjbxx;
@@ -249,6 +268,85 @@ public class LjxxAction extends PageAction{
 			}
 			lj.setJjrzjhm(lj.getJjr().getZjhm());//寄件人证件号码
 			lj.setLjyxm(lj.getLjr().getXm());//揽件人姓名
+		}
+		
+		Ljjbxx setLjxx = new Ljjbxx();
+		//this.setDataCustomer(setLjxx, lData, lPro, null, lCol);
+		this.setData(setLjxx, lData, lPro, lCol);
+		this.tabledata = this.getData();
+		totalrows = this.getTotalrows();
+	}
+//========================================公安端寄递品信息查询==========================================================================================
+	public String jdywxxquerylist() throws Exception{
+			
+			//如果派件查询参数不为空的话，配置数据库的查询参数
+			Map<String, Object> params = new HashMap<String, Object>();
+			
+			//管辖单位编码、企业名称
+			if(lj.getQyjbxx()!=null){
+				params.put("gxdwbm", lj.getQyjbxx());
+			}
+			//揽件基本信息   物流单号
+			if(lj.getWldh()!=null && lj.getWldh()!=""){
+				params.put("wldh", lj.getWldh());
+			}
+			//寄件人
+			if(lj.getJjr()!=null){
+				params.put("jjr", lj.getJjr());
+			}
+			//收件人
+			if(lj.getSjr()!=null){
+				params.put("sjr", lj.getSjr());
+			}
+			//寄递品信息
+			if(lj.getJdpxx()!=null){
+				params.put("jdpxx", lj.getJdpxx());
+			}
+			//登记时间
+			if(djsjf!=null){
+				params.put("djsjf", djsjf);
+			}
+			if(djsjt!=null){
+				params.put("djsjt", djsjt);
+			}
+			Page pageinfo = ljjbxxService.gadjdpxxForPage(params, pagesize, pagerow, dir, sort);
+			totalpage = pageinfo.getTotalPages();
+			totalrows = pageinfo.getTotalRows();
+			lLjjbxx = pageinfo.getData();
+			
+			setTableDate_gadjdpxxcx(pageinfo.getData());
+			
+			this.result = "success";
+			return SUCCESS;
+		}
+	/***揽件基本信息主页面setable方法***/
+	private void setTableDate_gadjdpxxcx(List<Ljjbxx> lData) {
+		// TODO Auto-generated method stub
+		List lPro = new ArrayList();
+		lPro.add("djxh");
+		lPro.add("qymc");//--
+		lPro.add("wldh");
+		lPro.add("jjrxm");//--
+		lPro.add("jjrzjhm");//--
+		lPro.add("sjrxm");//--
+		lPro.add("jdpdlxmc");//--
+		lPro.add("jdplxmc");//--
+		lPro.add("ljtbsj");
+		
+		List lCol = new ArrayList();
+		
+		List lDetail = new ArrayList();
+		lDetail.add("setLjxxDetail");
+		lDetail.add("详情");
+		lCol.add(lDetail);
+		
+		for(Ljjbxx lj : lData){
+			lj.setQymc(lj.getQyjbxx().getQymc());//企业名称
+			lj.setJjrxm(lj.getJjr().getXm());//寄件人姓名
+			lj.setJjrzjhm(lj.getJjr().getZjhm());//寄件人证件号码
+			lj.setSjrxm(lj.getSjr().getXm());//收件人姓名
+			lj.setJdpdlxmc(lj.getJdpxx().getJdpdlxmc());//寄递品大类型名称
+			lj.setJdplxmc(lj.getJdpxx().getJdplxmc());//寄递品小类型名称
 		}
 		
 		Ljjbxx setLjxx = new Ljjbxx();
