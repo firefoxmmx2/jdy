@@ -12,66 +12,58 @@ var ljjdpxx = new Array();
 $(document).ready(function() {	
 	Modifyurl="jdy/query_ljxx.action";
 	$('#ljjbxxmodif_id').val(dataid);
-	//alert("是否有值="+dataid);
-	var params = getSubmitParams("#ljjbxx_modify [name*=lj.]");
+	$("#ljjbxx_detail [id^=lj_]").attr("class","readonly");
+	$("#ljjbxx_detail [id=jjrssxmc]").attr("class","readonly");
+	$("#ljjbxx_detail [id=sjrssxmc]").attr("class","readonly");
+	
+	var params = getSubmitParams("#ljjbxx_detail [name*=lj.]");
 	jQuery.post("jdy/query_ljxx.action",params,modifyback,"json");
 	
-	//将页面的所有属性设置为不可修改
-	$("#ljjbxx_detail [id^=lj_]").attr("class","readonly"));//登记序号
-	
-	//添加寄递对象证件类型的提交名称
-	$("#lj_jjrzjlx").attr("name","lj.jjr.zjlx");
-	$("#lj_sjrzjlx").attr("name","lj.sjr.zjlx");
-	//揽件时间选择
-	$("#ljjbxx_modify [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();
-	//户籍省市县--寄件人
-	$("#jjrssxmc").click( function() {
-		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
-	});
-	//户籍省市县--收件人
-	$("#sjrssxmc").click( function() {
-		getDict_item("sjrssxmc", "lj_sjrssx", "dm_xzqh");
-	});
 	//证件类型--寄件人
 	getDictItemBox("lj_jjrzjlx","lj_jjrzjlxdm","dm_zjlx");
 	//证件类型--收件人
 	getDictItemBox("lj_sjrzjlx","lj_sjrzjlxdm","dm_zjlx");
-	//揽件人
-	$('#lj_ljr_xm').attr('readOnly',true).click(function(){
-		getTyRY_item('lj_ljr_xm','lj_ljr_cyrybh','<%=qybm%>');
-	});
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
 	dzcl_pageUrl="#";
-	
 	detailid="zxzybaydwdzcl_detail";
 	daggleDiv(detailid);
 	$("#"+detailid).hide();
-	
 	dzcl_divnid="YwwffzjlData";
 	dzcl_tableid="YwwffzjlTable";
 	dzcl_tables=$("#"+dzcl_divnid).html();
 	setPageList_ywwffzjlzmfj(1);
 }); 
 function modifyback(json){
-	$("#ljjbxx_modify [id=lj_djxh]").val(json.lj.djxh);//登记序号
-	$("#ljjbxx_modify [id=lj_wldh]").val(json.lj.wldh);//物流单号
-	$("#ljjbxx_modify [id=lj_jjrxm]").val(json.lj.jjr.xm);//寄件人姓名
-	$("#ljjbxx_modify [id=lj_jjrzjlx]").val(json.lj.jjr.zjlx);//寄件人证件类型
-	$("#ljjbxx_modify [id=lj_jjrzjhm]").val(json.lj.jjr.zjhm);//寄件人证件号码
-	$("#ljjbxx_modify [id=jjrssxmc]").val(json.lj.jjr.ssx);//寄件地址
-	$("#ljjbxx_modify [id=lj_jjrxxdz]").val(json.lj.jjr.xxdz);//寄件人现住地详址
-	$("#ljjbxx_modify [id=lj_jjrlxdh]").val(json.lj.jjr.lxdh);//寄件人手机
-	$("#ljjbxx_modify [id=lj_sjrxm]").val(json.lj.sjr.xm);//收件人姓名
-	$("#ljjbxx_modify [id=lj_sjrzjlx]").val(json.lj.sjr.zjlx);//收件人证件类型
-	$("#ljjbxx_modify [id=lj_sjrzjhm]").val(json.lj.sjr.zjhm);//收件人证件号码
-	$("#ljjbxx_modify [id=sjrssxmc]").val(json.lj.sjr.ssx);//收件地址
-	$("#ljjbxx_modify [id=lj_sjrxxdz]").val(json.lj.sjr.xxdz);//收件人现住地详址
-	$("#ljjbxx_modify [id=lj_sjrlxdh]").val(json.lj.sjr.lxdh);//收件人手机
-	$("#ljjbxx_modify [id=lj_ljr_xm]").val(json.lj.ljr.xm);//揽件人
-	$("#ljjbxx_modify [id=lj_ljsj]").val(json.lj.ljsj);//揽件日期
+	$("#ljjbxx_detail [id=lj_djxh]").val(json.lj.djxh);//登记序号
+	$("#ljjbxx_detail [id=lj_wldh]").val(json.lj.wldh);//物流单号
+	
+	$("#ljjbxx_detail [id=lj_jjrxm]").val(json.lj.jjr.xm);//寄件人姓名
+	$("#ljjbxx_detail [id=lj_jjrzjlx]").val(json.lj.jjr.zjlx);//寄件人证件类型
+	$("#ljjbxx_detail [id=lj_jjrzjhm]").val(json.lj.jjr.zjhm);//寄件人证件号码
+	$("#ljjbxx_detail [id=jjrssxmc]").val(json.lj.jjr.ssxmc);//寄件地址
+	$("#ljjbxx_detail [id=lj_jjrssx]").val(json.lj.jjr.ssx);//寄件地址代码
+	$("#ljjbxx_detail [id=lj_jjrxxdz]").val(json.lj.jjr.xxdz);//寄件人现住地详址
+	$("#ljjbxx_detail [id=lj_jjrdw]").val(json.lj.jjr.dw);//寄件人单位
+	$("#ljjbxx_detail [id=lj_jjrlxdh]").val(json.lj.jjr.lxdh);//寄件人手机
+	$("#ljjbxx_detail [id=lj_jjrgddh]").val(json.lj.jjr.gddh);//固定电话
+	
+	$("#ljjbxx_detail [id=lj_sjrxm]").val(json.lj.sjr.xm);//收件人姓名
+	$("#ljjbxx_detail [id=lj_sjrzjlx]").val(json.lj.sjr.zjlx);//收件人证件类型
+	$("#ljjbxx_detail [id=lj_sjrzjhm]").val(json.lj.sjr.zjhm);//收件人证件号码
+	$("#ljjbxx_detail [id=sjrssxmc]").val(json.lj.sjr.ssxmc);//收件地址
+	$("#ljjbxx_detail [id=lj_sjrssx]").val(json.lj.sjr.ssx);//寄件地址代码
+	$("#ljjbxx_detail [id=lj_sjrxxdz]").val(json.lj.sjr.xxdz);//收件人现住地详址
+	$("#ljjbxx_detail [id=lj_sjrdw]").val(json.lj.sjr.dw);//收件人单位
+	$("#ljjbxx_detail [id=lj_sjrlxdh]").val(json.lj.sjr.lxdh);//收件人手机
+	$("#ljjbxx_detail [id=lj_sjrgddh]").val(json.lj.sjr.gddh);//固定电话
+	
+	$("#ljjbxx_detail [id=lj_ljrxm_mod]").val(json.lj.ljr.xm);//揽件人
+	$("#ljjbxx_detail [id=lj_ljr_cyrybh]").val(json.lj.ljr.cyrybh);//揽件人编码
+	$("#ljjbxx_detail [id=lj_ljsj]").val(json.lj.ljsj);//揽件日期
 	for(var i=0;i<json.lj.jdp_list.length;i++){
 		//寄递物品信息保存时添加到列表---添加行的方法
+		    var jdwp_id=json.lj.jdp_list[i].id;//寄递品类型
 			var jdwp_jdplx=json.lj.jdp_list[i].jdplx;//寄递品类型
 			var jdwp_jdpmc=json.lj.jdp_list[i].jdpmc;//寄递品名称
 			var jdwp_jdpsm=json.lj.jdp_list[i].jdpsm;//寄递品数量
@@ -95,6 +87,7 @@ function modifyback(json){
 				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
 				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
 				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_id"+i+"'>"+jdwp_id+"</td>";
 				addTableTr1 += "</tr>";
 				if(addTableTr1!=""){
 					$("#YwwffzjlTable").append(addTableTr1);
@@ -123,11 +116,10 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										//hideColIndex:[0,4,5],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["0","30%","30%","20%","0","0","0","20%"]								
+										colWidths: ["25","35%","30%","25%","0","0","0","0"]								
 									});				
 		}
 }
-
 //处理鼠标悬停是的页面样式
 function addTrEvent(tr){
 	var currTrClass;
@@ -168,7 +160,7 @@ function addTrEvent(tr){
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">寄递品信息详情</td>
+      <td align="left" class="title1">寄递品信息修改</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
@@ -201,7 +193,7 @@ function addTrEvent(tr){
 <input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
 <input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
 <input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
-<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>">
+<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh">
 <input type="hidden" id="ljjbxxmodif_id" name="lj.djxh" value=""><!-- 修改传递过来的ID号 -->
 <tr>
   <td>
@@ -212,7 +204,7 @@ function addTrEvent(tr){
 			<td class="distd">登记序号</td>
 			<td class="detailtd"><input type="text" id="lj_djxh" class="readonly" value="" /></td>
 			<td class="red">物流单号</td>
-			<td class="detailtd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value="" /></td>
+			<td class="detailtd"><input type="text" id="lj_wldh" name="lj.wldh" class="readonly" value="" /></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -231,11 +223,6 @@ function addTrEvent(tr){
 	</table>
 	<fieldset>
 	<legend>寄递品信息</legend>
-	<table width="100%" >
-		<tr height="20">
-   	  		<td width="60%" align="right"><a href="#" class="addbutton" id="addbutton" onclick="tianJiaZxzybaydwDzcl()">添加</a></td>
-		</tr>
-	</table>
 	<div id="zxzybaydwdzcl_detail" class="page-layout" src="#" style="top:180px; left:160px;"></div>
 		<div id="YwwffzjlData" style="width:100%;">
 			<table id="YwwffzjlTable"  width="100%">
@@ -248,7 +235,7 @@ function addTrEvent(tr){
 			     	<th name="lj_jdplx">类型</th>
 			     	<th name="lj_jdpzl">重量</th>
 			     	<th name="lj_jdptj">体积</th>
-					<th name="">操作</th>
+			     	<th name="lj_id">ID</th>
 			    </tr>
 			  </thead>
 			</table>	
@@ -259,9 +246,9 @@ function addTrEvent(tr){
 	<table width="100%" >
 		<tr height="20">
 			<td class="red">揽件人</td>
-			<td class="detailtd"><input type="text" id="lj_ljr_xm"   name="lj.ljr.xm" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj_ljrxm_mod"   name="lj.ljr.xm" class="readonly" value=""></td>
 			<td class="red">揽件时间</td>
-			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle" value=""></td>
+			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="readonly" value=""></td>
 		</tr>
 	</table>
 	</fieldset>

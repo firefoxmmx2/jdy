@@ -118,6 +118,8 @@ public class LjxxAction extends PageAction{
 	public String delete() throws Exception{
 		if(lj == null)
 			throw new RuntimeException("需要删除的派件信息参数不能为空");
+		//删除时修改scbzw
+		lj.setScbzw("1");
 		ljjbxxService.deleteLjjbxx(lj);
 		
 		this.result=SUCCESS;
@@ -222,7 +224,6 @@ public class LjxxAction extends PageAction{
 		lDelete.add("setLjxxDelete");
 		lDelete.add("删除");
 		lCol.add(lDelete);
-
 		for(Ljjbxx lj : lData){
 			lj.setJjrxm(lj.getJjr().getXm());//寄件人姓名
 			if(lj.getJjr().getZjlx().equals("11")){

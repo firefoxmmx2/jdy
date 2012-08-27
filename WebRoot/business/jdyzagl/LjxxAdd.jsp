@@ -4,7 +4,7 @@
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
 <%
-	qybm = "T013306005003";
+	//qybm = "T013306005003";
 %>
 <script type="text/javascript">
 var trNum=0;
@@ -14,6 +14,9 @@ $(document).ready(function() {
 	//添加寄递对象证件类型的提交名称
 	$("#lj_jjrzjlx").attr("name","lj.jjr.zjlx");
 	$("#lj_sjrzjlx").attr("name","lj.sjr.zjlx");
+	//添加寄件地址、收件地址的提交名称
+	$("#jjrssxmc").attr("name","lj.jjr.ssxmc");
+	$("#sjrssxmc").attr("name","lj.sjr.ssxmc");
 	//揽件时间选择
 	$("#ljjbxx_add [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();
 	//户籍省市县--寄件人
@@ -30,7 +33,7 @@ $(document).ready(function() {
 	getDictItemBox("lj_sjrzjlx","lj_sjrzjlxdm","dm_zjlx");
 	//揽件人
 	$('#lj_ljr_xm').attr('readOnly',true).click(function(){
-		getTyRY_item('lj_ljr_xm','lj_ljr_cyrybh','<%=qybm%>');
+		getTyRY_item('lj_ljr_xm','ljljradd_cyrybh','<%=qybm%>');
 	});
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
@@ -246,6 +249,8 @@ function  ljxxbaocun(){
 	//设置企业编码，之后要删除这里的设置
 	//$("#lj_qyjbxx").val("0123456789")
 	//alert("蓝贱人编码="+$("#lj_qyjbxx").val());
+	alert($("#ljljradd_cyrybh").val());
+	//return;
 	if (addVerify()){
 		var params = getSubmitParams("#ljjbxx_add [name*=lj.]");
 		//var params = getSubmitParams("#pjjbxx_add [name*=pjxx.]");
@@ -315,7 +320,7 @@ function addback(json){
 <input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
 <input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
 <input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
-<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh">
+<input type="hidden" id="ljljradd_cyrybh" name="lj.ljr.cyrybh">
 <tr>
   <td>
     <fieldset>

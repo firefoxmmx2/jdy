@@ -14,7 +14,9 @@ import com.aisino2.jdy.dao.IRdrjbxxDao;
 import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Rdrjbxx;
+import com.aisino2.jdy.service.IJdyBjService;
 import com.aisino2.jdy.service.ILjjbxxService;
+import com.aisino2.publicsystem.service.IQyjbxxService;
 
 public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	/**注入揽件基本信息**/
@@ -25,6 +27,17 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	private IRdrjbxxDao rdrjbxxDao;
 	
 	private Ljjbxx setLjjbxx;
+	private IQyjbxxService qyjbxxService;
+	private IJdyBjService jdyBjService;
+
+
+	public void setJdyBjService(IJdyBjService jdyBjService) {
+		this.jdyBjService = jdyBjService;
+	}
+
+	public void setQyjbxxService(IQyjbxxService qyjbxxService) {
+		this.qyjbxxService = qyjbxxService;
+	}
 	
 	public Ljjbxx getSetLjjbxx() {
 		return setLjjbxx;
@@ -47,35 +60,12 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 
 	
 	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) {
-		
-			/***向寄递对象表打入人员信息的数据--得到人员信息ID后再插入到揽件表中去***/
-			Rdrjbxx setRddrjbxx = new Rdrjbxx();
-//			setRddrjbxx.setZjhm(ljjbxx.getJjr().getZjhm());
-//			setRddrjbxx=rdrjbxxDao.get(setRddrjbxx);
-			//Rdrjbxx Rdrjbxxjjr = new Rdrjbxx();//存放寄件人ID
-			//Rdrjbxx Rdrjbxxsjr = new Rdrjbxx();//存放收件人ID
-			
-//			if(setRddrjbxx==null){//判断证件号码，表中是否存在，若不存在则插入
-				/***向寄递对象--人员信息表插入数据***/
-				ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
-				//Rdrjbxxjjr.setId(ljjbxx.getJjr().getId());
-//			}else{
-//				Rdrjbxxjjr.setId(setRddrjbxx.getId());
-//			}
-//			setRddrjbxx.setZjhm(ljjbxx.getSjr().getZjhm());
-//			setRddrjbxx=rdrjbxxDao.get(setRddrjbxx);
-//			if(setRddrjbxx==null){//判断证件号码，表中是否存在，若不存在则插入
-				/***向寄递对象--人员信息表插入数据***/
-				//setRddrjbxx=rdrjbxxDao.insert(ljjbxx.getSjr());
-				ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
-				//Rdrjbxxsjr.setId(ljjbxx.getSjr().getId());
-				
-//			}else{
-//				Rdrjbxxsjr.setId(setRddrjbxx.getId());
-//			}
+	
+			/***向寄递对象--人员信息表插入数据***/
+			ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
+			/***向寄递对象--人员信息表插入数据***/
+			ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
 			/***向揽件信息表打入揽件数据***/
-//			ljjbxx.setJjr(Rdrjbxxjjr);
-//			ljjbxx.setSjr(Rdrjbxxsjr);
 			ljjbxx.setLjtbsj(new Date());
 			ljjbxx = ljjbxxDao.insert(ljjbxx);
 			/***向寄递物品表插入数据***/
@@ -85,40 +75,48 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 					jdpxxDao.insert(ljjbxx.getJdp_list().get(i));
 				}
 			}
+			ljjbxx.setQyjbxx(
+					qyjbxxService.getQyjbxx(ljjbxx.getQyjbxx()));
+			// 寄递业公共比对插入
+			jdyBjService.insertJdyBjxx(ljjbxx);
 		return ljjbxx;
 	}
 
 	public void updateLjjbxx(Ljjbxx ljjbxx) {
 		if(ljjbxx==null || !StringUtil.isNotEmpty(ljjbxx.getDjxh()))
 			throw new RuntimeException("需要修改的揽件信息登记序号为空");
-//		修改寄件人
+		//修改寄件人
 		if(ljjbxx.getJjr()!=null && StringUtil.isNotEmpty(ljjbxx.getJjr().getZjhm())){
-//			Rdrjbxx old_jjr = rdrjbxxDao.get(ljjbxx.getJjr());
-//			//在寄件人不存在的时候，添加一个新的寄件人，在存的时候，更新这个寄件人的信息。
-//			if(old_jjr == null){
-//				ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
-//			}
-//			else{
-				rdrjbxxDao.update(ljjbxx.getJjr());
-//			}
+			Rdrjbxx setJjrtemp = new Rdrjbxx();
+			setJjrtemp=rdrjbxxDao.get(ljjbxx.getJjr());
+			//寄件人不存在的时候，需要将该人员添加到比对报警表去
+			if(setJjrtemp == null){
+				ljjbxx.setQyjbxx(
+						qyjbxxService.getQyjbxx(ljjbxx.getQyjbxx()));
+				// 寄递业公共比对插入
+				jdyBjService.insertJdyBjxx(ljjbxx);
+			}
+		    rdrjbxxDao.update(ljjbxx.getJjr());
 		}
-//		修改收件人
+		//修改收件人
 		if(ljjbxx.getSjr()!=null && StringUtil.isNotEmpty(ljjbxx.getSjr().getZjhm())){
-//			Rdrjbxx old_sjr = rdrjbxxDao.get(ljjbxx.getSjr());
-//			//在收件人不存在的时候，添加一个新的收件人，在存的时候，更新这个收件人的信息。
-//			if(old_sjr==null){
-//				ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
-//			}
-//			else {
-				rdrjbxxDao.update(ljjbxx.getSjr());
-//			}
+			Rdrjbxx setJjrtemp1 = new Rdrjbxx();
+			setJjrtemp1=rdrjbxxDao.get(ljjbxx.getSjr());
+			//收件人不存在的时候，需要将该人员添加到比对报警表去
+			if(setJjrtemp1==null){
+				ljjbxx.setQyjbxx(
+						qyjbxxService.getQyjbxx(ljjbxx.getQyjbxx()));
+				// 寄递业公共比对插入
+				jdyBjService.insertJdyBjxx(ljjbxx);
+			}
+			rdrjbxxDao.update(ljjbxx.getSjr());
 		}
-//		修改寄递品信息
+		//修改寄递品信息
 		if(ljjbxx.getJdp_list()!=null && ljjbxx.getJdp_list().size()>0){
 			for(Jdpxx jdp : ljjbxx.getJdp_list()){
 				if(jdp==null)
 					continue;
-//				删除标志，当他为Y的时候，出数据库中删除这个寄递品
+				//删除标志，当他为Y的时候，出数据库中删除这个寄递品
 				if(StringUtil.isNotEmpty(jdp.getSfscbz()) && jdp.getSfscbz().equals("Y")){
 					jdpxxDao.delete(jdp);
 				}
