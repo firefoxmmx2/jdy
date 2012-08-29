@@ -156,6 +156,7 @@ public class PjxxAction extends PageAction {
 		
 		Qyryxx pjtbr = new Qyryxx();
 		pjtbr.setCyrybh(curr_user.getUseraccount());
+		pjxx.setPjtbr(pjtbr); // 修正 没有派件填报人的问题。
 		pjxx.setPjtbsj(new Date());
 		pjjbxxService.insertPjjbxx(pjxx);
 		
