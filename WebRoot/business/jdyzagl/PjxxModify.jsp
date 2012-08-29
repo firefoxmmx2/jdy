@@ -337,6 +337,7 @@ function  modify_pjxx(){
 				}
 			}
 			else{
+				rowData['sfscbz']='N'; //修正
 				for(var key in rowData){
 					params["pjxx.ljjbxx.jdp_list["+idx+"]."+key] = rowData[key];
 				}
@@ -453,6 +454,10 @@ function loadData(){
 <input type="hidden" name="pjxx.ljjbxx.jjr.ssx" id="pjjbxxmod_jjrssxdm">
 <input type="hidden" name="pjxx.ljjbxx.sjr.ssx" id="pjjbxxmod_sjrssxdm">
 <input type="hidden" name="pjxx.id" id="pjjbxxmod_id">
+<%-- 修正寄件人和收件人没用ID的问题 --%>
+<input type="hidden" name="pjxx.ljjbxx.jjr.id" id="pjjbxxmod_jjrid">
+<input type="hidden" name="pjxx.ljjbxx.sjr.id" id="pjjbxxmod_sjrid">
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td>
