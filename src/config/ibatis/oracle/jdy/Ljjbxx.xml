@@ -140,6 +140,7 @@
 	<select id="getQyryxxByCyrybh" resultMap="qyryxxResult" parameterClass="String" > 
 		select a.xzdxzqh xzdxzqh,a.xzdxzqhdm xzdxzqhdm,a.qyid qyid,a.ryid ryid,a.hylbdm hylbdm,a.hylb hylb,a.cyrybh cyrybh,a.cyrylbdm cyrylbdm,a.cyrylbmc cyrylbmc,a.xm xm,a.qm qm,a.bm bm,a.xmpy xmpy,a.gjdm gjdm,a.gj gj,a.mzdm mzdm,a.minzu minzu,a.xbdm xbdm,a.xb xb,a.csrq csrq,a.hyzkdm hyzkdm,a.hyzk hyzk,a.shengao shengao,a.tizh tizh,a.hjdxzqh hjdxzqh,a.hjdxzqhdm hjdxzqhdm,a.hjdxz hjdxz,a.cyzjdm cyzjdm,a.cyzj cyzj,a.zjhm zjhm,a.zzzhm zzzhm,a.zzdz zzdz,a.gwbh gwbh,a.gwmc gwmc,a.gwzrms gwzrms,a.shouji shouji,a.lxdh lxdh,a.jjlxr jjlxr,a.jjlxrdh jjlxrdh,a.gzdm gzdm,a.gz gz,a.zhiwu zhiwu,a.rzrq rzrq,a.cyryztdm cyryztdm,a.cyryzt cyryzt,a.zxr zxr,a.zxbz zxbz,a.zxsj zxsj,a.lrsj lrsj,a.lrr lrr,a.lrdwbm lrdwbm,a.lrdwmc lrdwmc,a.hcdw hcdw,a.hcr hcr,a.hcsj hcsj,a.zxyy zxyy,a.zkzt zkzt,a.bcsj bcsj,a.dcbs dcbs,a.bz bz,a.scbz scbz,a.biduiflag biduiflag,a.zpwtgyy zpwtgyy,a.zt zt,a.yjbz yjbz,a.yjsj yjsj
 		,b.qymc,b.qybm ,a.lzrq , a.xxdm,a.xx ,a.whcd,a.whcddm  , a.cylbdm , a.cylb,a.djrq,a.hjlbdm,a.hjlbmc,a.zzmmdm,a.zzmmmc
+		,a.kdywyzyzgzhm kdywyzyzgzhm
 		from t_qyryxx a ,t_qyjbxx b
 		where a.qyid=b.qyid
 		and a.cyrybh=#value#
