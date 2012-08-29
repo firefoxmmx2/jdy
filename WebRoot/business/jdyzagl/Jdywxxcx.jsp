@@ -7,7 +7,7 @@
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 
 <script type="text/javascript">
-	var lj_detail_div="pjjbxx_detail";
+	var lj_detail_div="ljjbxxadd_detail";
 	var lj_detail_width=900;
 	var lj_grid_div="pjjbxxDiv";
 	var lj_grid_table = "pjjbxxTable";
@@ -16,7 +16,7 @@
 	$(function(){
 		// 治安管理机构
 		$("#lj_gxdwmc").click(function(){
-			getGxdw("lj_gxdwmc","p_gxdwbm");
+			getGxdw("lj_gxdwmc","lj_gxdwbm");
 		});
 		//寄件人证件类型
 		$('#lj_jjr_zjlx').selectBox({code:'dm_zjlx'});
@@ -37,7 +37,7 @@
 	
 	function setPjxxQueryList(pageno,url){
 	 	$("#"+lj_grid_div).html(lj_grid_table_html);
-		params = getSubmitParams("#jdywxxcx_gyd [id*=lj_]",params);
+		params = getSubmitParams("#jdywxxcx_gyd [name*=lj.]",params);
 		if (url==null || url=="undefined"){
 			url=lj_page_url;
 		}
@@ -45,6 +45,8 @@
 	 }
 	//页面gird加载方法
 	function jdywxxQueryPageList(pageno,url){	
+		//alert($("#jdwpdl").val());
+		//alert($("#jdwpxl").val());
 		if (manVerify_pjxx()){
 		    url=setPjxxQueryList(pageno,url);
 			var mygrid1 = $("#"+lj_grid_table).ingrid({ 
@@ -72,38 +74,18 @@
 	/**
 	派件信息详情
 	*/
-	function setPjxxDetail(id) {
+	function setLjxxDetail(id) {
+		$("#"+ljjbxxadd_detail).empty();
 		dataid = id;
-		detailDialog(lj_detail_div, lj_detail_width, lj_update_page_url, null,function(data){
-			$('#pjjbxx_mod [id*=pjjbxxmod_]').attr("readOnly",true).addClass('readonly');
-			$('#pjjbxx_mod .red').removeClass('red');
-			$('#pjjbxx_mod_button').parent('td').remove();
-			$('#pjjbxx_goback').attr('title','关闭').text('关闭');
-			//去掉身份证扫描框
-			$('#pjjbxx_mod a:contains("二代证读取")').each(function(){
-				$(this).parents("table").eq(0).remove();
-			});
-			//去掉寄件人和收件人的选择器
-			$('#pjjbxxmod_jjrssx').unbind('click');
-			$('#pjjbxxmod_sjrssx').unbind('click');
-			//去掉派件人的人员选择器
-			$('#pjjbxxmod_pjr_xm').unbind('click');
-			//去掉寄递品添加按钮
-			$('#pjjbxx_mod a[id=addbutton]').remove();
-			//去掉寄递品信息的操作动作
-			function clear(){
-				$('#YwwffzjlData tbody tr').each(function(){
-					$(this).find('td:last').html('');
-				})
-			}
-			
-			setTimeout(clear,600);
-			
-		});
+		setWidth("ljjbxxadd_detail",950);
+		setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxDetail.jsp");
+		bindDocument("ljjbxxadd_detail");
+		
 	}
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="jdywxxcx_gyd">
+  <input type="hidden" id="lj_gxdwbm" name="lj.gxdwbm" value=""><!-- 管辖单位编码 -->
   <tr>
     <td class="queryfont">寄递业务信息查询</td>
   </tr>
@@ -138,22 +120,22 @@
 				<tr>
 					<td width="10%" class="pagedistd">寄递品大类</td>
 					<td width="23%" class="pagetd">
-					  <select id="jdwpdl">
+					  <select id="jdwpdl" name="lj.jdpxx.jdpdlx">
 						<option></option>
 					  </select>
 					</td>
 					<td width="10%" class="pagedistd">寄递品小类</td>
 					<td width="23%" class="pagetd">
-						 <select id="jdwpxl">
+						 <select id="jdwpxl" name="lj.jdpxx.jdplx">
 							<option></option>
 						 </select>
 					</td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjf" name="pjtbsjf" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjf" name="lj.pjtbsjf" class="inputstyle date" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjt" name="pjtbsjt" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjt" name="lj.pjtbsjt" class="inputstyle date" value=""></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
@@ -174,7 +156,7 @@
 		<td height="3"></td>
 	</tr>
 </table>
-<div id="pjjbxx_detail" class="page-layout" src="#"
+<div id="ljjbxxadd_detail" class="page-layout" src="#"
 		style="top:5px; left:160px;display: none;">
 </div>	
 
