@@ -287,7 +287,7 @@ public class LjxxAction extends PageAction{
 				params.put("gxdwbm", lj.getQyjbxx());
 			}
 			//揽件基本信息   物流单号
-			if(lj.getWldh()!=null && lj.getWldh()!=""){
+			if(lj.getWldh()!=null){
 				params.put("wldh", lj.getWldh());
 			}
 			//寄件人
