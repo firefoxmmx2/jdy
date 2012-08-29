@@ -192,12 +192,12 @@
 			</isNotEmpty>
 		</isNotEmpty>
 		
-		<isNotEmpty prepend="and" property="jdpxx">
-			<isNotEmpty prepend="and" property="jdpxx.jdpdlxmc">
-				jdpxx.jdpdlxmc=#jdpxx.jdpdlxmc#
+		<isNotEmpty prepend="" property="jdpxx">
+			<isNotEmpty prepend="and" property="jdpxx.jdpdlx">
+				jdpxx.jdpdlx=#jdpxx.jdpdlx#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="jdpxx.jdplxmc">
-				jdpxx.jdplxmc=#jdpxx.jdplxmc#
+			<isNotEmpty prepend="and" property="jdpxx.jdplx">
+				jdpxx.jdplx=#jdpxx.jdplx#
 			</isNotEmpty>
 		</isNotEmpty>
 <!-- 		企业信息查询 -->
