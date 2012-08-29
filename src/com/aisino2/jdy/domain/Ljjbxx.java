@@ -69,12 +69,52 @@ public class Ljjbxx implements Serializable {
      */
     private String scbzw;
     
-    //查询列表需要的值
+    //用于查询时用到的对象---寄递品对象
+    private Jdpxx jdpxx;
+    
+    
+	//查询列表需要的值
     private String jjrxm;//寄件人姓名
 	private String jjrzjlx;//寄件人证件类型
     private String jjrzjhm;//寄件人证件号码
     private String ljyxm;//揽件人姓名
     
+    //公安端寄递品信息查询列表需要字段
+    private String qymc;//企业名称
+    private String sjrxm;//收件人姓名
+    private String jdpdlxmc;//寄递品大类型名称
+    private String jdplxmc;//寄递品小类型名称
+    
+    public String getQymc() {
+		return qymc;
+	}
+	public void setQymc(String qymc) {
+		this.qymc = qymc;
+	}
+	public String getSjrxm() {
+		return sjrxm;
+	}
+	public void setSjrxm(String sjrxm) {
+		this.sjrxm = sjrxm;
+	}
+	public String getJdpdlxmc() {
+		return jdpdlxmc;
+	}
+	public void setJdpdlxmc(String jdpdlxmc) {
+		this.jdpdlxmc = jdpdlxmc;
+	}
+	public String getJdplxmc() {
+		return jdplxmc;
+	}
+	public void setJdplxmc(String jdplxmc) {
+		this.jdplxmc = jdplxmc;
+	}
+    public Jdpxx getJdpxx() {
+		return jdpxx;
+	}
+	public void setJdpxx(Jdpxx jdpxx) {
+		this.jdpxx = jdpxx;
+	}
     public String getJjrxm() {
 		return jjrxm;
 	}

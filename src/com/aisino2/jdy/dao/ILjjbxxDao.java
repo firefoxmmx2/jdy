@@ -15,6 +15,10 @@ public interface ILjjbxxDao {
 	List<Ljjbxx> findLjjbxxs(Ljjbxx ljjbxx);
 	
 	Page findLjjbxxsForPage(Map<String, Object> map,int pageno ,int pagesize,String dir, String sort);
+	/*
+	 *公安端 寄递品信息关联 分页查询 
+	 */
+	Page gadjdpxxForPage(Map<String, Object> map,int pageno ,int pagesize,String dir, String sort);
 	
 	String generateDjxh(String qybm);
 	

@@ -55,6 +55,16 @@ public interface ILjjbxxService {
 	 * @return
 	 */
 	Page findLjjbxxForPage(Map<String, Object> para,int pageno, int pagesize,String dir,String sort );
+	/**
+	 * 公安端 寄递品信息关联   分页查询
+	 * @param para 
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page gadjdpxxForPage(Map<String, Object> para,int pageno, int pagesize,String dir,String sort );
 	
 	/**
 	 * 生成揽件信息的登记序号

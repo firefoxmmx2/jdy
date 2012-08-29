@@ -79,7 +79,39 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 		map.put("pageSort", sCol);
 		return queryForPage("ljjbxx.getListPage", map, pageno,pagesize);
 	}
-
+	
+	public Page gadjdpxxForPage(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort) {	
+		
+		String sCol=" ljjbxx.djxh ";
+		if(sort == null)
+			sort = "";
+		else if(!sort.equals("asc") && !sort.equals("desc"))
+			sort = " asc ";
+		if (sort!=null){
+			if("0".equals(sort))
+				sCol = " qyjbxx.qymc "+ sort;
+			else if("1".equals(sort))
+				sCol = " ljjbxx.wldh "+ sort;
+			else if("2".equals(sort))
+				sCol = " jjr.xm "+ sort;
+			else if("3".equals(sort))
+				sCol = " jjr.zjhm "+ sort;
+			else if("4".equals(sort))
+				sCol = " sjr.xm "+ sort;
+			else if("5".equals(sort))
+				sCol = " jdp.jdpdlx "+ sort;
+			else if("6".equals(sort))
+				sCol = " jdp.jdplx "+ sort;
+			else if("5".equals(sort))
+				sCol = "ljjbxx.djsj "+ sort;
+			else 
+				sCol=" ljjbxx.djxh ";
+		}
+		
+		map.put("pageSort", sCol);
+		return queryForPage("jdpxxgadcx.getListPage", map, pageno,pagesize);
+	}
 
 	public String generateDjxh(String qybm) {
 		 String djxh = (String) queryForObject("ljjbxx.getForGenerateDjxh", qybm);

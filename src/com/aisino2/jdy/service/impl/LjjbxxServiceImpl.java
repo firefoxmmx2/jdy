@@ -148,6 +148,11 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			int pagesize, String dir, String sort) {
 		return ljjbxxDao.findLjjbxxsForPage(para, pageno, pagesize, dir, sort);
 	}
+	
+	public Page gadjdpxxForPage(Map<String, Object> para, int pageno,
+			int pagesize, String dir, String sort) {
+		return ljjbxxDao.gadjdpxxForPage(para, pageno, pagesize, dir, sort);
+	}
 
 	public String generateLjdjxh(String qybm) {
 		if(qybm == null || qybm.trim().length()==0)

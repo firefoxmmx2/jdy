@@ -3,7 +3,7 @@
 <sqlMap>
 	<typeAlias alias="ljjbxx" type="com.aisino2.jdy.domain.Ljjbxx"/>
 	<typeAlias alias="Rdrjbxx" type="com.aisino2.jdy.domain.Rdrjbxx"/>
-	
+	<typeAlias alias="Jdpxx" type="com.aisino2.jdy.domain.Jdpxx"/>
 	<cacheModel id="oneDayCategory" type="LRU">
 		<flushInterval hours="24"/>
 	</cacheModel>
@@ -55,6 +55,12 @@
 			<result property="zjhm" column="jjr_zjhm"/>
 			<result property="zjlx" column="jjr_zjlx"/>
 	</resultMap>
+<!-- 	寄递品信息 -->
+	<resultMap class="Jdpxx" id="ljjbxx_list_jdp_rm">
+			<result property="jdpdlxmc" column="jdpdlxmc"/>
+			<result property="jdplxmc" column="jdplxmc"/>
+			<result property="jdpmc" column="jdpmc"/>
+	</resultMap>
 <!-- 	揽件信息列表查询结果 -->
 	<resultMap class="ljjbxx" id="ljjbxx_list_rm" extends="ljjbxx_base_rm">
 		<result property="jjr" resultMap="ljjbxx_list_jjr_rm"/>
@@ -72,7 +78,18 @@
 <!-- 		查询列表里面没有所需要这个字段，暂时不给出 -->
 <!-- 		<result property="ljrtbr" resultMap=""/> --> 
 	</resultMap>
-	
+<!--        公安端寄递品信息关联查询                              -->	
+	<resultMap class="ljjbxx" id="gadjdpxxglcx" extends="ljjbxx_base_rm">
+		<result property="jdpxx" resultMap="ljjbxx_list_jdp_rm"/>
+		<result property="jjr" resultMap="ljjbxx_list_jjr_rm"/>
+		<result property="sjr" resultMap="ljjbxx_list_sjr_rm"/>
+		<!--企业信息 -->
+		<result property="qyjbxx.qyid" column="qyjbxx_qyid"/>
+		<result property="qyjbxx.qybm" column="qyjbxx_qybm"/>
+		<result property="qyjbxx.qymc" column="qyjbxx_qymc"/>
+		<result property="qyjbxx.gxdwbm" column="qyjbxx_gxdwbm"/>
+		<result property="qyjbxx.gxdwmc" column="qyjbxx_gxdwmc"/>
+	</resultMap>	
 	
 	<sql id="ljjbxxWhere" >
 		<isNotEmpty prepend="and" property="djxh"> 
@@ -116,6 +133,72 @@
 		
 		<isNotEmpty prepend="and" property="sfbj">
 			ljjbxx.sfbj = #sfbj#
+		</isNotEmpty>
+<!-- 		企业信息查询 -->
+		<isNotEmpty prepend="" property="qyjbxx" >
+<!-- 			<isNotEmpty prepend="and" property="qyjbxx.qyid"> -->
+<!-- 				ljjbxx.qyid = #qyjbxx.qyid# -->
+<!-- 			</isNotEmpty> -->
+			<isNotEmpty prepend="and" property="qyjbxx.qybm">
+				qyjbxx.qybm = #qyjbxx.qybm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qyjbxx.qymc">
+				qyjbxx.qymc like '%$qyjbxx.qymc$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qyjbxx.gxdwbm">
+				qyjbxx.gxdwbm = #qyjbxx.gxdwbm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qyjbxx.gxdwmc">
+				qyjbxx.gxdwmc like '$qyjbxx.gxdwmc$%'
+			</isNotEmpty>
+		</isNotEmpty>
+	</sql>
+<!--  公安端寄递品信息链表查询  -->
+	<sql id="jdpxxgadcxWhere">
+		<include refid="ljjbxxWhere"/>
+		<isNotEmpty prepend="and" property="djsjf">
+			ljjbxx.ljtbsj >= #djsjf#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="djsjt">
+			ljjbxx.ljtbsj &lt;= #djsjt#
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="jjr" >
+			<isNotEmpty prepend="and" property="jjr.id">
+				ljjbxx.jjr_id=#jjr.id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jjr.xm">
+				jjr.xm like '%$jjr.xm$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jjr.zjhm"> 
+				jjr.zjhm=#jjr.zjhm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jjr.zjlx">
+				jjr.zjlx=#jjr.zjlx#
+			</isNotEmpty>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="" property="sjr" >
+			<isNotEmpty prepend="and" property="sjr.id">
+				ljjbxx.sjr_id=#sjr.id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sjr.xm">
+				sjr.xm like '%$sjr.xm$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sjr.zjhm"> 
+				sjr.zjhm=#sjr.zjhm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sjr.zjlx">
+				sjr.zjlx=#sjr.zjlx#
+			</isNotEmpty>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="and" property="jdpxx">
+			<isNotEmpty prepend="and" property="jdpxx.jdpdlxmc">
+				jdpxx.jdpdlxmc=#jdpxx.jdpdlxmc#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jdpxx.jdplxmc">
+				jdpxx.jdplxmc=#jdpxx.jdplxmc#
+			</isNotEmpty>
 		</isNotEmpty>
 <!-- 		企业信息查询 -->
 		<isNotEmpty prepend="" property="qyjbxx" >
@@ -352,5 +435,47 @@
 <!-- 	生成登记序号用的查询 -->
 	<select id="ljjbxx.getForGenerateDjxh" parameterClass="String" resultClass="String">
 		select djxh from t_ljjbxx where djxh like '$value$%' and rownum &lt;=1 order by djxh desc
+	</select>
+<!-- 	公安端寄递品信息列表分页记录数  -->
+	<select id="jdpxxgadcx.getListPageCount" parameterClass="map" resultClass="Integer">
+		select count(1) 
+		from 
+				t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyjbxx qyjbxx,t_jdpxx jdpxx
+		where 1=1
+		        and jdpxx.ljjbxx_id=ljjbxx.djxh
+		        and ljjbxx.qybm=qyjbxx.qybm
+				and ljjbxx.jjr_id=jjr.id 
+				and ljjbxx.sjr_id=sjr.id 
+		<dynamic prepend="and">
+			<include refid="jdpxxgadcxWhere"/>
+		</dynamic>
+	</select>
+<!-- 	公安端寄递品信息列表分页 -->
+	<select id="jdpxxgadcx.getListPage" parameterClass="map" resultMap="gadjdpxxglcx">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(	select
+		    <!--寄递品信息 -->
+		    jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc,jdpxx.jdpmc jdpmc
+		    <!--寄递人信息 -->
+		    ,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm,jjr.id jjr_id
+		    <!--收递人信息 -->
+		    ,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm,sjr.id sjr_id
+		    <!--揽件信息 -->
+		    ,ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh
+			<!--企业信息 -->
+			,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc
+			,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
+		from 
+				t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyjbxx qyjbxx,t_jdpxx jdpxx
+		where 1=1
+		        and jdpxx.ljjbxx_id=ljjbxx.djxh
+		        and ljjbxx.qybm=qyjbxx.qybm
+				and ljjbxx.jjr_id=jjr.id 
+				and ljjbxx.sjr_id=sjr.id 
+		<dynamic prepend="and">
+			<include refid="jdpxxgadcxWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 </sqlMap>
