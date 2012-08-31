@@ -19,4 +19,6 @@
 	<sqlMap resource="config/ibatis/oracle/jdy/Rdrjbxx.xml"/>
 <!-- 	寄递对象照片信息 -->
 	<sqlMap resource="config/ibatis/oracle/jdy/Jddxzpxx.xml"/>
+<!-- 	寄递业统计信息 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Jdytj.xml"/>
 </sqlMapConfig>

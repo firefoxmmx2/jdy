@@ -11,5 +11,9 @@
     <action name="*_pjxx" method="{1}" class="PjxxAction">
       <result type="json"/>
     </action>
+<!--     寄递业统计 -->
+    <action name="*_jdytjxx" method="{1}" class="JdytjAction">
+      <result type="json"/>
+    </action>
   </package>
 </struts>

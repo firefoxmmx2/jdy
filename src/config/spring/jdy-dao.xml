@@ -24,5 +24,8 @@
 	<bean id="PjjbxxDaoImpl" class="com.aisino2.jdy.dao.impl.PjjbxxDaoImpl">
 		<property name="sqlMapClient" ref="sqlMapJdysys" />
 	</bean>
-	
+<!-- 	寄递业统计 -->
+	<bean id="JdytjxxDaoImpl" class="com.aisino2.jdy.dao.impl.JdytjxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
 </beans>

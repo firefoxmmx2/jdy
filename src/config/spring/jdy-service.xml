@@ -29,4 +29,8 @@
 	<bean id="JdyBjServiceImpl" class="com.aisino2.jdy.service.impl.JdyBjServiceImpl">
 		<property name="ggbdsjService" ref="ggbdsjService"/>
 	</bean>
+<!-- 	寄递业统计 -->
+	<bean id="JdytjxxServiceImpl" class="com.aisino2.jdy.service.impl.JdytjxxServiceImpl">
+		<property name="jdytjxxDao" ref="JdytjxxDaoImpl"/>
+	</bean>
 </beans>

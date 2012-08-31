@@ -9,4 +9,9 @@
   <bean id="PjxxAction" class="com.aisino2.jdy.action.PjxxAction" scope="prototype">
       <property name="pjjbxxService" ref="PjjbxxServiceImpl"/>
   </bean>
+<!--   寄递业统计信息 -->
+  <bean id="JdytjAction" class="com.aisino2.jdy.action.JdytjAction" scope="prototype">
+      <property name="jdytjxx_service" ref="JdytjxxServiceImpl"/>
+  </bean>
+  
 </beans>
