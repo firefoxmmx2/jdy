@@ -376,6 +376,9 @@ function wldh_completion(wldh_el){
 <input type="hidden" name="pjxx.pjr.cyrybh" id="pjxxadd_pjr_cyrybh">
 <input type="hidden" name="pjxx.ljjbxx.jjr.ssx" id="pjxxadd_jjrssxdm">
 <input type="hidden" name="pjxx.ljjbxx.sjr.ssx" id="pjxxadd_sjrssxdm">
+<%-- 修正在新增派件信息的时候，寄件人和收件人的ID为空的问题 --%>
+<input type="hidden" name="pjxx.ljjbxx.jjr.id" id="pjxxadd_jjrid">
+<input type="hidden" name="pjxx.ljjbxx.sjr.id" id="pjxxadd_sjrid">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td>
