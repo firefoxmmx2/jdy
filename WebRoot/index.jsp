@@ -78,7 +78,8 @@
         <script language="javascript" type="text/javascript" src="javascript/ext/ext-all.js"></script>
 		<script language="javascript" type="text/javascript" src="javascript/jquery.bgiframe.js?"></script>
 		<script language="javascript" type="text/javascript" src="javascript/jquery.dimensions.js?"></script>
-
+		
+			
 		<script language="javascript" type="text/javascript" src="javascript/jdsharp.js?"></script>
 		<script language="javascript" type="text/javascript" src="javascript/jquery.jdMenu.js?"></script>
 		<script language="javascript" type="text/javascript" src="javascript/jquery.jframe.js"></script>
@@ -118,7 +119,9 @@
 		<link rel="stylesheet" href="css/style.css" type="text/css" />
 		<link rel="stylesheet" href="css/ui.datepicker.css" type="text/css"
 			media="screen" title="core css file" charset="utf-8" />
-			
+		<%-- 加入图表插件 --%>
+		<script language="JavaScript" src="javascript/FusionCharts.js"></script>
+		<script language="JavaScript" src="javascript/ChartsCreate.js"></script>
     <link href="css/notificationmsg.css" rel="stylesheet" type="text/css" />
 			
 			
