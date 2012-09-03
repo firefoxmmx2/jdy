@@ -54,6 +54,8 @@ $(document).ready(function() {
 		
 		if(!jdytjxx_qy_queryTable)
 			jdytjxx_qy_queryTable=$("#"+jdytjxx__table_id);
+		if($('#jdlx',jdytjxx_qy_queryTable).length)
+			$('#jdlx',jdytjxx_qy_queryTable).text('揽件量');
 		
 		qydxtj_loadPage(jdytjxx_divnid);
 		if($('#jdlx').length)
@@ -70,6 +72,8 @@ $(document).ready(function() {
 		
 		if(!jdytjxx_queryTable)
 			jdytjxx_queryTable=$("#"+jdytjxx__table_id);
+		if($('#jddxlx',jdytjxx_queryTable).length)
+			$('#jddxlx',jdytjxx_queryTable).text('寄件人');
 		jddxtj_loadPage(jdytjxx_divnid);
 		if($('#jddxlx').length)
 			$('#jddxlx').text('寄件人');
@@ -85,7 +89,8 @@ $(document).ready(function() {
 		
 		if(!jdytjxx_qy_queryTable)
 			jdytjxx_qy_queryTable=$("#"+jdytjxx__table_id);
-		
+		if($('#jdlx',jdytjxx_qy_queryTable).length)
+			$('#jdlx',jdytjxx_qy_queryTable).text('派件量');
 		qydxtj_loadPage(jdytjxx_divnid);
 		if($('#jdlx').length)
 			$('#jdlx').text('派件量');
@@ -101,6 +106,8 @@ $(document).ready(function() {
 		
 		if(!jdytjxx_queryTable)
 			jdytjxx_queryTable=$("#"+jdytjxx__table_id);
+		if($('#jddxlx',jdytjxx_queryTable).length)
+			$('#jddxlx',jdytjxx_queryTable).text('收件人');
 		jddxtj_loadPage(jdytjxx_divnid);
 		if($('#jddxlx').length)
 			$('#jddxlx').text('收件人');
@@ -160,7 +167,7 @@ function geteExcelHead_baybmxxtj(divid){
 }
 
 function set_jdytjxx_list(pageno,url){	
-	$("#"+jdytjxx_divnid).html(jdytjxx_tables);	
+	//$("#"+jdytjxx_divnid).html(jdytjxx_tables);	
 
 	createXML("jdytjxx_");
 	params=getSubmitParams('#jdytjxx_ct [id*=jdytjxx_]');
@@ -177,9 +184,6 @@ function set_jdytjxx_list(pageno,url){
  * param detailid：用于修改，明细查询的div的id
  */
 function jddxtj_loadPage(divpageid){
-	if($('#'+jdytjxx__table_id).length == 0){
-		$('#'+divpageid).html(jdytjxx_queryTable);
-	}
 	jdytjxx_tables=$("#"+divpageid).html();
 	$("#"+jdytjxx_detailid).hide();
 	jdytjxx_query_page_func=jdyjddxtj_page_query;
@@ -187,9 +191,6 @@ function jddxtj_loadPage(divpageid){
 }
 
 function qydxtj_loadPage(divpageid){
-	if($('#'+jdytjxx__table_id).length == 0){
-		$('#'+divpageid).html(jdytjxx_qy_queryTable);
-	}
 	jdytjxx_tables=$("#"+divpageid).html();
 	$("#"+jdytjxx_detailid).hide();
 	jdytjxx_query_page_func=jdyqydxtj_page_query;
@@ -203,6 +204,11 @@ function jdyjddxtj_page_query(pageno,url){
 			$("#jdytjxx_gxdwbm").val(<%=gxdwbm%>);
 			$("#jdytjxx_departlevel").val(<%=departlevel%>);
 		} 
+		
+		if($('#'+jdytjxx__table_id).length == 0){
+			$('#'+jdytjxx_divnid).html(jdytjxx_queryTable);
+		}
+
 		
 		url=set_jdytjxx_list(pageno,url);
 		
@@ -222,7 +228,7 @@ function jdyjddxtj_page_query(pageno,url){
 	                                    		$tr.find('td:nth(0)').remove();
 	                                    		$tr.find('th:nth(0)').remove();
 	                                    	});
-	                                    	myTableDataBmXx= $(jdytjxx_tables).clone().append($chart_table.find('tbody').html()).hide();
+	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
 	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
 	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
 	                                    		 ceshiBar();
@@ -244,6 +250,9 @@ function jdyqydxtj_page_query(pageno,url){
 			$("#jdytjxx_departlevel").val(<%=departlevel%>);
 		} 
 		
+		if($('#'+jdytjxx__table_id).length == 0){
+			$('#'+jdytjxx_divnid).html(jdytjxx_qy_queryTable);
+		}
 		url=set_jdytjxx_list(pageno,url);
 		
 		var mygrid1 = $("#"+jdytjxx__table_id).ingrid({
@@ -261,7 +270,7 @@ function jdyqydxtj_page_query(pageno,url){
 	                                    		$tr.find('td:nth(0)').remove();
 	                                    		$tr.find('th:nth(0)').remove();
 	                                    	});
-	                                    	myTableDataBmXx= $(jdytjxx_tables).clone().append($chart_table.find('tbody').html()).hide();
+	                                    	myTableDataBmXx= $(jdytjxx_qy_queryTable).clone().append($chart_table.find('tbody').html()).hide();
 	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
 	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
 	                                    		 ceshiBar();
