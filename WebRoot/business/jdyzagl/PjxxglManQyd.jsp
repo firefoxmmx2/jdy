@@ -72,6 +72,24 @@
 	}
 	//验证
 	function manVerify_pjxx(){
+		var sj1 = $("#pjxx_pjsjf").val();
+		var sj2 = $("#pjxx_pjsjt").val();
+		if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
+			if(sj1>sj2){
+				jAlert('派件时间不能大于派件时间至','提示信息')
+				return false;
+			}
+		}
+		
+		sj1 = $("#pjxx_pjtbsjf").val();
+		sj2 = $("#pjxx_pjtbsjt").val();
+		if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
+			if(sj1>sj2){
+				jAlert('填报时间时间不能大于填报时间至','提示信息')
+				return false;
+			}
+		}
+		
 		return true;
 	}
 	//派件信息修改
