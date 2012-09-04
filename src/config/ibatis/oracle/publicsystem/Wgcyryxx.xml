@@ -641,7 +641,7 @@
 				#rjka#
 			</isNotNull>
 			<isNotNull prepend="," property="kdywyzyzgzhm">
-				kdywyzyzgzhm
+				#kdywyzyzgzhm#
 			</isNotNull>
 		</dynamic>
 		)
