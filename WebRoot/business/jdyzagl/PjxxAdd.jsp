@@ -27,7 +27,8 @@ $(function() {
 	
 	//派件人
 	$('#pjxxadd_pjr_xm').attr('readOnly',true).click(function(){
-		getTyRY_item('pjxxadd_pjr_xm','pjxxadd_pjr_cyrybh','<%=qybm%>');
+		dataid=null;
+		getTyRY_item('pjxxadd_pjr_xm','pjxxadd_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
 	});
 	//派件时间选择
 	$("#pjxxadd_pjsj").val('<%=dateNow%>').attr("readOnly",true).datepicker();

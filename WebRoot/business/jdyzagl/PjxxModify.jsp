@@ -31,7 +31,8 @@ $(function() {
 	$("#pjjbxxmod_pjsj").attr("readOnly",true).datepicker();
 	//
 	$('#pjjbxxmod_pjr_xm').attr("readOnly",true).click(function(){
-		getTyRY_item('pjjbxxmod_pjr_xm','pjjbxxmod_pjr_cyrybh','<%=qybm%>');
+		dataid=null;
+		getTyRY_item('pjjbxxmod_pjr_xm','pjjbxxmod_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
 	});
 	//户籍省市县--寄件人
 	$("#pjjbxxmod_jjrssx").click( function() {

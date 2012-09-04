@@ -21,7 +21,8 @@
 		$('#pjxx_jjr_zjlx').selectBox({code:'dm_zjlx'});
 		$('.date').attr("readOnly",true).datepicker();
 		$('#pjxx_pjr_xm').click(function(){
-			getTyRY_item('pjxx_pjr_xm','pjxx_pjr_cyrybh','<%=qybm%>');
+			dataid=null;
+			getTyRY_item('pjxx_pjr_xm','pjxx_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
 		});
 		loadPagePjxxQuery(pjxx_grid_div);
 		
