@@ -126,59 +126,72 @@ function tianJiaZxzybaydwDzcl(cllb){
 	setUrl("zxzybaydwdzcl_detail","business/jdyzagl/tjwp.jsp");
 	bindDocument("zxzybaydwdzcl_detail");
 }
-//寄递物品信息保存时添加到列表---添加行的方法
-function jdwpxxadd(){
-	var jdwp_jdplx=$("#jdwp_jdpxl").val();//寄递品类型
-	var jdwp_jdpmc=$("#jdwp_jdpmc").val();//寄递品名称
-	var jdwp_jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
-	var jdwp_jdpzl=$('#jdwp_jdpzl').val();//重量
-	var jdwp_jdptj=$('#jdwp_jdptj').val();//体积
-	var jdwp_jdplx_mc=$("#jdwp_jdpxl").attr("title");//寄递品类型名称
-	var jdwp_jdpdl=$('#jdwp_jdpdl').val();
-	var jdwp_jdpdl_mc=$('#jdwp_jdpdl').attr('title');
-	var rowData = {
-			jdplx:jdwp_jdplx,
-			jdpmc:jdwp_jdpmc,
-			jdpsm:jdwp_jdpsm,
-			jdpzl:jdwp_jdpzl,
-			jdptj:jdwp_jdptj,
-			jdplxmc:jdwp_jdplx_mc,
-			jdpdlx:jdwp_jdpdl,
-			jdpdlxmc:jdwp_jdpdl_mc
-	};
-	rowData = $.toJSON(rowData);
-		trNum++;
-		var addTableTr="";
-		//获取行数
-		var trLen= $("#YwwffzjlTable").find("tr").length;
-		//通过行数判断每行的css
-		var tr_class = "grid-row-style1";//当为奇数时的css
-		//当为偶数时的css
-		if((trLen-1)%2==1)
-			tr_class = "grid-row-style2";
-		//设置行的属性和样式	
-		addTableTr += "<tr _selected='false' name='Tr' class='"+tr_class+"' id='"+trNum+"' rowData='"+rowData+"'>";
-		//设置每列的属性
-	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_xh"+trNum+"'>"+trNum+"</td>";
-	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_bzw"+trNum+"'>"+jdwp_jdpmc+"</td>";
-	    
-	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sl"+trNum+"'>"+jdwp_jdpsm+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_lx"+trNum+"'>"+jdwp_jdplx_mc+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_njpm"+trNum+"'>"+jdwp_jdpzl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_zl"+trNum+"'>"+jdwp_jdptj+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
-		+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
-		+"</td>";
-		addTableTr += "</tr>";
-		if(addTableTr!=""){
-			$("#YwwffzjlTable").append(addTableTr);
-			//清空附件上传页面数据
+/**
+ * 寄递物品信息保存时添加到列表---添加行的方法
+ * @recode jdpxx 对象
+ */
+function jdwpxxadd(record){
+	
+	var jdwp_jdplx_mc;//寄递品类型名称
+	var rowData = {};
+	if(record){
+		rowData.id = record.id;
+		rowData.jdplx =record.jdplx;
+		rowData.jdpmc=record.jdpmc;
+		rowData.jdpsm=record.jdpsm;
+		rowData.jdpzl=record.jdpzl;
+		rowData.jdptj=record.jdptj;
+		rowData.jdplxmc=record.jdplxmc;
+		rowData.jdpdlx=record.jdpdlx;
+		rowData.jdpdlxmc=record.jdpdlxmc;
+	}
+	else{
+		rowData.jdplx=$("#jdwp_jdpxl").val();//寄递品类型
+		rowData.jdpmc=$("#jdwp_jdpmc").val();//寄递品名称
+		rowData.jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
+		rowData.jdpzl=$('#jdwp_jdpzl').val();//重量
+		rowData.jdptj=$('#jdwp_jdptj').val();//体积
+		rowData.jdplxmc=$("#jdwp_jdpxl").attr("title");//寄递品类型名称
+		rowData.jdpdlx=$('#jdwp_jdpdl').val();
+		rowData.jdpdlxmc=$('#jdwp_jdpdl').attr('title');
+	}
+	var rowDataStr = $.toJSON(rowData);
+	trNum++;
+	var addTableTr="";
+	//获取行数
+	var trLen= $("#YwwffzjlTable").find("tr").length;
+	//通过行数判断每行的css
+	var tr_class = "grid-row-style1";//当为奇数时的css
+	//当为偶数时的css
+	if((trLen-1)%2==1)
+		tr_class = "grid-row-style2";
+	//设置行的属性和样式
+	if(record)
+		addTableTr += "<tr _selected='false' name='Tr' database='1' class='"+tr_class+"' id='"+trNum+"' rowData='"+rowDataStr+"'>";
+	else
+		addTableTr += "<tr _selected='false' name='Tr' class='"+tr_class+"' id='"+trNum+"' rowData='"+rowDataStr+"'>";
+	//设置每列的属性
+    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_xh"+trNum+"'>"+trNum+"</td>";
+    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_bzw"+trNum+"'>"+rowData.jdpmc+"</td>";
+    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sl"+trNum+"'>"+rowData.jdpsm+"</td>";
+	addTableTr += "<td class='grid-col-style1' _colid='2' id='l_lx"+trNum+"'>"+rowData.jdplxmc+"</td>";
+	addTableTr += "<td class='grid-col-style1' _colid='2' id='l_njpm"+trNum+"'>"+rowData.jdpzl+"</td>";
+	addTableTr += "<td class='grid-col-style1' _colid='2' id='l_zl"+trNum+"'>"+rowData.jdptj+"</td>";
+	addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
+	+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
+	+"</td>";
+	addTableTr += "</tr>";
+	if(addTableTr!=""){
+		$("#YwwffzjlTable").append(addTableTr);
+		//清空附件上传页面数据
+		if(!record){
 			$("#jdwp_jdpmc").removeAttr("value");
 			$("#jdwp_jdpsm").removeAttr("value");
 			$('#jdwp_jdpzl').removeAttr("value");//重量
 			$('#jdwp_jdptj').removeAttr("value");//体积
-			addTrEvent($("#YwwffzjlTable").find("tr:last"));
 		}
+		addTrEvent($("#YwwffzjlTable").find("tr:last"));
+	}
 }
 //处理鼠标悬停是的页面样式
 function addTrEvent(tr){
@@ -226,8 +239,15 @@ function getObject(obj){
 		var shanchuTr = $(obj).parent().parent();
 		var shanchuTrParent = shanchuTr.parent();
 		//标志位修改成1表示新添加之后又做了删除，2表示已经做了录入需要对数据库进行删除
-		$(shanchuTr).find("td").eq(1).text("1");
-		shanchuTr.remove();
+		//如果为数据库记录就隐藏该行，否则删除
+		if($(shanchuTr).attr("database")){
+			$(shanchuTr).hide();
+			var rowData=$.evalJSON($(shanchuTr).attr("rowData"));
+			rowData['sfscbz'] = "Y";
+			$(shanchuTr).attr("rowData",$.toJSON(rowData));
+		}
+		else
+			shanchuTr.remove();
 		$("shanchuTrParent td:nth-child(2)").text();
 		var tr_class;
 		shanchuTrParent.find("tr").each(function(i){
@@ -358,6 +378,14 @@ function wldh_completion(wldh_el){
 				
 					
 			});
+			
+			//初始化寄递品信息
+			if(data.lj.jdp_list && data.lj.jdp_list.length>0){
+				var jdp_list=data.lj.jdp_list;
+				for(var i=0;i<jdp_list.length;i++){
+					jdwpxxadd(jdp_list[i]);
+				}
+			}
 		}
 		
 	}, 'json');
