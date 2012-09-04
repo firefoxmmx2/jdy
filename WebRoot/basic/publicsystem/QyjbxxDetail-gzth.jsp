@@ -63,8 +63,22 @@
 			ysyInit();
 		} else if(selHylb=='Y01') { //废旧金属
 			ksyInit();
-		} 
+		} else if(selHylb=='Y') {// 寄递业
+			jdyInit();
+		}
 	}
+	
+	function jdyInit(){ //寄递业初始
+		changeLableTitle('gxdw_title','管辖单位');
+		//$("#hqZhuFuType").css("display","block"); //当需要隐藏/显示企业主分类的时候 将此行回复注销
+		$("#qyjbxxXiangxi").height(400);
+		$("#QyJibenxiangmu").load("basic/publicsystem/QyjbxxJibenXiangMuDetail-jdy-gzth.jsp", {}, function(){
+			qyjbxxXiangxi_updatediv();
+			changeLableTitle('qyorcs_','企业');
+			jdyYqInit(); //页签初始化
+		});
+	}
+	
 	function ylyInit(){ //娱乐业初始
 	}
 	
@@ -206,6 +220,12 @@
 	}
 	
 	//---不同行业页签初始化(根据需求,不同行业可能需要不同的页签)
+	function jdyYqInit(){ //寄递业
+		showOrHideYlQitaxxbq('small_abxx','block'); //用到安保信息页签则加载之,不需要则不用写本行和下两行
+		$("#plant_abxx").load("basic/publicsystem/YqAbxx-jdy-gzth.jsp"); //安保信息页签需要有那些DIV 去加载不同的业务页面
+	}
+	
+	//---不同行业页签初始化(根据需求,不同行业可能需要不同的页签)
 	function jxyYqInit(){ //机修业
 		showOrHideYlQitaxxbq('small_abxx','block'); //用到安保信息页签则加载之,不需要则不用写本行和下两行
 		$("#plant_abxx").load("basic/publicsystem/YqAbxx-jxy-gzth.jsp"); //安保信息页签需要有那些DIV 去加载不同的业务页面
@@ -251,6 +271,15 @@
 		$("#plant_abxx").load("basic/publicsystem/YqAbxx-ysy-gzth.jsp"); //安保信息页签需要有那些DIV 去加载不同的业务页面
 	}
 	//---不同行业页签点击事件初始化(根据需求,不同行业每个页签加载的内容可能不同：在这里做)
+	function jdyOnloadbq(yqid){ //寄递业
+		if(yqid=='abxx'&&yqstate==0){ //保证加载一次
+			$("#div_jdy_baoAnRY").empty().load("basic/publicsystem/BaryxxMan.jsp").show("slow"); //加载保安人员信息
+			$("#div_jdy_baoWeiRY").empty().load("basic/publicsystem/BwryxxDetailMan.jsp").show("slow"); //加载保卫人员信息
+			$("#div_jdy_shiPinSB").empty().load("basic/publicsystem/BldsjksbDetailMan-gzth.jsp").show("slow"); //加载视频监控设备
+			$("#div_jdy_jiFangSB").empty().load("basic/publicsystem/AqjcsbMan-gzth.jsp").show("slow"); //加载技防设备信息
+		}
+	}
+	
 	function jxyOnloadbq(yqid){ //机修业
 		if(yqid=='abxx'&&yqstate==0){ //保证加载一次
 			$("#div_jxy_baoAnRY").empty().load("basic/publicsystem/BaryxxMan.jsp").show("slow"); //加载保安人员信息
@@ -380,6 +409,8 @@
 			jdccjyOnloadbq(yqid);
 		} else if(selHylb=='D') { //印刷业
 			ysyOnloadbq(yqid);
+		} else if(selHylb=='Y') { //寄递业
+			jdyOnloadbq(yqid);
 		}
 	}
 	
