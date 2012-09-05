@@ -833,6 +833,8 @@ public class Dict_itemAction extends PageAction{
 		int lksyflag = 0; //开锁业标识2011年7月22日新增
 		int lzjjgyflag = 0; //中介机构业标识2011年11月8日新增
 		int ysyflag = 0; //印刷业标识2011年11月17日新增
+		int jdyflag = 0; //寄递业标识 2012-8-21 新增
+		
 		String[] utype = userType.split(",");
 		
 		for(int i=0;i<utype.length;i++){
@@ -855,6 +857,7 @@ public class Dict_itemAction extends PageAction{
 				lksyflag = 1;
 				lzjjgyflag = 1;
 				ysyflag = 1;
+				jdyflag=1;
 			}else{
 				if("11".equals(utype[i]) || "12".equals(utype[i]) || "13".equals(utype[i]) || "14".equals(utype[i])||"15".equals(utype[i]))
 					ylyflag = 1;
@@ -912,6 +915,10 @@ public class Dict_itemAction extends PageAction{
 					lksyflag = 1;
 				if("234".equals(utype[i]) || "233".equals(utype[i]))
 					ysyflag = 1;
+				//寄递业
+				if("254".equals(utype[i]) || "253".equals(utype[i]) || "252".equals(utype[i]))
+					jdyflag=1;
+
 			}			
 		}
 		
@@ -940,6 +947,8 @@ public class Dict_itemAction extends PageAction{
 				lksyflag = 0; //开锁业标识2011年7月22日新增
 				lzjjgyflag=0; //中介机构业标识2011年11月8日新增
 				ysyflag=0; //印刷业标识2011年11月17日新增
+				jdyflag = 0; //寄递业标识 2012-8-21 新增
+
 			}
 		}
 		
@@ -986,6 +995,9 @@ public class Dict_itemAction extends PageAction{
 				allhylbdm=allhylbdm+Separator+"E07";
 			if(ysyflag == 1)
 				allhylbdm=allhylbdm+Separator+"D";
+			//寄递业 新增 2012-09-05
+			if(jdyflag==1)
+				allhylbdm=allhylbdm+Separator+"Y";
 		
 		try {
 			Dict_item setDict_item=new Dict_item();
@@ -1086,6 +1098,10 @@ public class Dict_itemAction extends PageAction{
 					}
 				}else if("D".equals(d_item.getFact_value())){
 					if(ysyflag==1){
+						ldata.add(d_item);
+					}
+				}else if("Y".equals(d_item.getFact_value())){ //寄递业 20120905
+					if(jdyflag==1){
 						ldata.add(d_item);
 					}
 				}
