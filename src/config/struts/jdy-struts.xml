@@ -15,5 +15,13 @@
     <action name="*_jdytjxx" method="{1}" class="JdytjAction">
       <result type="json"/>
     </action>
+<!--     寄递品信息 -->
+    <action name="*_jdpxx" method="{1}" class="jdpxxAction">
+      <result type="json"/>
+    </action>
+<!--     可以寄递物品信息 -->
+    <action name="*_kyjdwp" method="{1}" class="kyjdwpAction">
+      <result type="json"/>
+    </action>
   </package>
 </struts>
