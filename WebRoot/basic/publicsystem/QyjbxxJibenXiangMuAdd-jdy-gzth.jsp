@@ -13,10 +13,32 @@
 		$("#a_jjlxmc").click(function(){ //经济类型筛选
 			getDict_item("a_jjlxmc","a_jjlxbm","dm_jjlx");
 		});
+		$('#a_jjlxbm').bind('propertychange',function(){
+			if($(this).val() == '330'){
+				if(!$('#a_wstzqypzzsh').attr('isValiate')){
+					$('#a_wstzqypzzsh').parent('td').prev()
+						.removeClass('pagedistd1')
+						.addClass('red');
+					$('#a_wstzqypzzsh').attr('isValiate',true)
+				}
+				
+			}
+			else{
+				if($('#a_wstzqypzzsh').attr('isValiate')){
+					$('#a_wstzqypzzsh').parent('td').prev()
+					.removeClass('red')
+					.addClass('pagedistd1');
+					$('#a_wstzqypzzsh').attr('isValiate',false);
+				}
+				
+			}
+			
+		})
 		
 	});
 	
-	function qyjbxx_addVerify_jdy(){ //验证
+	function qyjbxx_addVerify(){ //验证
+		
 		if (!checkControlValue("a_qymc","String",1,120,null,1,"企业名称"))
 			return false;
 		if (!checkControlValue("a_jydz","String",1,200,null,1,"企业地址"))
@@ -35,7 +57,7 @@
 			return false;
 		if (!checkControlValue("a_jymj","Float",-99999999.99,99999999.99,2,1,"占地面积(平米)"))
 			return false;
-		if (!checkControlValue("a_zczj","Float",-99999999.99,99999999.99,2,0,"注册资金(万元)"))
+		if (!checkControlValue("a_zczj","Float",-99999999.99,99999999.99,2,1,"注册资金(万元)"))
 			return false;
 		if (!checkControlValue("a_frdb","String",1,30,null,1,"法定代表人"))
 			return false;
@@ -56,8 +78,9 @@
 // 			return false;
 		if (!checkControlValue("a_kdjyxkzbh","String",1,30,null,1,"快递经营许可证号"))
 			return false;
-// 		if (!checkControlValue("a_wstzqypzzsh","String",1,30,null,1,"外商投资企业批准证书号"))
-// 			return false;
+		if($('#a_wstzqypzzsh').attr('isValiate'))
+			if (!checkControlValue("a_wstzqypzzsh","String",1,30,null,1,"外商投资企业批准证书号"))
+				return false;
 		if (!checkControlValue("a_yyzzZjbh","String",1,60,null,0,"营业执照编号"))
 			return false;
 		if (!checkControlValue("a_yyzzFzjg","String",1,60,null,0,"营业执照发证机构名称"))
@@ -66,10 +89,10 @@
 			return false
 		if (!checkControlValue("a_swdjFzjg","String",1,60,null,0,"税务登记证发证机构名称"))
 			return false;
-		if (!checkControlValue("a_jyxkZjbh","String",1,60,null,1,"经营许可证号"))
+		if (!checkControlValue("a_jyxkZjbh","String",1,60,null,1,"行业许可证号"))
 			return false;
-		if (!checkControlValue("a_jyxkFzjg","String",1,60,null,1,"经营许可证发证机关"))
-			return false;
+// 		if (!checkControlValue("a_jyxkFzjg","String",1,60,null,1,"经营许可证发证机关"))
+// 			return false;
 		if (!checkControlValue("a_dwfzr","String",1,30,null,1,"单位负责人"))
 			return false;
 		if(!valSfzCardIsRight("a_dwfzrzjhm","请正确填写单位负责人身份证号!"))
@@ -90,9 +113,7 @@
 			return false;
 		if (!checkControlValue("a_bz","String",1,2000,null,0,"备注"))
 			return false;
-		
-		if (!checkControlValue("a_zczj","Float",1,30,null,1,"注册资金（万元）"))
-			return false;
+		 
 		valadateYyzz();
 		if(!canCommit)
 			return false;
@@ -246,7 +267,7 @@
 <!-- 		        	onkeyup="htjdOnkeyupVal('a_jyxkFzjg','zhongwen');"/></td> -->
 		        <td class="red">行业许可证号</td>
 		        <td class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="a_jyxkZjbh"/></td>
-		        <td class="red" nowrap>行业许可证发证机关</td>
+		        <td class="pagedistd1" nowrap>行业许可证发证机关</td>
 		        <td id="jyxk_fzjgConte" class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="a_jyxkFzjg"
 		        	onkeyup="htjdOnkeyupVal('a_jyxkFzjg','zhongwen');"/></td>
 			</tr>
