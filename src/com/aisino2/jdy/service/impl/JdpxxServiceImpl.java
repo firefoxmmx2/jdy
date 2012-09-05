@@ -47,4 +47,12 @@ public class JdpxxServiceImpl implements IJdpxxService {
 		return jdpxxDao.findJdpxxsForPage(map, pageno, pagesize, dir, sort);
 	}
 
+
+	public Jdpxx getJdpxx(Jdpxx jdpxx) {
+		if(jdpxx == null)
+			throw new RuntimeException("要获取的揽件信息的登记序号或者物流单号为空");
+		jdpxx = jdpxxDao.get(jdpxx);
+		return jdpxx;
+	}
+
 }
