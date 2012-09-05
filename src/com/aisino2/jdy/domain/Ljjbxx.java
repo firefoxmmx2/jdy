@@ -78,13 +78,41 @@ public class Ljjbxx implements Serializable {
 	private String jjrzjlx;//寄件人证件类型
     private String jjrzjhm;//寄件人证件号码
     private String ljyxm;//揽件人姓名
+    private String ywcxbz;//业务查询标志
+	
     
     //公安端寄递品信息查询列表需要字段
     private String qymc;//企业名称
     private String sjrxm;//收件人姓名
     private String jdpdlxmc;//寄递品大类型名称
     private String jdplxmc;//寄递品小类型名称
+    private String jdpmc;  //寄递品名称
+    private Integer jdpxxid; //寄递品信息ID
     
+
+	public Integer getJdpxxid() {
+		return jdpxxid;
+	}
+
+	public void setJdpxxid(Integer jdpxxid) {
+		this.jdpxxid = jdpxxid;
+	}
+
+	public String getJdpmc() {
+		return jdpmc;
+	}
+
+	public void setJdpmc(String jdpmc) {
+		this.jdpmc = jdpmc;
+	}
+
+	public String getYwcxbz() {
+		return ywcxbz;
+	}
+
+	public void setYwcxbz(String ywcxbz) {
+		this.ywcxbz = ywcxbz;
+	}
     public String getQymc() {
 		return qymc;
 	}
