@@ -172,3 +172,27 @@ function detailDialog(detailid, width, url, config,callback) {
 	upAllPage(detailid);
 	bindDocument(detailid);
 }
+/***
+ * 验证揽件信息的物流单号是否可用（物流单号在揽件信息中必须唯一，
+ * 如果存在返回false，否则true）
+ */
+function validateWldh(wldh,successFunc,beforeSuccessFunc){
+	if(!wldh)
+		throw "被要求验证的物流单号不能为空";
+	
+	$.aajx({
+		url:'jdy/checkUniqireWldh.action',
+		type:'post',
+		data:{'lj.wldh':wldh},
+		dataType:'json',
+		success:function(data,xhr){
+			if(successFunc)
+				successFunc(data);
+		},
+		beforeSend:function(xhr){
+			if(beforeSuccessFunc)
+				beforeSuccessFunc();
+		}
+	});
+	
+}
