@@ -2,6 +2,9 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
 	<typeAlias alias="jdpxx" type="com.aisino2.jdy.domain.Jdpxx"/>
+	<typeAlias alias="ljjbxx" type="com.aisino2.jdy.domain.Ljjbxx"/>
+	<typeAlias alias="rdrjbxx" type="com.aisino2.jdy.domain.Rdrjbxx"/>
+	<typeAlias alias="pjjbxx" type="com.aisino2.jdy.domain.Pjjbxx"/>
 	<cacheModel id="oneDayCategory" type="LRU">
 		<flushInterval hours="24"/>
 	</cacheModel>
@@ -20,6 +23,36 @@
 		<result property="jdpdlx" column="jdpdlx"/>
 		<result property="jdpdlxmc" column="jdpdlxmc"/>
 	</resultMap>
+<!-- 		寄递品信息关联查询结果集 -->	
+	<resultMap class="jdpxx" id="jdpxx_glcx">
+	    <!-- 寄递品信息表 -->
+		<result property="id" column="id"/>
+		<result property="jdplx" column="jdplx"/>
+		<result property="jdpmc" column="jdpmc"/>
+		<result property="jdpsm" column="jdpsm"/>
+		<result property="jdptj" column="jdptj"/>
+		<result property="jdpzl" column="jdpzl"/>
+		<result property="jdplxmc" column="jdplxmc"/>
+		<result property="jdpdlx" column="jdpdlx"/>
+		<result property="jdpdlxmc" column="jdpdlxmc"/>
+		<!-- 基地对象表 -->
+		<result property="ljjbxx" column="ljjbxx_id" select="ljjbxx.getByDjxh"/>
+		<result property="pjjbxx" column="ljjbxx_id" select="pjjbxx.getById"/>
+		
+		
+		<!-- 
+		<result property="pjjbxx" column="djxh" select="pjjbxx.getById"/>
+		<result property="jjr" column="id" select="Rdrjbxx.getById"/>
+		<result property="sjr" column="id" select="Rdrjbxx.getById"/>
+		<result property="dsr" column="id" select="Rdrjbxx.getById"/>
+		
+		<result property="ljjbxx" column="djxh" select="ljjbxx.getByDjxh"/>
+		<result property="ljjbxx" column="ljjbxx.djxh" select="pjjbxx.getById"/>
+		 -->
+		
+		
+	</resultMap>
+	
 	
 	<resultMap class="jdpxx" id="jdpxx_ljxx_rm" extends="jdpxx_rm">
 		<result property="ljjbxx" column="ljjbxx_id" select="ljjbxx.getById"/>
@@ -194,10 +227,10 @@
 		select * from t_jdpxx where ljjbxx_id=#value#
 	</select>
 	
-	<select id="jdpxx.get" parameterClass="jdpxx" resultMap="jdpxx_rm">
+	<select id="jdpxx.get" parameterClass="jdpxx" resultMap="jdpxx_glcx">
 		select * from t_jdpxx jdpxx
-		where 
-		<dynamic prepend=" ">
+		where 1=1
+		<dynamic prepend="and">
 			<include refid="jdpxxWhere"/>
 		</dynamic>
 	</select>

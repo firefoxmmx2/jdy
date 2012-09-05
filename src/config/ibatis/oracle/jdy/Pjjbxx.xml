@@ -223,6 +223,10 @@
 			<include refid="pjjbxxWhere"/>
 		</dynamic>
 	</select>
+<!-- 	通过ID号获取唯一揽件数据 -->
+	<select id="pjjbxx.getById" parameterClass="String" resultMap="pjjbxx_mx_rm">
+		select * from t_pjjbxx pjjbxx where pjjbxx.ljjbxx_id=#value#
+	</select>
 	
 <!-- 	获取派件信息列表 -->
 	<select id="pjjbxx.getList" parameterClass="pjjbxx" resultMap="pjjbxx_list_rm">

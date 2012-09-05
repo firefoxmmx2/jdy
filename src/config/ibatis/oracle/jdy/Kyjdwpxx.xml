@@ -2,12 +2,176 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
 	<typeAlias alias="kyjdwpxx" type="com.aisino2.jdy.domain.Kyjdwpxx"/>
+	<typeAlias alias="ljjbxx" type="com.aisino2.jdy.domain.Ljjbxx"/>
+	<typeAlias alias="jdpxx" type="com.aisino2.jdy.domain.Jdpxx"/>
 	<cacheModel id="oneDayCategory" type="LRU">
 		<flushInterval hours="24"/>
 	</cacheModel>
 	
+	<resultMap class="kyjdwpxx" id="kyjdwpxxjgj">
+		<result property="jdpxx" column="jdpxx.id"/>
+		<result property="kyywdjxh" column="kyywdjxh" />
+		<result property="kywpms" column="kywpms" />
+		<result property="kywplb" column="kywplb"/>
+		<result property="bgr" column="bgr.cyrybh"/>
+		<result property="bgsj" column="bgsj"/>
+	</resultMap>
+<!--        企业端可疑物品关联查询                              -->	
+	<resultMap class="kyjdwpxx" id="qydkyjdwpxxcx">
+		<result property="ljjbxx_id" column="ljjbxx_id"/>
+		<result property="ljjbxx.wldh" column="wldh"/>
+		<result property="jdpxx.jdpmc" column="jdpmc"/>
+		<result property="jjr.xm" column="jjrxm"/>
+		<result property="jjr.zjlx" column="jjrzjlx"/>
+		<result property="jjr.zjhm" column="jjrzjhm"/>
+		<result property="jdpxx.jdpdlxmc" column="jdpdlxmc"/>
+		<result property="jdpxx.jdplxmc" column="jdplxmc"/>
+		<!--<result property="qyryxx.xm" column="xm"/>  -->
+		
+		<result property="bgsj" column="bgsj"/>
+		<result property="kywplb" column="kywplb"/>
+	</resultMap>	
+	<sql id="kyjdwpxxWhere" >
+		<isNotEmpty prepend="and" property="kyywdjxh"> 
+			kyjdwpxx.kyywdjxh=#kyywdjxh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ljjbxx_id"> 
+			kyjdwpxx.ljjbxx_id=#ljjbxx_id#
+		</isNotEmpty>
+	</sql>
+	<sql id="kyjdwpxxqydcxWhere" >
+		<isNotEmpty prepend="and" property="kyywdjxh"> 
+			ljjbxx.wldh=#ljjbxx.wldh#
+		</isNotEmpty>
+	</sql>
 	<!-- 	生成登记序号用的查询 -->
 	<select id="kyjdwpxx.getForGenerateDjxh" parameterClass="String" resultClass="String">
 		select kyywdjxh from t_kyjdwpxx where kyywdjxh like '$value$%' and rownum &lt;=1 order by kyywdjxh desc
+	</select>
+	
+	<!-- 	插入揽件信息 -->
+	<insert id="kyjdwpxx.insert" parameterClass="kyjdwpxx">
+		insert into t_kyjdwpxx (
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="jdpxx.id">
+				ljjbxx_id
+			</isNotNull>
+			<isNotNull prepend="," property="kyywdjxh">
+				kyywdjxh
+			</isNotNull>
+			<isNotNull prepend="," property="kywpms">
+				kywpms
+			</isNotNull>
+			<isNotNull prepend="," property="kywplb">
+				kywplb
+			</isNotNull>
+			<isNotNull prepend="," property="bgr.cyrybh">
+				bgr
+			</isNotNull>
+			<isNotNull prepend="," property="bgsj">
+				bgsj
+			</isNotNull>
+		
+		</dynamic>
+		)
+		values (
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="jdpxx.id">
+				#jdpxx.id#
+			</isNotNull>
+			<isNotNull prepend="," property="kyywdjxh">
+				#kyywdjxh#
+			</isNotNull>
+			<isNotNull prepend="," property="kywpms">
+				#kywpms#
+			</isNotNull>
+			<isNotNull prepend="," property="kywplb">
+				#kywplb#
+			</isNotNull>
+			<isNotNull prepend="," property="bgr.cyrybh">
+				#bgr#
+			</isNotNull>
+			<isNotNull prepend="," property="bgsj">
+				#bgsj#
+			</isNotNull>
+			
+		</dynamic>
+		)
+	</insert>
+	
+	<delete id="kyjdwpxx.delete" parameterClass="kyjdwpxx">
+		delete from t_kyjdwpxx kyjdwpxx
+		where
+		<dynamic prepend=" ">
+			<include refid="kyjdwpxxWhere"/>
+		</dynamic>
+	</delete>
+	
+	<update id="kyjdwpxx.update" parameterClass="kyjdwpxx">
+		update t_kyjdwpxx kyjdwpxx
+		set
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="kywpms">
+				kywpms=#kywpms#
+			</isNotNull>
+			<isNotNull prepend="," property="kywplb">
+				kywplb=#kywplb#
+			</isNotNull>
+			<isNotNull prepend="," property="bgr.cyrybh">
+				bgr=#bgr#
+			</isNotNull>
+			<isNotNull prepend="," property="bgsj">
+				bgsj=#bgsj#
+			</isNotNull>
+		</dynamic>
+		where
+		<dynamic prepend=" ">
+			<include refid="kyjdwpxxWhere"/>
+		</dynamic>
+	</update>
+<!-- 	公安端寄递品信息列表分页记录数  -->
+	<select id="kyjdwpxx.getListPageCount" parameterClass="map" resultClass="Integer">
+		select count(1) 
+					
+			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr
+			
+			where 1=1
+			 
+			  and kyjdwpxx.ljjbxx_id=jdpxx.id
+		      and jdpxx.ljjbxx_id=ljjbxx.djxh
+        	  and ljjbxx.jjr_id=jjr.id
+        	  and ljjbxx.sjr_id=sjr.id
+        	 
+		<dynamic prepend="and">
+			<include refid="kyjdwpxxqydcxWhere"/>
+		</dynamic>
+	</select>
+<!-- 	公安端寄递品信息列表分页 -->
+	<select id="kyjdwpxx.getListPage" parameterClass="map" resultMap="qydkyjdwpxxcx">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(	select
+		  
+			kyjdwpxx.ljjbxx_id ljjbxx_id
+			,ljjbxx.wldh wldh
+			,jdpxx.jdpmc jdpmc
+			,jjr.xm jjrxm,jjr.zjlx jjrzjlx,jjr.zjhm jjrzjhm
+			,jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc
+			,kyjdwpxx.bgsj bgsj,kyjdwpxx.kywplb kywplb
+					
+			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr
+			
+			where 1=1
+			 
+			  and kyjdwpxx.ljjbxx_id=jdpxx.id
+		      and jdpxx.ljjbxx_id=ljjbxx.djxh
+        	  and ljjbxx.jjr_id=jjr.id
+        	  and ljjbxx.sjr_id=sjr.id
+        	  
+
+		<dynamic prepend="and">
+			<include refid="kyjdwpxxqydcxWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 </sqlMap>
