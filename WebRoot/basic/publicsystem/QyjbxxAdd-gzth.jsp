@@ -304,7 +304,7 @@
 		showOrHideYlQitaxxbq('small_','none'); //先将除企业信息以外的页签关掉
 		setYqValueAll('0'); //将除企业信息以外的页签加载状态全变成未被加载状态
 		showOrHideYlQitaxxbq('small_abxx','block'); //用到安保信息页签则加载之,不需要则不用写本行和下两行
-		$("#plant_abxx").load("basic/publicsystem/YqAbxx-jdy-gzth.jsp"); //安保信息页签需要有那些DIV 去加载不同的业务页面
+		$("#plant_abxx").empty().load("basic/publicsystem/YqAbxx-jdy-gzth.jsp"); //安保信息页签需要有那些DIV 去加载不同的业务页面
 	}
 	
 	//---不同行业页签点击事件初始化(根据需求,不同行业每个页签加载的内容可能不同：在这里做)
@@ -415,6 +415,7 @@
 	//---页签点击动作
 	function show_biaoqian(yqid){ //点击页签时的动作
 		$("#yqAndZt option").each(function(){
+			
 			var thisid =  $(this).attr("value");
 			$("#"+thisid)[0].style.display='none';
 			if(thisid==yqid){
@@ -431,10 +432,10 @@
 		}
 		if(yqid=='zzcl'&&yqstate==0){ //保证变更一次
 			$("#a_activePageTwo").attr("value","1");
-		}	 
-		if(setHylb='Y01'){
+		}
+		if(selHylb=='Y01'){
 		 	ksyOnloadbq(yqid);
-		 }else 	if(selHylb=='J'){
+		} else if(selHylb=='J'){
 			 //娱乐业初始
 		} else if(selHylb=='C') {//机修
 			jxyOnloadbq(yqid);
@@ -456,9 +457,9 @@
 			wtjmOnloadbq(yqid);
 		} else if(selHylb=='C01') { //机动车拆解
 			jdccjOnloadbq(yqid);
-		}else if(selHylb=='D') { //印刷业
+		} else if(selHylb=='D') { //印刷业
 			ysyOnloadbq(yqid);
-		} else if(selHylb=="Y") { //寄递业
+		} else if(selHylb=='Y') { //寄递业
 			jdyOnloadbq(yqid);
 		}
 	}
