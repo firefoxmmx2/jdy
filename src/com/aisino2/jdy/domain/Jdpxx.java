@@ -58,8 +58,17 @@ public class Jdpxx implements Serializable {
 	 */
 	private String jdptj;
 	
+	/**
+	 * 关联查询时用到
+	 */
+	private Pjjbxx pjjbxx;//派件人
 	
-	
+	public Pjjbxx getPjjbxx() {
+		return pjjbxx;
+	}
+	public void setPjjbxx(Pjjbxx pjjbxx) {
+		this.pjjbxx = pjjbxx;
+	}
 	public String getJdpdlx() {
 		return jdpdlx;
 	}
