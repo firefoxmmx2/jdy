@@ -37,9 +37,17 @@ public class LjxxAction extends PageAction{
 	private List<Ljjbxx> lLjjbxx = new ArrayList();
 	private Date djsjf;//登记开始时间
 	private Date djsjt;//登记截止时间
+	private String wldh;
 	
 	
-	
+	public String getWldh() {
+		return wldh;
+	}
+
+	public void setWldh(String wldh) {
+		this.wldh = wldh;
+	}
+
 	public Date getDjsjf() {
 		return djsjf;
 	}
@@ -430,6 +438,17 @@ public class LjxxAction extends PageAction{
 		this.setData(setLjxx, lData, lPro, lCol);
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
+	}
+	/**
+	 * 验证物流单号是否重复
+	 */
+	public String wldhsfcf() throws Exception{
+		Ljjbxx setLjjbxx = new Ljjbxx();
+		setLjjbxx.setWldh(wldh);
+		lj = ljjbxxService.getLjjbxx(setLjjbxx);
+		
+		this.result = "success";
+		return SUCCESS;
 	}
 	
 }
