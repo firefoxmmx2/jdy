@@ -33,7 +33,7 @@ $(document).ready(function() {
 	getDictItemBox("lj_sjrzjlx","lj_sjrzjlxdm","dm_zjlx");
 	//揽件人
 	$('#lj_ljr_xm').attr('readOnly',true).click(function(){
-		getTyRY_item('lj_ljr_xm','ljljradd_cyrybh','<%=qybm%>');
+		getTyRY_item('lj_ljr_xm','ljljradd_cyrybh',null,null,'<%=qybm%>');
 	});
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
@@ -279,7 +279,7 @@ function addback(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
 		$("#ljjbxxadd_detail").hideAndRemove("show");
-		//setPageListLjxx(1);
+		setPageListlj(1);
 	}else{
 		jAlert(json.result,'错误信息');
 	}		
