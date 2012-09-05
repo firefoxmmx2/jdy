@@ -39,6 +39,7 @@ public class LjxxAction extends PageAction{
 	private Date djsjt;//登记截止时间
 	
 	
+	
 	public Date getDjsjf() {
 		return djsjf;
 	}
@@ -228,6 +229,11 @@ public class LjxxAction extends PageAction{
 		
 		List lCol = new ArrayList();
 		
+		List lky = new ArrayList();
+		lky.add("setLjxxKy");
+		lky.add("可疑");
+		lCol.add(lky);
+		
 		List lDetail = new ArrayList();
 		lDetail.add("setLjxxDetail");
 		lDetail.add("详情");
@@ -314,7 +320,13 @@ public class LjxxAction extends PageAction{
 			totalrows = pageinfo.getTotalRows();
 			lLjjbxx = pageinfo.getData();
 			
-			setTableDate_gadjdpxxcx(pageinfo.getData());
+			
+			if(lj.getYwcxbz().equals("qydjdywxxcx")){
+				setTableDate_qydjdpxxcx(pageinfo.getData());
+			}else if(lj.getYwcxbz().equals("gadjdywxxcx")){
+				setTableDate_gadjdpxxcx(pageinfo.getData());
+			}
+			
 			
 			this.result = "success";
 			return SUCCESS;
@@ -347,6 +359,70 @@ public class LjxxAction extends PageAction{
 			lj.setSjrxm(lj.getSjr().getXm());//收件人姓名
 			lj.setJdpdlxmc(lj.getJdpxx().getJdpdlxmc());//寄递品大类型名称
 			lj.setJdplxmc(lj.getJdpxx().getJdplxmc());//寄递品小类型名称
+		}
+		
+		Ljjbxx setLjxx = new Ljjbxx();
+		//this.setDataCustomer(setLjxx, lData, lPro, null, lCol);
+		this.setData(setLjxx, lData, lPro, lCol);
+		this.tabledata = this.getData();
+		totalrows = this.getTotalrows();
+	}
+	/***企业端 可疑寄递物品信息查询 setable方法***/
+	private void setTableDate_qydjdpxxcx(List<Ljjbxx> lData) {
+		// TODO Auto-generated method stub
+		List lPro = new ArrayList();
+		lPro.add("jdpxxid");
+		lPro.add("jdpxxid");//--
+		lPro.add("djxh");
+		lPro.add("jdpmc");//--
+		lPro.add("wldh");
+		lPro.add("jjrxm");//--
+		lPro.add("jjrzjlx");//--
+		lPro.add("jjrzjhm");//--
+		lPro.add("ljyxm");//--
+		lPro.add("ljtbsj");
+		
+		
+		List lCol = new ArrayList();
+		
+		List lky = new ArrayList();
+		lky.add("setLjxxKy");
+		lky.add("可疑");
+		lCol.add(lky);
+		
+		List lDetail = new ArrayList();
+		lDetail.add("setLjxxDetail");
+		lDetail.add("详情");
+		lCol.add(lDetail);
+		
+		for(Ljjbxx lj : lData){
+			lj.setJdpxxid(lj.getJdpxx().getId());//寄递品信息ID
+			lj.setJdpmc(lj.getJdpxx().getJdpmc());//寄递品名称
+			lj.setJjrxm(lj.getJjr().getXm());//寄件人姓名
+			if(lj.getJjr().getZjlx().equals("11")){
+				lj.setJjrzjlx("身份证");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("13")){
+				lj.setJjrzjlx("户口薄");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("90")){
+				lj.setJjrzjlx("军官证");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("91")){
+				lj.setJjrzjlx("警官证");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("92")){
+				lj.setJjrzjlx("士兵证");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("93")){
+				lj.setJjrzjlx("护照");//寄件人证件类型
+			}
+			if(lj.getJjr().getZjlx().equals("99")){		
+				lj.setJjrzjlx("其他");//寄件人证件类型
+			}
+			lj.setJjrzjhm(lj.getJjr().getZjhm());//寄件人证件号码
+			lj.setLjyxm(lj.getLjr().getXm());//揽件人姓名
+			
 		}
 		
 		Ljjbxx setLjxx = new Ljjbxx();
