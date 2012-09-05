@@ -193,7 +193,7 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 			else if(sort.equals("9"))
 				sCol = " a.zt "+ desc;
 			else if(sort.equals("10"))
-			    sCol = " a.cyryztdm "+ desc;
+			    sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid desc";
 		}else{
@@ -240,7 +240,7 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 				sCol = " a.zt "+ desc;
 			 
 			else if(sort.equals("8"))
-			    sCol = " a.cyryztdm "+ desc;
+			    sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid desc";
 		}else{
@@ -270,7 +270,7 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 			else if(sort.equals("4"))
 				sCol = " a.gwbh "+ desc;
 			else if(sort.equals("5"))
-			    sCol = " a.cyryztdm "+ desc;
+			    sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid  desc";
 		}else{
@@ -336,7 +336,7 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 			else if(sort.equals("8"))
 				sCol = " a.zxsj "+ desc;
 			else if(sort.equals("9"))
-			    sCol = " a.cyryztdm "+ desc;
+			    sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid  desc";
 		}else{
@@ -370,7 +370,7 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 			else if(sort.equals("7"))
 				sCol = " a.rzrq "+ desc;
 			else if(sort.equals("8"))
-				sCol = " a.cyryztdm "+ desc;
+				sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid  desc";
 		}else{
