@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#a_kyrq").attr("readonly","true").datepicker();
-		$("#a_nsrq").attr("readonly","true").datepicker();
+// 		$("#a_nsrq").attr("readonly","true").datepicker();
 		
 		$("#bq_frdbzj").selectBox({code:"dm_frdbzjlb(ylcs)",width:"118px"});
 		
@@ -109,8 +109,8 @@
 			return false;
 		if (!checkControlValue("a_bafzrdh","String",1,30,null,1,"治安负责人联系方式"))
 			return false;
-		if (!checkControlValue("a_nsrq","Date",null,null,null,1,"年审日期"))
-			return false;
+// 		if (!checkControlValue("a_nsrq","Date",null,null,null,1,"年审日期"))
+// 			return false;
 		if (!checkControlValue("a_bz","String",1,2000,null,0,"备注"))
 			return false;
 		 
