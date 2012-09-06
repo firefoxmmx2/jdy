@@ -11,7 +11,10 @@ $(document).ready(function() {
 	daggleDiv(detailid);
 	$("#"+detailid).hide()
 	
-	loadPage("tabledata");
+	//loadPage(divnid);
+	tables=$("#"+divnid).html();
+	$("#"+detailid).hide(); 	
+	setPageListddddd(1,'#');
 		$("#kywp_sbsjt").attr("readonly","true");
 		$("#kywp_sbsjt").datepicker();
 		$("#kywp_sbsjf").attr("readonly","true");
@@ -21,7 +24,7 @@ $(document).ready(function() {
 	daggleDiv("kyqk_detail");
 }); 
 
-function setPageList(pageno,url){	
+function setPageListddddd(pageno,url){	
 	if (true){
 		url=setList(pageno,url);
 		rows = Math.ceil((pageHeight-225-25-23)/20);
@@ -38,17 +41,18 @@ function setPageList(pageno,url){
 }	
 //新增可疑寄递物品信息方法
 function setkyjdwpAdd(){
-	setWidth("kyjdwp_detail",950);
-	setUrl("kyjdwp_detail","business/jdyzagl/KyjdwpxxTable.jsp");
-	bindDocument("kyjdwp_detail");
+	$("#"+detailid).empty();
+	setWidth(detailid,950);
+	setUrl(detailid,"business/jdyzagl/KyjdwpxxTable.jsp");
+	bindDocument(detailid);
 }
 //可疑寄递物品修改 
 function setKyjdwpxxUpdate(id){
-	$("#"+kyjdwp_detail).empty();
+	$("#"+detailid).empty();
 	dataid = id;
-	setWidth("kyjdwp_detail",950);
-	setUrl("kyjdwp_detail","business/jdyzagl/KyjdwpxxModify.jsp");
-	bindDocument("kyjdwp_detail");
+	setWidth(detailid,600);
+	setUrl(detailid,"business/jdyzagl/KyjdwpxxModify.jsp");
+	bindDocument(detailid);
 }
 </script>
 
@@ -82,7 +86,7 @@ function setKyjdwpxxUpdate(id){
 		    <td colspan="6">
     		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
     		    	<tr>
-    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageList(1);">查询</a></td>
+    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListddddd(1);">查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setkyjdwpAdd();'>添加</a></td>
     		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='setkyjdwpdaoc();'>导出</a></td>
     		    	</tr>

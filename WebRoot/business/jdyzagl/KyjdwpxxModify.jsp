@@ -3,35 +3,29 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
+<script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
 <script type="text/javascript">
 $(document).ready(function() {	
-	$('#jdpxx_id').val(dataid);
-	
-	daggleDiv("ljjbxxadd_detail");//div拖动 
-	dzcl_pageUrl="#";
-	detailid="zxzybaydwdzcl_detail";
-	daggleDiv(detailid);
-	$("#"+detailid).hide();
+	$('#jdpxx_id_mod').val(dataid);
 	//可疑物品类别
 	$('#jdpxx_kywplb').selectBox({code:'dm_kywplb'});
 	//报告时间
-	$("#jdpxx_basj").val('<%=dateNow%>').attr("readOnly",true).datepicker();
+	$("#jdpxx_basj").attr("readOnly",true).datepicker();
 	//揽件人
 	$('#jdpxx_bgrxm').attr('readOnly',true).click(function(){
 		getTyRY_item('jdpxx_bgrxm','ljljradd_cyrybh',null,null,'<%=qybm%>');
 	});
-	kyjdwpback();
+	kyjdwpback_mod();
 }); 
 //查询揽件信息并赋值函数
-function kyjdwpback(json){
-	//alert(json.jdpxx.id);
-	//$("#kyjdwpxx_qyd [id=lj_jdpxxid]").val(json.jdpxx.id);//登记序号
-	var params = getSubmitParams("#kyjdwpxx_qyd [id=jdpxx_id]");
+function kyjdwpback_mod(json){
+	var params = getSubmitParams("#kyjdwpxx_mod_qyd [id=jdpxx_id_mod]");
 	$.post("jdy/djpxxquery_jdpxx.action",params,function(data){
 		if(data.jdpxx){
 			$("#kyjdwpxx_jdpxx_id").val(data.jdpxx.id);
+			alert(data.jdpxx.kyjdwpxx.kywpms);
 			//初始化数据
-			$('#kyjdwpxx_qyd [name*=jdpxx.]').each(function(idx){
+			$('#kyjdwpxx_mod_qyd [name*=jdpxx.]').each(function(idx){
 				$this = $(this);
 				if($this.attr("tagName").toLowerCase() == 'select'){
 					try{
@@ -71,19 +65,18 @@ function yangzhengff(){
 		return false;
 	return true;
 }
-//可疑物品insert方法
-function kywpxxadd(){
+//可疑寄递物品修改方法
+function kywpxxmod(){
 	if(yangzhengff()){
-		var params = getSubmitParams("#kyjdwpxx_qyd [name*=kyjdwpxx.]");
-		jQuery.post("jdy/insert_kyjdwp.action",params,kywpaddaddback,"json");
+		var params = getSubmitParams("#kyjdwpxx_mod_qyd [name*=kyjdwpxx.]");
+		jQuery.post("jdy/update_kyjdwp.action",params,kywpaddmodback,"json");
 	}
-	
 }
-//可疑物品添加回调函数
-function kywpaddaddback(json){
+//可疑物品修改回调函数
+function kywpaddmodback(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
-		$("#ljjbxxadd_detail").hideAndRemove("show");
+		$("#"+detailid).hideAndRemove("show");
 		//setPageListLjxx(1);
 	}else{
 		jAlert(json.result,'错误信息');
@@ -93,7 +86,7 @@ function kywpaddaddback(json){
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
       <td align="left" class="title1">可疑物品新增</td>
-      <td align="right"><a href="#" id="closeDiv" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");' class="close"></a></td>
+      <td align="right"><a href="#" id="closeDiv" onclick='$("#"+detailid).hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -101,8 +94,8 @@ function kywpaddaddback(json){
 		<td height="9"></td>
 	</tr>
 </table>
-<table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="kyjdwpxx_qyd">
-<input type="hidden" id="jdpxx_id" name="jdpxx.id" value="">
+<table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="kyjdwpxx_mod_qyd">
+<input type="hidden" id="jdpxx_id_mod" name="jdpxx.id" value="">
 <input type="hidden" id="kyjdwpxx_jdpxx_id" name="kyjdwpxx.jdpxx.id" value="">
 <input type="hidden" id="kyjdwpxx_qyjbxx" name="kyjdwpxx.ljjbxx.qyjbxx.qybm" value="<%=qybm %>">
 	<tr>
@@ -138,17 +131,17 @@ function kywpaddaddback(json){
 		<td class="distd">代收人证件号码</td>
 		<td class="detailtd"><input type="text" id="jdpxx_pjjbxx_dsr_zjhm"  name="jdpxx.pjjbxx.dsr.zjhm" class="readonly" value="" /></td>
 		<td class="red">可疑物品类别</td>
-		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="kyjdwpxx.kywplb" ><option></option></select></td>
+		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="jdpxx.kyjdwp.kywpms" value=""><option></option></select></td>
 	</tr>
 	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
-		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="kyjdwpxx.kywpms"></textarea></td>
+		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="jdpxx.kywpms" value=""></textarea></td>
 	</tr>
 	<tr height="20">
 		<td class="red">报告人</td>
-		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="kyjdwpxx.bagbm" class="inputstyle" value=""></td>
+		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="jdpxx.bagbm" class="inputstyle" value=""></td>
 		<td class="red">报告时间</td>
-		<td class="detailtd"><input type="text" id="jdpxx_basj" name="kyjdwpxx.bgsj" class="inputstyle date"></td>
+		<td class="detailtd"><input type="text" id="jdpxx_basj" name="jdpxx.bgsj" class="inputstyle date" value=""></td>
 	</tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -157,8 +150,8 @@ function kywpaddaddback(json){
 	</tr>
 </table>
 <tr height="25" align="center">
-	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存" onclick='kywpxxadd();'>保存</a></td>
-	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="取消" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");'>取消</a></td>
+	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存" onclick='kywpxxmod();'>保存</a></td>
+	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="取消" onclick='$("#"+detailid).hideAndRemove("show");'>取消</a></td>
 </tr>
 </table>
 

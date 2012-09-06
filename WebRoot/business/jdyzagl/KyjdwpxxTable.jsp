@@ -9,26 +9,26 @@
 <script type="text/javascript">
 //默认加载执行内容
 $(document).ready(function() {
-	pageUrl="jdy/jdywxxquerylist_ljxx.action";
+	pageUrltab="jdy/jdywxxquerylist_ljxx.action";
 	
 	//添加揽件信息的DIV
-	detailid="ljjbxxadd_detail";
-	daggleDiv(detailid);
-	$("#"+detailid).hide();
+	detailidtab="ljjbxxadd_detail";
+	daggleDiv(detailidtab);
+	$("#"+detailidtab).hide();
 	//定义gird数据信息
-	divnid="LjjbxxDate";
-	tableid="LjjbxxTable";
-	tables=$("#"+divnid).html();
+	divnidtab="LjjbxxDate";
+	tableidtab="LjjbxxTable";
+	tablestab=$("#"+divnidtab).html();
 	
 	setPageListlj(1);
 }); 
 //页面gird加载方法
 function setPageListlj(pageno,url){	
 	if (true){
-	    $("#"+divnid).html(tables);
+	    $("#"+divnidtab).html(tablestab);
 		params = getSubmitParams("#KyjdwpxxTab [name*=lj.]");
 		if (url==null || url=="undefined"){
-			url=pageUrl;
+			url=pageUrltab;
 		}
 		var mygrid1 = $("#LjjbxxTable").ingrid({ 
 										url: url,	

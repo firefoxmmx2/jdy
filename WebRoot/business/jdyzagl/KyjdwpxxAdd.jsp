@@ -6,12 +6,6 @@
 <script type="text/javascript">
 $(document).ready(function() {	
 	$('#jdpxx_id').val(dataid);
-	
-	daggleDiv("ljjbxxadd_detail");//div拖动 
-	dzcl_pageUrl="#";
-	detailid="zxzybaydwdzcl_detail";
-	daggleDiv(detailid);
-	$("#"+detailid).hide();
 	//可疑物品类别
 	$('#jdpxx_kywplb').selectBox({code:'dm_kywplb'});
 	//报告时间
