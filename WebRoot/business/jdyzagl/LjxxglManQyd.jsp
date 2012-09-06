@@ -109,7 +109,6 @@ function setLjxxDetail(id){
 }
 //揽件信息删除
 function setLjxxDelete(id) {
-	alert("进入该方法");
 	$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
 }
 </script>

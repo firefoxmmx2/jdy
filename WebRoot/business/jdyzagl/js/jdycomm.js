@@ -181,7 +181,7 @@ function validateWldh(wldh,successFunc,beforeSuccessFunc){
 		throw "被要求验证的物流单号不能为空";
 	
 	$.aajx({
-		url:'jdy/checkUniqireWldh.action',
+		url:'jdy/wldhsfcf_ljxx.action',
 		type:'post',
 		data:{'lj.wldh':wldh},
 		dataType:'json',

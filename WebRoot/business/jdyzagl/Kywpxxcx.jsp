@@ -35,6 +35,12 @@ function setPageListKyjdwpxx(pageno,url){
 										height: pageHeight-225,
 										pageNumber: pageno,
 										ingridPageParams: sXML,
+										changeHref:function(table){
+											$(table).find("tr").each(function(){
+												$(this).find("td:last").find("a[title='修改']").remove();
+												$(this).find("td:last").find("a[title='删除']").remove();
+											});
+										},
 										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
 									});				
 		}
@@ -55,7 +61,7 @@ function setKyjdwpxxDetail(id){
 	<input type="hidden" id="d_kyqkid" value="">
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder">
   <tr>
-    <td class="queryfont">可疑物品管理</td>
+    <td class="queryfont">可疑物品信息查询</td>
   </tr>
   <tr>
     <td class="tdbg">

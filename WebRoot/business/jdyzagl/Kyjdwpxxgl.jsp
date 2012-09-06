@@ -14,7 +14,7 @@ $(document).ready(function() {
 	//loadPage(divnid);
 	tables=$("#"+divnid).html();
 	$("#"+detailid).hide(); 	
-	setPageListddddd(1,'#');
+	setPageListKyjdwpxx(1,'#');
 		$("#kywp_sbsjt").attr("readonly","true");
 		$("#kywp_sbsjt").datepicker();
 		$("#kywp_sbsjf").attr("readonly","true");
@@ -24,7 +24,7 @@ $(document).ready(function() {
 	daggleDiv("kyqk_detail");
 }); 
 
-function setPageListddddd(pageno,url){	
+function setPageListKyjdwpxx(pageno,url){	
 	if (true){
 		url=setList(pageno,url);
 		rows = Math.ceil((pageHeight-225-25-23)/20);
@@ -53,6 +53,25 @@ function setKyjdwpxxUpdate(id){
 	setWidth(detailid,600);
 	setUrl(detailid,"business/jdyzagl/KyjdwpxxModify.jsp");
 	bindDocument(detailid);
+}
+//可疑寄递物品详情
+function setKyjdwpxxDetail(id){
+	$("#"+detailid).empty();
+	dataid = id;
+	setWidth(detailid,600);
+	setUrl(detailid,"business/jdyzagl/KyjdwpxxDetail.jsp");
+	bindDocument(detailid);
+}
+//可疑寄递物品删除
+function setKyjdwpxxDelete(id){
+	alert("进入方法没得呀");
+	$.post("jdy/delete_kyjdwp.action",{
+		'kyjdwpxx.ljjbxx_id':id},
+		function(json){ 
+			if(json.result == 'success') {
+				setPageListKyjdwpxx(1); 
+				} 
+			},'json');
 }
 </script>
 
@@ -86,7 +105,7 @@ function setKyjdwpxxUpdate(id){
 		    <td colspan="6">
     		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
     		    	<tr>
-    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListddddd(1);">查询</a></td>
+    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListKyjdwpxx(1);">查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setkyjdwpAdd();'>添加</a></td>
     		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='setkyjdwpdaoc();'>导出</a></td>
     		    	</tr>
