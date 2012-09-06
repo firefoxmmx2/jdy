@@ -13,7 +13,7 @@ $(document).ready(function() {
 	$("#jdpxx_basj").attr("readOnly",true).datepicker();
 	//揽件人
 	$('#jdpxx_bgrxm').attr('readOnly',true).click(function(){
-		getTyRY_item('jdpxx_bgrxm','ljljradd_cyrybh',null,null,'<%=qybm%>');
+		getTyRY_item('jdpxx_bgrxm','kyjdwpxx_kyjdwpxx_bgr',null,null,'<%=qybm%>');
 	});
 	kyjdwpback_mod();
 }); 
@@ -22,8 +22,11 @@ function kyjdwpback_mod(json){
 	var params = getSubmitParams("#kyjdwpxx_mod_qyd [id=jdpxx_id_mod]");
 	$.post("jdy/djpxxquery_jdpxx.action",params,function(data){
 		if(data.jdpxx){
-			$("#kyjdwpxx_jdpxx_id").val(data.jdpxx.id);
-			alert(data.jdpxx.kyjdwpxx.kywpms);
+			$("#kyjdwpxx_jdpxx_id").val(data.jdpxx.id);//可疑寄递品物品ID-修改是需要
+			$("#kyjdwpxx_kyjdwpxx_kywpms").val(data.jdpxx.kyjdwpxx.kywpms);//可疑寄递物品描述
+			$("#kyjdwpxx_kyjdwpxx_kywplb").val(data.jdpxx.kyjdwpxx.kywplb);//可疑物品类别
+			$("#kyjdwpxx_kyjdwpxx_bgr").val(data.jdpxx.kyjdwpxx.bgr);//可疑物品类别
+			$("#kyjdwpxx_kyjdwpxx_bgsj").val(data.jdpxx.kyjdwpxx.bgsj);//可疑物品类别
 			//初始化数据
 			$('#kyjdwpxx_mod_qyd [name*=jdpxx.]').each(function(idx){
 				$this = $(this);
@@ -97,7 +100,6 @@ function kywpaddmodback(json){
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="kyjdwpxx_mod_qyd">
 <input type="hidden" id="jdpxx_id_mod" name="jdpxx.id" value="">
 <input type="hidden" id="kyjdwpxx_jdpxx_id" name="kyjdwpxx.jdpxx.id" value="">
-<input type="hidden" id="kyjdwpxx_qyjbxx" name="kyjdwpxx.ljjbxx.qyjbxx.qybm" value="<%=qybm %>">
 	<tr>
 		<td class="distd">寄递品ID</td>
 		<td class="detailtd"><input type="text" id="jdpxxid" name="jdpxx.id" class="readonly" value="" /></td>
@@ -131,17 +133,17 @@ function kywpaddmodback(json){
 		<td class="distd">代收人证件号码</td>
 		<td class="detailtd"><input type="text" id="jdpxx_pjjbxx_dsr_zjhm"  name="jdpxx.pjjbxx.dsr.zjhm" class="readonly" value="" /></td>
 		<td class="red">可疑物品类别</td>
-		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="jdpxx.kyjdwp.kywpms" value=""><option></option></select></td>
+		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="jdpxx.kyjdwpxx.kywplb" value=""><option></option></select></td>
 	</tr>
 	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
-		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="jdpxx.kywpms" value=""></textarea></td>
+		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="jdpxx.kyjdwpxx.kywpms" value=""></textarea></td>
 	</tr>
 	<tr height="20">
 		<td class="red">报告人</td>
-		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="jdpxx.bagbm" class="inputstyle" value=""></td>
+		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="jdpxx.kyjdwpxx.bgr.cyrybh" class="inputstyle" value=""></td>
 		<td class="red">报告时间</td>
-		<td class="detailtd"><input type="text" id="jdpxx_basj" name="jdpxx.bgsj" class="inputstyle date" value=""></td>
+		<td class="detailtd"><input type="text" id="jdpxx_basj" name="jdpxx.kyjdwpxx.bgsj" class="inputstyle date" value=""></td>
 	</tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">

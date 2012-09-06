@@ -35,25 +35,16 @@ function setPageListKyjdwpxx(pageno,url){
 										height: pageHeight-225,
 										pageNumber: pageno,
 										ingridPageParams: sXML,
+										changeHref:function(table){
+											$(table).find("tr").each(function(){
+												$(this).find("td:last").find("a[title='修改']").remove();
+												$(this).find("td:last").find("a[title='删除']").remove();
+											});
+										},
 										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
 									});				
 		}
 }	
-//新增可疑寄递物品信息方法
-function setkyjdwpAdd(){
-	$("#"+detailid).empty();
-	setWidth(detailid,950);
-	setUrl(detailid,"business/jdyzagl/KyjdwpxxTable.jsp");
-	bindDocument(detailid);
-}
-//可疑寄递物品修改 
-function setKyjdwpxxUpdate(id){
-	$("#"+detailid).empty();
-	dataid = id;
-	setWidth(detailid,600);
-	setUrl(detailid,"business/jdyzagl/KyjdwpxxModify.jsp");
-	bindDocument(detailid);
-}
 //可疑寄递物品详情
 function setKyjdwpxxDetail(id){
 	$("#"+detailid).empty();
@@ -61,17 +52,6 @@ function setKyjdwpxxDetail(id){
 	setWidth(detailid,600);
 	setUrl(detailid,"business/jdyzagl/KyjdwpxxDetail.jsp");
 	bindDocument(detailid);
-}
-//可疑寄递物品删除
-function setKyjdwpxxDelete(id){
-	alert("进入方法没得呀");
-	$.post("jdy/delete_kyjdwp.action",{
-		'kyjdwpxx.ljjbxx_id':id},
-		function(json){ 
-			if(json.result == 'success') {
-				setPageListKyjdwpxx(1); 
-				} 
-			},'json');
 }
 </script>
 
@@ -81,7 +61,7 @@ function setKyjdwpxxDelete(id){
 	<input type="hidden" id="d_kyqkid" value="">
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder">
   <tr>
-    <td class="queryfont">可疑物品管理</td>
+    <td class="queryfont">可疑物品信息查询</td>
   </tr>
   <tr>
     <td class="tdbg">
@@ -106,7 +86,6 @@ function setKyjdwpxxDelete(id){
     		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
     		    	<tr>
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListKyjdwpxx(1);">查询</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setkyjdwpAdd();'>添加</a></td>
     		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='setkyjdwpdaoc();'>导出</a></td>
     		    	</tr>
     		  	</table>
