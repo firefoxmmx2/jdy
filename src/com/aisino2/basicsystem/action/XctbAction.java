@@ -750,6 +750,10 @@ public class XctbAction extends PageAction {
 			case 233: hylbstr += plusInput("D",map.get("D").toString());break;//印刷业
 			case 234: hylbstr += plusInput("D",map.get("D").toString());break;//印刷业
 			case 244: hylbstr += plusInput("Y01",map.get("Y01").toString());break;//开锁业
+			//寄递业
+			case 252: hylbstr += plusInput("Y",map.get("Y").toString());break;
+			case 253: hylbstr += plusInput("Y",map.get("Y").toString());break;
+			case 254: hylbstr += plusInput("Y",map.get("Y").toString());break;
 		}
 	}
 	this.result = "success";
