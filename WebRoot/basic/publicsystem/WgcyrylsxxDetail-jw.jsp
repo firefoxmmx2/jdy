@@ -41,7 +41,7 @@
 		addtotempList("hcdw",setNull(json.LQyryxx_lsxx[0].csmc));
 		addtotempList("zxyy",setNull(json.LQyryxx_lsxx[0].zxyy));
 		addtotempList("zt",setNull(json.LQyryxx_lsxx[0].zt));
-		addtotempList("scbz",setNull(json.LQyryxx_lsxx[0].scbz));
+		addtotempList("zxbz",setNull(json.LQyryxx_lsxx[0].zxbz));
 		addtotempList("ywx",setNull(json.LQyryxx_lsxx[0].ywx));
 		addtotempList("ywm",setNull(json.LQyryxx_lsxx[0].ywm));
 		addtotempList("gj",setNull(json.LQyryxx_lsxx[0].gj));
@@ -90,7 +90,7 @@
 		changeAndWriteRedFont("hcdw",setNull(json.LQyryxx_lsxx[0].csmc));
 		changeAndWriteRedFont("zxyy",setNull(json.LQyryxx_lsxx[0].zxyy));
 		changeAndWriteRedFont("zt",setNull(json.LQyryxx_lsxx[0].zt));
-		changeAndWriteRedFont("scbz",setNull(json.LQyryxx_lsxx[0].scbz));
+		changeAndWriteRedFont("zxbz",setNull(json.LQyryxx_lsxx[0].zxbz));
 		changeAndWriteRedFont("ywx",setNull(json.LQyryxx_lsxx[0].ywx));
 		changeAndWriteRedFont("ywm",setNull(json.LQyryxx_lsxx[0].ywm));
 		changeAndWriteRedFont("gj",setNull(json.LQyryxx_lsxx[0].gj));
@@ -258,7 +258,7 @@
 		<td class="distd1">注销原因</td>
 		<td class="detailtd2"><span id="zxyy"></span></td>
 	    <td class="distd1">注销标志</td>
-	    <td class="detailtd2"><span id="scbz"></span></td>
+	    <td class="detailtd2"><span id="zxbz"></span></td>
     </tr>
     
 	<tr>
