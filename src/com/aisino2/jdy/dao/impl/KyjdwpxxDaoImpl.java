@@ -23,8 +23,9 @@ public class KyjdwpxxDaoImpl extends BaseDao implements IKyjdwpxxDao {
 				throw new RuntimeException("要么外部传入登记序号，要么传入企业编码，不可同时为空");
 			}
 		}
-		
-		this.insert("kyjdwpxx.insert", kyjdwpxx);
+		kyjdwpxx.getKyywdjxh();
+		//this.insert("kyjdwpxx.insert", kyjdwpxx);
+		insert("kyjdwpxx.insert", kyjdwpxx);
 		return kyjdwpxx;
 	}
 

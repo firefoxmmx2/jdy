@@ -60,6 +60,7 @@
 			<result property="jdpdlxmc" column="jdpdlxmc"/>
 			<result property="jdplxmc" column="jdplxmc"/>
 			<result property="jdpmc" column="jdpmc"/>
+			<result property="id" column="id"/>
 	</resultMap>
 <!-- 	揽件信息列表查询结果 -->
 	<resultMap class="ljjbxx" id="ljjbxx_list_rm" extends="ljjbxx_base_rm">
@@ -83,6 +84,7 @@
 		<result property="jdpxx" resultMap="ljjbxx_list_jdp_rm"/>
 		<result property="jjr" resultMap="ljjbxx_list_jjr_rm"/>
 		<result property="sjr" resultMap="ljjbxx_list_sjr_rm"/>
+		<result property="ljr.xm" column="ljr_xm" />
 		<!--企业信息 -->
 		<result property="qyjbxx.qyid" column="qyjbxx_qyid"/>
 		<result property="qyjbxx.qybm" column="qyjbxx_qybm"/>
@@ -198,6 +200,9 @@
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="jdpxx.jdplx">
 				jdpxx.jdplx=#jdpxx.jdplx#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jdpxx.id">
+				jdpxx.id=#jdpxx.id#
 			</isNotEmpty>
 		</isNotEmpty>
 <!-- 		企业信息查询 -->
@@ -404,7 +409,7 @@
 <!-- 	获取揽件信息列表分页记录数  -->
 	<select id="ljjbxx.getListPageCount" parameterClass="map" resultClass="Integer">
 		select count(1) from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr
-		where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh
+		where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh and ljjbxx.scbzw='0'
 		<dynamic prepend=" ">
 			<include refid="ljjbxxPageWhere"/>
 		</dynamic>
@@ -422,7 +427,7 @@
 		,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
 			from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr ,t_qyjbxx qyjbxx
 		where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh
-				and qyjbxx.qybm = ljjbxx.qybm
+				and qyjbxx.qybm = ljjbxx.qybm and ljjbxx.scbzw='0'
 		<dynamic prepend=" ">
 			<include refid="ljjbxxPageWhere" />
 		</dynamic>
@@ -456,7 +461,7 @@
 		select rownum rowno,z.* from 
 		(	select
 		    <!--寄递品信息 -->
-		    jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc,jdpxx.jdpmc jdpmc
+		    jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc,jdpxx.jdpmc jdpmc,jdpxx.id id
 		    <!--寄递人信息 -->
 		    ,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm,jjr.id jjr_id
 		    <!--收递人信息 -->
@@ -466,16 +471,46 @@
 			<!--企业信息 -->
 			,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc
 			,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
+			,ljr.xm ljr_xm
 		from 
-				t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyjbxx qyjbxx,t_jdpxx jdpxx
+				t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyjbxx qyjbxx,t_jdpxx jdpxx,t_qyryxx ljr
 		where 1=1
 		        and jdpxx.ljjbxx_id=ljjbxx.djxh
 		        and ljjbxx.qybm=qyjbxx.qybm
 				and ljjbxx.jjr_id=jjr.id 
 				and ljjbxx.sjr_id=sjr.id 
+				and ljjbxx.ljrbh=ljr.cyrybh
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere" />
 		</dynamic>
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!-- 	企业端寄递品信息单条查询 -->
+	<select id="jdpxxqydcx.get" parameterClass="map" resultMap="gadjdpxxglcx">
+			select
+		    <!--寄递品信息 -->
+		    jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc,jdpxx.jdpmc jdpmc,jdpxx.id id
+		    <!--寄递人信息 -->
+		    ,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm,jjr.id jjr_id
+		    <!--收递人信息 -->
+		    ,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm,sjr.id sjr_id
+		    <!--揽件信息 -->
+		    ,ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh
+			<!--企业信息 -->
+			,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc
+			,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
+			,ljr.xm ljr_xm
+		from 
+				t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyjbxx qyjbxx,t_jdpxx jdpxx,t_qyryxx ljr
+		where 1=1
+		        and jdpxx.ljjbxx_id=ljjbxx.djxh
+		        and ljjbxx.qybm=qyjbxx.qybm
+				and ljjbxx.jjr_id=jjr.id 
+				and ljjbxx.sjr_id=sjr.id 
+				and ljjbxx.ljrbh=ljr.cyrybh
+		<dynamic prepend="and">
+			<include refid="jdpxxgadcxWhere" />
+		</dynamic>
+		
 	</select>
 </sqlMap>

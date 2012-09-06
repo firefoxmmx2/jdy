@@ -39,6 +39,100 @@ public class Kyjdwpxx implements Serializable {
 	 */
 	private Ljjbxx ljjbxx;
 	
+	/**
+	 * 映射寄递物品实体
+	 */
+	private Jdpxx jdpxx;
+	/**
+	 * 映射寄递物品实体
+	 */
+	private Rdrjbxx jjr;
+	/**
+	 * 映射寄递物品实体
+	 */
+	private Rdrjbxx sjr;
+	
+	public Rdrjbxx getJjr() {
+		return jjr;
+	}
+	public void setJjr(Rdrjbxx jjr) {
+		this.jjr = jjr;
+	}
+	public Rdrjbxx getSjr() {
+		return sjr;
+	}
+	public void setSjr(Rdrjbxx sjr) {
+		this.sjr = sjr;
+	}
+	
+	
+	/**
+	 * 关联查询所需字段
+	 */
+	private Integer ljjbxx_id;//寄递品信息ID
+	private String wldh;//物流单号
+	private String jdpmc;//寄递品名称
+	private String jjrxm;//寄件人姓名
+	private String jjrzjlx;//寄件人证件类型
+	private String jjrzjhm;//寄件人证件号码
+	private String jdpdlxmc;//寄递品大类名称
+	private String jdplxmc;//寄递品小类名称
+	
+	public Integer getLjjbxx_id() {
+		return ljjbxx_id;
+	}
+	public void setLjjbxx_id(Integer ljjbxx_id) {
+		this.ljjbxx_id = ljjbxx_id;
+	}
+	public String getWldh() {
+		return wldh;
+	}
+	public void setWldh(String wldh) {
+		this.wldh = wldh;
+	}
+	public String getJdpmc() {
+		return jdpmc;
+	}
+	public void setJdpmc(String jdpmc) {
+		this.jdpmc = jdpmc;
+	}
+	public String getJjrxm() {
+		return jjrxm;
+	}
+	public void setJjrxm(String jjrxm) {
+		this.jjrxm = jjrxm;
+	}
+	public String getJjrzjlx() {
+		return jjrzjlx;
+	}
+	public void setJjrzjlx(String jjrzjlx) {
+		this.jjrzjlx = jjrzjlx;
+	}
+	public String getJjrzjhm() {
+		return jjrzjhm;
+	}
+	public void setJjrzjhm(String jjrzjhm) {
+		this.jjrzjhm = jjrzjhm;
+	}
+	public String getJdpdlxmc() {
+		return jdpdlxmc;
+	}
+	public void setJdpdlxmc(String jdpdlxmc) {
+		this.jdpdlxmc = jdpdlxmc;
+	}
+	public String getJdplxmc() {
+		return jdplxmc;
+	}
+	public void setJdplxmc(String jdplxmc) {
+		this.jdplxmc = jdplxmc;
+	}
+	
+	public Jdpxx getJdpxx() {
+		return jdpxx;
+	}
+	public void setJdpxx(Jdpxx jdpxx) {
+		this.jdpxx = jdpxx;
+	}
 	public Ljjbxx getLjjbxx() {
 		return ljjbxx;
 	}

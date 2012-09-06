@@ -33,4 +33,8 @@
 	<bean id="JdytjxxServiceImpl" class="com.aisino2.jdy.service.impl.JdytjxxServiceImpl">
 		<property name="jdytjxxDao" ref="JdytjxxDaoImpl"/>
 	</bean>
+<!-- 	可疑寄递物品 -->
+	<bean id="KyjdwpxxServiceImpl" class="com.aisino2.jdy.service.impl.KyjdwpxxServiceImpl">
+		<property name="kyjdwpxxDao" ref="KyjdwpxxDaoImpl"/>
+	</bean>
 </beans>

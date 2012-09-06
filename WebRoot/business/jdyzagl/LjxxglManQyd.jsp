@@ -63,12 +63,17 @@ function setPageListlj(pageno,url){
 										pageNumber: pageno,
 										//colIndex: [0],
 										noSortColIndex:[11],
-										hideColIndex:[1],
+										//hideColIndex:[1],
 										isHaveMorenPaixuClass: true, //加默认排序样式
 										morenPaixuCol: 8, //第一默认排序	
 										morenPaixuFangshi:'desc', //默认排序方式 
 										alignCenterColIndex: [1,2,8],
-										colWidths: ["20%","15%","10%","10%","20%","10%","15%","10%"]									
+										changeHref:function(table){
+											$(table).find("tr").each(function(){
+												$(this).find("td:last").find("a[title='可疑']").remove();
+											});
+										},
+										colWidths: ["10%","15%","10%","10%","20%","10%","15%","18%"]									
 									});				
 		}
 }	
@@ -104,7 +109,7 @@ function setLjxxDetail(id){
 }
 //揽件信息删除
 function setLjxxDelete(id) {
-	//alert("进入该方法");
+	alert("进入该方法");
 	$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
 }
 </script>

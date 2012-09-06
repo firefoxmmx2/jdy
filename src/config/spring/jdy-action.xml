@@ -13,5 +13,12 @@
   <bean id="JdytjAction" class="com.aisino2.jdy.action.JdytjAction" scope="prototype">
       <property name="jdytjxx_service" ref="JdytjxxServiceImpl"/>
   </bean>
-  
+<!-- 寄递品信息action -->
+  <bean id="jdpxxAction" class="com.aisino2.jdy.action.JdpxxAction" scope="prototype">  
+      <property name="jdpxxService" ref="JdpxxServiceImpl"/> 
+  </bean>  
+<!-- 寄递品信息action -->
+  <bean id="kyjdwpAction" class="com.aisino2.jdy.action.KyjdwpAction" scope="prototype">  
+      <property name="kyjdwpxxService" ref="KyjdwpxxServiceImpl"/> 
+  </bean>   
 </beans>

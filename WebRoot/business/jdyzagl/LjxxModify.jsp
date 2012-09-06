@@ -79,7 +79,7 @@ function modifyback(json){
 	
 	$("#ljjbxx_modify [id=lj_ljrxm_mod]").val(json.lj.ljr.xm);//揽件人
 	$("#ljjbxx_modify [id=lj_ljr_cyrybh]").val(json.lj.ljr.cyrybh);//揽件人编码
-	$("#ljjbxx_modify [id=lj_ljsj]").val(json.lj.ljsj);//揽件日期
+	$("#ljjbxx_modify [id=lj_ljsj]").val(json.lj.ljsj.setNull);//揽件日期
 	for(var i=0;i<json.lj.jdp_list.length;i++){
 		//寄递物品信息保存时添加到列表---添加行的方法
 		    var jdwp_id=json.lj.jdp_list[i].id;//寄递品类型
@@ -374,7 +374,7 @@ function addback(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
 		$("#ljjbxxadd_detail").hideAndRemove("show");
-		//setPageListLjxx(1);
+		setPageListlj(1);
 	}else{
 		jAlert(json.result,'错误信息');
 	}		

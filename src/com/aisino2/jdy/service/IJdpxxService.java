@@ -46,4 +46,11 @@ public interface IJdpxxService {
 	 * @return
 	 */
 	Page findJdpxxsForPage(Map<String, Object> map, int pageno, int pagesize, String dir, String sort);
+	
+	/**
+	 * 获取单一的寄递品信息
+	 * @param ljjbxx
+	 * @return
+	 */
+	Jdpxx getJdpxx(Jdpxx jdpxx);
 }
