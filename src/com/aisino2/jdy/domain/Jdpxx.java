@@ -63,6 +63,18 @@ public class Jdpxx implements Serializable {
 	 */
 	private Pjjbxx pjjbxx;//派件人
 	
+	/**
+	 *添加可疑寄递物品信息实体 
+	 */
+	private Kyjdwpxx kyjdwpxx;
+	
+	
+	public Kyjdwpxx getKyjdwpxx() {
+		return kyjdwpxx;
+	}
+	public void setKyjdwpxx(Kyjdwpxx kyjdwpxx) {
+		this.kyjdwpxx = kyjdwpxx;
+	}
 	public Pjjbxx getPjjbxx() {
 		return pjjbxx;
 	}
