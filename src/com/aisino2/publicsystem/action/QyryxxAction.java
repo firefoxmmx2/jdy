@@ -1253,6 +1253,17 @@ public class QyryxxAction extends PageAction{
 				displayName = ((Dict_item)list.get(0)).getDisplay_name();
 			data.setZxyy(displayName);
 		}
+		//签证类型
+		if(data.getQzzldm()!=null){
+			
+			displayName = "";
+			dict_item.setDict_code("dm_qzzl(lgy)");
+			dict_item.setFact_value(data.getQzzldm());
+			List list = CacheManager.getCacheDictitem(dict_item);
+			if(list!=null&&list.size()>0)
+				displayName = ((Dict_item)list.get(0)).getDisplay_name();
+			data.setQzzldm(displayName);
+		}
 		
 	}	
 	//根据人员ID查询人员照片
