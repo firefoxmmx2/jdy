@@ -39,7 +39,7 @@ function setPageListlj(pageno,url){
 	    $("#"+divnid).html(tables);
 		//alert($("#ljxx_ljrxm").val());
 		//alert($("#lj_ljr_cyrybh").val());
-		alert($("#ljxx_ljsjf").val());
+		//alert($("#ljxx_ljsjf").val());
 		params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]",params);
 		//将揽件时间添加到params对象中去
 		params.ljsjf=$("#ljxx_ljsjf").val();
