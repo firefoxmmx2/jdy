@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ include file="/public/user-info.jsp" %>
 <script type="text/javascript">
 var exportState = 0;
 var dataid_cyryCsid;
@@ -10,6 +11,7 @@ if($("#offineFlag").attr("value")=='1'){
 	currPageHeight = pageHeight-165;
 }
 $(document).ready(function() {
+	alert(1)
 	pageUrl="publicsystem/querylist_publicwgcyryxx.action";
 	divnid="tabledata";
 	tableid="table1";

@@ -1,6 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ include file="/public/user-info.jsp" %>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	pageUrl="publicsystem/querylistCsls_publicwgcyryxx.action";
@@ -79,6 +81,7 @@ $("#p_gj").click(function(){
 <body>
 	
 	<input type="hidden" id="d_ryid" value="">
+	<input type="hidden" id="p_gxdwbm" value="<%=gxdwbm %>">
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder">
   <tr>
     <td class="queryfont">境外人员历史</td>

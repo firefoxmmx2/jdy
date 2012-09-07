@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ include file="/public/user-info.jsp" %>
 <script type="text/javascript">
 $(document).ready(function() {
 	pageUrl="publicsystem/querylistCsls_qyryxx.action";
@@ -79,6 +80,7 @@ function setCyryXq(id){
 	
 	<input type="hidden" id="d_ryid" value="">
 	<input type="hidden" id="p_cyrylbdm" value="0">
+	<input type="hidden" id="p_gxdwbm" value="<%=gxdwbm%>">
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder">
   <tr>
     <td class="queryfont">国内人员历史</td>
