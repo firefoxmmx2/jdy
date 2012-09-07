@@ -1323,7 +1323,7 @@ function createXML(contype,childList){
 							else
 								colName = $(domEleTD).find("div").html();
 							sXML+="<Col name=\""+thNameArr[indexTD]+"\">"+changeTsZifu(colName)+"</Col>\n";
-							alert("===="+colName);
+							//alert("===="+colName);
 						}
 					});
 					sXML+="</Row>\n";
