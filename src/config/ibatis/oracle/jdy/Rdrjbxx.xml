@@ -28,9 +28,6 @@
 		<isNotEmpty prepend="and" property="id">
 			Rdrjbxx.id=#id#
 		</isNotEmpty>
-		<isNotEmpty prepend="and" property="zjhm">
-			Rdrjbxx.zjhm=#zjhm#
-		</isNotEmpty>
 	</sql>
 	
 	<sql id="RdrjbxxPageWhere">

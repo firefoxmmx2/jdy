@@ -23,11 +23,11 @@ $(document).ready(function() {
 	//寄递物品联动下拉列表
 	selectboxlink("jdpdlx","jdpxlx","dm_jdwpdl");
 	//证件类型--寄件人
-	getDictItemBox("lj_jjrzjlx1","lj_jjrzjlx1dm","dm_zjlx");
+	getDictItemBox("ljxx_jjr_zjlx","lj_jjrzjlx1dm","dm_zjlx");
 	//揽件人
-	$('#lj_ljrxm').attr('readOnly',true).click(function(){
-		getTyRY_item('lj_ljrxm','lj_ljr_cyrybh','<%=qybm%>');
-	})	
+	$('#ljxx_ljrxm').attr('readOnly',true).click(function(){
+		getTyRY_item('ljxx_ljrxm','lj_ljr_cyrybh',null,null,'<%=qybm%>');
+	});
 	//页面时间格式
 	$('.date').attr("readOnly",true).datepicker();
 	
@@ -37,27 +37,20 @@ $(document).ready(function() {
 function setPageListlj(pageno,url){	
 	if (manVerify_bm()){
 	    $("#"+divnid).html(tables);
-		//alert("寄件人证件类型="+$("#lj_jjrzjlx1").val());
-		//alert("寄递品大类="+$("#lj_jdpdlx").val());
-		//alert("寄递品小类="+$("#lj_jdpxlx").val());
-		if($("#jdpdlx").val()!=""){
-			$("#lj_jdwp_jdplx").val($("#jdpdlx").val());
-		}
-		if($("#jdpxlx").val()!=""){
-			$("#lj_jdwp_jdplx").val($("#jdpxlx").val());
-		}
-		if($("#jdpdlx").val()!=""&&$("#jdpxlx").val()!=""){
-			$("#lj_jdwp_jdplx").val($("#jdpxlx").val());
-		}
-		//var params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]");
-		var aaa=$("#ljjbxx_man_qyd [name*=lj.jjr.xm]").val();
+		//alert($("#ljxx_ljrxm").val());
+		//alert($("#lj_ljr_cyrybh").val());
+		//alert($("#ljxx_ljsjf").val());
+		params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]",params);
+		//将揽件时间添加到params对象中去
+		params.ljsjf=$("#ljxx_ljsjf").val();
+		params.ljsjt=$("#ljxx_ljsjt").val();
 		if (url==null || url=="undefined"){
 			url=pageUrl;
 		}
 		var mygrid1 = $("#LjjbxxTable").ingrid({ 
 										url: url,	
 										onRowSelect:null,
-										height: pageHeight-267,
+										height: pageHeight-276,
                                         ingridPageParams:sXML,
                                         ingridExtraParams:params,
 										pageNumber: pageno,
@@ -79,6 +72,14 @@ function setPageListlj(pageno,url){
 }	
 //查询提交时验证方法
 function manVerify_bm(){
+	var sj1 = $("#ljxx_ljsjf").val();
+	var sj2 = $("#ljxx_ljsjt").val();
+	if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
+		if(sj1>sj2){
+			jAlert('填报时间时间不能大于填报时间至','提示信息')
+			return false;
+		}
+	}
 	return true;
 }
 //新增揽件信息方法
@@ -119,31 +120,31 @@ function setLjxxDelete(id) {
   <tr>
     <td class="tdbg">
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="ljjbxx_man_qyd">
-    	<input type="hidden" id="lj_jdwp_jdplx" name="lj.jdwp.jdplx" /><!-- 寄递品类型-->
-    	<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="<%=qybm %>" /><!-- 揽件人 -->
+    	<input type="hidden" id="lj_qyjbxx_qybm" name="lj.qyjbxx.qybm" value="<%=qybm%>" /><!-- 所有查询都需要跟上企业编码 -->
+    	<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="" /><!-- 揽件人 -->
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
 					<td width="23%" class="pagetd"><input type="text" id="ljxx_wldh" name="lj.wldh" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄件人姓名</td>
 					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrxm" name="lj.jjr.xm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄件人证件类型</td>
-					<td width="23%" class="pagetd"><select id="ljxx_jjrzjlx1" name="lj.jjr.zjlx"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="ljxx_jjr_zjlx" name="lj.jjr.zjlx"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">寄件人证件号码</td>
 					<td width="23%" class="pagetd"><input type="text" id="ljxx_jjrzjhm" name="lj.jjr.zjhm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">寄递品大类</td>
-					<td width="23%" class="pagetd"><select id="jdpdlx"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="jdpdlx" name="lj.jdpxx.jdpdlx"><option></option></select></td>
 					<td width="10%" class="pagedistd">寄递品小类</td>
-					<td width="23%" class="pagetd"><select id="jdpxlx"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="jdpxlx" name="lj.jdpxx.jdplx"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">揽件员</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljrxm" class="inputstyle" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljrxm" name="lj.ljr.xm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">揽件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsj" name="lj.ljsjf" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjf" name="lj.ljsjf" class="inputstyle date" value="" /></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsj" name="lj.ljsjt" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjt" name="lj.ljsjf" class="inputstyle date" value="" /></td>
 				</tr>
     		<tr>
     		  <td colspan="6">

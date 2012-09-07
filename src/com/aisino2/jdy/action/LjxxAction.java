@@ -37,9 +37,23 @@ public class LjxxAction extends PageAction{
 	private List<Ljjbxx> lLjjbxx = new ArrayList();
 	private Date djsjf;//登记开始时间
 	private Date djsjt;//登记截止时间
+	private Date ljsjf;//揽件开始时间
+	private Date ljsjt;//揽件结束时间
 	private String wldh;
 	
 	
+	public Date getLjsjf() {
+		return ljsjf;
+	}
+	public void setLjsjf(Date ljsjf) {
+		this.ljsjf = ljsjf;
+	}
+	public Date getLjsjt() {
+		return ljsjt;
+	}
+	public void setLjsjt(Date ljsjt) {
+		this.ljsjt = ljsjt;
+	}
 	public String getWldh() {
 		return wldh;
 	}
@@ -153,50 +167,28 @@ public class LjxxAction extends PageAction{
 		this.result=SUCCESS;
 		return SUCCESS;
 	}
-	/**
-	 * 分页查询揽件信息
-	 * @return
-	 * @throws Exception
-	 */
-//	public String queryListlj() throws Exception {
-//		
-//        //如果派件查询参数不为空的话，配置数据库的查询参数	
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		
-//		if(lj!=null){
-//			if(lj.getWldh()!=""){//物流单号
-//				params.put("wldh", lj.getWldh());
-//			}
-//			if(lj.getJjr().getXm()!=""){//寄件人姓名
-//				params.put("xm", lj.getJjr().getXm());
-//			}
-//			if(lj.getJjr().getZjlx()!=""){//证件类型
-//				params.put("zjlx", lj.getJjr().getZjlx());
-//			}
-//			if(lj.getJjr().getZjhm()!=""){//证件号码
-//				params.put("zjhm", lj.getJjr().getZjhm());
-//			}
-//			if(lj.getLjr().getCyrybh()!=""){//揽件员
-//				params.put("ljr", lj.getLjr().getCyrybh());
-//			}
-//		}
-//
-//		
-//		Page page =	ljjbxxService.findLjjbxxForPage(params, 1, totalrows, tabledata, result);
-//		
-//		totalpage = page.getTotalPages();
-//		totalrows = page.getTotalRows();
-//		lLjjbxx = page.getData();
-//		setTableDate_ljjbxx(lLjjbxx);
-//		
-//		
-//		this.result = "success";
-//		return SUCCESS;
-//	} 
 	public String queryListlj() throws Exception{
 		
 //		如果派件查询参数不为空的话，配置数据库的查询参数
 		Map<String, Object> params = new HashMap<String, Object>();
+		if(lj.getWldh()!=null){//物流单号
+			params.put("wldh", lj.getWldh());
+		}
+		if(lj.getJjr()!=null){//寄件人信息
+			params.put("jjr", lj.getJjr());
+		}
+		if(lj.getJdpxx()!=null){//寄递品信息
+			params.put("jdpxx", lj.getJdpxx());
+		}
+		if(lj.getLjr()!=null){//揽件人信息
+			params.put("ljr", lj.getLjr());
+		}
+		if(ljsjf!=null){//揽件登记时间开始
+			params.put("djsjf", djsjf);
+		}
+		if(ljsjt!=null){//揽件登记时间结束
+			params.put("djsjf", djsjt);
+		}
 	
 		Page pageinfo = ljjbxxService.findLjjbxxForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
