@@ -13,6 +13,9 @@ $(document).ready(function() {
 	Modifyurl="jdy/query_ljxx.action";
 	$('#ljjbxxmodif_id').val(dataid);
 	$("#ljjbxx_detail [id^=lj_]").attr("class","readonly");
+	$("#ljjbxx_detail [id^=lj_jjrzjlx]").removeAttr("class");//删除class属性
+	$("#ljjbxx_detail [id^=lj_sjrzjlx]").removeAttr("class");//删除class属性
+	$("#jj_sj_yr .red").removeAttr("class").attr("class","distd");
 	$("#ljjbxx_detail [id=jjrssxmc]").attr("class","readonly");
 	$("#ljjbxx_detail [id=sjrssxmc]").attr("class","readonly");
 	
@@ -203,12 +206,12 @@ function addTrEvent(tr){
 		<tr height="20">
 			<td class="distd">登记序号</td>
 			<td class="detailtd"><input type="text" id="lj_djxh" class="readonly" value="" /></td>
-			<td class="red">物流单号</td>
+			<td class="distd">物流单号</td>
 			<td class="detailtd"><input type="text" id="lj_wldh" name="lj.wldh" class="readonly" value="" /></td>
 		</tr>
 	</table>
 	</fieldset>
-	<table width="100%" border="0" cellSpacing="0" cellPadding="0" >
+	<table width="100%" border="0" cellSpacing="0" cellPadding="0" id="jj_sj_yr">
 	   <tr>
 	       <td>
 	           <jsp:include page="../../business/jdyzagl/jjrxx.jsp"></jsp:include>
@@ -245,9 +248,9 @@ function addTrEvent(tr){
 	<legend>揽件人信息</legend>
 	<table width="100%" >
 		<tr height="20">
-			<td class="red">揽件人</td>
+			<td class="distd">揽件人</td>
 			<td class="detailtd"><input type="text" id="lj_ljrxm_mod"   name="lj.ljr.xm" class="readonly" value=""></td>
-			<td class="red">揽件时间</td>
+			<td class="distd">揽件时间</td>
 			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="readonly" value=""></td>
 		</tr>
 	</table>
