@@ -266,13 +266,13 @@ function  ljxxbaocun(){
 		//alert("最后的数组="+jsjxsz);
 		if(jsjxsz!="" && jsjxsz.length>0){
 			for (var i=0;i<jsjxsz.length;i++){
-					params["lj.jdp_list["+i+"].jdplx"] = jsjxsz[i][4];
+					params["lj.jdp_list["+i+"].jdplx"] = jsjxsz[i][7];
 					params["lj.jdp_list["+i+"].jdpmc"] = jsjxsz[i][2];
 					params["lj.jdp_list["+i+"].jdpsm"] = jsjxsz[i][3];
 					params["lj.jdp_list["+i+"].sfscbz"] = jsjxsz[i][1];
 					params["lj.jdp_list["+i+"].jdpzl"] = jsjxsz[i][5];
 					params["lj.jdp_list["+i+"].jdptj"] = jsjxsz[i][6];
-					params["lj.jdp_list["+i+"].jdpdlx"] = jsjxsz[i][7];
+					params["lj.jdp_list["+i+"].jdpdlx"] = jsjxsz[i][4];
 					params["lj.jdp_list["+i+"].jdpdlxmc"] = jsjxsz[i][8];
 					params["lj.jdp_list["+i+"].jdplxmc"] = jsjxsz[i][9];
 			}
@@ -375,9 +375,9 @@ function addback(json){
 			     	<th name="lj_jdplx">大类型</th>
 			     	<th name="lj_jdpzl">重量</th>
 			     	<th name="lj_jdptj">体积</th>
-			     	<th name="lj_jdptj">小类型</th>
-			     	<th name="lj_jdptj">大类型名称</th>
-			     	<th name="lj_jdptj">小类型名称</th>
+			     	<th name="lj_jdpxlx">小类型</th>
+			     	<th name="lj_jdpdlxmc">大类型名称</th>
+			     	<th name="lj_jdpxlxmc">小类型名称</th>
 					<th name="">操作</th>
 			    </tr>
 			  </thead>
