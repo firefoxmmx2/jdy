@@ -69,7 +69,7 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										//hideColIndex:[0,4,5],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["0","30%","30%","20%","0","0","0","20%"]								
+										colWidths: ["0","30%","30%","20%","0","0","0","0","0","0","20%"]								
 									});				
 		}
 }
@@ -81,7 +81,10 @@ function tianJiaZxzybaydwDzcl(cllb){
 }
 //寄递物品信息保存时添加到列表---添加行的方法
 function jdwpxxadd(){ 
-	var jdwp_jdplx=$("#jdwp_jdpxl").val();//寄递品类型
+	var jdwp_jdpdl=$("#jdwp_jdpdl").val();//寄递品大类型
+	var jdwp_jdmdlxmc=$("#jdwp_jdpdl option:selected").text();//寄递品大类型名称
+	var jdwp_jdpxl=$("#jdwp_jdpxl").val();//寄递品小类型
+	var jdwp_jdmlxmc=$("#jdwp_jdpxl option:selected").text();//寄递品大类型名称
 	var jdwp_jdpmc=$("#jdwp_jdpmc").val();//寄递品名称
 	var jdwp_jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
 	var jdwp_jdpzl=$("#jdwp_jdpzl").val();//寄递品重量
@@ -102,9 +105,12 @@ function jdwpxxadd(){
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+trNum+"'>0</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+trNum+"'>"+jdwp_jdpmc+"</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+trNum+"'>"+jdwp_jdpsm+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+trNum+"'>"+jdwp_jdplx+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+trNum+"'>"+jdwp_jdpdl+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpxlx"+trNum+"'>"+jdwp_jdpxl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpdlxmc"+trNum+"'>"+jdwp_jdmdlxmc+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpxlxmc"+trNum+"'>"+jdwp_jdmlxmc+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
 		+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
 		+"</td>";
@@ -266,6 +272,9 @@ function  ljxxbaocun(){
 					params["lj.jdp_list["+i+"].sfscbz"] = jsjxsz[i][1];
 					params["lj.jdp_list["+i+"].jdpzl"] = jsjxsz[i][5];
 					params["lj.jdp_list["+i+"].jdptj"] = jsjxsz[i][6];
+					params["lj.jdp_list["+i+"].jdpdlx"] = jsjxsz[i][7];
+					params["lj.jdp_list["+i+"].jdpdlxmc"] = jsjxsz[i][8];
+					params["lj.jdp_list["+i+"].jdplxmc"] = jsjxsz[i][9];
 			}
 		}else{
             jAlert("寄递品信息不能为空！",'验证信息');
@@ -363,9 +372,12 @@ function addback(json){
 			     	<th name="lj_sfscbz">标志位</th>
 			     	<th name="lj_jdpmc">内件品名</th>
 			     	<th name="lj_jdpsm">数量</th>
-			     	<th name="lj_jdplx">类型</th>
+			     	<th name="lj_jdplx">大类型</th>
 			     	<th name="lj_jdpzl">重量</th>
 			     	<th name="lj_jdptj">体积</th>
+			     	<th name="lj_jdptj">小类型</th>
+			     	<th name="lj_jdptj">大类型名称</th>
+			     	<th name="lj_jdptj">小类型名称</th>
 					<th name="">操作</th>
 			    </tr>
 			  </thead>
