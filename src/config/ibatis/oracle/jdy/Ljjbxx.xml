@@ -131,6 +131,18 @@
 			<isNotEmpty prepend="and" property="ljr.cyrybh">
 				ljjbxx.ljrbh=#ljr.cyrybh#
 			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ljr.xm">
+				ljr.xm=#ljr.xm#
+			</isNotEmpty>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="" property="jdpxx">
+			<isNotEmpty prepend="and" property="jdpxx.jdpdlx">
+				jdpxx.jdpdlx=#jdpxx.jdpdlx#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jdpxx.jdplx">
+				jdpxx.jdplx=#jdpxx.jdplx#
+			</isNotEmpty>
 		</isNotEmpty>
 		
 		<isNotEmpty prepend="and" property="sfbj">
@@ -408,27 +420,31 @@
 	</select>
 <!-- 	获取揽件信息列表分页记录数  -->
 	<select id="ljjbxx.getListPageCount" parameterClass="map" resultClass="Integer">
-		select count(1) from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr
-		where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh and ljjbxx.scbzw='0'
-		<dynamic prepend=" ">
-			<include refid="ljjbxxPageWhere"/>
-		</dynamic>
+	select  count(1) from 
+	    (select  distinct ljjbxx.djxh
+	    from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr ,t_qyjbxx qyjbxx, t_jdpxx   jdpxx
+	    where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh
+               and qyjbxx.qybm = ljjbxx.qybm and ljjbxx.scbzw='0' and ljjbxx.djxh = jdpxx.ljjbxx_id
+               <dynamic prepend="and">
+					<include refid="ljjbxxPageWhere"/>
+				</dynamic>
+		) a
 	</select>
 <!-- 	获取揽件信息列表分页 -->
 	<select id="ljjbxx.getListPage" parameterClass="map" resultMap="ljjbxx_list_rm">
 		select x.* from (
 		select rownum rowno,z.* from 
-		(	select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh
+		(	select distinct ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh
 			,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm,jjr.id jjr_id
 			,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm,sjr.id sjr_id
 			,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
 			<!-- 		企业信息 -->
 		,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc
 		,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
-			from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr ,t_qyjbxx qyjbxx
+			from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr ,t_qyjbxx qyjbxx, t_jdpxx   jdpxx
 		where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh
-				and qyjbxx.qybm = ljjbxx.qybm and ljjbxx.scbzw='0'
-		<dynamic prepend=" ">
+				and qyjbxx.qybm = ljjbxx.qybm and ljjbxx.scbzw='0' and ljjbxx.djxh = jdpxx.ljjbxx_id
+		<dynamic prepend="and">
 			<include refid="ljjbxxPageWhere" />
 		</dynamic>
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
