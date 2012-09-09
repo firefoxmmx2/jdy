@@ -42,7 +42,7 @@ function modifyback(json){
 	$("#ljjbxx_detail [id=lj_wldh]").val(json.lj.wldh);//物流单号
 	
 	$("#ljjbxx_detail [id=lj_jjrxm]").val(json.lj.jjr.xm);//寄件人姓名
-	$("#ljjbxx_detail [id=lj_jjrzjlx]").val(json.lj.jjr.zjlx);//寄件人证件类型
+	$("#ljjbxx_detail [id=lj_jjrzjlx]").val(setNull(json.lj.jjr.zjlx));//寄件人证件类型
 	$("#ljjbxx_detail [id=lj_jjrzjhm]").val(json.lj.jjr.zjhm);//寄件人证件号码
 	$("#ljjbxx_detail [id=jjrssxmc]").val(json.lj.jjr.ssxmc);//寄件地址
 	$("#ljjbxx_detail [id=lj_jjrssx]").val(json.lj.jjr.ssx);//寄件地址代码
@@ -52,7 +52,7 @@ function modifyback(json){
 	$("#ljjbxx_detail [id=lj_jjrgddh]").val(json.lj.jjr.gddh);//固定电话
 	
 	$("#ljjbxx_detail [id=lj_sjrxm]").val(json.lj.sjr.xm);//收件人姓名
-	$("#ljjbxx_detail [id=lj_sjrzjlx]").val(json.lj.sjr.zjlx);//收件人证件类型
+	$("#ljjbxx_detail [id=lj_sjrzjlx]").val(setNull(json.lj.sjr.zjlx));//收件人证件类型
 	$("#ljjbxx_detail [id=lj_sjrzjhm]").val(json.lj.sjr.zjhm);//收件人证件号码
 	$("#ljjbxx_detail [id=sjrssxmc]").val(json.lj.sjr.ssxmc);//收件地址
 	$("#ljjbxx_detail [id=lj_sjrssx]").val(json.lj.sjr.ssx);//寄件地址代码
@@ -63,7 +63,7 @@ function modifyback(json){
 	
 	$("#ljjbxx_detail [id=lj_ljrxm_mod]").val(json.lj.ljr.xm);//揽件人
 	$("#ljjbxx_detail [id=lj_ljr_cyrybh]").val(json.lj.ljr.cyrybh);//揽件人编码
-	$("#ljjbxx_detail [id=lj_ljsj]").val(json.lj.ljsj);//揽件日期
+	$("#ljjbxx_detail [id=lj_ljsj]").val(setNull(json.lj.ljsj));//揽件日期
 	for(var i=0;i<json.lj.jdp_list.length;i++){
 		//寄递物品信息保存时添加到列表---添加行的方法
 		    var jdwp_id=json.lj.jdp_list[i].id;//寄递品类型

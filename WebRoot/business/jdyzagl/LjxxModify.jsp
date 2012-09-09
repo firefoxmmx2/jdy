@@ -79,7 +79,7 @@ function modifyback(json){
 	
 	$("#ljjbxx_modify [id=lj_ljrxm_mod]").val(json.lj.ljr.xm);//揽件人
 	$("#ljjbxx_modify [id=lj_ljr_cyrybh_mod]").val(json.lj.ljr.cyrybh);//揽件人编码
-	$("#ljjbxx_modify [id=lj_ljsj]").val(json.lj.ljsj.setNull);//揽件日期
+	$("#ljjbxx_modify [id=lj_ljsj]").val(setNull(json.lj.ljsj));//揽件日期
 	//针对寄件人、收件人修改操作时，还需要传递对应 的ID过去
 	$("#ljjbxx_modify [id=lj_jjrid]").val(json.lj.jjr.id);//寄件人ID
 	$("#ljjbxx_modify [id=lj_sjrid]").val(json.lj.sjr.id);//寄件人ID
