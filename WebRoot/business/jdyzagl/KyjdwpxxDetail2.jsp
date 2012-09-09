@@ -10,11 +10,11 @@ $(document).ready(function() {
 	//可疑物品类别
 	$('#jdpxx_kywplb').selectBox({code:'dm_kywplb'});
 	//报告时间
-	$("#jdpxx_basj").attr("readOnly",true).datepicker();
+	//$("#jdpxx_basj").attr("readOnly",true).datepicker();
 	//揽件人
-	$('#jdpxx_bgrxm').attr('readOnly',true).click(function(){
-		getTyRY_item('jdpxx_bgrxm','ljljradd_cyrybh',null,null,'<%=qybm%>');
-	});
+	//$('#jdpxx_bgrxm').attr('readOnly',true).click(function(){
+	//	getTyRY_item('jdpxx_bgrxm','ljljradd_cyrybh',null,null,'<%=qybm%>');
+	//});
 	kyjdwpback_mod();
 }); 
 //查询揽件信息并赋值函数
@@ -30,7 +30,7 @@ function kyjdwpback_mod(json){
 				$this = $(this);
 				if($this.attr("tagName").toLowerCase() == 'select'){
 					try{
-						$this.setValue(eval("data." + $this.attr("name")));
+						$this.setValue(setNull(eval("data." + $this.attr("name"))));
 					}catch (e) {
 						//alert($this.attr("name"));
 						//alert(eval("data." + $this.attr("name")))
@@ -40,7 +40,7 @@ function kyjdwpback_mod(json){
 				}
 				else{
 					try{
-						$this.val(eval("data." + $this.attr("name")));
+						$this.val(setNull(eval("data." + $this.attr("name"))));
 					}catch (e) {
 						//alert($this.attr("name"));
 						//alert(eval("data." + $this.attr("name")))
@@ -107,11 +107,11 @@ function kyjdwpback_mod(json){
 	</tr>
 	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
-		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="jdpxx.kyjdwpxx.kywpms" value="" class="readonly"></textarea></td>
+		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="jdpxx.kyjdwpxx.kywpms" value="" ></textarea></td>
 	</tr>
 	<tr height="20">
 		<td class="distd">报告人</td>
-		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="jdpxx.kyjdwpxx.bgr.cyrybm" class="inputstyle" value="" class="readonly"></td>
+		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="jdpxx.kyjdwpxx.bgr.xm" class="inputstyle" value="" class="readonly"></td>
 		<td class="distd">报告时间</td>
 		<td class="detailtd"><input type="text" id="jdpxx_basj" name="jdpxx.kyjdwpxx.bgsj" class="inputstyle date" value="" class="readonly"></td>
 	</tr>

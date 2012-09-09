@@ -12,7 +12,8 @@ $(document).ready(function() {
 	$("#jdpxx_basj").val('<%=dateNow%>').attr("readOnly",true).datepicker();
 	//揽件人
 	$('#jdpxx_bgrxm').attr('readOnly',true).click(function(){
-		getTyRY_item('jdpxx_bgrxm','ljljradd_cyrybh',null,null,'<%=qybm%>');
+		dataid=null;
+		getTyRY_item('jdpxx_bgrxm','kyjdwpxx_cyrybh',null,null,'<%=qybm%>');
 	});
 	kyjdwpback();
 }); 
@@ -23,7 +24,7 @@ function kyjdwpback(json){
 	var params = getSubmitParams("#kyjdwpxx_qyd [id=jdpxx_id]");
 	$.post("jdy/djpxxquery_jdpxx.action",params,function(data){
 		if(data.jdpxx){
-			$("#kyjdwpxx_jdpxx_id").val(data.jdpxx.id);
+			$("#kyjdwpxx_jdpxx_id").val(data.jdpxx.id);//插入时需要将寄递品信息ID插入可疑寄递物品信息表中
 			//初始化数据
 			$('#kyjdwpxx_qyd [name*=jdpxx.]').each(function(idx){
 				$this = $(this);
@@ -59,8 +60,8 @@ function kyjdwpback(json){
 function yangzhengff(){
 	if (!checkControlValue("jdpxx_kywplb","Select",1,8,null,1,"可疑物品类型"))
 		return false;
-	//if (!checkControlValue("jdpxx_bgrxm","Select",1,8,null,1,"报告人"))
-	//	return false;
+	if (!checkControlValue("jdpxx_bgrxm","Select",1,8,null,1,"报告人"))
+		return false;
 	if (!checkControlValue("jdpxx_basj","Date",null,null,null,1,"报告日期"))
 		return false;
 	return true;
@@ -99,6 +100,7 @@ function kywpaddaddback(json){
 <input type="hidden" id="jdpxx_id" name="jdpxx.id" value="">
 <input type="hidden" id="kyjdwpxx_jdpxx_id" name="kyjdwpxx.jdpxx.id" value="">
 <input type="hidden" id="kyjdwpxx_qyjbxx" name="kyjdwpxx.ljjbxx.qyjbxx.qybm" value="<%=qybm %>">
+<input type="hidden" id="kyjdwpxx_cyrybh" name="kyjdwpxx.bgr.cyrybh" value="">
 	<tr>
 		<td class="distd">寄递品ID</td>
 		<td class="detailtd"><input type="text" id="jdpxxid" name="jdpxx.id" class="readonly" value="" /></td>
@@ -140,7 +142,7 @@ function kywpaddaddback(json){
 	</tr>
 	<tr height="20">
 		<td class="red">报告人</td>
-		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="kyjdwpxx.bagbm" class="inputstyle" value=""></td>
+		<td class="detailtd"><input type="text" id="jdpxx_bgrxm" class="inputstyle" value=""></td>
 		<td class="red">报告时间</td>
 		<td class="detailtd"><input type="text" id="jdpxx_basj" name="kyjdwpxx.bgsj" class="inputstyle date"></td>
 	</tr>
