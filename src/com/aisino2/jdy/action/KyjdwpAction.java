@@ -113,6 +113,19 @@ public class KyjdwpAction extends PageAction{
 			
        //如果派件查询参数不为空的话，配置数据库的查询参数
 		Map<String, Object> params = new HashMap<String, Object>();
+		
+		if(kyjdwpxx.getLjjbxx()!=null){//物流单号
+			params.put("ljjbxx", kyjdwpxx.getLjjbxx());
+		}
+		if(kyjdwpxx.getKywplb()!=null){//可疑物品类别
+			params.put("kywplb", kyjdwpxx.getKywplb());
+		}
+		if(kyjdwpxx.getSbsjf()!=null){//上报开始时间
+			params.put("sbsjf", kyjdwpxx.getSbsjf());
+		}
+		if(kyjdwpxx.getSbsjt()!=null){//上报截止时间
+			params.put("sbsjt", kyjdwpxx.getSbsjt());
+		}
 	
 		Page pageinfo = kyjdwpxxService.findKyjdwpxxsForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
@@ -129,14 +142,14 @@ public class KyjdwpAction extends PageAction{
 		// TODO Auto-generated method stub
 		List lPro = new ArrayList();
 		lPro.add("ljjbxx_id");
-		lPro.add("wldh");
+		lPro.add("wldhlb");
 		lPro.add("jdpmc");
 		lPro.add("jjrxm");
 		lPro.add("jjrzjlx");
 		lPro.add("jjrzjhm");
 		lPro.add("jdpdlxmc");
 		lPro.add("jdplxmc");
-		lPro.add("bgr");
+		lPro.add("bgrxm");
 		lPro.add("bgsj");
 		lPro.add("kywplb");
 		
@@ -160,7 +173,7 @@ public class KyjdwpAction extends PageAction{
 		
 		for(Kyjdwpxx kyjdwpxx : lData){
 			//kyjdwp.setLjjbxx_id(kyjdwpxx.getLjjbxx_id());//可疑物品信息ID
-			kyjdwpxx.setWldh(kyjdwpxx.getLjjbxx().getWldh());//物流单号
+			kyjdwpxx.setWldhlb(kyjdwpxx.getLjjbxx().getWldh());//物流单号
 			kyjdwpxx.setJdpmc(kyjdwpxx.getJdpxx().getJdpmc());//寄递品名称
 			kyjdwpxx.setJjrxm(kyjdwpxx.getJjr().getXm());//寄件人姓名
 			//kyjdwpxx.setJjrzjlx(kyjdwpxx.getJjr().getZjlx());//寄件人证件类型
@@ -197,6 +210,7 @@ public class KyjdwpAction extends PageAction{
 			if(kyjdwpxx.getKywplb().equals("3")){//可疑物品类别
 				kyjdwpxx.setKywplb("其他");
 			}
+			kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
 		}
 		Kyjdwpxx setkyjdwpxx = new Kyjdwpxx();
 		this.setData(setkyjdwpxx, lData, lPro, lCol);
