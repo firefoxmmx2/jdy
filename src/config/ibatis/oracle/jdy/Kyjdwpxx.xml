@@ -14,6 +14,7 @@
 		<result property="kywplb" column="kywplb"/>
 		<result property="bgr" column="bgrbm" select="getQyryxxByCyrybh"/>
 		<result property="bgsj" column="bgsj"/>
+		<result property="kyywdjxh" column="kyywdjxh"/>
 	</resultMap>
 <!--        企业端可疑物品关联查询                              -->	
 	<resultMap class="kyjdwpxx" id="qydkyjdwpxxcx">
@@ -25,10 +26,10 @@
 		<result property="jjr.zjhm" column="jjrzjhm"/>
 		<result property="jdpxx.jdpdlxmc" column="jdpdlxmc"/>
 		<result property="jdpxx.jdplxmc" column="jdplxmc"/>
-		<!--<result property="qyryxx.xm" column="xm"/>  -->
-		
+		<result property="bgr.xm" column="bgrxm"/>
 		<result property="bgsj" column="bgsj"/>
 		<result property="kywplb" column="kywplb"/>
+		<result property="kyywdjxh" column="kyywdjxh"/>
 	</resultMap>	
 	<sql id="kyjdwpxxWhere" >
 		<isNotEmpty prepend="and" property="kyywdjxh"> 
@@ -39,9 +40,22 @@
 		</isNotEmpty>
 	</sql>
 	<sql id="kyjdwpxxqydcxWhere" >
-		<isNotEmpty prepend="and" property="kyywdjxh"> 
-			ljjbxx.wldh=#ljjbxx.wldh#
+		<isNotEmpty prepend="and" property="sbsjf">
+				kyjdwpxx.bgsj >= #sbsjf#
 		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sbsjt">
+				kyjdwpxx.bgsj &lt;= #sbsjt#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="and" property="kywplb">
+				kyjdwpxx.kywplb=#kywplb#
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="ljjbxx">
+			<isNotEmpty prepend="and" property="ljjbxx.wldh">
+				ljjbxx.wldh=#ljjbxx.wldh#
+			</isNotEmpty>
+		</isNotEmpty>
+		
 	</sql>
 	<!-- 	通过寄递物品ID获取唯一揽件数据 -->
 	<select id="kyjdwpxx.getkyjdwpxxid" parameterClass="Integer" resultMap="kyjdwpxxjgj">
@@ -69,7 +83,7 @@
 				kywplb
 			</isNotNull>
 			<isNotNull prepend="," property="bgr.cyrybh">
-				bgr
+				bgrbm
 			</isNotNull>
 			<isNotNull prepend="," property="bgsj">
 				bgsj
@@ -92,7 +106,7 @@
 				#kywplb#
 			</isNotNull>
 			<isNotNull prepend="," property="bgr.cyrybh">
-				#bgr#
+				#bgr.cyrybh#
 			</isNotNull>
 			<isNotNull prepend="," property="bgsj">
 				#bgsj#
@@ -121,7 +135,7 @@
 				kywplb=#kywplb#
 			</isNotNull>
 			<isNotNull prepend="," property="bgr.cyrybh">
-				bgr=#bgr#
+				bgrbm=#bgr.cyrybh#
 			</isNotNull>
 			<isNotNull prepend="," property="bgsj">
 				bgsj=#bgsj#
@@ -132,11 +146,11 @@
 			<include refid="kyjdwpxxWhere"/>
 		</dynamic>
 	</update>
-<!-- 	公安端寄递品信息列表分页记录数  -->
+<!-- 	可疑寄递物品信息列表分页记录数  -->
 	<select id="kyjdwpxx.getListPageCount" parameterClass="map" resultClass="Integer">
 		select count(1) 
 					
-			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr
+			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx   bgr
 			
 			where 1=1
 			 
@@ -144,12 +158,12 @@
 		      and jdpxx.ljjbxx_id=ljjbxx.djxh
         	  and ljjbxx.jjr_id=jjr.id
         	  and ljjbxx.sjr_id=sjr.id
-        	 
+        	 and kyjdwpxx.bgrbm=bgr.cyrybh
 		<dynamic prepend="and">
 			<include refid="kyjdwpxxqydcxWhere"/>
 		</dynamic>
 	</select>
-<!-- 	公安端寄递品信息列表分页 -->
+<!-- 	可疑寄递物品信息列表分页 -->
 	<select id="kyjdwpxx.getListPage" parameterClass="map" resultMap="qydkyjdwpxxcx">
 		select x.* from (
 		select rownum rowno,z.* from 
@@ -160,9 +174,9 @@
 			,jdpxx.jdpmc jdpmc
 			,jjr.xm jjrxm,jjr.zjlx jjrzjlx,jjr.zjhm jjrzjhm
 			,jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc
-			,kyjdwpxx.bgsj bgsj,kyjdwpxx.kywplb kywplb
+			,kyjdwpxx.bgsj bgsj,kyjdwpxx.kywplb kywplb, bgr.xm bgrxm,kyjdwpxx.kyywdjxh kyywdjxh
 					
-			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr
+			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx   bgr
 			
 			where 1=1
 			 
@@ -170,6 +184,7 @@
 		      and jdpxx.ljjbxx_id=ljjbxx.djxh
         	  and ljjbxx.jjr_id=jjr.id
         	  and ljjbxx.sjr_id=sjr.id
+        	  and kyjdwpxx.bgrbm=bgr.cyrybh
         	  
 
 		<dynamic prepend="and">
