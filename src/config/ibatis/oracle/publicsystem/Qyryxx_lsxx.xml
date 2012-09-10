@@ -366,6 +366,11 @@
  			<isNotEmpty prepend="and" property="allhylbdm"><!-- 查询多个行业的企业，用于一个用户数据多个行业时 -->
 				a.hylbdm in ($allhylbdm$)
 			</isNotEmpty>		
+			
+<!-- 			添加管辖单位查询 -->
+			<isNotEmpty prepend="and" property="gxdwbm">
+				b.gxdwbm like '$gxdwbm$%'
+			</isNotEmpty>
 	</sql>
 	
 	
