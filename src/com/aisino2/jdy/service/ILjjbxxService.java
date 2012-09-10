@@ -79,4 +79,12 @@ public interface ILjjbxxService {
 	 * @return
 	 */
 	Ljjbxx getLjjbxx(Ljjbxx ljjbxx);
+	
+	/**
+	 * 验证物流单号是否可用
+	 * @param qybm 企业编码
+	 * @param wldh 物流单号
+	 * @return
+	 */
+	boolean isAvailableWldh(String qybm,String wldh);
 }

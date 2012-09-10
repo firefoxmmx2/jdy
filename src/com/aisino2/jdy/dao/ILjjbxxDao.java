@@ -27,4 +27,10 @@ public interface ILjjbxxDao {
 	 * @return
 	 */
 	Ljjbxx get(Ljjbxx ljjbxx);
+	/**
+	 * 获取符合条件的记录数
+	 * @param map 
+	 * @return
+	 */
+	Integer count(Map<String, Object> map);
 }

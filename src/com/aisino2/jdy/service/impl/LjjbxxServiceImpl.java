@@ -2,6 +2,7 @@ package com.aisino2.jdy.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -168,6 +169,28 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			throw new RuntimeException("要获取的揽件信息的登记序号或者物流单号为空");
 		ljjbxx = ljjbxxDao.get(ljjbxx);
 		return ljjbxx;
+	}
+
+	public boolean isAvailableWldh(String qybm, String wldh) {
+		if(!StringUtil.isNotEmpty(qybm))
+			throw new RuntimeException("需要确认唯一性的物流单号的企业编码为空");
+		if(!StringUtil.isNotEmpty(wldh))
+			throw new RuntimeException("需要确认唯一性的物流单号的物流单号为空");
+		
+		boolean result = false;
+		Integer count = 0;
+		
+//		查询参数
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("qybm", qybm);
+		map.put("wldh", wldh);
+		
+		count=ljjbxxDao.count(map);
+		if(count>0)
+			result=false;
+		else
+			result=true;
+		return result;
 	}
 
 }

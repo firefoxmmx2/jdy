@@ -429,15 +429,27 @@ public class LjxxAction extends PageAction{
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
-	/**
-	 * 验证物流单号是否重复
+	
+	/***
+	 * 验证物流单号在指定企业内是否可用。
+	 * @return result=success 表示可用, 否则不可用。
+	 * @throws Exception
 	 */
-	public String wldhsfcf() throws Exception{
-		Ljjbxx setLjjbxx = new Ljjbxx();
-		setLjjbxx.setWldh(wldh);
-		lj = ljjbxxService.getLjjbxx(setLjjbxx);
+	public String isAvailableWldh() throws Exception{
+		try{
+			if(lj==null || lj.getQyjbxx()==null)
+				throw new RuntimeException("验证物流单号是否可用，参数传递错误");
+			boolean res=ljjbxxService.isAvailableWldh(lj.getQyjbxx().getQybm(), lj.getWldh());
+			if(res)
+				result=SUCCESS;
+			else
+				result="该物流单号已存在不可用";
+		}catch(RuntimeException e){
+			e.printStackTrace();
+			log.debug(e,e.fillInStackTrace());
+			result=e.getMessage();
+		}
 		
-		this.result = "success";
 		return SUCCESS;
 	}
 	
