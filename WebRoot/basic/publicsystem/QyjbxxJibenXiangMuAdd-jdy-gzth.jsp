@@ -56,8 +56,8 @@
 			return false;
 		if (!checkControlValue("a_jjlxmc","String",1,100,null,1,"经济类型"))
 			return false;
-		if (!checkControlValue("a_jymj","Float",-99999999.99,99999999.99,2,1,"占地面积(平米)"))
-			return false;
+// 		if (!checkControlValue("a_jymj","Float",-99999999.99,99999999.99,2,1,"占地面积(平米)"))
+// 			return false;
 		if (!checkControlValue("a_zczj","Float",-99999999.99,99999999.99,2,1,"注册资金(万元)"))
 			return false;
 		if (!checkControlValue("a_frdb","String",1,30,null,1,"法定代表人"))
@@ -90,8 +90,8 @@
 			return false
 		if (!checkControlValue("a_swdjFzjg","String",1,60,null,0,"税务登记证发证机构名称"))
 			return false;
-		if (!checkControlValue("a_jyxkZjbh","String",1,60,null,1,"行业许可证号"))
-			return false;
+// 		if (!checkControlValue("a_jyxkZjbh","String",1,60,null,1,"行业许可证号"))
+// 			return false;
 // 		if (!checkControlValue("a_jyxkFzjg","String",1,60,null,1,"经营许可证发证机关"))
 // 			return false;
 		if (!checkControlValue("a_dwfzr","String",1,30,null,1,"单位负责人"))
@@ -224,7 +224,7 @@
 			<tr height="25">
             	<td class="red" >经济类型</td>
 	          <td class="pagetd1" ><input style="width:120px" type="text" class="inputstyle1" id="a_jjlxmc" readonly/></td>
-	          <td class="red">占地面积（平米）</td>
+	          <td class="pagedistd1">占地面积（平米）</td>
 		        <td class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="a_jymj"/></td>
 		        <td class="red">注册资金（万元）</td>
 		        <td class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="a_zczj"/></td>
@@ -266,7 +266,7 @@
 <!-- 		        <td class="red" nowrap>经营许可证发证机关</td> -->
 <!-- 		        <td id="jyxk_fzjgConte" class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="a_jyxkFzjg" -->
 <!-- 		        	onkeyup="htjdOnkeyupVal('a_jyxkFzjg','zhongwen');"/></td> -->
-		        <td class="red">行业许可证号</td>
+		        <td class="pagedistd1">行业许可证号</td>
 		        <td class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="a_jyxkZjbh"/></td>
 		        <td class="pagedistd1" nowrap>行业许可证发证机关</td>
 		        <td id="jyxk_fzjgConte" class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="a_jyxkFzjg"
