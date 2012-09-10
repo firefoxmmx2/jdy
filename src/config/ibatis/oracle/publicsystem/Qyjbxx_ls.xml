@@ -135,8 +135,8 @@
 		<result property="gdjycscqbh" column="gdjycscqbh"/>
 		
 		<!-- 		寄递业 -->
-		<result property="kdjyxkzbh" column="KDJYXKZBH"/>
-		<result property="wstzqypzzsh" column="WSTZQYPZZSH"/>
+		<result property="kdjyxkzbh" column="kdjyxkzbh"/>
+		<result property="wstzqypzzsh" column="wstzqypzzsh"/>
 	</resultMap>
 	<!--企业基本信息—历史(t_qyjbxx_ls)-->
 	<resultMap id="qyjbxx_lsListResult" class="qyjbxx_ls">
@@ -1466,6 +1466,8 @@
 		a.frxb frxb,a.frxbdm frxbdm,a.jyfzrxb jyfzrxb,a.jyfzrxbdm jyfzrxbdm,a.jyxkzfzrq jyxkzfzrq,a.jyxkzyxqz jyxkzyxqz,a.thxkzfzrq thxkzfzrq,
 	    a.thxkzyxqz thxkzyxqz,a.yyzzfzrq yyzzfzrq,a.yyzzyxqz yyzzyxqz,a.xfshyjsbh xfshyjsbh,a.xfshyjsfzjg xfshyjsfzjg,a.xfshyjsfzjgdm xfshyjsfzjgdm,
 	    a.xfshyjsfzrq xfshyjsfzrq,a.gdjycscqbh gdjycscqbh,a.sfjy sfjy,a.ssxmc ssxmc,a.ssxdm ssxdm 
+	      <!-- 		寄递业 -->
+		,a.kdjyxkzbh kdjyxkzbh,a.wstzqypzzsh wstzqypzzsh 
 		from t_qyjbxx_ls a,
        (select  max(qylsid) qylsid
           from t_qyjbxx_ls t
@@ -1482,6 +1484,8 @@
 		a.frxb frxb,a.frxbdm frxbdm,a.jyfzrxb jyfzrxb,a.jyfzrxbdm jyfzrxbdm,a.jyxkzfzrq jyxkzfzrq,a.jyxkzyxqz jyxkzyxqz,a.thxkzfzrq thxkzfzrq,
 	    a.thxkzyxqz thxkzyxqz,a.yyzzfzrq yyzzfzrq,a.yyzzyxqz yyzzyxqz,a.xfshyjsbh xfshyjsbh,a.xfshyjsfzjg xfshyjsfzjg,a.xfshyjsfzjgdm xfshyjsfzjgdm,
 	    a.xfshyjsfzrq xfshyjsfzrq,a.gdjycscqbh gdjycscqbh,a.sfjy sfjy,a.ssxmc ssxmc ,a.ssxdm ssxdm
+	      <!-- 		寄递业 -->
+		,a.kdjyxkzbh kdjyxkzbh,a.wstzqypzzsh wstzqypzzsh 
 		from t_qyjbxx_ls a,
        (select min(qylsid) qylsid
           from t_qyjbxx_ls t,
