@@ -88,6 +88,9 @@
 			<isNotNull prepend="," property="bgsj">
 				bgsj
 			</isNotNull>
+			<isNotNull prepend="," property="ljjbxx.djxh">
+				ljxx_djxh
+			</isNotNull>
 		
 		</dynamic>
 		)
@@ -111,7 +114,9 @@
 			<isNotNull prepend="," property="bgsj">
 				#bgsj#
 			</isNotNull>
-			
+			<isNotNull prepend="," property="ljjbxx.djxh">
+				#ljjbxx.djxh#
+			</isNotNull>
 		</dynamic>
 		)
 	</insert>
