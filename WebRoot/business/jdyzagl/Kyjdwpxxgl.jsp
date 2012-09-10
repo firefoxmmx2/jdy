@@ -35,7 +35,7 @@ function setPageListKyjdwpxx(pageno,url){
 										ingridPageWidth: pageWidth,
 										url: url,	
                                         ingridExtraParams:params,
-										height: pageHeight-225,
+										height: pageHeight-250,
 										pageNumber: pageno,
 										ingridPageParams: sXML,
 										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									

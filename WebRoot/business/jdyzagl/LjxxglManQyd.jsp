@@ -26,6 +26,7 @@ $(document).ready(function() {
 	getDictItemBox("ljxx_jjr_zjlx","lj_jjrzjlx1dm","dm_zjlx");
 	//揽件人
 	$('#ljxx_ljrxm').attr('readOnly',true).click(function(){
+		dataid=null;//js中使用了次变量，且他原本传递过去的值为行业类别，所以会查询不出来东西
 		getTyRY_item('ljxx_ljrxm','lj_ljr_cyrybh',null,null,'<%=qybm%>');
 	});
 	//页面时间格式
@@ -41,26 +42,23 @@ function setPageListlj(pageno,url){
 		//alert($("#lj_ljr_cyrybh").val());
 		//alert($("#ljxx_ljsjf").val());
 		params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]",params);
-		//将揽件时间添加到params对象中去
-		params.ljsjf=$("#ljxx_ljsjf").val();
-		params.ljsjt=$("#ljxx_ljsjt").val();
 		if (url==null || url=="undefined"){
 			url=pageUrl;
 		}
 		var mygrid1 = $("#LjjbxxTable").ingrid({ 
 										url: url,	
 										onRowSelect:null,
-										height: pageHeight-276,
+										height: pageHeight-286,
                                         ingridPageParams:sXML,
                                         ingridExtraParams:params,
 										pageNumber: pageno,
-										//colIndex: [0],
-										noSortColIndex:[11],
-										//hideColIndex:[1],
-										isHaveMorenPaixuClass: true, //加默认排序样式
-										morenPaixuCol: 8, //第一默认排序	
-										morenPaixuFangshi:'desc', //默认排序方式 
-										alignCenterColIndex: [1,2,8],
+										colIndex: [0],
+										//noSortColIndex:[11],
+										hideColIndex:[1],
+										//isHaveMorenPaixuClass: true, //加默认排序样式
+										//morenPaixuCol: 8, //第一默认排序	
+										//morenPaixuFangshi:'desc', //默认排序方式 
+										//alignCenterColIndex: [1,2,8],
 										changeHref:function(table){
 											$(table).find("tr").each(function(){
 												//$(this).find("td:last").find("a[title='可疑']").remove();

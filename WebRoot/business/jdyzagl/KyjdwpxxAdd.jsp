@@ -81,7 +81,8 @@ function kywpaddaddback(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
 		$("#ljjbxxadd_detail").hideAndRemove("show");
-		//setPageListLjxx(1);
+		setPageListlj(1);
+		setPageListKyjdwpxx(1);
 	}else{
 		jAlert(json.result,'错误信息');
 	}		

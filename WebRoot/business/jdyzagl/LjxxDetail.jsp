@@ -13,8 +13,8 @@ $(document).ready(function() {
 	Modifyurl="jdy/query_ljxx.action";
 	$('#ljjbxxmodif_id').val(dataid);
 	$("#ljjbxx_detail [id^=lj_]").attr("class","readonly");
-	$("#ljjbxx_detail [id^=lj_jjrzjlx]").removeAttr("class");//删除class属性
-	$("#ljjbxx_detail [id^=lj_sjrzjlx]").removeAttr("class");//删除class属性
+	$("#ljjbxx_detail [id^=lj_jjrzjlx]").removeAttr("class").attr("disabled","true");//删除class属性
+	$("#ljjbxx_detail [id^=lj_sjrzjlx]").removeAttr("class").attr("disabled","true");//删除class属性
 	$("#jj_sj_yr .red").removeAttr("class").attr("class","distd");
 	$("#ljjbxx_detail [id=jjrssxmc]").attr("class","readonly");
 	$("#ljjbxx_detail [id=sjrssxmc]").attr("class","readonly");
@@ -163,7 +163,7 @@ function addTrEvent(tr){
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">寄递品信息修改</td>
+      <td align="left" class="title1">寄递品信息详情</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
