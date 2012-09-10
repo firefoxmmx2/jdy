@@ -8,12 +8,13 @@
 $(document).ready(function() {	
 	$('#jdpxx_id_mod').val(dataid);
 	//可疑物品类别
-	$('#jdpxx_kywplb').selectBox({code:'dm_kywplb'});
+	$('#jdpxx_kywplb_mod').selectBox({code:'dm_kywplb'});
 	//报告时间
 	$("#jdpxx_basj").attr("readOnly",true).datepicker();
 	//揽件人
 	$('#jdpxx_bgrxm').attr('readOnly',true).click(function(){
-		getTyRY_item('jdpxx_bgrxm','kyjdwpxx_kyjdwpxx_bgr',null,null,'<%=qybm%>');
+		dataid=null;
+		getTyRY_item('jdpxx_bgrxm','kyjdwpxx_bgrbm',null,null,'<%=qybm%>');
 	});
 	kyjdwpback_mod();
 }); 
@@ -23,10 +24,13 @@ function kyjdwpback_mod(json){
 	$.post("jdy/djpxxquery_jdpxx.action",params,function(data){
 		if(data.jdpxx){
 			$("#kyjdwpxx_jdpxx_id").val(data.jdpxx.id);//可疑寄递品物品ID-修改是需要
-			$("#kyjdwpxx_kyjdwpxx_kywpms").val(data.jdpxx.kyjdwpxx.kywpms);//可疑寄递物品描述
-			$("#kyjdwpxx_kyjdwpxx_kywplb").val(data.jdpxx.kyjdwpxx.kywplb);//可疑物品类别
-			$("#kyjdwpxx_kyjdwpxx_bgr").val(data.jdpxx.kyjdwpxx.bgr);//可疑物品类别
-			$("#kyjdwpxx_kyjdwpxx_bgsj").val(data.jdpxx.kyjdwpxx.bgsj);//可疑物品类别
+			$("#jdpxx_kyjdwpxx_kyywdjxh").val(data.jdpxx.kyjdwpxx.kyywdjxh);//可疑业务登记序号，修改时要用到
+			$("#jdpxx_kywpms").val(data.jdpxx.kyjdwpxx.kywpms);//可疑寄递物品描述
+			//$("#jdpxx_kywplb_mod").val(setNull(data.jdpxx.kyjdwpxx.kywplb));//可疑物品类别
+			$("#jdpxx_bgrxm").val(data.jdpxx.kyjdwpxx.bgr.xm);//报告人姓名
+			$("#kyjdwpxx_bgrbm").val(data.jdpxx.kyjdwpxx.bgr.cyrybh);//报告人编码 
+			$("#jdpxx_basj").val(setNull(data.jdpxx.kyjdwpxx.bgsj));//报告时间 
+			$("#kyjdwpxx_ljjbxx_djxh_mod").val(data.jdpxx.ljjbxx.djxh);//需要将登记序号打入可疑寄递物品信息表中
 			//初始化数据
 			$('#kyjdwpxx_mod_qyd [name*=jdpxx.]').each(function(idx){
 				$this = $(this);
@@ -60,10 +64,10 @@ function kyjdwpback_mod(json){
 }
 //验证方法 
 function yangzhengff(){
-	if (!checkControlValue("jdpxx_kywplb","Select",1,8,null,1,"可疑物品类型"))
+	if (!checkControlValue("jdpxx_kywplb_mod","Select",1,8,null,1,"可疑物品类型"))
 		return false;
-	//if (!checkControlValue("jdpxx_bgrxm","Select",1,8,null,1,"报告人"))
-	//	return false;
+	if (!checkControlValue("jdpxx_bgrxm","Select",1,14,null,1,"报告人"))
+		return false;
 	if (!checkControlValue("jdpxx_basj","Date",null,null,null,1,"报告日期"))
 		return false;
 	return true;
@@ -71,7 +75,9 @@ function yangzhengff(){
 //可疑寄递物品修改方法
 function kywpxxmod(){
 	if(yangzhengff()){
-		var params = getSubmitParams("#kyjdwpxx_mod_qyd [name*=kyjdwpxx.]");
+		$("#kyjdwpxx_kywplb_mod").val($("#jdpxx_kywplb_mod").val());
+		alert($("#kyjdwpxx_kywplb_mod").val());
+		params = getSubmitParams("#kyjdwpxx_mod_qyd [name*=kyjdwpxx.]",params);
 		jQuery.post("jdy/update_kyjdwp.action",params,kywpaddmodback,"json");
 	}
 }
@@ -100,9 +106,13 @@ function kywpaddmodback(json){
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="kyjdwpxx_mod_qyd">
 <input type="hidden" id="jdpxx_id_mod" name="jdpxx.id" value="">
 <input type="hidden" id="kyjdwpxx_jdpxx_id" name="kyjdwpxx.jdpxx.id" value="">
+<input type="hidden" id="kyjdwpxx_bgrbm" name="kyjdwpxx.bgr.cyrybh" value=""><!-- 修改提交时要保持的报告人编码 -->
+<input type="hidden" id="jdpxx_kyjdwpxx_kyywdjxh" name="kyjdwpxx.kyywdjxh" value=""><!-- 修改时需要可疑业务登记需要 来进行修改 -->
+<input type="hidden" id="kyjdwpxx_kywplb_mod" name="kyjdwpxx.kywplb" value=""><!-- 修改操作时提交的可以物品类别 -->
+<input type="hidden" id="kyjdwpxx_ljjbxx_djxh_mod" name="kyjdwpxx.ljjbxx.djxh" value=""><!-- 业务登记序号 -->
 	<tr>
-		<td class="distd">寄递品ID</td>
-		<td class="detailtd"><input type="text" id="jdpxxid" name="jdpxx.id" class="readonly" value="" /></td>
+		<td class="distd">业务登记序号</td>
+		<td class="detailtd"><input type="text" id="jdpxx_ljjbxx_djxh" name="jdpxx.ljjbxx.djxh" class="readonly" value="" /></td>
 		<td class="distd">快递单号</td>
 		<td class="detailtd"><input type="text" id="jdpxx_ljjbxx_wldh" name="jdpxx.ljjbxx.wldh"  value="" class="readonly" /></td>
 	</tr>
@@ -133,17 +143,17 @@ function kywpaddmodback(json){
 		<td class="distd">代收人证件号码</td>
 		<td class="detailtd"><input type="text" id="jdpxx_pjjbxx_dsr_zjhm"  name="jdpxx.pjjbxx.dsr.zjhm" class="readonly" value="" /></td>
 		<td class="red">可疑物品类别</td>
-		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="jdpxx.kyjdwpxx.kywplb" value=""><option></option></select></td>
+		<td class="pagetd"><select class="select1" id="jdpxx_kywplb_mod" name="jdpxx.kyjdwpxx.kywplb" value=""><option></option></select></td>
 	</tr>
 	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
-		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="jdpxx.kyjdwpxx.kywpms" value=""></textarea></td>
+		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="kyjdwpxx.kywpms" value=""></textarea></td>
 	</tr>
 	<tr height="20">
 		<td class="red">报告人</td>
-		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="jdpxx.kyjdwpxx.bgr.cyrybh" class="inputstyle" value=""></td>
+		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="kyjdwpxx.bgr.xm" class="inputstyle" value=""></td>
 		<td class="red">报告时间</td>
-		<td class="detailtd"><input type="text" id="jdpxx_basj" name="jdpxx.kyjdwpxx.bgsj" class="inputstyle date" value=""></td>
+		<td class="detailtd"><input type="text" id="jdpxx_basj" name="kyjdwpxx.bgsj" class="inputstyle date" value=""></td>
 	</tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">

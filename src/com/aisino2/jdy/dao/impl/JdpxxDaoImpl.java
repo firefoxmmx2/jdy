@@ -63,4 +63,10 @@ public class JdpxxDaoImpl extends BaseDao implements IJdpxxDao {
 		return queryForPage("jdpxx.getListPage", map, pageno,pagesize);
 	}
 
+	/*
+	 * 根据ljjbxx_id号查询该揽件信息是否还存在可以寄递物品
+	 */
+	public Jdpxx getkyjdwp(Jdpxx jdpxx) {
+		return (Jdpxx) queryForObject("jdpxx.getkyjdwp", jdpxx);
+	}
 }

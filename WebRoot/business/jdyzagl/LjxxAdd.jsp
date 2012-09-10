@@ -255,7 +255,7 @@ function  ljxxbaocun(){
 	//设置企业编码，之后要删除这里的设置
 	//$("#lj_qyjbxx").val("0123456789")
 	//alert("蓝贱人编码="+$("#lj_qyjbxx").val());
-	alert($("#ljljradd_cyrybh").val());
+	//alert($("#ljljradd_cyrybh").val());
 	//return;
 	if (addVerify()){
 		var params = getSubmitParams("#ljjbxx_add [name*=lj.]");

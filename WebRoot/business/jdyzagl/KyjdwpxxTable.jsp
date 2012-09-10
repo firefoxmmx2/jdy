@@ -82,6 +82,7 @@ function setLjxxKy(id){
 </table>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="KyjdwpxxTab">
   <input type="hidden" id="lj_qydjdywxxcx" name="lj.ywcxbz" value="qydjdywxxcx"><!-- 企业端可疑寄递物品信息查询标志 -->
+  <input type="hidden" id="gadqydcxqbbz_ljman" name="lj.gadqydcxqbbz" value="qydkywpcx" /><!-- 安端端、企业端查询寄递物品区别标志 -->
   <tr height="10" align="center">
   </tr>
    <tr>

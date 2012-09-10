@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
 <script type="text/javascript">
 $(document).ready(function() {
 	pageUrl="jdy/queryList_kyjdwp.action";
@@ -15,70 +16,82 @@ $(document).ready(function() {
 	tables=$("#"+divnid).html();
 	$("#"+detailid).hide(); 	
 	setPageListKyjdwpxx(1,'#');
-		$("#kywp_sbsjt").attr("readonly","true");
-		$("#kywp_sbsjt").datepicker();
-		$("#kywp_sbsjf").attr("readonly","true");
-		$("#kywp_sbsjf").datepicker();
+		$("#kyjdwpxx_sbsjt").attr("readonly","true");
+		$("#kyjdwpxx_sbsjt").datepicker();
+		$("#kyjdwpxx_sbsjf").attr("readonly","true");
+		$("#kyjdwpxx_sbsjf").datepicker();
 		//可疑物品类别
-		$('#kyjdwpxx_kywplb').selectBox({code:'dm_kywplb'});
+		$('#kyjdwpxx_kywplb_man').selectBox({code:'dm_kywplb'});
 	daggleDiv("kyqk_detail");
 }); 
 
 function setPageListKyjdwpxx(pageno,url){	
-	if (true){
+	if (manVerify_bm()){
+		params =getSubmitParams("#kyjdwpxx_man [name*=kyjdwpxx.]");
 		url=setList(pageno,url);
 		rows = Math.ceil((pageHeight-225-25-23)/20);
 		var mygrid1 = $("#"+tableid).ingrid({ 
 										onRowSelect:null,
 										ingridPageWidth: pageWidth,
 										url: url,	
+                                        ingridExtraParams:params,
 										height: pageHeight-225,
 										pageNumber: pageno,
-										ingridPageParams: sXML,
 										changeHref:function(table){
 											$(table).find("tr").each(function(){
 												$(this).find("td:last").find("a[title='修改']").remove();
 												$(this).find("td:last").find("a[title='删除']").remove();
 											});
 										},
+										ingridPageParams: sXML,
 										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
 									});				
 		}
-}	
+}
+//查询提交时验证方法
+function manVerify_bm(){
+	var sj1 = $("#kyjdwpxx_sbsjf").val();
+	var sj2 = $("#kyjdwpxx_sbsjt").val();
+	if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
+		if(sj1>sj2){
+			jAlert('填报时间时间不能大于填报时间至','提示信息')
+			return false;
+		}
+	}
+	return true;
+}
 //可疑寄递物品详情
 function setKyjdwpxxDetail(id){
 	$("#"+detailid).empty();
 	dataid = id;
 	setWidth(detailid,600);
-	setUrl(detailid,"business/jdyzagl/KyjdwpxxDetail.jsp");
+	setUrl(detailid,"business/jdyzagl/KyjdwpxxDetail2.jsp");
 	bindDocument(detailid);
 }
+
 </script>
 
 <body>
-	 
-	<input type="hidden" id="d_csid" value="">
-	<input type="hidden" id="d_kyqkid" value="">
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder">
   <tr>
-    <td class="queryfont">可疑物品信息查询</td>
+    <td class="queryfont">可疑物品管理</td>
   </tr>
   <tr>
     <td class="tdbg">
-    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="kyjdwpxx_man">
 		  <tr>
 			<td width="10%" class="pagedistd">物流单号</td>
-			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_wldh" name="kyjdwpxx.wldh" class="inputstyle" value=""></td>	
+			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_wldh" name="kyjdwpxx.ljjbxx.wldh" class="inputstyle" value=""></td>	
 			<td width="7%" class="pagedistd">上报时间</td>
-				  <td width="41%" class="pagetd"><input type="text" class="inputstyle"  id="kyjdwpxx_sbsjt" name="kyjdwpxx.sbsjt" value="">
+				  <td width="41%" class="pagetd"><input type="text" class="inputstyle"  id="kyjdwpxx_sbsjf" name="kyjdwpxx.sbsjf" value="">
 			      <span class="pagedistd">至
-			           <input type="text" class="inputstyle"  id="kyjdwpxx_sbsjf" name="kyjdwpxx.sbsjf" value="">
+			           <input type="text" class="inputstyle"  id="kyjdwpxx_sbsjt" name="kyjdwpxx.sbsjt" value="">
 			      </span>
 			</td>
 		  </tr>
 		   <tr>
 			<td width="10%" class="pagedistd">可疑物品类别</td>
-			<td width="23%" class="pagetd"><select class="select1" id="kyjdwpxx_kywplb" name="kyjdwpxx.kywplb" ><option></option></select></td>
+			<td width="23%" class="pagetd"><select class="select1" id="kyjdwpxx_kywplb_man" name="kyjdwpxx.kywplb" ><option></option></select></td>
 		  </tr>
 		  <tr>
 			<td colspan="6" class="pagedistd">&nbsp;</td>
@@ -107,14 +120,14 @@ function setKyjdwpxxDetail(id){
 	<table id="table1" width="100%">
 	  <thead>
 	    <tr>       
-	     	<th name="l_wldh">物流单号</th>
+	     	<th name="l_wldhlb">物流单号</th>
 	     	<th name="l_jdpmc">内件品名</th>
 	    	<th name="l_jjrxm">寄件人</th>
 	    	<th name="l_jjrzjlx">证件类型</th>
 	    	<th name="l_jjrzjhm">证件号码</th>
 	    	<th name="l_jdpdlxmc">寄递品大类</th>
 	    	<th name="l_jdplxmc">寄递品小类</th>
-	    	<th name="l_bgr">报告人</th>
+	    	<th name="l_bgrxm">报告人</th>
 	    	<th name="l_bgsj">报告时间</th>
 	    	<th name="l_kywplb">可疑物品类别</th>
 			<th name="">操作</th>

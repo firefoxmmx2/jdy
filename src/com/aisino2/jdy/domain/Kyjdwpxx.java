@@ -52,6 +52,8 @@ public class Kyjdwpxx implements Serializable {
 	 */
 	private Rdrjbxx sjr;
 	
+	
+	
 	public Rdrjbxx getJjr() {
 		return jjr;
 	}
@@ -70,25 +72,33 @@ public class Kyjdwpxx implements Serializable {
 	 * 关联查询所需字段
 	 */
 	private Integer ljjbxx_id;//寄递品信息ID
-	private String wldh;//物流单号
+	private String wldhlb;//物流单号
 	private String jdpmc;//寄递品名称
 	private String jjrxm;//寄件人姓名
 	private String jjrzjlx;//寄件人证件类型
 	private String jjrzjhm;//寄件人证件号码
 	private String jdpdlxmc;//寄递品大类名称
 	private String jdplxmc;//寄递品小类名称
+	private String bgrxm;//报告人姓名
 	
+	
+	public String getBgrxm() {
+		return bgrxm;
+	}
+	public void setBgrxm(String bgrxm) {
+		this.bgrxm = bgrxm;
+	}
 	public Integer getLjjbxx_id() {
 		return ljjbxx_id;
 	}
 	public void setLjjbxx_id(Integer ljjbxx_id) {
 		this.ljjbxx_id = ljjbxx_id;
 	}
-	public String getWldh() {
-		return wldh;
+	public String getWldhlb() {
+		return wldhlb;
 	}
-	public void setWldh(String wldh) {
-		this.wldh = wldh;
+	public void setWldhlb(String wldhlb) {
+		this.wldhlb = wldhlb;
 	}
 	public String getJdpmc() {
 		return jdpmc;
@@ -169,6 +179,26 @@ public class Kyjdwpxx implements Serializable {
 	public void setBgsj(Date bgsj) {
 		this.bgsj = bgsj;
 	}
+	/*
+	 * 主页面按时间查询时用到
+	 */
+	private Date sbsjf;//上报开始时间
+	private Date sbsjt;//上报截止时间
+	
+	public Date getSbsjf() {
+		return sbsjf;
+	}
+	public void setSbsjf(Date sbsjf) {
+		this.sbsjf = sbsjf;
+	}
+	public Date getSbsjt() {
+		return sbsjt;
+	}
+	public void setSbsjt(Date sbsjt) {
+		this.sbsjt = sbsjt;
+	}
+
+
 	
 	
 }

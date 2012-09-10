@@ -63,7 +63,7 @@ function setPageListlj(pageno,url){
 										alignCenterColIndex: [1,2,8],
 										changeHref:function(table){
 											$(table).find("tr").each(function(){
-												$(this).find("td:last").find("a[title='可疑']").remove();
+												//$(this).find("td:last").find("a[title='可疑']").remove();
 											});
 										},
 										colWidths: ["10%","15%","10%","10%","20%","10%","15%","18%"]									
@@ -144,7 +144,7 @@ function setLjxxDelete(id) {
 					<td width="10%" class="pagedistd">揽件登记时间</td>
 					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjf" name="lj.ljsjf" class="inputstyle date" value="" /></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjt" name="lj.ljsjf" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjt" name="lj.ljsjt" class="inputstyle date" value="" /></td>
 				</tr>
     		<tr>
     		  <td colspan="6">

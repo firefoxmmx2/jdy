@@ -68,6 +68,19 @@ public class Jdpxx implements Serializable {
 	 */
 	private Kyjdwpxx kyjdwpxx;
 	
+	/**
+	 * 可疑标志
+	 */
+	private String kybz;
+	
+	public String getKybz() {
+		return kybz;
+	}
+	public void setKybz(String kybz) {
+		this.kybz = kybz;
+	}
+	
+	
 	
 	public Kyjdwpxx getKyjdwpxx() {
 		return kyjdwpxx;

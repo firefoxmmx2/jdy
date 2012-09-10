@@ -15,4 +15,9 @@ public interface IJdpxxDao {
 	
 	List<Jdpxx> findJdpxxs(Jdpxx jdpxx);
 	Page findJdpxxsForPage(Map<String, Object> map, int pageno, int pagesize, String dir, String sort);
+	
+	/*
+	 * 根据ljjbxx_id号查询该揽件信息是否还存在可以寄递物品
+	 */
+	Jdpxx getkyjdwp(Jdpxx jdpxx);
 }
