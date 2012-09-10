@@ -229,11 +229,6 @@ public class LjxxAction extends PageAction{
 		
 		List lCol = new ArrayList();
 		
-		List lky = new ArrayList();
-		lky.add("setLjxxKy");
-		lky.add("可疑");
-		lCol.add(lky);
-		
 		List lDetail = new ArrayList();
 		lDetail.add("setLjxxDetail");
 		lDetail.add("详情");
@@ -282,7 +277,7 @@ public class LjxxAction extends PageAction{
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
-//========================================公安端寄递品信息查询==========================================================================================
+//========================================企业端、公安端针对寄递物品信息查询==========================================================================================
 	public String jdywxxquerylist() throws Exception{
 			
 			//如果派件查询参数不为空的话，配置数据库的查询参数
@@ -315,6 +310,9 @@ public class LjxxAction extends PageAction{
 			if(djsjt!=null){
 				params.put("djsjt", djsjt);
 			}
+			if(lj.getGadqydcxqbbz()!=null){
+				params.put("gadqydcxqbbz", lj.getGadqydcxqbbz());
+			}
 			Page pageinfo = ljjbxxService.gadjdpxxForPage(params, pagesize, pagerow, dir, sort);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
@@ -331,7 +329,7 @@ public class LjxxAction extends PageAction{
 			this.result = "success";
 			return SUCCESS;
 		}
-	/***揽件基本信息主页面setable方法***/
+	/***公安端寄递品信息setable方法***/
 	private void setTableDate_gadjdpxxcx(List<Ljjbxx> lData) {
 		// TODO Auto-generated method stub
 		List lPro = new ArrayList();
