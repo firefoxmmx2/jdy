@@ -144,6 +144,7 @@ function jdwpxxadd(record){
 		rowData.jdplxmc=record.jdplxmc;
 		rowData.jdpdlx=record.jdpdlx;
 		rowData.jdpdlxmc=record.jdpdlxmc;
+		rowData.sfscbz=record.sfscbz;
 	}
 	else{
 		rowData.jdplx=$("#jdwp_jdpxl").val();//寄递品类型
@@ -154,7 +155,9 @@ function jdwpxxadd(record){
 		rowData.jdplxmc=$("#jdwp_jdpxl").attr("title");//寄递品类型名称
 		rowData.jdpdlx=$('#jdwp_jdpdl').val();
 		rowData.jdpdlxmc=$('#jdwp_jdpdl').attr('title');
+		rowData.sfscbz='N';
 	}
+	
 	var rowDataStr = $.toJSON(rowData);
 	trNum++;
 	var addTableTr="";
