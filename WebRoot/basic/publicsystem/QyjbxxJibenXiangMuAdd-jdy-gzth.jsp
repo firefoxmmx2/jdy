@@ -38,7 +38,8 @@
 	});
 	
 	function qyjbxx_addVerify(){ //验证
-		
+		if (!checkControlValue("a_gxdwmc","String",1,120,null,1,"管辖单位"))
+			return false;
 		if (!checkControlValue("a_qymc","String",1,120,null,1,"企业名称"))
 			return false;
 		if (!checkControlValue("a_jydz","String",1,200,null,1,"企业地址"))
