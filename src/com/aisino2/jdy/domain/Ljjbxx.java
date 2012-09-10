@@ -71,7 +71,17 @@ public class Ljjbxx implements Serializable {
     
     //用于查询时用到的对象---寄递品对象
     private Jdpxx jdpxx;
-    
+    /**
+	 * 可疑标志
+	 */
+	private String kybz;
+	
+	public String getKybz() {
+		return kybz;
+	}
+	public void setKybz(String kybz) {
+		this.kybz = kybz;
+	}
     
 	//查询列表需要的值
     private String jjrxm;//寄件人姓名
@@ -89,6 +99,22 @@ public class Ljjbxx implements Serializable {
     private String jdpmc;  //寄递品名称
     private Integer jdpxxid; //寄递品信息ID
     
+    /*
+     * 公安端、企业端查询区别标志
+     */
+    private String gadqydcxqbbz;
+    
+    
+
+
+
+	public String getGadqydcxqbbz() {
+		return gadqydcxqbbz;
+	}
+
+	public void setGadqydcxqbbz(String gadqydcxqbbz) {
+		this.gadqydcxqbbz = gadqydcxqbbz;
+	}
 
 	public Integer getJdpxxid() {
 		return jdpxxid;

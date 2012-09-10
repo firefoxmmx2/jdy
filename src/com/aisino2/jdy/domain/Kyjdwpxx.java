@@ -52,6 +52,8 @@ public class Kyjdwpxx implements Serializable {
 	 */
 	private Rdrjbxx sjr;
 	
+	
+	
 	public Rdrjbxx getJjr() {
 		return jjr;
 	}
