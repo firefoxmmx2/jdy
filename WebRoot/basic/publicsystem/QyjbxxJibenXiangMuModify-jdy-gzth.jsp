@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#m_kyrq").attr("readonly","true").datepicker();
-		$("#m_nsrq").attr("readonly","true").datepicker();
+// 		$("#m_nsrq").attr("readonly","true").datepicker();
 		
 		$("#bq_frdbzj").selectBox({code:"dm_frdbzjlb(ylcs)",width:"118px"});
 		
@@ -14,10 +14,32 @@
 			getDict_item("m_jjlxmc","m_jjlxbm","dm_jjlx");
 		});
 		
-		
+		$('#m_jjlxbm').bind('propertychange',function(){
+			if($(this).val() == '330'){
+				if(!$('#m_wstzqypzzsh').attr('isValiate')){
+					$('#m_wstzqypzzsh').parent('td').prev()
+						.removeClass('pagedistd1')
+						.addClass('red');
+					$('#m_wstzqypzzsh').attr('isValiate',true)
+				}
+				
+			}
+			else{
+				if($('#m_wstzqypzzsh').attr('isValiate')){
+					$('#m_wstzqypzzsh').parent('td').prev()
+					.removeClass('red')
+					.addClass('pagedistd1');
+					$('#m_wstzqypzzsh').attr('isValiate',false);
+				}
+				
+			}
+			
+		})
 	});
 	
-	function qyjbxx_modifyVerify_jdy(){ //验证
+	function qyjbxx_modifyVerify(){ //验证
+		if (!checkControlValue("m_gxdwmc","String",1,120,null,1,"管辖单位"))
+			return false;
 		if (!checkControlValue("m_qymc","String",1,120,null,1,"企业名称"))
 			return false;
 		if (!checkControlValue("m_jydz","String",1,200,null,1,"企业地址"))
@@ -34,8 +56,8 @@
 			return false;
 		if (!checkControlValue("m_jjlxmc","String",1,100,null,1,"经济类型"))
 			return false;
-		if (!checkControlValue("m_jymj","Float",-99999999.99,99999999.99,2,1,"占地面积(平米)"))
-			return false;
+// 		if (!checkControlValue("m_jymj","Float",-99999999.99,99999999.99,2,1,"占地面积(平米)"))
+// 			return false;
 		if (!checkControlValue("m_zczj","Float",-99999999.99,99999999.99,2,0,"注册资金(万元)"))
 			return false;
 		if (!checkControlValue("m_frdb","String",1,30,null,1,"法定代表人"))
@@ -57,6 +79,9 @@
 // 			return false;
 		if (!checkControlValue("m_kdjyxkzbh","String",1,30,null,1,"快递经营许可证号"))
 			return false;
+		if($('#m_wstzqypzzsh').attr('isValiate'))
+			if (!checkControlValue("m_wstzqypzzsh","String",1,30,null,1,"外商投资企业批准证书号"))
+				return false;
 // 		if (!checkControlValue("m_wstzqypzzsh","String",1,30,null,1,"外商投资企业批准证书号"))
 // 			return false;
 		if (!checkControlValue("m_yyzzZjbh","String",1,60,null,0,"营业执照编号"))
@@ -67,10 +92,10 @@
 			return false
 		if (!checkControlValue("m_swdjFzjg","String",1,60,null,0,"税务登记证发证机构名称"))
 			return false;
-		if (!checkControlValue("m_jyxkZjbh","String",1,60,null,1,"经营许可证号"))
-			return false;
-		if (!checkControlValue("m_jyxkFzjg","String",1,60,null,1,"经营许可证发证机关"))
-			return false;
+// 		if (!checkControlValue("m_jyxkZjbh","String",1,60,null,1,"经营许可证号"))
+// 			return false;
+// 		if (!checkControlValue("m_jyxkFzjg","String",1,60,null,1,"经营许可证发证机关"))
+// 			return false;
 		if (!checkControlValue("m_dwfzr","String",1,30,null,1,"单位负责人"))
 			return false;
 		if(!valSfzCardIsRight("m_dwfzrzjhm","请正确填写单位负责人身份证号!"))
@@ -81,19 +106,22 @@
 			return false;
 		if (!checkControlValue("m_bafzrxm","String",1,30,null,1,"治安负责人"))
 			return false;
-		if(!valSfzCardIsRight("m_bafzrgmsfhm","请正确填写治安负责人身份证号!"))
-			return false;
+		
 		if (!checkControlValue("m_bafzrgmsfhm","String",1,30,null,1,"治安负责人身份证号"))
+			return false;
+		if(!valSfzCardIsRight("m_bafzrgmsfhm","请正确填写治安负责人身份证号!"))
 			return false;
 		if (!checkControlValue("m_bafzrdh","String",1,30,null,1,"治安负责人联系方式"))
 			return false;
-		if (!checkControlValue("m_nsrq","Date",null,null,null,1,"年审日期"))
-			return false;
+// 		if (!checkControlValue("m_nsrq","Date",null,null,null,1,"年审日期"))
+// 			return false;
 		if (!checkControlValue("m_bz","String",1,2000,null,0,"备注"))
 			return false;
-		
-		if (!checkControlValue("m_zczj","Float",1,30,null,1,"注册资金（万元）"))
-			return false;
+		//变更原因验证
+		if($('#m_bgyy').length){
+			if (!checkControlValue("m_bgyy","String",1,2000,null,1,"变更原因"))
+				return false;
+		}
 		valadateYyzz();
 		if(!canCommit)
 			return false;
@@ -167,14 +195,14 @@
 			var $me = $(this);
 			var value = eval('jsonResultMes.LQyjbxx[0].'+$me.attr('id').split("m_")[1]);
 			if(value)
-				$($me).val(value);
+				$($me).val(setNull(value));
 		});
 		
 		$('[id*=m_]').each(function(){
 			var $me = $(this);
 			var value = eval('jsonResultMes.LQyjbxx[1].'+$me.attr('id').split("m_")[1]);
 			if(value)
-				$($me).val(value);
+				$($me).val(setNull(value));
 		});
 		$("#bq_hylb").setValue(setNull(jsonResultMes.LQyjbxx[0].hylbdm),115); //value：根据代码赋下拉框值 text：是根据内容赋下拉框值
 		$("#bq_ylcsfl").setValue(setNull(jsonResultMes.LQyjbxx[0].qyzflbm),115);
@@ -228,7 +256,7 @@
 			<tr height="25">
             	<td class="red" >经济类型</td>
 	          <td class="pagetd1" ><input style="width:120px" type="text" class="inputstyle1" id="m_jjlxmc" readonly/></td>
-	          <td class="red">占地面积（平米）</td>
+	          <td class="pagedistd1">占地面积（平米）</td>
 		        <td class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="m_jymj"/></td>
 		        <td class="red">注册资金（万元）</td>
 		        <td class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="m_zczj"/></td>
@@ -270,9 +298,9 @@
 <!-- 		        <td class="red" nowrap>经营许可证发证机关</td> -->
 <!-- 		        <td id="jyxk_fzjgConte" class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="m_jyxkFzjg" -->
 <!-- 		        	onkeyup="htjdOnkeyupVal('m_jyxkFzjg','zhongwen');"/></td> -->
-		        <td class="red">行业许可证号</td>
+		        <td class="pagedistd1">行业许可证号</td>
 		        <td class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="m_jyxkZjbh"/></td>
-		        <td class="red" nowrap>行业许可证发证机关</td>
+		        <td class="pagedistd1" nowrap>行业许可证发证机关</td>
 		        <td id="jyxk_fzjgConte" class="pagetd1"><input style="width:120px" type="text" class="inputstyle1" id="m_jyxkFzjg"
 		        	onkeyup="htjdOnkeyupVal('m_jyxkFzjg','zhongwen');"/></td>
 			</tr>
