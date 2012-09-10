@@ -241,12 +241,19 @@
     <resultMap class="jdpxx" id="jdpxx_kyjdwp">
 		<result property="id" column="id"/>
 	</resultMap>
-	
+	<sql id="jdpxx_kyjdwpWhere">
+		<isNotEmpty prepend="" property="ljjbxx">
+			<isNotEmpty prepend="and" property="ljjbxx.djxh">
+				jdpxx.ljjbxx_id=#ljjbxx.djxh#
+			</isNotEmpty>
+		</isNotEmpty>
+		
+	</sql>
 	<select id="jdpxx.getkyjdwp" parameterClass="jdpxx" resultMap="jdpxx_kyjdwp">
 		select jdpxx.id from t_jdpxx jdpxx
 		where 1=1  and jdpxx.kybz='Y'
 		<dynamic prepend="and">
-			<include refid="jdpxxWhere"/>
+			<include refid="jdpxx_kyjdwpWhere"/>
 		</dynamic>
 	</select>
 </sqlMap>
