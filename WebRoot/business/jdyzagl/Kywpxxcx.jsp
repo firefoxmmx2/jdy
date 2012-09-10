@@ -48,6 +48,18 @@ function setPageListKyjdwpxx(pageno,url){
 									});				
 		}
 }
+//查询提交时验证方法
+function manVerify_bm(){
+	var sj1 = $("#kyjdwpxx_sbsjf").val();
+	var sj2 = $("#kyjdwpxx_sbsjt").val();
+	if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
+		if(sj1>sj2){
+			jAlert('填报时间时间不能大于填报时间至','提示信息')
+			return false;
+		}
+	}
+	return true;
+}
 //可疑寄递物品详情
 function setKyjdwpxxDetail(id){
 	$("#"+detailid).empty();
