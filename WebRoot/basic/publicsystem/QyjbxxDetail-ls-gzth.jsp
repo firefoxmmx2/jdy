@@ -363,8 +363,30 @@
 			zjjgInit(json);
 		}else if(selHylb=='D') { //印刷业
 			ysyInit(json);
+		}else if(selHylb=='Y') {// 寄递业
+			jdyInit(json);
 		}
 	}
+	
+	function jdyInit(json){ //寄递业初始
+		changeLableTitle('gxdw_title','管辖单位');
+		//$("#hqZhuFuType").css("display","block"); //当需要隐藏/显示企业主分类的时候 将此行回复注销
+		$("#qyjbxxXiangxi").height(400);
+		$("#someHyMes").load("basic/publicsystem/QyjbxxJibenXiangMuDetail-jdy-gzth.jsp", {}, function(){
+			$("#someHyMes span").each(function(idx){
+				var $span=$(this);
+				var span_id=$span.attr('id');
+				$span.attr('id',span_id+'_');
+				span_id=$span.attr('id');
+				$span.parent('td').prev('td').attr(span_id+"title");
+				
+			});
+			loadSomeHyBack(json);
+			//qyjbxxXiangxi_updatediv();
+			//changeLableTitle('qyorcs_','企业');
+		});
+	}
+	
 	function ylyInit(json){ //娱乐业初始
 	}
 	
