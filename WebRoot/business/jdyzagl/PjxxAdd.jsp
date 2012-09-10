@@ -380,6 +380,8 @@ function wldh_completion(wldh_el){
 			});
 			
 			//初始化寄递品信息
+			//修正每次初始化寄递品信息重复添加寄递品信息
+			$('#YwwffzjlData tbody tr').remove();
 			if(data.lj.jdp_list && data.lj.jdp_list.length>0){
 				var jdp_list=data.lj.jdp_list;
 				for(var i=0;i<jdp_list.length;i++){
