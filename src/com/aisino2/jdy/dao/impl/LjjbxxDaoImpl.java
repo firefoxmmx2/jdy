@@ -108,9 +108,14 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 			else 
 				sCol=" ljjbxx.djxh ";
 		}
-		
 		map.put("pageSort", sCol);
-		return queryForPage("jdpxxgadcx.getListPage", map, pageno,pagesize);
+		if(map.get("gadqydcxqbbz").toString().equals("gadjdywxxcx")){
+			return queryForPage("jdpxxgadcx.getListPage", map, pageno,pagesize);
+		}
+		else{
+			return queryForPage("jdpxxqydkyaddcx.getListPage", map, pageno,pagesize);
+		}
+		
 	}
 
 	public String generateDjxh(String qybm) {
