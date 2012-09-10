@@ -2,6 +2,10 @@
 <HTML>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		if(qyjbxx_requestType=="hecha" && $('#m_bgyy').length){
+			$('#m_bgyy').parents('tr').eq(0).remove();
+		}
 		$("#m_kyrq").attr("readonly","true").datepicker();
 // 		$("#m_nsrq").attr("readonly","true").datepicker();
 		
