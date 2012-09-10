@@ -440,8 +440,8 @@
 	function jdyOnloadbq(yqid){ //寄递业
 	    if(yqid=='abxx'&&yqstate==0){ //保证加载一次
 			$("#div_jdy_baoAnRY").empty().load("basic/publicsystem/BaryxxMan.jsp").show("slow");//加载保安人员信息
-			$("#div_jdy_baoWeiRY").empty().load("basic/publicsystem/BwryxxAddMan.jsp").show("slow"); //加载保卫人员信息
-			$("#div_jdy_shiPinSB").empty().load("basic/publicsystem/BldsjksbAddMan-gzth.jsp").show("slow"); //加载视频监控设备
+			$("#div_jdy_baoWeiRY").empty().load("basic/publicsystem/BwryxxModifyMan.jsp").show("slow"); //加载保卫人员信息
+			$("#div_jdy_shiPinSB").empty().load("basic/publicsystem/BldsjksbModifyMan-gzth.jsp").show("slow"); //加载视频监控设备
 			$("#div_jdy_jiFangSB").empty().load("basic/publicsystem/AqjcsbMan-gzth.jsp").show("slow"); //加载技防设备信息
 		}
 	}
