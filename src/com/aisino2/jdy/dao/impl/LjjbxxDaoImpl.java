@@ -137,4 +137,10 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 		return (Ljjbxx) queryForObject("ljjbxx.get", ljjbxx);
 	}
 
+
+	public Integer count(Map<String, Object> map) {
+		
+		return (Integer) queryForObject("ljjbxx.getListPageCount", map);
+	}
+
 }

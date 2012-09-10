@@ -3,8 +3,9 @@ package com.aisino2.publicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.BaseDao;
 import com.aisino2.core.dao.Page;
+import com.aisino2.core.dao.BaseDao;
+
 import com.aisino2.publicsystem.dao.IQybaxxDao;
 import com.aisino2.publicsystem.domain.Qybaxx;
 
@@ -39,6 +40,12 @@ public class QybaxxDaoImpl extends BaseDao implements IQybaxxDao {
 		// TODO: implement
 		String sCol="";
 		if (sort!=null){
+			if(sort.equals("0"))
+				sCol = " a.qybabm "+ desc;
+			else if(sort.equals("1"))
+				sCol = " a.barq "+ desc;
+			else if(sort.equals("2"))
+				sCol = " a.babmmc "+ desc;
 		}else{
 			sCol="a.Qyid desc";
 		}
