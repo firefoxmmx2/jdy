@@ -388,6 +388,15 @@ function wldh_completion(wldh_el){
 			}
 		}
 		
+		//如果揽件信息为可疑的话，不准派件
+		if(data.lj.kybz && data.lj.kybz=="Y"){
+			$('#pjjbxx_add_button').parent('td').remove();
+			$('#pjjbxx_add_again_button').parent('td').remove();
+			$('#pjjbxx_goback').attr('title','关闭').text('关闭');
+			
+			jAlert("该揽件信息包含可疑物品，无法派件","提示");
+		}
+		
 	}, 'json');
 }
 </script>
