@@ -87,6 +87,7 @@
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="jdywxxcx_gyd">
   <input type="hidden" id="lj_gxdwbm" name="lj.gxdwbm" value=""><!-- 管辖单位编码 -->
   <input type="hidden" id="lj_gadjdywxxcx" name="lj.ywcxbz" value="gadjdywxxcx"><!-- 公安端寄递物品信息查询标志 -->
+  <input type="hidden" id="gadqydcxqbbz_ljman" name="lj.gadqydcxqbbz" value="gadcx" /><!-- 安端端、企业端查询寄递物品区别标志 -->
   <tr>
     <td class="queryfont">寄递业务信息查询</td>
   </tr>

@@ -63,7 +63,7 @@ function setPageListlj(pageno,url){
 										alignCenterColIndex: [1,2,8],
 										changeHref:function(table){
 											$(table).find("tr").each(function(){
-												$(this).find("td:last").find("a[title='可疑']").remove();
+												//$(this).find("td:last").find("a[title='可疑']").remove();
 											});
 										},
 										colWidths: ["10%","15%","10%","10%","20%","10%","15%","18%"]									

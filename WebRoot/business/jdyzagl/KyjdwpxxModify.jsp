@@ -30,6 +30,7 @@ function kyjdwpback_mod(json){
 			$("#jdpxx_bgrxm").val(data.jdpxx.kyjdwpxx.bgr.xm);//报告人姓名
 			$("#kyjdwpxx_bgrbm").val(data.jdpxx.kyjdwpxx.bgr.cyrybh);//报告人编码 
 			$("#jdpxx_basj").val(setNull(data.jdpxx.kyjdwpxx.bgsj));//报告时间 
+			$("#kyjdwpxx_ljjbxx_djxh_mod").val(data.jdpxx.ljjbxx.djxh);//需要将登记序号打入可疑寄递物品信息表中
 			//初始化数据
 			$('#kyjdwpxx_mod_qyd [name*=jdpxx.]').each(function(idx){
 				$this = $(this);
@@ -108,9 +109,10 @@ function kywpaddmodback(json){
 <input type="hidden" id="kyjdwpxx_bgrbm" name="kyjdwpxx.bgr.cyrybh" value=""><!-- 修改提交时要保持的报告人编码 -->
 <input type="hidden" id="jdpxx_kyjdwpxx_kyywdjxh" name="kyjdwpxx.kyywdjxh" value=""><!-- 修改时需要可疑业务登记需要 来进行修改 -->
 <input type="hidden" id="kyjdwpxx_kywplb_mod" name="kyjdwpxx.kywplb" value=""><!-- 修改操作时提交的可以物品类别 -->
+<input type="hidden" id="kyjdwpxx_ljjbxx_djxh_mod" name="kyjdwpxx.ljjbxx.djxh" value=""><!-- 业务登记序号 -->
 	<tr>
-		<td class="distd">寄递品ID</td>
-		<td class="detailtd"><input type="text" id="jdpxxid" name="jdpxx.id" class="readonly" value="" /></td>
+		<td class="distd">业务登记序号</td>
+		<td class="detailtd"><input type="text" id="jdpxx_ljjbxx_djxh" name="jdpxx.ljjbxx.djxh" class="readonly" value="" /></td>
 		<td class="distd">快递单号</td>
 		<td class="detailtd"><input type="text" id="jdpxx_ljjbxx_wldh" name="jdpxx.ljjbxx.wldh"  value="" class="readonly" /></td>
 	</tr>

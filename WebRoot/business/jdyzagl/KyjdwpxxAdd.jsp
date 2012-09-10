@@ -25,6 +25,8 @@ function kyjdwpback(json){
 	$.post("jdy/djpxxquery_jdpxx.action",params,function(data){
 		if(data.jdpxx){
 			$("#kyjdwpxx_jdpxx_id").val(data.jdpxx.id);//插入时需要将寄递品信息ID插入可疑寄递物品信息表中
+			//alert("登记序号="+data.jdpxx.ljjbxx.djxh);
+			$("#kyjdwpxx_ljjbxx_djxh_add").val(data.jdpxx.ljjbxx.djxh);//需要将登记序号打入可疑寄递物品信息表中
 			//初始化数据
 			$('#kyjdwpxx_qyd [name*=jdpxx.]').each(function(idx){
 				$this = $(this);
@@ -101,9 +103,10 @@ function kywpaddaddback(json){
 <input type="hidden" id="kyjdwpxx_jdpxx_id" name="kyjdwpxx.jdpxx.id" value="">
 <input type="hidden" id="kyjdwpxx_qyjbxx" name="kyjdwpxx.ljjbxx.qyjbxx.qybm" value="<%=qybm %>">
 <input type="hidden" id="kyjdwpxx_cyrybh" name="kyjdwpxx.bgr.cyrybh" value="">
+<input type="hidden" id="kyjdwpxx_ljjbxx_djxh_add" name="kyjdwpxx.ljjbxx.djxh" value=""><!-- 业务登记序号 -->
 	<tr>
-		<td class="distd">寄递品ID</td>
-		<td class="detailtd"><input type="text" id="jdpxxid" name="jdpxx.id" class="readonly" value="" /></td>
+		<td class="distd">业务登记序号</td>
+		<td class="detailtd"><input type="text" id="jdpxx_ljjbxx_djxh" name="jdpxx.ljjbxx.djxh" class="readonly" value="" /></td>
 		<td class="distd">快递单号</td>
 		<td class="detailtd"><input type="text" id="jdpxx_ljjbxx_wldh" name="jdpxx.ljjbxx.wldh"  value="" class="readonly" /></td>
 	</tr>

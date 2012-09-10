@@ -71,8 +71,8 @@ function kyjdwpback_mod(json){
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="kyjdwpxx_det_qyd">
 <input type="hidden" id="jdpxx_id_det" name="jdpxx.id" value="">
 	<tr>
-		<td class="distd">寄递品ID</td>
-		<td class="detailtd"><input type="text" id="jdpxxid" name="jdpxx.id" class="readonly" value="" /></td>
+		<td class="distd">业务登记序号</td>
+		<td class="detailtd"><input type="text" id="jdpxx_ljjbxx_djxh" name="jdpxx.ljjbxx.djxh" class="readonly" value="" /></td>
 		<td class="distd">快递单号</td>
 		<td class="detailtd"><input type="text" id="jdpxx_ljjbxx_wldh" name="jdpxx.ljjbxx.wldh"  value="" class="readonly" /></td>
 	</tr>
