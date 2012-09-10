@@ -36,5 +36,7 @@
 <!-- 	可疑寄递物品 -->
 	<bean id="KyjdwpxxServiceImpl" class="com.aisino2.jdy.service.impl.KyjdwpxxServiceImpl">
 		<property name="kyjdwpxxDao" ref="KyjdwpxxDaoImpl"/>
+		<property name="ljjbxxDao" ref="LjjbxxDaoImpl" />
+		<property name="jdpxxDao" ref="JdpxxDaoImpl" />
 	</bean>
 </beans>
