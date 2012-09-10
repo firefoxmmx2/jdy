@@ -186,6 +186,9 @@
 			<isNotNull prepend="," property="jdpdlxmc">
 				jdpdlxmc=#jdpdlxmc#
 			</isNotNull>
+			<isNotNull prepend="," property="kybz">
+				kybz=#kybz#
+			</isNotNull>
 			
 		</dynamic>
 		where
@@ -230,6 +233,18 @@
 	<select id="jdpxx.get" parameterClass="jdpxx" resultMap="jdpxx_glcx">
 		select * from t_jdpxx jdpxx
 		where 1=1
+		<dynamic prepend="and">
+			<include refid="jdpxxWhere"/>
+		</dynamic>
+	</select>
+<!--    根据ljjbxx_id号查询该揽件信息是否还存在可以寄递物品    -->
+    <resultMap class="jdpxx" id="jdpxx_kyjdwp">
+		<result property="id" column="id"/>
+	</resultMap>
+	
+	<select id="jdpxx.getkyjdwp" parameterClass="jdpxx" resultMap="jdpxx_kyjdwp">
+		select jdpxx.id from t_jdpxx jdpxx
+		where 1=1  and jdpxx.kybz='Y'
 		<dynamic prepend="and">
 			<include refid="jdpxxWhere"/>
 		</dynamic>

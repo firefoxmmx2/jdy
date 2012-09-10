@@ -386,6 +386,9 @@
 			<isNotNull prepend="," property="scbzw">
 				scbzw=#scbzw#
 			</isNotNull>
+			<isNotNull prepend="," property="kybz">
+				kybz=#kybz#
+			</isNotNull>
 		</dynamic>
 		where
 		<dynamic prepend=" ">
@@ -501,7 +504,53 @@
 		</dynamic>
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
-	<!-- 	企业端寄递品信息单条查询 -->
+<!-- 	企业端可疑寄递物品列表分页记录数  -->
+	<select id="jdpxxqydkyaddcx.getListPageCount" parameterClass="map" resultClass="Integer">
+		select count(1) 
+		from 
+				t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyjbxx qyjbxx,t_jdpxx jdpxx
+		where 1=1
+		        and jdpxx.ljjbxx_id=ljjbxx.djxh
+		        and ljjbxx.qybm=qyjbxx.qybm
+				and ljjbxx.jjr_id=jjr.id 
+				and ljjbxx.sjr_id=sjr.id 
+				and jdpxx.kybz='N'
+		<dynamic prepend="and">
+			<include refid="jdpxxgadcxWhere"/>
+		</dynamic>
+	</select>
+<!-- 	企业端可疑寄递物品页面列表分页 -->
+	<select id="jdpxxqydkyaddcx.getListPage" parameterClass="map" resultMap="gadjdpxxglcx">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(	select
+		    <!--寄递品信息 -->
+		    jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc,jdpxx.jdpmc jdpmc,jdpxx.id id
+		    <!--寄递人信息 -->
+		    ,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm,jjr.id jjr_id
+		    <!--收递人信息 -->
+		    ,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm,sjr.id sjr_id
+		    <!--揽件信息 -->
+		    ,ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh
+			<!--企业信息 -->
+			,qyjbxx.qyid qyjbxx_qyid, qyjbxx.qybm qyjbxx_qybm, qyjbxx.qymc qyjbxx_qymc
+			,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
+			,ljr.xm ljr_xm
+		from 
+				t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyjbxx qyjbxx,t_jdpxx jdpxx,t_qyryxx ljr
+		where 1=1
+		        and jdpxx.ljjbxx_id=ljjbxx.djxh
+		        and ljjbxx.qybm=qyjbxx.qybm
+				and ljjbxx.jjr_id=jjr.id 
+				and ljjbxx.sjr_id=sjr.id 
+				and ljjbxx.ljrbh=ljr.cyrybh
+				and jdpxx.kybz='N'
+		<dynamic prepend="and">
+			<include refid="jdpxxgadcxWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+<!-- 	企业端寄递品信息单条查询 -->
 	<select id="jdpxxqydcx.get" parameterClass="map" resultMap="gadjdpxxglcx">
 			select
 		    <!--寄递品信息 -->
