@@ -11,7 +11,6 @@ if($("#offineFlag").attr("value")=='1'){
 	currPageHeight = pageHeight-165;
 }
 $(document).ready(function() {
-	alert(1)
 	pageUrl="publicsystem/querylist_publicwgcyryxx.action";
 	divnid="tabledata";
 	tableid="table1";
