@@ -347,7 +347,7 @@ function  modify_pjxx(){
 			
 			
 		});
-		jQuery.post("jdy/update_pjxx.action",params,modify_pjxx_back,"json");
+		jQuery.post(pjxx_update_url,params,modify_pjxx_back,"json");
 	}
 }
 //提交方法回调函数
