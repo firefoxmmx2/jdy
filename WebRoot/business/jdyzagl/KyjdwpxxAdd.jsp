@@ -62,7 +62,7 @@ function kyjdwpback(json){
 function yangzhengff(){
 	if (!checkControlValue("jdpxx_kywplb","Select",1,8,null,1,"可疑物品类型"))
 		return false;
-	if (!checkControlValue("jdpxx_bgrxm","Select",1,8,null,1,"报告人"))
+	if (!checkControlValue("jdpxx_bgrxm","Select",1,14,null,1,"报告人"))
 		return false;
 	if (!checkControlValue("jdpxx_basj","Date",null,null,null,1,"报告日期"))
 		return false;
