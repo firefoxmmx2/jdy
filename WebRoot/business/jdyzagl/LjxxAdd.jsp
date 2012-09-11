@@ -259,7 +259,7 @@ function addVerify(){
     return true;
 }
 //揽件信息保存方法
-function  ljxxbaocun(){
+function  ljxxbaocun(temp){
 	//设置企业编码，之后要删除这里的设置
 	//$("#lj_qyjbxx").val("0123456789")
 	//alert("蓝贱人编码="+$("#lj_qyjbxx").val());
@@ -288,14 +288,35 @@ function  ljxxbaocun(){
             jAlert("寄递品信息不能为空！",'验证信息');
             return false;
 		}
-		jQuery.post("jdy/insert_ljxx.action",params,addback,"json");
+		if(temp=="bc"){
+			jQuery.post("jdy/insert_ljxx.action",params,addbackbc,"json");
+		}
+		if(temp=="bcxz"){
+			jQuery.post("jdy/insert_ljxx.action",params,addbackbcxz,"json");
+		}
+		
 	}
 }
 //提交方法回调函数
-function addback(json){
+function addbackbc(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
 		$("#ljjbxxadd_detail").hideAndRemove("show");
+		setPageListlj(1);
+	}else{
+		jAlert(json.result,'错误信息');
+	}		
+}
+//提交方法回调函数
+function addbackbcxz(json){
+	if  (json.result=="success"){
+		jAlert(addMessage,'提示信息');
+		//$("#ljjbxxadd_detail").hideAndRemove("show");
+		//清空数据 
+		$("#ljjbxx_add [id='lj_wldh']").val("");//物流单号
+		$("#ljjbxx_add [id='lj_ljr_xm']").val("");//揽件人
+		//$("#ljjbxx_add [id='YwwffzjlData']");//揽件人
+		$('#YwwffzjlData tbody tr').remove();
 		setPageListlj(1);
 	}else{
 		jAlert(json.result,'错误信息');
@@ -409,8 +430,8 @@ function addback(json){
 </tr>
 <tr><td height="3"></td></tr>
 <tr height="25" align="center">
-	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存" onclick='ljxxbaocun();'>保存</a></td>
-	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存新增" onclick='valadateCode();'>保存新增</a></td>
+	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存" onclick='ljxxbaocun("bc");'>保存</a></td>
+	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存新增" onclick='ljxxbaocun("bcxz");'>保存新增</a></td>
 	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");'>返回</a></td>
 </tr>
 </table>

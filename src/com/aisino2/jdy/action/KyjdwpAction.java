@@ -116,6 +116,10 @@ public class KyjdwpAction extends PageAction{
 		
 		if(kyjdwpxx.getLjjbxx()!=null){//物流单号
 			params.put("ljjbxx", kyjdwpxx.getLjjbxx());
+			
+			if(kyjdwpxx.getLjjbxx().getQyjbxx()!=null){//企业基本信息
+				params.put("qyjbxx", kyjdwpxx.getLjjbxx().getQyjbxx());
+			}
 		}
 		if(kyjdwpxx.getKywplb()!=null){//可疑物品类别
 			params.put("kywplb", kyjdwpxx.getKywplb());

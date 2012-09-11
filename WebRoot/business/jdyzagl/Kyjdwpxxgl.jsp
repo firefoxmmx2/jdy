@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@include file="../../public/user-info.jsp" %>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
 <script type="text/javascript">
 $(document).ready(function() {
@@ -106,6 +107,7 @@ function setKyjdwpxxDelete(id){
   <tr>
     <td class="tdbg">
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="kyjdwpxx_man">
+    	  <input type="hidden" id="kyjdwpxx_ljjbxx_qyjbxx_qybm" name="kyjdwpxx.ljjbxx.qyjbxx.qybm" value="<%=qybm%>" /><!-- 所有查询都需要跟上企业编码 -->
 		  <tr>
 			<td width="10%" class="pagedistd">物流单号</td>
 			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_wldh" name="kyjdwpxx.ljjbxx.wldh" class="inputstyle" value=""></td>	
