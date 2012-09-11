@@ -410,6 +410,8 @@ function wldh_completion(wldh,qybm){
 				else
 					$(this).removeAttr('value');
 			});
+			//默认当前企业编码
+			$('input:hidden[name=pjxx.ljjbxx.qyjbxx.qybm]').val('<%=qybm%>');
 			$('#YwwffzjlData tbody tr').remove();
 			
 			$('#pjjbxx_add_button').parent('td').show();
