@@ -17,6 +17,7 @@ import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IJdyBjService;
 import com.aisino2.jdy.service.ILjjbxxService;
+import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.service.IQyjbxxService;
 
 public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
@@ -182,7 +183,9 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		
 //		查询参数
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("qybm", qybm);
+		Qyjbxx qyjbxx=new Qyjbxx();
+		qyjbxx.setQybm(qybm);
+		map.put("qyjbxx", qyjbxx);
 		map.put("wldh", wldh);
 		
 		count=ljjbxxDao.count(map);
