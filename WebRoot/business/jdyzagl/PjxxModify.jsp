@@ -456,7 +456,7 @@ function loadData(){
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">寄递品信息登记</td>
+      <td align="left" class="title1" id="pjxx_title">寄递品派件信息修改</td>
       <td align="right"><a href="#" id="closeDiv" onclick='close_pjxx_mod_page();' class="close"></a></td>
     </tr>
 </table>

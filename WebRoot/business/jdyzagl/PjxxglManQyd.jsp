@@ -19,7 +19,7 @@
 	
 	$(function(){
 		
-		$('#pjxx_jjr_zjlx').selectBox({code:'dm_zjlx'});
+		$('#pjxx_sjr_zjlx').selectBox({code:'dm_zjlx'});
 		$('.date').attr("readOnly",true).datepicker();
 		$('#pjxx_pjr_xm').click(function(){
 			dataid=null;
@@ -119,6 +119,8 @@
 	function setPjxxDetail(id) {
 		dataid = id;
 		detailDialog(pjxx_detail_div, pjxx_detail_width, pjxx_update_page_url, null,function(data){
+// 			修改标题
+			$('#pjxx_title').text('寄递品派件信息详情');
 			$('#pjjbxx_mod [id*=pjjbxxmod_]').attr("readOnly",true).addClass('readonly');
 			$('#pjjbxx_mod .red').removeClass('red');
 			$('#pjjbxx_mod_button').parent('td').remove();
@@ -174,13 +176,13 @@
 					<td width="10%" class="pagedistd">物流单号</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_wldh" name="pjxx.ljjbxx.wldh" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">收件人姓名</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_jjr_xm" name="pjxx.ljjbxx.jjr.xm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_sjr_xm" name="pjxx.ljjbxx.sjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">收件人证件类型</td>
-					<td width="23%" class="pagetd"><select id="pjxx_jjr_zjlx" name="pjxx.ljjbxx.jjr.zjlx" class="select1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="pjxx_sjr_zjlx" name="pjxx.ljjbxx.sjr.zjlx" class="select1"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">收件人证件号码</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_jjr_zjhm" name="pjxx.ljjbxx.jjr.zjhm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_sjr_zjhm" name="pjxx.ljjbxx.sjr.zjhm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">派件时间</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjf" name="pjsjf" class="inputstyle date" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
@@ -225,7 +227,7 @@
 	    <tr>       
 	    	<th name="l_djxh">登记序号</th>
 	    	<th name="l_wldh">物流单号</th>
-	    	<th name="l_jjrxm">收件人姓名</th>
+	    	<th name="l_sjrxm">收件人姓名</th>
 	    	<th name="l_zjlx">证件类型</th>
 	    	<th name="l_zjhm">证件号码</th>
 	    	<th name="l_jdpdl">派件时间</th>
