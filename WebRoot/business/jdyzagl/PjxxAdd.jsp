@@ -54,30 +54,53 @@ $(function() {
 	$("#"+detailid).hide();
 	
 	$("#pjxxadd_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
-		//如果身份证证号填写不为15或18位，则直接返回让他重新填写
-		var zjhm = $("#pjxxadd_jjrzjhm").attr("value").toUpperCase();
-		if(zjhm!=""){
-			if(isIdCardNo(zjhm)){
-				//证件号码就用用户自己填写的，如15位的不在去转换为18位
-				//15位转18位
-				if(zjhm.length==15){
-					valSfzCardIsRight("pjxxadd_jjrzjhm","请正证件号码!");
+		if($('#pjxxadd_jjrzjlx').val() == '11'){
+			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+			var zjhm = $("#pjxxadd_jjrzjhm").attr("value").toUpperCase();
+			if(zjhm!=""){
+				if(isIdCardNo(zjhm)){
+					//证件号码就用用户自己填写的，如15位的不在去转换为18位
+					//15位转18位
+					if(zjhm.length==15){
+						valSfzCardIsRight("pjxxadd_jjrzjhm","请正证件号码!");
+					}
 				}
 			}
 		}
+		
 	});
 	$("#pjxxadd_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
-		//如果身份证证号填写不为15或18位，则直接返回让他重新填写
-		var zjhm = $("#pjxxadd_jjrzjhm").attr("value").toUpperCase();
-		if(zjhm!=""){
-			if(isIdCardNo(zjhm)){
-				//证件号码就用用户自己填写的，如15位的不在去转换为18位
-				//15位转18位
-				if(zjhm.length==15){
-					valSfzCardIsRight("pjxxadd_jjrzjhm","请正证件号码!");
+		if($('#pjxxadd_sjrzjlx').val()=='11'){
+			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+			var zjhm = $("#pjxxadd_jjrzjhm").attr("value").toUpperCase();
+			if(zjhm!=""){
+				if(isIdCardNo(zjhm)){
+					//证件号码就用用户自己填写的，如15位的不在去转换为18位
+					//15位转18位
+					if(zjhm.length==15){
+						valSfzCardIsRight("pjxxadd_jjrzjhm","请正证件号码!");
+					}
 				}
 			}
 		}
+		
+	});
+	
+	$("#pjxxadd_dsr_zjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
+		if($('#pjxxadd_dsr_zjlx').val() == "11"){
+			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+			var zjhm = $("#pjxxadd_dsr_zjhm").attr("value").toUpperCase();
+			if(zjhm!=""){
+				if(isIdCardNo(zjhm)){
+					//证件号码就用用户自己填写的，如15位的不在去转换为18位
+					//15位转18位
+					if(zjhm.length==15){
+						valSfzCardIsRight("pjxxadd_dsr_zjhm","请正证件号码!");
+					}
+				}
+			}
+		}
+		
 	});
 	
 	dzcl_divnid="YwwffzjlData";
