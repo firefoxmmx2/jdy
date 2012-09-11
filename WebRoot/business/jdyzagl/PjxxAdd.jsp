@@ -85,12 +85,11 @@ $(function() {
 	dzcl_tables=$("#"+dzcl_divnid).html();
 	setPageList_ywwffzjlzmfj(1,'#');
 	//物流单号查询
-	$(document).unbind("keydown");
-	$('#pjxxadd_wldh').unbind("keydown").keydown(function(e){
-		if(e.keyCode == 13){
-			wldh_completion($(this));	
-		}
-		
+	
+	$('#pjxxadd_wldh').change(function(){
+		if(!$(this).val())
+			return;
+		wldh_completion($(this).val(),'<%=qybm%>');
 	});
 	
 });
@@ -361,9 +360,9 @@ function close_pjxx_add_page(){
 /*
 * 物流单号补全揽件信息
 */
-function wldh_completion(wldh_el){
+function wldh_completion(wldh,qybm){
 	var url='jdy/query_ljxx.action';
-	var params = {'lj.wldh':wldh_el.val()};
+	var params = {'lj.wldh':wldh,'lj.qyjbxx.qybm':qybm};
 	
 	$.post(url,params,function(data){
 		if(data.lj){
@@ -391,15 +390,39 @@ function wldh_completion(wldh_el){
 					jdwpxxadd(jdp_list[i]);
 				}
 			}
-		}
-		
-		//如果揽件信息为可疑的话，不准派件
-		if(data.lj.kybz && data.lj.kybz=="Y"){
-			$('#pjjbxx_add_button').parent('td').remove();
-			$('#pjjbxx_add_again_button').parent('td').remove();
-			$('#pjjbxx_goback').attr('title','关闭').text('关闭');
 			
-			jAlert("该揽件信息包含可疑物品，无法派件","提示");
+			//如果揽件信息为可疑的话，不准派件
+			if(data.lj.kybz && data.lj.kybz=="Y"){
+				$('#pjjbxx_add_button').parent('td').hide();
+				$('#pjjbxx_add_again_button').parent('td').hide();
+				$('#pjjbxx_goback').attr('title','关闭').text('关闭');
+				
+				jAlert("该揽件信息包含可疑物品，无法派件","提示");
+			}
+			
+			$('#pjjbxx_add_button').attr('disabled',false);
+			$('#pjjbxx_add_again_button').attr('disabled',false);
+		}
+		else{
+			$('#pjjbxx_add [name*=pjxx.ljjbxx.][name!=pjxx.ljjbxx.wldh]').each(function(){
+				if($(this).attr('tagName').toLowerCase()=='select')
+					$(this).setValue("");
+				else
+					$(this).removeAttr('value');
+			});
+			$('#YwwffzjlData tbody tr').remove();
+			
+			$('#pjjbxx_add_button').parent('td').show();
+			$('#pjjbxx_add_again_button').parent('td').show();
+			$('#pjjbxx_goback').attr('title','返回').text('返回');
+			//验证物流单号唯一性
+			validateWldh(wldh,qybm,function(json){
+				$('#pjjbxx_add_button').attr('disabled',false);
+				$('#pjjbxx_add_again_button').attr('disabled',false);
+			},function(){
+				$('#pjjbxx_add_button').attr('disabled',true);
+				$('#pjjbxx_add_again_button').attr('disabled',true);
+			});
 		}
 		
 	}, 'json');
