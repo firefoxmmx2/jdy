@@ -76,7 +76,6 @@ function yangzhengff(){
 function kywpxxmod(){
 	if(yangzhengff()){
 		$("#kyjdwpxx_kywplb_mod").val($("#jdpxx_kywplb_mod").val());
-		alert($("#kyjdwpxx_kywplb_mod").val());
 		params = getSubmitParams("#kyjdwpxx_mod_qyd [name*=kyjdwpxx.]",params);
 		jQuery.post("jdy/update_kyjdwp.action",params,kywpaddmodback,"json");
 	}
@@ -86,7 +85,7 @@ function kywpaddmodback(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
 		$("#"+detailid).hideAndRemove("show");
-		//setPageListLjxx(1);
+		setPageListKyjdwpxx();
 	}else{
 		jAlert(json.result,'错误信息');
 	}		
