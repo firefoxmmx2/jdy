@@ -55,22 +55,22 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
-		if (sort!=null){
-			if("0".equals(sort))
+		if (dir!=null){
+			if("0".equals(dir))
 				sCol = " ljjbxx.djxh "+ sort;
-			else if("1".equals(sort))
+			else if("1".equals(dir))
 				sCol = " ljjbxx.wldh "+ sort;
-			else if("2".equals(sort))
+			else if("2".equals(dir))
 				sCol = " jjr.xm "+ sort;
-			else if("3".equals(sort))
+			else if("3".equals(dir))
 				sCol = " jjr.zjlx "+ sort;
-			else if("4".equals(sort))
+			else if("4".equals(dir))
 				sCol = " jjr.zjhm "+ sort;
-			else if("5".equals(sort))
+			else if("5".equals(dir))
 				sCol = "ljjbxx.ljsj "+ sort;
-			else if("6".equals(sort))
+			else if("6".equals(dir))
 				sCol = "ljr.xm "+ sort;
-			else if("7".equals(sort))
+			else if("7".equals(dir))
 				sCol = "ljjbxx.ljtbsj "+ sort;
 			else 
 				sCol=" ljjbxx.djxh ";
@@ -88,22 +88,22 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
-		if (sort!=null){
-			if("0".equals(sort))
+		if (dir!=null){
+			if("0".equals(dir))
 				sCol = " qyjbxx.qymc "+ sort;
-			else if("1".equals(sort))
+			else if("1".equals(dir))
 				sCol = " ljjbxx.wldh "+ sort;
-			else if("2".equals(sort))
+			else if("2".equals(dir))
 				sCol = " jjr.xm "+ sort;
-			else if("3".equals(sort))
+			else if("3".equals(dir))
 				sCol = " jjr.zjhm "+ sort;
-			else if("4".equals(sort))
+			else if("4".equals(dir))
 				sCol = " sjr.xm "+ sort;
-			else if("5".equals(sort))
+			else if("5".equals(dir))
 				sCol = " jdp.jdpdlx "+ sort;
-			else if("6".equals(sort))
+			else if("6".equals(dir))
 				sCol = " jdp.jdplx "+ sort;
-			else if("5".equals(sort))
+			else if("5".equals(dir))
 				sCol = "ljjbxx.djsj "+ sort;
 			else 
 				sCol=" ljjbxx.djxh ";
