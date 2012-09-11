@@ -400,7 +400,7 @@ function loadData(){
 				$this = $(this);
 				if($this.attr("tagName").toLowerCase() == 'select'){
 					try{
-						$this.setValue(eval("data." + $this.attr("name")));
+						$this.setValue(setNull(eval("data." + $this.attr("name"))));
 					}catch (e) {
 						//alert($this.attr("name"));
 						//alert(eval("data." + $this.attr("name")))
@@ -410,7 +410,7 @@ function loadData(){
 				}
 				else{
 					try{
-						$this.val(eval("data." + $this.attr("name")));
+						$this.val(setNull(eval("data." + $this.attr("name"))));
 					}catch (e) {
 						//alert($this.attr("name"));
 						//alert(eval("data." + $this.attr("name")))
