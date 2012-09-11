@@ -55,7 +55,7 @@
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
 											colIndex: [0],
-											noSortColIndex:[8],
+											noSortColIndex:[9],
 											hideColIndex:[8],
 											isHaveMorenPaixuClass: true, //加默认排序样式
 											morenPaixuCol: 7, //第一默认排序	
@@ -231,6 +231,7 @@
 	    	<th name="l_jdpdl">派件时间</th>
 	    	<th name="l_ljy">派件员</th>
 	    	<th name="l_ljsj">登记时间</th>
+	    	<th name="l_zt">状态</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
