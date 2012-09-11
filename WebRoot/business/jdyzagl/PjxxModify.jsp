@@ -88,7 +88,7 @@ $(function() {
 	dzcl_tables=$("#"+dzcl_divnid).html();
 	setPageList_ywwffzjlzmfj(1,'#');
 	
-
+	
 	loadData();
 });
 
@@ -407,6 +407,18 @@ function loadData(){
 				}
 			}
 			
+			//给物流单号添加改变事件绑定，当物流单号的值发生改变的话，立刻做一次物流单号唯一性的验证。
+			$('#pjjbxxmod_wldh').change(function(){
+				var wldh=$(this).val();
+				var qybm='<%=qybm%>';
+				
+				//验证物流单号唯一性
+				validateWldh(wldh,qybm,function(json){
+					$('#pjjbxx_mod_button').attr('disabled',false);
+				},function(){
+					$('#pjjbxx_mod_button').attr('disabled',true);
+				});
+			});
 			//修改时间限定
 			if(data.overUpdateTime){
 				//只读化数据
