@@ -176,22 +176,31 @@ function detailDialog(detailid, width, url, config,callback) {
  * 验证揽件信息的物流单号是否可用（物流单号在揽件信息中必须唯一，
  * 如果存在返回false，否则true）
  */
-function validateWldh(wldh,successFunc,beforeSuccessFunc){
+function validateWldh(wldh,qybm,successFunc,beforeSuccessFunc){
 	if(!wldh)
 		throw "被要求验证的物流单号不能为空";
+	if(!qybm)
+		throw "企业编码不能为空";
 	
-	$.aajx({
-		url:'jdy/wldhsfcf_ljxx.action',
+	//执行前需要操作
+	if(beforeSuccessFunc)
+		beforeSuccessFunc();
+	
+	$.ajax({
+		url:'jdy/isAvailableWldh_ljxx.action',
 		type:'post',
-		data:{'lj.wldh':wldh},
+		data:{'lj.wldh':wldh,'lj.qyjbxx.qybm':qybm},
 		dataType:'json',
-		success:function(data,xhr){
-			if(successFunc)
-				successFunc(data);
-		},
-		beforeSend:function(xhr){
-			if(beforeSuccessFunc)
-				beforeSuccessFunc();
+		success:function(data,xhr){ //执行后操作
+			if(data.result=='success'){
+				if(successFunc)
+					successFunc(data);
+			}
+			else{
+				jAlert(data.result,"提示");
+				
+			}
+			
 		}
 	});
 	
