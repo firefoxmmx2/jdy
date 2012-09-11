@@ -40,7 +40,14 @@ public class Pjjbxx implements Serializable {
 	 */
 	private Date pjtbsj;
 	
+	/**
+	 * 是否删除标志 Y 已删除 N 未删除
+	 */
 	private String sfscbz;
+	/**
+	 * 派件状态  Y 已派件 N 未派件
+	 */
+	private String zt;
 	
 //	查询列表用的
 	private String djxh;
@@ -52,6 +59,12 @@ public class Pjjbxx implements Serializable {
 	
 	
 	
+	public String getZt() {
+		return zt;
+	}
+	public void setZt(String zt) {
+		this.zt = zt;
+	}
 	public String getSfscbz() {
 		return sfscbz;
 	}

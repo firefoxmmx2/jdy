@@ -15,6 +15,7 @@
 	var pjxx_add_page_url = "business/jdyzagl/PjxxAdd.jsp";
 	var pjxx_update_page_url="business/jdyzagl/PjxxModify.jsp";
 	var pjxx_delete_url="jdy/delete_pjxx.action";
+	var pjxx_update_url="jdy/update_pjxx.action";
 	
 	$(function(){
 		
@@ -55,12 +56,20 @@
 											pageNumber: pageno,
 											colIndex: [0],
 											noSortColIndex:[8],
-											//hideColIndex:[1],
+											hideColIndex:[8],
 											isHaveMorenPaixuClass: true, //加默认排序样式
 											morenPaixuCol: 7, //第一默认排序	
-											morenPaixuFangshi:'desc', //默认排序方式 
+											morenPaixuFangshi:'desc', //默认排序方式
+											changeHref:function($table){
+												$('tr',$table).each(function(){
+													var $tr=$(this);
+													var zt=$tr.find('td:nth(8)').text();
+													if(zt=='Y')
+														$tr.find('td:last a[title=派件]').remove();
+												});
+											},
 											alignCenterColIndex: [1,2,8],
-											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%","11%"]									
+											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%",'0%',"11%"]									
 										});				
 			}
 	}	
@@ -101,7 +110,8 @@
 	} 
 	//派件信息删除
 	function setPjxxDelete(id) {
-		$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+		if(confirm("是否决定删除该派件登记信息"))
+			$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
 	}
 	/**
 	派件信息详情
@@ -134,6 +144,18 @@
 			setTimeout(clear,600);
 			
 		});
+	}
+	
+	/***
+	派送登记的派件信息。
+	**/
+	function setPjxxSend(id){
+		var params={"pjxx.id":id,"pjxx.zt":'Y'};
+		
+		$.post(pjxx_update_url,params,function(json){
+			if(json.result == 'success')
+				pjxxQueryPageList(1);
+		},'json');
 	}
 </script>
 

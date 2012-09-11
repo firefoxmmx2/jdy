@@ -280,6 +280,7 @@ public class PjxxAction extends PageAction {
 		lPro.add("pjsj");
 		lPro.add("pjr_xm");
 		lPro.add("pjtbsj");
+		lPro.add("zt");
 		
 		List lCol = new ArrayList();
 		
@@ -288,6 +289,11 @@ public class PjxxAction extends PageAction {
 		lDetail.add("详情");
 		lCol.add(lDetail);
 
+		List lSend=new ArrayList();
+		lSend.add("setPjxxSend");
+		lSend.add("派件");
+		lCol.add(lSend);
+		
 		List lUpdate=new ArrayList();
 		lUpdate.add("setPjxxUpdate");
 		lUpdate.add("修改");
@@ -297,6 +303,7 @@ public class PjxxAction extends PageAction {
 		lDelete.add("setPjxxDelete");
 		lDelete.add("删除");
 		lCol.add(lDelete);
+		
 		
 		for(Pjjbxx pj : lData){
 			pj.setDjxh(pj.getLjjbxx().getDjxh());
