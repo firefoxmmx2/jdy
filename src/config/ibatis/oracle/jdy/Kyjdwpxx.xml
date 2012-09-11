@@ -54,6 +54,11 @@
 			<isNotEmpty prepend="and" property="ljjbxx.wldh">
 				ljjbxx.wldh=#ljjbxx.wldh#
 			</isNotEmpty>
+			<isNotEmpty prepend="" property="qyjbxx">
+				<isNotEmpty prepend="and" property="qyjbxx.qybm">
+					ljjbxx.qybm=#qyjbxx.qybm#
+				</isNotEmpty>
+			</isNotEmpty>
 		</isNotEmpty>
 		
 	</sql>
