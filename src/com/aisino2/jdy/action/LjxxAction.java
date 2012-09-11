@@ -161,7 +161,7 @@ public class LjxxAction extends PageAction{
 			params.put("qyjbxx", lj.getQyjbxx());
 		}
 	
-		Page pageinfo = ljjbxxService.findLjjbxxForPage(params, pagesize, pagerow, dir, sort);
+		Page pageinfo = ljjbxxService.findLjjbxxForPage(params, pagesize, pagerow, sort , dir);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
 		lLjjbxx = pageinfo.getData();
@@ -284,7 +284,7 @@ public class LjxxAction extends PageAction{
 			if(lj.getGadqydcxqbbz()!=null){
 				params.put("gadqydcxqbbz", lj.getGadqydcxqbbz());
 			}
-			Page pageinfo = ljjbxxService.gadjdpxxForPage(params, pagesize, pagerow, dir, sort);
+			Page pageinfo = ljjbxxService.gadjdpxxForPage(params, pagesize, pagerow, sort , dir);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
 			lLjjbxx = pageinfo.getData();
