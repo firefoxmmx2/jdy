@@ -62,7 +62,7 @@ function kyjdwpback(json){
 function yangzhengff(){
 	if (!checkControlValue("jdpxx_kywplb","Select",1,8,null,1,"可疑物品类型"))
 		return false;
-	if (!checkControlValue("jdpxx_bgrxm","Select",1,8,null,1,"报告人"))
+	if (!checkControlValue("jdpxx_bgrxm","Select",1,14,null,1,"报告人"))
 		return false;
 	if (!checkControlValue("jdpxx_basj","Date",null,null,null,1,"报告日期"))
 		return false;
@@ -81,7 +81,8 @@ function kywpaddaddback(json){
 	if  (json.result=="success"){
 		jAlert(addMessage,'提示信息');
 		$("#ljjbxxadd_detail").hideAndRemove("show");
-		//setPageListLjxx(1);
+		setPageListlj(1);
+		setPageListKyjdwpxx(1);
 	}else{
 		jAlert(json.result,'错误信息');
 	}		

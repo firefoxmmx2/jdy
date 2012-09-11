@@ -35,7 +35,7 @@ function setPageListKyjdwpxx(pageno,url){
 										ingridPageWidth: pageWidth,
 										url: url,	
                                         ingridExtraParams:params,
-										height: pageHeight-225,
+										height: pageHeight-270,
 										pageNumber: pageno,
 										changeHref:function(table){
 											$(table).find("tr").each(function(){

@@ -104,8 +104,27 @@ public class Ljjbxx implements Serializable {
      */
     private String gadqydcxqbbz;
     
+    /*
+	 * 主页面按时间查询时用到
+	 */
+    private Date ljsjf;//开始时间
+    private Date ljsjt;//截止时间
     
+    
+    public Date getLjsjf() {
+		return ljsjf;
+	}
+	public void setLjsjf(Date ljsjf) {
+		this.ljsjf = ljsjf;
+	}
+	public Date getLjsjt() {
+		return ljsjt;
+	}
+	public void setLjsjt(Date ljsjt) {
+		this.ljsjt = ljsjt;
+	}
 
+	
 
 
 	public String getGadqydcxqbbz() {

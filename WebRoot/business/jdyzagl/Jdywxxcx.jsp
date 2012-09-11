@@ -4,6 +4,7 @@
 
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
 <script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
+<script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 
 <script type="text/javascript">
@@ -24,6 +25,8 @@
 		$('#lj_sjr_zjlx').selectBox({code:'dm_zjlx'});
 		//寄递物品联动下拉列表
 		selectboxlink("jdwpdl","jdwpxl","dm_jdwpdl");
+		//页面时间格式
+		$('.date').attr("readOnly",true).datepicker();
 		
 		loadPagePjxxQuery(lj_grid_div);
 		
@@ -52,7 +55,7 @@
 			var mygrid1 = $("#"+lj_grid_table).ingrid({ 
 											url: url,	
 											onRowSelect:null,
-											height: pageHeight-267,
+											height: pageHeight-343,
 	                                        ingridPageParams:sXML,
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
@@ -85,9 +88,9 @@
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="jdywxxcx_gyd">
-  <input type="hidden" id="lj_gxdwbm" name="lj.gxdwbm" value=""><!-- 管辖单位编码 -->
+  <input type="hidden" id="lj_gxdwbm" name="lj.qyjbxx.gxdwbm" value=""><!-- 管辖单位编码 -->
   <input type="hidden" id="lj_gadjdywxxcx" name="lj.ywcxbz" value="gadjdywxxcx"><!-- 公安端寄递物品信息查询标志 -->
-  <input type="hidden" id="gadqydcxqbbz_ljman" name="lj.gadqydcxqbbz" value="gadcx" /><!-- 安端端、企业端查询寄递物品区别标志 -->
+  <input type="hidden" id="gadqydcxqbbz_ljman" name="lj.gadqydcxqbbz" value="gadkywpcx" /><!-- 安端端、企业端查询寄递物品区别标志 -->
   <tr>
     <td class="queryfont">寄递业务信息查询</td>
   </tr>
@@ -135,9 +138,9 @@
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjf" name="lj.pjtbsjf" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjf1" name="lj.ljsjf" class="inputstyle date" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjt" name="lj.pjtbsjt" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjt1" name="lj.ljsjt" class="inputstyle date" value=""></td>
 				</tr>
     		<tr>
     		  <td colspan="6">

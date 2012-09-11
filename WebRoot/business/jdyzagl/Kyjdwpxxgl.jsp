@@ -35,7 +35,7 @@ function setPageListKyjdwpxx(pageno,url){
 										ingridPageWidth: pageWidth,
 										url: url,	
                                         ingridExtraParams:params,
-										height: pageHeight-225,
+										height: pageHeight-250,
 										pageNumber: pageno,
 										ingridPageParams: sXML,
 										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
@@ -79,13 +79,22 @@ function setKyjdwpxxDetail(id){
 }
 //可疑寄递物品删除
 function setKyjdwpxxDelete(id){
-	$.post("jdy/delete_kyjdwp.action",{
-		'kyjdwpxx.ljjbxx_id':id},
-		function(json){ 
-			if(json.result == 'success') {
-				setPageListKyjdwpxx(1); 
-				} 
-			},'json');
+	$("#"+detailid).hide();
+	sFlag="false";
+	jConfirm('确定删除吗？', '删除提示', function(r) {
+    	if(r==true){
+    		$.post("jdy/delete_kyjdwp.action",{
+    			'kyjdwpxx.ljjbxx_id':id},
+    			function(json){ 
+    				if(json.result == 'success') {
+    					setPageListKyjdwpxx(1); 
+    					} 
+    				},'json');
+		}
+		else{
+		   return false;
+		}
+	});
 }
 </script>
 

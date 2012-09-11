@@ -35,47 +35,15 @@ public class LjxxAction extends PageAction{
 	private int totalrows = 0;
 	private String result = "";
 	private List<Ljjbxx> lLjjbxx = new ArrayList();
-	private Date djsjf;//登记开始时间
-	private Date djsjt;//登记截止时间
-	private Date ljsjf;//揽件开始时间
-	private Date ljsjt;//揽件结束时间
 	private String wldh;
 	
-	
-	public Date getLjsjf() {
-		return ljsjf;
-	}
-	public void setLjsjf(Date ljsjf) {
-		this.ljsjf = ljsjf;
-	}
-	public Date getLjsjt() {
-		return ljsjt;
-	}
-	public void setLjsjt(Date ljsjt) {
-		this.ljsjt = ljsjt;
-	}
+
 	public String getWldh() {
 		return wldh;
 	}
 
 	public void setWldh(String wldh) {
 		this.wldh = wldh;
-	}
-
-	public Date getDjsjf() {
-		return djsjf;
-	}
-
-	public void setDjsjf(Date djsjf) {
-		this.djsjf = djsjf;
-	}
-
-	public Date getDjsjt() {
-		return djsjt;
-	}
-
-	public void setDjsjt(Date djsjt) {
-		this.djsjt = djsjt;
 	}
 
 	public List<Ljjbxx> getlLjjbxx() {
@@ -183,11 +151,14 @@ public class LjxxAction extends PageAction{
 		if(lj.getLjr()!=null){//揽件人信息
 			params.put("ljr", lj.getLjr());
 		}
-		if(ljsjf!=null){//揽件登记时间开始
-			params.put("djsjf", djsjf);
+		if(lj.getLjsjf()!=null){//揽件登记时间开始
+			params.put("ljsjf", lj.getLjsjf());
 		}
-		if(ljsjt!=null){//揽件登记时间结束
-			params.put("djsjf", djsjt);
+		if(lj.getLjsjt()!=null){//揽件登记时间结束
+			params.put("ljsjt", lj.getLjsjt());
+		}
+		if(lj.getQyjbxx()!=null){//企业基本信息
+			params.put("qyjbxx", lj.getQyjbxx());
 		}
 	
 		Page pageinfo = ljjbxxService.findLjjbxxForPage(params, pagesize, pagerow, dir, sort);
@@ -285,7 +256,7 @@ public class LjxxAction extends PageAction{
 			
 			//管辖单位编码、企业名称
 			if(lj.getQyjbxx()!=null){
-				params.put("gxdwbm", lj.getQyjbxx());
+				params.put("qyjbxx", lj.getQyjbxx());
 			}
 			//揽件基本信息   物流单号
 			if(lj.getWldh()!=null){
@@ -304,11 +275,11 @@ public class LjxxAction extends PageAction{
 				params.put("jdpxx", lj.getJdpxx());
 			}
 			//登记时间
-			if(djsjf!=null){
-				params.put("djsjf", djsjf);
+			if(lj.getLjsjf()!=null){
+				params.put("ljsjf", lj.getLjsjf());
 			}
-			if(djsjt!=null){
-				params.put("djsjt", djsjt);
+			if(lj.getLjsjt()!=null){
+				params.put("ljsjt", lj.getLjsjt());
 			}
 			if(lj.getGadqydcxqbbz()!=null){
 				params.put("gadqydcxqbbz", lj.getGadqydcxqbbz());

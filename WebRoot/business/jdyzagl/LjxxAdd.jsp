@@ -190,27 +190,35 @@ $("#lj_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判
 	var zjhm = $("#lj_jjrzjhm").attr("value").toUpperCase();
 	if($("#lj_jjrzjlx").val()=="11"){
 		if(zjhm!=""){
-			if(isIdCardNo(zjhm)){
-				//证件号码就用用户自己填写的，如15位的不在去转换为18位
-				//15位转18位
-				if(zjhm.length==15){
-					valSfzCardIsRight("lj_jjrzjhm","请正证件号码!");
-				}
+			if(isIdCardNo_jdy(zjhm)==false){
+				sFlag="false";
+				jConfirm('身份证号码不正确，确定输入吗？', '确认提示', function(r) {
+			    	if(r==true){
+			    		
+					}
+					else{
+						$("#lj_jjrzjhm").val("");
+					}
+				});
 			}
 		}
 	}
 });
 $("#lj_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
 	//如果身份证证号填写不为15或18位，则直接返回让他重新填写
-	var zjhm = $("#lj_jjrzjhm").attr("value").toUpperCase();
+	var zjhm = $("#lj_sjrzjhm").attr("value").toUpperCase();
 	if($("#lj_sjrzjlx").val()=="11"){
 		if(zjhm!=""){
-			if(isIdCardNo(zjhm)){
-				//证件号码就用用户自己填写的，如15位的不在去转换为18位
-				//15位转18位
-				if(zjhm.length==15){
-					valSfzCardIsRight("lj_jjrzjhm","请正证件号码!");
-				}
+			if(isIdCardNo_jdy(zjhm)==false){
+				sFlag="false";
+				jConfirm('身份证号码不正确，确定输入吗？', '确认提示', function(r) {
+			    	if(r==true){
+			    		
+					}
+					else{
+						$("#lj_sjrzjhm").val("");
+					}
+				});
 			}
 		}
 	}

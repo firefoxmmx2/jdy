@@ -178,11 +178,11 @@
 <!--  公安端寄递品信息链表查询  -->
 	<sql id="jdpxxgadcxWhere">
 		<include refid="ljjbxxWhere"/>
-		<isNotEmpty prepend="and" property="djsjf">
-			ljjbxx.ljtbsj >= #djsjf#
+		<isNotEmpty prepend="and" property="ljsjf">
+			ljjbxx.ljtbsj >= #ljsjf#
 		</isNotEmpty>
-		<isNotEmpty prepend="and" property="djsjt">
-			ljjbxx.ljtbsj &lt;= #djsjt#
+		<isNotEmpty prepend="and" property="ljsjt">
+			ljjbxx.ljtbsj &lt;= #ljsjt#
 		</isNotEmpty>
 		<isNotEmpty prepend="" property="jjr" >
 			<isNotEmpty prepend="and" property="jjr.id">

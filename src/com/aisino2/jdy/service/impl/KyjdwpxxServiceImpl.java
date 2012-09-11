@@ -11,6 +11,7 @@ import com.aisino2.jdy.dao.IKyjdwpxxDao;
 import com.aisino2.jdy.dao.ILjjbxxDao;
 import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Kyjdwpxx;
+import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.service.IJdpxxService;
 import com.aisino2.jdy.service.IKyjdwpxxService;
 import com.aisino2.publicsystem.service.IKyqkService;
@@ -59,8 +60,29 @@ public class KyjdwpxxServiceImpl implements IKyjdwpxxService {
 	}
 
 	public void deleteKyjdwpxx(Kyjdwpxx kyjdwpxx) {
+		/*
+		 * 修改该条寄递品信息的：可疑值
+		 */
+		Jdpxx setJdpxx = new Jdpxx();
+		setJdpxx.setKybz("N");
+		setJdpxx.setId(kyjdwpxx.getLjjbxx_id());//寄递品信息ID
+		jdpxxDao.update(setJdpxx);
+		/*
+		 * 查询该登记序号的寄递品信息是否还有为：可疑
+		 */
+		kyjdwpxx.setJdpxx(jdpxxDao.get(setJdpxx));
 		
-		kyjdwpxxDao.delete(kyjdwpxx);
+		//Jdpxx setJdpxx1 = new Jdpxx();
+		//setJdpxx1.getLjjbxx().setDjxh(kyjdwpxx.getJdpxx().getLjjbxx().getDjxh());
+		//传入揽件信息登记序号，查询该揽件信息是否还存在有可以的寄递物品
+		if(jdpxxDao.getkyjdwp(kyjdwpxx.getJdpxx())==null){
+			Ljjbxx setLjjbxx = new Ljjbxx();
+			setLjjbxx.setKybz("N");
+			setLjjbxx.setDjxh(kyjdwpxx.getJdpxx().getLjjbxx().getDjxh());
+			ljjbxxDao.update(setLjjbxx);
+		}
+		
+		kyjdwpxxDao.delete(kyjdwpxx);   
 		
 	}
 

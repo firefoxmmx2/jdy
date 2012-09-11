@@ -94,7 +94,7 @@ function kywpaddmodback(json){
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">可疑物品新增</td>
+      <td align="left" class="title1">可疑物品修改</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#"+detailid).hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
