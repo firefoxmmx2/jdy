@@ -226,7 +226,7 @@ jQuery.fn.ingrid = function(o){
 			} else {
 				$theadTrTh.find('div:first').addClass(cfg.sortNoneClass);
 			}
-			$theadTrTh.click(function(){
+			$theadTrTh.get(0).onclick=function(){
 				cfg.clickPageOrSort = true; //点击了排序
 				$gridObj.find('tbody').html("");
 				var $nowthdiv = $theadTrTh.find('div:first');
@@ -246,7 +246,7 @@ jQuery.fn.ingrid = function(o){
 				});
 				$nowthdiv.removeClass(cfg.sortAscClass).removeClass(cfg.sortDescClass).removeClass(cfg.sortNoneClass).addClass(nowclass);
 				$ingrider.load();
-			});
+			};
 		}
 	});
 
