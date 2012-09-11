@@ -86,8 +86,7 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 			throw new RuntimeException("需要修改的派件ID不能为空");
 
 		// 如果该派件的揽件信息不存在，需要自动创建，并且设置揽件信息的状态为 补件状态。
-		if (pjjbxx.getLjjbxx().getDjxh() != null
-				&& pjjbxx.getLjjbxx().getDjxh().trim().length() > 0) {
+		if (pjjbxx.getLjjbxx()!=null && StringUtil.isNotEmpty(pjjbxx.getLjjbxx().getDjxh())) {
 			ljjbxxService.updateLjjbxx(pjjbxx.getLjjbxx());
 		}
 
