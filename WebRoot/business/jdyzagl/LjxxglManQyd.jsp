@@ -4,7 +4,8 @@
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
-<script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
+<!--寄递物品类型联动的js -->
+<script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script> 
 
 <script type="text/javascript">
 //默认加载执行内容
@@ -13,12 +14,14 @@ $(document).ready(function() {
 	detailWidth="950";
 	//添加揽件信息的DIV
 	detailid="ljjbxxadd_detail";
-	daggleDiv(detailid);
+	
 	$("#"+detailid).hide();
 	//定义gird数据信息
 	divnid="LjjbxxDate";
 	tableid="LjjbxxTable";
 	tables=$("#"+divnid).html();
+	
+	setPageListlj(1,'#');
 	
 	//寄递物品联动下拉列表
 	selectboxlink("jdpdlx","jdpxlx","dm_jdwpdl");
@@ -32,7 +35,9 @@ $(document).ready(function() {
 	//页面时间格式
 	$('.date').attr("readOnly",true).datepicker();
 	
-	setPageListlj(1);
+	
+	
+	daggleDiv(detailid);
 }); 
 //页面gird加载方法
 function setPageListlj(pageno,url){	
@@ -47,14 +52,15 @@ function setPageListlj(pageno,url){
 		}
 		var mygrid1 = $("#LjjbxxTable").ingrid({ 
 										url: url,	
-										onRowSelect:null,
 										height: pageHeight-286,
                                         ingridPageParams:sXML,
                                         ingridExtraParams:params,
 										pageNumber: pageno,
 										colIndex: [0],
+										noSortColIndex:[0,11],	
 										//noSortColIndex:[11],
-										hideColIndex:[1],
+										onRowSelect:null,
+										//hideColIndex:[1],
 										//isHaveMorenPaixuClass: true, //加默认排序样式
 										//morenPaixuCol: 8, //第一默认排序	
 										//morenPaixuFangshi:'desc', //默认排序方式 
@@ -64,7 +70,7 @@ function setPageListlj(pageno,url){
 												//$(this).find("td:last").find("a[title='可疑']").remove();
 											});
 										},
-										colWidths: ["10%","15%","10%","10%","20%","10%","15%","18%"]									
+										colWidths: ["25%","12%","10%","10%","20%","10%","15%","15%"]									
 									});				
 		}
 }	
@@ -108,7 +114,17 @@ function setLjxxDetail(id){
 }
 //揽件信息删除
 function setLjxxDelete(id) {
-	$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
+	$("#"+ljjbxxadd_detail).hide();
+	sFlag="false";
+	jConfirm('确定删除吗？', '删除提示', function(r) {
+    	if(r==true){
+    		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
+		}
+		else{
+		   return false;
+		}
+	});
+	
 }
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="">
