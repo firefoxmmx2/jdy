@@ -236,7 +236,7 @@ public class PjxxAction extends PageAction {
 		if(pjxx.getSfscbz()!=null){
 			params.put("sfscbz", pjxx.getSfscbz());
 		}
-		Page pageinfo = pjjbxxService.findPjjbxxsForPage(params, pagesize, pagerow, dir, sort);
+		Page pageinfo = pjjbxxService.findPjjbxxsForPage(params, pagesize, pagerow, sort , dir);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
 		lPjjbxxList = pageinfo.getData();

@@ -44,22 +44,22 @@ public class PjjbxxDaoImpl extends BaseDao implements IPjjbxxDao {
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
-		if (sort!=null){
-			if("0".equals(sort))
+		if (dir!=null){
+			if("0".equals(dir))
 				sCol = " ljjbxx.djxh "+ sort;
-			else if("1".equals(sort))
+			else if("1".equals(dir))
 				sCol = " ljjbxx.wldh "+ sort;
-			else if("2".equals(sort))
+			else if("2".equals(dir))
 				sCol = " sjr.xm "+ sort;
-			else if("3".equals(sort))
+			else if("3".equals(dir))
 				sCol = " sjr.zjlx "+ sort;
-			else if("4".equals(sort))
+			else if("4".equals(dir))
 				sCol = " sjr.zjhm "+ sort;
-			else if("5".equals(sort))
+			else if("5".equals(dir))
 				sCol = "pjjbxx.pjsj "+ sort;
-			else if("6".equals(sort))
+			else if("6".equals(dir))
 				sCol = "pjr.xm "+ sort;
-			else if("7".equals(sort))
+			else if("7".equals(dir))
 				sCol = "pjjbxx.pjtbsj "+ sort;
 			else 
 				sCol=" ljjbxx.djxh ";
