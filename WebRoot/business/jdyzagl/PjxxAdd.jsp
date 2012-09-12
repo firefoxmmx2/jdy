@@ -318,6 +318,11 @@ function pjxx_add_verify(){
 		return false;
 	if (!checkControlValue("pjxxadd_pjsj","String",1,20,null,1,"派件日期"))
 		return false;
+	
+	if(!$('#YwwffzjlData tbody>tr:visible').length){
+		jAlert("寄递品信息不能为空","提示");
+		return false;
+	}
   return true;
 }
 //揽件信息保存方法
@@ -511,22 +516,22 @@ function wldh_completion(wldh,qybm){
 		</tr>
 	</table>
 	<div id="zxzybaydwdzcl_detail" class="page-layout" src="#" style="top:180px; left:160px;"></div>
-		<div id="YwwffzjlData" style="width:100%;">
-			<table id="YwwffzjlTable"  width="100%">
-			  <thead>
-			    <tr>       
-			     	<th name="xh">序号</th>
-			     	<th name="sfscbz">标志位</th>
-			     	<th name="jdpmc">内件品名</th>
-			     	<th name="jdpsm">数量</th>
-			     	<th name="jdplx">类型</th>
-			     	<th name="jdpzl">重量</th>
-			     	<th name="jdptj">体积</th>
-					<th name="">操作</th>
-			    </tr>
-			  </thead>
-			</table>	
-		</div>
+	<div id="YwwffzjlData" style="width:100%;">
+		<table id="YwwffzjlTable"  width="100%">
+		  <thead>
+		    <tr>       
+		     	<th name="xh">序号</th>
+		     	<th name="sfscbz">标志位</th>
+		     	<th name="jdpmc">内件品名</th>
+		     	<th name="jdpsm">数量</th>
+		     	<th name="jdplx">类型</th>
+		     	<th name="jdpzl">重量</th>
+		     	<th name="jdptj">体积</th>
+				<th name="">操作</th>
+		    </tr>
+		  </thead>
+		</table>	
+	</div>
 	</fieldset>
 	<fieldset>
 	<legend>代收人信息</legend>

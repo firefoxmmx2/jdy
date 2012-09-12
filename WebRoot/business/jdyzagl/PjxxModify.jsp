@@ -343,6 +343,10 @@ function pjxx_mod_verify(){
 		return false;
 	if (!checkControlValue("pjjbxxmod_pjsj","String",1,20,null,1,"派件日期"))
 		return false;
+	if(!$('#YwwffzjlData tbody tr:visible').length){
+		jAlert("寄递品信息不能为空","提示");
+		return false;
+	}
 	
     return true;
 }
