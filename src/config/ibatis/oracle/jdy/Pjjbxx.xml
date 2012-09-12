@@ -51,6 +51,13 @@
 		<result property="ljjbxx.sjr.zjlx" column="ljjbxx_sjr_zjlx"/>
 		
 	</resultMap>
+	<sql id="pjjbxxFrom">
+		<isNotEmpty prepend=" " property="ljjbxx">
+			<isNotEmpty prepend="," property="ljjbxx.jdpxx">
+				t_jdpxx jdpxx
+			</isNotEmpty>
+		</isNotEmpty>
+	</sql>
 	<sql id="pjjbxxWhere">
 		<isNotEmpty prepend="and" property="id">
 			pjjbxx.id = #id#
@@ -88,6 +95,20 @@
 					qyjbxx.qymc like '$ljjbxx.qyjbxx.qymc$%'
 				</isNotEmpty>
 			</isNotEmpty>
+			
+			<!-- 		寄递品 -->
+			<isNotEmpty prepend=" " property="ljjbxx.jdpxx">
+				and jdpxx.ljjbxx_id=ljjbxx.djxh
+<!-- 			大类 -->
+				<isNotEmpty prepend="and" property="ljjbxx.jdpxx.jdpdlx">
+					jdpxx.jdpdlx=#ljjbxx.jdpxx.jdpdlx# 
+				</isNotEmpty>
+<!-- 				小类 -->
+				<isNotEmpty prepend="and" property="ljjbxx.jdpxx.jdplx">
+					jdpxx.jdplx=#ljjbxx.jdpxx.jdplx#
+				</isNotEmpty>
+			</isNotEmpty>
+		
 		</isNotEmpty>
 <!-- 		派件人 -->
 		<isNotEmpty prepend=" " property="pjr">
@@ -123,6 +144,7 @@
 		<isNotEmpty prepend="and" property="zt">
 			pjjbxx.zt = #zt#
 		</isNotEmpty>
+		
 	</sql>
 	
 <!-- 	插入派件 -->
@@ -247,7 +269,7 @@
 	
 <!-- 	获取派件信息列表 -->
 	<select id="pjjbxx.getList" parameterClass="pjjbxx" resultMap="pjjbxx_list_rm">
-		select pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj,pjjbxx.sfscbz,pjjbxx.zt
+		select distinct pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj,pjjbxx.sfscbz,pjjbxx.zt
 			,jjr.xm ljjbxx_jjr_xm, jjr.id ljjbxx_jjr_id, jjr.zjlx ljjbxx_jjr_zjlx, jjr.zjhm ljjbxx_jjr_zjhm
 			,sjr.xm ljjbxx_sjr_xm, sjr.id ljjbxx_sjr_id, sjr.zjlx ljjbxx_sjr_zjlx, sjr.zjhm ljjbxx_sjr_zjhm
 			,pjjbxx.pjrbh, pjr.xm pjr_xm
@@ -267,10 +289,15 @@
 	
 <!-- 	获取派件信息列表分页 记数-->
 	<select id="pjjbxx.getListPageCount" parameterClass="map" resultClass="Integer"> 
-		select count(1)
+		select count(
+		distinct
+		 pjjbxx.id)
 		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
 			<!-- 			关联企业信息 -->
 			,t_qyjbxx qyjbxx
+			<dynamic>
+				<include refid="pjjbxxFrom"/>
+			</dynamic>
 		where pjjbxx.ljjbxx_id=ljjbxx.djxh and ljjbxx.jjr_id = jjr.id and ljjbxx.sjr_id = sjr.id 
 			  and pjjbxx.pjrbh=pjr.cyrybh and pjjbxx.pjtbrbh = pjtbr.cyrybh
 			  <!-- 			关联企业信息 -->			  
@@ -284,7 +311,7 @@
 	<select id="pjjbxx.getListPage" parameterClass="map" resultMap="pjjbxx_list_rm">
 		select x.* from (
 		select rownum rowno,z.* from 
-		(	select pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj,pjjbxx.sfscbz,pjjbxx.zt
+		(	select distinct pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj,pjjbxx.sfscbz,pjjbxx.zt
 			,jjr.xm ljjbxx_jjr_xm, jjr.id ljjbxx_jjr_id, jjr.zjlx ljjbxx_jjr_zjlx, jjr.zjhm ljjbxx_jjr_zjhm
 			,sjr.xm ljjbxx_sjr_xm, sjr.id ljjbxx_sjr_id, sjr.zjlx ljjbxx_sjr_zjlx, sjr.zjhm ljjbxx_sjr_zjhm
 			,pjjbxx.pjrbh, pjr.xm pjr_xm
@@ -294,6 +321,9 @@
 		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
 		<!-- 			关联企业信息 -->
 			,t_qyjbxx qyjbxx
+			<dynamic>
+				<include refid="pjjbxxFrom"/>
+			</dynamic>
 		where pjjbxx.ljjbxx_id=ljjbxx.djxh and ljjbxx.jjr_id = jjr.id and ljjbxx.sjr_id = sjr.id 
 			  and pjjbxx.pjrbh=pjr.cyrybh and pjjbxx.pjtbrbh = pjtbr.cyrybh
 			   <!-- 			关联企业信息 -->			  

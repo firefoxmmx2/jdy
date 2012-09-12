@@ -4,6 +4,7 @@
 
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
 <script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
+<script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 
 <script type="text/javascript">
 	var pjxx_detail_div="pjjbxx_detail";
@@ -23,6 +24,8 @@
 		//时间设置
 		$('.datef').attr("readOnly",true).datepicker(true,'0');
 		$('.datet').attr("readOnly",true).datepicker(true,'1');
+		//寄递物品联动下拉列表
+		selectboxlink("pjxx_jdpdlx","pjxx_jdplx","dm_jdwpdl");
 		$('#pjxx_pjr_xm').click(function(){
 			dataid=null;
 			getTyRY_item('pjxx_pjr_xm','pjxx_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
@@ -203,10 +206,10 @@
 				<tr>
 					<td width="10%" class="pagedistd">收件人证件号码</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_sjr_zjhm" name="pjxx.ljjbxx.sjr.zjhm" class="inputstyle" value=""></td>
-					<td width="10%" class="pagedistd">派件时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjf" name="pjsjf" class="inputstyle datef" value=""></td>
-					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjt" name="pjsjt" class="inputstyle datet" value=""></td>
+					<td width="10%" class="pagedistd">寄递品大类</td>
+					<td width="23%" class="pagetd"><select id="pjxx_jdpdlx" name="pjxx.ljjbxx.jdpxx.jdpdlx" class="inputstyle"><option></option></select></td>
+					<td width="10%" class="pagedistd">寄递品小类</td>
+					<td width="23%" class="pagetd"><select id="pjxx_jdplx" name="pjxx.ljjbxx.jdpxx.jdplx" class="inputstyle" ><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">派件员</td>
