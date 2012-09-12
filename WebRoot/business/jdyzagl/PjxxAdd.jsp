@@ -6,6 +6,11 @@
 
 <script type="text/javascript">
 var trNum=0;
+var invaildCard={ //无效证件集合
+		'jjr':{"name":'寄件人',status:0},
+		'sjr':{'name':'收件人',status:0},
+		'dsr':{'name':'代收人',status:0}
+};
 $(function() {	
 	//修改页面所有原有揽件信息元素
 	$('#pjjbxx_add [id*=lj_]').each(function(idx){
@@ -58,11 +63,19 @@ $(function() {
 			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
 			var zjhm = $("#pjxxadd_jjrzjhm").attr("value").toUpperCase();
 			if(zjhm!=""){
-				if(isIdCardNo(zjhm)){
-					//证件号码就用用户自己填写的，如15位的不在去转换为18位
-					//15位转18位
+				if(isIdCardNo_jdy(zjhm)==false){
+					sFlag="false";
+					jConfirm('该人员身份证号码错误，确定继续保存？', '确认提示', function(r) {
+				    	if(r==true){
+				    		
+						}
+						else{
+							$("#pjxxadd_jjrzjhm").val("");
+						}
+					});
+				}else{
 					if(zjhm.length==15){
-						valSfzCardIsRight("pjxxadd_jjrzjhm","请正证件号码!");
+						valSfzCardIsRight_jdy("pjxxadd_jjrzjhm","请正证件号码!");
 					}
 				}
 			}
@@ -74,11 +87,19 @@ $(function() {
 			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
 			var zjhm = $("#pjxxadd_jjrzjhm").attr("value").toUpperCase();
 			if(zjhm!=""){
-				if(isIdCardNo(zjhm)){
-					//证件号码就用用户自己填写的，如15位的不在去转换为18位
-					//15位转18位
+				if(isIdCardNo_jdy(zjhm)==false){
+					sFlag="false";
+					jConfirm('该人员身份证号码错误，确定继续保存？', '确认提示', function(r) {
+				    	if(r==true){
+				    		
+						}
+						else{
+							$("#pjxxadd_jjrzjhm").val("");
+						}
+					});
+				}else{
 					if(zjhm.length==15){
-						valSfzCardIsRight("pjxxadd_jjrzjhm","请正证件号码!");
+						valSfzCardIsRight_jdy("pjxxadd_jjrzjhm","请正证件号码!");
 					}
 				}
 			}
@@ -91,11 +112,19 @@ $(function() {
 			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
 			var zjhm = $("#pjxxadd_dsr_zjhm").attr("value").toUpperCase();
 			if(zjhm!=""){
-				if(isIdCardNo(zjhm)){
-					//证件号码就用用户自己填写的，如15位的不在去转换为18位
-					//15位转18位
+				if(isIdCardNo_jdy(zjhm)==false){
+					sFlag="false";
+					jConfirm('该人员身份证号码错误，确定继续保存？', '确认提示', function(r) {
+				    	if(r==true){
+				    		
+						}
+						else{
+							$("#pjxxadd_dsr_zjhm").val("");
+						}
+					});
+				}else{
 					if(zjhm.length==15){
-						valSfzCardIsRight("pjxxadd_dsr_zjhm","请正证件号码!");
+						valSfzCardIsRight_jdy("pjxxadd_dsr_zjhm","请正证件号码!");
 					}
 				}
 			}
