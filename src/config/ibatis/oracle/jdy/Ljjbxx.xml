@@ -114,10 +114,10 @@
 		<include refid="ljjbxxWhere"/>
 		
 		<isNotEmpty prepend="and" property="ljsjf">
-			ljjbxx.ljsj >= #ljsjf#
+			ljjbxx.ljtbsj >= #ljsjf#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="ljsjt">
-			ljjbxx.ljsj &lt;= #ljsjt#
+			ljjbxx.ljtbsj &lt;= #ljsjt#
 		</isNotEmpty>
 		
 			
