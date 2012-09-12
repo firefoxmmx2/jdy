@@ -102,7 +102,7 @@
 					<td width="10%" class="pagedistd">治安管理机构</td>
 					<td width="23%" class="pagetd"><input type="text" id="lj_gxdwmc" name="lj.gxdwmc" class="inputstyle" value="" readonly></td>
 					<td width="10%" class="pagedistd">企业名称</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_qymc" name="lj.qymc" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_qymc" name="lj.qyjbxx.qymc" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">物流单号</td>
 					<td width="23%" class="pagetd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value=""></td>
 				</tr>
