@@ -73,7 +73,7 @@
 					sjr.zjlx = #ljjbxx.sjr.zjlx#
 				</isNotEmpty>
 				<isNotEmpty prepend="and" property="ljjbxx.sjr.zjhm">
-					sjr.zjlx = #ljjbxx.sjr.zjhm#
+					sjr.zjhm = #ljjbxx.sjr.zjhm#
 				</isNotEmpty>
 			</isNotEmpty>
 <!-- 			企业信息 -->
