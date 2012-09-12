@@ -51,78 +51,89 @@ $(document).ready(function() {
 	setPageList_ywwffzjlzmfj(1);
 }); 
 function modifyback(json){
-	$("#ljjbxx_modify [id=lj_djxh]").val(json.lj.djxh);//登记序号
-	$("#ljjbxx_modify [id=lj_wldh]").val(json.lj.wldh);//物流单号
-	
-	$("#ljjbxx_modify [id=lj_jjrxm]").val(json.lj.jjr.xm);//寄件人姓名
-	$("#ljjbxx_modify [id=lj_jjrzjlx]").val(json.lj.jjr.zjlx);//寄件人证件类型
-	$("#ljjbxx_modify [id=lj_jjrzjhm]").val(json.lj.jjr.zjhm);//寄件人证件号码
-	$("#ljjbxx_modify [id=jjrssxmc]").val(json.lj.jjr.ssxmc);//寄件地址
-	$("#ljjbxx_modify [id=lj_jjrssx]").val(json.lj.jjr.ssx);//寄件地址代码
-	$("#ljjbxx_modify [id=lj_jjrxxdz]").val(json.lj.jjr.xxdz);//寄件人现住地详址
-	$("#ljjbxx_modify [id=lj_jjrdw]").val(json.lj.jjr.dw);//寄件人单位
-	$("#ljjbxx_modify [id=lj_jjrlxdh]").val(json.lj.jjr.lxdh);//寄件人手机
-	$("#ljjbxx_modify [id=lj_jjrgddh]").val(json.lj.jjr.gddh);//固定电话
-	
-	$("#ljjbxx_modify [id=lj_sjrxm]").val(json.lj.sjr.xm);//收件人姓名
-	$("#ljjbxx_modify [id=lj_sjrzjlx]").val(json.lj.sjr.zjlx);//收件人证件类型
-	$("#ljjbxx_modify [id=lj_sjrzjhm]").val(json.lj.sjr.zjhm);//收件人证件号码
-	$("#ljjbxx_modify [id=sjrssxmc]").val(json.lj.sjr.ssxmc);//收件地址
-	$("#ljjbxx_modify [id=lj_sjrssx]").val(json.lj.sjr.ssx);//寄件地址代码
-	$("#ljjbxx_modify [id=lj_sjrxxdz]").val(json.lj.sjr.xxdz);//收件人现住地详址
-	$("#ljjbxx_modify [id=lj_sjrdw]").val(json.lj.sjr.dw);//收件人单位
-	$("#ljjbxx_modify [id=lj_sjrlxdh]").val(json.lj.sjr.lxdh);//收件人手机
-	$("#ljjbxx_modify [id=lj_sjrgddh]").val(json.lj.sjr.gddh);//固定电话
-	
-	$("#ljjbxx_modify [id=lj_ljrxm_mod]").val(json.lj.ljr.xm);//揽件人
-	$("#ljjbxx_modify [id=lj_ljr_cyrybh_mod]").val(json.lj.ljr.cyrybh);//揽件人编码
-	$("#ljjbxx_modify [id=lj_ljsj]").val(setNull(json.lj.ljsj));//揽件日期
-	//针对寄件人、收件人修改操作时，还需要传递对应 的ID过去
-	$("#ljjbxx_modify [id=lj_jjrid]").val(json.lj.jjr.id);//寄件人ID
-	$("#ljjbxx_modify [id=lj_sjrid]").val(json.lj.sjr.id);//寄件人ID
-	for(var i=0;i<json.lj.jdp_list.length;i++){
-		//寄递物品信息保存时添加到列表---添加行的方法
-		    var jdwp_id=json.lj.jdp_list[i].id;//寄递品类型
-			var jdwp_jdplx=json.lj.jdp_list[i].jdplx;//寄递品类型
-			var jdwp_jdpmc=json.lj.jdp_list[i].jdpmc;//寄递品名称
-			var jdwp_jdpsm=json.lj.jdp_list[i].jdpsm;//寄递品数量
-			var jdwp_jdpzl=json.lj.jdp_list[i].jdpzl;//寄递品重量
-			var jdwp_jdptj=json.lj.jdp_list[i].jdptj;//寄递品体积
-			
+	if(json.overUpdateTime){
+		//$("#ljjbxxadd_detail").hideAndRemove("show");
+		//$("#"+ljjbxxadd_detail).empty();
+		//dataid = $('#ljjbxxmodif_id').val();
+		//setWidth("ljjbxxadd_detail",950);
+		//setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxDetail.jsp");
+		//bindDocument("ljjbxxadd_detail");
+		setLjxxDetail($('#ljjbxxmodif_id').val());
+	}else{
+		$("#ljjbxx_modify [id=lj_djxh]").val(json.lj.djxh);//登记序号
+		$("#ljjbxx_modify [id=lj_wldh]").val(json.lj.wldh);//物流单号
 		
+		$("#ljjbxx_modify [id=lj_jjrxm]").val(json.lj.jjr.xm);//寄件人姓名
+		$("#ljjbxx_modify [id=lj_jjrzjlx]").val(json.lj.jjr.zjlx);//寄件人证件类型
+		$("#ljjbxx_modify [id=lj_jjrzjhm]").val(json.lj.jjr.zjhm);//寄件人证件号码
+		$("#ljjbxx_modify [id=jjrssxmc]").val(json.lj.jjr.ssxmc);//寄件地址
+		$("#ljjbxx_modify [id=lj_jjrssx]").val(json.lj.jjr.ssx);//寄件地址代码
+		$("#ljjbxx_modify [id=lj_jjrxxdz]").val(json.lj.jjr.xxdz);//寄件人现住地详址
+		$("#ljjbxx_modify [id=lj_jjrdw]").val(json.lj.jjr.dw);//寄件人单位
+		$("#ljjbxx_modify [id=lj_jjrlxdh]").val(json.lj.jjr.lxdh);//寄件人手机
+		$("#ljjbxx_modify [id=lj_jjrgddh]").val(json.lj.jjr.gddh);//固定电话
+		
+		$("#ljjbxx_modify [id=lj_sjrxm]").val(json.lj.sjr.xm);//收件人姓名
+		$("#ljjbxx_modify [id=lj_sjrzjlx]").val(json.lj.sjr.zjlx);//收件人证件类型
+		$("#ljjbxx_modify [id=lj_sjrzjhm]").val(json.lj.sjr.zjhm);//收件人证件号码
+		$("#ljjbxx_modify [id=sjrssxmc]").val(json.lj.sjr.ssxmc);//收件地址
+		$("#ljjbxx_modify [id=lj_sjrssx]").val(json.lj.sjr.ssx);//寄件地址代码
+		$("#ljjbxx_modify [id=lj_sjrxxdz]").val(json.lj.sjr.xxdz);//收件人现住地详址
+		$("#ljjbxx_modify [id=lj_sjrdw]").val(json.lj.sjr.dw);//收件人单位
+		$("#ljjbxx_modify [id=lj_sjrlxdh]").val(json.lj.sjr.lxdh);//收件人手机
+		$("#ljjbxx_modify [id=lj_sjrgddh]").val(json.lj.sjr.gddh);//固定电话
+		
+		$("#ljjbxx_modify [id=lj_ljrxm_mod]").val(json.lj.ljr.xm);//揽件人
+		$("#ljjbxx_modify [id=lj_ljr_cyrybh_mod]").val(json.lj.ljr.cyrybh);//揽件人编码
+		$("#ljjbxx_modify [id=lj_ljsj]").val(setNull(json.lj.ljsj));//揽件日期
+		//针对寄件人、收件人修改操作时，还需要传递对应 的ID过去
+		$("#ljjbxx_modify [id=lj_jjrid]").val(json.lj.jjr.id);//寄件人ID
+		$("#ljjbxx_modify [id=lj_sjrid]").val(json.lj.sjr.id);//寄件人ID
+		for(var i=0;i<json.lj.jdp_list.length;i++){
+			//寄递物品信息保存时添加到列表---添加行的方法
+			    var jdwp_id=json.lj.jdp_list[i].id;//寄递品类型
+				var jdwp_jdplx=json.lj.jdp_list[i].jdplx;//寄递品类型
+				var jdwp_jdpmc=json.lj.jdp_list[i].jdpmc;//寄递品名称
+				var jdwp_jdpsm=json.lj.jdp_list[i].jdpsm;//寄递品数量
+				var jdwp_jdpzl=json.lj.jdp_list[i].jdpzl;//寄递品重量
+				var jdwp_jdptj=json.lj.jdp_list[i].jdptj;//寄递品体积
+				
 			
-				var addTableTr1="";
-				//获取行数
-				var trLen1= $("#YwwffzjlTable").find("tr").length;
-				//通过行数判断每行的css
-				var tr_class1 = "grid-row-style1";//当为奇数时的css
-				//当为偶数时的css
-				if((trLen1-1)%2==1)
-					tr_class1 = "grid-row-style2";
-				//设置行的属性和样式	
-				addTableTr1 += "<tr _selected='false' name='Tr' class='"+tr_class1+"' id='"+i+"'>";
-				//设置每列的属性
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+trNum+"</td>";
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+i+"'>0</td>";
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+i+"'>"+jdwp_id+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlx"+i+"'>0</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+i+"'>0</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlxmc"+i+"'>0</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='cz_"+i+"'>"
-				+"<A id='delete_"+i+"' class=fontbutton title='删除' onclick=getObjectmod(this) href='#'>删除</A>"
-				+"</td>";
-				addTableTr1 += "</tr>";
-				if(addTableTr1!=""){
-					$("#YwwffzjlTable").append(addTableTr1);
-					addTrEvent($("#YwwffzjlTable").find("tr:last"));
-				}
-				trNum++;
+				
+					var addTableTr1="";
+					//获取行数
+					var trLen1= $("#YwwffzjlTable").find("tr").length;
+					//通过行数判断每行的css
+					var tr_class1 = "grid-row-style1";//当为奇数时的css
+					//当为偶数时的css
+					if((trLen1-1)%2==1)
+						tr_class1 = "grid-row-style2";
+					//设置行的属性和样式	
+					addTableTr1 += "<tr _selected='false' name='Tr' class='"+tr_class1+"' id='"+i+"'>";
+					//设置每列的属性
+				    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+trNum+"</td>";
+				    addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+i+"'>0</td>";
+				    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
+				    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+i+"'>"+jdwp_id+"</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlx"+i+"'>0</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+i+"'>0</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlxmc"+i+"'>0</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2' id='cz_"+i+"'>"
+					+"<A id='delete_"+i+"' class=fontbutton title='删除' onclick=getObjectmod(this) href='#'>删除</A>"
+					+"</td>";
+					addTableTr1 += "</tr>";
+					if(addTableTr1!=""){
+						$("#YwwffzjlTable").append(addTableTr1);
+						addTrEvent($("#YwwffzjlTable").find("tr:last"));
+					}
+					trNum++;
+		}
 	}
+	
 }
 //寄递品信息grid
 function setPageList_ywwffzjlzmfj(pageno,url){	
