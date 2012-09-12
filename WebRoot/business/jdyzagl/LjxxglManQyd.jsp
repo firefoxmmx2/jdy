@@ -60,7 +60,7 @@ function setPageListlj(pageno,url){
 										noSortColIndex:[7],	
 										//noSortColIndex:[11],
 										onRowSelect:null,
-										//hideColIndex:[1],
+										hideColIndex:[7],
 										//isHaveMorenPaixuClass: true, //加默认排序样式
 										//morenPaixuCol: 8, //第一默认排序	
 										//morenPaixuFangshi:'desc', //默认排序方式 
@@ -70,7 +70,7 @@ function setPageListlj(pageno,url){
 												//$(this).find("td:last").find("a[title='可疑']").remove();
 											});
 										},
-										colWidths: ["25%","12%","10%","10%","20%","10%","15%","15%"]									
+										colWidths: ["25%","12%","10%","10%","20%","10%","15%","0","15%"]									
 									});				
 		}
 }	
@@ -99,12 +99,18 @@ function setljAdd(){
 }
 //揽件信息修改
 function setLjxxUpdate(id){
-	$("#"+ljjbxxadd_detail).empty();
-	dataid = id;
-	setWidth("ljjbxxadd_detail",950);
-	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxModify.jsp");
-	bindDocument("ljjbxxadd_detail");
+	var kybzw=$("#"+id+" td:nth(7)").text();//得到可疑标志 的值 
+	if(kybzw=="Y"){
+		jAlert("该条揽件信息存在可疑寄递物品，不能进行修改操作！",'验证信息',null,null);
+	}else{
+		$("#"+ljjbxxadd_detail).empty();
+		dataid = id;
+		setWidth("ljjbxxadd_detail",950);
+		setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxModify.jsp");
+		bindDocument("ljjbxxadd_detail");
+	}
 } 
+//详情方法
 function setLjxxDetail(id){
 	$("#"+ljjbxxadd_detail).empty();
 	dataid = id;
@@ -114,17 +120,21 @@ function setLjxxDetail(id){
 }
 //揽件信息删除
 function setLjxxDelete(id) {
-	$("#"+ljjbxxadd_detail).hide();
-	sFlag="false";
-	jConfirm('确定删除吗？', '删除提示', function(r) {
-    	if(r==true){
-    		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
-		}
-		else{
-		   return false;
-		}
-	});
-	
+	var kybzw=$("#"+id+" td:nth(7)").text();//得到可疑标志 的值
+	if(kybzw=="Y"){
+		jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！",'验证信息',null,null);
+	}else{
+		$("#"+ljjbxxadd_detail).hide();
+		sFlag="false";
+		jConfirm('确定删除吗？', '删除提示', function(r) {
+	    	if(r==true){
+	    		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
+			}
+			else{
+			   return false;
+			}
+		});
+	}
 }
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="">
@@ -195,6 +205,7 @@ function setLjxxDelete(id) {
 	    	<th name="l_jjrzjhm">证件号码</th>
 	    	<th name="l_ljyxm">揽件员</th>
 	    	<th name="l_ljtbsj">登记时间</th>
+	    	<th name="l_kybz">可疑标志</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
