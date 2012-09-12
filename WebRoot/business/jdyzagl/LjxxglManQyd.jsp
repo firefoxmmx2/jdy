@@ -46,7 +46,7 @@ function setPageListlj(pageno,url){
 		//alert($("#ljxx_ljrxm").val());
 		//alert($("#lj_ljr_cyrybh").val());
 		//alert($("#ljxx_ljsjf").val());
-		params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]",params);
+		params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]");
 		if (url==null || url=="undefined"){
 			url=pageUrl;
 		}
