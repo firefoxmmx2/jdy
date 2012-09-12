@@ -56,9 +56,16 @@ public class Pjjbxx implements Serializable {
 	private String sjr_zjlx;
 	private String sjr_zjhm;
 	private String pjr_xm;
+	private String overUpdateTime;
 	
 	
 	
+	public String getOverUpdateTime() {
+		return overUpdateTime;
+	}
+	public void setOverUpdateTime(String overUpdateTime) {
+		this.overUpdateTime = overUpdateTime;
+	}
 	public String getZt() {
 		return zt;
 	}

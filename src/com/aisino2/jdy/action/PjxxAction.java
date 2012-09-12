@@ -1,5 +1,6 @@
 package com.aisino2.jdy.action;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -258,17 +259,20 @@ public class PjxxAction extends PageAction {
 		pjxx = pjjbxxService.getPjjbxx(pjxx);
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar updateOverTimeCalender =  sdf.getCalendar();
-		updateOverTimeCalender.setTime(pjxx.getPjtbsj());
+		Calendar updateOverTimeCalender =  Calendar.getInstance();
+		updateOverTimeCalender.setTime(sdf.parse(sdf.format(pjxx.getPjtbsj())));
 		updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
-		if((now.compareTo(updateOverTimeCalender.getTime())) >= 0)
+		Calendar nowCalendar=Calendar.getInstance();
+		nowCalendar.setTime(now);
+		if((nowCalendar.compareTo(updateOverTimeCalender)) >= 0)
 			overUpdateTime=true;
 		else
 			overUpdateTime=false;
+		pjxx.setOverUpdateTime(String.valueOf(overUpdateTime));
 		return SUCCESS;
 	}
 	
-	private void setTableData(List<Pjjbxx> lData) {
+	private void setTableData(List<Pjjbxx> lData) throws ParseException {
 		// TODO Auto-generated method stub
 		List lPro = new ArrayList();
 		lPro.add("id");
@@ -281,6 +285,7 @@ public class PjxxAction extends PageAction {
 		lPro.add("pjr_xm");
 		lPro.add("pjtbsj");
 		lPro.add("zt");
+		lPro.add("overUpdateTime");
 		
 		List lCol = new ArrayList();
 		
@@ -315,6 +320,17 @@ public class PjxxAction extends PageAction {
 			dict_item.setDict_code("dm_zjlx");
 			dict_item.setFact_value(pj.getLjjbxx().getSjr().getZjlx());
 			pj.setSjr_zjlx(CacheManager.getCacheDictitemOne(dict_item).getDisplay_name());
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar updateOverTimeCalender =  Calendar.getInstance();
+			updateOverTimeCalender.setTime(sdf.parse(sdf.format(pj.getPjtbsj())));
+			updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
+			Calendar nowCalendar=Calendar.getInstance();
+			nowCalendar.setTime(now);
+			if((nowCalendar.compareTo(updateOverTimeCalender)) >= 0)
+				pj.setOverUpdateTime("true");
+			else
+				pj.setOverUpdateTime("false");
 			
 		}
 		Pjjbxx setpjxx = new Pjjbxx();

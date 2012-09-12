@@ -16,7 +16,7 @@
 	var pjxx_update_page_url="business/jdyzagl/PjxxModify.jsp";
 	var pjxx_delete_url="jdy/delete_pjxx.action";
 	var pjxx_update_url="jdy/update_pjxx.action";
-	
+	var pjxx_detail_url="jdy/query_pjxx.action";
 	$(function(){
 		
 		$('#pjxx_sjr_zjlx').selectBox({code:'dm_zjlx'});
@@ -55,8 +55,8 @@
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
 											colIndex: [0],
-											noSortColIndex:[9],
-											hideColIndex:[8],
+											noSortColIndex:[10],
+											hideColIndex:[8,9],
 											isHaveMorenPaixuClass: true, //加默认排序样式
 											morenPaixuCol: 7, //第一默认排序	
 											morenPaixuFangshi:'desc', //默认排序方式
@@ -66,10 +66,17 @@
 													var zt=$tr.find('td:nth(8)').text();
 													if(zt=='Y')
 														$tr.find('td:last a[title=派件]').remove();
+													
+													var overUpdateTime=$tr.find('td:nth(9)').text();
+													if(overUpdateTime=='true'){
+														$tr.find('td:last a[title=删除]').remove();
+														$tr.find('td:last a[title=修改]').remove();
+													}
+														
 												});
 											},
 											alignCenterColIndex: [1,2,8],
-											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%",'0%',"11%"]									
+											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%",'0%','0%',"11%"]									
 										});				
 			}
 	}	
@@ -110,8 +117,19 @@
 	} 
 	//派件信息删除
 	function setPjxxDelete(id) {
-		if(confirm("是否决定删除该派件登记信息"))
-			$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+		if(confirm("是否决定删除该派件登记信息")){
+			$.post(pjxx_detail_url,{'pjxx.id':id},function(json){
+				if(json.overUpdateTime){
+					jAlert("已经超过了删除的时间！","提示");
+					pjxxQueryPageList(1);
+				}
+				else{
+					$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+				}
+			},'json');
+			
+		}
+			
 	}
 	/**
 	派件信息详情
@@ -234,6 +252,7 @@
 	    	<th name="l_ljy">派件员</th>
 	    	<th name="l_ljsj">登记时间</th>
 	    	<th name="l_zt">状态</th>
+	    	<th>修改状态</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
