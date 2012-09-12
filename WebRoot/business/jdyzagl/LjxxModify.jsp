@@ -41,9 +41,10 @@ $(document).ready(function() {
 		dataid=null;//js中使用了次变量，且他原本传递过去的值为行业类别，所以会查询不出来东西
 		getTyRY_item('lj_ljrxm_mod','lj_ljr_cyrybh_mod',null,null,'<%=qybm%>');
 	});
-	daggleDiv("ljjbxxadd_detail");//div拖动
+	//寄递物品信息加载的DIV 
+	daggleDiv("zxzybaydwdzcl_detail");//div拖动
+	
 	dzcl_pageUrl="#";
-		
 	dzcl_divnid="YwwffzjlData";
 	dzcl_tableid="YwwffzjlTable";
 	dzcl_tables=$("#"+dzcl_divnid).html();
@@ -481,7 +482,7 @@ function addback(json){
    	  		<td width="60%" align="right"><a href="#" class="addbutton" id="addbutton" onclick="tianJiaZxzybaydwDzcl()">添加</a></td>
 		</tr>
 	</table>
-	<div id="zxzybaydwdzcl_detail" style="display: none;"></div>
+	<div id="zxzybaydwdzcl_detail"  class="page-layout" src="#" style="top:125px; left:20px;display: none;"></div>
 		<div id="YwwffzjlData" style="width:100%;">
 			<table id="YwwffzjlTable"  width="100%">
 			  <thead>

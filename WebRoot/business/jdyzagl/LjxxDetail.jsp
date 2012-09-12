@@ -3,11 +3,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
-<%
-	qybm = "T013306005003";
-%>
 <script type="text/javascript">
-var trNum=0;
+var trNum=1;
 var ljjdpxx = new Array();
 $(document).ready(function() {	
 	Modifyurl="jdy/query_ljxx.action";
@@ -27,7 +24,6 @@ $(document).ready(function() {
 	//证件类型--收件人
 	getDictItemBox("lj_sjrzjlx","lj_sjrzjlxdm","dm_zjlx");
 	
-	daggleDiv("ljjbxxadd_detail");//div拖动
 	
 	dzcl_pageUrl="#";
 	dzcl_divnid="YwwffzjlData";
@@ -81,7 +77,7 @@ function modifyback(json){
 				//设置行的属性和样式	
 				addTableTr1 += "<tr _selected='false' name='Tr' class='"+tr_class1+"' id='"+i+"'>";
 				//设置每列的属性
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+i+"</td>";
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+trNum+"</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+i+"'>0</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
@@ -94,6 +90,7 @@ function modifyback(json){
 					$("#YwwffzjlTable").append(addTableTr1);
 					addTrEvent($("#YwwffzjlTable").find("tr:last"));
 				}
+				trNum++;
 	}
 }
 //寄递品信息grid

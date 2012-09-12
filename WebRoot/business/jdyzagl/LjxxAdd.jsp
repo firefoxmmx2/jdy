@@ -36,9 +36,11 @@ $(document).ready(function() {
 		getTyRY_item('lj_ljr_xm','ljljradd_cyrybh',null,null,'<%=qybm%>');
 	});
 	
-	daggleDiv("ljjbxxadd_detail");//div拖动
-	dzcl_pageUrl="#";
+	//寄递物品信息加载的DIV 
+	addjdwp="zxzybaydwdzcl_detail";
+	daggleDiv(addjdwp);//div拖动
 	
+	dzcl_pageUrl="#";
 	dzcl_divnid="YwwffzjlData";
 	dzcl_tableid="YwwffzjlTable";
 	dzcl_tables=$("#"+dzcl_divnid).html();
@@ -71,6 +73,7 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 }
 //添加物品执行方法
 function tianJiaZxzybaydwDzcl(cllb){
+	$("zxzybaydwdzcl_detail").empty();
 	setWidth("zxzybaydwdzcl_detail",300);
 	setUrl("zxzybaydwdzcl_detail","business/jdyzagl/tjwp.jsp");
 	bindDocument("zxzybaydwdzcl_detail");
@@ -396,7 +399,7 @@ function addbackbcxz(json){
    	  		<td width="60%" align="right"><a href="#" class="addbutton" id="addbutton" onclick="tianJiaZxzybaydwDzcl()">添加</a></td>
 		</tr>
 	</table>
-	<div id="zxzybaydwdzcl_detail" style="display: none;"></div>
+	<div id="zxzybaydwdzcl_detail"  class="page-layout" src="#" style="top:125px; left:20px;display: none;"></div>
 		<div id="YwwffzjlData" style="width:100%;">
 			<table id="YwwffzjlTable"  width="100%">
 			  <thead>
