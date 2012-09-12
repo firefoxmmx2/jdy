@@ -51,10 +51,11 @@ function kyjdwpback_mod(json){
 	}, 'json');
 	
 }
+//清楚所有DIV的方法
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">可疑物品详情dddd</td>
+      <td align="left" class="title1">可疑物品详情</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#"+detailid).hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
