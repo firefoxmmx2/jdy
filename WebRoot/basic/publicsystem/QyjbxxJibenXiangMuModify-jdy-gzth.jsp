@@ -62,7 +62,7 @@
 			return false;
 // 		if (!checkControlValue("m_jymj","Float",-99999999.99,99999999.99,2,1,"占地面积(平米)"))
 // 			return false;
-		if (!checkControlValue("m_zczj","Float",-99999999.99,99999999.99,2,0,"注册资金(万元)"))
+		if (!checkControlValue("m_zczj","Float",-99999999.99,99999999.99,2,1,"注册资金(万元)"))
 			return false;
 		if (!checkControlValue("m_frdb","String",1,30,null,1,"法定代表人"))
 			return false;

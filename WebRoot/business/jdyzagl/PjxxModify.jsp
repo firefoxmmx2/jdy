@@ -57,27 +57,49 @@ $(function() {
 	$("#"+detailid).hide();
 	
 	$("#pjjbxxmod_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
-		//如果身份证证号填写不为15或18位，则直接返回让他重新填写
-		var zjhm = $("#pjjbxxmod_jjrzjhm").attr("value").toUpperCase();
-		if(zjhm!=""){
-			if(isIdCardNo(zjhm)){
-				//证件号码就用用户自己填写的，如15位的不在去转换为18位
-				//15位转18位
-				if(zjhm.length==15){
-					valSfzCardIsRight("pjjbxxmod_jjrzjhm","请正证件号码!");
+		if($('#pjjbxxmod_jjrzjlx').val()=='11'){
+			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+			var zjhm = $("#pjjbxxmod_jjrzjhm").attr("value").toUpperCase();
+			if(zjhm!=""){
+				if(isIdCardNo(zjhm)){
+					//证件号码就用用户自己填写的，如15位的不在去转换为18位
+					//15位转18位
+					if(zjhm.length==15){
+						valSfzCardIsRight("pjjbxxmod_jjrzjhm","请正证件号码!");
+					}
 				}
 			}
 		}
+		
 	});
 	$("#pjjbxxmod_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
-		//如果身份证证号填写不为15或18位，则直接返回让他重新填写
-		var zjhm = $("#pjjbxxmod_jjrzjhm").attr("value").toUpperCase();
-		if(zjhm!=""){
-			if(isIdCardNo(zjhm)){
-				//证件号码就用用户自己填写的，如15位的不在去转换为18位
-				//15位转18位
-				if(zjhm.length==15){
-					valSfzCardIsRight("pjjbxxmod_jjrzjhm","请正证件号码!");
+		if($('#pjjbxxmod_sjrzjlx').val()=='11'){
+			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+			var zjhm = $("#pjjbxxmod_jjrzjhm").attr("value").toUpperCase();
+			if(zjhm!=""){
+				if(isIdCardNo(zjhm)){
+					//证件号码就用用户自己填写的，如15位的不在去转换为18位
+					//15位转18位
+					if(zjhm.length==15){
+						valSfzCardIsRight("pjjbxxmod_jjrzjhm","请正证件号码!");
+					}
+				}
+			}
+		}
+		
+	});
+	
+	$("#pjjbxxmod_dsrzjhm").blur(function(){//当填写身份号码失去焦点后，去判断身份号码
+		if($('#pjjbxxmod_dsrzjlx').val() == '11'){
+			//如果身份证证号填写不为15或18位，则直接返回让他重新填写
+			var zjhm = $("#pjjbxxmod_dsrzjhm").attr("value").toUpperCase();
+			if(zjhm!=""){
+				if(isIdCardNo(zjhm)){
+					//证件号码就用用户自己填写的，如15位的不在去转换为18位
+					//15位转18位
+					if(zjhm.length==15){
+						valSfzCardIsRight("pjjbxxmod_dsrzjhm","请正证件号码!");
+					}
 				}
 			}
 		}
@@ -347,7 +369,7 @@ function  modify_pjxx(){
 			
 			
 		});
-		jQuery.post("jdy/update_pjxx.action",params,modify_pjxx_back,"json");
+		jQuery.post(pjxx_update_url,params,modify_pjxx_back,"json");
 	}
 }
 //提交方法回调函数
@@ -378,7 +400,7 @@ function loadData(){
 				$this = $(this);
 				if($this.attr("tagName").toLowerCase() == 'select'){
 					try{
-						$this.setValue(eval("data." + $this.attr("name")));
+						$this.setValue(setNull(eval("data." + $this.attr("name"))));
 					}catch (e) {
 						//alert($this.attr("name"));
 						//alert(eval("data." + $this.attr("name")))
@@ -388,7 +410,7 @@ function loadData(){
 				}
 				else{
 					try{
-						$this.val(eval("data." + $this.attr("name")));
+						$this.val(setNull(eval("data." + $this.attr("name"))));
 					}catch (e) {
 						//alert($this.attr("name"));
 						//alert(eval("data." + $this.attr("name")))
@@ -456,7 +478,7 @@ function loadData(){
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">寄递品信息登记</td>
+      <td align="left" class="title1" id="pjxx_title">寄递品派件信息修改</td>
       <td align="right"><a href="#" id="closeDiv" onclick='close_pjxx_mod_page();' class="close"></a></td>
     </tr>
 </table>

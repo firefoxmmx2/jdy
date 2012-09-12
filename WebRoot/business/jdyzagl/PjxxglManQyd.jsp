@@ -15,10 +15,11 @@
 	var pjxx_add_page_url = "business/jdyzagl/PjxxAdd.jsp";
 	var pjxx_update_page_url="business/jdyzagl/PjxxModify.jsp";
 	var pjxx_delete_url="jdy/delete_pjxx.action";
+	var pjxx_update_url="jdy/update_pjxx.action";
 	
 	$(function(){
 		
-		$('#pjxx_jjr_zjlx').selectBox({code:'dm_zjlx'});
+		$('#pjxx_sjr_zjlx').selectBox({code:'dm_zjlx'});
 		$('.date').attr("readOnly",true).datepicker();
 		$('#pjxx_pjr_xm').click(function(){
 			dataid=null;
@@ -54,13 +55,21 @@
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
 											colIndex: [0],
-											noSortColIndex:[8],
-											//hideColIndex:[1],
+											noSortColIndex:[9],
+											hideColIndex:[8],
 											isHaveMorenPaixuClass: true, //加默认排序样式
 											morenPaixuCol: 7, //第一默认排序	
-											morenPaixuFangshi:'desc', //默认排序方式 
+											morenPaixuFangshi:'desc', //默认排序方式
+											changeHref:function($table){
+												$('tr',$table).each(function(){
+													var $tr=$(this);
+													var zt=$tr.find('td:nth(8)').text();
+													if(zt=='Y')
+														$tr.find('td:last a[title=派件]').remove();
+												});
+											},
 											alignCenterColIndex: [1,2,8],
-											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%","11%"]									
+											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%",'0%',"11%"]									
 										});				
 			}
 	}	
@@ -101,7 +110,8 @@
 	} 
 	//派件信息删除
 	function setPjxxDelete(id) {
-		$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+		if(confirm("是否决定删除该派件登记信息"))
+			$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
 	}
 	/**
 	派件信息详情
@@ -109,6 +119,8 @@
 	function setPjxxDetail(id) {
 		dataid = id;
 		detailDialog(pjxx_detail_div, pjxx_detail_width, pjxx_update_page_url, null,function(data){
+// 			修改标题
+			$('#pjxx_title').text('寄递品派件信息详情');
 			$('#pjjbxx_mod [id*=pjjbxxmod_]').attr("readOnly",true).addClass('readonly');
 			$('#pjjbxx_mod .red').removeClass('red');
 			$('#pjjbxx_mod_button').parent('td').remove();
@@ -135,6 +147,18 @@
 			
 		});
 	}
+	
+	/***
+	派送登记的派件信息。
+	**/
+	function setPjxxSend(id){
+		var params={"pjxx.id":id,"pjxx.zt":'Y'};
+		
+		$.post(pjxx_update_url,params,function(json){
+			if(json.result == 'success')
+				pjxxQueryPageList(1);
+		},'json');
+	}
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="pjjbxx_man_qyd">
@@ -152,13 +176,13 @@
 					<td width="10%" class="pagedistd">物流单号</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_wldh" name="pjxx.ljjbxx.wldh" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">收件人姓名</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_jjr_xm" name="pjxx.ljjbxx.jjr.xm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_sjr_xm" name="pjxx.ljjbxx.sjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">收件人证件类型</td>
-					<td width="23%" class="pagetd"><select id="pjxx_jjr_zjlx" name="pjxx.ljjbxx.jjr.zjlx" class="select1"><option></option></select></td>
+					<td width="23%" class="pagetd"><select id="pjxx_sjr_zjlx" name="pjxx.ljjbxx.sjr.zjlx" class="select1"><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">收件人证件号码</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_jjr_zjhm" name="pjxx.ljjbxx.jjr.zjhm" class="inputstyle" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_sjr_zjhm" name="pjxx.ljjbxx.sjr.zjhm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">派件时间</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjf" name="pjsjf" class="inputstyle date" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
@@ -203,12 +227,13 @@
 	    <tr>       
 	    	<th name="l_djxh">登记序号</th>
 	    	<th name="l_wldh">物流单号</th>
-	    	<th name="l_jjrxm">收件人姓名</th>
+	    	<th name="l_sjrxm">收件人姓名</th>
 	    	<th name="l_zjlx">证件类型</th>
 	    	<th name="l_zjhm">证件号码</th>
 	    	<th name="l_jdpdl">派件时间</th>
 	    	<th name="l_ljy">派件员</th>
 	    	<th name="l_ljsj">登记时间</th>
+	    	<th name="l_zt">状态</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
