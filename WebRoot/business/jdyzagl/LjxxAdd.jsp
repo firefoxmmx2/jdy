@@ -7,7 +7,7 @@
 	//qybm = "T013306005003";
 %>
 <script type="text/javascript">
-var trNum=0;
+var trNum=1;
 var dataid="";
 var ljjdpxx = new Array();
 $(document).ready(function() {	
@@ -39,10 +39,6 @@ $(document).ready(function() {
 	daggleDiv("ljjbxxadd_detail");//div拖动
 	dzcl_pageUrl="#";
 	
-	detailid="zxzybaydwdzcl_detail";
-	daggleDiv(detailid);
-	$("#"+detailid).hide();
-	
 	dzcl_divnid="YwwffzjlData";
 	dzcl_tableid="YwwffzjlTable";
 	dzcl_tables=$("#"+dzcl_divnid).html();
@@ -66,10 +62,10 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										sorting: false,
 										paging: false,	
 										//havaWaiDivGunDong: true,//控制不能出现滚动条
-										//hideColIndex:[0,4,5],
+										hideColIndex:[1,4,5,6,7,8,9],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["0","30%","30%","20%","0","0","0","0","0","0","20%"]								
+										colWidths: ["40","0%","40%","40%","0","0","0","0","0","0","30%"]								
 									});				
 		}
 }
@@ -89,7 +85,6 @@ function jdwpxxadd(){
 	var jdwp_jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
 	var jdwp_jdpzl=$("#jdwp_jdpzl").val();//寄递品重量
 	var jdwp_jdptj=$("#jdwp_jdptj").val();//寄递品体积
-	trNum++;
 		var addTableTr="";
 		//获取行数
 		var trLen= $("#YwwffzjlTable").find("tr").length;
@@ -102,15 +97,15 @@ function jdwpxxadd(){
 		addTableTr += "<tr _selected='false' name='Tr' class='"+tr_class+"' id='"+trNum+"'>";
 		//设置每列的属性
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_xh"+trNum+"'>"+trNum+"</td>";
-	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+trNum+"'>0</td>";
+	    addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+trNum+"'>0</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+trNum+"'>"+jdwp_jdpmc+"</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+trNum+"'>"+jdwp_jdpsm+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+trNum+"'>"+jdwp_jdpdl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpxlx"+trNum+"'>"+jdwp_jdpxl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpdlxmc"+trNum+"'>"+jdwp_jdmdlxmc+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpxlxmc"+trNum+"'>"+jdwp_jdmlxmc+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+trNum+"'>"+jdwp_jdpdl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlx"+trNum+"'>"+jdwp_jdpxl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+trNum+"'>"+jdwp_jdmdlxmc+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlxmc"+trNum+"'>"+jdwp_jdmlxmc+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
 		+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
 		+"</td>";
@@ -124,6 +119,7 @@ function jdwpxxadd(){
 			var jdwp_jdptj=$("#jdwp_jdptj").val("");//寄递品体积
 			addTrEvent($("#YwwffzjlTable").find("tr:last"));
 		}
+		trNum++;//自加变量
 }
 //处理鼠标悬停是的页面样式
 function addTrEvent(tr){
@@ -400,7 +396,7 @@ function addbackbcxz(json){
    	  		<td width="60%" align="right"><a href="#" class="addbutton" id="addbutton" onclick="tianJiaZxzybaydwDzcl()">添加</a></td>
 		</tr>
 	</table>
-	<div id="zxzybaydwdzcl_detail" class="page-layout" src="#" style="top:180px; left:160px;"></div>
+	<div id="zxzybaydwdzcl_detail" style="display: none;"></div>
 		<div id="YwwffzjlData" style="width:100%;">
 			<table id="YwwffzjlTable"  width="100%">
 			  <thead>

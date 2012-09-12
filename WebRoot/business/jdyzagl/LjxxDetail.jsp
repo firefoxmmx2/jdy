@@ -28,10 +28,8 @@ $(document).ready(function() {
 	getDictItemBox("lj_sjrzjlx","lj_sjrzjlxdm","dm_zjlx");
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
+	
 	dzcl_pageUrl="#";
-	detailid="zxzybaydwdzcl_detail";
-	daggleDiv(detailid);
-	$("#"+detailid).hide();
 	dzcl_divnid="YwwffzjlData";
 	dzcl_tableid="YwwffzjlTable";
 	dzcl_tables=$("#"+dzcl_divnid).html();
@@ -84,13 +82,13 @@ function modifyback(json){
 				addTableTr1 += "<tr _selected='false' name='Tr' class='"+tr_class1+"' id='"+i+"'>";
 				//设置每列的属性
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+i+"</td>";
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+i+"'>0</td>";
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+i+"'>0</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_id"+i+"'>"+jdwp_id+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+i+"'>"+jdwp_id+"</td>";
 				addTableTr1 += "</tr>";
 				if(addTableTr1!=""){
 					$("#YwwffzjlTable").append(addTableTr1);
@@ -116,10 +114,10 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										sorting: false,
 										paging: false,	
 										//havaWaiDivGunDong: true,//控制不能出现滚动条
-										//hideColIndex:[0,4,5],
+										hideColIndex:[1,4,5,6,7],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["25","35%","30%","25%","0","0","0","0"]								
+										colWidths: ["50","0","50%","50%","0","0","0","0"]								
 									});				
 		}
 }
@@ -160,11 +158,15 @@ function addTrEvent(tr){
 		}
 	});
 }
+//关闭所有DIV
+function close_div(){
+	$("#ljjbxxadd_detail").hideAndRemove("show");
+}
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
       <td align="left" class="title1">寄递品信息详情</td>
-      <td align="right"><a href="#" id="closeDiv" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");' class="close"></a></td>
+      <td align="right"><a href="#" id="closeDiv" onclick='close_div();' class="close"></a></td>
     </tr>
 </table>
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0">
@@ -226,7 +228,7 @@ function addTrEvent(tr){
 	</table>
 	<fieldset>
 	<legend>寄递品信息</legend>
-	<div id="zxzybaydwdzcl_detail" class="page-layout" src="#" style="top:180px; left:160px;"></div>
+	<div id="zxzybaydwdzcl_detail" style="display: none;"></div>
 		<div id="YwwffzjlData" style="width:100%;">
 			<table id="YwwffzjlTable"  width="100%">
 			  <thead>
@@ -261,7 +263,7 @@ function addTrEvent(tr){
 </tr>
 <tr><td height="3"></td></tr>
 <tr height="25" align="center">
-	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");'>返回</a></td>
+	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='close_div();'>返回</a></td>
 </tr>
 </table>
 
