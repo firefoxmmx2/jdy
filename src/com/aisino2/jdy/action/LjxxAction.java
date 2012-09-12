@@ -197,6 +197,7 @@ public class LjxxAction extends PageAction{
 		lPro.add("jjrzjhm");
 		lPro.add("ljyxm");
 		lPro.add("ljtbsj");
+		lPro.add("kybz");
 		
 		List lCol = new ArrayList();
 		
