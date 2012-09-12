@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/public/user-info.jsp" %>
-
-<script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
-<script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 
@@ -27,7 +24,10 @@
 		selectboxlink("jdwpdl","jdwpxl","dm_jdwpdl");
 		//页面时间格式
 		$('.date').attr("readOnly",true).datepicker();
-		
+		$("#lj_qymc").click(function(){ //服务场所筛选框
+			dataid="";
+			getTy_item("lj_qymc","p_qybm","","",$("#lj_gxdwbm").attr("value"),$('#p_allhylbdm').val());
+		});
 		loadPagePjxxQuery(lj_grid_div);
 		
 		daggleDiv(lj_detail_div);
