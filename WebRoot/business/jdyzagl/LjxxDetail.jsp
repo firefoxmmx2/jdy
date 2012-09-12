@@ -84,13 +84,13 @@ function modifyback(json){
 				addTableTr1 += "<tr _selected='false' name='Tr' class='"+tr_class1+"' id='"+i+"'>";
 				//设置每列的属性
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+i+"</td>";
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+i+"'>0</td>";
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+i+"'>0</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_id"+i+"'>"+jdwp_id+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+i+"'>"+jdwp_id+"</td>";
 				addTableTr1 += "</tr>";
 				if(addTableTr1!=""){
 					$("#YwwffzjlTable").append(addTableTr1);
@@ -116,10 +116,10 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										sorting: false,
 										paging: false,	
 										//havaWaiDivGunDong: true,//控制不能出现滚动条
-										//hideColIndex:[0,4,5],
+										hideColIndex:[1,4,5,6,7],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["25","35%","30%","25%","0","0","0","0"]								
+										colWidths: ["50","0","50%","50%","0","0","0","0"]								
 									});				
 		}
 }

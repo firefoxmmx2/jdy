@@ -7,7 +7,7 @@
 	//qybm = "T013306005003";
 %>
 <script type="text/javascript">
-var trNum=0;
+var trNum=1;
 var ljjdpxx = new Array();
 $(document).ready(function() {	
 	Modifyurl="jdy/query_ljxx.action";
@@ -105,17 +105,17 @@ function modifyback(json){
 				//设置行的属性和样式	
 				addTableTr1 += "<tr _selected='false' name='Tr' class='"+tr_class1+"' id='"+i+"'>";
 				//设置每列的属性
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+i+"</td>";
-			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+i+"'>0</td>";
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_xh"+i+"'>"+trNum+"</td>";
+			    addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+i+"'>0</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_id"+i+"'>"+jdwp_id+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpdlx"+i+"'>0</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpdlxmc"+i+"'>0</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpxlxmc"+i+"'>0</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+i+"'>"+jdwp_id+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlx"+i+"'>0</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+i+"'>0</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlxmc"+i+"'>0</td>";
 				addTableTr1 += "<td class='grid-col-style1' _colid='2' id='cz_"+i+"'>"
 				+"<A id='delete_"+i+"' class=fontbutton title='删除' onclick=getObjectmod(this) href='#'>删除</A>"
 				+"</td>";
@@ -124,6 +124,7 @@ function modifyback(json){
 					$("#YwwffzjlTable").append(addTableTr1);
 					addTrEvent($("#YwwffzjlTable").find("tr:last"));
 				}
+				trNum++;
 	}
 }
 //寄递品信息grid
@@ -144,10 +145,10 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										sorting: false,
 										paging: false,	
 										//havaWaiDivGunDong: true,//控制不能出现滚动条
-										//hideColIndex:[0,4,5],
+										hideColIndex:[1,4,5,6,7,8,9,10],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["0","30%","30%","20%","0","0","0","0","0","0","0","20%"]								
+										colWidths: ["40","0","40%","40%","0","0","0","0","0","0","0","20%"]								
 									});				
 		}
 }
@@ -167,7 +168,6 @@ function jdwpxxadd(){
 	var jdwp_jdmdlxmc=$("#jdwp_jdpdl option:selected").text();//寄递品大类型名称
 	var jdwp_jdpdl=$("#jdwp_jdpdl").val();//寄递品大类型
 	var jdwp_jdmdxmc=$("#jdwp_jdpxl option:selected").text();//寄递品大类型名称
-	trNum++;
 		var addTableTr="";
 		//获取行数
 		var trLen= $("#YwwffzjlTable").find("tr").length;
@@ -180,16 +180,16 @@ function jdwpxxadd(){
 		addTableTr += "<tr _selected='false' name='Tr' class='"+tr_class+"' id='"+trNum+"'>";
 		//设置每列的属性
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_xh"+trNum+"'>"+trNum+"</td>";
-	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_sfscbz"+trNum+"'>N</td>";
+	    addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+trNum+"'>N</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+trNum+"'>"+jdwp_jdpmc+"</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+trNum+"'>"+jdwp_jdpsm+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdplx"+trNum+"'>"+jdwp_jdplx+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_id"+trNum+"'></td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpdlx"+trNum+"'>"+jdwp_jdpdl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpdlxmc"+trNum+"'>"+jdwp_jdmdlxmc+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpxlx"+trNum+"'>"+jdwp_jdmdxmc+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+trNum+"'>"+jdwp_jdplx+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+trNum+"'></td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlx"+trNum+"'>"+jdwp_jdpdl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+trNum+"'>"+jdwp_jdmdlxmc+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlx"+trNum+"'>"+jdwp_jdmdxmc+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
 		+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
 		+"</td>";
@@ -203,6 +203,7 @@ function jdwpxxadd(){
 			var jdwp_jdptj=$("#jdwp_jdptj").val("");//寄递品体积
 			addTrEvent($("#YwwffzjlTable").find("tr:last"));
 		}
+		trNum++;
 }
 //处理鼠标悬停是的页面样式
 function addTrEvent(tr){
