@@ -57,7 +57,7 @@ function setPageListlj(pageno,url){
 }	
 //寄递品详情方法
 function setLjxxDetail(id){
-	$("#"+ljjbxxadd_detail).empty();
+	$("#ljjbxxadd_detail").empty();
 	dataid=$("#"+id+" td:nth(1)").text();//得到这条数据的登记序号
 	setWidth("ljjbxxadd_detail",950);
 	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxDetail.jsp");
@@ -66,7 +66,7 @@ function setLjxxDetail(id){
 //可疑物品添加方法
 function setLjxxKy(id){
 	//return GB_showCenter("保安企业奖励增加","business/jdyzagl/KyjdwpxxAdd.jsp",270,540);
-	$("#"+ljjbxxadd_detail).empty();
+	$("#ljjbxxadd_detail").empty();
 	dataid = id;
 	setWidth("ljjbxxadd_detail",600);
 	setUrl("ljjbxxadd_detail","business/jdyzagl/KyjdwpxxAdd.jsp");

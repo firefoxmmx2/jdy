@@ -43,11 +43,7 @@ $(document).ready(function() {
 	});
 	daggleDiv("ljjbxxadd_detail");//div拖动
 	dzcl_pageUrl="#";
-	
-	detailid="zxzybaydwdzcl_detail";
-	daggleDiv(detailid);
-	$("#"+detailid).hide();
-	
+		
 	dzcl_divnid="YwwffzjlData";
 	dzcl_tableid="YwwffzjlTable";
 	dzcl_tables=$("#"+dzcl_divnid).html();
@@ -485,7 +481,7 @@ function addback(json){
    	  		<td width="60%" align="right"><a href="#" class="addbutton" id="addbutton" onclick="tianJiaZxzybaydwDzcl()">添加</a></td>
 		</tr>
 	</table>
-	<div id="zxzybaydwdzcl_detail" class="page-layout" src="#" style="top:180px; left:160px;"></div>
+	<div id="zxzybaydwdzcl_detail" style="display: none;"></div>
 		<div id="YwwffzjlData" style="width:100%;">
 			<table id="YwwffzjlTable"  width="100%">
 			  <thead>

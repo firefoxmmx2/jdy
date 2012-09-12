@@ -28,10 +28,8 @@ $(document).ready(function() {
 	getDictItemBox("lj_sjrzjlx","lj_sjrzjlxdm","dm_zjlx");
 	
 	daggleDiv("ljjbxxadd_detail");//div拖动
+	
 	dzcl_pageUrl="#";
-	detailid="zxzybaydwdzcl_detail";
-	daggleDiv(detailid);
-	$("#"+detailid).hide();
 	dzcl_divnid="YwwffzjlData";
 	dzcl_tableid="YwwffzjlTable";
 	dzcl_tables=$("#"+dzcl_divnid).html();
@@ -160,11 +158,15 @@ function addTrEvent(tr){
 		}
 	});
 }
+//关闭所有DIV
+function close_div(){
+	$("#ljjbxxadd_detail").hideAndRemove("show");
+}
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
       <td align="left" class="title1">寄递品信息详情</td>
-      <td align="right"><a href="#" id="closeDiv" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");' class="close"></a></td>
+      <td align="right"><a href="#" id="closeDiv" onclick='close_div();' class="close"></a></td>
     </tr>
 </table>
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0">
@@ -226,7 +228,7 @@ function addTrEvent(tr){
 	</table>
 	<fieldset>
 	<legend>寄递品信息</legend>
-	<div id="zxzybaydwdzcl_detail" class="page-layout" src="#" style="top:180px; left:160px;"></div>
+	<div id="zxzybaydwdzcl_detail" style="display: none;"></div>
 		<div id="YwwffzjlData" style="width:100%;">
 			<table id="YwwffzjlTable"  width="100%">
 			  <thead>
@@ -261,7 +263,7 @@ function addTrEvent(tr){
 </tr>
 <tr><td height="3"></td></tr>
 <tr height="25" align="center">
-	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");'>返回</a></td>
+	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='close_div();'>返回</a></td>
 </tr>
 </table>
 

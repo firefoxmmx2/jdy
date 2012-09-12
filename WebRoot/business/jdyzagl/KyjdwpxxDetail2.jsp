@@ -51,7 +51,6 @@ function kyjdwpback_mod(json){
 	}, 'json');
 	
 }
-//清楚所有DIV的方法
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
