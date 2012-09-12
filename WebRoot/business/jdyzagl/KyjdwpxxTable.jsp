@@ -58,7 +58,7 @@ function setPageListlj(pageno,url){
 //寄递品详情方法
 function setLjxxDetail(id){
 	$("#"+ljjbxxadd_detail).empty();
-	dataid = id;
+	dataid=$("#"+id+" td:nth(1)").text();//得到这条数据的登记序号
 	setWidth("ljjbxxadd_detail",950);
 	setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxDetail.jsp");
 	bindDocument("ljjbxxadd_detail");

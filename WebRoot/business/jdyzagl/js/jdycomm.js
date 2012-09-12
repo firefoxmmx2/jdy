@@ -293,3 +293,47 @@ function isIdCardNo_jdy(num)
 	} 
 	return false; 
 } 
+function valSfzCardIsRight_jdy(objId,errmess,isFoucsMes){
+	(isFoucsMes==null)?sfzIsFoucsMes=1:sfzIsFoucsMes=isFoucsMes;
+	var cardNumber = $("#"+objId).attr("value");
+	cardNumber = cardNumber.toUpperCase();
+	//身份证号码不允许为111111111111111或将111111191111111113.20100817修改
+	if(cardNumber=='111111111111111'||cardNumber=='111111191111111113')
+	{
+		return errtishi(errmess,objId);
+	}
+	if(valIsWrite(cardNumber)){ //写法没有问题 15/17/18
+		if(cardNumber.length==17){
+			cardNumber = change17to15(cardNumber);
+		}
+		
+		if (cardNumber.length==15){
+			var re = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/);
+			var arrSplit = cardNumber.match(re);
+			var dtmBirth = new Date('19'+ arrSplit[2]+'/'+arrSplit[3]+'/'+arrSplit[4]);
+			var goodDate = valIs15Birth(dtmBirth,arrSplit); //判断生日
+			if (goodDate){ //生日正确
+				$("#"+objId).attr("value",change15to18(cardNumber))
+			} else {
+				return errtishi(errmess,objId);
+			}
+		}
+		
+		if (cardNumber.length==18){
+			var re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/);
+			var arrSplit = cardNumber.match(re);
+			var dtmBirth = new Date(arrSplit[2]+"/"+arrSplit[3]+"/"+arrSplit[4]);
+			var goodDate = valIs18Birth(dtmBirth,arrSplit); //判断生日
+			if (goodDate){ //生日正确
+				if(!varThe18LastStr(cardNumber)){ //验证最后一位
+					return errtishi(errmess,objId);
+				}
+			} else {
+				return errtishi(errmess,objId);
+			}
+		}
+	} else {
+		return errtishi(errmess,objId);
+	}
+	return true;
+}

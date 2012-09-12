@@ -294,7 +294,7 @@ $("#lj_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判
 		if(zjhm!=""){
 			if(isIdCardNo_jdy(zjhm)==false){
 				sFlag="false";
-				jConfirm('身份证号码不正确，确定输入吗？', '确认提示', function(r) {
+				jConfirm('该人员身份证号码错误，确定继续保存？', '确认提示', function(r) {
 			    	if(r==true){
 			    		
 					}
@@ -302,6 +302,10 @@ $("#lj_jjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判
 						$("#lj_jjrzjhm").val("");
 					}
 				});
+			}else{
+				if(zjhm.length==15){
+					valSfzCardIsRight_jdy("lj_jjrzjhm","请正证件号码!");
+				}
 			}
 		}
 	}
@@ -312,7 +316,7 @@ $("#lj_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判
 	if($("#lj_sjrzjlx").val()=="11"){
 		if(isIdCardNo_jdy(zjhm)==false){
 			sFlag="false";
-			jConfirm('身份证号码不正确，确定输入吗？', '确认提示', function(r) {
+			jConfirm('该人员身份证号码错误，确定继续保存？', '确认提示', function(r) {
 		    	if(r==true){
 		    		
 				}
@@ -320,6 +324,10 @@ $("#lj_sjrzjhm").blur(function(){//当填写身份号码失去焦点后，去判
 					$("#lj_sjrzjhm").val("");
 				}
 			});
+		}else{
+			if(zjhm.length==15){
+				valSfzCardIsRight_jdy("lj_sjrzjhm","请正证件号码!");
+			}
 		}
 	}
 });

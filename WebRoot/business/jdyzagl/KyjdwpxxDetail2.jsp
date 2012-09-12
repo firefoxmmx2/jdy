@@ -9,12 +9,7 @@ $(document).ready(function() {
 	$('#jdpxx_id_det').val(dataid);
 	//可疑物品类别
 	$('#jdpxx_kywplb').selectBox({code:'dm_kywplb'});
-	//报告时间
-	//$("#jdpxx_basj").attr("readOnly",true).datepicker();
-	//揽件人
-	//$('#jdpxx_bgrxm').attr('readOnly',true).click(function(){
-	//	getTyRY_item('jdpxx_bgrxm','ljljradd_cyrybh',null,null,'<%=qybm%>');
-	//});
+	$("#jdpxx_kywplb").setAttr("readonly","readonly");//删除class属性
 	kyjdwpback_mod();
 }); 
 //查询揽件信息并赋值函数
@@ -59,7 +54,7 @@ function kyjdwpback_mod(json){
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">可疑物品详情</td>
+      <td align="left" class="title1">可疑物品详情dddd</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#"+detailid).hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>
@@ -103,17 +98,17 @@ function kyjdwpback_mod(json){
 		<td class="distd">代收人证件号码</td>
 		<td class="detailtd"><input type="text" id="jdpxx_pjjbxx_dsr_zjhm"  name="jdpxx.pjjbxx.dsr.zjhm" class="readonly" value="" /></td>
 		<td class="distd">可疑物品类别</td>
-		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="jdpxx.kyjdwpxx.kywplb" value="" class="readonly"><option></option></select></td>
+		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="jdpxx.kyjdwpxx.kywplb" value="" ><option></option></select></td>
 	</tr>
 	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
-		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="jdpxx.kyjdwpxx.kywpms" value="" ></textarea></td>
+		<td class="detailtd"><textarea style="height: 60px;width: 200px;" id="jdpxx_kywpms" name="jdpxx.kyjdwpxx.kywpms" value="" class="readonly"></textarea></td>
 	</tr>
 	<tr height="20">
 		<td class="distd">报告人</td>
-		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="jdpxx.kyjdwpxx.bgr.xm" class="inputstyle" value="" class="readonly"></td>
+		<td class="detailtd"><input type="text" id="jdpxx_bgrxm"  name="jdpxx.kyjdwpxx.bgr.xm"  value="" class="readonly"></td>
 		<td class="distd">报告时间</td>
-		<td class="detailtd"><input type="text" id="jdpxx_basj" name="jdpxx.kyjdwpxx.bgsj" class="inputstyle date" value="" class="readonly"></td>
+		<td class="detailtd"><input type="text" id="jdpxx_basj" name="jdpxx.kyjdwpxx.bgsj"  value="" class="readonly"></td>
 	</tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -122,7 +117,7 @@ function kyjdwpback_mod(json){
 	</tr>
 </table>
 <tr height="25" align="center">
-	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="取消" onclick='$("#"+detailid).hideAndRemove("show");'>取消</a></td>
+	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#"+detailid).hideAndRemove("show");'>返回</a></td>
 </tr>
 </table>
 
