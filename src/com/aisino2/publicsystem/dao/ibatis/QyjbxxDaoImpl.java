@@ -235,7 +235,7 @@ public class QyjbxxDaoImpl extends BaseDao implements IQyjbxxDao {
 				else if(sort.equals("2"))
 					sCol = " a.zrs "+ desc;
 				else if(sort.equals("3"))
-					sCol = " a.qyzflbm "+ desc;
+					sCol = " a.qyzflmc "+ desc;
 				else if(sort.equals("4"))
 					sCol = " a.bcsj "+ desc;
 				else
