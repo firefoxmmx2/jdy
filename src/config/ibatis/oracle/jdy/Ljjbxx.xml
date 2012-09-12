@@ -101,9 +101,10 @@
 			ljjbxx.djxh=#djxh#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="wldh">
+			ljjbxx.wldh=#wldh#
 			<isNotEmpty prepend="" property="qyjbxx">
 				<isNotEmpty prepend="" property="qyjbxx.qybm">
-					ljjbxx.wldh=#wldh# and ljjbxx.qybm=#qyjbxx.qybm#
+					 and ljjbxx.qybm=#qyjbxx.qybm#
 				</isNotEmpty>
 			</isNotEmpty>
 			
