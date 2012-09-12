@@ -15,6 +15,10 @@ $(document).ready(function() {
 	$("#jj_sj_yr .red").removeAttr("class").attr("class","distd");
 	$("#ljjbxx_detail [id=jjrssxmc]").attr("class","readonly");
 	$("#ljjbxx_detail [id=sjrssxmc]").attr("class","readonly");
+	//去掉身份证扫描框
+	$('#ljjbxx_detail a:contains("二代证读取")').each(function(){
+		$(this).parents("table").eq(0).remove();
+	});
 	
 	var params = getSubmitParams("#ljjbxx_detail [name*=lj.]");
 	jQuery.post("jdy/query_ljxx.action",params,modifyback,"json");
