@@ -46,6 +46,18 @@ public class WgcyryxxAction extends PageAction{
 	private int totalrows=0;
 	private String result="success";
 	private int myPageSize=0;
+	//排序控制标志
+	private String tag;
+	
+	
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
 	public int getTotalrows() {
 		return totalrows;
 	}
@@ -245,6 +257,7 @@ public class WgcyryxxAction extends PageAction{
 			 map.put("nianlingT",setWgcyryxx.getNianlingT());
 			 map.put("allhylbdm", setWgcyryxx.getAllhylbdm());
 			 
+			 map.put("tag", tag);
 			 //map=addMap(setWgcyryxx);
 			 Page page = wgcyryxxService.getListGadForPage(map, pagesize, pagerow,sort,dir);
 			 myPageSize = pagesize;
@@ -1242,6 +1255,8 @@ public class WgcyryxxAction extends PageAction{
         		map.put("allhylbdm", setWgcyryxx.getAllhylbdm());
         	}
 		}
+		
+		map.put("tag", tag);
 		return map;
 	}
 	public String findqycyryzt(String dm){//根据代码找从业人员状态

@@ -58,6 +58,17 @@ public class QyryxxAction extends PageAction{
 	private int totalrows=0;
 	private String baseStringPic = "";
 
+	private String tag;
+	
+	
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
 	public int getTotalrows() {
 		return totalrows;
 	}
@@ -1597,6 +1608,8 @@ public class QyryxxAction extends PageAction{
         	}
         	//System.out.println("管辖单位"+map.get("gxdwbm")+"部门编号"+map.get("deptCode"));
         }
+        //控制排序的标志
+        map.put("tag", tag);
 		return map;
 	}
 	 /**

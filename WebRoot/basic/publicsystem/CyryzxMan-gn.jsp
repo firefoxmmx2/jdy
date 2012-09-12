@@ -48,6 +48,7 @@ function setPageList(pageno,url){
 		// returns a jQ object with a 'g' property - that's ingrid
 		var mygrid1 = $("#"+tableid).ingrid({ 
 										ingridPageParams:sXML,
+										ingridExtraParams:{'tag':'cyrycxman-gad'},
 										ingridPageWidth: pageWidth,
 										url: url,	
 										height: pageHeight-280,
@@ -60,6 +61,7 @@ function setPageList(pageno,url){
 												}
 											},
 										hideColIndex:[5],
+										noSortColIndex:[10],
 										colWidths: ["7%","13%","12%","5%","10%","0%","12%","15%","5%","8%","10%"]										
 									});				
 		}

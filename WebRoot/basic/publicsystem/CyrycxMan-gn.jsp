@@ -82,6 +82,7 @@ function setPageList(pageno,url){
 		//alert(tables);
 		var mygrid1 = $("#"+tableid).ingrid({ 
 										ingridPageParams:sXML,
+										ingridExtraParams:{'tag':'cyrycxman-gad'},
 										ingridPageWidth: pageWidth,
 										url: url,	
 										height: pageHeight-327,

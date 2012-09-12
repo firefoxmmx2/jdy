@@ -24,7 +24,8 @@
 	$(document).ready(function() {
 		ylcsjbxx_loadPage("tabledata");
 		//$("#manbq_ylcsfl").selectBox({code:"dm_ylcsfl"});
-		$("#manbq_yyzt").selectBox({code:"dm_yyzt(bzhylcs)"});
+// 		$("#manbq_yyzt").selectBox({code:"dm_yyzt(bzhylcs)"});
+		$('#manbq_yyzt').selectBox({code:"dm_yyzt(gg)"});
 		$("#manbq_relation").selectBox({state:"temp",width:"80px"});
 		$("#p_gxdwmc").click(function(){ //管辖单位
 //			getGxdw("p_gxdwmc","p_gxdwbm");

@@ -160,7 +160,6 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 
 	public Page getListGadForPage(Map map, int pageNo, int pageSize,
 			String sort, String desc) {
-		// TODO Auto-generated method stub
 		if(map.get("superbOrderBy") != null && !(map.get("superbOrderBy").equals("")))
 		{
 			map.put("pageSort", map.get("superbOrderBy"));
@@ -171,34 +170,66 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 			desc = "";
 		else if(!desc.equals("asc") && !desc.equals("desc"))
 			desc = " desc ";
-		if (sort!=null){
-			if(sort.equals("0"))
-				sCol = " a.xm "+ desc;
-			else if(sort.equals("1"))
-				sCol = " a.zjhm "+ desc;
-			else if(sort.equals("2"))
-				sCol = " a.cyrybh "+ desc;
-			else if(sort.equals("3"))
-				sCol = " a.xbdm "+ desc;
-			else if(sort.equals("4"))
-				sCol = " a.shouji "+ desc;
-			else if(sort.equals("5"))
-				sCol = " a.hjdxzqhdm "+ desc;
-			else if(sort.equals("6"))
-				sCol = " a.gwbh "+ desc;
-			else if(sort.equals("7"))
-				sCol = " b.gxdwbm "+ desc;
-			else if(sort.equals("8"))
-				sCol = " b.qymc "+ desc;
-			else if(sort.equals("9"))
-				sCol = " a.zt "+ desc;
-			else if(sort.equals("10"))
-			    sCol = " a.cyryzt "+ desc;
-			else
-				sCol = " a.ryid desc";
-		}else{
-			sCol="a.ryid desc";
+//		排序控制
+		if(map.containsKey("tag") && "cyrycxman-gad".equals(map.get("tag"))){
+			if (sort!=null){
+				if(sort.equals("0"))
+					sCol = " a.xm "+ desc;
+				else if(sort.equals("1"))
+					sCol = " a.zjhm "+ desc;
+				else if(sort.equals("2"))
+					sCol = " a.cyrybh "+ desc;
+				else if(sort.equals("3"))
+					sCol = " a.xbdm "+ desc;
+				else if(sort.equals("4"))
+					sCol = " a.hjdxzqhdm "+ desc;
+				else if(sort.equals("5"))
+					sCol = " a.gwbh "+ desc;
+				else if(sort.equals("6"))
+					sCol = " b.gxdwbm "+ desc;
+				else if(sort.equals("7"))
+					sCol = " b.qymc "+ desc;
+				else if(sort.equals("8"))
+					sCol = " a.zt "+ desc;
+				else if(sort.equals("9"))
+				    sCol = " a.cyryzt "+ desc;
+				else
+					sCol = " a.ryid desc";
+			}else{
+				sCol="a.ryid desc";
+			}
 		}
+		else{
+			if (sort!=null){
+				if(sort.equals("0"))
+					sCol = " a.xm "+ desc;
+				else if(sort.equals("1"))
+					sCol = " a.zjhm "+ desc;
+				else if(sort.equals("2"))
+					sCol = " a.cyrybh "+ desc;
+				else if(sort.equals("3"))
+					sCol = " a.xbdm "+ desc;
+				else if(sort.equals("4"))
+					sCol = " a.shouji "+ desc;
+				else if(sort.equals("5"))
+					sCol = " a.hjdxzqhdm "+ desc;
+				else if(sort.equals("6"))
+					sCol = " a.gwbh "+ desc;
+				else if(sort.equals("7"))
+					sCol = " b.gxdwbm "+ desc;
+				else if(sort.equals("8"))
+					sCol = " b.qymc "+ desc;
+				else if(sort.equals("9"))
+					sCol = " a.zt "+ desc;
+				else if(sort.equals("10"))
+				    sCol = " a.cyryzt "+ desc;
+				else
+					sCol = " a.ryid desc";
+			}else{
+				sCol="a.ryid desc";
+			}
+		}
+		
 		map.put("pageSort", sCol);
 		return queryForPage("getQyryxxListGad", map, pageNo,pageSize);
 
