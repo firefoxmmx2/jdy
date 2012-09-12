@@ -20,7 +20,9 @@
 	$(function(){
 		
 		$('#pjxx_sjr_zjlx').selectBox({code:'dm_zjlx'});
-		$('.date').attr("readOnly",true).datepicker();
+		//时间设置
+		$('.datef').attr("readOnly",true).datepicker(true,'0');
+		$('.datet').attr("readOnly",true).datepicker(true,'1');
 		$('#pjxx_pjr_xm').click(function(){
 			dataid=null;
 			getTyRY_item('pjxx_pjr_xm','pjxx_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
@@ -202,17 +204,17 @@
 					<td width="10%" class="pagedistd">收件人证件号码</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_sjr_zjhm" name="pjxx.ljjbxx.sjr.zjhm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">派件时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjf" name="pjsjf" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjf" name="pjsjf" class="inputstyle datef" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjt" name="pjsjt" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjt" name="pjsjt" class="inputstyle datet" value=""></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">派件员</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjr_xm" name="pjxx.pjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">派件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjf" name="pjtbsjf" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjf" name="pjtbsjf" class="inputstyle datef" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjt" name="pjtbsjt" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjt" name="pjtbsjt" class="inputstyle datet" value=""></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
