@@ -40,7 +40,7 @@ function setPageListlj(pageno,url){
 										ingridPageWidth: 950,//定义宽度
 										//colIndex: [0],
 										noSortColIndex:[11],
-										hideColIndex:[1],
+										hideColIndex:[0],
 										isHaveMorenPaixuClass: true, //加默认排序样式
 										morenPaixuCol: 8, //第一默认排序	
 										morenPaixuFangshi:'desc', //默认排序方式 
