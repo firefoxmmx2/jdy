@@ -174,6 +174,12 @@
 		}
 		addtotempList("lrr_",setNull(json.LQyjbxx[0].lrr));
 		addtotempList("lrsj_",setNull(json.LQyjbxx[0].lrsj));
+		
+		if(setNull(json.LQyjbxx[0].hylbdm)=='Y'){
+			addtotempList("frdbzj_",setNull(json.LQyjbxx[0].frdbzjlb));
+			addtotempList("kdjyxkzbh_",setNull(json.LQyjbxx[0].kdjyxkzbh));
+			addtotempList("wstzqypzzsh_",setNull(json.LQyjbxx[0].wstzqypzzsh));
+		}
 		bgqk_setDetail();
 	}
 	
@@ -333,6 +339,12 @@
 		}
 		changeAndWriteRedFont("lrr_",setNull(json.LQyjbxx[0].lrr));
 		changeAndWriteRedFont("lrsj_",setNull(json.LQyjbxx[0].lrsj));
+		
+		if(setNull(json.LQyjbxx[0].hylbdm)=='Y'){
+			changeAndWriteRedFont("frdbzj_",setNull(json.LQyjbxx[0].frdbzjlb));
+			changeAndWriteRedFont("kdjyxkzbh_",setNull(json.LQyjbxx[0].kdjyxkzbh));
+			changeAndWriteRedFont("wstzqypzzsh_",setNull(json.LQyjbxx[0].wstzqypzzsh));
+		}
 	}
 	function hyInit(json){ //行业初始化
 		if(selHylb=='J'){
