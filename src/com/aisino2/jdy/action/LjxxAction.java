@@ -282,6 +282,9 @@ public class LjxxAction extends PageAction{
 			
 			//管辖单位编码、企业名称
 			if(lj.getQyjbxx()!=null){
+				if(lj.getQyjbxx().getGxdwbm()!=null){
+					lj.getQyjbxx().setGxdwbm(StringUtil.trimEven0(lj.getQyjbxx().getGxdwbm()));
+				}
 				params.put("qyjbxx", lj.getQyjbxx());
 			}
 			//揽件基本信息   物流单号
