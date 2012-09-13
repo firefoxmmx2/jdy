@@ -136,12 +136,16 @@ public class KyjdwpAction extends PageAction{
 		totalrows = pageinfo.getTotalRows();
 		lKyjdwpxx = pageinfo.getData();
 		
-		setTableDate_ljjbxx(pageinfo.getData());
+		if(kyjdwpxx.getKyjdwpxxcxbz().equals("gadcxbz")){
+			setTableDategad_ljjbxx(pageinfo.getData());
+		}else{
+			setTableDate_ljjbxx(pageinfo.getData());
+		}
 		
 		this.result = "success";
 		return SUCCESS;
 	}
-	/***揽件基本信息主页面setable方法***/
+	/***揽件基本信息主页面企业端setable方法***/
 	private void setTableDate_ljjbxx(List<Kyjdwpxx> lData) {
 		// TODO Auto-generated method stub
 		List lPro = new ArrayList();
@@ -215,6 +219,55 @@ public class KyjdwpAction extends PageAction{
 				kyjdwpxx.setKywplb("其他");
 			}
 			kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
+		}
+		Kyjdwpxx setkyjdwpxx = new Kyjdwpxx();
+		this.setData(setkyjdwpxx, lData, lPro, lCol);
+		this.tabledata = this.getData();
+		totalrows = this.getTotalrows();
+	}
+	/***揽件基本信息主页面公安端setable方法***/
+	private void setTableDategad_ljjbxx(List<Kyjdwpxx> lData) {
+		// TODO Auto-generated method stub
+		List lPro = new ArrayList();
+		lPro.add("ljjbxx_id");
+		lPro.add("jdpmc");//
+		lPro.add("qymc");//
+		lPro.add("wldhlb");
+		lPro.add("kywplb");
+		lPro.add("bgrxm");
+		lPro.add("bgsj");
+		lPro.add("jjrxm");
+		lPro.add("sjrxm");//
+		lPro.add("jdpdlxmc");
+		lPro.add("jdplxmc");
+		lPro.add("ljtbsj");//
+		
+		List lCol = new ArrayList();
+		
+		List lDetail = new ArrayList();
+		lDetail.add("setKyjdwpxxDetail");
+		lDetail.add("详情");
+		lCol.add(lDetail);
+		for(Kyjdwpxx kyjdwpxx : lData){
+			//kyjdwp.setLjjbxx_id(kyjdwpxx.getLjjbxx_id());//可疑物品信息ID
+			kyjdwpxx.setWldhlb(kyjdwpxx.getLjjbxx().getWldh());//物流单号
+			kyjdwpxx.setJdpmc(kyjdwpxx.getJdpxx().getJdpmc());//寄递品名称
+			kyjdwpxx.setJjrxm(kyjdwpxx.getJjr().getXm());//寄件人姓名
+			kyjdwpxx.setSjrxm(kyjdwpxx.getSjr().getXm());//收件人姓名==
+			kyjdwpxx.setJdpdlxmc(kyjdwpxx.getJdpxx().getJdpdlxmc());//寄递品大类名称
+			kyjdwpxx.setJdplxmc(kyjdwpxx.getJdpxx().getJdplxmc());//寄递品小类名称
+			if(kyjdwpxx.getKywplb().equals("1")){//可疑物品类别
+				kyjdwpxx.setKywplb("丢失");
+			}
+			if(kyjdwpxx.getKywplb().equals("2")){//可疑物品类别
+				kyjdwpxx.setKywplb("禁寄品");
+			}
+			if(kyjdwpxx.getKywplb().equals("3")){//可疑物品类别
+				kyjdwpxx.setKywplb("其他");
+			}
+			kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
+			kyjdwpxx.setLjtbsj(kyjdwpxx.getLjjbxx().getLjtbsj());//揽件填报时间
+			kyjdwpxx.setQymc(kyjdwpxx.getLjjbxx().getQyjbxx().getQymc());//企业名称
 		}
 		Kyjdwpxx setkyjdwpxx = new Kyjdwpxx();
 		this.setData(setkyjdwpxx, lData, lPro, lCol);
