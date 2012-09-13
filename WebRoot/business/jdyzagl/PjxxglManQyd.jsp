@@ -69,8 +69,11 @@
 												$('tr',$table).each(function(){
 													var $tr=$(this);
 													var zt=$tr.find('td:nth(8)').text();
-													if(zt=='Y')
-														$tr.find('td:last a[title=派件]').remove();
+													if(zt=='Y'){
+														$tr.find('td:last a[title=派发]').remove();
+														$tr.find('td:last a[title=修改]').remove();
+													}
+														
 													
 													var overUpdateTime=$tr.find('td:nth(9)').text();
 													if(overUpdateTime=='true'){
@@ -93,14 +96,8 @@
 	}
 	//验证
 	function manVerify_pjxx(){
-		var sj1 = $("#pjxx_pjsjf").val();
-		var sj2 = $("#pjxx_pjsjt").val();
-		if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
-			if(sj1>sj2){
-				jAlert('派件时间不能大于派件时间至','提示信息')
-				return false;
-			}
-		}
+		var sj1;
+		var sj2;
 		
 		sj1 = $("#pjxx_pjtbsjf").val();
 		sj2 = $("#pjxx_pjtbsjt").val();
@@ -122,7 +119,7 @@
 	} 
 	//派件信息删除
 	function setPjxxDelete(id) {
-		if(confirm("是否决定删除该派件登记信息")){
+		if(jConfirm("是否决定删除该派件登记信息")){
 			$.post(pjxx_detail_url,{'pjxx.id':id},function(json){
 				if(json.overUpdateTime){
 					jAlert("已经超过了删除的时间！","提示");
@@ -176,11 +173,13 @@
 	**/
 	function setPjxxSend(id){
 		var params={"pjxx.id":id,"pjxx.zt":'Y'};
+		if(jConfirm("是否决定派发该派件登记信息")){
+			$.post(pjxx_update_url,params,function(json){
+				if(json.result == 'success')
+					pjxxQueryPageList(1);
+			},'json');
+		}
 		
-		$.post(pjxx_update_url,params,function(json){
-			if(json.result == 'success')
-				pjxxQueryPageList(1);
-		},'json');
 	}
 </script>
 
