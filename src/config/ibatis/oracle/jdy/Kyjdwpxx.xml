@@ -33,6 +33,7 @@
 		<result property="ljjbxx.qyjbxx.qymc" column="qymc"/>
 		<result property="sjr.xm" column="sjrxm"/>
 		<result property="ljjbxx.ljtbsj" column="ljtbsj"/>
+		<result property="ljjbxx.qyjbxx.qyid" column="qyid"/>
 	</resultMap>	
 	<sql id="kyjdwpxxWhere" >
 		<isNotEmpty prepend="and" property="kyywdjxh"> 
@@ -198,7 +199,7 @@
 			,jjr.xm jjrxm,jjr.zjlx jjrzjlx,jjr.zjhm jjrzjhm
 			,jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc
 			,kyjdwpxx.bgsj bgsj,kyjdwpxx.kywplb kywplb, bgr.xm bgrxm,kyjdwpxx.kyywdjxh kyywdjxh
-			,qyjbxx.qymc qymc,sjr.xm sjrxm,ljjbxx.ljtbsj ljtbsj
+			,qyjbxx.qymc qymc,sjr.xm sjrxm,ljjbxx.ljtbsj ljtbsj,qyjbxx.qyid qyid
 					
 			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx bgr,t_qyjbxx qyjbxx
 			
