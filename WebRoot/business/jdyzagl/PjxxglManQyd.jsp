@@ -119,18 +119,21 @@
 	} 
 	//派件信息删除
 	function setPjxxDelete(id) {
-		if(jConfirm("是否决定删除该派件登记信息")){
-			$.post(pjxx_detail_url,{'pjxx.id':id},function(json){
-				if(json.overUpdateTime){
-					jAlert("已经超过了删除的时间！","提示");
-					pjxxQueryPageList(1);
-				}
-				else{
-					$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
-				}
-			},'json');
-			
-		}
+		jConfirm("是否决定删除该派件登记信息",function(r){
+			if(r){
+				$.post(pjxx_detail_url,{'pjxx.id':id},function(json){
+					if(json.overUpdateTime){
+						jAlert("已经超过了删除的时间！","提示");
+						pjxxQueryPageList(1);
+					}
+					else{
+						$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+					}
+				},'json');
+				
+			}
+		});
+		
 			
 	}
 	/**
@@ -173,12 +176,15 @@
 	**/
 	function setPjxxSend(id){
 		var params={"pjxx.id":id,"pjxx.zt":'Y'};
-		if(jConfirm("是否决定派发该派件登记信息")){
-			$.post(pjxx_update_url,params,function(json){
-				if(json.result == 'success')
-					pjxxQueryPageList(1);
-			},'json');
-		}
+		jConfirm("是否决定派发该派件登记信息",function(r){
+			if(r){
+				$.post(pjxx_update_url,params,function(json){
+					if(json.result == 'success')
+						pjxxQueryPageList(1);
+				},'json');
+			}
+		})
+		
 		
 	}
 </script>
