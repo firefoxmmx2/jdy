@@ -92,7 +92,7 @@ function setKyjdwpxxDetail(id){
   <tr>
     <td class="tdbg">
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="kyjdwpxx_man">
-    	 <input type="hidden" id="lj_gxdwbm" name="lj.qyjbxx.gxdwbm" value="<%=gxdwbm%>"><!-- 管辖单位编码 -->
+    	 <input type="hidden" id="lj_gxdwbm" name="kyjdwpxx.ljjbxx.qyjbxx.gxdwbm" value="<%=gxdwbm%>"><!-- 管辖单位编码 -->
     	 <input type="hidden" id="kyjdwpxxcxbz" name="kyjdwpxx.kyjdwpxxcxbz" value="gadcxbz"><!-- 可疑寄递物品查询标志 -->
     	 <input type="hidden" id="jdytjxx_departlevel" value="<%=departlevel %>"><!-- 级别 -->
     	  <input type="hidden" id="p_allhylbdm" value="'Y'"><!-- 级别 -->
