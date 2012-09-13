@@ -289,6 +289,7 @@ public class PjxxAction extends PageAction {
 		lPro.add("pjtbsj");
 		lPro.add("zt");
 		lPro.add("overUpdateTime");
+		lPro.add("kybz");
 		
 		List lCol = new ArrayList();
 		
@@ -334,7 +335,8 @@ public class PjxxAction extends PageAction {
 				pj.setOverUpdateTime("true");
 			else
 				pj.setOverUpdateTime("false");
-			
+			//可疑寄递标志
+			pj.setKybz(pj.getLjjbxx().getKybz());
 		}
 		Pjjbxx setpjxx = new Pjjbxx();
 		this.setData(setpjxx, lData, lPro, lCol);
