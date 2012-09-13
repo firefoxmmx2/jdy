@@ -130,7 +130,9 @@ public class KyjdwpAction extends PageAction{
 		if(kyjdwpxx.getSbsjt()!=null){//上报截止时间
 			params.put("sbsjt", kyjdwpxx.getSbsjt());
 		}
-	
+		if(kyjdwpxx.getKyjdwpxxcxbz()!=null){
+			params.put("kyjdwpxxcxbz", kyjdwpxx.getKyjdwpxxcxbz());
+		}
 		Page pageinfo = kyjdwpxxService.findKyjdwpxxsForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
