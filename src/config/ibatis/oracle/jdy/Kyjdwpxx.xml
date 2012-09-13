@@ -65,7 +65,7 @@
 					qyjbxx.qymc like '%$qyjbxx.qymc$%'
 				</isNotEmpty>
 				<isNotEmpty prepend="and" property="qyjbxx.gxdwbm">
-					qyjbxx.gxdwbm = #qyjbxx.gxdwbm#
+					qyjbxx.gxdwbm like '$qyjbxx.gxdwbm$%'
 				</isNotEmpty>
 				<isNotEmpty prepend="and" property="qyjbxx.gxdwmc">
 					qyjbxx.gxdwmc like '$qyjbxx.gxdwmc$%'
