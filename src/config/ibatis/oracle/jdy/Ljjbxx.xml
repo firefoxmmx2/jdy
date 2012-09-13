@@ -70,6 +70,7 @@
 		<result property="sjr" resultMap="ljjbxx_list_sjr_rm"/>
 		<result property="ljr.xm" column="ljr_xm"/>
 		<result property="ljr.cyrybh" column="ljr_cyrybh"/>
+		<result property="kybz" column="kybz"/>
 		
 <!-- 		企业信息 -->
 		<result property="qyjbxx.qyid" column="qyjbxx_qyid"/>
@@ -100,9 +101,10 @@
 			ljjbxx.djxh=#djxh#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="wldh">
+			ljjbxx.wldh=#wldh#
 			<isNotEmpty prepend="" property="qyjbxx">
 				<isNotEmpty prepend="" property="qyjbxx.qybm">
-					ljjbxx.wldh=#wldh# and ljjbxx.qybm=#qyjbxx.qybm#
+					 and ljjbxx.qybm=#qyjbxx.qybm#
 				</isNotEmpty>
 			</isNotEmpty>
 			
@@ -113,10 +115,10 @@
 		<include refid="ljjbxxWhere"/>
 		
 		<isNotEmpty prepend="and" property="ljsjf">
-			ljjbxx.ljsj >= #ljsjf#
+			ljjbxx.ljtbsj >= #ljsjf#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="ljsjt">
-			ljjbxx.ljsj &lt;= #ljsjt#
+			ljjbxx.ljtbsj &lt;= #ljsjt#
 		</isNotEmpty>
 		
 			
@@ -414,7 +416,7 @@
 	</select>
 <!-- 	获取揽件信息列表 -->
 	<select id="ljjbxx.getList" parameterClass="ljjbxx" resultMap="ljjbxx_list_rm">
-		select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj
+		select ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.kybz
 		,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm
 		,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm
 		,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
@@ -445,7 +447,7 @@
 	<select id="ljjbxx.getListPage" parameterClass="map" resultMap="ljjbxx_list_rm">
 		select x.* from (
 		select rownum rowno,z.* from 
-		(	select distinct ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh
+		(	select distinct ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh,ljjbxx.kybz
 			,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm,jjr.id jjr_id
 			,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm,sjr.id sjr_id
 			,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
@@ -478,6 +480,7 @@
 		        and ljjbxx.qybm=qyjbxx.qybm
 				and ljjbxx.jjr_id=jjr.id 
 				and ljjbxx.sjr_id=sjr.id 
+				and ljjbxx.scbzw='0'
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere"/>
 		</dynamic>
@@ -507,6 +510,7 @@
 				and ljjbxx.jjr_id=jjr.id 
 				and ljjbxx.sjr_id=sjr.id 
 				and ljjbxx.ljrbh=ljr.cyrybh
+				and ljjbxx.scbzw='0'
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere" />
 		</dynamic>
@@ -523,6 +527,7 @@
 				and ljjbxx.jjr_id=jjr.id 
 				and ljjbxx.sjr_id=sjr.id 
 				and jdpxx.kybz='N'
+				and ljjbxx.scbzw='0'
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere"/>
 		</dynamic>
@@ -553,6 +558,7 @@
 				and ljjbxx.sjr_id=sjr.id 
 				and ljjbxx.ljrbh=ljr.cyrybh
 				and jdpxx.kybz='N'
+				and ljjbxx.scbzw='0'
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere" />
 		</dynamic>

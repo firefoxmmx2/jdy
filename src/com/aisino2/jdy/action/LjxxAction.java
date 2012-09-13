@@ -1,6 +1,8 @@
 package com.aisino2.jdy.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +38,15 @@ public class LjxxAction extends PageAction{
 	private String result = "";
 	private List<Ljjbxx> lLjjbxx = new ArrayList();
 	private String wldh;
-	
+	private boolean overUpdateTime;//判断时间是否超过今日24点的标志
+
+	public boolean isOverUpdateTime() {
+		return overUpdateTime;
+	}
+
+	public void setOverUpdateTime(boolean overUpdateTime) {
+		this.overUpdateTime = overUpdateTime;
+	}
 
 	public String getWldh() {
 		return wldh;
@@ -181,7 +191,16 @@ public class LjxxAction extends PageAction{
 		
 		lj = ljjbxxService.getLjjbxx(lj);
 		
-		this.result = "success";
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar updateOverTimeCalender =  sdf.getCalendar();
+		updateOverTimeCalender.setTime(lj.getLjtbsj());
+		updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
+		if((now.compareTo(updateOverTimeCalender.getTime())) >= 0)
+			overUpdateTime=true;
+		else
+			overUpdateTime=false;
+		
 		return SUCCESS;
 	}
 	
@@ -197,6 +216,7 @@ public class LjxxAction extends PageAction{
 		lPro.add("jjrzjhm");
 		lPro.add("ljyxm");
 		lPro.add("ljtbsj");
+		lPro.add("kybz");
 		
 		List lCol = new ArrayList();
 		

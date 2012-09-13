@@ -16,12 +16,12 @@ function jdfpxxtjVerify(){
 		return false;
 	if (!checkControlValue("jdwp_jdpmc","String",1,30,null,1,"内件品名"))
 		return false;
-	if (!checkControlValue("jdwp_jdpsm","Float",0,9999.9,1,1,"数量"))
-		return false;
-	if (!checkControlValue("jdwp_jdpzl","String",1,200,1,1,"重量"))
-		return false;
-	if (!checkControlValue("jdwp_jdptj","String",1,200,1,1,"体积"))
-		return false;
+	//if (!checkControlValue("jdwp_jdpsm","Float",0,9999.9,1,1,"数量"))
+	//	return false;
+	//if (!checkControlValue("jdwp_jdpzl","String",1,200,1,1,"重量"))
+	//	return false;
+	//if (!checkControlValue("jdwp_jdptj","String",1,200,1,1,"体积"))
+	//	return false;
 	return true;
 }
 //寄递物品信息添加
@@ -65,15 +65,15 @@ function jdwpxxtj(){
 		<td class="detailtd"><input type="text" id="jdwp_jdpmc" class="inputstyle" value="" /></td>
 	</tr>
 	<tr>
-		<td class="red">数量</td>
+		<td class="pagetd">数量</td>
 		<td class="detailtd"><input type="text" id="jdwp_jdpsm" class="inputstyle" value="" /></td>
 	</tr>
 	<tr>
-		<td class="red">重量</td>
+		<td class="pagetd">重量</td>
 		<td class="detailtd"><input type="text" id="jdwp_jdpzl" class="inputstyle" value="" /></td>
 	</tr>
 	<tr>
-		<td class="red">体积</td>
+		<td class="pagetd">体积</td>
 		<td class="detailtd"><input type="text" id="jdwp_jdptj" class="inputstyle" value="" /></td>
 	</tr>
 	<tr><td height="9"></td></tr>
