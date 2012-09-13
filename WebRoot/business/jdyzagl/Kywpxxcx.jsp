@@ -22,6 +22,14 @@ $(document).ready(function() {
 		$("#kyjdwpxx_sbsjf").datepicker();
 		//可疑物品类别
 		$('#kyjdwpxx_kywplb_man').selectBox({code:'dm_kywplb'});
+		// 治安管理机构
+		$("#kyjdwpxx_ljjbxx_qyjbxx_gxdwmc").click(function(){
+			getGxdw("kyjdwpxx_ljjbxx_qyjbxx_gxdwmc","lj_gxdwbm");
+		});
+		$("#kyjdwpxx_ljjbxx_qyjbxx_qymc").click(function(){ //服务场所筛选框
+			dataid="";
+			getTy_item("kyjdwpxx_ljjbxx_qyjbxx_qymc","p_qybm","","",$("#lj_gxdwbm").attr("value"),$('#p_allhylbdm').val());
+		});
 	daggleDiv("kyqk_detail");
 }); 
 
@@ -39,12 +47,12 @@ function setPageListKyjdwpxx(pageno,url){
 										pageNumber: pageno,
 										changeHref:function(table){
 											$(table).find("tr").each(function(){
-												$(this).find("td:last").find("a[title='修改']").remove();
-												$(this).find("td:last").find("a[title='删除']").remove();
+												//$(this).find("td:last").find("a[title='修改']").remove();
+												//$(this).find("td:last").find("a[title='删除']").remove();
 											});
 										},
 										ingridPageParams: sXML,
-										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
+										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
 									});				
 		}
 }
@@ -79,17 +87,23 @@ function setKyjdwpxxDetail(id){
   <tr>
     <td class="tdbg">
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="kyjdwpxx_man">
+    	 <input type="hidden" id="lj_gxdwbm" name="lj.qyjbxx.gxdwbm" value=""><!-- 管辖单位编码 -->
+    	 <input type="hidden" id="kyjdwpxxcxbz" name="kyjdwpxx.kyjdwpxxcxbz" value="gadcxbz"><!-- 可疑寄递物品查询标志 -->
 		  <tr>
+			<td width="10%" class="pagedistd">治安管理机构</td>
+			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_ljjbxx_qyjbxx_gxdwmc" name="kyjdwpxx.ljjbxx.qyjbxx.gxdwmc" class="inputstyle" value="" readonly></td>
+			<td width="10%" class="pagedistd">企业名称</td>
+			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_ljjbxx_qyjbxx_qymc" name="kyjdwpxx.ljjbxx.qyjbxx.qymc" class="inputstyle" value=""></td>
 			<td width="10%" class="pagedistd">物流单号</td>
-			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_wldh" name="kyjdwpxx.ljjbxx.wldh" class="inputstyle" value=""></td>	
+			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_ljjbxx_wldh" name="kyjdwpxx.ljjbxx.wldh" class="inputstyle" value=""></td>
+		  </tr>
+		   <tr>
 			<td width="7%" class="pagedistd">上报时间</td>
 				  <td width="41%" class="pagetd"><input type="text" class="inputstyle"  id="kyjdwpxx_sbsjf" name="kyjdwpxx.sbsjf" value="">
 			      <span class="pagedistd">至
 			           <input type="text" class="inputstyle"  id="kyjdwpxx_sbsjt" name="kyjdwpxx.sbsjt" value="">
 			      </span>
 			</td>
-		  </tr>
-		   <tr>
 			<td width="10%" class="pagedistd">可疑物品类别</td>
 			<td width="23%" class="pagetd"><select class="select1" id="kyjdwpxx_kywplb_man" name="kyjdwpxx.kywplb" ><option></option></select></td>
 		  </tr>
@@ -120,16 +134,17 @@ function setKyjdwpxxDetail(id){
 	<table id="table1" width="100%">
 	  <thead>
 	    <tr>       
+	    	<th name="l_jdpmc">内件品名</th>
+	    	<th name="l_qymc">企业名称</th>
 	     	<th name="l_wldhlb">物流单号</th>
-	     	<th name="l_jdpmc">内件品名</th>
+	     	<th name="l_kywplb">可疑物品类别</th>
+	     	<th name="l_bgrxm">报告人</th>
+	    	<th name="l_bgsj">报告日期</th>
 	    	<th name="l_jjrxm">寄件人</th>
-	    	<th name="l_jjrzjlx">证件类型</th>
-	    	<th name="l_jjrzjhm">证件号码</th>
+	    	<th name="l_sjrxm">收件人</th>
 	    	<th name="l_jdpdlxmc">寄递品大类</th>
 	    	<th name="l_jdplxmc">寄递品小类</th>
-	    	<th name="l_bgrxm">报告人</th>
-	    	<th name="l_bgsj">报告时间</th>
-	    	<th name="l_kywplb">可疑物品类别</th>
+	    	<th name="l_ljtbsj">揽件登记时间</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
