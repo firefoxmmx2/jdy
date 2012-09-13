@@ -118,6 +118,9 @@ public class KyjdwpAction extends PageAction{
 			params.put("ljjbxx", kyjdwpxx.getLjjbxx());
 			
 			if(kyjdwpxx.getLjjbxx().getQyjbxx()!=null){//企业基本信息
+				if(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwbm()!=null){
+					kyjdwpxx.getLjjbxx().getQyjbxx().setGxdwbm(StringUtil.trimEven0(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwbm()));
+				}
 				params.put("qyjbxx", kyjdwpxx.getLjjbxx().getQyjbxx());
 			}
 		}
