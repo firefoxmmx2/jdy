@@ -71,6 +71,11 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 									});				
 		}
 }
+//物流单号查询
+$('#lj_wldh').change(function(){
+	validateWldh($("#lj_wldh").val(),$("#lj_qyjbxx").val());
+});
+
 //添加物品执行方法
 function tianJiaZxzybaydwDzcl(cllb){
 	$("zxzybaydwdzcl_detail").empty();
