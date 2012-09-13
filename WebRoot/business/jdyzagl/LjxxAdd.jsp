@@ -3,8 +3,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
-<%
-	//qybm = "T013306005003";
+<% 
+	long sj = System.currentTimeMillis();
 %>
 <script type="text/javascript">
 var trNum=1;
@@ -18,7 +18,8 @@ $(document).ready(function() {
 	$("#jjrssxmc").attr("name","lj.jjr.ssxmc");
 	$("#sjrssxmc").attr("name","lj.sjr.ssxmc");
 	//揽件时间选择
-	$("#ljjbxx_add [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();
+	//$("#ljjbxx_add [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();/没每时分秒
+	$("#ljjbxx_add [id=lj_ljsj]").attr("readonly","true").datepicker(true);
 	//户籍省市县--寄件人
 	$("#jjrssxmc").click( function() {
 		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
@@ -35,7 +36,6 @@ $(document).ready(function() {
 	$('#lj_ljr_xm').attr('readOnly',true).click(function(){
 		getTyRY_item('lj_ljr_xm','ljljradd_cyrybh',null,null,'<%=qybm%>');
 	});
-	
 	//寄递物品信息加载的DIV 
 	addjdwp="zxzybaydwdzcl_detail";
 	daggleDiv(addjdwp);//div拖动
@@ -260,7 +260,7 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_ljr_xm","String",1,30,null,1,"揽件人"))
 		return false;
-	if (!checkControlValue("lj_ljsj","Date",null,null,null,1,"揽件日期"))
+	if (!checkControlValue("lj_ljsj","Datetime",null,null,null,1,"揽件日期"))
 		return false;
 	
     return true;
@@ -427,7 +427,7 @@ function addbackbcxz(json){
 			<td class="red">揽件人</td>
 			<td class="detailtd"><input type="text" id="lj_ljr_xm"   name="lj.ljr.xm" class="inputstyle" value=""></td>
 			<td class="red">揽件时间</td>
-			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle date"></td>
+			<td class="detailtd"><input type="text" id="lj_ljsj" name="lj.ljsj" class="inputstyle" value="<%=datetime %>"></td>
 		</tr>
 	</table>
 	</fieldset>

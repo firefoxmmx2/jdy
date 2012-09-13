@@ -32,8 +32,9 @@ $(document).ready(function() {
 		dataid=null;//js中使用了次变量，且他原本传递过去的值为行业类别，所以会查询不出来东西
 		getTyRY_item('ljxx_ljrxm','lj_ljr_cyrybh',null,null,'<%=qybm%>');
 	});
-	//页面时间格式
-	$('.date').attr("readOnly",true).datepicker();
+	//时间设置
+		$('.datef').attr("readOnly",true).datepicker(true,'0');
+		$('.datet').attr("readOnly",true).datepicker(true,'1');
 	
 	
 	
@@ -60,7 +61,7 @@ function setPageListlj(pageno,url){
 										noSortColIndex:[7],	
 										//noSortColIndex:[11],
 										onRowSelect:null,
-										hideColIndex:[7],
+										//hideColIndex:[7],
 										//isHaveMorenPaixuClass: true, //加默认排序样式
 										//morenPaixuCol: 8, //第一默认排序	
 										//morenPaixuFangshi:'desc', //默认排序方式 
@@ -121,19 +122,28 @@ function setLjxxDetail(id){
 //揽件信息删除
 function setLjxxDelete(id) {
 	var kybzw=$("#"+id+" td:nth(7)").text();//得到可疑标志 的值
+	$('#ljdjxh').val(id);
 	if(kybzw=="Y"){
 		jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！",'验证信息',null,null);
 	}else{
-		$("#"+ljjbxxadd_detail).hide();
-		sFlag="false";
-		jConfirm('确定删除吗？', '删除提示', function(r) {
-	    	if(r==true){
-	    		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
+		params = getSubmitParams("#scstjcx [name*=lj.]");
+		jQuery.post("jdy/query_ljxx.action",params,ljxxzymcxback,"json");
+		function ljxxzymcxback(json){
+			if(json.overUpdateTime){
+				jAlert("该条揽件信息已超过删除时间，不能进行删除操作！",'验证信息',null,null);
+			}else{
+				$("#"+ljjbxxadd_detail).hide();
+				sFlag="false";
+				jConfirm('确定删除吗？', '删除提示', function(r) {
+			    	if(r==true){
+			    		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
+					}
+					else{
+					   return false;
+					}
+				});
 			}
-			else{
-			   return false;
-			}
-		});
+		}
 	}
 }
 </script>
@@ -166,9 +176,9 @@ function setLjxxDelete(id) {
 					<td width="10%" class="pagedistd">揽件员</td>
 					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljrxm" name="lj.ljr.xm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">揽件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjf" name="lj.ljsjf" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjf" name="lj.ljsjf" class="inputstyle datef" value="" /></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjt" name="lj.ljsjt" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjt" name="lj.ljsjt" class="inputstyle datet" value="" /></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
@@ -185,7 +195,8 @@ function setLjxxDelete(id) {
     </td>
   </tr>
 </table>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="scstjcx">
+    <input type="hidden" id="ljdjxh" name="lj.djxh" value="" /><!-- 揽件信息删除时，要进行判断该数据是否超过当天24点。这里是查询要用的ID -->
 	<tr>
 		<td height="3"></td>
 	</tr>

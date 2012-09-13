@@ -23,7 +23,8 @@ $(document).ready(function() {
 	$("#jjrssxmc").attr("name","lj.jjr.ssxmc");
 	$("#sjrssxmc").attr("name","lj.sjr.ssxmc");
 	//揽件时间选择
-	$("#ljjbxx_modify [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();
+	//$("#ljjbxx_modify [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();
+	$("#ljjbxx_modify [id=lj_ljsj]").attr("readonly","true").datepicker(true);
 	//户籍省市县--寄件人
 	$("#jjrssxmc").click( function() {
 		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
@@ -370,7 +371,7 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_ljrxm_mod","String",1,30,null,1,"揽件人"))
 		return false;
-	if (!checkControlValue("lj_ljsj","Date",null,null,null,1,"揽件日期"))
+	if (!checkControlValue("lj_ljsj","Datetime",null,null,null,1,"揽件日期"))
 		return false;
 	
     return true;
