@@ -257,18 +257,21 @@ public class PjxxAction extends PageAction {
 		if(pjxx == null)
 			throw new RuntimeException("需要获取的派件信息参数不能为空");
 		pjxx = pjjbxxService.getPjjbxx(pjxx);
-		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar updateOverTimeCalender =  Calendar.getInstance();
-		updateOverTimeCalender.setTime(sdf.parse(sdf.format(pjxx.getPjtbsj())));
-		updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
-		Calendar nowCalendar=Calendar.getInstance();
-		nowCalendar.setTime(now);
-		if((nowCalendar.compareTo(updateOverTimeCalender)) >= 0)
-			overUpdateTime=true;
-		else
-			overUpdateTime=false;
-		pjxx.setOverUpdateTime(String.valueOf(overUpdateTime));
+		if(pjxx!=null && pjxx.getPjtbsj()!=null){
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar updateOverTimeCalender =  Calendar.getInstance();
+			updateOverTimeCalender.setTime(sdf.parse(sdf.format(pjxx.getPjtbsj())));
+			updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
+			Calendar nowCalendar=Calendar.getInstance();
+			nowCalendar.setTime(now);
+			if((nowCalendar.compareTo(updateOverTimeCalender)) >= 0)
+				overUpdateTime=true;
+			else
+				overUpdateTime=false;
+			pjxx.setOverUpdateTime(String.valueOf(overUpdateTime));
+		}
+		
 		return SUCCESS;
 	}
 	

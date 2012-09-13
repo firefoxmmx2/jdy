@@ -191,15 +191,18 @@ public class LjxxAction extends PageAction{
 		
 		lj = ljjbxxService.getLjjbxx(lj);
 		
-		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar updateOverTimeCalender =  sdf.getCalendar();
-		updateOverTimeCalender.setTime(lj.getLjtbsj());
-		updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
-		if((now.compareTo(updateOverTimeCalender.getTime())) >= 0)
-			overUpdateTime=true;
-		else
-			overUpdateTime=false;
+		if(lj!=null && lj.getLjtbsj()!=null){
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar updateOverTimeCalender =  sdf.getCalendar();
+			updateOverTimeCalender.setTime(lj.getLjtbsj());
+			updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
+			if((now.compareTo(updateOverTimeCalender.getTime())) >= 0)
+				overUpdateTime=true;
+			else
+				overUpdateTime=false;
+		}
+		
 		
 		return SUCCESS;
 	}
