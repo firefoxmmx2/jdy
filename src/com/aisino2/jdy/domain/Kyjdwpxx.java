@@ -51,9 +51,17 @@ public class Kyjdwpxx implements Serializable {
 	 * 映射寄递物品实体
 	 */
 	private Rdrjbxx sjr;
+	//可疑基地物品公安端、企业端查询标志kyjdwpxxcxbz
+	private String kyjdwpxxcxbz;
 	
 	
 	
+	public String getKyjdwpxxcxbz() {
+		return kyjdwpxxcxbz;
+	}
+	public void setKyjdwpxxcxbz(String kyjdwpxxcxbz) {
+		this.kyjdwpxxcxbz = kyjdwpxxcxbz;
+	}
 	public Rdrjbxx getJjr() {
 		return jjr;
 	}
@@ -80,8 +88,31 @@ public class Kyjdwpxx implements Serializable {
 	private String jdpdlxmc;//寄递品大类名称
 	private String jdplxmc;//寄递品小类名称
 	private String bgrxm;//报告人姓名
+	private String sjrxm;//收件人姓名
+	private Date ljtbsj;//揽件填报时间
+	private String qymc;//企业名称
 	
 	
+	
+	
+	public String getQymc() {
+		return qymc;
+	}
+	public void setQymc(String qymc) {
+		this.qymc = qymc;
+	}
+	public String getSjrxm() {
+		return sjrxm;
+	}
+	public void setSjrxm(String sjrxm) {
+		this.sjrxm = sjrxm;
+	}
+	public Date getLjtbsj() {
+		return ljtbsj;
+	}
+	public void setLjtbsj(Date ljtbsj) {
+		this.ljtbsj = ljtbsj;
+	}
 	public String getBgrxm() {
 		return bgrxm;
 	}

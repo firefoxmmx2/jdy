@@ -30,6 +30,9 @@
 		<result property="bgsj" column="bgsj"/>
 		<result property="kywplb" column="kywplb"/>
 		<result property="kyywdjxh" column="kyywdjxh"/>
+		<result property="ljjbxx.qyjbxx.qymc" column="qymc"/>
+		<result property="sjr.xm" column="sjrxm"/>
+		<result property="ljjbxx.ljtbsj" column="ljtbsj"/>
 	</resultMap>	
 	<sql id="kyjdwpxxWhere" >
 		<isNotEmpty prepend="and" property="kyywdjxh"> 
@@ -56,7 +59,16 @@
 			</isNotEmpty>
 			<isNotEmpty prepend="" property="qyjbxx">
 				<isNotEmpty prepend="and" property="qyjbxx.qybm">
-					ljjbxx.qybm=#qyjbxx.qybm#
+					qyjbxx.qybm=#qyjbxx.qybm#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="qyjbxx.qymc">
+					qyjbxx.qymc like '%$qyjbxx.qymc$%'
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="qyjbxx.gxdwbm">
+					qyjbxx.gxdwbm = #qyjbxx.gxdwbm#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="qyjbxx.gxdwmc">
+					qyjbxx.gxdwmc like '$qyjbxx.gxdwmc$%'
 				</isNotEmpty>
 			</isNotEmpty>
 		</isNotEmpty>
@@ -160,7 +172,7 @@
 	<select id="kyjdwpxx.getListPageCount" parameterClass="map" resultClass="Integer">
 		select count(1) 
 					
-			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx   bgr
+			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx bgr,t_qyjbxx qyjbxx
 			
 			where 1=1
 			 
@@ -168,7 +180,8 @@
 		      and jdpxx.ljjbxx_id=ljjbxx.djxh
         	  and ljjbxx.jjr_id=jjr.id
         	  and ljjbxx.sjr_id=sjr.id
-        	 and kyjdwpxx.bgrbm=bgr.cyrybh
+        	  and kyjdwpxx.bgrbm=bgr.cyrybh
+        	  and ljjbxx.qybm=qyjbxx.qybm
 		<dynamic prepend="and">
 			<include refid="kyjdwpxxqydcxWhere"/>
 		</dynamic>
@@ -185,8 +198,9 @@
 			,jjr.xm jjrxm,jjr.zjlx jjrzjlx,jjr.zjhm jjrzjhm
 			,jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc
 			,kyjdwpxx.bgsj bgsj,kyjdwpxx.kywplb kywplb, bgr.xm bgrxm,kyjdwpxx.kyywdjxh kyywdjxh
+			,qyjbxx.qymc qymc,sjr.xm sjrxm,ljjbxx.ljtbsj ljtbsj
 					
-			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx   bgr
+			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx bgr,t_qyjbxx qyjbxx
 			
 			where 1=1
 			 
@@ -195,6 +209,7 @@
         	  and ljjbxx.jjr_id=jjr.id
         	  and ljjbxx.sjr_id=sjr.id
         	  and kyjdwpxx.bgrbm=bgr.cyrybh
+        	  and ljjbxx.qybm=qyjbxx.qybm
         	  
 
 		<dynamic prepend="and">
