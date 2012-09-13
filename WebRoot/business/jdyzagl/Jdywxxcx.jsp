@@ -143,7 +143,7 @@
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjf1" name="lj.ljsjf" class="inputstyle datef value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjf1" name="lj.ljsjf" class="inputstyle datef" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
 					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjt1" name="lj.ljsjt" class="inputstyle datet" value=""></td>
 				</tr>
