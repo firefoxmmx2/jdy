@@ -1,8 +1,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@include file="../../public/common.jsp" %>
+<%@include file="../../public/user-info.jsp" %>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
+<script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
 <script type="text/javascript">
+var hylbbz="Y";
 $(document).ready(function() {
 	pageUrl="jdy/queryList_kyjdwp.action";
 	divnid="tabledata";
@@ -16,17 +20,18 @@ $(document).ready(function() {
 	tables=$("#"+divnid).html();
 	$("#"+detailid).hide(); 	
 	setPageListKyjdwpxx(1,'#');
-		$("#kyjdwpxx_sbsjt").attr("readonly","true");
-		$("#kyjdwpxx_sbsjt").datepicker();
-		$("#kyjdwpxx_sbsjf").attr("readonly","true");
-		$("#kyjdwpxx_sbsjf").datepicker();
+		//时间设置
+		$('.datef').attr("readOnly",true).datepicker(true,'0');
+		$('.datet').attr("readOnly",true).datepicker(true,'1');
+
 		//可疑物品类别
 		$('#kyjdwpxx_kywplb_man').selectBox({code:'dm_kywplb'});
 		// 治安管理机构
 		$("#kyjdwpxx_ljjbxx_qyjbxx_gxdwmc").click(function(){
-			getGxdw("kyjdwpxx_ljjbxx_qyjbxx_gxdwmc","lj_gxdwbm");
+			getGxdwTree("kyjdwpxx_ljjbxx_qyjbxx_gxdwmc","lj_gxdwbm",null,"jdytjxx_departlevel");
 		});
-		$("#kyjdwpxx_ljjbxx_qyjbxx_qymc").click(function(){ //服务场所筛选框
+		//企业名称
+		$("#kyjdwpxx_ljjbxx_qyjbxx_qymc").click(function(){
 			dataid="";
 			getTy_item("kyjdwpxx_ljjbxx_qyjbxx_qymc","p_qybm","","",$("#lj_gxdwbm").attr("value"),$('#p_allhylbdm').val());
 		});
@@ -87,8 +92,10 @@ function setKyjdwpxxDetail(id){
   <tr>
     <td class="tdbg">
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="kyjdwpxx_man">
-    	 <input type="hidden" id="lj_gxdwbm" name="lj.qyjbxx.gxdwbm" value=""><!-- 管辖单位编码 -->
+    	 <input type="hidden" id="lj_gxdwbm" name="lj.qyjbxx.gxdwbm" value="<%=gxdwbm%>"><!-- 管辖单位编码 -->
     	 <input type="hidden" id="kyjdwpxxcxbz" name="kyjdwpxx.kyjdwpxxcxbz" value="gadcxbz"><!-- 可疑寄递物品查询标志 -->
+    	 <input type="hidden" id="jdytjxx_departlevel" value="<%=departlevel %>"><!-- 级别 -->
+    	  <input type="hidden" id="p_allhylbdm" value="'Y'"><!-- 级别 -->
 		  <tr>
 			<td width="10%" class="pagedistd">治安管理机构</td>
 			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_ljjbxx_qyjbxx_gxdwmc" name="kyjdwpxx.ljjbxx.qyjbxx.gxdwmc" class="inputstyle" value="" readonly></td>
@@ -99,9 +106,9 @@ function setKyjdwpxxDetail(id){
 		  </tr>
 		   <tr>
 			<td width="7%" class="pagedistd">上报时间</td>
-				  <td width="41%" class="pagetd"><input type="text" class="inputstyle"  id="kyjdwpxx_sbsjf" name="kyjdwpxx.sbsjf" value="">
+				  <td width="41%" class="pagetd"><input type="text" class="inputstyle datef"  id="kyjdwpxx_sbsjf" name="kyjdwpxx.sbsjf" value="">
 			      <span class="pagedistd">至
-			           <input type="text" class="inputstyle"  id="kyjdwpxx_sbsjt" name="kyjdwpxx.sbsjt" value="">
+			           							 <input type="text" class="inputstyle datet"  id="kyjdwpxx_sbsjt" name="kyjdwpxx.sbsjt" value="">
 			      </span>
 			</td>
 			<td width="10%" class="pagedistd">可疑物品类别</td>
