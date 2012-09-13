@@ -91,10 +91,17 @@ public class Kyjdwpxx implements Serializable {
 	private String sjrxm;//收件人姓名
 	private Date ljtbsj;//揽件填报时间
 	private String qymc;//企业名称
+	private Integer qyid;//企业ID
 	
 	
 	
 	
+	public Integer getQyid() {
+		return qyid;
+	}
+	public void setQyid(Integer qyid) {
+		this.qyid = qyid;
+	}
 	public String getQymc() {
 		return qymc;
 	}
