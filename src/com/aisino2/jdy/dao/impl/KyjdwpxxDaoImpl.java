@@ -58,27 +58,58 @@ public class KyjdwpxxDaoImpl extends BaseDao implements IKyjdwpxxDao {
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
 		if (sort!=null){
-			if("0".equals(sort))
-				sCol = " ljjbxx.wldh "+ sort;
-			else if("1".equals(sort))
-				sCol = " jjr.xm "+ sort;
-			else if("2".equals(sort))
-				sCol = " jjr.zjlx "+ sort;
-			else if("3".equals(sort))
-				sCol = " jjr.zjhm "+ sort;
-			else if("4".equals(sort))
-				sCol = " jdpxx.jdplx "+ sort;
-			else if("5".equals(sort))
-				sCol = "jdpxx.jdplx "+ sort;
-			else if("6".equals(sort))
-				sCol = "kyjdwpxx.xm "+ sort;
-			else if("7".equals(sort))
-				sCol = "kyjdwpxx.bgsj "+ sort;
-			//生成代码用，按照业务登记序号排序
-			else if("99".equals(sort))
-				sCol = "kyjdwpxx.kyywdjxh "+ sort;
-			else 
-				sCol=" ljjbxx.djxh ";
+			if(map.get("kyjdwpxxcxbz").toString().equals("qydcxbz")){
+				if("0".equals(sort))
+					sCol = " ljjbxx.wldh "+ sort;
+				else if("1".equals(sort))
+					sCol = " jdpxx.jdpmc "+ sort;
+				else if("2".equals(sort))
+					sCol = " jjr.xm "+ sort;
+				else if("3".equals(sort))
+					sCol = " jjr.zjlx "+ sort;
+				else if("4".equals(sort))
+					sCol = " jjr.zjhm "+ sort;
+				else if("5".equals(sort))
+					sCol = " jdpxx.jdpdlxmc "+ sort;
+				else if("6".equals(sort))
+					sCol = " jdpxx.jdplxmc "+ sort;
+				else if("7".equals(sort))
+					sCol = "bgr.xm "+ sort;
+				else if("8".equals(sort))
+					sCol = "kyjdwpxx.bgsj "+ sort;
+				else if("9".equals(sort))
+					sCol = "kyjdwpxx.kywplb "+ sort;
+				else 
+					sCol=" ljjbxx.wldh ";
+			}else{
+				if("0".equals(sort))
+					sCol = " jdpxx.jdpmc "+ sort;
+				else if("1".equals(sort))
+					sCol = " qyjbxx.qymc "+ sort;
+				else if("2".equals(sort))
+					sCol = " ljjbxx.wldh "+ sort;
+				else if("3".equals(sort))
+					sCol = " kyjdwpxx.kywplb "+ sort;
+				else if("4".equals(sort))
+					sCol = " bgr.xm "+ sort;
+				else if("5".equals(sort))
+					sCol = " kyjdwpxx.bgsj "+ sort;
+				else if("6".equals(sort))
+					sCol = " jjr.xm "+ sort;
+				else if("7".equals(sort))
+					sCol = "sjr.xm "+ sort;
+				else if("8".equals(sort))
+					sCol = "jdpxx.jdpdlx "+ sort;
+				else if("9".equals(sort))
+					sCol = "jdpxx.jdpdlxmc "+ sort;
+				else if("9".equals(sort))
+					sCol = "jdpxx.jdplxmc "+ sort;
+				else if("9".equals(sort))
+					sCol = "ljjbxx.ljtbsj "+ sort;
+				else 
+					sCol=" ljjbxx.wldh ";
+			}
+			
 		}else{
 			sCol=" ljjbxx.djxh ";
 		}
