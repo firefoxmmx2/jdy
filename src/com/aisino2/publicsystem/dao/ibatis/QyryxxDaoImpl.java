@@ -199,6 +199,34 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 				sCol="a.ryid desc";
 			}
 		}
+		else if (map.containsKey("tag") && "CyryzxMan-gn".equals(map.get("tag"))){
+			if (sort!=null){
+				if(sort.equals("0"))
+					sCol = " a.xm "+ desc;
+				else if(sort.equals("1"))
+					sCol = " a.zjhm "+ desc;
+				else if(sort.equals("2"))
+					sCol = " a.cyrybh "+ desc;
+				else if(sort.equals("3"))
+					sCol = " a.xbdm "+ desc;
+				else if(sort.equals("4"))
+					sCol = " a.hjdxzqhdm "+ desc;
+				else if(sort.equals("5"))
+					sCol = " a.gwbh "+ desc;
+				else if(sort.equals("6"))
+					sCol = " b.gxdwbm "+ desc;
+				else if(sort.equals("7"))
+					sCol = " b.qymc "+ desc;
+				else if(sort.equals("8"))
+					sCol = " a.zxbz "+ desc;
+				else if(sort.equals("9"))
+				    sCol = " a.cyryzt "+ desc;
+				else
+					sCol = " a.ryid desc";
+			}else{
+				sCol="a.ryid desc";
+			}
+		}
 		else{
 			if (sort!=null){
 				if(sort.equals("0"))
@@ -394,13 +422,13 @@ public class QyryxxDaoImpl extends BaseDao implements IQyryxxDao {
 				sCol = " a.cyrybh "+ desc;
 			else if(sort.equals("3"))
 				sCol = " a.xbdm "+ desc;
-			else if(sort.equals("5"))
+			else if(sort.equals("4"))
 				sCol = " b.qymc "+ desc;
-			else if(sort.equals("6"))
+			else if(sort.equals("5"))
 				sCol = " a.gwbh "+ desc;
-			else if(sort.equals("7"))
+			else if(sort.equals("6"))
 				sCol = " a.rzrq "+ desc;
-			else if(sort.equals("8"))
+			else if(sort.equals("7"))
 				sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid  desc";

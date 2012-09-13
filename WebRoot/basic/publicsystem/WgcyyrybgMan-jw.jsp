@@ -31,6 +31,7 @@ function setPageList(pageno,url){
 										url: url,	
 										height: pageHeight-275,
 										pageNumber: pageno,
+										noSortColIndex:[4,8,9],
 										colWidths: ["10%","10%","16%","6%","8%","10%","10%","10%","12%","8%"]										
 									});				
 		}
