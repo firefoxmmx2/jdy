@@ -17,10 +17,9 @@ $(document).ready(function() {
 	tables=$("#"+divnid).html();
 	$("#"+detailid).hide(); 	
 	setPageListKyjdwpxx(1,'#');
-		$("#kyjdwpxx_sbsjt").attr("readonly","true");
-		$("#kyjdwpxx_sbsjt").datepicker();
-		$("#kyjdwpxx_sbsjf").attr("readonly","true");
-		$("#kyjdwpxx_sbsjf").datepicker();
+		//时间设置
+		$('.datef').attr("readOnly",true).datepicker(true,'0');
+		$('.datet').attr("readOnly",true).datepicker(true,'1');
 		//可疑物品类别
 		$('#kyjdwpxx_kywplb_man').selectBox({code:'dm_kywplb'});
 	daggleDiv("kyqk_detail");
@@ -113,9 +112,9 @@ function setKyjdwpxxDelete(id){
 			<td width="10%" class="pagedistd">物流单号</td>
 			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_wldh" name="kyjdwpxx.ljjbxx.wldh" class="inputstyle" value=""></td>	
 			<td width="7%" class="pagedistd">上报时间</td>
-				  <td width="41%" class="pagetd"><input type="text" class="inputstyle"  id="kyjdwpxx_sbsjf" name="kyjdwpxx.sbsjf" value="">
+				  <td width="41%" class="pagetd"><input type="text" class="inputstyle datef"  id="kyjdwpxx_sbsjf" name="kyjdwpxx.sbsjf" value="">
 			      <span class="pagedistd">至
-			           <input type="text" class="inputstyle"  id="kyjdwpxx_sbsjt" name="kyjdwpxx.sbsjt" value="">
+			           <input type="text" class="inputstyle datet"  id="kyjdwpxx_sbsjt" name="kyjdwpxx.sbsjt" value="">
 			      </span>
 			</td>
 		  </tr>
