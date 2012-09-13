@@ -476,7 +476,6 @@ function wldh_completion(wldh,qybm){
 			$('#pjjbxx_goback').attr('title','返回').text('返回');
 			//验证物流单号唯一性
 			validateWldh(wldh,qybm,function(json){
-				alert(1)
 				$('#pjjbxx_add_button').attr('disabled',false);
 				$('#pjjbxx_add_again_button').attr('disabled',false);
 			},function(){
