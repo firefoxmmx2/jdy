@@ -296,7 +296,7 @@ public class PjxxAction extends PageAction {
 
 		List lSend=new ArrayList();
 		lSend.add("setPjxxSend");
-		lSend.add("派件");
+		lSend.add("派发");
 		lCol.add(lSend);
 		
 		List lUpdate=new ArrayList();
