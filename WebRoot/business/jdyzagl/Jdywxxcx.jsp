@@ -12,10 +12,6 @@
 	var lj_grid_table_html;
 	var lj_page_url = "jdy/jdywxxquerylist_ljxx.action";
 	$(function(){
-		// 治安管理机构
-		$("#lj_gxdwmc").click(function(){
-			getGxdw("lj_gxdwmc","lj_gxdwbm");
-		});
 		//寄件人证件类型
 		$('#lj_jjr_zjlx').selectBox({code:'dm_zjlx'});
 		//收件人证件类型
@@ -23,8 +19,15 @@
 		//寄递物品联动下拉列表
 		selectboxlink("jdwpdl","jdwpxl","dm_jdwpdl");
 		//页面时间格式
-		$('.date').attr("readOnly",true).datepicker();
-		$("#lj_qymc").click(function(){ //服务场所筛选框
+		//时间设置
+		$('.datef').attr("readOnly",true).datepicker(true,'0');
+		$('.datet').attr("readOnly",true).datepicker(true,'1');
+		// 治安管理机构
+		$("#lj_gxdwmc").click(function(){
+			getGxdwTree("lj_gxdwmc","lj_gxdwbm",null,"jdytjxx_departlevel");
+		});
+		//企业名称
+		$("#lj_qymc").click(function(){
 			dataid="";
 			getTy_item("lj_qymc","p_qybm","","",$("#lj_gxdwbm").attr("value"),$('#p_allhylbdm').val());
 		});
@@ -91,6 +94,8 @@
   <input type="hidden" id="lj_gxdwbm" name="lj.qyjbxx.gxdwbm" value=""><!-- 管辖单位编码 -->
   <input type="hidden" id="lj_gadjdywxxcx" name="lj.ywcxbz" value="gadjdywxxcx"><!-- 公安端寄递物品信息查询标志 -->
   <input type="hidden" id="gadqydcxqbbz_ljman" name="lj.gadqydcxqbbz" value="gadkywpcx" /><!-- 安端端、企业端查询寄递物品区别标志 -->
+   <input type="hidden" id="jdytjxx_departlevel" value="<%=departlevel %>"><!-- 级别 -->
+    	  <input type="hidden" id="p_allhylbdm" value="'Y'"><!-- 级别 -->
   <tr>
     <td class="queryfont">寄递业务信息查询</td>
   </tr>
@@ -100,7 +105,7 @@
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
     			<tr>
 					<td width="10%" class="pagedistd">治安管理机构</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_gxdwmc" name="lj.gxdwmc" class="inputstyle" value="" readonly></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_gxdwmc" name="lj.qyjbxx.gxdwmc" class="inputstyle" value="" readonly></td>
 					<td width="10%" class="pagedistd">企业名称</td>
 					<td width="23%" class="pagetd"><input type="text" id="lj_qymc" name="lj.qyjbxx.qymc" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">物流单号</td>
@@ -138,9 +143,9 @@
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjf1" name="lj.ljsjf" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjf1" name="lj.ljsjf" class="inputstyle datef value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjt1" name="lj.ljsjt" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="lj_pjtbsjt1" name="lj.ljsjt" class="inputstyle datet" value=""></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
