@@ -57,7 +57,7 @@ function setPageListlj(pageno,url){
                                         ingridPageParams:sXML,
                                         ingridExtraParams:params,
 										pageNumber: pageno,
-										colIndex: [0],
+										//colIndex: [0],
 										noSortColIndex:[7],	
 										//noSortColIndex:[11],
 										onRowSelect:null,
