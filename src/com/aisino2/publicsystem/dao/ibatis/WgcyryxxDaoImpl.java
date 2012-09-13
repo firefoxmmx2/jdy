@@ -3,8 +3,9 @@ package com.aisino2.publicsystem.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.BaseDao;
 import com.aisino2.core.dao.Page;
+import com.aisino2.core.dao.BaseDao;
+
 import com.aisino2.publicsystem.dao.IWgcyryxxDao;
 import com.aisino2.publicsystem.domain.Wgcyryxx;
 
@@ -113,32 +114,61 @@ public class WgcyryxxDaoImpl extends BaseDao implements IWgcyryxxDao {
 			desc = "";
 		else if(!desc.equals("asc") && !desc.equals("desc"))
 			desc = " desc ";
-		if (sort!=null){
-			if(sort.equals("0"))
-				sCol = " a.xm "+ desc;
-			else if(sort.equals("1"))
-				sCol = " a.zjhm "+ desc;
-			else if(sort.equals("2"))
-				sCol = " a.cyrybh "+ desc;
-			else if(sort.equals("3"))
-				sCol = " a.xbdm "+ desc;
-			else if(sort.equals("4"))
-				sCol = " a.shouji "+ desc;
-			else if(sort.equals("5"))
-				sCol = " a.gj "+ desc;
-			else if(sort.equals("6"))
-				sCol = " b.gxdwmc "+ desc;
-			else if(sort.equals("7"))
-				sCol = " b.qymc "+ desc;
-			else if(sort.equals("8"))
-				sCol = " a.zxbz "+ desc;
-			else if(sort.equals("9"))
-			    sCol = " a.cyryztdm "+ desc;
-			else
-				sCol = " a.ryid desc ";
-		}else{
-			sCol="a.ryid desc";
+		if(map.containsKey("tag") && "WgcyyrycxMan-gn".equals(map.get("tag"))){
+			if (sort!=null){
+				if(sort.equals("0"))
+					sCol = " a.xm "+ desc;
+				else if(sort.equals("1"))
+					sCol = " a.zjhm "+ desc;
+				else if(sort.equals("2"))
+					sCol = " a.cyrybh "+ desc;
+				else if(sort.equals("3"))
+					sCol = " a.xbdm "+ desc;
+				else if(sort.equals("4"))
+					sCol = " a.gj "+ desc;
+				else if(sort.equals("5"))
+					sCol = " b.gxdwmc "+ desc;
+				else if(sort.equals("6"))
+					sCol = " b.qymc "+ desc;
+				else if(sort.equals("7"))
+					sCol = " a.zxbz "+ desc;
+				else if(sort.equals("8"))
+				    sCol = " a.cyryztdm "+ desc;
+				else
+					sCol = " a.ryid desc ";
+			}else{
+				sCol="a.ryid desc";
+			}
 		}
+		else{
+			if (sort!=null){
+				if(sort.equals("0"))
+					sCol = " a.xm "+ desc;
+				else if(sort.equals("1"))
+					sCol = " a.zjhm "+ desc;
+				else if(sort.equals("2"))
+					sCol = " a.cyrybh "+ desc;
+				else if(sort.equals("3"))
+					sCol = " a.xbdm "+ desc;
+				else if(sort.equals("4"))
+					sCol = " a.shouji "+ desc;
+				else if(sort.equals("5"))
+					sCol = " a.gj "+ desc;
+				else if(sort.equals("6"))
+					sCol = " b.gxdwmc "+ desc;
+				else if(sort.equals("7"))
+					sCol = " b.qymc "+ desc;
+				else if(sort.equals("8"))
+					sCol = " a.zxbz "+ desc;
+				else if(sort.equals("9"))
+				    sCol = " a.cyryztdm "+ desc;
+				else
+					sCol = " a.ryid desc ";
+			}else{
+				sCol="a.ryid desc";
+			}
+		}
+		
 		map.put("pageSort", sCol);
 		return queryForPage("getWgyryxxGgListGad", map, pageNo,pageSize);
 	}

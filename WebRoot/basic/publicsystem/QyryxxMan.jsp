@@ -103,6 +103,7 @@ function setPageList(pageno,url){
 													});	
 										},
 										hideColIndex:[5],
+										noSortColIndex:[8],
 										colWidths: ["19%","9%","14%","8%","9%","0%","11%","13%","17%"]									
 									});			
 	}

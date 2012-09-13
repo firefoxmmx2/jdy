@@ -56,6 +56,7 @@ function setPageList(pageno,url){
 		// returns a jQ object with a 'g' property - that's ingrid
 		var mygrid1 = $("#"+tableid).ingrid({ 
 										ingridPageParams:sXML,
+										ingridExtraParams:{'tag':'WgcyyrycxMan-gn'},
 										ingridPageWidth: pageWidth,
 										url: url,	
 										height: pageHeight-327,

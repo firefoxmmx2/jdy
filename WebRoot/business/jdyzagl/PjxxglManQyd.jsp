@@ -4,6 +4,7 @@
 
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
 <script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
+<script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 
 <script type="text/javascript">
 	var pjxx_detail_div="pjjbxx_detail";
@@ -16,11 +17,15 @@
 	var pjxx_update_page_url="business/jdyzagl/PjxxModify.jsp";
 	var pjxx_delete_url="jdy/delete_pjxx.action";
 	var pjxx_update_url="jdy/update_pjxx.action";
-	
+	var pjxx_detail_url="jdy/query_pjxx.action";
 	$(function(){
 		
 		$('#pjxx_sjr_zjlx').selectBox({code:'dm_zjlx'});
-		$('.date').attr("readOnly",true).datepicker();
+		//时间设置
+		$('.datef').attr("readOnly",true).datepicker(true,'0');
+		$('.datet').attr("readOnly",true).datepicker(true,'1');
+		//寄递物品联动下拉列表
+		selectboxlink("pjxx_jdpdlx","pjxx_jdplx","dm_jdwpdl");
 		$('#pjxx_pjr_xm').click(function(){
 			dataid=null;
 			getTyRY_item('pjxx_pjr_xm','pjxx_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
@@ -55,8 +60,8 @@
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
 											colIndex: [0],
-											noSortColIndex:[9],
-											hideColIndex:[8],
+											noSortColIndex:[10],
+											hideColIndex:[8,9],
 											isHaveMorenPaixuClass: true, //加默认排序样式
 											morenPaixuCol: 7, //第一默认排序	
 											morenPaixuFangshi:'desc', //默认排序方式
@@ -66,10 +71,17 @@
 													var zt=$tr.find('td:nth(8)').text();
 													if(zt=='Y')
 														$tr.find('td:last a[title=派件]').remove();
+													
+													var overUpdateTime=$tr.find('td:nth(9)').text();
+													if(overUpdateTime=='true'){
+														$tr.find('td:last a[title=删除]').remove();
+														$tr.find('td:last a[title=修改]').remove();
+													}
+														
 												});
 											},
 											alignCenterColIndex: [1,2,8],
-											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%",'0%',"11%"]									
+											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%",'0%','0%',"11%"]									
 										});				
 			}
 	}	
@@ -110,8 +122,19 @@
 	} 
 	//派件信息删除
 	function setPjxxDelete(id) {
-		if(confirm("是否决定删除该派件登记信息"))
-			$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+		if(confirm("是否决定删除该派件登记信息")){
+			$.post(pjxx_detail_url,{'pjxx.id':id},function(json){
+				if(json.overUpdateTime){
+					jAlert("已经超过了删除的时间！","提示");
+					pjxxQueryPageList(1);
+				}
+				else{
+					$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+				}
+			},'json');
+			
+		}
+			
 	}
 	/**
 	派件信息详情
@@ -183,18 +206,18 @@
 				<tr>
 					<td width="10%" class="pagedistd">收件人证件号码</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_sjr_zjhm" name="pjxx.ljjbxx.sjr.zjhm" class="inputstyle" value=""></td>
-					<td width="10%" class="pagedistd">派件时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjf" name="pjsjf" class="inputstyle date" value=""></td>
-					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjsjt" name="pjsjt" class="inputstyle date" value=""></td>
+					<td width="10%" class="pagedistd">寄递品大类</td>
+					<td width="23%" class="pagetd"><select id="pjxx_jdpdlx" name="pjxx.ljjbxx.jdpxx.jdpdlx" class="inputstyle"><option></option></select></td>
+					<td width="10%" class="pagedistd">寄递品小类</td>
+					<td width="23%" class="pagetd"><select id="pjxx_jdplx" name="pjxx.ljjbxx.jdpxx.jdplx" class="inputstyle" ><option></option></select></td>
 				</tr>
 				<tr>
 					<td width="10%" class="pagedistd">派件员</td>
 					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjr_xm" name="pjxx.pjr.xm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">派件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjf" name="pjtbsjf" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjf" name="pjtbsjf" class="inputstyle datef" value=""></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjt" name="pjtbsjt" class="inputstyle date" value=""></td>
+					<td width="23%" class="pagetd"><input type="text" id="pjxx_pjtbsjt" name="pjtbsjt" class="inputstyle datet" value=""></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
@@ -234,6 +257,7 @@
 	    	<th name="l_ljy">派件员</th>
 	    	<th name="l_ljsj">登记时间</th>
 	    	<th name="l_zt">状态</th>
+	    	<th>修改状态</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>

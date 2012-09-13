@@ -70,6 +70,7 @@
 												}					
 											},
 											pageNumber: pageno,
+											noSortColIndex:[3],
 											colWidths: ["20%","20%","40%","20%"]
 										});
 		}

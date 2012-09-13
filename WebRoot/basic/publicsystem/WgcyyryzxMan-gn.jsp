@@ -50,6 +50,7 @@ function setPageList(pageno,url){
 		var mygrid1 = $("#"+tableid).ingrid({ 
 										ingridPageParams:sXML,
 										ingridPageWidth: pageWidth,
+										ingridExtraParams:{'tag':'WgcyyrycxMan-gn'},
 										url: url,	
 										height: pageHeight-314,
 										changeHref : function(table){
@@ -61,6 +62,7 @@ function setPageList(pageno,url){
 											},
 										pageNumber: pageno,
 										hideColIndex: [7],
+										noSortColIndex:[10],
 										colWidths: ["10%","12%","12%","5%","5%","13%","14%","0%","7%","10%","10%"]										
 									});				
 		}
