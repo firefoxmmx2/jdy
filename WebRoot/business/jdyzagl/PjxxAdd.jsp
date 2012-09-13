@@ -419,13 +419,13 @@ function close_pjxx_add_page(){
 */
 function wldh_completion(wldh,qybm){
 	var url='jdy/query_ljxx.action';
-	var params = {'lj.wldh':wldh,'lj.qyjbxx.qybm':qybm};
+	var params = {'lj.wldh':wldh,'lj.qyjbxx.qybm':qybm,'lj.scbzw':'0'};
 	
 	$.post(url,params,function(data){
 		if(data.lj){
 			$('#pjjbxx_add [name*=pjxx.ljjbxx.]').each(function(idx){
 				$this = $(this);
-				var value = eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]);
+				var value = setNull(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
 				if(value){
 					if($this.attr("tagName").toLowerCase() == 'select'){
 						$this.setValue(value);
@@ -476,6 +476,7 @@ function wldh_completion(wldh,qybm){
 			$('#pjjbxx_goback').attr('title','返回').text('返回');
 			//验证物流单号唯一性
 			validateWldh(wldh,qybm,function(json){
+				alert(1)
 				$('#pjjbxx_add_button').attr('disabled',false);
 				$('#pjjbxx_add_again_button').attr('disabled',false);
 			},function(){

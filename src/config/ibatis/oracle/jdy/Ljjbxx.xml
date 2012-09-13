@@ -101,19 +101,29 @@
 			ljjbxx.djxh=#djxh#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="wldh">
-			ljjbxx.wldh=#wldh#
+			
 			<isNotEmpty prepend="" property="qyjbxx">
 				<isNotEmpty prepend="" property="qyjbxx.qybm">
-					 and ljjbxx.qybm=#qyjbxx.qybm#
+					ljjbxx.wldh=#wldh# and ljjbxx.qybm=#qyjbxx.qybm#
 				</isNotEmpty>
 			</isNotEmpty>
-			
-			
+		</isNotEmpty>
+		
+	</sql>
+	
+	<sql id="ljjbxxGetWhere">
+		<include refid="ljjbxxWhere"/>
+		
+		<isNotEmpty prepend="and" property="scbzw">
+			ljjbxx.scbzw = #scbzw#
 		</isNotEmpty>
 	</sql>
 	<sql id="ljjbxxPageWhere">
 		<include refid="ljjbxxWhere"/>
 		
+		<isNotEmpty prepend="and" property="wldh">
+			ljjbxx.wldh=#wldh#
+		</isNotEmpty>
 		<isNotEmpty prepend="and" property="ljsjf">
 			ljjbxx.ljtbsj >= #ljsjf#
 		</isNotEmpty>
@@ -176,10 +186,22 @@
 				qyjbxx.gxdwmc like '$qyjbxx.gxdwmc$%'
 			</isNotEmpty>
 		</isNotEmpty>
+		
+		<isEmpty prepend="and" property="scbzw">
+        		ljjbxx.scbzw='0'
+        </isEmpty>
+        <isNotEmpty prepend="and" property="scbzw">
+        	<isNotEqual property="scbzw" compareValue="y">
+        		ljjbxx.scbzw=#scbzw#
+        	</isNotEqual>
+        </isNotEmpty>
 	</sql>
 <!--  公安端寄递品信息链表查询  -->
 	<sql id="jdpxxgadcxWhere">
 		<include refid="ljjbxxWhere"/>
+		<isNotEmpty prepend="and" property="wldh">
+			ljjbxx.wldh=#wldh#
+		</isNotEmpty>
 		<isNotEmpty prepend="and" property="ljsjf">
 			ljjbxx.ljtbsj >= #ljsjf#
 		</isNotEmpty>
@@ -245,6 +267,13 @@
 				qyjbxx.gxdwmc like '$qyjbxx.gxdwmc$%'
 			</isNotEmpty>
 		</isNotEmpty>
+		
+		<isEmpty prepend="and" property="scbzw">
+        		ljjbxx.scbzw='0'
+        </isEmpty>
+        <isNotEmpty prepend="and" property="scbzw">
+        	ljjbxx.scbzw=#scbzw#
+        </isNotEmpty>
 	</sql>
 <!-- 	通过从业人员编号得到从业人员信息 -->
 	<select id="getQyryxxByCyrybh" resultMap="qyryxxResult" parameterClass="String" > 
@@ -411,7 +440,7 @@
 		select * from t_ljjbxx ljjbxx
 		where
 		<dynamic prepend=" ">
-			<include refid="ljjbxxWhere"/>
+			<include refid="ljjbxxGetWhere"/>
 		</dynamic>
 	</select>
 <!-- 	获取揽件信息列表 -->
@@ -437,7 +466,8 @@
 	    (select  distinct ljjbxx.djxh
 	    from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr ,t_qyjbxx qyjbxx, t_jdpxx   jdpxx
 	    where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh
-               and qyjbxx.qybm = ljjbxx.qybm and ljjbxx.scbzw='0' and ljjbxx.djxh = jdpxx.ljjbxx_id
+               and qyjbxx.qybm = ljjbxx.qybm 
+                and ljjbxx.djxh = jdpxx.ljjbxx_id
                <dynamic prepend="and">
 					<include refid="ljjbxxPageWhere"/>
 				</dynamic>
@@ -456,7 +486,8 @@
 		,qyjbxx.gxdwbm qyjbxx_gxdwbm, qyjbxx.gxdwmc qyjbxx_gxdwmc
 			from t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx ljr ,t_qyjbxx qyjbxx, t_jdpxx   jdpxx
 		where ljjbxx.jjr_id=jjr.id and ljjbxx.sjr_id=sjr.id and ljr.cyrybh=ljjbxx.ljrbh
-				and qyjbxx.qybm = ljjbxx.qybm and ljjbxx.scbzw='0' and ljjbxx.djxh = jdpxx.ljjbxx_id
+				and qyjbxx.qybm = ljjbxx.qybm 
+			 and ljjbxx.djxh = jdpxx.ljjbxx_id
 		<dynamic prepend="and">
 			<include refid="ljjbxxPageWhere" />
 		</dynamic>
@@ -480,7 +511,6 @@
 		        and ljjbxx.qybm=qyjbxx.qybm
 				and ljjbxx.jjr_id=jjr.id 
 				and ljjbxx.sjr_id=sjr.id 
-				and ljjbxx.scbzw='0'
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere"/>
 		</dynamic>
@@ -510,7 +540,6 @@
 				and ljjbxx.jjr_id=jjr.id 
 				and ljjbxx.sjr_id=sjr.id 
 				and ljjbxx.ljrbh=ljr.cyrybh
-				and ljjbxx.scbzw='0'
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere" />
 		</dynamic>
@@ -527,7 +556,7 @@
 				and ljjbxx.jjr_id=jjr.id 
 				and ljjbxx.sjr_id=sjr.id 
 				and jdpxx.kybz='N'
-				and ljjbxx.scbzw='0'
+				
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere"/>
 		</dynamic>
@@ -558,7 +587,6 @@
 				and ljjbxx.sjr_id=sjr.id 
 				and ljjbxx.ljrbh=ljr.cyrybh
 				and jdpxx.kybz='N'
-				and ljjbxx.scbzw='0'
 		<dynamic prepend="and">
 			<include refid="jdpxxgadcxWhere" />
 		</dynamic>
