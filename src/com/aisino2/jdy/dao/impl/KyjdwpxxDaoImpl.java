@@ -52,66 +52,64 @@ public class KyjdwpxxDaoImpl extends BaseDao implements IKyjdwpxxDao {
 	
 	public Page findKyjdwpxxsForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {
-		String sCol="";
+		String sCol=" ljjbxx.wldh ";
 		if(sort == null)
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
-		if (sort!=null){
+		if (dir!=null){
 			if(map.get("kyjdwpxxcxbz").toString().equals("qydcxbz")){
-				if("0".equals(sort))
+				if("0".equals(dir))
 					sCol = " ljjbxx.wldh "+ sort;
-				else if("1".equals(sort))
+				else if("1".equals(dir))
 					sCol = " jdpxx.jdpmc "+ sort;
-				else if("2".equals(sort))
+				else if("2".equals(dir))
 					sCol = " jjr.xm "+ sort;
-				else if("3".equals(sort))
+				else if("3".equals(dir))
 					sCol = " jjr.zjlx "+ sort;
-				else if("4".equals(sort))
+				else if("4".equals(dir))
 					sCol = " jjr.zjhm "+ sort;
-				else if("5".equals(sort))
+				else if("5".equals(dir))
 					sCol = " jdpxx.jdpdlxmc "+ sort;
-				else if("6".equals(sort))
+				else if("6".equals(dir))
 					sCol = " jdpxx.jdplxmc "+ sort;
-				else if("7".equals(sort))
+				else if("7".equals(dir))
 					sCol = "bgr.xm "+ sort;
-				else if("8".equals(sort))
+				else if("8".equals(dir))
 					sCol = "kyjdwpxx.bgsj "+ sort;
-				else if("9".equals(sort))
+				else if("9".equals(dir))
 					sCol = "kyjdwpxx.kywplb "+ sort;
 				else 
 					sCol=" ljjbxx.wldh ";
 			}else{
-				if("0".equals(sort))
+				if("0".equals(dir))
 					sCol = " jdpxx.jdpmc "+ sort;
-				else if("1".equals(sort))
+				else if("1".equals(dir))
 					sCol = " qyjbxx.qymc "+ sort;
-				else if("2".equals(sort))
+				else if("2".equals(dir))
 					sCol = " ljjbxx.wldh "+ sort;
-				else if("3".equals(sort))
+				else if("3".equals(dir))
 					sCol = " kyjdwpxx.kywplb "+ sort;
-				else if("4".equals(sort))
+				else if("4".equals(dir))
 					sCol = " bgr.xm "+ sort;
-				else if("5".equals(sort))
+				else if("5".equals(dir))
 					sCol = " kyjdwpxx.bgsj "+ sort;
-				else if("6".equals(sort))
+				else if("6".equals(dir))
 					sCol = " jjr.xm "+ sort;
-				else if("7".equals(sort))
+				else if("7".equals(dir))
 					sCol = "sjr.xm "+ sort;
-				else if("8".equals(sort))
+				else if("8".equals(dir))
 					sCol = "jdpxx.jdpdlx "+ sort;
-				else if("9".equals(sort))
+				else if("9".equals(dir))
 					sCol = "jdpxx.jdpdlxmc "+ sort;
-				else if("9".equals(sort))
+				else if("10".equals(dir))
 					sCol = "jdpxx.jdplxmc "+ sort;
-				else if("9".equals(sort))
+				else if("11".equals(dir))
 					sCol = "ljjbxx.ljtbsj "+ sort;
 				else 
 					sCol=" ljjbxx.wldh ";
 			}
 			
-		}else{
-			sCol=" ljjbxx.djxh ";
 		}
 		map.put("pageSort", sCol);
 		return queryForPage("kyjdwpxx.getListPage", map, pageno,pagesize);
