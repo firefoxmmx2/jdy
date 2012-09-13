@@ -13,6 +13,11 @@ $(document).ready(function() {
 	tableid="table1";
 	//页面用于加载用的DIV的操作
 	detailid="kyjdwp_detail";
+	//设置显示详情页面的路径
+	qyjbxx_detailHtml_kyqk="basic/publicsystem/QyjbxxDetail-gzth.jsp";
+	qyjbxx_detailWidthkk="1000";
+	qycx_timeFlag = true;
+	
 	daggleDiv(detailid);
 	$("#"+detailid).hide()
 	
@@ -49,15 +54,58 @@ function setPageListKyjdwpxx(pageno,url){
 										url: url,	
                                         ingridExtraParams:params,
 										height: pageHeight-270,
+										colIndex: [1,2],
 										pageNumber: pageno,
-										changeHref:function(table){
-											$(table).find("tr").each(function(){
-												//$(this).find("td:last").find("a[title='修改']").remove();
-												//$(this).find("td:last").find("a[title='删除']").remove();
-											});
-										},
+										onTdSelect: function(tr){
+								            $(tr).find("td").click(function(){
+								                var tdnum = $(tr).find("td").index(this);
+								                if (tdnum == 1) {
+								                	//此ID表示的是该行的逐渐列
+								                	var id =$(tr).attr("id");
+								                	var hdqyid=$("#bayjbxxTable #"+id).find("td:nth(11)").text();
+								                	//通过gird的tableid属性+主键列，获取到第N的值
+									       	        var hylbdm=$("#p_allhylbdm").val();
+								                	alert(hylbdm);
+								                	//alert("行业类别代码="+hylbdm);
+												       	 //"行业类别"不是旅馆业 所掉的页面
+								                	 if(hylbdm.trim()=="'A'"){
+												       	    //这个变量是控制列点击时间不执行用的
+															if(sFlag=="true"){
+																    sFlag="false";
+																    setQuery(hdqyid,detailHtmlqy,detailWidth); 	
+															}else{
+																sFlag="true";
+															}
+												       	 }else if(hylbdm.trim()=="'J'"||hylbdm.trim()=="'K'"){
+												       	 if(sFlag=="true"){
+																    sFlag="false";
+												       	    setCsDetail(hdqyid);
+												       	    }else{
+																sFlag="true";
+												       	 }
+												       	 }else{//"行业类别"不是旅馆业 所掉的页面
+												       		if (sFlag=="true"){
+												       		    //这个变量是控制列点击时间不执行用的
+													       		sFlag="false";
+																if(tdnum!=$(tr).find("td").length-1){
+																	if(qycx_timeFlag){
+															       		qycx_timeFlag = false;
+															 			qyjbxx_requestType="detail";
+															 			qyjbxx_dataid=hdqyid;
+															 			//alert("企业ID="+qyjbxx_dataid);
+															 			setWidth("kyjdwp_detail",qyjbxx_detailWidthkk);
+															 			setUrl("kyjdwp_detail",qyjbxx_detailHtml_kyqk);
+															 			bindDocument("kyjdwp_detail");
+															 			setTimeout(function(){qycx_timeFlag = true;},1000);
+																	}
+																}
+															}
+												       	 }
+								                }
+								            });
+								        },
 										ingridPageParams: sXML,
-										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
+										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
 									});				
 		}
 }
@@ -152,6 +200,7 @@ function setKyjdwpxxDetail(id){
 	    	<th name="l_jdpdlxmc">寄递品大类</th>
 	    	<th name="l_jdplxmc">寄递品小类</th>
 	    	<th name="l_ljtbsj">揽件登记时间</th>
+	    	<th name="l_qyid">企业ID</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
