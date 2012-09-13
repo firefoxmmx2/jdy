@@ -107,6 +107,7 @@ function setKyjdwpxxDelete(id){
   <tr>
     <td class="tdbg">
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="kyjdwpxx_man">
+    	<input type="hidden" id="kyjdwpxxcxbz" name="kyjdwpxx.kyjdwpxxcxbz" value="qydcxbz"><!-- 可疑寄递物品查询标志 -->
     	  <input type="hidden" id="kyjdwpxx_ljjbxx_qyjbxx_qybm" name="kyjdwpxx.ljjbxx.qyjbxx.qybm" value="<%=qybm%>" /><!-- 所有查询都需要跟上企业编码 -->
 		  <tr>
 			<td width="10%" class="pagedistd">物流单号</td>
