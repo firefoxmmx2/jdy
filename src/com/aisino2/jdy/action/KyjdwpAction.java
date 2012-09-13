@@ -246,6 +246,7 @@ public class KyjdwpAction extends PageAction{
 		lPro.add("jdpdlxmc");
 		lPro.add("jdplxmc");
 		lPro.add("ljtbsj");//
+		lPro.add("qyid");//
 		
 		List lCol = new ArrayList();
 		
@@ -273,6 +274,7 @@ public class KyjdwpAction extends PageAction{
 			kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
 			kyjdwpxx.setLjtbsj(kyjdwpxx.getLjjbxx().getLjtbsj());//揽件填报时间
 			kyjdwpxx.setQymc(kyjdwpxx.getLjjbxx().getQyjbxx().getQymc());//企业名称
+			kyjdwpxx.setQyid(kyjdwpxx.getLjjbxx().getQyjbxx().getQyid());//企业ID
 		}
 		Kyjdwpxx setkyjdwpxx = new Kyjdwpxx();
 		this.setData(setkyjdwpxx, lData, lPro, lCol);
