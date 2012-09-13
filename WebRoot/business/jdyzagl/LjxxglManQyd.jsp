@@ -32,8 +32,9 @@ $(document).ready(function() {
 		dataid=null;//js中使用了次变量，且他原本传递过去的值为行业类别，所以会查询不出来东西
 		getTyRY_item('ljxx_ljrxm','lj_ljr_cyrybh',null,null,'<%=qybm%>');
 	});
-	//页面时间格式
-	$('.date').attr("readOnly",true).datepicker();
+	//时间设置
+		$('.datef').attr("readOnly",true).datepicker(true,'0');
+		$('.datet').attr("readOnly",true).datepicker(true,'1');
 	
 	
 	
@@ -175,9 +176,9 @@ function setLjxxDelete(id) {
 					<td width="10%" class="pagedistd">揽件员</td>
 					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljrxm" name="lj.ljr.xm" class="inputstyle" value="" /></td>
 					<td width="10%" class="pagedistd">揽件登记时间</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjf" name="lj.ljsjf" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjf" name="lj.ljsjf" class="inputstyle datef" value="" /></td>
 					<td width="10%" class="pagedistd">至</td>
-					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjt" name="lj.ljsjt" class="inputstyle date" value="" /></td>
+					<td width="23%" class="pagetd"><input type="text" id="ljxx_ljsjt" name="lj.ljsjt" class="inputstyle datet" value="" /></td>
 				</tr>
     		<tr>
     		  <td colspan="6">
