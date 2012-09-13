@@ -187,6 +187,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		qyjbxx.setQybm(qybm);
 		map.put("qyjbxx", qyjbxx);
 		map.put("wldh", wldh);
+		map.put("scbzw", "y");
 		
 		count=ljjbxxDao.count(map);
 		if(count>0)
