@@ -1,6 +1,9 @@
 package com.aisino2.jdy.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -166,6 +169,7 @@ public class KyjdwpAction extends PageAction{
 		lPro.add("bgrxm");
 		lPro.add("bgsj");
 		lPro.add("kywplb");
+		lPro.add("djsjbz");
 		
 		List lCol = new ArrayList();
 		
@@ -225,6 +229,24 @@ public class KyjdwpAction extends PageAction{
 				kyjdwpxx.setKywplb("其他");
 			}
 			kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
+			
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar updateOverTimeCalender =  Calendar.getInstance();
+			try {
+				updateOverTimeCalender.setTime(sdf.parse(sdf.format(kyjdwpxx.getDjsj())));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
+			Calendar nowCalendar=Calendar.getInstance();
+			nowCalendar.setTime(now);
+			if((nowCalendar.compareTo(updateOverTimeCalender)) >= 0)
+				kyjdwpxx.setDjsjbz("Y");
+			else
+				kyjdwpxx.setDjsjbz("N");
+			
 		}
 		Kyjdwpxx setkyjdwpxx = new Kyjdwpxx();
 		this.setData(setkyjdwpxx, lData, lPro, lCol);
