@@ -1056,8 +1056,17 @@ public class QyryxxAction extends PageAction{
 			if("N".equals(setQyryxx.getHylbdm())){
 			 	setQyryxx.setLrdwbm(user.getDepartment().getDepartcode());
 			}
+			List isCyryExist = qyryxxService.getIsQyryxxExist(setQyryxx);
+			if(isCyryExist!=null&&isCyryExist.size()>0){
+				throw new RuntimeException("公民身份号码已存在");
+				
+			}
 			qyryxxService.updateQyryxx(setQyryxx);
-		} catch (Exception e) {
+		}catch(RuntimeException e){
+			e.printStackTrace();
+			this.result = e.getMessage();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			this.result="";
 		}
