@@ -34,6 +34,7 @@
 		<result property="sjr.xm" column="sjrxm"/>
 		<result property="ljjbxx.ljtbsj" column="ljtbsj"/>
 		<result property="ljjbxx.qyjbxx.qyid" column="qyid"/>
+		<result property="djsj" column="djsj"/>
 	</resultMap>	
 	<sql id="kyjdwpxxWhere" >
 		<isNotEmpty prepend="and" property="kyywdjxh"> 
@@ -45,10 +46,10 @@
 	</sql>
 	<sql id="kyjdwpxxqydcxWhere" >
 		<isNotEmpty prepend="and" property="sbsjf">
-				kyjdwpxx.bgsj >= #sbsjf#
+				kyjdwpxx.djsj >= #sbsjf#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="sbsjt">
-				kyjdwpxx.bgsj &lt;= #sbsjt#
+				kyjdwpxx.djsj &lt;= #sbsjt#
 		</isNotEmpty>
 		
 		<isNotEmpty prepend="and" property="kywplb">
@@ -109,6 +110,9 @@
 			<isNotNull prepend="," property="ljjbxx.djxh">
 				ljxx_djxh
 			</isNotNull>
+			<isNotNull prepend="," property="djsj">
+				djsj
+			</isNotNull>
 		
 		</dynamic>
 		)
@@ -134,6 +138,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="ljjbxx.djxh">
 				#ljjbxx.djxh#
+			</isNotNull>
+			<isNotNull prepend="," property="djsj">
+				#djsj#
 			</isNotNull>
 		</dynamic>
 		)
@@ -199,7 +206,7 @@
 			,jjr.xm jjrxm,jjr.zjlx jjrzjlx,jjr.zjhm jjrzjhm
 			,jdpxx.jdpdlxmc jdpdlxmc,jdpxx.jdplxmc jdplxmc
 			,kyjdwpxx.bgsj bgsj,kyjdwpxx.kywplb kywplb, bgr.xm bgrxm,kyjdwpxx.kyywdjxh kyywdjxh
-			,qyjbxx.qymc qymc,sjr.xm sjrxm,ljjbxx.ljtbsj ljtbsj,qyjbxx.qyid qyid
+			,qyjbxx.qymc qymc,sjr.xm sjrxm,ljjbxx.ljtbsj ljtbsj,qyjbxx.qyid qyid,kyjdwpxx.djsj djsj
 					
 			from t_kyjdwpxx kyjdwpxx,t_jdpxx jdpxx,t_ljjbxx ljjbxx,t_rdrjbxx jjr,t_rdrjbxx sjr,t_qyryxx bgr,t_qyjbxx qyjbxx
 			

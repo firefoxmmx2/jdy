@@ -38,7 +38,19 @@ function setPageListKyjdwpxx(pageno,url){
 										height: pageHeight-250,
 										pageNumber: pageno,
 										ingridPageParams: sXML,
-										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
+										changeHref:function(table){
+											$('tr',table).each(function(){
+												var $tr=$(this);
+												//登记时间标志
+												var djsjbz=$tr.find('td:nth(10)').text();
+												if(djsjbz=='Y'){
+													$tr.find('td:last a[title=修改]').remove();
+													$tr.find('td:last a[title=删除]').remove();
+													//$tr.addClass("red");
+												}
+											});
+										},
+										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","2%","18%"]									
 									});				
 		}
 }
@@ -160,6 +172,7 @@ function setKyjdwpxxDelete(id){
 	    	<th name="l_bgrxm">报告人</th>
 	    	<th name="l_bgsj">报告时间</th>
 	    	<th name="l_kywplb">可疑物品类别</th>
+	    	<th name="l_djsjbz">超时标志</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>

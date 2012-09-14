@@ -61,17 +61,39 @@ function setPageListlj(pageno,url){
 										noSortColIndex:[7],	
 										//noSortColIndex:[11],
 										onRowSelect:null,
-										hideColIndex:[7],
+										hideColIndex:[7,8,9],
 										//isHaveMorenPaixuClass: true, //加默认排序样式
 										//morenPaixuCol: 8, //第一默认排序	
 										//morenPaixuFangshi:'desc', //默认排序方式 
 										//alignCenterColIndex: [1,2,8],
 										changeHref:function(table){
-											$(table).find("tr").each(function(){
+											//$(table).find("tr").each(function(){
 												//$(this).find("td:last").find("a[title='可疑']").remove();
+											//});
+											$('tr',table).each(function(){
+												var $tr=$(this);
+												//可疑寄递物品标志
+												var kyzt=$tr.find('td:nth(7)').text();
+												if(kyzt=='Y'){
+													$tr.find('td:last a[title=修改]').remove();
+													$tr.find('td:last a[title=删除]').remove();
+													$tr.addClass("red");
+												}
+												//超时标志
+												var cjbz=$tr.find('td:nth(8)').text();
+												if(cjbz=='Y'){
+													$tr.find('td:last a[title=修改]').remove();
+													$tr.find('td:last a[title=删除]').remove();
+												}
+												//已派件标志
+												var ypj=$tr.find('td:nth(9)').text();
+												if(ypj=='Y'){
+													$tr.find('td:last a[title=修改]').remove();
+													$tr.find('td:last a[title=删除]').remove();
+												}
 											});
 										},
-										colWidths: ["25%","12%","10%","10%","20%","10%","15%","0","15%"]									
+										colWidths: ["25%","12%","10%","10%","20%","10%","15%","0","2","2","15%"]									
 									});				
 		}
 }	
@@ -217,6 +239,8 @@ function setLjxxDelete(id) {
 	    	<th name="l_ljyxm">揽件员</th>
 	    	<th name="l_ljtbsj">登记时间</th>
 	    	<th name="l_kybz">可疑标志</th>
+	    	<th name="l_sjkzbz">时间可疑标志</th>
+	    	<th name="l_sfpjbz">是否派发标志</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
