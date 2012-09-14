@@ -85,14 +85,14 @@ function tianJiaZxzybaydwDzcl(cllb){
 }
 //寄递物品信息保存时添加到列表---添加行的方法
 function jdwpxxadd(){ 
-	var jdwp_jdpdl=$("#jdwp_jdpdl").val();//寄递品大类型
-	var jdwp_jdmdlxmc=$("#jdwp_jdpdl option:selected").text();//寄递品大类型名称
-	var jdwp_jdpxl=$("#jdwp_jdpxl").val();//寄递品小类型
-	var jdwp_jdmlxmc=$("#jdwp_jdpxl option:selected").text();//寄递品大类型名称
-	var jdwp_jdpmc=$("#jdwp_jdpmc").val();//寄递品名称
-	var jdwp_jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
-	var jdwp_jdpzl=$("#jdwp_jdpzl").val();//寄递品重量
-	var jdwp_jdptj=$("#jdwp_jdptj").val();//寄递品体积
+	var jdwp_jdpdl=setNull($("#jdwp_jdpdl").val());//寄递品大类型
+	var jdwp_jdmdlxmc=setNull($("#jdwp_jdpdl option:selected").text());//寄递品大类型名称
+	var jdwp_jdpxl=setNull($("#jdwp_jdpxl").val());//寄递品小类型
+	var jdwp_jdmlxmc=setNull($("#jdwp_jdpxl option:selected").text());//寄递品大类型名称
+	var jdwp_jdpmc=setNull($("#jdwp_jdpmc").val());//寄递品名称
+	var jdwp_jdpsm=setNull($("#jdwp_jdpsm").val());//寄递品数量
+	var jdwp_jdpzl=setNull($("#jdwp_jdpzl").val());//寄递品重量
+	var jdwp_jdptj=setNull($("#jdwp_jdptj").val());//寄递品体积
 		var addTableTr="";
 		//获取行数
 		var trLen= $("#YwwffzjlTable").find("tr").length;
