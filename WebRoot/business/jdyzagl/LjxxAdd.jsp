@@ -64,10 +64,10 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										sorting: false,
 										paging: false,	
 										//havaWaiDivGunDong: true,//控制不能出现滚动条
-										hideColIndex:[1,4,5,6,7,8,9],
+										hideColIndex:[1,4,7,8],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["40","0%","40%","40%","0","0","0","0","0","0","30%"]								
+										colWidths: ["5%","0%","20%","20%","0","30%","30%","0","0","30%","10%"]								
 									});				
 		}
 }
@@ -109,11 +109,11 @@ function jdwpxxadd(){
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+trNum+"'>"+jdwp_jdpmc+"</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+trNum+"'>"+jdwp_jdpsm+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+trNum+"'>"+jdwp_jdpdl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2'  id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2'  id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlx"+trNum+"'>"+jdwp_jdpxl+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+trNum+"'>"+jdwp_jdmdlxmc+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlxmc"+trNum+"'>"+jdwp_jdmlxmc+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2'  id='l_jdpxlxmc"+trNum+"'>"+jdwp_jdmlxmc+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
 		+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
 		+"</td>";
@@ -417,8 +417,8 @@ function addbackbcxz(json){
 			     	<th name="lj_jdpzl">重量</th>
 			     	<th name="lj_jdptj">体积</th>
 			     	<th name="lj_jdpxlx">小类型</th>
-			     	<th name="lj_jdpdlxmc">大类型名称</th>
-			     	<th name="lj_jdpxlxmc">小类型名称</th>
+			     	<th name="lj_jdpdlxmc">类型名称</th>
+			     	<th name="lj_jdpxlxmc">类型名称</th>
 					<th name="">操作</th>
 			    </tr>
 			  </thead>

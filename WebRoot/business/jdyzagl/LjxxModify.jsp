@@ -117,12 +117,12 @@ function modifyback(json){
 				    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
 				    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
-					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
-					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2'  id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2'  id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+i+"'>"+jdwp_id+"</td>";
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlx"+i+"'>0</td>";
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+i+"'>0</td>";
-					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlxmc"+i+"'>0</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2'  id='l_jdpxlxmc"+i+"'>0</td>";
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' id='cz_"+i+"'>"
 					+"<A id='delete_"+i+"' class=fontbutton title='删除' onclick=getObjectmod(this) href='#'>删除</A>"
 					+"</td>";
@@ -154,10 +154,10 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										sorting: false,
 										paging: false,	
 										//havaWaiDivGunDong: true,//控制不能出现滚动条
-										hideColIndex:[1,4,5,6,7,8,9,10],
+										hideColIndex:[1,4,7,8,9],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["40","0","40%","40%","0","0","0","0","0","0","0","20%"]								
+										colWidths: ["15%","0","20%","20%","0","20%","20%","0","0","0","20","20%"]								
 									});				
 		}
 }
@@ -193,12 +193,12 @@ function jdwpxxadd(){
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+trNum+"'>"+jdwp_jdpmc+"</td>";
 	    addTableTr += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+trNum+"'>"+jdwp_jdpsm+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+trNum+"'>"+jdwp_jdplx+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2'  id='l_jdpzl"+trNum+"'>"+jdwp_jdpzl+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2'  id='l_jdptj"+trNum+"'>"+jdwp_jdptj+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+trNum+"'></td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlx"+trNum+"'>"+jdwp_jdpdl+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+trNum+"'>"+jdwp_jdmdlxmc+"</td>";
-		addTableTr += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpxlx"+trNum+"'>"+jdwp_jdmdxmc+"</td>";
+		addTableTr += "<td class='grid-col-style1' _colid='2'  id='l_jdpxlx"+trNum+"'>"+jdwp_jdmdxmc+"</td>";
 		addTableTr += "<td class='grid-col-style1' _colid='2' id='cz_"+trNum+"'>"
 		+"<A id='delete_"+trNum+"' class=fontbutton title='删除' onclick=getObject(this) href='#'>删除</A>"
 		+"</td>";
@@ -508,8 +508,8 @@ function addback(json){
 			     	<th name="lj_jdptj">体积</th>
 			     	<th name="lj_id">ID</th>
 			     	<th name="lj_jdptj">大类型</th>
-			     	<th name="lj_jdptj">大类型名称</th>
-			     	<th name="lj_jdptj">小类型名称</th>
+			     	<th name="lj_jdptj">类型名称</th>
+			     	<th name="lj_jdptj">类型名称</th>
 					<th name="">操作</th>
 			    </tr>
 			  </thead>

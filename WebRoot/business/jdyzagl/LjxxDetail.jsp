@@ -70,6 +70,8 @@ function modifyback(json){
 			var jdwp_jdpsm=json.lj.jdp_list[i].jdpsm;//寄递品数量
 			var jdwp_jdpzl=json.lj.jdp_list[i].jdpzl;//寄递品重量
 			var jdwp_jdptj=json.lj.jdp_list[i].jdptj;//寄递品体积
+			var jdwp_jdplxmc=json.lj.jdp_list[i].jdplxmc;//寄递品类型
+			
 				var addTableTr1="";
 				//获取行数
 				var trLen1= $("#YwwffzjlTable").find("tr").length;
@@ -85,9 +87,9 @@ function modifyback(json){
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_sfscbz"+i+"'>0</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpmc"+i+"'>"+jdwp_jdpmc+"</td>";
 			    addTableTr1 += "<td class='grid-col-style1' _colid='2' id='l_jdpsm"+i+"'>"+jdwp_jdpsm+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdplx"+i+"'>"+jdwp_jdplx+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
-				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2'  id='l_jdplx"+i+"'>"+jdwp_jdplxmc+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2'  id='l_jdpzl"+i+"'>"+jdwp_jdpzl+"</td>";
+				addTableTr1 += "<td class='grid-col-style1' _colid='2'  id='l_jdptj"+i+"'>"+jdwp_jdptj+"</td>";
 				addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+i+"'>"+jdwp_id+"</td>";
 				addTableTr1 += "</tr>";
 				if(addTableTr1!=""){
@@ -115,10 +117,10 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										sorting: false,
 										paging: false,	
 										//havaWaiDivGunDong: true,//控制不能出现滚动条
-										hideColIndex:[1,4,5,6,7],
+										hideColIndex:[1,7],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["50","0","50%","50%","0","0","0","0"]								
+										colWidths: ["20%","0","20%","20%","20%","20%","20%","0"]								
 									});				
 		}
 }
