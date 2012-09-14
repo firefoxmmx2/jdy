@@ -186,14 +186,14 @@ function jdwpxxadd(record){
 		rowData.sfscbz=record.sfscbz;
 	}
 	else{
-		rowData.jdplx=$("#jdwp_jdpxl").val();//寄递品类型
-		rowData.jdpmc=$("#jdwp_jdpmc").val();//寄递品名称
-		rowData.jdpsm=$("#jdwp_jdpsm").val();//寄递品数量
-		rowData.jdpzl=$('#jdwp_jdpzl').val();//重量
-		rowData.jdptj=$('#jdwp_jdptj').val();//体积
-		rowData.jdplxmc=$("#jdwp_jdpxl").attr("title");//寄递品类型名称
-		rowData.jdpdlx=$('#jdwp_jdpdl').val();
-		rowData.jdpdlxmc=$('#jdwp_jdpdl').attr('title');
+		rowData.jdplx=setNull($("#jdwp_jdpxl").val());//寄递品类型
+		rowData.jdpmc=setNull($("#jdwp_jdpmc").val());//寄递品名称
+		rowData.jdpsm=setNull($("#jdwp_jdpsm").val());//寄递品数量
+		rowData.jdpzl=setNull($('#jdwp_jdpzl').val());//重量
+		rowData.jdptj=setNull($('#jdwp_jdptj').val());//体积
+		rowData.jdplxmc=setNull($("#jdwp_jdpxl").attr("title"));//寄递品类型名称
+		rowData.jdpdlx=setNull($('#jdwp_jdpdl').val());
+		rowData.jdpdlxmc=setNull($('#jdwp_jdpdl').attr('title'));
 		rowData.sfscbz='N';
 	}
 	
