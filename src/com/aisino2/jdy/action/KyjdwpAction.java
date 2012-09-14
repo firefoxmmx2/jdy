@@ -74,6 +74,7 @@ public class KyjdwpAction extends PageAction{
 	    HttpSession session = this.getRequest().getSession();
 		User user = (User)session.getAttribute(Constants.userKey);
 		
+		kyjdwpxx.setDjsj(new Date());
 		
 		kyjdwpxxService.insertKyjdwpxx(kyjdwpxx);
 		
