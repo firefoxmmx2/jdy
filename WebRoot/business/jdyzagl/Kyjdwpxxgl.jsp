@@ -172,7 +172,7 @@ function setKyjdwpxxDelete(id){
 	    	<th name="l_bgrxm">报告人</th>
 	    	<th name="l_bgsj">报告时间</th>
 	    	<th name="l_kywplb">可疑物品类别</th>
-	    	<th name="l_djsjbz">可疑物品类别</th>
+	    	<th name="l_djsjbz">超时标志</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
