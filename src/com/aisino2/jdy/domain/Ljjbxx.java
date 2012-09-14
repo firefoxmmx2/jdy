@@ -109,9 +109,23 @@ public class Ljjbxx implements Serializable {
 	 */
     private Date ljsjf;//开始时间
     private Date ljsjt;//截止时间
+    private String sjkzbz;//根据时间来判断是否可删除修改
+    private String sfpjbz;//是否标志位
     
-    
-    public Date getLjsjf() {
+   
+	public String getSfpjbz() {
+		return sfpjbz;
+	}
+	public void setSfpjbz(String sfpjbz) {
+		this.sfpjbz = sfpjbz;
+	}
+	public String getSjkzbz() {
+		return sjkzbz;
+	}
+	public void setSjkzbz(String sjkzbz) {
+		this.sjkzbz = sjkzbz;
+	}
+	public Date getLjsjf() {
 		return ljsjf;
 	}
 	public void setLjsjf(Date ljsjf) {
