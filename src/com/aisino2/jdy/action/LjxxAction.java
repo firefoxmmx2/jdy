@@ -1,5 +1,6 @@
 package com.aisino2.jdy.action;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -223,6 +224,8 @@ public class LjxxAction extends PageAction{
 		lPro.add("ljyxm");
 		lPro.add("ljtbsj");
 		lPro.add("kybz");
+		lPro.add("sjkzbz");
+		lPro.add("sfpjbz");
 		
 		List lCol = new ArrayList();
 		
@@ -266,6 +269,26 @@ public class LjxxAction extends PageAction{
 			}
 			lj.setJjrzjhm(lj.getJjr().getZjhm());//寄件人证件号码
 			lj.setLjyxm(lj.getLjr().getXm());//揽件人姓名
+			if(lj.getSfpjbz()==""||lj.getSfpjbz()==null){//派件标志
+				lj.setSfpjbz("N");
+			}
+			
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar updateOverTimeCalender =  Calendar.getInstance();
+			try {
+				updateOverTimeCalender.setTime(sdf.parse(sdf.format(lj.getLjtbsj())));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
+			Calendar nowCalendar=Calendar.getInstance();
+			nowCalendar.setTime(now);
+			if((nowCalendar.compareTo(updateOverTimeCalender)) >= 0)
+				lj.setSjkzbz("Y");
+			else
+				lj.setSjkzbz("N");
 		}
 		
 		Ljjbxx setLjxx = new Ljjbxx();
