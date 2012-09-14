@@ -429,6 +429,9 @@
 			<isNotNull prepend="," property="kybz">
 				kybz=#kybz#
 			</isNotNull>
+			<isNotNull prepend="," property="sfpjbz">
+				sfpjbz=#sfpjbz#
+			</isNotNull>
 		</dynamic>
 		where
 		<dynamic prepend=" ">
