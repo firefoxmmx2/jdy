@@ -54,8 +54,18 @@ public class Kyjdwpxx implements Serializable {
 	//可疑基地物品公安端、企业端查询标志kyjdwpxxcxbz
 	private String kyjdwpxxcxbz;
 	
+	//登记时间
+	private Date djsj;//登记时间
 	
 	
+	
+	
+	public Date getDjsj() {
+		return djsj;
+	}
+	public void setDjsj(Date djsj) {
+		this.djsj = djsj;
+	}
 	public String getKyjdwpxxcxbz() {
 		return kyjdwpxxcxbz;
 	}
