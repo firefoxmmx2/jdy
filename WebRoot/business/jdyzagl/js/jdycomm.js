@@ -176,7 +176,7 @@ function detailDialog(detailid, width, url, config,callback) {
  * 验证揽件信息的物流单号是否可用（物流单号在揽件信息中必须唯一，
  * 如果存在返回false，否则true）
  */
-function validateWldh(wldh,qybm,successFunc,beforeSuccessFunc){
+function validateWldh(wldh,qybm,successFunc,beforeSuccessFunc,failedFunc){
 	if(!wldh)
 		throw "被要求验证的物流单号不能为空";
 	if(!qybm)
@@ -197,7 +197,13 @@ function validateWldh(wldh,qybm,successFunc,beforeSuccessFunc){
 					successFunc(data);
 			}
 			else{
-				jAlert(data.result,"提示");
+				if(failedFunc){
+					failedFunc(data);
+				}
+				else{
+					jAlert(data.result,"提示");
+				}
+				
 				
 			}
 			
