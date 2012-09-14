@@ -65,42 +65,25 @@ function setPageListKyjdwpxx(pageno,url){
 								                	var hdqyid=$("#bayjbxxTable #"+id).find("td:nth(11)").text();
 								                	//通过gird的tableid属性+主键列，获取到第N的值
 									       	        var hylbdm=$("#p_allhylbdm").val();
-								                	alert(hylbdm);
+								                	//alert(hylbdm);
 								                	//alert("行业类别代码="+hylbdm);
-												       	 //"行业类别"不是旅馆业 所掉的页面
-								                	 if(hylbdm.trim()=="'A'"){
-												       	    //这个变量是控制列点击时间不执行用的
-															if(sFlag=="true"){
-																    sFlag="false";
-																    setQuery(hdqyid,detailHtmlqy,detailWidth); 	
-															}else{
-																sFlag="true";
-															}
-												       	 }else if(hylbdm.trim()=="'J'"||hylbdm.trim()=="'K'"){
-												       	 if(sFlag=="true"){
-																    sFlag="false";
-												       	    setCsDetail(hdqyid);
-												       	    }else{
-																sFlag="true";
-												       	 }
-												       	 }else{//"行业类别"不是旅馆业 所掉的页面
+												   //"行业类别"不是旅馆业 所掉的页面
 												       		if (sFlag=="true"){
 												       		    //这个变量是控制列点击时间不执行用的
 													       		sFlag="false";
-																if(tdnum!=$(tr).find("td").length-1){
-																	if(qycx_timeFlag){
-															       		qycx_timeFlag = false;
-															 			qyjbxx_requestType="detail";
-															 			qyjbxx_dataid=hdqyid;
-															 			//alert("企业ID="+qyjbxx_dataid);
-															 			setWidth("kyjdwp_detail",qyjbxx_detailWidthkk);
-															 			setUrl("kyjdwp_detail",qyjbxx_detailHtml_kyqk);
-															 			bindDocument("kyjdwp_detail");
-															 			setTimeout(function(){qycx_timeFlag = true;},1000);
-																	}
-																}
+																//if(tdnum!=$(tr).find("td").length-1){
+																	//if(qycx_timeFlag){
+															       	//	qycx_timeFlag = false;
+															 		//	qyjbxx_requestType="detail";
+															 		//	qyjbxx_dataid=hdqyid;
+															 		//	//alert("企业ID="+qyjbxx_dataid);
+															 		//	setWidth("kyjdwp_detail",qyjbxx_detailWidthkk);
+															 		//	setUrl("kyjdwp_detail",qyjbxx_detailHtml_kyqk);
+															 		//	bindDocument("kyjdwp_detail");
+															 		//	setTimeout(function(){qycx_timeFlag = true;},1000);
+																	//}
+																//}
 															}
-												       	 }
 								                }
 								            });
 								        },
