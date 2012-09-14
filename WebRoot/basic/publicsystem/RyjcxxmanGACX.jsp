@@ -77,7 +77,7 @@ function cf_setPageList(pageno,url){
 										ingridPageParams:sXML,
 										height: pageHeight - 285,
 										pageNumber: pageno,
-										onRowSelect:null,
+										onRowSelect: null,
 										noSortColIndex:[10],
 										colWidths: ["6%","15%","15%","5%","8%","15%","10%","5%","6%","9%","6%"]									
 									});		
@@ -95,7 +95,7 @@ function setDetail_rycf(){
 	jQuery.post(cf_detailUrl,params,updatediv,"json");
 }
 
-function setQuery(id){
+function setQueryRyjcxxmanGACX(id){
 	$("#"+cf_detailid).empty();
 	dataid=id;
 	//$("#"+cf_detailid).css("width",cf_detailWidth);
