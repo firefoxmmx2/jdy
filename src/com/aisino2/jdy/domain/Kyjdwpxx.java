@@ -57,9 +57,17 @@ public class Kyjdwpxx implements Serializable {
 	//登记时间
 	private Date djsj;//登记时间
 	
+	private String djsjbz;//用于判断是否可进行修改
 	
 	
 	
+	
+	public String getDjsjbz() {
+		return djsjbz;
+	}
+	public void setDjsjbz(String djsjbz) {
+		this.djsjbz = djsjbz;
+	}
 	public Date getDjsj() {
 		return djsj;
 	}
