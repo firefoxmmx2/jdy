@@ -90,6 +90,7 @@
 														$tr.find('td:last a[title=修改]').remove();
 														$tr.find('td:last a[title=删除]').remove();
 														$tr.addClass("red");
+														$tr.attr('title',"该揽件包含可疑寄递物品");
 													}
 												});
 											},
@@ -249,13 +250,18 @@
 				jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！","提示");
 				return;
 			}
-			
+			var djxh = json.pjxx.ljjbxx.djxh;
 			var params={"pjxx.id":id,"pjxx.zt":'Y'};
+			
 			jConfirm("派发后不能修改或删除，您确认派发？","提示",function(r){
 				if(r){
 					$.post(pjxx_update_url,params,function(json){
-						if(json.result == 'success')
+						if(json.result == 'success'){
 							pjxxQueryPageList(1);
+							//修改揽件是否派件的标志为Y
+							$.post("jdy/update_ljxx.action",{'lj.djxh':djxh,'lj.sfpjbz':"Y"});
+						}
+							
 					},'json');
 				}
 			});

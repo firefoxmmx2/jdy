@@ -187,15 +187,15 @@ function jdwpxxadd(record){
 	var rowData = {};
 	if(record){
 		rowData.id = record.id;
-		rowData.jdplx =record.jdplx;
-		rowData.jdpmc=record.jdpmc;
-		rowData.jdpsm=record.jdpsm;
-		rowData.jdpzl=record.jdpzl;
-		rowData.jdptj=record.jdptj;
-		rowData.jdplxmc=record.jdplxmc;
-		rowData.jdpdlx=record.jdpdlx;
-		rowData.jdpdlxmc=record.jdpdlxmc;
-		rowData.sfscbz=record.sfscbz;
+		rowData.jdplx = setNull(record.jdplx);
+		rowData.jdpmc= setNull(record.jdpmc);
+		rowData.jdpsm= setNull(record.jdpsm);
+		rowData.jdpzl= setNull(record.jdpzl);
+		rowData.jdptj= setNull(record.jdptj);
+		rowData.jdplxmc= setNull(record.jdplxmc);
+		rowData.jdpdlx= setNull(record.jdpdlx);
+		rowData.jdpdlxmc= setNull(record.jdpdlxmc);
+		rowData.sfscbz= setNull(record.sfscbz);
 	}
 	else{
 		rowData.jdplx=setNull($("#jdwp_jdpxl").val());//寄递品类型
@@ -366,8 +366,6 @@ function add_pjxx(mode){
 			}
 			
 		});
-		//修改揽件是否派件的标志为Y
-		params["pjxx.ljjbxx.sfpjbz"] = "Y";
 		
 		if(mode == 'again')
 			jQuery.post("jdy/insert_pjxx.action",params,add_pjxx_again_callback,"json");
