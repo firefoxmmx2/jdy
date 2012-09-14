@@ -59,7 +59,7 @@
 	                                        ingridPageParams:sXML,
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
-											colIndex: [0],
+											//colIndex: [0],
 											noSortColIndex:[11],
 											hideColIndex:[8,9,10],
 											isHaveMorenPaixuClass: true, //加默认排序样式
@@ -83,57 +83,65 @@
 														$tr.find('td:last a[title=修改]').remove();
 													}
 													
-												});
-											},
-											ingridComplete:function(){
-												$("#"+pjxx_grid_div+" tbody tr").each(function(){
-													$tr = $(this);
-													//可疑寄递控制，揽件信息被标记为可疑寄递的话，不能派发，删除，修改。
+													//可疑寄递控制，高亮显示
 													var kybz=$tr.find('td:nth(10)').text();
-													var id=$tr.attr('id');
 													if(kybz=='Y'){
-														var rowData={
-																id:id,
-																kybz:kybz
-														};
-														var deleteAction=$tr.find('td:last a[title=删除]');
-														deleteAction.attr('rowData',$.toJSON(rowData));
-														if(deleteAction.length)
-															deleteAction.get(0).onclick=null;
-														deleteAction.click(function(){
-															var rowData = $(this).attr('rowData');
-															if(rowData)
-																rowData=$.evalJSON(rowData);
-															setPjxxDelete(rowData.id,rowData.kybz);
-															$(this).remove();
-														});
-														
-														var updateAction = $tr.find('td:last a[title=修改]');
-														updateAction.attr('rowData',$.toJSON(rowData));
-														if(updateAction.length)
-															updateAction.get(0).onclick=null;
-														updateAction.click(function(){ 
-															var rowData = $(this).attr('rowData');
-															if(rowData)
-																rowData=$.evalJSON(rowData);
-															setPjxxUpdate(rowData.id,rowData.kybz);
-															$(this).remove();
-														});
-														
-														var sendAction = $tr.find('td:last a[title=派发]');
-														sendAction.attr('rowData',$.toJSON(rowData));
-														if(sendAction.length)
-															sendAction.get(0).onclick=null;
-														sendAction.click(function(){ 
-															var rowData = $(this).attr('rowData');
-															if(rowData)
-																rowData=$.evalJSON(rowData);
-															setPjxxSend(rowData.id,rowData.kybz);
-															$(this).remove();
-														});
+														$tr.find('td:last a[title=派发]').remove();
+														$tr.find('td:last a[title=修改]').remove();
+														$tr.find('td:last a[title=删除]').remove();
+														$tr.addClass("red");
 													}
 												});
 											},
+// 											ingridComplete:function(){
+// 												$("#"+pjxx_grid_div+" tbody tr").each(function(){
+// 													$tr = $(this);
+// 													//可疑寄递控制，揽件信息被标记为可疑寄递的话，不能派发，删除，修改。
+// 													var kybz=$tr.find('td:nth(10)').text();
+// 													var id=$tr.attr('id');
+// 													if(kybz=='Y'){
+// 														var rowData={
+// 																id:id,
+// 																kybz:kybz
+// 														};
+// 														var deleteAction=$tr.find('td:last a[title=删除]');
+// 														deleteAction.attr('rowData',$.toJSON(rowData));
+// 														if(deleteAction.length)
+// 															deleteAction.get(0).onclick=null;
+// 														deleteAction.click(function(){
+// 															var rowData = $(this).attr('rowData');
+// 															if(rowData)
+// 																rowData=$.evalJSON(rowData);
+// 															setPjxxDelete(rowData.id,rowData.kybz);
+// 															$(this).remove();
+// 														});
+														
+// 														var updateAction = $tr.find('td:last a[title=修改]');
+// 														updateAction.attr('rowData',$.toJSON(rowData));
+// 														if(updateAction.length)
+// 															updateAction.get(0).onclick=null;
+// 														updateAction.click(function(){ 
+// 															var rowData = $(this).attr('rowData');
+// 															if(rowData)
+// 																rowData=$.evalJSON(rowData);
+// 															setPjxxUpdate(rowData.id,rowData.kybz);
+// 															$(this).remove();
+// 														});
+														
+// 														var sendAction = $tr.find('td:last a[title=派发]');
+// 														sendAction.attr('rowData',$.toJSON(rowData));
+// 														if(sendAction.length)
+// 															sendAction.get(0).onclick=null;
+// 														sendAction.click(function(){ 
+// 															var rowData = $(this).attr('rowData');
+// 															if(rowData)
+// 																rowData=$.evalJSON(rowData);
+// 															setPjxxSend(rowData.id,rowData.kybz);
+// 															$(this).remove();
+// 														});
+// 													}
+// 												});
+// 											},
 											alignCenterColIndex: [1,2,8],
 											colWidths: ["11%","11%","11%","11%","11%","11%","11%","11%",'0%','0%','0%',"11%"]									
 										});				
@@ -162,11 +170,7 @@
 		return true;
 	}
 	//派件信息修改
-	function setPjxxUpdate(id,kybz){
-		if(kybz == 'Y'){
-			jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！","提示");
-			return;
-		}
+	function setPjxxUpdate(id){
 		
 		dataid = id;
 		setWidth(pjxx_detail_div,pjxx_detail_width);
@@ -174,26 +178,29 @@
 		bindDocument(pjxx_detail_div);
 	} 
 	//派件信息删除
-	function setPjxxDelete(id,kybz) {
-		if(kybz == 'Y'){
-			jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！","提示");
-			return;
-		}
-		jConfirm("是否决定删除该派件登记信息","提示",function(r){
-			if(r){
-				$.post(pjxx_detail_url,{'pjxx.id':id},function(json){
-					if(json.overUpdateTime){
-						jAlert("已经超过了删除的时间！","提示");
-						pjxxQueryPageList(1);
-					}
-					else{
-						$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
-					}
-				},'json');
-				
+	function setPjxxDelete(id) {
+		//验证是否为可疑
+		$.post(pjxx_detail_url,{"pjxx.id":id},function(json){
+			if(json.pjxx.ljjbxx.kybz == 'Y'){
+				jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！","提示");
+				return;
 			}
-		});
-		
+			jConfirm("是否决定删除该派件登记信息","提示",function(r){
+				if(r){
+					$.post(pjxx_detail_url,{'pjxx.id':id},function(json){
+						if(json.overUpdateTime){
+							jAlert("已经超过了删除的时间！","提示");
+							pjxxQueryPageList(1);
+						}
+						else{
+							$.post(pjxx_delete_url,{'pjxx.id':id},function(json){ if(json.result == 'success') { pjxxQueryPageList(1); } },'json');
+						}
+					},'json');
+					
+				}
+			});
+			
+		},'json');
 			
 	}
 	/**
@@ -234,21 +241,26 @@
 	/***
 	派送登记的派件信息。
 	**/
-	function setPjxxSend(id,kybz){
-		if(kybz == 'Y'){
-			jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！","提示");
-			return;
-		}
+	function setPjxxSend(id){
 		
-		var params={"pjxx.id":id,"pjxx.zt":'Y'};
-		jConfirm("是否决定派发该派件登记信息","提示",function(r){
-			if(r){
-				$.post(pjxx_update_url,params,function(json){
-					if(json.result == 'success')
-						pjxxQueryPageList(1);
-				},'json');
+		//验证是否为可疑
+		$.post(pjxx_detail_url,{"pjxx.id":id},function(json){
+			if(json.pjxx.ljjbxx.kybz == 'Y'){
+				jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！","提示");
+				return;
 			}
-		})
+			
+			var params={"pjxx.id":id,"pjxx.zt":'Y'};
+			jConfirm("是否决定派发该派件登记信息","提示",function(r){
+				if(r){
+					$.post(pjxx_update_url,params,function(json){
+						if(json.result == 'success')
+							pjxxQueryPageList(1);
+					},'json');
+				}
+			});
+		},'json');
+		
 		
 		
 	}
