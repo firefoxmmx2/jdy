@@ -366,6 +366,9 @@ function add_pjxx(mode){
 			}
 			
 		});
+		//修改揽件是否派件的标志为Y
+		params["pjxx.ljjbxx.sfpjbz"] = "Y";
+		
 		if(mode == 'again')
 			jQuery.post("jdy/insert_pjxx.action",params,add_pjxx_again_callback,"json");
 			//add_pjxx_again_callback({result:"success"})
