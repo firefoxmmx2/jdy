@@ -45,10 +45,10 @@
 	</sql>
 	<sql id="kyjdwpxxqydcxWhere" >
 		<isNotEmpty prepend="and" property="sbsjf">
-				kyjdwpxx.bgsj >= #sbsjf#
+				kyjdwpxx.djsj >= #sbsjf#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="sbsjt">
-				kyjdwpxx.bgsj &lt;= #sbsjt#
+				kyjdwpxx.djsj &lt;= #sbsjt#
 		</isNotEmpty>
 		
 		<isNotEmpty prepend="and" property="kywplb">
@@ -108,6 +108,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="ljjbxx.djxh">
 				ljxx_djxh
+			</isNotNull>
+			<isNotNull prepend="," property="djsj">
+				djsj
 			</isNotNull>
 		
 		</dynamic>
