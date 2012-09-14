@@ -73,6 +73,7 @@ function cf_setPageList(pageno,url){
 										},
 										height: pageHeight - 250,
 										pageNumber: pageno,
+										noSortColIndex:[5],
 										colWidths: ["16%","16%","16%","16%","16%","20%"]									
 									});				
 		}

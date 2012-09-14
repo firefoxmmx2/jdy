@@ -78,6 +78,7 @@ function cf_setPageList(pageno,url){
 										height: pageHeight - 285,
 										pageNumber: pageno,
 										onRowSelect:null,
+										noSortColIndex:[10],
 										colWidths: ["6%","15%","15%","5%","8%","15%","10%","5%","6%","9%","6%"]									
 									});		
 		setTableText();		

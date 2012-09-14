@@ -27,6 +27,7 @@ var myTableDataBmXx="";
 var jdytjxx_query_page_func;
 var jdytjxx_detail_width=1000;
 var qyjbxx_dataid;
+var qyjbxx_requestType="detail";
 $(document).ready(function() {
 	
 	jdytjxx__table_id="jdytjxx_table_gr";

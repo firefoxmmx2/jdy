@@ -39,6 +39,8 @@
 <!-- 		<result property="pjr.qyid" column="pjr_qyid"/> -->
 		<result property="ljjbxx.djxh" column="ljjbxx_djxh"/>
 		<result property="ljjbxx.wldh" column="ljjbxx_wldh"/>
+<!-- 		添加可疑寄递标识 -->
+		<result property="ljjbxx.kybz" column="ljjbxx_kybz"/>
 <!-- 		寄件人 -->
 		<result property="ljjbxx.jjr.xm" column="ljjbxx_jjr_xm"/>
 		<result property="ljjbxx.jjr.id" column="ljjbxx_jjr_id"/>
@@ -274,7 +276,7 @@
 			,sjr.xm ljjbxx_sjr_xm, sjr.id ljjbxx_sjr_id, sjr.zjlx ljjbxx_sjr_zjlx, sjr.zjhm ljjbxx_sjr_zjhm
 			,pjjbxx.pjrbh, pjr.xm pjr_xm
 			,pjjbxx.pjtbrbh, pjtbr.xm pjtbr_xm
-			,ljjbxx.djxh ljjbxx_djxh,ljjbxx.wldh ljjbxx_wldh
+			,ljjbxx.djxh ljjbxx_djxh,ljjbxx.wldh ljjbxx_wldh,ljjbxx.kybz ljjbxx_kybz
 		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
 <!-- 			关联企业信息 -->
 			,t_qyjbxx qyjbxx
@@ -316,7 +318,7 @@
 			,sjr.xm ljjbxx_sjr_xm, sjr.id ljjbxx_sjr_id, sjr.zjlx ljjbxx_sjr_zjlx, sjr.zjhm ljjbxx_sjr_zjhm
 			,pjjbxx.pjrbh, pjr.xm pjr_xm
 			,pjjbxx.pjtbrbh, pjtbr.xm pjtbr_xm
-			,ljjbxx.djxh ljjbxx_djxh,ljjbxx.wldh ljjbxx_wldh
+			,ljjbxx.djxh ljjbxx_djxh,ljjbxx.wldh ljjbxx_wldh,ljjbxx.kybz ljjbxx_kybz
 			
 		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
 		<!-- 			关联企业信息 -->

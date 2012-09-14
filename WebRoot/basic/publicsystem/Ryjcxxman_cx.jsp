@@ -77,6 +77,7 @@ $(document).ready(function() {
 										height: pageHeight-255,
 										pageNumber: pageno,
 									 	hideColIndex:[8,9],
+									 	noSortColIndex:[10],
 										colWidths: ["8%","14%","12%","5%","10%","10%","18%","11%","0%","0%","12%"]									
 									});
 		setTableText();

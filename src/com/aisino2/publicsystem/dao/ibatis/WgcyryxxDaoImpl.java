@@ -68,7 +68,7 @@ public class WgcyryxxDaoImpl extends BaseDao implements IWgcyryxxDao {
 			else if(sort.equals("7"))
 				sCol = " a.zt "+ desc;
 			else if(sort.equals("8"))
-			    sCol = " a.cyryztdm "+ desc;
+			    sCol = " a.cyryzt "+ desc;
 		
 		
 			
@@ -131,9 +131,11 @@ public class WgcyryxxDaoImpl extends BaseDao implements IWgcyryxxDao {
 				else if(sort.equals("6"))
 					sCol = " b.qymc "+ desc;
 				else if(sort.equals("7"))
-					sCol = " a.zxbz "+ desc;
+					sCol = " a.gwmc "+ desc;
 				else if(sort.equals("8"))
-				    sCol = " a.cyryztdm "+ desc;
+					sCol = " a.zxbz "+ desc;
+				else if(sort.equals("9"))
+				    sCol = " a.cyryzt "+ desc;
 				else
 					sCol = " a.ryid desc ";
 			}else{
@@ -161,7 +163,11 @@ public class WgcyryxxDaoImpl extends BaseDao implements IWgcyryxxDao {
 				else if(sort.equals("8"))
 					sCol = " a.zxbz "+ desc;
 				else if(sort.equals("9"))
-				    sCol = " a.cyryztdm "+ desc;
+					sCol = " a.gwmc "+ desc;
+				else if(sort.equals("10"))
+				    sCol = " a.cyryzt "+ desc;
+				else if(sort.equals("11"))
+					sCol = " a.zxbz "+ desc;
 				else
 					sCol = " a.ryid desc ";
 			}else{
@@ -204,7 +210,7 @@ public class WgcyryxxDaoImpl extends BaseDao implements IWgcyryxxDao {
 			else if(sort.equals("7"))
 				sCol = " a.zt "+ desc;
 			else if(sort.equals("8"))
-			    sCol = " a.cyryztdm "+ desc;
+			    sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid desc ";
 		}else{
@@ -240,7 +246,7 @@ public class WgcyryxxDaoImpl extends BaseDao implements IWgcyryxxDao {
 			else if(sort.equals("7"))
 				sCol = " a.zt "+ desc;
 			else if(sort.equals("8"))
-			    sCol = " a.cyryztdm "+ desc;
+			    sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid  desc";
 		}else{
@@ -270,7 +276,7 @@ public class WgcyryxxDaoImpl extends BaseDao implements IWgcyryxxDao {
 			else if(sort.equals("4"))
 				sCol = " a.gwbh "+ desc;
 			else if(sort.equals("5"))
-			    sCol = " a.cyryztdm "+ desc;
+			    sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid  desc";
 		}else{
@@ -309,11 +315,13 @@ public class WgcyryxxDaoImpl extends BaseDao implements IWgcyryxxDao {
 			else if(sort.equals("6"))
 				sCol = " b.qymc "+ desc;
 			else if(sort.equals("7"))
-				sCol = " a.zxr "+ desc;
+				sCol = " b.gwmc "+ desc;
 			else if(sort.equals("8"))
-				sCol = " a.zxsj "+ desc;
+				sCol = " a.zxr "+ desc;
 			else if(sort.equals("9"))
-			    sCol = " a.cyryztdm "+ desc;
+				sCol = " a.zxsj "+ desc;
+			else if(sort.equals("10"))
+			    sCol = " a.cyryzt "+ desc;
 			else
 				sCol = " a.ryid  desc";
 		}else{
