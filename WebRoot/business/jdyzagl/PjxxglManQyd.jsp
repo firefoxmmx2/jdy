@@ -73,6 +73,7 @@
 													if(zt=='Y'){
 														$tr.find('td:last a[title=派发]').remove();
 														$tr.find('td:last a[title=修改]').remove();
+														$tr.find('td:last a[title=删除]').remove();
 													}
 														
 													//修改删除的时间控制
