@@ -62,7 +62,7 @@
 	                                        ingridPageParams:sXML,
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
-											colIndex: [0],
+											//colIndex: [0],
 											noSortColIndex:[8],
 											//hideColIndex:[1],
 											isHaveMorenPaixuClass: true, //加默认排序样式
