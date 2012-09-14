@@ -10,9 +10,9 @@ $(document).ready(function() {
 })
 //寄递物品信息保存时验证方法
 function jdfpxxtjVerify(){
-	if (!checkControlValue("jdwp_jdpdl","Select",1,4,null,1,"大类不能为空"))
+	if (!checkControlValue("jdwp_jdpdl","Select",1,4,null,1,"大类"))
 		return false;
-	if (!checkControlValue("jdwp_jdpxl","Select",1,4,null,1,"小类不能为空"))
+	if (!checkControlValue("jdwp_jdpxl","Select",1,4,null,1,"小类"))
 		return false;
 	if (!checkControlValue("jdwp_jdpmc","String",1,30,null,1,"内件品名"))
 		return false;
