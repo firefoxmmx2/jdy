@@ -61,7 +61,7 @@ function setPageListlj(pageno,url){
 										noSortColIndex:[7],	
 										//noSortColIndex:[11],
 										onRowSelect:null,
-										//hideColIndex:[7],
+										hideColIndex:[7],
 										//isHaveMorenPaixuClass: true, //加默认排序样式
 										//morenPaixuCol: 8, //第一默认排序	
 										//morenPaixuFangshi:'desc', //默认排序方式 
