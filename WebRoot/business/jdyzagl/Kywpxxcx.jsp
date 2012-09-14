@@ -54,7 +54,7 @@ function setPageListKyjdwpxx(pageno,url){
 										url: url,	
                                         ingridExtraParams:params,
 										height: pageHeight-270,
-										colIndex: [1,2],
+										//colIndex: [1,2],
 										pageNumber: pageno,
 										onTdSelect: function(tr){
 								            $(tr).find("td").click(function(){
