@@ -71,6 +71,7 @@
 		<result property="ljr.xm" column="ljr_xm"/>
 		<result property="ljr.cyrybh" column="ljr_cyrybh"/>
 		<result property="kybz" column="kybz"/>
+		<result property="sfpjbz" column="sfpjbz"/>
 		
 <!-- 		企业信息 -->
 		<result property="qyjbxx.qyid" column="qyjbxx_qyid"/>
@@ -477,7 +478,7 @@
 	<select id="ljjbxx.getListPage" parameterClass="map" resultMap="ljjbxx_list_rm">
 		select x.* from (
 		select rownum rowno,z.* from 
-		(	select distinct ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh,ljjbxx.kybz
+		(	select distinct ljjbxx.djxh,ljjbxx.ljsj,ljjbxx.ljtbsj,ljjbxx.sfbj,ljjbxx.wldh,ljjbxx.kybz,ljjbxx.sfpjbz
 			,jjr.xm jjr_xm,jjr.zjlx jjr_zjlx,jjr.zjhm jjr_zjhm,jjr.id jjr_id
 			,sjr.xm sjr_xm,sjr.zjlx sjr_zjlx,sjr.zjhm sjr_zjhm,sjr.id sjr_id
 			,ljr.xm ljr_xm, ljr.cyrybh ljr_cyrybh
