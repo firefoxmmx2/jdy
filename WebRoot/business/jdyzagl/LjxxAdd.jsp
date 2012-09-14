@@ -73,7 +73,9 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 }
 //物流单号查询
 $('#lj_wldh').change(function(){
-	validateWldh($("#lj_wldh").val(),$("#lj_qyjbxx").val());
+	validateWldh($("#lj_wldh").val(),$("#lj_qyjbxx").val(),null,null,function(data){
+		$('#lj_wldh').val("");
+	});
 });
 
 //添加物品执行方法
@@ -443,7 +445,7 @@ function addbackbcxz(json){
 <tr><td height="3"></td></tr>
 <tr height="25" align="center">
 	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存" onclick='ljxxbaocun("bc");'>保存</a></td>
-	<td  colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="保存新增" onclick='ljxxbaocun("bcxz");'>保存新增</a></td>
+	<td  colspan="6"><a href="#" id="addAgainButton" hidefocus="true" class="submitbutton" title="保存新增" onclick='ljxxbaocun("bcxz");'>保存新增</a></td>
 	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#ljjbxxadd_detail").hideAndRemove("show");'>返回</a></td>
 </tr>
 </table>

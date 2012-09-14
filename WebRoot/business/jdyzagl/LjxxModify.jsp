@@ -98,6 +98,7 @@ function modifyback(json){
 				var jdwp_jdpsm=setNull(json.lj.jdp_list[i].jdpsm);//寄递品数量
 				var jdwp_jdpzl=setNull(json.lj.jdp_list[i].jdpzl);//寄递品重量
 				var jdwp_jdptj=setNull(json.lj.jdp_list[i].jdptj);//寄递品体积
+				var jdwp_jdplxmc=setNull(json.lj.jdp_list[i].jdplxmc);//寄递小类型名称
 				
 			
 				
@@ -122,7 +123,7 @@ function modifyback(json){
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_id"+i+"'>"+jdwp_id+"</td>";
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlx"+i+"'>0</td>";
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' style='display:none' id='l_jdpdlxmc"+i+"'>0</td>";
-					addTableTr1 += "<td class='grid-col-style1' _colid='2'  id='l_jdpxlxmc"+i+"'>0</td>";
+					addTableTr1 += "<td class='grid-col-style1' _colid='2'  id='l_jdpxlxmc"+i+"'>"+jdwp_jdplxmc+"</td>";
 					addTableTr1 += "<td class='grid-col-style1' _colid='2' id='cz_"+i+"'>"
 					+"<A id='delete_"+i+"' class=fontbutton title='删除' onclick=getObjectmod(this) href='#'>删除</A>"
 					+"</td>";
@@ -157,10 +158,11 @@ function setPageList_ywwffzjlzmfj(pageno,url){
 										hideColIndex:[1,4,7,8,9],
 										isPlayResultNull:false,
 										onRowSelect:null,
-										colWidths: ["15%","0","20%","20%","0","20%","20%","0","0","0","20","20%"]								
+										colWidths: ["15%","0","20%","20%","0","20%","15%","0","0","0","20","10%"]								
 									});				
 		}
 }
+
 //添加物品执行方法
 function tianJiaZxzybaydwDzcl(cllb){
 	setWidth("zxzybaydwdzcl_detail",300);
@@ -470,7 +472,7 @@ function addback(json){
 			<td class="distd">登记序号</td>
 			<td class="detailtd"><input type="text" id="lj_djxh" class="readonly" value="" /></td>
 			<td class="red">物流单号</td>
-			<td class="detailtd"><input type="text" id="lj_wldh" name="lj.wldh" class="inputstyle" value="" /></td>
+			<td class="detailtd"><input type="text" id="lj_wldh" class="readonly" name="lj.wldh" class="inputstyle" value="" /></td>
 		</tr>
 	</table>
 	</fieldset>
