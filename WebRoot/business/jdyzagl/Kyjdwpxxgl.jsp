@@ -38,6 +38,7 @@ function setPageListKyjdwpxx(pageno,url){
 										height: pageHeight-250,
 										pageNumber: pageno,
 										ingridPageParams: sXML,
+										hideColIndex:[10],
 										changeHref:function(table){
 											$('tr',table).each(function(){
 												var $tr=$(this);
