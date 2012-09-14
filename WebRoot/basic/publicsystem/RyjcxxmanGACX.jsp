@@ -79,6 +79,18 @@ function cf_setPageList(pageno,url){
 										pageNumber: pageno,
 										onRowSelect: null,
 										noSortColIndex:[10],
+										ingridComplete:function(){
+											$('#'+cf_divnid+' tbody tr').each(function(){
+												var $tr = $(this);
+												$tr.find('td:last a[title=详情]').each(function(){
+													var $a = $(this);
+													$a.get(0).onclick=null;
+													$a.click(function(){
+														setQueryRyjcxxmanGACX($a.parents('tr').eq(0).attr("id"));
+													});
+												});
+											});
+										},
 										colWidths: ["6%","15%","15%","5%","8%","15%","10%","5%","6%","9%","6%"]									
 									});		
 		setTableText();		
