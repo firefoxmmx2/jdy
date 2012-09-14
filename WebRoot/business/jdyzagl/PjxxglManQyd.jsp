@@ -251,7 +251,7 @@
 			}
 			
 			var params={"pjxx.id":id,"pjxx.zt":'Y'};
-			jConfirm("是否决定派发该派件登记信息","提示",function(r){
+			jConfirm("派发后不能修改或删除，您确认派发？","提示",function(r){
 				if(r){
 					$.post(pjxx_update_url,params,function(json){
 						if(json.result == 'success')
