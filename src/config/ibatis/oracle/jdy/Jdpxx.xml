@@ -37,7 +37,8 @@
 		<result property="jdpdlxmc" column="jdpdlxmc"/>
 		<!-- 基地对象表 -->
 		<result property="ljjbxx" column="ljjbxx_id" select="ljjbxx.getByDjxh"/>
-		<result property="pjjbxx" column="ljjbxx_id" select="pjjbxx.getById"/>
+		<!-- <result property="pjjbxx" column="ljjbxx_id" select="pjjbxx.getById"/> -->
+		
 		<result property="kyjdwpxx" column="id" select="kyjdwpxx.getkyjdwpxxid"/>
 		
 		<!-- 

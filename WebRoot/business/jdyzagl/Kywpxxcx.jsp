@@ -44,6 +44,10 @@ $(document).ready(function() {
 }); 
 
 function setPageListKyjdwpxx(pageno,url){	
+	//查询提交时：如果管辖单位编码为空，则必须赋上当前登录用户的管辖单位编码
+	if($("#lj_gxdwbm").val()==null || $("#lj_gxdwbm").val()==""){
+		$("#lj_gxdwbm").val(<%=gxdwbm%>);
+	}
 	if (manVerify_bm()){
 		params =getSubmitParams("#kyjdwpxx_man [name*=kyjdwpxx.]");
 		url=setList(pageno,url);
@@ -129,7 +133,7 @@ function setKyjdwpxxDetail(id){
     	  <input type="hidden" id="p_allhylbdm" value="'Y'"><!-- 级别 -->
 		  <tr>
 			<td width="10%" class="pagedistd">治安管理机构</td>
-			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_ljjbxx_qyjbxx_gxdwmc" name="kyjdwpxx.ljjbxx.qyjbxx.gxdwmc" class="inputstyle" value="" readonly></td>
+			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_ljjbxx_qyjbxx_gxdwmc"  class="inputstyle" value="" readonly></td>
 			<td width="10%" class="pagedistd">企业名称</td>
 			<td width="23%" class="pagetd"><input type="text" id="kyjdwpxx_ljjbxx_qyjbxx_qymc" name="kyjdwpxx.ljjbxx.qyjbxx.qymc" class="inputstyle" value=""></td>
 			<td width="10%" class="pagedistd">物流单号</td>

@@ -64,13 +64,13 @@ function modifyback(json){
 	$("#ljjbxx_detail [id=lj_ljsj]").val(setNull(json.lj.ljsj));//揽件日期
 	for(var i=0;i<json.lj.jdp_list.length;i++){
 		//寄递物品信息保存时添加到列表---添加行的方法
-		    var jdwp_id=json.lj.jdp_list[i].id;//寄递品类型
-			var jdwp_jdplx=json.lj.jdp_list[i].jdplx;//寄递品类型
-			var jdwp_jdpmc=json.lj.jdp_list[i].jdpmc;//寄递品名称
-			var jdwp_jdpsm=json.lj.jdp_list[i].jdpsm;//寄递品数量
-			var jdwp_jdpzl=json.lj.jdp_list[i].jdpzl;//寄递品重量
-			var jdwp_jdptj=json.lj.jdp_list[i].jdptj;//寄递品体积
-			var jdwp_jdplxmc=json.lj.jdp_list[i].jdplxmc;//寄递品类型
+		    var jdwp_id=setNull(json.lj.jdp_list[i].id);//寄递品类型
+			var jdwp_jdplx=setNull(json.lj.jdp_list[i].jdplx);//寄递品类型
+			var jdwp_jdpmc=setNull(json.lj.jdp_list[i].jdpmc);//寄递品名称
+			var jdwp_jdpsm=setNull(json.lj.jdp_list[i].jdpsm);//寄递品数量
+			var jdwp_jdpzl=setNull(json.lj.jdp_list[i].jdpzl);//寄递品重量
+			var jdwp_jdptj=setNull(json.lj.jdp_list[i].jdptj);//寄递品体积
+			var jdwp_jdplxmc=setNull(json.lj.jdp_list[i].jdplxmc);//寄递品类型
 			
 				var addTableTr1="";
 				//获取行数
