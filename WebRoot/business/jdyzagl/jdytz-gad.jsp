@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(function(){
 		$('#ryjbxxData').load('business/jdyzagl/BjxxbRY-jdy-tz.jsp');
-		
+		$('#yxqkData').load('business/jdyzagl/ClbjbdTz.jsp');
 		daggleDiv("ryyjxx_detail");
 	});
 </script>
@@ -21,5 +21,6 @@
 	
 	<fieldset>
 		<legend>运行情况</legend>
+		<div id="yxqkData"></div>
 	</fieldset>
 </div>

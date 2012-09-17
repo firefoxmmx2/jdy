@@ -55,7 +55,7 @@ function setPageList_RY(pageno,url){
 		url=setList_RY(pageno,url);
 		var mygrid1 = $("#"+tableidRY).ingrid({ 
 										url: url,	
-										ingridPageWidth : pageWidth/2-10,
+										ingridPageWidth : 1000,
 										height: pageHeight/2-140,
 										ingridPageParams:sXML,
 										changeHref:function(table){
@@ -78,7 +78,7 @@ function setPageList_RY(pageno,url){
 										pageNumber: pageno,
 										hideColIndex:[2,7,9,10],	
 										isPlayResultNull:false,
-										colWidths: ["11%","14%","11%","11%","12%","11%","10%","11%","11%","11%","0%"]									
+										colWidths: ["14.2%","14%","14.2%","14.2%","14.2%","14.2%","14.2%","14.2%","14.2%","14.2%","0%"]									
 									});				
 }
 
@@ -109,51 +109,53 @@ function setPageList_RY(pageno,url){
  
 		<div id="BjxxbData" style="width: 100%;">
 		<table width="100%" cellpadding="0" cellspacing="0">
-			<tr class="queryfont">
-				<td>
-					人员警情信息
-				</td>
-			</tr>
+<!-- 			<tr class="queryfont"> -->
+<!-- 				<td> -->
+<!-- 					人员警情信息 -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 			<tr>
-			<table id="BjxxbTable" width="100%">
-				<thead>
-					<tr>
-						<th name="l_xm" datatype="string" sumflag="0">
-							姓名
-						</th>
-						<th name="l_gmsfhm" datatype="string" sumflag="0">
-							公民身份号码
-						</th>
-						<th name="l_ssqymc" datatype="string" sumflag="0">
-							所属企业名称
-						</th>
-						<th name="l_gxdwmc" datatype="string" sumflag="0">
-							治安管辖机构名称
-						</th>
-						<th name="l_bjsj" datatype="string" sumflag="0">
-							报警时间
-						</th>
-						<th name="l_bjlx" datatype="string" sumflag="0">
-							报警类型
-						</th>
-						<th name="l_sfyxbj" datatype="string" sumflag="0">
-							警情是否有效
-						</th>
-						<th name="l_jqzt" datatype="string" sumflag="0">
-							警情状态
-						</th>
-						<th name="l_chjjg" datatype="string" sumflag="0">
-							处警结果
-						</th>
-						<th name="">
-							警情状态代码
-						</th>
-						<th name="">
-							操作
-						</th>
-					</tr>
-				</thead>
-			</table>
+				<td>
+					<table id="BjxxbTable" width="100%">
+					<thead>
+						<tr>
+							<th name="l_xm" datatype="string" sumflag="0">
+								姓名
+							</th>
+							<th name="l_gmsfhm" datatype="string" sumflag="0">
+								公民身份号码
+							</th>
+							<th name="l_ssqymc" datatype="string" sumflag="0">
+								所属企业名称
+							</th>
+							<th name="l_gxdwmc" datatype="string" sumflag="0">
+								治安管辖机构名称
+							</th>
+							<th name="l_bjsj" datatype="string" sumflag="0">
+								报警时间
+							</th>
+							<th name="l_bjlx" datatype="string" sumflag="0">
+								报警类型
+							</th>
+							<th name="l_sfyxbj" datatype="string" sumflag="0">
+								警情是否有效
+							</th>
+							<th name="l_jqzt" datatype="string" sumflag="0">
+								警情状态
+							</th>
+							<th name="l_chjjg" datatype="string" sumflag="0">
+								处警结果
+							</th>
+							<th name="">
+								警情状态代码
+							</th>
+							<th name="">
+								操作
+							</th>
+						</tr>
+					</thead>
+					</table>
+				</td>
 			</tr>
 			</table>
 		</div>
