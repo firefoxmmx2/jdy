@@ -53,6 +53,10 @@
 	function jdywxxQueryPageList(pageno,url){	
 		//alert($("#jdwpdl").val());
 		//alert($("#jdwpxl").val());
+		//查询提交时：如果管辖单位编码为空，则必须赋上当前登录用户的管辖单位编码
+		if($("#lj_gxdwbm").val()==null || $("#lj_gxdwbm").val()==""){
+			$("#lj_gxdwbm").val(<%=gxdwbm%>);
+		}
 		if (manVerify_pjxx()){
 		    url=setPjxxQueryList(pageno,url);
 			var mygrid1 = $("#"+lj_grid_table).ingrid({ 
