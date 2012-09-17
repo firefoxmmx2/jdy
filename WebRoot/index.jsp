@@ -340,7 +340,13 @@ background-attachment: fixed;}
 	    	hyflag =21;	
 	    if(usertype.indexOf("233")!=-1)
 	    	hyflag =233;
-
+		//寄递业企业端
+		if(usertype.indexOf('252')!=-1 || usertype.indexOf('253')!=-1)
+			hyflag=253;
+		//寄递业公安端
+		if(usertype.indexOf('254')!=-1)
+			hyflag=254;
+		
 	 	 /*
 	 	if(usertype.indexOf("14")!=-1||usertype.indexOf("144")!=-1)
 		 	$('#header').css('background-image','url(images/logo_011.jpg)');    
@@ -446,6 +452,12 @@ background-attachment: fixed;}
 				shouYeJiaZaiYeMian = "business/ysyzagl/ysytz-qyd.jsp";
 				jiaZaiShouYeYeMian();
 
+		} else if(hyflag==253){ //加载寄递业企业端台帐
+			shouYeJiaZaiYeMian='business/jdyzagl/jdytz-qyd.jsp';
+			jiaZaiShouYeYeMian();
+		} else if(hyflag==254) { //加载寄递业公安端台帐
+			shouYeJiaZaiYeMian='business/jdyzagl/jdytz-gad.jsp';
+			jiaZaiShouYeYeMian();
 		}
 	}
 	
