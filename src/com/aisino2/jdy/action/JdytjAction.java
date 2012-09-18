@@ -6,14 +6,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.RuntimeErrorException;
+
 import com.aisino2.common.StringUtil;
+import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Jdytjxx;
+import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IJdytjxxService;
+import com.aisino2.sysadmin.domain.Dict_item;
+import com.aisino2.sysadmin.service.IDict_itemService;
 
 public class JdytjAction extends PageAction {
 	private IJdytjxxService jdytjxx_service;
-
+	private IDict_itemService dict_itemService;
+	
 	private String tabledata;
 	
 	private int totalrows;
@@ -22,6 +29,16 @@ public class JdytjAction extends PageAction {
 	
 	
 	private List<Jdytjxx> jdytjxx_list;
+	
+	/**
+	 *数据关联度分析人员列表 
+	 */
+	private List<Rdrjbxx> rdrjbxx_list;
+	
+	/**
+	 * 数据关联度分析人员实体，参数传递
+	 */
+	private Rdrjbxx rdrjbxx;
 	
 	/**
 	 * 统计时间开始
@@ -42,6 +59,26 @@ public class JdytjAction extends PageAction {
 	
 	
 	
+	public List<Rdrjbxx> getRdrjbxx_list() {
+		return rdrjbxx_list;
+	}
+
+	public void setRdrjbxx_list(List<Rdrjbxx> rdrjbxx_list) {
+		this.rdrjbxx_list = rdrjbxx_list;
+	}
+
+	public Rdrjbxx getRdrjbxx() {
+		return rdrjbxx;
+	}
+
+	public void setRdrjbxx(Rdrjbxx rdrjbxx) {
+		this.rdrjbxx = rdrjbxx;
+	}
+
+	public void setDict_itemService(IDict_itemService dict_itemService) {
+		this.dict_itemService = dict_itemService;
+	}
+
 	public Integer getShow_number() {
 		return show_number;
 	}
@@ -282,4 +319,80 @@ public class JdytjAction extends PageAction {
 		totalrows=this.getTotalrows();
 	}
 	
+	/**
+	 * 数据关联度分析查询
+	 * @return
+	 * @throws Exception
+	 */
+	public String slgjtjQuerylist() throws Exception{
+		try{
+			if(rdrjbxx==null)
+				throw new RuntimeException("数据关联度分析查询参数传递错误");
+			Map<String,Object> paras = new HashMap<String, Object>();
+			
+			if(rdrjbxx.getXm()!=null)
+				paras.put("xm", rdrjbxx.getXm());
+			if(rdrjbxx.getXxdz()!=null)
+				paras.put("xxdz", rdrjbxx.getXxdz());
+			if(rdrjbxx.getLxdh()!=null)
+				paras.put("lxdh", rdrjbxx.getLxdh());
+			
+			Page page = jdytjxx_service.getSlgjtj(paras,pagesize,pagerow,sort,dir);
+			
+			this.totalpage =page.getTotalPages();
+			this.totalrows = page.getTotalRows();
+			rdrjbxx_list = page.getData();
+			setTabledataSjgltj(rdrjbxx_list);
+			
+			this.result=SUCCESS;
+		}catch(RuntimeException e){
+			this.result = e.getMessage();
+			e.printStackTrace();
+			log.debug(e,e.fillInStackTrace());
+			throw e;
+		}
+		
+		return SUCCESS;
+	}
+	
+	/**
+	 * 数据关联度分析查询，设置INGRID列表结果函数
+	 * @param lData
+	 */
+	private void setTabledataSjgltj(List<Rdrjbxx> lData){
+		List lPro = new ArrayList();
+		//随便设置的一个，详情查询用的列表查询。
+		lPro.add("xm");
+		lPro.add("xm");
+		lPro.add("lxdh");
+		lPro.add("xxdz");
+		lPro.add("jdrylxmc");
+		lPro.add("jdrylx");
+		
+		List lCols = new ArrayList();
+		List lDetail = new ArrayList();
+		lDetail.add("setLjxxDetail");
+		lDetail.add("详情");
+		
+		lCols.add(lDetail);
+		
+		//设置寄递人员类型名称
+		Dict_item item = new Dict_item();
+		item.setFact_value("dm_jdy_rylx");
+		List<Dict_item> dictitemList = dict_itemService.getListDict_item(item);
+		Map<String,String> jdrylxDict = new HashMap<String, String>();
+		
+		for(Dict_item it : dictitemList){
+			jdrylxDict.put(it.getFact_value(), it.getDisplay_name());
+		}
+		
+		for(Rdrjbxx r : lData){
+			r.setJdrylxmc(jdrylxDict.get(r.getJdrylx()));
+		}
+		
+		Rdrjbxx setRdrjbxx = new Rdrjbxx();
+		this.setData(setRdrjbxx, lData, lPro, lCols);
+		this.tabledata = this.getData();
+		this.totalrows = this.getTotalrows();
+	}
 }

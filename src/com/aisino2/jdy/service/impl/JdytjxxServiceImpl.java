@@ -3,6 +3,7 @@ package com.aisino2.jdy.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
 import com.aisino2.jdy.dao.IJdytjxxDao;
 import com.aisino2.jdy.domain.Jdytjxx;
@@ -66,6 +67,19 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 		if(!map.containsKey("show_number") || map.get("show_number") == null)
 			throw new RuntimeException("企业派件量统计显示条目不能为空");
 		return jdytjxxDao.getQypjltj(map);
+	}
+
+	/***
+	 * 数据关联度分析统计查询
+	 * */
+	public Page getSlgjtj(Map<String, Object> paras, int pageno, int pagesize,
+			String dir, String sort) {
+		if(paras.isEmpty())
+			throw new RuntimeException("数据关联度分析查询参数不能为空");
+		if(paras.containsKey("xm") 
+				|| paras.containsKey("lxdh")
+				|| paras.containsKey(""))
+		return jdytjxxDao.getSlgjtj(paras,pageno,pagesize,dir,sort);
 	}
 
 }
