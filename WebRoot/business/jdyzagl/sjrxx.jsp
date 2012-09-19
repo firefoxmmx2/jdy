@@ -1,5 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script type="text/javascript">
+function updatePicture(y){
+	alert("难道没执行呀");
+	$("#lj_sjrxm").val("");//姓名
+	$("#lj_sjrzjlx").val("");//证件类型
+	$("#lj_sjrzjhm").val("");//证件号码
+	//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
+	$("#sjrssxmc").val("");//寄件地址
+	$("#lj_sjrxxdz").val("");//详细地址
+	$("#lj_sjrzpdata").remove();//照片
+	
+    $("#lj_sjrxm").val(y.ocrCName);//姓名
+	$("#lj_sjrzjlx").val("身份证");//证件类型
+	$("#lj_sjrzjhm").val(y.ocrIdentityId);//证件号码
+	getHjsxDD(y.ocrIdentityId,"dm_xzqh","lj_sjrssx","sjrssxmc");//从身份号码中得到户籍省县
+	//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
+	$("#lj_sjrxxdz").val(y.ocrAddR);//详细地址
+	$("#lj_sjrzpdata").val(y.GetImage());//照片
+}
+</script>
          <fieldset>
 		 <legend>收件人信息</legend>
 		 <table width="100%" >

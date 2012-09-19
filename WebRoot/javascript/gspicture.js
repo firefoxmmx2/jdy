@@ -143,7 +143,7 @@ var img_object='';
             x.Other_onscan();
         }
     }
-    function DeviceOnescanOcr(ob,kuan,gao,gj)
+    function DeviceOnescanOcr(ob,kuan,gao,gj,temp)//最后一个参数用于判断回调函数使用
     {
     	x=document.getElementById(ob); 
     	wi=kuan;
@@ -156,7 +156,16 @@ var img_object='';
         {
             x.Other_onscanocr();
             x=formatSfzDate(x);
-            updatePicture(x);
+            if(temp==null || temp ==""){
+		  		updatePicture(x);
+		  	}else{
+		  		if(temp=="jjr"){
+		  			updatePicturejjr(x);
+		  		}else{
+		  			updatePicture(x);
+		  		}
+		  	}
+            
          GetBigImage(x);
         }
     }
@@ -191,7 +200,7 @@ var img_object='';
         }
     }
     
-    function sanTwoOcrAddValue(ob,kuan,gao,gj){
+    function sanTwoOcrAddValue(ob,kuan,gao,gj,temp){//第三个参数用于判断回调函数
 
     	x=document.getElementById(ob); 
     	wi=kuan;
@@ -200,7 +209,7 @@ var img_object='';
     	setControlSize();
    		setControlParameter(gj);
    		selectDeviceType();
-   		DeviceTwoscanOcr();
+   		DeviceTwoscanOcr(temp);
     	
     }
     
@@ -224,7 +233,7 @@ var img_object='';
         }
     }
     
-    function DeviceTwoscanOcr()
+    function DeviceTwoscanOcr(temp)
     {
     	 
     		
@@ -237,7 +246,15 @@ var img_object='';
         x.Other_twoscanocr();
         }
         x=formatSfzDate(x);
-        updatePicture(x);
+        if(temp==null || temp ==""){
+	  		updatePicture(x);
+	  	}else{
+	  		if(temp=="jjr"){
+	  			updatePicturejjr(x);
+	  		}else{
+	  			updatePicture(x);
+	  		}
+	  	}
          GetBigImage(x);
     }
     
@@ -284,7 +301,7 @@ var img_object='';
     }
     
     
-    function Devicepassportscanocr(ob,kuan,gao,gj)
+    function Devicepassportscanocr(ob,kuan,gao,gj,temp)
     {
     	x=document.getElementById(ob); 
     	wi=kuan;
@@ -297,7 +314,15 @@ var img_object='';
         {
             x.Other_passportscanocr();
             x=formatSfzDate(x);
-             updatePicture(x);
+             if(temp==null || temp ==""){
+ 		  		updatePicture(x);
+ 		  	}else{
+ 		  		if(temp=="jjr"){
+ 		  			updatePicturejjr(x);
+ 		  		}else{
+ 		  			updatePicture(x);
+ 		  		}
+ 		  	}
          GetBigImage(x);
         }
     }
@@ -427,7 +452,7 @@ var img_object='';
             x.DeviceScanSelectClick();
         }
     }
-    function opencard(CardName){
+    function opencard(CardName,temp){//第二个参数，用于判断回调函数用到
         var IDCard;
         PickjName=CardName;
         IDCard = document.getElementById('IDCard_'+CardName);    
@@ -461,7 +486,16 @@ var img_object='';
 		  	$('#div_'+CardName).hide();
 		  	$('#img_'+CardName).show();
 		  	x=formatSfzDate(x);
-            updatePicture(x);
+		  	if(temp==null || temp ==""){
+		  		updatePicture(x);
+		  	}else{
+		  		if(temp=="jjr"){
+		  			updatePicturejjr(x);
+		  		}else{
+		  			updatePicture(x);
+		  		}
+		  	}
+            
         }
         //else{
         //	document.getElementById('tName').value = 'error';
@@ -470,8 +504,29 @@ var img_object='';
    
 }
 function ysjz(){
-	img_object= document.getElementById('img_'+PickjName).src = 'C:\\Program Files\\AERO_INFO\\edzzp.bmp';
+	windows = (navigator.userAgent.indexOf("Windows",0) != -1)?1:0;
+	if (windows){
+		img_object= document.getElementById('img_'+PickjName).src = 'C:\\AERO_INFO\\edzzp.bmp';
+	}else{
+		img_object= document.getElementById('img_'+PickjName).src = 'C:\\Program Files\\AERO_INFO\\edzzp.bmp';
+	}
+	
 }
+//判断系统类型函数：Windows、Mac、Linux、Unix
+function check_os() {
+	windows = (navigator.userAgent.indexOf("Windows",0) != -1)?1:0;
+	mac = (navigator.userAgent.indexOf("mac",0) != -1)?1:0;
+	linux = (navigator.userAgent.indexOf("Linux",0) != -1)?1:0;
+	unix = (navigator.userAgent.indexOf("X11",0) != -1)?1:0;
+ 
+	if (windows) os_type = "MS Windows";
+	else if (mac) os_type = "Apple mac";
+	else if (linux) os_type = "Lunix";
+	else if (unix) os_type = "Unix";
+ 
+	return os_type;
+}
+
 
 function formatSfzDate(x){
 	var Birth=x.ocrBirth;
