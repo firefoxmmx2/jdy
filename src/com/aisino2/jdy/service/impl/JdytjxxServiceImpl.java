@@ -72,14 +72,14 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 	/***
 	 * 数据关联度分析统计查询
 	 * */
-	public Page getSlgjtj(Map<String, Object> paras, int pageno, int pagesize,
+	public Page getSjgltj(Map<String, Object> paras, int pageno, int pagesize,
 			String dir, String sort) {
 		if(paras.isEmpty())
 			throw new RuntimeException("数据关联度分析查询参数不能为空");
-		if(paras.containsKey("xm") 
-				|| paras.containsKey("lxdh")
-				|| paras.containsKey(""))
-		return jdytjxxDao.getSlgjtj(paras,pageno,pagesize,dir,sort);
+//		if(!(paras.containsKey("xm") 
+//				|| paras.containsKey("lxdh")
+//				|| paras.containsKey("xxdz")))
+		return jdytjxxDao.getSjgltj(paras,pageno,pagesize,dir,sort);
 	}
 
 }

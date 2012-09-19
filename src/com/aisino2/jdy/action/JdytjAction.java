@@ -337,7 +337,7 @@ public class JdytjAction extends PageAction {
 			if(rdrjbxx.getLxdh()!=null)
 				paras.put("lxdh", rdrjbxx.getLxdh());
 			
-			Page page = jdytjxx_service.getSlgjtj(paras,pagesize,pagerow,sort,dir);
+			Page page = jdytjxx_service.getSjgltj(paras,pagesize,pagerow,sort,dir);
 			
 			this.totalpage =page.getTotalPages();
 			this.totalrows = page.getTotalRows();
@@ -378,7 +378,7 @@ public class JdytjAction extends PageAction {
 		
 		//设置寄递人员类型名称
 		Dict_item item = new Dict_item();
-		item.setFact_value("dm_jdy_rylx");
+		item.setDict_code("dm_jdy_rylx");
 		List<Dict_item> dictitemList = dict_itemService.getListDict_item(item);
 		Map<String,String> jdrylxDict = new HashMap<String, String>();
 		

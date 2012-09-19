@@ -14,11 +14,15 @@
 	//揽件
 	var ljxx_div="ljxxData";
 	var ljxx_page_url="business/jdyzagl/LjxxglManQyd.jsp";
-	var ljxx_width=1000;
+	var ljxx_width=1024;
+	
+	function close_ljxx_dialog(){
+		$('#'+ljxx_div).hideAndRemove("show");
+	}
 	/**
 	揽件详情方法
 	*/
-	function setLjxxDetail(xm,lxdh,xxdz,jdrylx){
+	function setLjxxDetailQuery(xm,lxdh,xxdz,jdrylx){
 		var detailBussTitle = "业务详情展示";
 		if(!xm){
 			jAlert(detailBussTitle + "姓名不能为空","提示");
@@ -32,6 +36,7 @@
 			jAlert(detailBussTitle + "地址不能为空","提示");
 			return;
 		}
+		
 		if(!jdrylx){
 			jAlert(detailBussTitle + "寄递人员类型不能为空","提示");
 			return;
@@ -39,8 +44,15 @@
 		
 		$('#'+ljxx_div).empty();
 		detailDialog(ljxx_div, ljxx_width, ljxx_page_url, null,function(data){
-			$('#'+ljxx_div+" div[id=ljjbxx_man_qyd]").hide();
-			$('#'+ljxx_div+":input").removeAttr('value');
+			$('<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">'+
+				    '<tr>'+
+				      '<td align="left" class="title1">揽件信息</td>'+
+				      '<td align="right"><a href="#" id="closeDiv" onclick="close_ljxx_dialog();" class="close"></a></td>'+
+				    '</tr>'+
+				'</table>').insertBefore($('#ljjbxx_man_qyd'));
+			
+			$('#ljjbxx_man_qyd').hide();
+			$('#ljjbxx_man_qyd :input').attr("value","");
 			//根据寄递人员类型代码，设置揽件参数查询 ， 最大限度复用已有的部件。
 			if(jdrylx == '10'){
 				$('#ljxx_jjrxm').val(xm);
@@ -62,6 +74,10 @@
 				if (manVerify_bm()){
 				    $("#"+divnid).html(tables);
 					params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]");
+					params['lj.jdpxx.jdpdlx'] = undefined;
+					params['lj.jdpxx.jdplx'] = undefined;
+					params['lj.jjr.zjlx'] = undefined;
+					params['lj.scbzw'] = 'y';
 					if (url==null || url=="undefined"){
 						url=pageUrl;
 					}
@@ -96,7 +112,7 @@
 	var sjgl_div="sjglData";
 	var sjgl_table="sjglTable";
 	var sjgl_tabledata;
-	var sjgl_page_url = "jdy/slgjtjQuerylist_jdytj.action";
+	var sjgl_page_url = "jdy/slgjtjQuerylist_jdytjxx.action";
 	/**
 	数据关联度查询
 	*/
@@ -114,17 +130,33 @@
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
 											noSortColIndex:[5],	
+											colIndex: [0,1,2],
 											onRowSelect:null,
 											ingridComplete:function(){
 												$('#'+sjgl_div+" table tbody tr").each(function(){
 													var row = $(this);
-													row.find('a[title=详情]').unbind('click');
+													if(row.find('a[title=详情]').length)
+														row.find('a[title=详情]').get(0).onclick=null;
 													row.find('a[title=详情]').click(function(){
-														setLjxxDetail(
-																row.find('td:nth(0)').text(),
-																row.find('td:nth(1)').text(),
-																row.find('td:nth(2)').text(),
-																row.find('td:nth(4)').text());
+														setLjxxDetailQuery(
+																$(this).parents('tr').eq(0).find('td:nth(0)').text(),
+																$(this).parents('tr').eq(0).find('td:nth(1)').text(),
+																$(this).parents('tr').eq(0).find('td:nth(2)').text(),
+																$(this).parents('tr').eq(0).find('td:nth(4)').text()
+														);
+													});
+													
+													row.find('td').each(function(idx){
+														var datafield = $(this).parents('table').eq(0)
+															.find('thead tr th:nth('+idx+')')
+															.attr('datafield');
+														if(datafield){
+															$(this).click(function(){
+																$('#sjgldfx_man :input').val('');
+																$('#'+datafield).val($(this).text());
+																$('#sjglQueryButton').click();
+															})
+														}
 													});
 												});
 												
@@ -193,9 +225,9 @@
 	<table id="sjglTable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th>姓名</th>
-	    	<th>电话号码</th>
-	    	<th>地址</th>
+	    	<th datafield="sjgl_xm">姓名</th>
+	    	<th datafield="sjgl_lxdh">电话号码</th>
+	    	<th datafield="sjgl_xxdz">地址</th>
 	    	<th>业务类型</th>
 	    	<th>类型实际值</th>
 	    	<th>业务详情</th>
@@ -205,4 +237,5 @@
 </div>
 
 <div id="ljxxData" class="page-layout" src="#"
-		style="top:5px; left:160px;"></div>
+		style="top:5px; left:160px; display: none;">
+</div>

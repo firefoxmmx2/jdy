@@ -12,5 +12,5 @@ public interface IJdytjxxService {
 	List<Jdytjxx> getQyljltj(Map<String, Object> map);
 	List<Jdytjxx> getQypjltj(Map<String, Object> map);
 	
-	Page getSlgjtj(Map<String,Object> paras,int pageno,int pagesize,String dir,String sort);
+	Page getSjgltj(Map<String,Object> paras,int pageno,int pagesize,String dir,String sort);
 }
