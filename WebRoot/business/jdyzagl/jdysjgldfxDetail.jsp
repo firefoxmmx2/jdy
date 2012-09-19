@@ -77,6 +77,7 @@
 		sjglSubPageQuery(1);
 		
 		daggleDiv(ljxx_sub_div);
+		$('#bottomButtonbar').css('paddingLeft','85%');
 	})
 	
 	/**
@@ -125,6 +126,10 @@
 		  </thead>
 		</table>	
 	</div>
+	
+</div>
+<div id="bottomButtonbar">
+	<a href="#" class="addbutton" id="sjglExportButton" onclick='exportSubSjgl();'>导出</a>
 </div>
 
 <div id="ljxxSubData" class="page-layout" src="#"

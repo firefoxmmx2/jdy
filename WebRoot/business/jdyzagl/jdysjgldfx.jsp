@@ -116,6 +116,7 @@
 	var sjgl_detail_div = "sjglDetail";
 	var sjgl_detail_widh= 1024;
 	var sjgl_detail_page_url = 'business/jdyzagl/jdysjgldfxDetail.jsp';
+	var sjgl_excel_url = "jdy/exportSjgltj_jdytjxx.action";
 	
 	function sjglDetail(param){
 		detailDialog(sjgl_detail_div,sjgl_detail_widh,sjgl_detail_page_url,param);
@@ -191,36 +192,69 @@
 	导出数据关联度数据
 	*/
 	function exportSjgl(){
-		
+		//设置分页信息
+		alert($('#'+sjgl_div).find('.grid-page-viewing-records-info').length);
+		$('#'+sjgl_div).find('.grid-sort-desc','.grid-sort-asc').each(function(){
+			th = $(this);
+			var sort = th.parent().index(th);
+			var dir = th.hasClass('grid-sort-desc') ? 'desc' : 'asc';
+			
+			$('#excelSjglForm input:hidden[name=sort]').val(sort);
+			$('#excelSjglForm input:hidden[name=dir]').val(dir);
+		});
+		//当前页数
+		$('#excelSjglForm input:hidden[name=pagesize]').val($('#pageNo',$('#'+sjgl_div)).val());
+		//总页数
+		$('#'+sjgl_div).find('.grid-page-viewing-records-info').each(function(){
+			var pageinfo = $(this).text();
+			var pagerow = 20;
+			var group = /^([\d]+)[u4e00-u9fa5|\w]$/.exec(pageinfo.split(" ")[1].split("/")[0])
+			if(group){
+				pagerow = group[1];
+			}
+			alert(pagerow)
+			$('#excelSjglForm input:hidden[name=pagerow]').val(pagerow);
+		});
+		$('#excelSjglForm').attr('action',sjgl_excel_url)
+			.attr("target","_blank")
+			.attr('type','post')
+			.submit();
 	}
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="sjgldfx_man">
   <tr>
-    <td class="queryfont">关联查询</td>
+    <td class="queryfont">数据关联度查询</td>
   </tr>
   <tr>
     <td class="tdbg">
-    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
-				<tr>
-					<td width="10%" class="pagedistd">姓名</td>
-					<td width="23%" class="pagetd"><input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle"></td>
-					<td width="10%" class="pagedistd">联系电话</td>
-					<td width="23%" class="pagetd"><input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle"></td>
-					<td width="10%" class="pagedistd">地址</td>
-					<td width="23%" class="pagetd"><input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputsytle"></td>
-				</tr>
-    		<tr>
-    		  <td colspan="6">
-    		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
-    		    	<tr>
-    		    	  <td ><a href="#" class="highsearchbutton" id="sjglQueryButton" onclick="sjglPageQuery(1);">关联查询</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="sjglExportButton" onclick='exportSjgl();'>导出</a></td>
-    		    	</tr>
-    		  	</table>
-    		  </td>
-    		</tr>
-    	</table> 
+    	<form action="" id="excelSjglForm">
+    		<input type="hidden" name="pagesize">
+    		<input type="hidden" name="pagerow">
+    		<input type="hidden" name="sort">
+    		<input type="hidden" name="dir">
+	    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
+					<tr>
+						<td width="10%" class="pagedistd">姓名</td>
+						<td width="23%" class="pagetd"><input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle"></td>
+						<td width="10%" class="pagedistd">联系电话</td>
+						<td width="23%" class="pagetd"><input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle"></td>
+						<td width="10%" class="pagedistd">地址</td>
+						<td width="23%" class="pagetd"><input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputsytle"></td>
+					</tr>
+	    		<tr>
+	    		  <td colspan="6">
+	    		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
+	    		    	<tr>
+	    		    	  <td ><a href="#" class="highsearchbutton" id="sjglQueryButton" onclick="sjglPageQuery(1);">关联查询</a></td>
+	    		    	  <td ><a href="#" class="addbutton" id="sjglExportButton" onclick='exportSjgl();'>导出</a></td>
+	    		    	</tr>
+	    		  	</table>
+	    		  </td>
+	    		</tr>
+	    	</table> 
+    	</form>
+    	
     </td>
   </tr>
 </table>
