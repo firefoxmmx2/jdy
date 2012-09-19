@@ -60,6 +60,7 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 		// 新添加一个人员对象为新的代收人。
 		if (pjjbxx.getDsr() != null && pjjbxx.getDsr().getZjhm() != null
 				&& pjjbxx.getDsr().getZjhm().trim().length() > 0) {
+			pjjbxx.getDsr().setJdrylx("30"); //设置寄递人员类型 ， 代收
 			pjjbxx.setDsr(rdrjbxxService.insertRdrjbxx(pjjbxx.getDsr()));
 		}
 

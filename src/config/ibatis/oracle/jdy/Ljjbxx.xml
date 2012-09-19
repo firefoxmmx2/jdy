@@ -146,6 +146,34 @@
 			<isNotEmpty prepend="and" property="jjr.zjlx">
 				jjr.zjlx=#jjr.zjlx#
 			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jjr.xxdz">
+				jjr.xxdz like '%$jjr.xxdz$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jjr.lxdh">
+				jjr.lxdh = #jjr.lxdh#
+			</isNotEmpty>
+		</isNotEmpty>
+		
+<!-- 		收件人 -->
+		<isNotEmpty prepend="" property="sjr" >
+			<isNotEmpty prepend="and" property="sjr.id">
+				ljjbxx.sjr_id=#sjr.id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sjr.xm">
+				sjr.xm like '%$sjr.xm$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sjr.zjhm"> 
+				sjr.zjhm=#sjr.zjhm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sjr.zjlx">
+				sjr.zjlx=#sjr.zjlx#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sjr.xxdz">
+				sjr.xxdz like '%$sjr.xxdz$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sjr.lxdh">
+				sjr.lxdh = #sjr.lxdh#
+			</isNotEmpty>
 		</isNotEmpty>
 		
 		<isNotEmpty prepend="" property="ljr">

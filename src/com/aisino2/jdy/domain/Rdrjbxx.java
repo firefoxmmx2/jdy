@@ -58,7 +58,31 @@ public class Rdrjbxx implements Serializable {
 	 */
 	private String ssxmc;
 	
+	/**
+	 * 寄递人员类型名称
+	 */
+	private String jdrylxmc;
+	/**
+	 * 寄递人员类型
+	 */
+	private String jdrylx;
 	
+	public String getJdrylxmc() {
+		return jdrylxmc;
+	}
+
+	public void setJdrylxmc(String jdrylxmc) {
+		this.jdrylxmc = jdrylxmc;
+	}
+
+	public String getJdrylx() {
+		return jdrylx;
+	}
+
+	public void setJdrylx(String jdrylx) {
+		this.jdrylx = jdrylx;
+	}
+
 	public String getSsxmc() {
 		return ssxmc;
 	}

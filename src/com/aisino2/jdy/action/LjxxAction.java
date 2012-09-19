@@ -162,6 +162,9 @@ public class LjxxAction extends PageAction{
 		if(lj.getLjr()!=null){//揽件人信息
 			params.put("ljr", lj.getLjr());
 		}
+		if(lj.getSjr()!=null){//收件人
+			params.put("sjr", lj.getSjr()); 
+		}
 		if(lj.getLjsjf()!=null){//揽件登记时间开始
 			params.put("ljsjf", lj.getLjsjf());
 		}
@@ -170,6 +173,9 @@ public class LjxxAction extends PageAction{
 		}
 		if(lj.getQyjbxx()!=null){//企业基本信息
 			params.put("qyjbxx", lj.getQyjbxx());
+		}
+		if(lj.getScbzw()!=null){
+			params.put("scbzw", lj.getScbzw());
 		}
 	
 		Page pageinfo = ljjbxxService.findLjjbxxForPage(params, pagesize, pagerow, sort , dir);

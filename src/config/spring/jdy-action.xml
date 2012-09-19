@@ -12,6 +12,7 @@
 <!--   寄递业统计信息 -->
   <bean id="JdytjAction" class="com.aisino2.jdy.action.JdytjAction" scope="prototype">
       <property name="jdytjxx_service" ref="JdytjxxServiceImpl"/>
+      <property name="dict_itemService" ref="dict_itemService"/>
   </bean>
 <!-- 寄递品信息action -->
   <bean id="jdpxxAction" class="com.aisino2.jdy.action.JdpxxAction" scope="prototype">  

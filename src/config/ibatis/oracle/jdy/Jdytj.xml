@@ -26,6 +26,24 @@
 		<result property="gxdwmc" column="gxdwmc"/>
 	</resultMap>
 	
+	<resultMap class="Rdrjbxx" id="sjgltj_rm">
+		<result property="xm" column="xm"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="xxdz" column="xxdz"/>
+		<result property="jdrylx" column="jdrylx"/>
+	</resultMap>
+	
+	<sql id="SjgltjPageWhere">
+		<isNotEmpty prepend="and" property="xm">
+			rdrjbxx.xm like '%$xm$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="lxdh">
+			rdrjbxx.lxdh = #lxdh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="xxdz">
+			rdrjbxx.xxdz like '%$xxdz$%'
+		</isNotEmpty>
+	</sql>
 	<sql id="JdytjxxWhere">
 		<isNotEmpty prepend="and" property="pjsjf">
 			p.pjsj >= #pjsjf#
@@ -121,5 +139,31 @@
 		<dynamic prepend="where">
 			<include refid="JdytjxxOutterWhere"/>
 		</dynamic> 
+	</select>
+	
+<!-- 	数据关联读分析统计查询 -->
+	<select id="Jdytjxx.sjgltj" parameterClass="map" resultMap="sjgltj_rm">
+		select x.* from (
+			select rownum rowno,z.* from 
+				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
+					from t_rdrjbxx rdrjbxx 
+					where 1=1
+					<dynamic prepend="">
+						<include refid="SjgltjPageWhere" />
+						and rdrjbxx.jdrylx != '30'
+					</dynamic>
+					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+	</select>
+	
+	<select id="Jdytjxx.sjgltjCount" parameterClass="map" resultClass="int">
+		select count(1) from (select 1
+					from t_rdrjbxx rdrjbxx 
+					where 1=1
+					<dynamic prepend="">
+						<include refid="SjgltjPageWhere" />
+						and rdrjbxx.jdrylx != '30'
+					</dynamic>
+					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx)
 	</select>
 </sqlMap>

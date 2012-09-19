@@ -18,6 +18,8 @@
 		<result property="gddh" column="gddh"/>
 		<result property="ssxmc" column="ssxmc"/>
 		<result property="dw" column="dw"/>
+<!-- 		新增寄递人员类型 -->
+		<result property="jdrylx" column="jdrylx"/>
 	</resultMap>
 <!-- 	寄递对象信息带照片 -->
 	<resultMap class="Rdrjbxx" id="rdrjbxx_zpxx_rm" extends="rdrjbxx_rm">
@@ -67,6 +69,10 @@
 				<isNotNull property="dw" prepend=","> 
 					dw
 				</isNotNull>
+				<isNotNull property="jdrylx" prepend=","> 
+					jdrylx
+				</isNotNull>
+				
 			</dynamic>
 		)
 		values(
@@ -100,6 +106,9 @@
 				</isNotNull>
 				<isNotNull property="dw" prepend=","> 
 					#dw#
+				</isNotNull>
+				<isNotNull property="jdrylx" prepend=","> 
+					#jdrylx#
 				</isNotNull>
 			</dynamic>
 		)
@@ -136,6 +145,9 @@
 				</isNotNull>
 				<isNotNull property="dw" prepend=","> 
 					dw=#dw#
+				</isNotNull>
+				<isNotNull property="jdrylx" prepend=","> 
+					jdrylx = #jdrylx#
 				</isNotNull>
 			</dynamic>
 			

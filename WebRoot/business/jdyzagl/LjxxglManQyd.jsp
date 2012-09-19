@@ -169,15 +169,22 @@ function setLjxxDelete(id) {
 	}
 }
 </script>
-<table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="">
+<table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="ljjbxx_man_qyd">
   <tr>
     <td class="queryfont">揽件信息管理</td>
   </tr>
   <tr>
     <td class="tdbg">
-    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="ljjbxx_man_qyd">
     	<input type="hidden" id="lj_qyjbxx_qybm" name="lj.qyjbxx.qybm" value="<%=qybm%>" /><!-- 所有查询都需要跟上企业编码 -->
     	<input type="hidden" id="lj_ljr_cyrybh" name="lj.ljr.cyrybh" value="" /><!-- 揽件人 -->
+    	<%-- ++ 兼容数据关联读分析的揽件信息查询  add by 2012-9-18 --%>
+    	<input type="hidden" id="lj_jjr_lxdh" name="lj.jjr.lxdh">
+    	<input type="hidden" id="lj_jjr_xxdz" name="lj.jjr.xxdz">
+    	<input type="hidden" id="lj_sjr_lxdh" name="lj.sjr.lxdh">
+    	<input type="hidden" id="lj_sjr_xxdz" name="lj.sjr.xxdz">
+    	<input type="hidden" id="lj_sjr_xm" name="lj.sjr.xm">
+    	<%-- -- 兼容数据关联读分析的揽件信息查询  add by 2012-9-18 --%>
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2" >
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
 					<td width="23%" class="pagetd"><input type="text" id="ljxx_wldh" name="lj.wldh" class="inputstyle" value="" /></td>

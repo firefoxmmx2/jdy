@@ -64,8 +64,10 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) {
 	
 			/***向寄递对象--人员信息表插入数据***/
+			ljjbxx.getJjr().setJdrylx("10"); //设置寄递人员类型 寄件
 			ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
 			/***向寄递对象--人员信息表插入数据***/
+			ljjbxx.getSjr().setJdrylx("20"); //设置寄递人员类型 收件
 			ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
 			/***向揽件信息表打入揽件数据***/
 			ljjbxx.setLjtbsj(new Date());
