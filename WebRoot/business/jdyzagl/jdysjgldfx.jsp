@@ -15,9 +15,9 @@
 	var ljxx_div="ljxxData";
 	var ljxx_page_url="business/jdyzagl/LjxxglManQyd.jsp";
 	var ljxx_width=1024;
-	
+	var ljxx_dialog_div;
 	function close_ljxx_dialog(){
-		$('#'+ljxx_div).hideAndRemove("show");
+		$('#'+ljxx_dialog_div).hideAndRemove("show");
 	}
 	/**
 	揽件详情方法
@@ -42,8 +42,8 @@
 			return;
 		}
 		
-		$('#'+ljxx_div).empty();
-		detailDialog(ljxx_div, ljxx_width, ljxx_page_url, null,function(data){
+		$('#'+ljxx_dialog_div).empty();
+		detailDialog(ljxx_dialog_div, ljxx_width, ljxx_page_url, null,function(data){
 			$('<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">'+
 				    '<tr>'+
 				      '<td align="left" class="title1">揽件信息</td>'+
@@ -113,6 +113,13 @@
 	var sjgl_table="sjglTable";
 	var sjgl_tabledata;
 	var sjgl_page_url = "jdy/slgjtjQuerylist_jdytjxx.action";
+	var sjgl_detail_div = "sjglDetail";
+	var sjgl_detail_widh= 1024;
+	var sjgl_detail_page_url = 'business/jdyzagl/jdysjgldfxDetail.jsp';
+	
+	function sjglDetail(param){
+		detailDialog(sjgl_detail_div,sjgl_detail_widh,sjgl_detail_page_url,param);
+	}
 	/**
 	数据关联度查询
 	*/
@@ -138,6 +145,7 @@
 													if(row.find('a[title=详情]').length)
 														row.find('a[title=详情]').get(0).onclick=null;
 													row.find('a[title=详情]').click(function(){
+														ljxx_dialog_div = ljxx_div;
 														setLjxxDetailQuery(
 																$(this).parents('tr').eq(0).find('td:nth(0)').text(),
 																$(this).parents('tr').eq(0).find('td:nth(1)').text(),
@@ -152,9 +160,9 @@
 															.attr('datafield');
 														if(datafield){
 															$(this).click(function(){
-																$('#sjgldfx_man :input').val('');
-																$('#'+datafield).val($(this).text());
-																$('#sjglQueryButton').click();
+																var param = {};
+																param[datafield] = $(this).text();
+																sjglDetail(param);
 															})
 														}
 													});
@@ -176,6 +184,7 @@
 		sjglPageQuery(1,"#");
 		
 		daggleDiv(ljxx_div);
+		daggleDiv(sjgl_detail_div);
 	})
 	
 	/**
@@ -205,7 +214,7 @@
     		  <td colspan="6">
     		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
     		    	<tr>
-    		    	  <td ><a href="#" class="searchbutton" id="sjglQueryButton" onclick="sjglPageQuery(1);">关联查询</a></td>
+    		    	  <td ><a href="#" class="highsearchbutton" id="sjglQueryButton" onclick="sjglPageQuery(1);">关联查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="sjglExportButton" onclick='exportSjgl();'>导出</a></td>
     		    	</tr>
     		  	</table>
@@ -237,5 +246,9 @@
 </div>
 
 <div id="ljxxData" class="page-layout" src="#"
+		style="top:5px; left:160px; display: none;">
+</div>
+
+<div id="sjglDetail" class="page-layout" src="#"
 		style="top:5px; left:160px; display: none;">
 </div>
