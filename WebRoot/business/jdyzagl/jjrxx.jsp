@@ -1,9 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<script type="text/javascript">
+function updatePicturejjr(x){
+	$("#lj_jjrxm").val("");//姓名
+	$("#lj_jjrzjlx").val("");//证件类型
+	$("#lj_jjrzjhm").val("");//证件号码
+	//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
+	$("#jjrssxmc").val("");//寄件地址
+	$("#lj_jjrxxdz").val("");//详细地址
+	$("#lj_jjrzpdata").remove();//照片
+	
+	
+    $("#lj_jjrxm").val(x.ocrCName);//姓名
+	$("#lj_jjrzjlx").val("身份证");//证件类型
+	$("#lj_jjrzjhm").val(x.ocrIdentityId);//证件号码
+	getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
+	//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
+	$("#lj_jjrxxdz").val(x.ocrAddR);//详细地址
+	$("#lj_jjrzpdata").val(x.GetImage());//照片
+}
+</script>
          <fieldset>
 		 <legend>寄件人信息</legend>
-		 <table width="100%" >
+		 <table width="100%" > 
 			<tr>
 				<td>
 				  <table>
@@ -31,7 +50,7 @@
 				 </td>
 				 <td>
 				    <div>
-					  <jsp:include page="../../public/saomiaoyiPictureJdy.jsp?zh=true&mo=2&pic=picControlscr&wi=80&hi=114&file=true" flush="true"></jsp:include>
+					  <jsp:include page="../../business/jdyzagl/saomiaoyiPictureJdyjjr.jsp?zh=true&mo=2&pic=picControlscrjjr&wi=80&hi=114&file=true" flush="tru"></jsp:include>
 					</div>
 				 </td>
 			 </tr>
