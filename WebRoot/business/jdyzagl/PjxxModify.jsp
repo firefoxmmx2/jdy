@@ -28,7 +28,7 @@ $(function() {
 	$("#pjjbxxmod_jjrzjlx").attr("name","pjxx.ljjbxx.jjr.zjlx");
 	$("#pjjbxxmod_sjrzjlx").attr("name","pjxx.ljjbxx.sjr.zjlx");
 	//派件时间选择
-	$("#pjjbxxmod_pjsj").attr("readOnly",true).datepicker();
+	$("#pjjbxxmod_pjsj").attr("readOnly",true).datepicker(true,'0');
 	//
 	$('#pjjbxxmod_pjr_xm').attr("readOnly",true).click(function(){
 		dataid=null;
