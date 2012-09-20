@@ -84,7 +84,30 @@
 	导出数据关联度数据
 	*/
 	function exportSubSjgl(){
-		
+		//设置分页信息
+		$('#'+sjgl_sub_div).find('.grid-sort-desc','.grid-sort-asc').each(function(idx){
+			th = $(this);
+			var sort = idx;
+			var dir = th.hasClass('grid-sort-desc') ? 'desc' : 'asc';
+			$('#excelSjglForm input:hidden[name=sort]',$('#subSjglDiv')).val(sort);
+			$('#excelSjglForm input:hidden[name=dir]',$('#subSjglDiv')).val(dir);
+		});
+		//当前页数
+		$('#excelSjglForm input:hidden[name=pagesize]',$('#subSjglDiv')).val($('#pageNo',$('#subSjglDiv')).val());
+		//每页数
+		$('#'+sjgl_sub_div).find('.grid-page-viewing-records-info').each(function(){
+			var pageinfo = $(this).text();
+			var pagerow = 20;
+			var group = /^([\d]+)[\u4e00-\u9fa5|\w]*$/.exec(pageinfo.split(" ")[1].split("/")[0])
+			if(group){
+				pagerow = group[1];
+			}
+			$('#excelSjglForm input:hidden[name=pagerow]',$('#subSjglDiv')).val(pagerow);
+		});
+		$('#excelSjglForm').attr('action',sjgl_excel_url)
+			.attr("target","_blank")
+			.attr('type','post')
+			.submit();
 	}
 	
 	function closeSubSjglDetail(){
@@ -109,9 +132,16 @@
 		if(xxdz==null)
 			xxdz = "";
 	%>
-	<input type="hidden" id="sjgl_xm" name="rdrjbxx.xm" value="<%=xm%>">
-	<input type="hidden" id="sjgl_lxdh" name="rdrjbxx.lxdh" value="<%=lxdh%>">
-	<input type="hidden" id="sjgl_xxdz" name="rdrjbxx.xxdz" value="<%=xxdz%>">
+	<form action="" id="excelSjglForm">
+		<input type="hidden" name="pagesize">
+   		<input type="hidden" name="pagerow">
+   		<input type="hidden" name="sort">
+   		<input type="hidden" name="dir">
+		<input type="hidden" id="sjgl_xm" name="rdrjbxx.xm" value="<%=xm%>">
+		<input type="hidden" id="sjgl_lxdh" name="rdrjbxx.lxdh" value="<%=lxdh%>">
+		<input type="hidden" id="sjgl_xxdz" name="rdrjbxx.xxdz" value="<%=xxdz%>">
+	</form>
+	
 	<div id="sjglSubData" style="width:100%;">
 		<table id="sjglSubTable" width="100%">
 		  <thead>

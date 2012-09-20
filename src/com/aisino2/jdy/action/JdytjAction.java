@@ -472,7 +472,7 @@ public class JdytjAction extends PageAction {
 		if (!(new File(excelExportPath)).isDirectory())
 			(new File(excelExportPath)).mkdir();
 		String sExcelName = (new StringBuilder(String.valueOf(excelExportPath)))
-				.append("\\").append(sFileName).toString();
+				.append("/").append(sFileName).toString();
 		excelExportPath = sExcelName;
 		File excleFile = new File(sExcelName);
 		if (!excleFile.exists()) {

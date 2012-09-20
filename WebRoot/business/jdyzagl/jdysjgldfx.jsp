@@ -193,10 +193,9 @@
 	*/
 	function exportSjgl(){
 		//设置分页信息
-		alert($('#'+sjgl_div).find('.grid-page-viewing-records-info').length);
-		$('#'+sjgl_div).find('.grid-sort-desc','.grid-sort-asc').each(function(){
+		$('#'+sjgl_div).find('.grid-sort-desc','.grid-sort-asc').each(function(idx){
 			th = $(this);
-			var sort = th.parent().index(th);
+			var sort = idx;
 			var dir = th.hasClass('grid-sort-desc') ? 'desc' : 'asc';
 			
 			$('#excelSjglForm input:hidden[name=sort]').val(sort);
@@ -208,11 +207,10 @@
 		$('#'+sjgl_div).find('.grid-page-viewing-records-info').each(function(){
 			var pageinfo = $(this).text();
 			var pagerow = 20;
-			var group = /^([\d]+)[u4e00-u9fa5|\w]$/.exec(pageinfo.split(" ")[1].split("/")[0])
+			var group = /^([\d]+)[\u4e00-\u9fa5|\w]*$/.exec(pageinfo.split(" ")[1].split("/")[0])
 			if(group){
 				pagerow = group[1];
 			}
-			alert(pagerow)
 			$('#excelSjglForm input:hidden[name=pagerow]').val(pagerow);
 		});
 		$('#excelSjglForm').attr('action',sjgl_excel_url)
