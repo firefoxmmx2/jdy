@@ -104,7 +104,7 @@
 			}
 			$('#excelSjglForm input:hidden[name=pagerow]',$('#subSjglDiv')).val(pagerow);
 		});
-		$('#excelSjglForm').attr('action',sjgl_excel_url)
+		$('#excelSjglForm',$('#subSjglDiv')).attr('action',sjgl_excel_url)
 			.attr("target","_blank")
 			.attr('type','post')
 			.submit();
