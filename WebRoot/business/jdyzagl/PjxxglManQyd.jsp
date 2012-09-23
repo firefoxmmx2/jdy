@@ -7,6 +7,7 @@
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 
 <script type="text/javascript">
+var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
 	var pjxx_detail_div="pjjbxx_detail";
 	var pjxx_detail_width=900;
 	var pjxx_grid_div="pjjbxxDiv";
@@ -18,6 +19,8 @@
 	var pjxx_delete_url="jdy/delete_pjxx.action";
 	var pjxx_update_url="jdy/update_pjxx.action";
 	var pjxx_detail_url="jdy/query_pjxx.action";
+	var searchLongUrl="jdy/querycxForExport_pjxx.action";
+	var excelUrl="jdy/exportExcel_pjxx.action";
 	$(function(){
 		
 		$('#pjxx_sjr_zjlx').selectBox({code:'dm_zjlx'});
@@ -30,8 +33,11 @@
 			dataid=null;
 			getTyRY_item('pjxx_pjr_xm','pjxx_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
 		});
-		loadPagePjxxQuery(pjxx_grid_div);
+		//导出用到参数
+		tabletitle = "";
+		geteExcelHead("pjjbxxDiv");
 		
+		loadPagePjxxQuery(pjxx_grid_div);
 		daggleDiv(pjxx_detail_div);
 	});
 	
@@ -66,6 +72,12 @@
 											morenPaixuCol: 7, //第一默认排序	
 											morenPaixuFangshi:'desc', //默认排序方式
 											changeHref:function($table){
+												//判断是否有数据
+												if($($table).find("tr").length==0){
+												    daochuNum = 0;
+												}else{
+												    daochuNum = 1;
+												}
 												$('tr',$table).each(function(){
 													var $tr=$(this);
 													//派发控制
@@ -270,6 +282,28 @@
 		
 		
 	}
+	//导出Excel
+	function exportPjxx(){	
+	  	if(daochuNum==1){
+	  	  //params = null
+	  	  params = getSubmitParams("#pjjbxx_man_qyd [id*=pjxx_]",params);
+	  	  jQuery.post(searchLongUrl,params,searchLongBack,"json");
+	  	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
+	  	}else{
+	  		jAlert("无查询结果不能导出！",'验证信息',null,null);
+	  	}		
+	}
+	//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
+	function searchLongBack(json){  
+	    //报表标题
+		var bbmc="派件信息";
+		//报表请求
+		setExcelLong("pjxxexcel",bbmc);	
+	}
+	//揽件信息导入方法
+	function importPjxx(){
+		return;
+	}
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="pjjbxx_man_qyd">
@@ -314,7 +348,7 @@
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="pjxxQueryPageList(1);">查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setPjxxAdd();'>添加</a></td>
     		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='importPjxx();'>导入</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='exportPjxx();'>导出</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="pjxxexcel" onclick='exportPjxx();'>导出</a></td>
     		    	</tr>
     		  	</table>
     		  </td>
@@ -336,17 +370,17 @@
 	<table id="pjjbxxTable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="l_djxh">登记序号</th>
-	    	<th name="l_wldh">物流单号</th>
-	    	<th name="l_sjrxm">收件人姓名</th>
-	    	<th name="l_zjlx">证件类型</th>
-	    	<th name="l_zjhm">证件号码</th>
-	    	<th name="l_jdpdl">派件时间</th>
-	    	<th name="l_ljy">派件员</th>
-	    	<th name="l_ljsj">登记时间</th>
-	    	<th name="l_zt">状态</th>
-	    	<th>修改状态</th>
-	    	<th>可疑寄递标志</th>
+	    	<th name="l_djxh" datatype="string" sumflag="0">登记序号</th>
+	    	<th name="l_wldh" datatype="string" sumflag="0">物流单号</th>
+	    	<th name="l_sjr_xm" datatype="string" sumflag="0">收件人姓名</th>
+	    	<th name="l_sjr_zjlx" datatype="string" sumflag="0">证件类型</th>
+	    	<th name="l_sjr_zjhm" datatype="string" sumflag="0">证件号码</th>
+	    	<th name="l_pjsj" datatype="string" sumflag="0">派件时间</th>
+	    	<th name="l_pjr_xm" datatype="string" sumflag="0">派件员</th>
+	    	<th name="l_pjtbsj" datatype="string" sumflag="0">登记时间</th>
+	    	<th name="">状态</th>
+	    	<th name="">修改状态</th>
+	    	<th name="">可疑寄递标志</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
