@@ -192,7 +192,7 @@ function setLjxxDelete(id) {
 //导出Excel
 function setExportExcel(){	
   	if(daochuNum==1){
-  	  params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]");
+  	  params =null;
   	  jQuery.post(searchLongUrl,params,searchLongBack,"json");
   	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
   	}else{
