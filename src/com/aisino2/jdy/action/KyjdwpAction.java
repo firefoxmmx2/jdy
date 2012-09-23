@@ -1,5 +1,6 @@
 package com.aisino2.jdy.action;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,10 +10,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 
 
 import com.aisino2.common.PageUtil;
+import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
@@ -21,6 +27,7 @@ import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.service.IKyjdwpxxService;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.User;
+import com.opensymphony.xwork2.ActionContext;
 /**
  * 可疑寄递物品信息action
  * @author renhao
@@ -304,5 +311,111 @@ public class KyjdwpAction extends PageAction{
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
+	/***
+	 * 可疑寄递物品信息导出时的查询，公安端
+	 * @return
+	 * @throws Exception
+	 */
+		public String querycxForExportgad() throws Exception{
+			HttpSession session = ServletActionContext.getRequest().getSession();
+			session.removeAttribute("Kyjdwpxxdaoc");// 清除session中的导出结果
+			String maxRows = QjblUtil.queryQjblVal("exportmaxrows");// 最大导出记录数
+			if(maxRows == null || "".equals(maxRows)){
+				maxRows = "0";
+			}
+			try {
+				//如果派件查询参数不为空的话，配置数据库的查询参数
+				Map<String, Object> params = new HashMap<String, Object>();
+				
+				if(kyjdwpxx.getLjjbxx()!=null){//物流单号
+					params.put("ljjbxx", kyjdwpxx.getLjjbxx());
+					
+					if(kyjdwpxx.getLjjbxx().getQyjbxx()!=null){//企业基本信息
+						if(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwbm()!=null){
+							kyjdwpxx.getLjjbxx().getQyjbxx().setGxdwbm(StringUtil.trimEven0(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwbm()));
+						}
+						params.put("qyjbxx", kyjdwpxx.getLjjbxx().getQyjbxx());
+					}
+				}
+				if(kyjdwpxx.getKywplb()!=null){//可疑物品类别
+					params.put("kywplb", kyjdwpxx.getKywplb());
+				}
+				if(kyjdwpxx.getSbsjf()!=null){//上报开始时间
+					params.put("sbsjf", kyjdwpxx.getSbsjf());
+				}
+				if(kyjdwpxx.getSbsjt()!=null){//上报截止时间
+					params.put("sbsjt", kyjdwpxx.getSbsjt());
+				}
+				if(kyjdwpxx.getKyjdwpxxcxbz()!=null){
+					params.put("kyjdwpxxcxbz", kyjdwpxx.getKyjdwpxxcxbz());
+				}
+				Page pageinfo = kyjdwpxxService.findKyjdwpxxsForPage(params, 1, Integer.parseInt(maxRows), dir, sort);
+				totalpage = pageinfo.getTotalPages();
+				totalrows = pageinfo.getTotalRows();
+				lKyjdwpxx = pageinfo.getData();
+				for(Kyjdwpxx kyjdwpxx : lKyjdwpxx){
+					//kyjdwp.setLjjbxx_id(kyjdwpxx.getLjjbxx_id());//可疑物品信息ID
+					kyjdwpxx.setWldhlb(kyjdwpxx.getLjjbxx().getWldh());//物流单号
+					kyjdwpxx.setJdpmc(kyjdwpxx.getJdpxx().getJdpmc());//寄递品名称
+					kyjdwpxx.setJjrxm(kyjdwpxx.getJjr().getXm());//寄件人姓名
+					kyjdwpxx.setSjrxm(kyjdwpxx.getSjr().getXm());//收件人姓名==
+					kyjdwpxx.setJdpdlxmc(kyjdwpxx.getJdpxx().getJdpdlxmc());//寄递品大类名称
+					kyjdwpxx.setJdplxmc(kyjdwpxx.getJdpxx().getJdplxmc());//寄递品小类名称
+					if(kyjdwpxx.getKywplb().equals("1")){//可疑物品类别
+						kyjdwpxx.setKywplb("丢失");
+					}
+					if(kyjdwpxx.getKywplb().equals("2")){//可疑物品类别
+						kyjdwpxx.setKywplb("禁寄品");
+					}
+					if(kyjdwpxx.getKywplb().equals("3")){//可疑物品类别
+						kyjdwpxx.setKywplb("其他");
+					}
+					kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
+					kyjdwpxx.setLjtbsj(kyjdwpxx.getLjjbxx().getLjtbsj());//揽件填报时间
+					kyjdwpxx.setQymc(kyjdwpxx.getLjjbxx().getQyjbxx().getQymc());//企业名称
+					kyjdwpxx.setQyid(kyjdwpxx.getLjjbxx().getQyjbxx().getQyid());//企业ID
+				}
+		    	session.setAttribute("Kyjdwpxxdaoc", lKyjdwpxx);
+				this.result = "success";
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.result = e.getMessage();
+			}
+			return "success";
+	    }
+	/***
+	 * 可疑寄递物品信息导出，公安端
+	 */
+		public void exportExcelgad() throws Exception {
+			ActionContext ctx = ActionContext.getContext();
+			HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+			HttpServletResponse response = (HttpServletResponse) ctx.get(ServletActionContext.HTTP_RESPONSE);
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute(Constants.userKey);
+			try {
+				String bbmc = request.getParameter("bbmc");
+				String tabletitle = request.getParameter("tabletitle");
+				// Excel输出
+				List lResult = new ArrayList(); // //开头excel
+				List qyryList = (List) session.getAttribute("Kyjdwpxxdaoc");
+				Kyjdwpxx setKyjdwpxx=new Kyjdwpxx();
+				List lColumn = this.getExcelColumn(tabletitle);
+				lResult.add(bbmc);
+				lResult.add(lColumn);
+				lResult.add(response);
+				lResult.add(qyryList);
+				lResult.add(setKyjdwpxx);
+				this.setExcelCreate("Ljxx", lResult);
+				this.result = "ok";
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				this.result = e.getMessage();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				this.result = e.getMessage();
+			}
+		}
 	
 }
