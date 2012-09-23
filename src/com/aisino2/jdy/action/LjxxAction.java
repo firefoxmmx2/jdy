@@ -671,6 +671,109 @@ public class LjxxAction extends PageAction{
 			this.result = e.getMessage();
 		}
 	}
+	/***
+	 * 揽件寄递物品导出时的查询，公安端
+	 * @return
+	 * @throws Exception
+	 */
+		public String querycxForExportgad() throws Exception{
+			HttpSession session = ServletActionContext.getRequest().getSession();
+			session.removeAttribute("Ljjdwpxxgad");// 清除session中的导出结果
+			String maxRows = QjblUtil.queryQjblVal("exportmaxrows");// 最大导出记录数
+			if(maxRows == null || "".equals(maxRows)){
+				maxRows = "0";
+			}
+			try {
+				//如果派件查询参数不为空的话，配置数据库的查询参数
+				Map<String, Object> params = new HashMap<String, Object>();
+				
+				//管辖单位编码、企业名称
+				if(lj.getQyjbxx()!=null){
+					if(lj.getQyjbxx().getGxdwbm()!=null){
+						lj.getQyjbxx().setGxdwbm(StringUtil.trimEven0(lj.getQyjbxx().getGxdwbm()));
+					}
+					params.put("qyjbxx", lj.getQyjbxx());
+				}
+				//揽件基本信息   物流单号
+				if(lj.getWldh()!=null){
+					params.put("wldh", lj.getWldh());
+				}
+				//寄件人
+				if(lj.getJjr()!=null){
+					params.put("jjr", lj.getJjr());
+				}
+				//收件人
+				if(lj.getSjr()!=null){
+					params.put("sjr", lj.getSjr());
+				}
+				//寄递品信息
+				if(lj.getJdpxx()!=null){
+					params.put("jdpxx", lj.getJdpxx());
+				}
+				//登记时间
+				if(lj.getLjsjf()!=null){
+					params.put("ljsjf", lj.getLjsjf());
+				}
+				if(lj.getLjsjt()!=null){
+					params.put("ljsjt", lj.getLjsjt());
+				}
+				if(lj.getGadqydcxqbbz()!=null){
+					params.put("gadqydcxqbbz", lj.getGadqydcxqbbz());
+				}
+				Page pageinfo = ljjbxxService.gadjdpxxForPage(params, 1, Integer.parseInt(maxRows), sort , dir);
+				totalpage = pageinfo.getTotalPages();
+				totalrows = pageinfo.getTotalRows();
+				lLjjbxx = pageinfo.getData();
+				for(Ljjbxx lj : lLjjbxx){
+					lj.setQymc(lj.getQyjbxx().getQymc());//企业名称
+					lj.setJjrxm(lj.getJjr().getXm());//寄件人姓名
+					lj.setJjrzjhm(lj.getJjr().getZjhm());//寄件人证件号码
+					lj.setSjrxm(lj.getSjr().getXm());//收件人姓名
+					lj.setJdpdlxmc(lj.getJdpxx().getJdpdlxmc());//寄递品大类型名称
+					lj.setJdplxmc(lj.getJdpxx().getJdplxmc());//寄递品小类型名称
+				}
+		    	session.setAttribute("Ljjdwpxxgad", lLjjbxx);
+				this.result = "success";
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.result = e.getMessage();
+			}
+			return "success";
+	    }
+	/***
+	 * 揽件寄递物品导出时的查询，公安端
+	 */
+		public void exportExcelgad() throws Exception {
+			ActionContext ctx = ActionContext.getContext();
+			HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+			HttpServletResponse response = (HttpServletResponse) ctx.get(ServletActionContext.HTTP_RESPONSE);
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute(Constants.userKey);
+			try {
+				String bbmc = request.getParameter("bbmc");
+				String tabletitle = request.getParameter("tabletitle");
+				// Excel输出
+				List lResult = new ArrayList(); // //开头excel
+				List qyryList = (List) session.getAttribute("Ljjdwpxxgad");
+				Ljjbxx setLjjbxx=new Ljjbxx();
+				List lColumn = this.getExcelColumn(tabletitle);
+				lResult.add(bbmc);
+				lResult.add(lColumn);
+				lResult.add(response);
+				lResult.add(qyryList);
+				lResult.add(setLjjbxx);
+				this.setExcelCreate("Ljxx", lResult);
+				this.result = "ok";
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				this.result = e.getMessage();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				this.result = e.getMessage();
+			}
+		}
 //	 /**
 //	 * 翻译字典项
 //	 */
