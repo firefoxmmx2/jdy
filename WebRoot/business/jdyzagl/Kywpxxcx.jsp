@@ -6,7 +6,7 @@
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
 <script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
 <script type="text/javascript">
-var hylbbz="Y";
+var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
 $(document).ready(function() {
 	pageUrl="jdy/queryList_kyjdwp.action";
 	divnid="tabledata";
@@ -20,6 +20,11 @@ $(document).ready(function() {
 	
 	daggleDiv(detailid);
 	$("#"+detailid).hide()
+	//导出用到参数
+	searchLongUrl="jdy/querycxForExportgad_kyjdwp.action";
+	excelUrl="jdy/exportExcelgad_kyjdwp.action";
+	tabletitle = "";
+	geteExcelHead("tabledata");
 	
 	//loadPage(divnid);
 	tables=$("#"+divnid).html();
@@ -91,6 +96,16 @@ function setPageListKyjdwpxx(pageno,url){
 								                }
 								            });
 								        },
+								        changeHref:function(table){
+											//$(table).find("tr").each(function(){
+												//$(this).find("td:last").find("a[title='可疑']").remove();
+											//});
+											if($(table).find("tr").length==0){
+											    daochuNum = 0;
+											}else{
+											    daochuNum = 1;
+											}	
+										},
 										ingridPageParams: sXML,
 										colWidths: ["10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","10%","18%"]									
 									});				
@@ -116,7 +131,23 @@ function setKyjdwpxxDetail(id){
 	setUrl(detailid,"business/jdyzagl/KyjdwpxxDetail2.jsp");
 	bindDocument(detailid);
 }
-
+//导出Excel
+function setkyjdwpdaoc(){	
+  	if(daochuNum==1){
+  	  params =getSubmitParams("#kyjdwpxx_man [name*=kyjdwpxx.]");
+  	  jQuery.post(searchLongUrl,params,searchLongBack,"json");
+  	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
+  	}else{
+  		jAlert("无查询结果不能导出！",'验证信息',null,null);
+  	}		
+}
+//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
+function searchLongBack(json){  
+    //报表标题
+	var bbmc="可疑寄递物品信息";
+	//报表请求
+	setExcelLong("kyjdwpxxexcel",bbmc);	
+}
 </script>
 
 <body>
@@ -155,7 +186,7 @@ function setKyjdwpxxDetail(id){
     		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
     		    	<tr>
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListKyjdwpxx(1);">查询</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='setkyjdwpdaoc();'>导出</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="kyjdwpxxexcel" onclick='setkyjdwpdaoc();'>导出</a></td>
     		    	</tr>
     		  	</table>
     		  </td>
@@ -176,18 +207,18 @@ function setKyjdwpxxDetail(id){
 	<table id="table1" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="l_jdpmc">内件品名</th>
-	    	<th name="l_qymc">企业名称</th>
-	     	<th name="l_wldhlb">物流单号</th>
-	     	<th name="l_kywplb">可疑物品类别</th>
-	     	<th name="l_bgrxm">报告人</th>
-	    	<th name="l_bgsj">报告日期</th>
-	    	<th name="l_jjrxm">寄件人</th>
-	    	<th name="l_sjrxm">收件人</th>
-	    	<th name="l_jdpdlxmc">寄递品大类</th>
-	    	<th name="l_jdplxmc">寄递品小类</th>
-	    	<th name="l_ljtbsj">揽件登记时间</th>
-	    	<th name="l_qyid">企业ID</th>
+	    	<th name="l_jdpmc" datatype="string" sumflag="0">内件品名</th>
+	    	<th name="l_qymc" datatype="string" sumflag="0">企业名称</th>
+	     	<th name="l_wldhlb" datatype="string" sumflag="0">物流单号</th>
+	     	<th name="l_kywplb" datatype="string" sumflag="0">可疑物品类别</th>
+	     	<th name="l_bgrxm" datatype="string" sumflag="0">报告人</th>
+	    	<th name="l_bgsj" datatype="string" sumflag="0">报告日期</th>
+	    	<th name="l_jjrxm" datatype="string" sumflag="0">寄件人</th>
+	    	<th name="l_sjrxm" datatype="string" sumflag="0">收件人</th>
+	    	<th name="l_jdpdlxmc" datatype="string" sumflag="0">寄递品大类</th>
+	    	<th name="l_jdplxmc" datatype="string" sumflag="0">寄递品小类</th>
+	    	<th name="l_ljtbsj" datatype="string" sumflag="0">揽件登记时间</th>
+	    	<th name="l_qyid" datatype="string" sumflag="0">企业ID</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
