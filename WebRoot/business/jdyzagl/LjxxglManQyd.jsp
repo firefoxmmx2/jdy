@@ -192,12 +192,11 @@ function setLjxxDelete(id) {
 //导出Excel
 function setExportExcel(){	
   	if(daochuNum==1){
-  	  alert("是否有值1111="+tabletitle);
   	  params =getSubmitParams("#ljjbxx_man_qyd [name*=lj.]");
   	  jQuery.post(searchLongUrl,params,searchLongBack,"json");
   	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
   	}else{
-  		alert('无查询结果不能导出！');
+  		jAlert("无查询结果不能导出！",'验证信息',null,null);
   	}		
 }
 //导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
@@ -206,6 +205,10 @@ function searchLongBack(json){
 	var bbmc="揽件信息";
 	//报表请求
 	setExcelLong("ljxxexcel",bbmc);	
+}
+//揽件信息导入方法
+function importLjxx(){
+	return;
 }
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="ljjbxx_man_qyd">
@@ -254,6 +257,7 @@ function searchLongBack(json){
     		    	<tr>
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListlj(1);">查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setljAdd();'>添加</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="exceldcbutton" onclick='importLjxx();'>导入</a></td>
     		    	  <td width="62"><a href="#" class="exceldcbutton" onclick='setExportExcel();' id="ljxxexcel">导出</a></td>
     		    	</tr>
     		  	</table>
