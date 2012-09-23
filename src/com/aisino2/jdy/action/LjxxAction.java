@@ -165,7 +165,7 @@ public class LjxxAction extends PageAction{
 		ActionContext ctx = ActionContext.getContext();
 		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		session.removeAttribute("QyryExportResult");// 清除session中的导出结果
+		session.removeAttribute("Ljjbxxdaoc");// 清除session中的导出查询条件
 		
 //		如果派件查询参数不为空的话，配置数据库的查询参数
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -502,83 +502,83 @@ public class LjxxAction extends PageAction{
 		
 		return SUCCESS;
 	}
-	/***
-	 * 揽件信息导出，企业端
-	 * 
-	 */
-	public String queryljxxdc() throws Exception {
-		
-		HttpServletResponse response = ServletActionContext.getResponse();
-		String sFileName = (new StringBuilder(DateToString.getDateTimeNoFormat14(new Date()))).append(".xls").toString();
-		String excelExportPath = ServletActionContext.getRequest().getRealPath("Excel");
-		ActionContext ctx = ActionContext.getContext();
-		HttpServletRequest request = (HttpServletRequest) ctx.get("com.opensymphony.xwork2.dispatcher.HttpServletRequest");
-		HttpSession session = request.getSession();
-		//如果派件查询参数不为空的话，配置数据库的查询参数
-		Map<String, Object> params = new HashMap<String, Object>();
-		params = (Map) session.getAttribute("Ljjbxxdaoc");
-		
-		Page pageinfo = ljjbxxService.findLjjbxxForPage(params, 1, 99999999, sort , dir);
-		totalpage = pageinfo.getTotalPages();
-		totalrows = pageinfo.getTotalRows();
-		lLjjbxx = pageinfo.getData();
-		//创建excel工作簿
-		HSSFWorkbook workbook = new HSSFWorkbook();
-		HSSFSheet sheet = workbook.createSheet();
-		HSSFRow row = null;
-		if (sheet.getRow(0) == null) {
-			row = sheet.createRow(0);
-			for (int i = 0; i <= 11; i++) {
-				row.createCell(i);
-			}
-		}
-		row.getCell(0).setCellValue("登记序号");
-		row.getCell(1).setCellValue("物流单号");
-		row.getCell(2).setCellValue("寄件人姓名");
-		row.getCell(3).setCellValue("证件类型");
-		row.getCell(4).setCellValue("证件号码");
-		row.getCell(5).setCellValue("揽件员");
-		row.getCell(6).setCellValue("登记时间");
-
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Ljjbxx setLjjbxx = null;
-		for (int i = 1; i <= lLjjbxx.size(); i++) {
-			if (sheet.getRow(i) == null) {
-				row = sheet.createRow(i);
-				for (int j = 0; j <= 11; j++) {
-					row.createCell(j);
-				}
-			}
-			setLjjbxx = (Ljjbxx) lLjjbxx.get(i - 1);
-			if (setLjjbxx.getDjxh() != null)
-				row.getCell(0).setCellValue(setLjjbxx.getDjxh());
-			if (setLjjbxx.getWldh() != null)
-				row.getCell(1).setCellValue(setLjjbxx.getWldh());
-			if (setLjjbxx.getLjtbr() != null) {
-				row.getCell(2).setCellValue(df.format(setLjjbxx.getLjtbr()));
-			}
-			
-		}
-		if (!(new File(excelExportPath)).isDirectory())
-			(new File(excelExportPath)).mkdir();
-		String sExcelName = (new StringBuilder(String.valueOf(excelExportPath)))
-				.append("\\").append(sFileName).toString();
-		excelExportPath = sExcelName;
-		File excleFile = new File(sExcelName);
-		if (!excleFile.exists()) {
-			excleFile.createNewFile();
-		}
-		FileOutputStream fOut = new FileOutputStream(excleFile);
-		workbook.write(fOut);
-		fOut.flush();
-		fOut.close();
-
-		excelFilePath = (new StringBuilder("Excel/")).append(sFileName).toString();
-		response.setContentType("text/html; charset=UTF-8");
-		response.sendRedirect((new StringBuilder(String.valueOf(request.getContextPath()))).append("/Excel/").append(sFileName).toString());
-		this.result = "success";
-		return "success";
-	}
+//	/***
+//	 * 揽件信息导出，企业端
+//	 * 
+//	 */
+//	public String queryljxxdc() throws Exception {
+//		
+//		HttpServletResponse response = ServletActionContext.getResponse();
+//		String sFileName = (new StringBuilder(DateToString.getDateTimeNoFormat14(new Date()))).append(".xls").toString();
+//		String excelExportPath = ServletActionContext.getRequest().getRealPath("Excel");
+//		ActionContext ctx = ActionContext.getContext();
+//		HttpServletRequest request = (HttpServletRequest) ctx.get("com.opensymphony.xwork2.dispatcher.HttpServletRequest");
+//		HttpSession session = request.getSession();
+//		//如果派件查询参数不为空的话，配置数据库的查询参数
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		params = (Map) session.getAttribute("Ljjbxxdaoc");
+//		
+//		Page pageinfo = ljjbxxService.findLjjbxxForPage(params, 1, 99999999, sort , dir);
+//		totalpage = pageinfo.getTotalPages();
+//		totalrows = pageinfo.getTotalRows();
+//		lLjjbxx = pageinfo.getData();
+//		//创建excel工作簿
+//		HSSFWorkbook workbook = new HSSFWorkbook();
+//		HSSFSheet sheet = workbook.createSheet();
+//		HSSFRow row = null;
+//		if (sheet.getRow(0) == null) {
+//			row = sheet.createRow(0);
+//			for (int i = 0; i <= 11; i++) {
+//				row.createCell(i);
+//			}
+//		}
+//		row.getCell(0).setCellValue("登记序号");
+//		row.getCell(1).setCellValue("物流单号");
+//		row.getCell(2).setCellValue("寄件人姓名");
+//		row.getCell(3).setCellValue("证件类型");
+//		row.getCell(4).setCellValue("证件号码");
+//		row.getCell(5).setCellValue("揽件员");
+//		row.getCell(6).setCellValue("登记时间");
+//
+//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//		Ljjbxx setLjjbxx = null;
+//		for (int i = 1; i <= lLjjbxx.size(); i++) {
+//			if (sheet.getRow(i) == null) {
+//				row = sheet.createRow(i);
+//				for (int j = 0; j <= 11; j++) {
+//					row.createCell(j);
+//				}
+//			}
+//			setLjjbxx = (Ljjbxx) lLjjbxx.get(i - 1);
+//			if (setLjjbxx.getDjxh() != null)
+//				row.getCell(0).setCellValue(setLjjbxx.getDjxh());
+//			if (setLjjbxx.getWldh() != null)
+//				row.getCell(1).setCellValue(setLjjbxx.getWldh());
+//			if (setLjjbxx.getLjtbr() != null) {
+//				row.getCell(2).setCellValue(df.format(setLjjbxx.getLjtbr()));
+//			}
+//			
+//		}
+//		if (!(new File(excelExportPath)).isDirectory())
+//			(new File(excelExportPath)).mkdir();
+//		String sExcelName = (new StringBuilder(String.valueOf(excelExportPath)))
+//				.append("\\").append(sFileName).toString();
+//		excelExportPath = sExcelName;
+//		File excleFile = new File(sExcelName);
+//		if (!excleFile.exists()) {
+//			excleFile.createNewFile();
+//		}
+//		FileOutputStream fOut = new FileOutputStream(excleFile);
+//		workbook.write(fOut);
+//		fOut.flush();
+//		fOut.close();
+//
+//		excelFilePath = (new StringBuilder("Excel/")).append(sFileName).toString();
+//		response.setContentType("text/html; charset=UTF-8");
+//		response.sendRedirect((new StringBuilder(String.valueOf(request.getContextPath()))).append("/Excel/").append(sFileName).toString());
+//		this.result = "success";
+//		return "success";
+//	}
 /***
  * 揽件信息导出时的查询，企业端
  * @return
@@ -586,6 +586,7 @@ public class LjxxAction extends PageAction{
  */
 	public String querycxForExport() throws Exception{
 		HttpSession session = ServletActionContext.getRequest().getSession();
+		session.removeAttribute("Ljjbxxdaocjg");// 清除session中的导出结果
 		String maxRows = QjblUtil.queryQjblVal("exportmaxrows");// 最大导出记录数
 		if(maxRows == null || "".equals(maxRows)){
 			maxRows = "0";
@@ -670,28 +671,28 @@ public class LjxxAction extends PageAction{
 			this.result = e.getMessage();
 		}
 	}
-	 /**
-	 * 翻译字典项
-	 */
-	public void dictFanYi(List queryList){
-		String displayName;
-		if(queryList!=null&&queryList.size()>0){
-			Map jlztMap = new HashMap();
-			Dict_item dict_item = new Dict_item();
-			dict_item.setDict_code("dm_jlzt");
-			dict_item.setItem_allpin("");
-			dict_item.setItem_simplepin("");
-			dict_item.setFact_value("");
-			dict_item.setDisplay_name("");
-			dict_item.setAppend_value("");
-			List list = CacheManager.getCacheDictitem(dict_item);
-			if(list!=null&&list.size()>0){
-				for(int index=0,max=list.size();index<max;index++){
-					Dict_item temp = (Dict_item)list.get(index);
-					jlztMap.put(temp.getFact_value(), temp.getDisplay_name());
-				}
-			}
-			
-		}
-	}
+//	 /**
+//	 * 翻译字典项
+//	 */
+//	public void dictFanYi(List queryList){
+//		String displayName;
+//		if(queryList!=null&&queryList.size()>0){
+//			Map jlztMap = new HashMap();
+//			Dict_item dict_item = new Dict_item();
+//			dict_item.setDict_code("dm_jlzt");
+//			dict_item.setItem_allpin("");
+//			dict_item.setItem_simplepin("");
+//			dict_item.setFact_value("");
+//			dict_item.setDisplay_name("");
+//			dict_item.setAppend_value("");
+//			List list = CacheManager.getCacheDictitem(dict_item);
+//			if(list!=null&&list.size()>0){
+//				for(int index=0,max=list.size();index<max;index++){
+//					Dict_item temp = (Dict_item)list.get(index);
+//					jlztMap.put(temp.getFact_value(), temp.getDisplay_name());
+//				}
+//			}
+//			
+//		}
+//	}
 }
