@@ -5,12 +5,15 @@
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
 
 <script type="text/javascript">
+var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
 	var lj_detail_div="ljjbxxadd_detail";
 	var lj_detail_width=900;
 	var lj_grid_div="pjjbxxDiv";
 	var lj_grid_table = "pjjbxxTable";
 	var lj_grid_table_html;
 	var lj_page_url = "jdy/jdywxxquerylist_ljxx.action";
+	var searchLongUrl="jdy/querycxForExportgad_ljxx.action";
+	var excelUrl="jdy/exportExcelgad_ljxx.action";
 	$(function(){
 		//寄件人证件类型
 		$('#lj_jjr_zjlx').selectBox({code:'dm_zjlx'});
@@ -31,8 +34,11 @@
 			dataid="";
 			getTy_item("lj_qymc","p_qybm","","",$("#lj_gxdwbm").attr("value"),$('#p_allhylbdm').val());
 		});
-		loadPagePjxxQuery(lj_grid_div);
+		//导出用到参数
+		tabletitle = "";
+		geteExcelHead("pjjbxxDiv");
 		
+		loadPagePjxxQuery(lj_grid_div);
 		daggleDiv(lj_detail_div);
 	});
 	
@@ -73,6 +79,16 @@
 											morenPaixuCol: 7, //第一默认排序	
 											morenPaixuFangshi:'desc', //默认排序方式 
 											alignCenterColIndex: [1,2,8],
+											changeHref:function(table){
+												//$(table).find("tr").each(function(){
+													//$(this).find("td:last").find("a[title='可疑']").remove();
+												//});
+												if($(table).find("tr").length==0){
+												    daochuNum = 0;
+												}else{
+												    daochuNum = 1;
+												}	
+											},
 											colWidths: ["11%","11%","9%","20%","11%","11%","11%","11%","11%"]									
 										});				
 			}
@@ -91,6 +107,23 @@
 		setUrl("ljjbxxadd_detail","business/jdyzagl/LjxxDetail.jsp");
 		bindDocument("ljjbxxadd_detail");
 		
+	}
+	//导出Excel
+	function exportPjxx(){	
+	  	if(daochuNum==1){
+	  	  params = getSubmitParams("#jdywxxcx_gyd [name*=lj.]",params);
+	  	  jQuery.post(searchLongUrl,params,searchLongBack,"json");
+	  	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
+	  	}else{
+	  		jAlert("无查询结果不能导出！",'验证信息',null,null);
+	  	}		
+	}
+	//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
+	function searchLongBack(json){  
+	    //报表标题
+		var bbmc="寄递业务信息";
+		//报表请求
+		setExcelLong("jdywxx",bbmc);	
 	}
 </script>
 
@@ -156,7 +189,7 @@
     		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
     		    	<tr>
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="jdywxxQueryPageList(1);">查询</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='exportPjxx();'>导出</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="jdywxx" onclick='exportPjxx();'>导出</a></td>
     		    	</tr>
     		  	</table>
     		  </td>
@@ -178,14 +211,14 @@
 	<table id="pjjbxxTable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="l_qymc">企业名称</th>
-	    	<th name="l_wldh">物流单号</th>
-	    	<th name="l_jjrxm">寄件人</th>
-	    	<th name="l_jjrzjhm">寄件人证件号码</th>
-	    	<th name="l_sjrxm">收件人姓名</th>
-	    	<th name="l_jdpdlxmc">寄递品大类</th>
-	    	<th name="l_jdplxmc">寄递品小类</th>
-	    	<th name="l_ljtbsj">登记时间</th>
+	    	<th name="l_qymc" datatype="string" sumflag="0">企业名称</th>
+	    	<th name="l_wldh" datatype="string" sumflag="0">物流单号</th>
+	    	<th name="l_jjrxm" datatype="string" sumflag="0">寄件人</th>
+	    	<th name="l_jjrzjhm" datatype="string" sumflag="0">寄件人证件号码</th>
+	    	<th name="l_sjrxm" datatype="string" sumflag="0">收件人姓名</th>
+	    	<th name="l_jdpdlxmc" datatype="string" sumflag="0">寄递品大类</th>
+	    	<th name="l_jdplxmc" datatype="string" sumflag="0">寄递品小类</th>
+	    	<th name="l_ljtbsj" datatype="string" sumflag="0">登记时间</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
