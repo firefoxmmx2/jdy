@@ -389,13 +389,13 @@ function addbackbcxz(json){
 	<table width="100%" border="0" cellSpacing="0" cellPadding="0" >
 	   <tr>
 	       <td>
-	           <jsp:include page="../../business/jdyzagl/jjrxx.jsp"></jsp:include>
+	           <jsp:include page="../../business/jdyzagl/jjrxx.jsp?pdbzw=ljjbxx"></jsp:include>
 	       </td>
 	       <td>
 	       		&nbsp;
 	       </td>
 	       <td>
-	            <jsp:include page="../../business/jdyzagl/sjrxx.jsp"></jsp:include>
+	            <jsp:include page="../../business/jdyzagl/sjrxx.jsp?pdbzw=ljjbxx"></jsp:include>
 	       </td>
 	   </tr>
 	</table>
