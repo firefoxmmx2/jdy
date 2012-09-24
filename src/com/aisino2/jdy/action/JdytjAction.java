@@ -1,13 +1,24 @@
 package com.aisino2.jdy.action;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.management.RuntimeErrorException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.struts2.ServletActionContext;
+
+import com.aisino2.common.DateToString;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
@@ -16,6 +27,7 @@ import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IJdytjxxService;
 import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.service.IDict_itemService;
+import com.opensymphony.xwork2.ActionContext;
 
 public class JdytjAction extends PageAction {
 	private IJdytjxxService jdytjxx_service;
@@ -394,5 +406,90 @@ public class JdytjAction extends PageAction {
 		this.setData(setRdrjbxx, lData, lPro, lCols);
 		this.tabledata = this.getData();
 		this.totalrows = this.getTotalrows();
+	}
+	
+	/**
+	 * 导出数据关联度分析结果
+	 * @throws Exception
+	 */
+	public void exportSjgltj() throws Exception{
+		List<Rdrjbxx> sjgltjList = new ArrayList<Rdrjbxx>();
+		slgjtjQuerylist();
+		sjgltjList.addAll(rdrjbxx_list);
+		
+		while(this.pagesize<this.totalrows){
+			this.pagesize += 1;
+			
+			slgjtjQuerylist();
+			sjgltjList.addAll(rdrjbxx_list);
+		}
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String sFileName = (new StringBuilder(
+				DateToString.getDateTimeNoFormat14(new Date()))).append(".xls")
+				.toString();
+		String excelExportPath = ServletActionContext.getRequest().getRealPath(
+				"Excel");
+		ActionContext ctx = ActionContext.getContext();
+		HttpServletRequest request = (HttpServletRequest) ctx
+				.get("com.opensymphony.xwork2.dispatcher.HttpServletRequest");
+		HttpSession session = request.getSession();
+		
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet sheet = workbook.createSheet();
+		HSSFRow row = null;
+		if (sheet.getRow(0) == null) {
+			row = sheet.createRow(0);
+			for (int i = 0; i <= 3; i++) {
+				row.createCell(i);
+			}
+		}
+		row.getCell(0).setCellValue("姓名");
+		row.getCell(1).setCellValue("电话号码");
+		row.getCell(2).setCellValue("地址");
+		row.getCell(3).setCellValue("业务类型");
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Rdrjbxx setRdrjbxx = null;
+		for (int i = 1; i <= sjgltjList.size(); i++) {
+			if (sheet.getRow(i) == null) {
+				row = sheet.createRow(i);
+				for (int j = 0; j <= 3; j++) {
+					row.createCell(j);
+				}
+			}
+			setRdrjbxx = (Rdrjbxx) sjgltjList.get(i - 1);
+			if (setRdrjbxx.getXm() != null)
+				row.getCell(0).setCellValue(setRdrjbxx.getXm());
+			if (setRdrjbxx.getLxdh() != null)
+				row.getCell(1).setCellValue(setRdrjbxx.getLxdh());
+			if (setRdrjbxx.getXxdz() != null) {
+				row.getCell(2).setCellValue(setRdrjbxx.getXxdz());
+			}
+			if (setRdrjbxx.getJdrylxmc() != null)
+				row.getCell(3).setCellValue(setRdrjbxx.getJdrylxmc());
+		}
+		if (!(new File(excelExportPath)).isDirectory())
+			(new File(excelExportPath)).mkdir();
+		String sExcelName = (new StringBuilder(String.valueOf(excelExportPath)))
+				.append("/").append(sFileName).toString();
+		excelExportPath = sExcelName;
+		File excleFile = new File(sExcelName);
+		if (!excleFile.exists()) {
+			excleFile.createNewFile();
+		}
+		FileOutputStream fOut = new FileOutputStream(excleFile);
+		workbook.write(fOut);
+		fOut.flush();
+		fOut.close();
+
+		excelFilePath = (new StringBuilder("Excel/")).append(sFileName)
+				.toString();
+		response.setContentType("text/html; charset=UTF-8");
+		response.sendRedirect((new StringBuilder(String.valueOf(request
+				.getContextPath()))).append("/Excel/").append(sFileName)
+				.toString());
+		this.result = "success";
+		
 	}
 }

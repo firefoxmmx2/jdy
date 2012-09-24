@@ -104,7 +104,7 @@ function setPageList_RY(pageno,url){
 		</table>
 
 		<div id="bjxxb_detail"  class="page-layout" src="#"
-		style="top: 40px; left: 160px; width: 500px;">
+		style="top: 40px; left: 160px; width: 500px; display: none;">
 		</div>
  
 		<div id="BjxxbData" style="width: 100%;">

@@ -28,7 +28,7 @@ $(function() {
 	$("#pjjbxxmod_jjrzjlx").attr("name","pjxx.ljjbxx.jjr.zjlx");
 	$("#pjjbxxmod_sjrzjlx").attr("name","pjxx.ljjbxx.sjr.zjlx");
 	//派件时间选择
-	$("#pjjbxxmod_pjsj").attr("readOnly",true).datepicker();
+	$("#pjjbxxmod_pjsj").attr("readOnly",true).datepicker(true).val('<%=datetime%>');
 	//
 	$('#pjjbxxmod_pjr_xm').attr("readOnly",true).click(function(){
 		dataid=null;
@@ -445,7 +445,6 @@ function loadData(){
 				$('#pjjbxx_mod [id*=pjjbxxmod_]').attr("readOnly",true).addClass('readonly');
 				$('#pjjbxx_mod .red').removeClass('red');
 				$('#pjjbxx_mod_button').parent('td').remove();
-				$('#pjjbxx_goback').attr('title','关闭').text('关闭');
 				//去掉身份证扫描框
 				$('#pjjbxx_mod a:contains("二代证读取")').each(function(){
 					$(this).parents("table").eq(0).remove();

@@ -61,7 +61,7 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 			var mygrid1 = $("#"+pjxx_grid_table).ingrid({ 
 											url: url,	
 											onRowSelect:null,
-											height: pageHeight-267,
+											height: pageHeight-286,
 	                                        ingridPageParams:sXML,
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
@@ -224,10 +224,10 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 		detailDialog(pjxx_detail_div, pjxx_detail_width, pjxx_update_page_url, null,function(data){
 // 			修改标题
 			$('#pjxx_title').text('寄递品派件信息详情');
-			$('#pjjbxx_mod [id*=pjjbxxmod_]').attr("readOnly",true).addClass('readonly');
 			$('#pjjbxx_mod .red').removeClass('red');
 			$('#pjjbxx_mod_button').parent('td').remove();
-			$('#pjjbxx_goback').attr('title','关闭').text('关闭');
+			$('#pjjbxx_mod [id*=pjjbxxmod_]').attr('readonly',true).addClass('readonly').attr('disabled',true);
+			
 			//去掉身份证扫描框
 			$('#pjjbxx_mod a:contains("二代证读取")').each(function(){
 				$(this).parents("table").eq(0).remove();

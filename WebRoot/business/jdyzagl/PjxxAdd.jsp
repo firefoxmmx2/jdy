@@ -36,7 +36,7 @@ $(function() {
 		getTyRY_item('pjxxadd_pjr_xm','pjxxadd_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
 	});
 	//派件时间选择
-	$("#pjxxadd_pjsj").val('<%=dateNow%>').attr("readOnly",true).datepicker();
+	$("#pjxxadd_pjsj").val('<%=dateNow%>').attr("readOnly",true).datepicker(true).val('<%=datetime%>');
 	
 	//户籍省市县--寄件人
 	$("#pjxxadd_jjrssx").click( function() {
