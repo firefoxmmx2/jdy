@@ -7,6 +7,7 @@
 		<property name="rdrjbxxDao" ref="RdrjbxxDaoImpl" />
 		<property name="jdyBjService" ref="JdyBjServiceImpl"/>
 		<property name="qyjbxxService" ref="qyjbxxService"/>
+		<property name="jddxzpxxDao" ref="JddxzpxxDaoImpl"/>
 	</bean>
 <!-- 	寄递对象服务 -->
 	<bean id="RdrjbxxServiceImpl" class="com.aisino2.jdy.service.impl.RdrjbxxServiceImpl">
@@ -38,5 +39,9 @@
 		<property name="kyjdwpxxDao" ref="KyjdwpxxDaoImpl"/>
 		<property name="ljjbxxDao" ref="LjjbxxDaoImpl" />
 		<property name="jdpxxDao" ref="JdpxxDaoImpl" />
+	</bean>
+<!-- 	人员照片信息 -->
+	<bean id="JddxzpxxServiceImpl" class="com.aisino2.jdy.service.impl.JddxzpxxServiceImpl">
+		<property name="jddxzpxxDao" ref="JddxzpxxDaoImpl"/>
 	</bean>
 </beans>
