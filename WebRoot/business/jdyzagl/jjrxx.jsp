@@ -8,7 +8,6 @@ $(document).ready(function() {
 	//判断是揽件调用还是派件调用
 }); 
 function updatePicturejjr(x){
-	alert("寄件人="+$("#pdbzw").val());
 	if($("#pdbzw").val()=="ljjbxx"){
 		$("#lj_jjrxm").val("");//姓名
 		$("#lj_jjrzjlx").val("");//证件类型

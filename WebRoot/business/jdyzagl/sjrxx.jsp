@@ -5,7 +5,6 @@
 %>
 <script type="text/javascript">
 function updatePicture(y){
-	alert("收件人="+$("#pdbzw").val());
 	if($("#pdbzw").val()=="ljjbxx"){
 		$("#lj_sjrxm").val("");//姓名
 		$("#lj_sjrzjlx").val("");//证件类型
