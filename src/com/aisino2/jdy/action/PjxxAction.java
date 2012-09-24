@@ -1,5 +1,6 @@
 package com.aisino2.jdy.action;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,15 +10,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.aisino2.cache.CacheManager;
+import com.aisino2.common.QjblUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
+import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Pjjbxx;
 import com.aisino2.jdy.service.IPjjbxxService;
 import com.aisino2.publicsystem.domain.Qyryxx;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.User;
+import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 派件信息
@@ -201,6 +211,12 @@ public class PjxxAction extends PageAction {
 	 */
 	public String querylist() throws Exception{
 		
+//		ActionContext ctx = ActionContext.getContext();
+//		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+//		HttpSession session = ServletActionContext.getRequest().getSession();
+//		session.removeAttribute("Pjjbxxdaocchucxtj");// 清除session中的导出查询条件
+		
+		
 //		如果派件查询参数不为空的话，配置数据库的查询参数
 		Map<String, Object> params = new HashMap<String, Object>();
 		if(pjxx != null){
@@ -237,6 +253,10 @@ public class PjxxAction extends PageAction {
 		if(pjxx.getSfscbz()!=null){
 			params.put("sfscbz", pjxx.getSfscbz());
 		}
+		
+		//将查询参数放到session中
+		//session.setAttribute("Pjjbxxdaocchucxtj", params);
+		
 		Page pageinfo = pjjbxxService.findPjjbxxsForPage(params, pagesize, pagerow, sort , dir);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
@@ -343,4 +363,128 @@ public class PjxxAction extends PageAction {
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
+	/***
+	 * 派件信息导出时的查询，企业端
+	 * @return
+	 * @throws Exception
+	 */
+		public String querycxForExport() throws Exception{
+			HttpSession session = ServletActionContext.getRequest().getSession();
+			session.removeAttribute("Pjjbxxdaocjgj");// 清除session中的导出结果
+			String maxRows = QjblUtil.queryQjblVal("exportmaxrows");// 最大导出记录数
+			if(maxRows == null || "".equals(maxRows)){
+				maxRows = "0";
+			}
+			try {
+//				//如果派件查询参数不为空的话，配置数据库的查询参数
+//				Map<String, Object> params = new HashMap<String, Object>();
+//				params = (Map) session.getAttribute("Pjjbxxdaocchucxtj");
+				
+				//如果派件查询参数不为空的话，配置数据库的查询参数
+				Map<String, Object> params = new HashMap<String, Object>();
+				if(pjxx != null){
+//					揽件信息查询
+					if(pjxx.getLjjbxx()!=null){
+						params.put("ljjbxx", pjxx.getLjjbxx());
+					}
+//					代收人
+					if(pjxx.getDsr()!=null){
+						params.put("dsr", pjxx.getDsr());
+					}
+					
+					
+				}
+//				登记时间
+				if(pjtbsjf!=null){
+					params.put("pjtbsjf", pjtbsjf);
+				}
+				if(pjtbsjt!=null){
+					params.put("pjtbsjt", pjtbsjt);
+				}
+//				派件时间
+				if(pjsjf!=null){
+					params.put("pjsjf", pjsjf);
+				}
+				if(pjsjt!=null){
+					params.put("pjsjt", pjsjt);
+				}
+				//派件人
+				if(pjxx.getPjr()!=null){
+					params.put("pjr", pjxx.getPjr());
+				}
+				//是否删除标志
+				if(pjxx.getSfscbz()!=null){
+					params.put("sfscbz", pjxx.getSfscbz());
+				}
+				
+				Page pageinfo = pjjbxxService.findPjjbxxsForPage(params, 1, Integer.parseInt(maxRows), sort , dir);
+				totalpage = pageinfo.getTotalPages();
+				totalrows = pageinfo.getTotalRows();
+				lPjjbxxList = pageinfo.getData();
+				for(Pjjbxx pj : lPjjbxxList){
+					pj.setDjxh(pj.getLjjbxx().getDjxh());
+					pj.setWldh(pj.getLjjbxx().getWldh());
+					pj.setPjr_xm(pj.getPjr().getXm());
+					pj.setSjr_xm(pj.getLjjbxx().getSjr().getXm());
+					pj.setSjr_zjhm(pj.getLjjbxx().getSjr().getZjhm());
+					Dict_item dict_item = new Dict_item();
+					dict_item.setDict_code("dm_zjlx");
+					dict_item.setFact_value(pj.getLjjbxx().getSjr().getZjlx());
+					pj.setSjr_zjlx(CacheManager.getCacheDictitemOne(dict_item).getDisplay_name());
+					Date now = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					Calendar updateOverTimeCalender =  Calendar.getInstance();
+					updateOverTimeCalender.setTime(sdf.parse(sdf.format(pj.getPjtbsj())));
+					updateOverTimeCalender.add(Calendar.DAY_OF_MONTH, 1);
+					Calendar nowCalendar=Calendar.getInstance();
+					nowCalendar.setTime(now);
+					if((nowCalendar.compareTo(updateOverTimeCalender)) >= 0)
+						pj.setOverUpdateTime("true");
+					else
+						pj.setOverUpdateTime("false");
+					//可疑寄递标志
+					pj.setKybz(pj.getLjjbxx().getKybz());
+				}
+		    	session.setAttribute("Pjjbxxdaocjgj", lPjjbxxList);
+				this.result = "success";
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.result = e.getMessage();
+			}
+			return "success";
+	    }
+	/***
+	 * 派件信息导出
+	 */
+		public void exportExcel() throws Exception {
+			ActionContext ctx = ActionContext.getContext();
+			HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+			HttpServletResponse response = (HttpServletResponse) ctx.get(ServletActionContext.HTTP_RESPONSE);
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute(Constants.userKey);
+			try {
+				String bbmc = request.getParameter("bbmc");
+				String tabletitle = request.getParameter("tabletitle");
+				// Excel输出
+				List lResult = new ArrayList(); // //开头excel
+				List pjxxList = (List) session.getAttribute("Pjjbxxdaocjgj");
+				Pjjbxx setPjjbxx=new Pjjbxx();
+				List lColumn = this.getExcelColumn(tabletitle);
+				lResult.add(bbmc);
+				lResult.add(lColumn);
+				lResult.add(response);
+				lResult.add(pjxxList);
+				lResult.add(setPjjbxx);
+				this.setExcelCreate("Pjxx", lResult);
+				this.result = "ok";
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				this.result = e.getMessage();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				this.result = e.getMessage();
+			}
+		}
 }

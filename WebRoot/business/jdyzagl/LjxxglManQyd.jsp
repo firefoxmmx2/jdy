@@ -1,28 +1,33 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" 
+import="com.aisino2.sysadmin.domain.User,com.aisino2.sysadmin.Constants"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
+<%@page import="com.aisino2.common.QjblUtil"%>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
 <!--寄递物品类型联动的js -->
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script> 
-
 <script type="text/javascript">
+var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
 //默认加载执行内容
 $(document).ready(function() {
 	pageUrl="jdy/queryListlj_ljxx.action";
 	detailWidth="950";
 	//添加揽件信息的DIV
 	detailid="ljjbxxadd_detail";
-	
 	$("#"+detailid).hide();
+	//导出用到参数
+	searchLongUrl="jdy/querycxForExport_ljxx.action";
+	excelUrl="jdy/exportExcel_ljxx.action";
+	tabletitle = "";
+	geteExcelHead("LjjbxxDate");
+	
 	//定义gird数据信息
 	divnid="LjjbxxDate";
 	tableid="LjjbxxTable";
 	tables=$("#"+divnid).html();
-	
 	setPageListlj(1,'#');
-	
 	//寄递物品联动下拉列表
 	selectboxlink("jdpdlx","jdpxlx","dm_jdwpdl");
 	//证件类型--寄件人
@@ -70,6 +75,11 @@ function setPageListlj(pageno,url){
 											//$(table).find("tr").each(function(){
 												//$(this).find("td:last").find("a[title='可疑']").remove();
 											//});
+											if($(table).find("tr").length==0){
+											    daochuNum = 0;
+											}else{
+											    daochuNum = 1;
+											}	
 											$('tr',table).each(function(){
 												var $tr=$(this);
 												//可疑寄递物品标志
@@ -168,6 +178,38 @@ function setLjxxDelete(id) {
 		}
 	}
 }
+//=====揽件信息导出执行函数
+//function setExportExcel(){
+//	if(daochuNum==1){
+//		var downloadurl = "jdy/queryljxxdc_ljxx.action";
+//		xzurl = encodeURI(downloadurl);
+//		location.href = downloadurl;
+//	}else{
+//		jAlert("无查询结果不能导出！","提示信息");
+//	}		
+//}
+
+//导出Excel
+function setExportExcel(){	
+  	if(daochuNum==1){
+  	  params =null;
+  	  jQuery.post(searchLongUrl,params,searchLongBack,"json");
+  	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
+  	}else{
+  		jAlert("无查询结果不能导出！",'验证信息',null,null);
+  	}		
+}
+//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
+function searchLongBack(json){  
+    //报表标题
+	var bbmc="揽件信息";
+	//报表请求
+	setExcelLong("ljxxexcel",bbmc);	
+}
+//揽件信息导入方法
+function importLjxx(){
+	return;
+}
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="ljjbxx_man_qyd">
   <tr>
@@ -215,7 +257,8 @@ function setLjxxDelete(id) {
     		    	<tr>
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListlj(1);">查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setljAdd();'>添加</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='setBayAdd();'>导出</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="exceldcbutton" onclick='importLjxx();'>导入</a></td>
+    		    	  <td width="62"><a href="#" class="exceldcbutton" onclick='setExportExcel();' id="ljxxexcel">导出</a></td>
     		    	</tr>
     		  	</table>
     		  </td>
@@ -238,16 +281,16 @@ function setLjxxDelete(id) {
 	<table id="LjjbxxTable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="l_djxh">登记序号</th>
-	    	<th name="l_wldh">物流单号</th>
-	    	<th name="l_jjrxm">寄件人姓名</th>
-	    	<th name="l_jjrzjlx">证件类型</th>
-	    	<th name="l_jjrzjhm">证件号码</th>
-	    	<th name="l_ljyxm">揽件员</th>
-	    	<th name="l_ljtbsj">登记时间</th>
-	    	<th name="l_kybz">可疑标志</th>
-	    	<th name="l_sjkzbz">时间可疑标志</th>
-	    	<th name="l_sfpjbz">是否派发标志</th>
+	    	<th name="l_djxh" datatype="string" sumflag="0">登记序号</th>
+	    	<th name="l_wldh" datatype="string" sumflag="0">物流单号</th>
+	    	<th name="l_jjrxm" datatype="string" sumflag="0">寄件人姓名</th>
+	    	<th name="l_jjrzjlx" datatype="string" sumflag="0">证件类型</th>
+	    	<th name="l_jjrzjhm" datatype="string" sumflag="0">证件号码</th>
+	    	<th name="l_ljyxm" datatype="string" sumflag="0">揽件员</th>
+	    	<th name="l_ljtbsj" datatype="string" sumflag="0">登记时间</th>
+	    	<th name="">可疑标志</th>
+	    	<th name="">时间可疑标志</th>
+	    	<th name="">是否派发标志</th>
 			<th name="">操作</th>
 	    </tr>
 	  </thead>
