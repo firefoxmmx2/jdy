@@ -7,7 +7,6 @@ import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.jdy.dao.IPjjbxxDao;
 import com.aisino2.jdy.domain.Pjjbxx;
-import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IJdyBjService;
 import com.aisino2.jdy.service.ILjjbxxService;
 import com.aisino2.jdy.service.IPjjbxxService;
