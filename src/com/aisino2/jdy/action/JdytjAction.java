@@ -69,8 +69,20 @@ public class JdytjAction extends PageAction {
 	 */
 	private Integer show_number;
 	
+	/**
+	 * 机构级别
+	 */
+	private String departlevel;
 	
 	
+	public String getDepartlevel() {
+		return departlevel;
+	}
+
+	public void setDepartlevel(String departlevel) {
+		this.departlevel = departlevel;
+	}
+
 	public List<Rdrjbxx> getRdrjbxx_list() {
 		return rdrjbxx_list;
 	}
@@ -491,5 +503,92 @@ public class JdytjAction extends PageAction {
 				.toString());
 		this.result = "success";
 		
+	}
+	
+	/**
+	 * 寄递业运行情况统计
+	 * @return
+	 * @throws Exception
+	 */
+	public String querylistYxqk() throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(!StringUtil.isNotEmpty(gxdwbm))
+			gxdwbm = "";
+		map.put("gxdwbm", StringUtil.trimEven0(gxdwbm));
+		map.put("departlevel", departlevel);
+		Page page = jdytjxx_service.getYxqktj(map, pagesize, pagerow, this.sort, this.dir);
+		jdytjxx_list = page.getData();
+		this.totalrows = page.getTotalRows();
+		this.totalpage = page.getTotalPages();
+		
+		setTabledataForYxqk(jdytjxx_list);
+		this.result = SUCCESS;
+		
+		return SUCCESS;
+	}
+	
+	private void setTabledataForYxqk(List<Jdytjxx> datalist){
+		List lPro=new ArrayList();
+		lPro.add("gxdwbm");
+		lPro.add("gxdwmc");
+		lPro.add("qyzs");
+		lPro.add("zjs");
+		lPro.add("cyrys");
+		lPro.add("ljs");
+		lPro.add("pjs");
+		lPro.add("wscqys");
+		
+		List lCol = new ArrayList();
+		
+		Jdytjxx setJdytjxx=new Jdytjxx();
+		this.setData(setJdytjxx, datalist, lPro, lCol);
+		
+		this.tabledata=this.getData();
+		totalrows=this.getTotalrows();
+		
+	}
+	
+	/**
+	 * 昨日企业揽件派件情况统计
+	 * @return
+	 * @throws Exception
+	 */
+	public String querylistQyljpjqk() throws Exception{
+		
+		Map<String, Object> paras = new HashMap<String, Object>();
+		if(!StringUtil.isNotEmpty(gxdwbm))
+			gxdwbm = "";
+		
+		paras.put("gxdwbm", gxdwbm);
+		paras.put("departlevel", departlevel);
+		Page page = jdytjxx_service.getQyljpjqktj(paras, pagesize, pagerow, sort, dir);
+		jdytjxx_list = page.getData();
+		
+		this.totalrows = page.getTotalRows();
+		this.totalpage = page.getTotalPages();
+		
+		setTabledataForQyljpjqk(jdytjxx_list);
+		this.result = SUCCESS;
+		return SUCCESS;
+	}
+	
+	private void setTabledataForQyljpjqk(List<Jdytjxx> datalist) {
+		List lPro=new ArrayList();
+		lPro.add("qyid");
+		lPro.add("qybm");
+		lPro.add("qymc");
+		lPro.add("gxdwmc");
+		lPro.add("ljs");
+		lPro.add("pjs");
+		lPro.add("lxdh");
+		lPro.add("zt");
+		
+		List lCol = new ArrayList();
+		
+		Jdytjxx setJdytjxx=new Jdytjxx();
+		this.setData(setJdytjxx, datalist, lPro, lCol);
+		
+		this.tabledata=this.getData();
+		totalrows=this.getTotalrows();
 	}
 }
