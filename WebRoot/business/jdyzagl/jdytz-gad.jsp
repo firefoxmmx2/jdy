@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(function(){
 		$('#ryjbxxData').load('business/jdyzagl/BjxxbRY-jdy-tz.jsp');
-		$('#yxqkData').load('business/jdyzagl/ClbjbdTz.jsp');
+		$('#yxqkData').load('business/jdyzagl/yxqktj-jdy-tz.jsp');
 		daggleDiv("ryyjxx_detail");
 	});
 </script>
