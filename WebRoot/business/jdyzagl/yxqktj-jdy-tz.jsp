@@ -1,28 +1,27 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ include file="/public/user-info.jsp" %>
 <script type="text/javascript">
 	var	tablesX = $("#XtyxqkylData").html();
 	var daochuNum_Dryxtj = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
 	var QyjbxxList_Html;
 	var QyjbxxListWidth;
-	var HsclxxList_Html;
-	var HsclxxListWidth;
-	var yxqk-jdy-detailid;
+	var jdyxxList_Html;
+	var jdyxxListWidth;
+	var yxqk_jdy_detailid;
+	var searchUrl_jdytjxx;
+	var currentGxdwbm = '<%=gxdwbm%>';
+	
 	$(document).ready( function() {
 		QyjbxxList_Html="business/jdyzagl/jdytjxxQyjbxxList.jsp";
 		QyjbxxListWidth="800";
-		HsclxxList_Html="";
-		HsclxxListWidth="800";
-		yxqk-jdy-detailid='jdccjTj_detail';
+		jdyxxList_Html = "business/jdyzagl/qyljpjqktj-tz.jsp";
+		jdyxxListWidth="800";
+		yxqk_jdy_detailid='jdccjTj_detail';
 		
 		//*****导出Excel 
-		searchLongUrl_Dryxtj="jdccjzagl/queryForExportDryxtj_jdytjxx.action";  //超长参数后台Action对应url
-		tabletitle_Dryxtj = "";
-		geteExcelHead_Dryxtj("XtyxqkylData");		 
-		excelUrl_Dryxtj="jdccjzagl/getExcelCreateDryxtj_jdccjTj.action";
+		searchUrl_jdytjxx="jdccjzagl/queryForExportJdyxtj_jdytjxx.action";  //超长参数后台Action对应url
 		
-		daggleDiv(yxqk-jdy-detailid);
+		daggleDiv(yxqk_jdy_detailid);
 		var currDate = new Date();
 		$("#y_jzsj").val(getDate(currDate,"-"));
 		currDate.setDate(currDate.getDate()-1);
@@ -35,49 +34,82 @@
 		$("#XtyxqkylData").html(tablesX);
 		createXML("y_");
 
+		var params = {'gxdwbm':'<%=gxdwbm%>','departlevel':'<%=departlevel%>'};
 		var mygrid1 = $("#XtyxqkylTable").ingrid( {
 			onRowSelect :null,
 			tableid:'XtyxqkylGnrid',
-			url :"jdccjzagl/querylistYxtj_jdytjxx.action",
-			height :pageHeight - 320,
+			url :"jdy/querylistYxqk_jdytjxx.action",
+			height :pageHeight/2-140,
 			pageNumber :pageno,
-			ingridPageWidth :mainPageWidthright,
+			ingridPageWidth :1000,
 			isPlayResultNull :false,
 			ingridPageParams :sXML,
-			sumFlag :true,
+			ingridExtraParams:params,
 			sorting :false,
-			changeHref:function(table){//若表格无数据，则点击导出不起作用
-			if($(table).find("tr").length==0){
-				daochuNum_Dryxtj = 0;
-			}else{
-				daochuNum_Dryxtj = 1;
-			}	
+			ingridComplete:function(){
+				$('#XtyxqkylData tbody tr').each(function(idx){
+					var tr = $(this);
+					//企业总数列表
+					tr.find('td:nth(1)').click(function(){
+						queryQyjbxxList(tr.attr('id'));
+					});
+					
+					//装机企业查询
+					tr.find("td:nth(2)").click(function(){
+						queryQyjbxxList(tr.attr("id"),'1');
+					});
+					
+					//昨日揽件派件情况
+					tr.find("td").slice(4,6).click(function(){
+						var id = tr.attr("id");
+						if($('#XtyxqkylData tbody tr').index(this)==0){
+							while(/00$/.exec(id)){
+								id = id.replace(/00$/,'','g');
+							}
+						}
+						queryJdyLjxxList(id);
+					});
+					
+					tr.find("td:nth(6)").click(function(){
+						var id = tr.attr("id");
+						if($('#XtyxqkylData tbody tr').index(this)==0){
+							while(/00$/.exec(id)){
+								id = id.replace(/00$/,'','g');
+							}
+							
+							queryQyjbxxList(id,null,true);
+						}
+					});
+				});
 			},
-			colWidths : [ "30%", "15%", "15%", "20%", "20%" ]
-
+			colIndex:[1,2,4,5,6],
+			colWidths : [ "30%", "11.6%", "11.6%", "11.6%", "11.6%","11.6%","11.6%"]
 		});
 
 	}
 
 	//展开企业列表	
-	function queryQyjbxxList(gxdwdm){
-		dataid=gxdwdm;
-		detailDialog(yxqk-jdy-detailid, HsclxxListWidth, QyjbxxLQyjbxxListWidthist_Html, null,function(data){
-			
+	function queryQyjbxxList(gxdwbm,zjztdm,isWscqycx){
+		var params = {};
+		if(gxdwbm == '')
+			gxdwbm = currentGxdwbm
+		params['gxdwbm'] = gxdwbm;
+		if(zjztdm)
+			params.zjztdm = zjztdm;
+		
+		detailDialog(yxqk_jdy_detailid, jdyxxListWidth, QyjbxxList_Html, params,function(data){
+			if(isWscqycx){
+			}
 		});
 	}
 	
-	//展开寄递业揽件信息
-	function queryJdyLjxxList(gxdwdm){
-		dataid=gxdwdm;
-		detailDialog(yxqk-jdy-detailid, HsclxxListWidth, HsclxxList_Html, null,function(data){
-			
-		});
-	}
-	//展开寄递业派件信息
-	function queryJdyLjxxList(gxdwdm){
-		dataid=gxdwdm;
-		detailDialog(yxqk-jdy-detailid, HsclxxListWidth, HsclxxList_Html, null,function(data){
+	//展开寄递业揽件派件信息
+	function queryJdyLjxxList(gxdwbm){
+		var params = {};
+		if(gxdwbm == '')
+			gxdwbm = currentGxdwbm
+		params.gxdwbm = gxdwbm;
+		detailDialog(yxqk_jdy_detailid, jdyxxListWidth, jdyxxList_Html,params,function(data){
 			
 		});
 	}
@@ -91,34 +123,7 @@
 	  		alert('无查询结果不能导出！');
 	  	}		
 	}
-	
-	function setSearchLong_Dryxtj(){
-		setParams("y_");
-		jQuery.post(searchLongUrl_Dryxtj,params,searchLongBack_Dryxtj,"json");
-	}
 
-	//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
-	function searchLongBack_Dryxtj(json){  
-		//报表标题
-		var bbmc="运行情况";
-		//报表请求
-		setExcelLong_Dryxtj("dryxtjexcel",bbmc);	
-	}
-	
-	function setExcelLong_Dryxtj(excelid,bbmc){
-		//setParams("p_");
-		var surl=excelUrl_Dryxtj+"?tabletitle="+tabletitle_Dryxtj+"&bbmc="+bbmc;
-		//alert(surl);
-		surl=encodeURI(surl);
-		//surl=encodeURI(surl);
-		location.href = surl;
-	}
-	
-	function geteExcelHead_Dryxtj(divid){
-		var theadHtml = $("#"+divid).find("table:first").find("thead:first");
-		theadHtml.find("td").remove();
-		tabletitle_Dryxtj=theadHtml.html();
-	}
 </script>
 		<input type="hidden" id="y_qssj" />
 		<input type="hidden" id="y_jzsj" />
@@ -127,9 +132,9 @@
 			class="tableborder">
 			<tr>
 				<td class="queryfont" width='88%'>
-					<table>
-						<td width="90%">运行情况</td>
-						<td width="10%"><a href="#" class="exceldcbutton" onclick='setExportExcel_jdyyxtj();' id="dryxtjexcel">导出</a></td>
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<td width="90%">&nbsp;</td>
+<!-- 						<td width="10%"><a href="#" class="exceldcbutton" onclick='setExportExcel_jdyyxtj();' id="dryxtjexcel">导出</a></td> -->
 					</table>
 				</td>
 			</tr>
@@ -147,15 +152,26 @@
 								<th name="l_zjzs" datatype="number" sumflag="1">
 									装机总数
 								</th>
-								<th name="l_wscqyzs" datatype="number" sumflag="1">
-									未上传企业数
+								<th name="l_hsclzs" datatype="number" sumflag="1">
+									从业人员数
 								</th>
 								<th name="l_hsclzs" datatype="number" sumflag="1">
-									回收车辆总数
+									昨日揽件数
 								</th>
+								<th name="l_hsclzs" datatype="number" sumflag="1">
+									昨日派件数
+								</th>
+								<th name="l_wscqyzs" datatype="number" sumflag="1">
+									昨日未上传企业数
+								</th>
+<!-- 								<th> -->
+<!-- 									机构级别 -->
+<!-- 								</th> -->
 							</thead>
 						</table>
 					</div>
 				</td>
 			</tr>
 		</table>
+<div id="jdccjTj_detail"  class="page-layout" src="#"
+		style="top:5px; left:160px;display: none;"></div>
