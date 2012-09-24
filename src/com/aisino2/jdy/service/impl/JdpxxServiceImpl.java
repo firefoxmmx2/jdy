@@ -3,8 +3,6 @@ package com.aisino2.jdy.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JDialog;
-
 import com.aisino2.core.dao.Page;
 import com.aisino2.jdy.dao.IJdpxxDao;
 import com.aisino2.jdy.domain.Jdpxx;
