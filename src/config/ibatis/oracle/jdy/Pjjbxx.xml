@@ -96,6 +96,9 @@
 				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.qymc">
 					qyjbxx.qymc like '$ljjbxx.qyjbxx.qymc$%'
 				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.gxdwbm">
+					qyjbxx.gxdwbm like '$ljjbxx.qyjbxx.gxdwbm$%'
+				</isNotEmpty>
 			</isNotEmpty>
 			
 			<!-- 		寄递品 -->
