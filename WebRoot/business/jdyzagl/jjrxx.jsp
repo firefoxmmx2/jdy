@@ -72,6 +72,7 @@ function open_zp(){
 	  imgToBase(ImgerToBase1,"img_picControlscr","lj_jjrzpdata");
 }
 </script>
+<input type="hidden" id="lj_jjr_zpxx_zpid" name="lj.jjr.zpxx.id" value=""><!-- 寄件人照片信息ID -->
 <input type="hidden" id="lj_jjrzpdata" name="lj.jjrzpxx"><!-- 寄件人照片信息 -->
 <input type="hidden" name="pdbzw" id="pdbzw" value="<%=pdbzw %>"/>
          <fieldset>
