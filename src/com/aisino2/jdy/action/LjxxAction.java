@@ -24,11 +24,13 @@ import org.apache.struts2.ServletActionContext;
 
 import com.aisino2.cache.CacheManager;
 import com.aisino2.common.DateToString;
+import com.aisino2.common.ImageUtil;
 import com.aisino2.common.PageUtil;
 import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
+import com.aisino2.jdy.domain.Jddxzpxx;
 import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Pjjbxx;
@@ -120,10 +122,14 @@ public class LjxxAction extends PageAction{
      * @author renhao
      */
 	public String insert() throws Exception{
-	    HttpSession session = this.getRequest().getSession();
-		User user = (User)session.getAttribute(Constants.userKey);
+//	    HttpSession session = this.getRequest().getSession();
+//		User user = (User)session.getAttribute(Constants.userKey);
+//		Qyryxx ljtbr = new Qyryxx();
+//		ljtbr.setCyrybh(user.getCyrybh());
+//		lj.setLjtbr(ljtbr);
+		User curr_user = (User) this.getRequest().getSession().getAttribute(Constants.userKey);
 		Qyryxx ljtbr = new Qyryxx();
-		ljtbr.setCyrybh(user.getCyrybh());
+		ljtbr.setCyrybh(curr_user.getUseraccount());
 		lj.setLjtbr(ljtbr);
 		
 		ljjbxxService.insertLjjbxx(lj);
