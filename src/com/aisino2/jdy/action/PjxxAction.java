@@ -21,7 +21,6 @@ import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Pjjbxx;
 import com.aisino2.jdy.service.IPjjbxxService;
 import com.aisino2.publicsystem.domain.Qyryxx;

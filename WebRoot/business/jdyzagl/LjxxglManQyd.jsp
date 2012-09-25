@@ -152,32 +152,32 @@ function setLjxxDetail(id){
 	bindDocument("ljjbxxadd_detail");
 }
 //揽件信息删除
-function setLjxxDelete(id) {
-	var kybzw=$("#"+id+" td:nth(7)").text();//得到可疑标志 的值
-	$('#ljdjxh').val(id);
-	if(kybzw=="Y"){
-		jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！",'验证信息',null,null);
-	}else{
-		params = getSubmitParams("#scstjcx [name*=lj.]");
-		jQuery.post("jdy/query_ljxx.action",params,ljxxzymcxback,"json");
-		function ljxxzymcxback(json){
-			if(json.overUpdateTime){
-				jAlert("该条揽件信息已超过删除时间，不能进行删除操作！",'验证信息',null,null);
-			}else{
-				$("#"+ljjbxxadd_detail).hide();
-				sFlag="false";
-				jConfirm('确定删除吗？', '删除提示', function(r) {
-			    	if(r==true){
-			    		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
-					}
-					else{
-					   return false;
-					}
-				});
-			}
-		}
-	}
-}
+//function setLjxxDelete(id) {
+//	var kybzw=$("#"+id+" td:nth(7)").text();//得到可疑标志 的值
+//	$('#ljdjxh').val(id);
+//	if(kybzw=="Y"){
+//		jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！",'验证信息',null,null);
+//	}else{
+//		params = getSubmitParams("#scstjcx [name*=lj.]");
+//		jQuery.post("jdy/query_ljxx.action",params,ljxxzymcxback,"json");
+//		function ljxxzymcxback(json){
+//			if(json.overUpdateTime){
+//				jAlert("该条揽件信息已超过删除时间，不能进行删除操作！",'验证信息',null,null);
+//			}else{
+//				$("#"+ljjbxxadd_detail).hide();
+//				sFlag="false";
+//				jConfirm('确定删除吗？', '删除提示', function(r) {
+//			    	if(r==true){
+//			    		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
+//					}
+//					else{
+//					   return false;
+//					}
+//				});
+//			}
+//		}
+//	}
+//}
 //=====揽件信息导出执行函数
 //function setExportExcel(){
 //	if(daochuNum==1){
@@ -266,12 +266,6 @@ function importLjxx(){
     	</table> 
     </td>
   </tr>
-</table>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" id="scstjcx">
-    <input type="hidden" id="ljdjxh" name="lj.djxh" value="" /><!-- 揽件信息删除时，要进行判断该数据是否超过当天24点。这里是查询要用的ID -->
-	<tr>
-		<td height="3"></td>
-	</tr>
 </table>
 <div id="ljjbxxadd_detail" class="page-layout" src="#"
 		style="top:5px; left:160px;">
