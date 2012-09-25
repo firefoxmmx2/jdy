@@ -343,3 +343,15 @@ function valSfzCardIsRight_jdy(objId,errmess,isFoucsMes){
 	}
 	return true;
 }
+//通过数据库zpid，显示图片
+var parentWindowPath = "";
+function showImage(imageId,zpid,imageSrc){
+	if(zpid==""||zpid==null){
+		if(imageSrc==null){
+			imageSrc=parentWindowPath+"images/pic.gif";
+		}
+		$("#"+imageId).attr("src",imageSrc);
+	}else{
+		$("#"+imageId).attr("src",parentWindowPath+"jdy/queryZp_jddxzpxx.action?zpid="+zpid);
+	}
+}
