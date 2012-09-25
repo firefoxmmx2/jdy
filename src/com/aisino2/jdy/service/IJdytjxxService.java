@@ -40,4 +40,16 @@ public interface IJdytjxxService {
 	 */
 	Page getWscqycx(Map<String, Object> paras, int pageno, int pagesize,
 			String dir, String sort);
+	
+	/**
+	 * 台帐用企业信息查询
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page getJdyQyjbxxList(Map<String,Object> paras, int pageno, int pagesize,
+			String dir, String sort);
 }

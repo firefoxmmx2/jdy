@@ -102,4 +102,10 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 		return jdytjxxDao.getWscqycx(paras, pageno, pagesize, dir, sort);
 	}
 
+
+	public Page getJdyQyjbxxList(Map<String, Object> paras, int pageno,
+			int pagesize, String dir, String sort) {
+		return jdytjxxDao.getJdyQyjbxxList(paras, pageno, pagesize, dir, sort);
+	}
+
 }

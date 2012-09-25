@@ -89,4 +89,16 @@ public interface IJdytjxxDao {
 	 */
 	Page getWscqycx(Map<String, Object> paras, int pageno, int pagesize,
 			String dir, String sort);
+	
+	/**
+	 * 台帐用的弹出式窗口的企业信息
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page getJdyQyjbxxList(Map<String,Object> paras, int pageno, int pagesize,
+			String dir, String sort);
 }
