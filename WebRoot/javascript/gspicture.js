@@ -65,8 +65,9 @@ var img_object='';
         }
     }
     
-    function DeleteImg(ob)
+    function DeleteImg(ob,temp)//最后一个参数用于点击取消照片时，清空提交的照片数据
     {
+		
     	x=document.getElementById(ob);
     	$('#div_'+x.id).hide();
 		$('#img_'+x.id).attr('src','images/pic.gif').show();
@@ -75,7 +76,11 @@ var img_object='';
              x.DeleteImgClick();
           //   deleteDate(x);
         }
-       
+        if(temp=="jjr"){
+			$("#lj_jjrzpdata").val("");
+		}else{
+			$("#lj_sjrzpdata").val("");
+		}
     }
     
     function SaveasImage()
