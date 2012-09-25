@@ -13,7 +13,7 @@
 	
 	$(document).ready( function() {
 		QyjbxxList_Html="business/jdyzagl/jdytjxxQyjbxxList.jsp";
-		QyjbxxListWidth="800";
+		QyjbxxListWidth="1000";
 		jdyxxList_Html = "business/jdyzagl/qyljpjqktj-tz.jsp";
 		jdyxxListWidth="800";
 		yxqk_jdy_detailid='jdccjTj_detail';
@@ -34,7 +34,7 @@
 		$("#XtyxqkylData").html(tablesX);
 		createXML("y_");
 
-		var params = {'gxdwbm':'<%=gxdwbm%>','departlevel':'<%=departlevel%>'};
+		var params = getYxqkQueryParams();
 		var mygrid1 = $("#XtyxqkylTable").ingrid( {
 			onRowSelect :null,
 			tableid:'XtyxqkylGnrid',
@@ -51,35 +51,40 @@
 					var tr = $(this);
 					//企业总数列表
 					tr.find('td:nth(1)').click(function(){
-						queryQyjbxxList(tr.attr('id'));
+						var id = tr.attr("id");
+						if(idx==0){
+							id = rrTrim(currentGxdwbm,'00');
+						}
+						queryQyjbxxList(id);
 					});
 					
 					//装机企业查询
 					tr.find("td:nth(2)").click(function(){
-						queryQyjbxxList(tr.attr("id"),'1');
+						var id = tr.attr("id");
+						if(idx==0){
+							id = rrTrim(currentGxdwbm,'00');
+						}
+						queryQyjbxxList(id,'1');
 					});
 					
 					//昨日揽件派件情况
 					tr.find("td").slice(4,6).click(function(){
 						var id = tr.attr("id");
-						if($('#XtyxqkylData tbody tr').index(this)==0){
-							while(/00$/.exec(id)){
-								id = id.replace(/00$/,'','g');
-							}
+						if(idx==0){
+							id = rrTrim(currentGxdwbm,'00');
 						}
 						queryJdyLjxxList(id);
 					});
 					
+					//昨日未上传企业情况
 					tr.find("td:nth(6)").click(function(){
 						var id = tr.attr("id");
-						if($('#XtyxqkylData tbody tr').index(this)==0){
-							while(/00$/.exec(id)){
-								id = id.replace(/00$/,'','g');
-							}
-							
-							queryQyjbxxList(id,null,true);
+						if(idx==0){
+							id = rrTrim(currentGxdwbm,'00');
 						}
+						queryQyjbxxList(id,null,true);
 					});
+					
 				});
 			},
 			colIndex:[1,2,4,5,6],
@@ -96,9 +101,28 @@
 		params['gxdwbm'] = gxdwbm;
 		if(zjztdm)
 			params.zjztdm = zjztdm;
-		
-		detailDialog(yxqk_jdy_detailid, jdyxxListWidth, QyjbxxList_Html, params,function(data){
+		detailDialog(yxqk_jdy_detailid, QyjbxxListWidth, QyjbxxList_Html, params,function(data){
 			if(isWscqycx){
+				querylistQyjbxxtz(1,'jdy/querylistWscqycx_jdytjxx.action');
+				exportExcelWscqyqk = function(){
+					var url = "jdy/exportExcelWscqy_jdytjxx.action";
+					var params = getWscqyParams();
+					var form = $('<form></form>').attr("action",url)
+									.attr("target","_blank")
+									.append("<input type='hidden' name='qyjbxx.gxdwbm' value='"+params['qyjbxx.gxdwbm']+"'>")
+									.append("<input type='hidden' name='qyjbxx.hylbdm' value='"+params['qyjbxx.hylbdm']+"'>")
+									.append("<input type='hidden' name='qyjbxx.zjztdm' value='"+params['qyjbxx.zjztdm']+"'>")
+									.append("<input type='hidden' name='qyjbxx.scbz' value='"+params['qyjbxx.scbz']+"'>")
+									.appendTo('body');
+					form.submit();
+					
+					form.remove();
+				};
+				
+				$('<div><a onclick="exportExcelWscqyqk();" class="exceldcbutton" href="#">导出</a></div>').css('padding-left','85%').insertAfter('#'+qyjbxxlist_div);
+			}
+			else{
+				querylistQyjbxxtz(1,'jdy/querylistQyjbxx_jdytjxx.action');
 			}
 		});
 	}
@@ -115,15 +139,26 @@
 	}
 	
 	//导出Excel
-	function setExportExcel_jdyyxtj(){	
-  		if(daochuNum_Dryxtj==1){
-			setSearchLong_Dryxtj(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
-
-	  	}else{
-	  		alert('无查询结果不能导出！');
-	  	}		
+	function setExportExcel_jdyyxtj(){
+		var url = "jdy/exportExcelYxqk_jdytjxx.action";
+		var params = getYxqkQueryParams();
+		var form = $('<form></form>').attr("action",url)
+						.attr("target","_blank")
+						.append("<input type='hidden' name='gxdwbm' value='"+params.gxdwbm+"'>")
+						.append("<input type='hidden' name='departlevel' value='"+params.departlevel+"'>")
+						.appendTo('body');
+		form.submit();
+		
+		form.remove();
 	}
 
+	function closeYxqkDetailDialog(){
+		$('#'+yxqk_jdy_detailid).hideAndRemove("show");		
+	}
+	
+	function getYxqkQueryParams(){
+		return {'gxdwbm':'<%=gxdwbm%>','departlevel':'<%=departlevel%>'};
+	}
 </script>
 		<input type="hidden" id="y_qssj" />
 		<input type="hidden" id="y_jzsj" />
@@ -134,7 +169,7 @@
 				<td class="queryfont" width='88%'>
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<td width="90%">&nbsp;</td>
-<!-- 						<td width="10%"><a href="#" class="exceldcbutton" onclick='setExportExcel_jdyyxtj();' id="dryxtjexcel">导出</a></td> -->
+						<td width="10%"><a href="#" class="exceldcbutton" onclick='setExportExcel_jdyyxtj();' id="dryxtjexcel">导出</a></td>
 					</table>
 				</td>
 			</tr>
