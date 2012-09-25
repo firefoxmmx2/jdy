@@ -1,3 +1,4 @@
+
 package com.aisino2.jdy.domain;
 
 import java.io.Serializable;
