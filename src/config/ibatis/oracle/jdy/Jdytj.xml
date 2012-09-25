@@ -216,7 +216,7 @@
 					  (select count(qyid) from t_qyjbxx where zjztdm='1' and hylbdm=t.hylbdm and gxdwbm like '$gxdwbm$%') zjs,
 					  (select count(ryid) from t_qyryxx ry, t_qyjbxx qy where  ry.qyid = qy.qyid and qy.hylbdm = t.hylbdm and gxdwbm like '$gxdwbm$%' ) cyrys ,
 					  (select count(djxh) from t_ljjbxx where scbzw = '0' and ljtbsj > trunc(sysdate-1,'DD') and ljtbsj &lt; trunc(sysdate,'DD')) ljs,
-					  (select count(id) from t_pjjbxx where SFSCBZ='N' and pjtbsj > trunc(sysdate-1,'DD') and pjtbsj &lt; trunc(sysdate,'DD')) pjs,
+					  (select count(id) from  t_pjjbxx pj,t_ljjbxx lj,t_qyjbxx qy WHERE pj.ljjbxx_id = lj.djxh AND lj.qybm = qy.qybm and qy.gxdwbm like '$gxdwbm$%' and pjtbsj > trunc(sysdate-1,'DD') and pjtbsj &lt; trunc(sysdate,'DD')) pjs,
 					  (select count(1) from t_qyjbxx where gxdwbm like '$gxdwbm$%' and hylbdm = t.hylbdm  and qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = t.hylbdm 
 					      and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD'))) wscqys
 <!-- 					  ,'' departlevel -->
@@ -236,7 +236,7 @@
 						  (select count(qyid) from t_qyjbxx where zjztdm='1' and hylbdm=t.hylbdm and gxdwbm=t.gxdwbm) zjs,
 						  (select count(ryid) from t_qyryxx ry, t_qyjbxx qy where ry.qyid = qy.qyid and qy.hylbdm = t.hylbdm and  ry.hylbdm = t.hylbdm  and qy.gxdwbm=t.gxdwbm) cyrys,
 						  (select count(djxh) from t_ljjbxx lj, t_qyjbxx qy where lj.qybm = qy.qybm and qy.gxdwbm = t.gxdwbm and  lj.scbzw = '0' and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD')) ljs,
-						  (select count(id) from t_pjjbxx pj, t_ljjbxx lj, t_qyjbxx qy where pj.ljjbxx_id = lj.djxh and lj.qybm = qy.qybm and pj.SFSCBZ='N' and pj.pjtbsj > trunc(sysdate-1,'DD') and pj.pjtbsj &lt; trunc(sysdate,'DD')) pjs,
+						  (select count(id) from t_pjjbxx pj, t_ljjbxx lj, t_qyjbxx qy where pj.ljjbxx_id = lj.djxh and lj.qybm = qy.qybm and qy.gxdwbm = t.gxdwbm and pj.SFSCBZ='N' and pj.pjtbsj > trunc(sysdate-1,'DD') and pj.pjtbsj &lt; trunc(sysdate,'DD')) pjs,
 						  (select count(1) from t_qyjbxx where hylbdm = t.hylbdm and gxdwbm = t.gxdwbm and qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = t.hylbdm and qy.gxdwbm=t.gxdwbm 
 						      and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD'))) wscqys
 <!-- 						  ,departlevel departlevel  -->
@@ -260,9 +260,9 @@
 	<select id="Jdytjxx.wscqycxCount" parameterClass="map" resultClass="int">
 		select count(1) from t_qyjbxx a where a.hylbdm = 'Y' 
 			<isNotEmpty prepend="and" property="gxdwbm">
-				a.gxdwbm like '$gxdwbm$%';
+				a.gxdwbm like '$gxdwbm$%'
 			</isNotEmpty>
-			and a.qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = t.hylbdm
+			and a.qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = a.hylbdm
 								<isNotEmpty prepend="and" property="gxdwbm">
 									 qy.gxdwbm like '$gxdwbm$%'
 								</isNotEmpty> 
@@ -283,9 +283,11 @@
 							a.sgscxfjjs sgscxfjjs,a.jydz jydz 
 					from t_qyjbxx a where a.hylbdm = 'Y' 
 						<isNotEmpty prepend="and" property="gxdwbm">
-							a.gxdwbm like '$gxdwbm$%';
+							a.gxdwbm like '$gxdwbm$%'
 						</isNotEmpty>
-						and a.qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = t.hylbdm
+						and a.qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj 
+												where qy.qybm=lj.qybm 
+													and qy.hylbdm = a.hylbdm
 											<isNotEmpty prepend="and" property="gxdwbm">
 												 qy.gxdwbm like '$gxdwbm$%'
 											</isNotEmpty> 
