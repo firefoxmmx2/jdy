@@ -60,7 +60,7 @@
                   </tr>
                    -->
                   <tr>
-                    <td align="center" ><a href="#" onclick="DeleteImg('<%=pic %>');return false;"  class="submitlongbutton">取 消</a></td>
+                    <td align="center" ><a href="#" onclick="DeleteImg('<%=pic %>','jjr');return false;"  class="submitlongbutton">取 消</a></td>
                   </tr>
               </table>
 		</td>
