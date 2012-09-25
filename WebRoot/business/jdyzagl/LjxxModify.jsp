@@ -90,9 +90,10 @@ function modifyback(json){
 		//针对寄件人、收件人修改操作时，还需要传递对应 的ID过去
 		$("#ljjbxx_modify [id=lj_jjrid]").val(json.lj.jjr.id);//寄件人ID
 		$("#ljjbxx_modify [id=lj_sjrid]").val(json.lj.sjr.id);//寄件人ID
-		
-		//img_object= document.getElementById('img_picControlscrjjr').src = json.lj.jjr.zpxx.zpid;
-		$("#img_picControlscrjjr").attr("src",json.lj.jjr.zpxx.zpnr);
+		//显示寄件人照片
+		showImage("img_picControlscrjjr",json.lj.jjr.zpxx.id);
+		//显示收件人照片
+		showImage("img_picControlscr",json.lj.sjr.zpxx.id);
 		
 		for(var i=0;i<json.lj.jdp_list.length;i++){
 			//寄递物品信息保存时添加到列表---添加行的方法
