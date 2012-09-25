@@ -1,17 +1,20 @@
 package com.aisino2.jdy.service.impl;
 
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.common.ImageUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
+import com.aisino2.jdy.dao.IJddxzpxxDao;
 import com.aisino2.jdy.dao.IJdpxxDao;
 import com.aisino2.jdy.dao.ILjjbxxDao;
 import com.aisino2.jdy.dao.IRdrjbxxDao;
+import com.aisino2.jdy.domain.Jddxzpxx;
 import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Rdrjbxx;
@@ -27,7 +30,9 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	private IJdpxxDao jdpxxDao;
 	/**寄递物品信息**/
 	private IRdrjbxxDao rdrjbxxDao;
-	
+	/**人员照片信息**/
+	private IJddxzpxxDao jddxzpxxDao;
+
 	private Ljjbxx setLjjbxx;
 	private IQyjbxxService qyjbxxService;
 	private IJdyBjService jdyBjService;
@@ -56,7 +61,9 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	public void setLjjbxxDao(ILjjbxxDao ljjbxxDao) {
 		this.ljjbxxDao = ljjbxxDao;
 	}
-
+	public void setJddxzpxxDao(IJddxzpxxDao jddxzpxxDao) {
+		this.jddxzpxxDao = jddxzpxxDao;
+	}
 	
 	
 
@@ -66,9 +73,41 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			/***向寄递对象--人员信息表插入数据***/
 			ljjbxx.getJjr().setJdrylx("10"); //设置寄递人员类型 寄件
 			ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
+			/****插入人员照片信息*****/
+			Jddxzpxx setJddxzpxx = new Jddxzpxx();
+			if(ljjbxx.getJjrzpxx()!=null){
+				setJddxzpxx.setRdrjbxx_id(ljjbxx.getJjr().getId());//寄件人ID
+				setJddxzpxx.setScsj(new Date());//上传时间
+				byte[] jjrzp;
+				try {
+					jjrzp = ImageUtil.getImageByte(ljjbxx.getJjrzpxx());
+					setJddxzpxx.setZpnr(jjrzp);//寄件人照片内容
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				jddxzpxxDao.insert(setJddxzpxx);
+				
+			}
 			/***向寄递对象--人员信息表插入数据***/
 			ljjbxx.getSjr().setJdrylx("20"); //设置寄递人员类型 收件
 			ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
+			if(ljjbxx.getSjrzpxx()!=null){
+				/****插入人员照片信息*****/
+				setJddxzpxx.setRdrjbxx_id(ljjbxx.getSjr().getId());//寄件人ID
+				setJddxzpxx.setScsj(new Date());//上传时间
+				byte[] sjrzp;
+				try {
+					sjrzp = ImageUtil.getImageByte(ljjbxx.getSjrzpxx());
+					setJddxzpxx.setZpnr(sjrzp);//收件人照片内容
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				jddxzpxxDao.insert(setJddxzpxx);
+			}
 			/***向揽件信息表打入揽件数据***/
 			ljjbxx.setLjtbsj(new Date());
 			ljjbxx = ljjbxxDao.insert(ljjbxx);
