@@ -112,7 +112,22 @@ public class Ljjbxx implements Serializable {
     private String sjkzbz;//根据时间来判断是否可删除修改
     private String sfpjbz;//是否标志位
     
+	private String jjrzpxx;//寄件人照片信息
+    private String sjrzpxx;//收件人照片信息
+    
    
+    public String getJjrzpxx() {
+		return jjrzpxx;
+	}
+	public void setJjrzpxx(String jjrzpxx) {
+		this.jjrzpxx = jjrzpxx;
+	}
+	public String getSjrzpxx() {
+		return sjrzpxx;
+	}
+	public void setSjrzpxx(String sjrzpxx) {
+		this.sjrzpxx = sjrzpxx;
+	}
 	public String getSfpjbz() {
 		return sfpjbz;
 	}
