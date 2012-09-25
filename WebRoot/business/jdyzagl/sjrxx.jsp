@@ -12,7 +12,7 @@ function updatePicture(y){
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
 		$("#sjrssxmc").val("");//寄件地址
 		$("#lj_sjrxxdz").val("");//详细地址
-		$("#lj_sjrzpdata").remove();//照片
+		$("#lj_sjrzpdata").val("");//照片
 		
 	    $("#lj_sjrxm").val(y.ocrCName);//姓名
 		$("#lj_sjrzjlx").val("身份证");//证件类型
@@ -20,7 +20,9 @@ function updatePicture(y){
 		getHjsxDD(y.ocrIdentityId,"dm_xzqh","lj_sjrssx","sjrssxmc");//从身份号码中得到户籍省县
 		//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
 		$("#lj_sjrxxdz").val(y.ocrAddR);//详细地址
+		//$("#lj_sjrzpdata").val(y.GetImage());//照片
 		$("#lj_sjrzpdata").val(y.GetImage());//照片
+		
 	}else if($("#pdbzw").val()=="pjxxadd"){
 		$("#pjxxadd_sjrxm").val("");//姓名
 		$("#pjxxadd_sjrzjlx").val("");//证件类型
@@ -57,7 +59,16 @@ function updatePicture(y){
 	
 	
 }
+//删除照片信息
+function deleteDate(obj){
+	$("#lj_sjrzpdata").val("");
+}
+//有添加照片按钮时 选择文件
+function open_zp(){
+	  imgToBase(ImgerToBase1,"img_picControlscr","lj_sjrzpdata");
+}
 </script>
+<input type="hidden" id="lj_sjrzpdata" name="lj.sjrzpxx"><!-- 收件人照片信息 -->
 <input type="hidden" name="pdbzw" id="pdbzw" value="<%=pdbzw %>"/>
          <fieldset>
 		 <legend>收件人信息</legend>

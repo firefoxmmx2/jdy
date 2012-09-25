@@ -15,7 +15,7 @@ function updatePicturejjr(x){
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
 		$("#jjrssxmc").val("");//寄件地址
 		$("#lj_jjrxxdz").val("");//详细地址
-		$("#lj_jjrzpdata").remove();//照片
+		$("#lj_jjrzpdata").val("");//照片
 		
 		
 	    $("#lj_jjrxm").val(x.ocrCName);//姓名
@@ -25,6 +25,7 @@ function updatePicturejjr(x){
 		//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
 		$("#lj_jjrxxdz").val(x.ocrAddR);//详细地址
 		$("#lj_jjrzpdata").val(x.GetImage());//照片
+		
 	}else if($("#pdbzw").val()=="pjxxadd"){
 		$("#pjxxadd_jjrxm").val("");//姓名
 		$("#pjxxadd_jjrzjlx").val("");//证件类型
@@ -62,7 +63,16 @@ function updatePicturejjr(x){
 	}
 	
 }
+//删除照片信息
+function deleteDate(obj){
+	$("#lj_jjrzpdata").val("");
+}
+//有添加照片按钮时 选择文件
+function open_zp(){
+	  imgToBase(ImgerToBase1,"img_picControlscr","lj_jjrzpdata");
+}
 </script>
+<input type="hidden" id="lj_jjrzpdata" name="lj.jjrzpxx"><!-- 寄件人照片信息 -->
 <input type="hidden" name="pdbzw" id="pdbzw" value="<%=pdbzw %>"/>
          <fieldset>
 		 <legend>寄件人信息</legend>
