@@ -29,8 +29,7 @@ public class JddxzpxxServiceImpl implements IJddxzpxxService {
 	}
 
 	public Jddxzpxx get(Jddxzpxx jddxzpxx) {
-		if(jddxzpxx.getRdrjbxx_id() == null)
-			throw new RuntimeException("人员ID不能为空");
+		
 		return jddxzpxxDao.get(jddxzpxx);
 	}
 	
