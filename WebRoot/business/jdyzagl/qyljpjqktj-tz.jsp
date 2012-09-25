@@ -23,17 +23,21 @@
 			isPlayResultNull :false,
 			ingridPageParams :sXML,
 			ingridExtraParams:params,
-			sorting :false,
 			colWidths : [ "30%", "11.6%", "11.6%", "11.6%", "11.6%","11.6%","11.6%"]
 		});	
 	}
 	function exportExcelQyljpjqk(){
+		var url = "jdy/exportExcelQyljpjqk_jdytjxx.action";
+		var params = {'gxdwbm':$('#pgxdwbm').val()};
+		var form = $('<form></form>').attr("action",url)
+						.attr("target","_blank")
+						.append("<input type='hidden' name='gxdwbm' value='"+params.gxdwbm+"'>")
+						.appendTo('body');
+		form.submit();
 		
+		form.remove();
 	}
 	
-	function closeQyljpjqkDialog(){
-		$('#'+yxqk_jdy_detailid).hideAndRemove("show");		
-	}
 </script>
 
 <%
@@ -46,8 +50,8 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
       <td align="left" class="title1">昨日上传揽件派件情况</td>
-      <td align="right"><a href="#" id="exportExcelQyljpjqkBtn" onclick='exportExcelQyljpjqk();' class="exceldcbutton"></a></td>
-      <td align="right"><a href="#" id="closeDiv" onclick='closeQyljpjqkDialog();' class="close"></a></td>
+<!--       <td align="right"><a href="#" id="exportExcelQyljpjqkBtn" onclick='exportExcelQyljpjqk();' class="exceldcbutton"></a></td> -->
+      <td align="right"><a href="#" id="closeDiv" onclick='closeYxqkDetailDialog();' class="close"></a></td>
     </tr>
 </table>
 <div id="qyljpjqktjData">
@@ -66,3 +70,4 @@
 		
 	</table>
 </div>
+<div style="padding-left: 85%;"><a href="#" id="exportExcelQyljpjqkBtn" onclick='exportExcelQyljpjqk();' class="exceldcbutton">导出</a></div>
