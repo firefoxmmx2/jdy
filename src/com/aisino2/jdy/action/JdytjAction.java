@@ -2,8 +2,6 @@ package com.aisino2.jdy.action;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,21 +19,16 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 
-import sun.org.mozilla.javascript.ObjArray;
-
 import com.aisino2.common.DateToString;
 import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Jdytjxx;
-import com.aisino2.jdy.domain.Pjjbxx;
 import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IJdytjxxService;
 import com.aisino2.publicsystem.domain.Qyjbxx;
-import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.Dict_item;
-import com.aisino2.sysadmin.domain.User;
 import com.aisino2.sysadmin.service.IDict_itemService;
 import com.opensymphony.xwork2.ActionContext;
 

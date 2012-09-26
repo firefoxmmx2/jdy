@@ -225,7 +225,7 @@
 						and d.departlevel >= #departlevel# 
 						and t.hylbdm='Y'
 						and t.scbz = 0
-						
+						and t.gxdwbm like '$gxdwbm$%'
 					group by t.hylbdm
 					union all
 					select * from (

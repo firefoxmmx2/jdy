@@ -482,7 +482,6 @@ function wldh_completion(wldh,qybm){
 			if(data.lj.kybz && data.lj.kybz=="Y"){
 				$('#pjjbxx_add_button').parent('td').hide();
 				$('#pjjbxx_add_again_button').parent('td').hide();
-				$('#pjjbxx_goback').attr('title','关闭').text('关闭');
 				
 				jAlert("该揽件信息包含可疑物品，无法派件","提示");
 			}
