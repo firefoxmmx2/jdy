@@ -62,6 +62,22 @@ function modifyback(json){
 	$("#ljjbxx_detail [id=lj_ljrxm_mod]").val(json.lj.ljr.xm);//揽件人
 	$("#ljjbxx_detail [id=lj_ljr_cyrybh]").val(json.lj.ljr.cyrybh);//揽件人编码
 	$("#ljjbxx_detail [id=lj_ljsj]").val(setNull(json.lj.ljsj));//揽件日期
+	//显示寄件人照片
+	if(json.lj.jjr.zpxx!=null && json.lj.jjr.zpxx!=""){
+		if(json.lj.jjr.zpxx.id!=null && json.lj.jjr.zpxx.id!=""){
+			$("#lj_jjr_zpxx_zpid").val(json.lj.jjr.zpxx.id);
+			showImage("img_picControlscrjjr",json.lj.jjr.zpxx.id);
+			//$("#lj_jjrzpdata").val(json.lj.jjrzpxx);
+		}
+	}
+	//显示收件人照片
+	if(json.lj.sjr.zpxx!=null && json.lj.sjr.zpxx!=""){
+		if(json.lj.sjr.zpxx.id!=null && json.lj.sjr.zpxx.id!=""){
+			$("#lj_sjr_zpxx_zpid").val(json.lj.sjr.zpxx.id);
+			showImage("img_picControlscr",json.lj.sjr.zpxx.id);
+			//$("#lj_sjrzpdata").val(json.lj.sjrzpxx);
+		}
+	}
 	for(var i=0;i<json.lj.jdp_list.length;i++){
 		//寄递物品信息保存时添加到列表---添加行的方法
 		    var jdwp_id=setNull(json.lj.jdp_list[i].id);//寄递品类型
