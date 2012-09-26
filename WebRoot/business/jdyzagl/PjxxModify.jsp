@@ -434,7 +434,7 @@ function loadData(){
 						try{
 							$("#pjjbxxmod_sjr_zpxx_zpid").val(data.pjxx.ljjbxx.sjr.zpxx.id);
 							showImage("img_picControlscr",data.pjxx.ljjbxx.sjr.zpxx.id);
-							$("pjjbxxmod_#sjrzpdata").val(data.pjxx.ljjbxx.sjrzpxx);
+							$("#pjjbxxmod_sjrzpdata").val(data.pjxx.ljjbxx.sjrzpxx);
 						}catch(e){
 							
 						}
