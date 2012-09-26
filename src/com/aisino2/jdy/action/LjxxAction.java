@@ -270,7 +270,7 @@ public class LjxxAction extends PageAction {
 					String sjrzpnr;
 					sun.misc.BASE64Encoder base64Encoder = new sun.misc.BASE64Encoder();
 					sjrzpnr = base64Encoder.encodeBuffer(lj.getSjr().getZpxx().getZpnr());
-					lj.setJjrzpxx(sjrzpnr);
+					lj.setSjrzpxx(sjrzpnr);
 				}
 			}
 		}
