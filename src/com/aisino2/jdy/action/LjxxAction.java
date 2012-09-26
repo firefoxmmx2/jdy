@@ -21,6 +21,8 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 
+import sun.misc.BASE64Encoder;
+
 
 import com.aisino2.cache.CacheManager;
 import com.aisino2.common.DateToString;
@@ -238,6 +240,23 @@ public class LjxxAction extends PageAction{
 				overUpdateTime=true;
 			else
 				overUpdateTime=false;
+			//照片内容不为空将照片内容转换成base64Decoder编码
+			if(lj.getJjr().getZpxx()!=null){
+				if(lj.getJjr().getZpxx().getZpnr()!=null){
+					String jjrzpnr;
+					sun.misc.BASE64Encoder base64Encoder = new sun.misc.BASE64Encoder();
+					jjrzpnr = base64Encoder.encodeBuffer(lj.getJjr().getZpxx().getZpnr());
+					lj.setJjrzpxx(jjrzpnr);
+				}
+			}
+			if(lj.getSjr().getZpxx()!=null){
+				if(lj.getSjr().getZpxx().getZpnr()!=null){
+					String sjrzpnr;
+					sun.misc.BASE64Encoder base64Encoder = new sun.misc.BASE64Encoder();
+					sjrzpnr = base64Encoder.encodeBuffer(lj.getSjr().getZpxx().getZpnr());
+					lj.setJjrzpxx(sjrzpnr);
+				}
+			}
 		}
 		
 		
