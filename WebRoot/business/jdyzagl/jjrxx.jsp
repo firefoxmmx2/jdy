@@ -33,7 +33,7 @@ function updatePicturejjr(x){
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
 		$("#pjxxadd_jjrssxmc").val("");//寄件地址
 		$("#pjxxadd_jjrxxdz").val("");//详细地址
-		$("#pjxxadd_jjrzpdata").remove();//照片
+		$("#pjxxadd_jjrzpdata").val("");//照片
 		
 		
 	    $("#pjxxadd_jjrxm").val(x.ocrCName);//姓名
@@ -50,7 +50,7 @@ function updatePicturejjr(x){
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
 		$("#pjjbxxmod_jjrssxmc").val("");//寄件地址
 		$("#pjjbxxmod_jjrxxdz").val("");//详细地址
-		$("#pjjbxxmod_jjrzpdata").remove();//照片
+		$("#pjjbxxmod_jjrzpdata").val("");//照片
 		
 		
 	    $("#pjjbxxmod_jjrxm").val(x.ocrCName);//姓名

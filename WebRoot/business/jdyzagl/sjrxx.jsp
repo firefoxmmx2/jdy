@@ -30,7 +30,7 @@ function updatePicture(y){
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
 		$("#pjxxadd_sjrssxmc").val("");//寄件地址
 		$("#pjxxadd_sjrxxdz").val("");//详细地址
-		$("#pjxxadd_sjrzpdata").remove();//照片
+		$("#pjxxadd_sjrzpdata").val("");//照片
 		
 	    $("#pjxxadd_sjrxm").val(y.ocrCName);//姓名
 		$("#pjxxadd_sjrzjlx").setValue("身份证");//证件类型
@@ -46,7 +46,7 @@ function updatePicture(y){
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
 		$("#pjjbxxmod_sjrssxmc").val("");//寄件地址
 		$("#pjjbxxmod_sjrxxdz").val("");//详细地址
-		$("#pjjbxxmod_sjrzpdata").remove();//照片
+		$("#pjjbxxmod_sjrzpdata").val("");//照片
 		
 	    $("#pjjbxxmod_sjrxm").val(y.ocrCName);//姓名
 		$("#pjjbxxmod_sjrzjlx").setValue("身份证");//证件类型
