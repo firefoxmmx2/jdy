@@ -8,7 +8,6 @@ import java.util.Map;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.sysadmin.domain.Addressdetail;
-import com.aisino2.sysadmin.domain.Jlxxx;
 import com.aisino2.sysadmin.service.IAddressdetailService;
 import com.aisino2.sysadmin.service.ISystemService;
 

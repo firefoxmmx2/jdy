@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.sysadmin.domain.User_role;
 import com.aisino2.sysadmin.dao.IUser_roleDao;
+import com.aisino2.sysadmin.domain.User_role;
 import com.aisino2.sysadmin.service.IUser_roleService;
 
 public class User_roleServiceImpl extends BaseService implements IUser_roleService {

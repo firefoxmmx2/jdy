@@ -1,12 +1,7 @@
 package com.aisino2.sysadmin.test;
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Date;
-
 import com.aisino2.core.test.BaseTestCase;
 import com.aisino2.sysadmin.domain.Department;
-import com.aisino2.sysadmin.domain.Menu;
 import com.aisino2.sysadmin.service.IDepartmentService;
 
 public class DepartmentTest extends BaseTestCase {

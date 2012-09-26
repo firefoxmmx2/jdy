@@ -3,9 +3,8 @@ package com.aisino2.sysadmin.dao.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import com.aisino2.core.dao.Page;
 import com.aisino2.core.dao.BaseDao;
-
+import com.aisino2.core.dao.Page;
 import com.aisino2.sysadmin.dao.IRole_menuDao;
 import com.aisino2.sysadmin.domain.Menu;
 import com.aisino2.sysadmin.domain.Role;

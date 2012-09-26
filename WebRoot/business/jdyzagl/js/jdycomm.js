@@ -355,3 +355,17 @@ function showImage(imageId,zpid,imageSrc){
 		$("#"+imageId).attr("src",parentWindowPath+"jdy/queryZp_jddxzpxx.action?zpid="+zpid);
 	}
 }
+
+/**
+ * 从右边去掉自定义的部分
+ * @param str 原始字符串
+ * @param trimstr 需掉字符串
+ * @returns 去掉后的字符串
+ */
+function rrTrim(str,trimstr){
+	var pattern = new RegExp(trimstr+"$");
+	while(pattern.exec(str)){
+		str = str.replace(pattern,'','g');
+	}
+	return str;
+}

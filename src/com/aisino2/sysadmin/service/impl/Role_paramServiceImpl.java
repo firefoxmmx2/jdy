@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.sysadmin.domain.Role_param;
 import com.aisino2.sysadmin.dao.IRole_paramDao;
+import com.aisino2.sysadmin.domain.Role_param;
 import com.aisino2.sysadmin.service.IRole_paramService;
 
 public class Role_paramServiceImpl extends BaseService implements IRole_paramService {

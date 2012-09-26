@@ -16,7 +16,6 @@ import com.aisino2.sysadmin.domain.Role;
 import com.aisino2.sysadmin.domain.Role_func;
 import com.aisino2.sysadmin.domain.Role_menu;
 import com.aisino2.sysadmin.service.IRoleService;
-import com.aisino2.sysadmin.service.IRole_menuService;
 
 public class RoleAction extends PageAction{
 	private IRoleService roleService;

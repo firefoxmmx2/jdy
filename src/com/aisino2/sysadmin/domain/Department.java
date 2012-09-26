@@ -1,11 +1,7 @@
 package com.aisino2.sysadmin.domain;
 
-import java.util.List;
-import java.util.Date;
-
 import com.aisino2.core.domain.BaseObject;
 import com.aisino2.core.util.GB2Alpha;
-import com.aisino2.core.util.PinYinUtil;
 public class Department extends BaseObject {
 
 	/** @param 机构(t_department) */

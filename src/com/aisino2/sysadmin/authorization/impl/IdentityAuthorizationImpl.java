@@ -2,7 +2,6 @@ package com.aisino2.sysadmin.authorization.impl;
 
 import java.util.Map;
 
-import com.aisino2.core.util.EncryptUtil;
 import com.aisino2.sysadmin.authorization.IIdentityAuthorization;
 import com.aisino2.sysadmin.domain.User;
 import com.aisino2.sysadmin.service.IUserService;

@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.sysadmin.domain.Addressdetail;
 import com.aisino2.sysadmin.dao.IAddressdetailDao;
+import com.aisino2.sysadmin.domain.Addressdetail;
 import com.aisino2.sysadmin.service.IAddressdetailService;
 
 public class AddressdetailServiceImpl extends BaseService implements IAddressdetailService {

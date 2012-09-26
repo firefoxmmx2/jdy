@@ -1,10 +1,6 @@
 package com.aisino2.sysadmin.domain;
 
-import java.util.List;
-import java.util.Date;
-
 import com.aisino2.core.domain.BaseObject;
-import com.aisino2.core.util.PinYinUtil;
 public class Dict_item extends BaseObject {
 
 	/** @param 字典项(t_dict_item) */

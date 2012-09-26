@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.components.ElseIf;
 
 import com.aisino2.cache.CacheManager;
 import com.aisino2.common.DepartmentUtil;

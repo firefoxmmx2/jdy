@@ -3,7 +3,6 @@ package com.aisino2.sysadmin.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.sysadmin.domain.Param;
 public interface IParamDao {
 	/** @param 参数设置(t_param) 增加 */

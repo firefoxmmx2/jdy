@@ -26,7 +26,6 @@ import sun.misc.BASE64Decoder;
 import com.aisino2.common.IpMac;
 import com.aisino2.common.QjblUtil;
 import com.aisino2.core.web.PageAction;
-
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.authorization.IIdentityAuthorization;
 import com.aisino2.sysadmin.domain.Department;

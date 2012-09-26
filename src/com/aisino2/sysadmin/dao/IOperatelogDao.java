@@ -3,7 +3,6 @@ package com.aisino2.sysadmin.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.sysadmin.domain.Operatelog;
 public interface IOperatelogDao {
 	/** @param 操作日志表(t_operatelog) 增加 */

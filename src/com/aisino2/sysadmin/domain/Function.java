@@ -1,8 +1,6 @@
 package com.aisino2.sysadmin.domain;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Date;
 
 import com.aisino2.core.domain.BaseObject;
 

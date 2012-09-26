@@ -91,10 +91,21 @@ function modifyback(json){
 		$("#ljjbxx_modify [id=lj_jjrid]").val(json.lj.jjr.id);//寄件人ID
 		$("#ljjbxx_modify [id=lj_sjrid]").val(json.lj.sjr.id);//寄件人ID
 		//显示寄件人照片
-		showImage("img_picControlscrjjr",json.lj.jjr.zpxx.id);
+		if(json.lj.jjr.zpxx!=null && json.lj.jjr.zpxx!=""){
+			if(json.lj.jjr.zpxx.id!=null && json.lj.jjr.zpxx.id!=""){
+				$("#lj_jjr_zpxx_zpid").val(json.lj.jjr.zpxx.id);
+				showImage("img_picControlscrjjr",json.lj.jjr.zpxx.id);
+				$("#lj_jjrzpdata").val(json.lj.jjrzpxx);
+			}
+		}
 		//显示收件人照片
-		showImage("img_picControlscr",json.lj.sjr.zpxx.id);
-		
+		if(json.lj.sjr.zpxx!=null && json.lj.sjr.zpxx!=""){
+			if(json.lj.sjr.zpxx.id!=null && json.lj.sjr.zpxx.id!=""){
+				$("#lj_sjr_zpxx_zpid").val(json.lj.sjr.zpxx.id);
+				showImage("img_picControlscr",json.lj.sjr.zpxx.id);
+				$("#lj_sjrzpdata").val(json.lj.sjrzpxx);
+			}
+		}
 		for(var i=0;i<json.lj.jdp_list.length;i++){
 			//寄递物品信息保存时添加到列表---添加行的方法
 			    var jdwp_id=setNull(json.lj.jdp_list[i].id);//寄递品类型
@@ -390,7 +401,8 @@ function  ljxxmod(){
 	//alert("寄件地址="+$("#lj_jjrssx").val());
 	//alert("收件地址="+$("#lj_sjrssx").val());
 	//alert("蓝贱人="+$("#ljjbxx_modify [id=lj_ljr_cyrybh_mod]").val());
-	//return;
+	alert("寄件人="+$("#lj_jjrzpdata").val());
+	alert("收件人="+$("#lj_sjrzpdata").val());
 	if (addVerify()){
 		var params = getSubmitParams("#ljjbxx_modify [name*=lj.]");
 		//var params = getSubmitParams("#pjjbxx_add [name*=pjxx.]");
@@ -468,7 +480,6 @@ function addback(json){
 <input type="hidden" id="ljjbxxmodif_id" name="lj.djxh" value=""><!-- 修改传递过来的ID号 -->
 <input type="hidden" id="lj_jjrid" name="lj.jjr.id"><!-- 揽件修改、寄件人、收件人时还需传递对应ID过去，才能唯一标示出每一条数据 -->
 <input type="hidden" id="lj_sjrid" name="lj.sjr.id"><!-- 揽件修改、寄件人、收件人时还需传递对应ID过去，才能唯一标示出每一条数据 -->
-<input type="hidden" id="lj_jjrzpdata" name="lj.jjr.zpxx.zpnr" value=""><!-- 照片信息 -->
 <tr>
   <td>
     <fieldset>

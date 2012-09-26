@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-import com.aisino2.sysadmin.domain.Address;
 import com.aisino2.sysadmin.domain.Addressdetail;
 
 public interface IAddressdetailService {

@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-import com.aisino2.sysadmin.domain.Menu;
-import com.aisino2.sysadmin.domain.System;
 import com.aisino2.sysadmin.domain.User;
-import com.aisino2.sysadmin.domain.User_role;
 
 public interface IUserService {
 	/** @param 用户(t_user) 增加 */

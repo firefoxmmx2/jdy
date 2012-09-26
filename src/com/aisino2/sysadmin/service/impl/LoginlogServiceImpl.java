@@ -5,10 +5,9 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
+import com.aisino2.sysadmin.dao.ILoginlogDao;
 import com.aisino2.sysadmin.domain.Dltj;
 import com.aisino2.sysadmin.domain.Loginlog;
-import com.aisino2.sysadmin.dao.ILoginlogDao;
 import com.aisino2.sysadmin.service.ILoginlogService;
 
 public class LoginlogServiceImpl extends BaseService implements ILoginlogService {

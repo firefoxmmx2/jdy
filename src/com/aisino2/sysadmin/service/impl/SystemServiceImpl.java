@@ -5,10 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.sysadmin.domain.Menu;
-import com.aisino2.sysadmin.domain.System;
 import com.aisino2.sysadmin.dao.ISystemDao;
+import com.aisino2.sysadmin.domain.System;
 import com.aisino2.sysadmin.service.ISystemService;
 
 public class SystemServiceImpl extends BaseService implements ISystemService {

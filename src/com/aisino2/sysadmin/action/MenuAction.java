@@ -17,8 +17,8 @@ import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.common.TreeMenu;
 import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.sysadmin.domain.Menu;
-import com.aisino2.sysadmin.domain.User;
 import com.aisino2.sysadmin.domain.System;
+import com.aisino2.sysadmin.domain.User;
 import com.aisino2.sysadmin.service.IMenuService;
 import com.aisino2.sysadmin.service.ISystemService;
 

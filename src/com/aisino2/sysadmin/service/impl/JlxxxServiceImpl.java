@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.sysadmin.domain.Jlxxx;
 import com.aisino2.sysadmin.dao.IJlxxxDao;
+import com.aisino2.sysadmin.domain.Jlxxx;
 import com.aisino2.sysadmin.service.IJlxxxService;
 
 public class JlxxxServiceImpl extends BaseService implements IJlxxxService {

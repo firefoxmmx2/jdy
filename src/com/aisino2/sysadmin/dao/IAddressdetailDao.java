@@ -3,7 +3,6 @@ package com.aisino2.sysadmin.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.sysadmin.domain.Addressdetail;
 public interface IAddressdetailDao {
 	/** @param 地址详址(T_ADDRESSDETAIL) 增加 */

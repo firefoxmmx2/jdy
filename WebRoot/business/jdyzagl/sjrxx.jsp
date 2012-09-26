@@ -69,7 +69,7 @@ function open_zp(){
 }
 </script>
 <input type="hidden" id="lj_sjr_zpxx_zpid" name="lj.sjr.zpxx.id" value=""><!-- 收件人照片信息ID -->
-<input type="hidden" id="lj_sjrzpdata" name="lj.sjrzpxx"><!-- 收件人照片信息 -->
+<input type="hidden" id="lj_sjrzpdata" name="lj.sjrzpxx" value=""><!-- 收件人照片信息 -->
 <input type="hidden" name="pdbzw" id="pdbzw" value="<%=pdbzw %>"/>
          <fieldset>
 		 <legend>收件人信息</legend>

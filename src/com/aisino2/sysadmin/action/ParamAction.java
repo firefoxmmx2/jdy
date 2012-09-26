@@ -17,7 +17,6 @@ import com.aisino2.sysadmin.domain.Param;
 import com.aisino2.sysadmin.domain.Role;
 import com.aisino2.sysadmin.domain.Role_param;
 import com.aisino2.sysadmin.domain.User;
-import com.aisino2.sysadmin.domain.User_role;
 import com.aisino2.sysadmin.service.IParamService;
 import com.aisino2.sysadmin.service.IRoleService;
 import com.aisino2.sysadmin.service.IRole_paramService;

@@ -13,4 +13,43 @@ public interface IJdytjxxService {
 	List<Jdytjxx> getQypjltj(Map<String, Object> map);
 	
 	Page getSjgltj(Map<String,Object> paras,int pageno,int pagesize,String dir,String sort);
+	
+	Page getYxqktj(Map<String,Object> paras,int pageno,int pagesize,String dir,String sort);
+	
+	/**
+	 * 寄递业企业揽件派件情况统计　（昨日）
+	 * 
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page getQyljpjqktj(Map<String, Object> paras, int pageno, int pagesize,
+			String dir, String sort);
+
+	/**
+	 * 未上传企业列表查询
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page getWscqycx(Map<String, Object> paras, int pageno, int pagesize,
+			String dir, String sort);
+	
+	/**
+	 * 台帐用企业信息查询
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page getJdyQyjbxxList(Map<String,Object> paras, int pageno, int pagesize,
+			String dir, String sort);
 }

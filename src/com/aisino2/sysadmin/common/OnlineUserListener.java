@@ -3,10 +3,10 @@ package com.aisino2.sysadmin.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import javax.servlet.http.HttpSession;
-import javax.servlet.ServletContext;
 
 import com.aisino2.sysadmin.domain.OnlineUser;
 

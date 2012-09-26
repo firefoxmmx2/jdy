@@ -82,4 +82,30 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 		return jdytjxxDao.getSjgltj(paras,pageno,pagesize,dir,sort);
 	}
 
+	/***
+	 * 寄递业运行情况统计
+	 */
+	public Page getYxqktj(Map<String, Object> paras, int pageno, int pagesize,
+			String dir, String sort) {
+		return jdytjxxDao.getYxqktj(paras,pageno,pagesize,dir,sort);
+	}
+
+
+	public Page getQyljpjqktj(Map<String, Object> paras, int pageno,
+			int pagesize, String dir, String sort) {
+		return jdytjxxDao.getQyljpjqktj(paras, pageno, pagesize, dir, sort);
+	}
+
+
+	public Page getWscqycx(Map<String, Object> paras, int pageno, int pagesize,
+			String dir, String sort) {
+		return jdytjxxDao.getWscqycx(paras, pageno, pagesize, dir, sort);
+	}
+
+
+	public Page getJdyQyjbxxList(Map<String, Object> paras, int pageno,
+			int pagesize, String dir, String sort) {
+		return jdytjxxDao.getJdyQyjbxxList(paras, pageno, pagesize, dir, sort);
+	}
+
 }

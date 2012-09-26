@@ -3,8 +3,6 @@ package com.aisino2.sysadmin.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
-import com.aisino2.sysadmin.domain.Menu;
 import com.aisino2.sysadmin.domain.System;
 public interface ISystemDao {
 	/** @param 系统(t_system) 增加 */

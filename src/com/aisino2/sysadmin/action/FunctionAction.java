@@ -13,7 +13,6 @@ import com.aisino2.common.PageUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.sysadmin.domain.Function;
-import com.aisino2.sysadmin.domain.Menu;
 import com.aisino2.sysadmin.service.IFunctionService;
 import com.aisino2.sysadmin.service.ISystemService;
 

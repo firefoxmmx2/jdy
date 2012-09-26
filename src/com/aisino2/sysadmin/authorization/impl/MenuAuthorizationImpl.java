@@ -1,8 +1,6 @@
 package com.aisino2.sysadmin.authorization.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.aisino2.sysadmin.authorization.IMenuAuthorization;
 import com.aisino2.sysadmin.domain.Menu;

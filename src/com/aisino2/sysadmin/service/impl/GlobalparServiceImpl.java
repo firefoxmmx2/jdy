@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
-
-import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.sysadmin.dao.IGlobalparDao;
+import com.aisino2.sysadmin.domain.Globalpar;
 import com.aisino2.sysadmin.service.IGlobalparService;
 
 public class GlobalparServiceImpl extends BaseService implements IGlobalparService {

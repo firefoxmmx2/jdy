@@ -3,7 +3,6 @@ package com.aisino2.sysadmin.dao;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
-
 import com.aisino2.sysadmin.domain.Function;
 public interface IFunctionDao {
 	/** @param 功能(t_function) 增加 */
