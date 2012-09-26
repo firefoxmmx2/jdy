@@ -416,7 +416,30 @@ function loadData(){
 					}
 					
 				}
-					
+				//显示收件人照片
+				if(data.pjxx.ljjbxx.jjr.zpxx!=null &&data.pjxx.ljjbxx.jjr.zpxx!=""){
+					if(data.pjxx.ljjbxx.jjr.zpxx.id!=null && data.pjxx.ljjbxx.jjr.zpxx.id!=""){
+						try{
+							$("#pjjbxxmod_jjr_zpxx_zpid").val(data.pjxx.ljjbxx.jjr.zpxx.id);
+							showImage("img_picControlscrjjr",data.pjxx.ljjbxx.jjr.zpxx.id);
+							$("#pjjbxxmod_jjrzpdata").val(data.pjxx.ljjbxx.jjrzpxx);
+						}catch (e) {
+							
+						}
+					}
+				}
+				//显示收件人照片
+				if(data.pjxx.ljjbxx.sjr.zpxx!=null && data.pjxx.ljjbxx.sjr.zpxx!=""){
+					if(data.pjxx.ljjbxx.sjr.zpxx.id!=null && data.pjxx.ljjbxx.sjr.zpxx.id!=""){
+						try{
+							$("#pjjbxxmod_sjr_zpxx_zpid").val(data.pjxx.ljjbxx.sjr.zpxx.id);
+							showImage("img_picControlscr",data.pjxx.ljjbxx.sjr.zpxx.id);
+							$("pjjbxxmod_#sjrzpdata").val(data.pjxx.ljjbxx.sjrzpxx);
+						}catch(e){
+							
+						}
+					}
+				}	
 				
 			});
 			//初始化寄递品信息

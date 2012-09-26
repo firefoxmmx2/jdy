@@ -445,9 +445,9 @@ function wldh_completion(wldh,qybm){
 				if(data.lj.jjr.zpxx!=null && data.lj.jjr.zpxx!=""){
 					if(data.lj.jjr.zpxx.id!=null && data.lj.jjr.zpxx.id!=""){
 						try{
-							$("#jjr_zpxx_zpid").val(data.lj.jjr.zpxx.id);
+							$("#pjxxadd_jjr_zpxx_zpid").val(data.lj.jjr.zpxx.id);
 							showImage("img_picControlscrjjr",data.lj.jjr.zpxx.id);
-							$("#jjrzpdata").val(data.lj.jjrzpxx);
+							$("#pjxxadd_jjrzpdata").val(data.lj.jjrzpxx);
 						}catch (e) {
 							
 						}
@@ -457,9 +457,9 @@ function wldh_completion(wldh,qybm){
 				if(data.lj.sjr.zpxx!=null && data.lj.sjr.zpxx!=""){
 					if(data.lj.sjr.zpxx.id!=null && data.lj.sjr.zpxx.id!=""){
 						try{
-							$("#sjr_zpxx_zpid").val(data.lj.sjr.zpxx.id);
+							$("#pjxxadd_sjr_zpxx_zpid").val(data.lj.sjr.zpxx.id);
 							showImage("img_picControlscr",data.lj.sjr.zpxx.id);
-							$("#sjrzpdata").val(data.lj.sjrzpxx);
+							$("#pjxxadd_sjrzpdata").val(data.lj.sjrzpxx);
 						}catch(e){
 							
 						}
