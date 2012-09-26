@@ -141,6 +141,30 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			}
 		    rdrjbxxDao.update(ljjbxx.getJjr());
 		}
+		//删除照片信息
+		Jddxzpxx setJddxzpxx = new Jddxzpxx();
+		if(ljjbxx.getJjr().getZpxx().getId()!=null){
+			jddxzpxxDao.delete(ljjbxx.getJjr().getZpxx());
+		}
+		if(ljjbxx.getSjr().getZpxx().getId()!=null){
+			jddxzpxxDao.delete(ljjbxx.getSjr().getZpxx());
+		}
+		//从新获取照片信息数据插入数据库
+		if(ljjbxx.getJjrzpxx()!=null && ljjbxx.getJjrzpxx().trim().length()!=0){
+			setJddxzpxx.setRdrjbxx_id(ljjbxx.getJjr().getId());//寄件人ID
+			setJddxzpxx.setScsj(new Date());//上传时间
+			byte[] jjrzp;
+			try {
+				jjrzp = ImageUtil.getImageByte(ljjbxx.getJjrzpxx());
+				setJddxzpxx.setZpnr(jjrzp);//寄件人照片内容
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			jddxzpxxDao.insert(setJddxzpxx);
+			
+		}
 		//修改收件人
 		if(ljjbxx.getSjr()!=null && StringUtil.isNotEmpty(ljjbxx.getSjr().getZjhm())){
 			Rdrjbxx setJjrtemp1 = new Rdrjbxx();
@@ -153,6 +177,22 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 				jdyBjService.insertJdyBjxx(ljjbxx);
 			}
 			rdrjbxxDao.update(ljjbxx.getSjr());
+		}
+		//从新获取照片信息数据插入数据库
+		if(ljjbxx.getSjrzpxx()!=null && ljjbxx.getSjrzpxx().trim().length()!=0){
+			/****插入人员照片信息*****/
+			setJddxzpxx.setRdrjbxx_id(ljjbxx.getSjr().getId());//寄件人ID
+			setJddxzpxx.setScsj(new Date());//上传时间
+			byte[] sjrzp;
+			try {
+				sjrzp = ImageUtil.getImageByte(ljjbxx.getSjrzpxx());
+				setJddxzpxx.setZpnr(sjrzp);//收件人照片内容
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			jddxzpxxDao.insert(setJddxzpxx);
 		}
 		//修改寄递品信息
 		if(ljjbxx.getJdp_list()!=null && ljjbxx.getJdp_list().size()>0){
