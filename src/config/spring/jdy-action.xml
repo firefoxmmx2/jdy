@@ -22,4 +22,8 @@
   <bean id="kyjdwpAction" class="com.aisino2.jdy.action.KyjdwpAction" scope="prototype">  
       <property name="kyjdwpxxService" ref="KyjdwpxxServiceImpl"/> 
   </bean>   
+<!-- 人员照片信息action -->
+  <bean id="JddxzpxxAction" class="com.aisino2.jdy.action.JddxzpxxAction" scope="prototype">  
+      <property name="jddxzpxxService" ref="JddxzpxxServiceImpl"/> 
+  </bean> 
 </beans>
