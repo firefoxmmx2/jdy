@@ -401,8 +401,6 @@ function  ljxxmod(){
 	//alert("寄件地址="+$("#lj_jjrssx").val());
 	//alert("收件地址="+$("#lj_sjrssx").val());
 	//alert("蓝贱人="+$("#ljjbxx_modify [id=lj_ljr_cyrybh_mod]").val());
-	alert("寄件人="+$("#lj_jjrzpdata").val());
-	alert("收件人="+$("#lj_sjrzpdata").val());
 	if (addVerify()){
 		var params = getSubmitParams("#ljjbxx_modify [name*=lj.]");
 		//var params = getSubmitParams("#pjjbxx_add [name*=pjxx.]");
