@@ -511,28 +511,60 @@ var img_object='';
    
 }
 function ysjz(){
-	windows = (navigator.userAgent.indexOf("Windows",0) != -1)?1:0;
-	if (windows){
+	if (detectOS()=="Win7"){
+		alert("Win7系统执行");
 		img_object= document.getElementById('img_'+PickjName).src = 'C:\\AERO_INFO\\edzzp.bmp';
 	}else{
+		alert("XP系统执行");
 		img_object= document.getElementById('img_'+PickjName).src = 'C:\\Program Files\\AERO_INFO\\edzzp.bmp';
 	}
 	
 }
 //判断系统类型函数：Windows、Mac、Linux、Unix
-function check_os() {
-	windows = (navigator.userAgent.indexOf("Windows",0) != -1)?1:0;
-	mac = (navigator.userAgent.indexOf("mac",0) != -1)?1:0;
-	linux = (navigator.userAgent.indexOf("Linux",0) != -1)?1:0;
-	unix = (navigator.userAgent.indexOf("X11",0) != -1)?1:0;
- 
-	if (windows) os_type = "MS Windows";
-	else if (mac) os_type = "Apple mac";
-	else if (linux) os_type = "Lunix";
-	else if (unix) os_type = "Unix";
- 
-	return os_type;
-}
+function detectOS() {  
+
+	 var sUserAgent = navigator.userAgent;  
+
+	 var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");  
+
+	 var isMac = (navigator.platform == "Mac68K") || (navigator.platform == "MacPPC") || (navigator.platform == "Macintosh") || (navigator.platform == "MacIntel");          if (isMac)  
+
+	 return "Mac";  
+
+	 var isUnix = (navigator.platform == "X11") && !isWin && !isMac;  
+
+	 if (isUnix) return "Unix";  
+
+	 var isLinux = (String(navigator.platform).indexOf("Linux") > -1);  
+
+	 if (isLinux) return "Linux";  
+
+	 if (isWin) {  
+
+		 var isWin2K = sUserAgent.indexOf("Windows NT 5.0") > -1 || sUserAgent.indexOf("Windows 2000") > -1;  
+	
+		 if (isWin2K) return "Win2000";  
+	
+		 var isWinXP = sUserAgent.indexOf("Windows NT 5.1") > -1 || sUserAgent.indexOf("Windows XP") > -1;  
+	
+		 if (isWinXP) return "WinXP";  
+	
+		 var isWin2003 = sUserAgent.indexOf("Windows NT 5.2") > -1 || sUserAgent.indexOf("Windows 2003") > -1;  
+	
+		 if (isWin2003) return "Win2003";  
+	
+		 var isWin2003 = sUserAgent.indexOf("Windows NT 6.0") > -1 || sUserAgent.indexOf("Windows Vista") > -1;  
+	
+		 if (isWin2003) return "WinVista";  
+	
+		 var isWin2003 = sUserAgent.indexOf("Windows NT 6.1") > -1 || sUserAgent.indexOf("Windows 7") > -1;  
+	
+		 if (isWin2003) return "Win7";  
+	 }  
+	 return "other";  
+
+	 }  
+
 
 
 function formatSfzDate(x){
