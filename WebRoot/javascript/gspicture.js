@@ -78,8 +78,10 @@ var img_object='';
         }
         if(temp=="jjr"){
 			$("#lj_jjrzpdata").val("");
+			$("#pjjbxxmod_jjrzpdata").val("");
 		}else{
 			$("#lj_sjrzpdata").val("");
+			$("#pjjbxxmod_sjrzpdata").val("");
 		}
     }
     
