@@ -23,5 +23,9 @@
     <action name="*_kyjdwp" method="{1}" class="kyjdwpAction">
       <result type="json"/>
     </action>
+<!--     人员照片信息 -->
+    <action name="*_jddxzpxx" method="{1}" class="JddxzpxxAction">
+      <result type="json"/>
+    </action>
   </package>
 </struts>
