@@ -426,7 +426,13 @@ function wldh_completion(wldh,qybm){
 		if(data.lj){
 			$('#pjjbxx_add [name*=pjxx.ljjbxx.]').each(function(idx){
 				$this = $(this);
-				var value = setNull(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
+				var value;
+				try{
+					value= setNull(eval("data.lj." + $this.attr("name").split("pjxx.ljjbxx.")[1]));
+				}catch(e){
+					value="";
+				}
+				
 				if(value){
 					if($this.attr("tagName").toLowerCase() == 'select'){
 						$this.setValue(value);
@@ -435,7 +441,30 @@ function wldh_completion(wldh,qybm){
 						$this.val(value);
 					}
 				}
-				
+				//显示收件人照片
+				if(data.lj.jjr.zpxx!=null && data.lj.jjr.zpxx!=""){
+					if(data.lj.jjr.zpxx.id!=null && data.lj.jjr.zpxx.id!=""){
+						try{
+							$("#jjr_zpxx_zpid").val(data.lj.jjr.zpxx.id);
+							showImage("img_picControlscrjjr",data.lj.jjr.zpxx.id);
+							$("#jjrzpdata").val(data.lj.jjrzpxx);
+						}catch (e) {
+							
+						}
+					}
+				}
+				//显示收件人照片
+				if(data.lj.sjr.zpxx!=null && data.lj.sjr.zpxx!=""){
+					if(data.lj.sjr.zpxx.id!=null && data.lj.sjr.zpxx.id!=""){
+						try{
+							$("#sjr_zpxx_zpid").val(data.lj.sjr.zpxx.id);
+							showImage("img_picControlscr",data.lj.sjr.zpxx.id);
+							$("#sjrzpdata").val(data.lj.sjrzpxx);
+						}catch(e){
+							
+						}
+					}
+				}
 					
 			});
 			
