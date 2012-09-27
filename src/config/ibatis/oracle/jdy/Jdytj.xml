@@ -216,7 +216,7 @@
 					  (select count(qyid) from t_qyjbxx where zjztdm='1' and hylbdm=t.hylbdm and gxdwbm like '$gxdwbm$%') zjs,
 					  (select count(ryid) from t_qyryxx ry, t_qyjbxx qy where  ry.qyid = qy.qyid and qy.hylbdm = t.hylbdm and gxdwbm like '$gxdwbm$%' ) cyrys ,
 					  (select count(djxh) from t_ljjbxx where scbzw = '0' and ljtbsj > trunc(sysdate-1,'DD') and ljtbsj &lt; trunc(sysdate,'DD')) ljs,
-					  (select count(id) from  t_pjjbxx pj,t_ljjbxx lj,t_qyjbxx qy WHERE pj.ljjbxx_id = lj.djxh AND lj.qybm = qy.qybm and qy.gxdwbm like '$gxdwbm$%' and pjtbsj > trunc(sysdate-1,'DD') and pjtbsj &lt; trunc(sysdate,'DD')) pjs,
+					  (select count(id) from  t_pjjbxx pj,t_ljjbxx lj,t_qyjbxx qy WHERE pj.ljjbxx_id = lj.djxh AND lj.qybm = qy.qybm and qy.gxdwbm like '$gxdwbm$%' AND pj.SFSCBZ      ='N' and pjtbsj > trunc(sysdate-1,'DD') and pjtbsj &lt; trunc(sysdate,'DD')) pjs,
 					  (select count(1) from t_qyjbxx where gxdwbm like '$gxdwbm$%' and hylbdm = t.hylbdm  and qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = t.hylbdm 
 					      and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD'))) wscqys
 <!-- 					  ,'' departlevel -->
