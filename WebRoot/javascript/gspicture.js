@@ -485,7 +485,7 @@ var img_object='';
         	   ocrCNation:IDCard.getNation(),
         	   GetImage:function(){
         	   	return IDCard.getPhoto();
-        	   }}
+        	   }};
         	img_object= document.getElementById('img_'+CardName).src = '';
         	setTimeout('ysjz()',10);
         	
@@ -512,13 +512,10 @@ var img_object='';
 }
 function ysjz(){
 	if (detectOS()=="Win7"){
-		alert("Win7系统执行");
 		img_object= document.getElementById('img_'+PickjName).src = 'C:\\AERO_INFO\\edzzp.bmp';
 	}else{
-		alert("XP系统执行");
 		img_object= document.getElementById('img_'+PickjName).src = 'C:\\Program Files\\AERO_INFO\\edzzp.bmp';
 	}
-	
 }
 //判断系统类型函数：Windows、Mac、Linux、Unix
 function detectOS() {  
