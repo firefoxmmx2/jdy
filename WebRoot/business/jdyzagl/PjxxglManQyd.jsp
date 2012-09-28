@@ -5,6 +5,7 @@
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
 <script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
+<script type="text/javascript" src="business/jdyzagl/js/gspicturejdy.js"></script><!-- 身份证扫描js -->
 
 <script type="text/javascript">
 var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
