@@ -41,17 +41,17 @@
                    <!--   <td align="center" ><a href="#"  class="submitbutton">二代证读取</a></td>-->
                    <%if("true".equals(zh)){%>
                      <tr>
-                    <td align="center" ><a href="#" onclick="opencard('<%=pic %>','jjr');return false;" class="submitlongbutton">二代证读取</a></td>
+                    <td align="center" ><a href="#" onclick="opencardjdy('<%=pic %>','jjr');return false;" class="submitlongbutton">二代证读取</a></td>
                   </tr>
                      <tr>
-                    <td align="center" ><a href="#" onclick="sanTwoOcrAddValue('<%=pic %>',<%=wi %>,<%=hi %>,<%=zh%>,'jjr');addFun('<%=pic %>');return false;" class="submitlongbutton">二代证扫描</a></td>
+                    <td align="center" ><a href="#" onclick="sanTwoOcrAddValuejdy('<%=pic %>',<%=wi %>,<%=hi %>,<%=zh%>,'jjr');addFun('<%=pic %>');return false;" class="submitlongbutton">二代证扫描</a></td>
                   </tr>
                   <tr>
-                    <td align="center" ><a href="#" onclick="DeviceOnescanOcr('<%=pic %>',<%=wi %>,<%=hi %>,<%=zh%>,'jjr');addFun('<%=pic %>');return false;" class="submitlongbutton">一代证读取</a></td>
+                    <td align="center" ><a href="#" onclick="DeviceOnescanOcrjdy('<%=pic %>',<%=wi %>,<%=hi %>,<%=zh%>,'jjr');addFun('<%=pic %>');return false;" class="submitlongbutton">一代证读取</a></td>
                   </tr>
                   <%}if("false".equals(zh)){%>
                     <tr>
-                    <td align="center" ><a href="#" onclick="Devicepassportscanocr('<%=pic %>',<%=wi %>,<%=hi %>,<%=zh%>,'jjr');addFun('<%=pic %>');return false;" class="submitlongbutton">境外证件读取</a></td>
+                    <td align="center" ><a href="#" onclick="Devicepassportscanocrjdy('<%=pic %>',<%=wi %>,<%=hi %>,<%=zh%>,'jjr');addFun('<%=pic %>');return false;" class="submitlongbutton">境外证件读取</a></td>
                   </tr>
                    <%}%>
                   <!-- 
@@ -60,7 +60,7 @@
                   </tr>
                    -->
                   <tr>
-                    <td align="center" ><a href="#" onclick="DeleteImg('<%=pic %>','jjr');return false;"  class="submitlongbutton">取 消</a></td>
+                    <td align="center" ><a href="#" onclick="DeleteImgjdy('<%=pic %>','jjr');return false;"  class="submitlongbutton">取 消</a></td>
                   </tr>
               </table>
 		</td>
