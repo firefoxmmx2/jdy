@@ -245,8 +245,8 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
 		return false;
-	if (!checkControlValue("lj_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
-		return false;
+	//if (!checkControlValue("lj_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
+		//return false;
 	if (!checkControlValue("jjrssxmc","String",1,70,null,1,"寄件地址"))
 		return false;
 	if (!checkControlValue("lj_jjrxxdz","String",1,70,null,1,"寄件人现住地详址"))
@@ -257,8 +257,8 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
 		return false;
-	if (!checkControlValue("lj_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
-		return false;
+	//if (!checkControlValue("lj_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
+		//return false;
 	if (!checkControlValue("sjrssxmc","String",1,70,null,1,"收件地址"))
 		return false;
 	if (!checkControlValue("lj_sjrxxdz","String",1,70,null,1,"收件人现住地详址"))

@@ -86,7 +86,7 @@ function open_zp(){
 						<td class="detailtd"><input type="text" id="lj_jjrxm" name="lj.jjr.xm" class="inputstyle" value="" /></td>
 				    </tr>
 				    <tr height="20">
-						<td class="red">证件类型</td>
+						<td class="distd">证件类型</td>
 						<td class="detailtd">
 					          <select id="lj_jjrzjlx">
 								<option></option>
