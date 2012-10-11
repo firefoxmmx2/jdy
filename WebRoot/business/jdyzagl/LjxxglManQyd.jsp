@@ -6,6 +6,7 @@ import="com.aisino2.sysadmin.domain.User,com.aisino2.sysadmin.Constants"%>
 <%@include file="../../public/user-info.jsp" %>
 <%@page import="com.aisino2.common.QjblUtil"%>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
+<script type="text/javascript" src="business/jdyzagl/js/gspicturejdy.js"></script><!-- 身份证扫描js -->
 <!--寄递物品类型联动的js -->
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script> 
 <script type="text/javascript">
