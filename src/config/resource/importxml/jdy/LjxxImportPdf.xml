@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ImportPdf>
+<!-- 	这里的Dict字典等价与map -->
+	<Dicts>
+		<Dict id="jdplxDict">
+			<!--<property name="key">value</property>-->
+		</Dict>
+	</Dicts>
+
+	<Data>
+		<Entities worksheet=""  id="ljxx" type="java.util.ArrayList">
+			<Entity class="com.aisino2.jdy.domain.Ljjbxx" worksheet="">
+				<property name="wldh" column="0" type="String"/>
+				<Entity name="jjr" class="com.aisino2.jdy.domain.Rdrjbxx">
+					<property name="xm" column="1" type="String"/>
+					<property name="zjlx" column="2" type="String"/>
+					<property name="zjhm" column="3" type="String"/>
+					<property name="ssx" column="4" type="String"/>
+					<property name="xxdz" column="5" type="String"/>
+					<property name="lxdh" column="6" type="String"/>
+					<property name="gddh" column="7" type="String"/>
+				</Entity>
+				<Entity name="sjr" class="com.aisino2.jdy.domain.Rdrjbxx">
+					<property name="xm" column="8" type="String"/>
+					<property name="zjlx" column="9" type="String"/>
+					<property name="zjhm" column="10" type="String"/>
+					<property name="ssx" column="11" type="String"/>
+					<property name="xxdz" column="12" type="String"/>
+					<property name="lxdh" column="13" type="String"/>
+					<property name="gddh" column="14" type="String"/>
+				</Entity>
+				<Entity name="ljr" class="com.aisino2.publicsystem.domain.Qyryxx">
+					<property name="cyrybh" column="15" type="String"/>
+				</Entity>
+				<property name="ljsj" column="16" type="java.util.Date"/>
+				<Entity name="ljtbr" class="com.aisino2.publicsystem.domain.Qyryxx">
+					<property name="cyrybh" column="17" type="String" value="${currentUser.cyrybh}"/>
+				</Entity>
+	
+				<Entities class="com.aisino2.jdy.domain.Jdpxx" name="jdp_list" type="java.util.ArrayList" column="20" propertySize="6" var="jdp">
+					<property name="jdpmc" type="String"/>
+					<property name="jdpdlx" type="String"/>
+					<property name="jdplx" type="String"/>
+					<property name="jdpsm" type="String"/>
+					<property name="jdpzl" type="String"/>
+					<property name="jdptj" type="String"/>
+					<Dict name="jdpdlxmc" refDict="jdplxDict" factValue="${jdp.jdpdlx}"/>
+					<Dict name="jdplxmc" refDict="jdplxDict" factValue="${jdp.jdplx}"/>
+				</Entities>
+			</Entity>
+		</Entities>
+		
+	</Data>
+	<Services>
+		<service id="getJdplxDict" resourceId="LjjbxxService">
+			<method methodName="getDictData" result="jdplxDict">
+				<param>
+					<Entity class="com.aisino2.sysadmin.domain.Dict_item">
+						<property name="dictcode">dm_</property>
+					</Entity>
+				</param>
+			</method>
+		</service>
+		<!--resourceId spring的支援ID-->
+		<service id="importLjxx" resourceId="LjjbxxService" >
+			<method methodName="insertLjjbxx">
+				<param refEntity="ljxx"/>
+				<!--<param refEntity="" refProperty="" type="">value</param> param和解析的顺序有关系。-->
+			</method>
+		</service>
+	</Services>
+
+	<Process>
+<!-- 			运行段 -->
+			<proc>
+			
+			</proc>
+		</Process>
+</ImportPdf>
+
