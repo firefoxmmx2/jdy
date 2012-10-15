@@ -16,8 +16,9 @@ public interface IPjjbxxService {
 	 * 添加派件基本信息
 	 * @param pjjbxx
 	 * @return
+	 * @throws Exception 
 	 */
-	Pjjbxx insertPjjbxx(Pjjbxx pjjbxx);
+	Pjjbxx insertPjjbxx(Pjjbxx pjjbxx) throws Exception;
 	/**
 	 * 删除派件信息
 	 * @param pjjbxx
@@ -26,8 +27,9 @@ public interface IPjjbxxService {
 	/**
 	 * 更新派件信息
 	 * @param pjjbxx
+	 * @throws Exception 
 	 */
-	void updatePjjbxx(Pjjbxx pjjbxx);
+	void updatePjjbxx(Pjjbxx pjjbxx) throws Exception;
 	
 	/**
 	 * 获取派件信息
