@@ -4,6 +4,7 @@
   <!-- 寄递业揽件信息action -->
   <bean id="ljxxAction" class="com.aisino2.jdy.action.LjxxAction" scope="prototype">  
       <property name="ljjbxxService" ref="LjjbxxServiceImpl"/> 
+      <property name="qyryxxService" ref="qyryxxService"/>
   </bean>  
 <!--   派件信息 -->
   <bean id="PjxxAction" class="com.aisino2.jdy.action.PjxxAction" scope="prototype">
