@@ -16,14 +16,16 @@ public interface ILjjbxxService {
 	 * 添加揽件信息
 	 * @param ljjbxx
 	 * @return
+	 * @throws Exception 
 	 */
-	Ljjbxx insertLjjbxx(Ljjbxx ljjbxx);
+	Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) throws Exception;
 	/**
 	 * 更新揽件信息
 	 * @param ljjbxx
 	 * @return
+	 * @throws Exception 
 	 */
-	void updateLjjbxx(Ljjbxx ljjbxx);
+	void updateLjjbxx(Ljjbxx ljjbxx) throws Exception;
 	/**
 	 * 删除揽件信息
 	 * @param ljjbxx

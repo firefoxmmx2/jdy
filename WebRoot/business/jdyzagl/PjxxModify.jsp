@@ -313,8 +313,8 @@ function pjxx_mod_verify(){
 		return false;
 	if (!checkControlValue("pjjbxxmod_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
 		return false;
-	if (!checkControlValue("pjjbxxmod_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
-		return false;
+	//if (!checkControlValue("pjjbxxmod_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
+		//return false;
 	if (!checkControlValue("pjjbxxmod_jjrssx","String",1,70,null,1,"寄件地址"))
 		return false;
 	if (!checkControlValue("pjjbxxmod_jjrxxdz","String",1,70,null,1,"寄件人现住地详址"))
@@ -325,8 +325,8 @@ function pjxx_mod_verify(){
 		return false;
 	if (!checkControlValue("pjjbxxmod_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
 		return false;
-	if (!checkControlValue("pjjbxxmod_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
-		return false;
+	//if (!checkControlValue("pjjbxxmod_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
+		//return false;
 	if (!checkControlValue("pjjbxxmod_sjrssx","String",1,70,null,1,"收件地址"))
 		return false;
 	if (!checkControlValue("pjjbxxmod_sjrxxdz","String",1,70,null,1,"收件人现住地详址"))

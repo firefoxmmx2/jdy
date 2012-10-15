@@ -41,7 +41,7 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 		this.pjjbxxDao = pjjbxxDao;
 	}
 
-	public Pjjbxx insertPjjbxx(Pjjbxx pjjbxx) {
+	public Pjjbxx insertPjjbxx(Pjjbxx pjjbxx) throws Exception {
 		// 当揽件信息ID不存在的，或者说是揽件信息不存在的时候自动生成一个揽件信息
 		if (pjjbxx.getLjjbxx().getDjxh() == null
 				|| pjjbxx.getLjjbxx().getDjxh().trim().length() == 0) {
@@ -81,7 +81,7 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 		pjjbxxDao.update(pjjbxx);
 	}
 
-	public void updatePjjbxx(Pjjbxx pjjbxx) {
+	public void updatePjjbxx(Pjjbxx pjjbxx) throws Exception {
 		if (pjjbxx.getId() == null)
 			throw new RuntimeException("需要修改的派件ID不能为空");
 

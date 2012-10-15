@@ -94,7 +94,7 @@ function open_zp(){
 						</td>
 					</tr>
 					<tr height="20">
-						<td class="red">证件号码</td>
+						<td class="distd">证件号码</td>
 						<td class="detailtd"><input type="text" id="lj_jjrzjhm" name="lj.jjr.zjhm" class="inputstyle" value="" /></td>
 					</tr>
 					<tr height="20">
