@@ -101,4 +101,15 @@ public interface IJdytjxxDao {
 	 */
 	Page getJdyQyjbxxList(Map<String,Object> paras, int pageno, int pagesize,
 			String dir, String sort);
+	
+	/**
+	 * 获取历史数据轨迹信息
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page findLssjForPage(Map<String, Object> map, int pageno, int pagesize,	String dir, String sort);
 }
