@@ -73,17 +73,17 @@ public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
 			sort = " asc ";
 		if (sort!=null){
 			if("0".equals(sort))
-				sCol = " Rdrjbxx.id "+ sort;
+				sCol = " a.xm "+ sort;
 			else if("1".equals(sort))
-				sCol = " Rdrjbxx.xm "+ sort;
+				sCol = " a.ljsj "+ sort;
 			else if("2".equals(sort))
-				sCol = " Rdrjbxx.zjhm "+ sort;
+				sCol = " a.ljsj "+ sort;
 			else if("3".equals(sort))
-				sCol = " Rdrjbxx.zjlx "+ sort;
+				sCol = " a.gxdwbm "+ sort;
 			else 
-				sCol=" Rdrjbxx.id ";
+				sCol=" a.xm ";
 		}else{
-			sCol=" Rdrjbxx.id ";
+			sCol=" a.xm ";
 		}
 		map.put("pageSort", sCol);
 		return queryForPage("grpfghjjdwtjcxgad.getListPage", map, pageno,pagesize);
