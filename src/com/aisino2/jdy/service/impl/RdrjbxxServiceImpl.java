@@ -77,5 +77,14 @@ public class RdrjbxxServiceImpl implements IRdrjbxxService {
 		return rdrjbxxDao.grpfghjjdwtjcxForPage(para, pageno, pagesize, dir, sort);
 		
 	}
+	
+	/**
+	 * 个人频繁更换基建单位统计查询--详细信息列表
+	 */
+	public Page grpfghjjdwtjcxdalForPage(Map<String, Object> para, int pageno,
+			int pagesize, String dir, String sort) {
+		return rdrjbxxDao.grpfghjjdwtjcxdalForPage(para, pageno, pagesize, dir, sort);
+		
+	}
 
 }
