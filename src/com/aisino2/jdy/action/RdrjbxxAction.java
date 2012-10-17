@@ -94,6 +94,8 @@ public class RdrjbxxAction extends PageAction {
 	    }
 	    //管辖单位编码
 	    if(rdrjbxx.getGxdwbm()!=null && StringUtil.isNotEmpty(rdrjbxx.getGxdwbm())){
+	    	rdrjbxx.setGxdwbm(
+	    			StringUtil.trimEven0(rdrjbxx.getGxdwbm()));
 	    	params.put("gxdwbm", rdrjbxx.getGxdwbm());
 	    }
 	    //省市县
@@ -101,7 +103,7 @@ public class RdrjbxxAction extends PageAction {
 	    	params.put("ssx", rdrjbxx.getSsx());
 	    }
 
-		Page pageinfo = rdrjbxxService.grpfghjjdwtjcxForPage(params,  pagerow, pagesize, tabledata, result);
+		Page pageinfo = rdrjbxxService.grpfghjjdwtjcxForPage(params, pagesize,pagerow, tabledata, result);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
 		lRdrjbxx = pageinfo.getData();
@@ -115,6 +117,7 @@ public class RdrjbxxAction extends PageAction {
 	private void setTableDate_grpfghdwcx(List<Rdrjbxx> lData) {
 		// TODO Auto-generated method stub
 		List lPro = new ArrayList();
+		lPro.add("xm");
 		lPro.add("xm");
 		lPro.add("kssj");
 		lPro.add("jssj");
