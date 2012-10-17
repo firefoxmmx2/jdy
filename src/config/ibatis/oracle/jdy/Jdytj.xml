@@ -59,6 +59,13 @@
 		<result property="zt" column="zt"/>
 	</resultMap>
 	
+<!-- 	物品分类统计结果集 -->
+	<resultMap class="Jdytjxx" id="jdy_wpfltj_rm">
+		<result property="jdplx" column="jdplx"/>
+		<result property="cs" column="cs"/>
+	</resultMap>
+	
+	
 	<sql id="SjgltjPageWhere">
 		<isNotEmpty prepend="and" property="xm">
 			rdrjbxx.xm like '%$xm$%'
@@ -335,5 +342,19 @@
 		
 	</select>
 	
-	
+<!-- 	寄递业物品分类统计 -->
+	<select id="Jdytjxx.wpfltj" parameterClass="map" resultMap="jdy_wpfltj_rm">
+		select * from (
+		  select  jp.jdplxmc jdplx,count(jp.id) cs 
+		  from t_jdpxx jp,t_ljjbxx l , t_qyjbxx q
+		  where l.djxh=jp.ljjbxx_id and l.qybm = q.qybm
+		  <dynamic prepend="and">
+		  	<include refid="JdytjxxWhere"/>
+		  </dynamic> 
+		  group by jp.jdplxmc 
+		  order by cs desc) z 
+		  <dynamic prepend="where">
+			<include refid="JdytjxxOutterWhere"/>
+		  </dynamic> 
+	</select>
 </sqlMap>

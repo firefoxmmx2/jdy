@@ -108,4 +108,14 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 		return jdytjxxDao.getJdyQyjbxxList(paras, pageno, pagesize, dir, sort);
 	}
 
+
+	/**
+	 * 物品分类统计查询
+	 * @param map
+	 * @return
+	 */
+	public List<Jdytjxx> getWpfltj(Map<String, Object> map) {
+		return jdytjxxDao.getWpfltj(map);
+	}
+
 }
