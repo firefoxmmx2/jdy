@@ -19,4 +19,8 @@ public interface IRdrjbxxDao {
 	 * 公安端--个人频繁更换寄件单位统计查询
 	 */
 	Page grpfghjjdwtjcxForPage(Map<String, Object> map,int pageno, int pagesize,String dir,String sort);
+	/***
+	 * 公安端--个人频繁更换寄件单位统计查询----详细信息列表
+	 */
+	Page grpfghjjdwtjcxdalForPage(Map<String, Object> map,int pageno, int pagesize,String dir,String sort);
 }
