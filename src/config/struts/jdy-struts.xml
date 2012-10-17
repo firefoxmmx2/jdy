@@ -27,5 +27,9 @@
     <action name="*_jddxzpxx" method="{1}" class="JddxzpxxAction">
       <result type="json"/>
     </action>
+<!--     寄递对象信息 -->
+    <action name="*_rdrjbxx" method="{1}" class="RdrjbxxAction">
+      <result type="json"/>
+    </action>
   </package>
 </struts>
