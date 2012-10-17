@@ -37,8 +37,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	private IRdrjbxxDao rdrjbxxDao;
 	/**人员照片信息**/
 	private IJddxzpxxDao jddxzpxxDao;
-	/**人员历史信息表**/
-	private IRdrjbxx_lsDao rdrjbxx_lsDao;
+	
 	
 
 	private Ljjbxx setLjjbxx;
@@ -72,9 +71,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	public void setJddxzpxxDao(IJddxzpxxDao jddxzpxxDao) {
 		this.jddxzpxxDao = jddxzpxxDao;
 	}
-	public void setRdrjbxx_lsDao(IRdrjbxx_lsDao rdrjbxx_lsDao) {
-		this.rdrjbxx_lsDao = rdrjbxx_lsDao;
-	}
+	
 	
 
 	

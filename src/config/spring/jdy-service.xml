@@ -8,7 +8,6 @@
 		<property name="jdyBjService" ref="JdyBjServiceImpl"/>
 		<property name="qyjbxxService" ref="qyjbxxService"/>
 		<property name="jddxzpxxDao" ref="JddxzpxxDaoImpl"/>
-		<property name="rdrjbxx_lsDao" ref="Rdrjbxx_lsDaoImpl"/>
 	</bean>
 <!-- 	寄递对象服务 -->
 	<bean id="RdrjbxxServiceImpl" class="com.aisino2.jdy.service.impl.RdrjbxxServiceImpl">

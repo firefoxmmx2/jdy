@@ -15,5 +15,8 @@ public interface IRdrjbxxDao {
 	List<Rdrjbxx> findRdrjbxxs(Rdrjbxx rdrjbxx);
 	List<Rdrjbxx> findRdrjbxxs(Rdrjbxx rdrjbxx,String dir,String sort);
 	Page findRdrjbxxsForPage(Map<String, Object> map,int pageno, int pagesize,String dir,String sort);
-	
+	/***
+	 * 公安端--个人频繁更换寄件单位统计查询
+	 */
+	Page grpfghjjdwtjcxForPage(Map<String, Object> map,int pageno, int pagesize,String dir,String sort);
 }

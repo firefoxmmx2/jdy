@@ -1,5 +1,8 @@
 package com.aisino2.jdy.service;
 
+import java.util.Map;
+
+import com.aisino2.core.dao.Page;
 import com.aisino2.jdy.domain.Rdrjbxx;
 
 /**
@@ -30,5 +33,14 @@ public interface IRdrjbxxService {
 	 * @return
 	 */
 	Rdrjbxx getRdrjbxx(Rdrjbxx rdrjbxx);
-	
+	/**
+	 * 公安端 公安端--个人频繁更换寄件单位统计查询
+	 * @param para 
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page grpfghjjdwtjcxForPage(Map<String, Object> para,int pagesize, int pageno,String dir,String sort);
 }
