@@ -131,13 +131,57 @@ public class RdrjbxxAction extends PageAction {
 		lDetail.add("详情");
 		lCol.add(lDetail);
 
-		for (Rdrjbxx rdr : lData) {
-			
-		}
-
 		Rdrjbxx setRdrjbxx = new Rdrjbxx();
 		this.setData(setRdrjbxx, lData, lPro, lCol);
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
+
+	/**
+	 * 个人频繁更换基建单位统计---详细信息列表---查询函数
+	 *
+	 */
+		public String grpfghdwcxdal() throws Exception {
+		
+			Map<String, Object> params = new HashMap<String, Object>();
+		    //管辖单位编码
+		    if(rdrjbxx.getXm()!=null && StringUtil.isNotEmpty(rdrjbxx.getXm())){
+		    	rdrjbxx.setXm(
+		    			StringUtil.trimEven0(rdrjbxx.getXm()));
+		    	params.put("xm", rdrjbxx.getXm());
+		    }
+		    
+
+			Page pageinfo = rdrjbxxService.grpfghjjdwtjcxdalForPage(params, pagesize,pagerow, tabledata, result);
+			totalpage = pageinfo.getTotalPages();
+			totalrows = pageinfo.getTotalRows();
+			lRdrjbxx = pageinfo.getData();
+			setTableDate_grpfghdwcxdal(pageinfo.getData());
+			this.result = "success";
+			return SUCCESS;
+		}
+		/**
+		 * 个人频繁更换基建单位统计---详细信息列表setTable解析函数
+		 */
+		private void setTableDate_grpfghdwcxdal(List<Rdrjbxx> lData) {
+			// TODO Auto-generated method stub
+			List lPro = new ArrayList();
+			lPro.add("djxh");
+			lPro.add("djxh");
+			lPro.add("xh");
+			lPro.add("jjrxm");
+			lPro.add("jjsj");
+			lPro.add("cjqy");
+			lPro.add("wldh");
+			lPro.add("sjrxm");
+			lPro.add("sjrdh");
+			lPro.add("sjrxxdz");
+			
+			List lXzcz = new ArrayList();
+			Rdrjbxx setRdrjbxx = new Rdrjbxx();
+	    	this.setDataCustomer(setRdrjbxx, lData, lPro, null, lXzcz);
+			//this.setData(setRdrjbxx, lData, lPro, null);
+			this.tabledata = this.getData();
+			totalrows = this.getTotalrows();
+		}
 }
