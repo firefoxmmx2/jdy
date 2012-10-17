@@ -1,6 +1,7 @@
 package com.aisino2.jdy.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 寄递对象基本信息表
@@ -169,6 +170,52 @@ public class Rdrjbxx implements Serializable {
 
 	public void setZjlx(String zjlx) {
 		this.zjlx = zjlx;
+	}
+	/****
+	 * 个人频繁更换寄件单位查询、和页面展示用到字段
+	 */
+	private Date kssj;//个人频繁更换寄件单位【开始时间】
+	private Date jssj;//个人频繁更换寄件单位【结束时间】
+	private String ghjjdwcs;//个人频繁更换寄件单位【更换寄件单位次数】
+	private String ssxq;//个人频繁更换寄件单位统计查询，页面展示所需【所属辖区】
+	private String gxdwbm;//个人频繁更换寄件单位【管辖单位编码】
+	private String gxdwmc;//个人频繁更换寄件单位【管辖单位名称】
+	
+	public String getGxdwbm() {
+		return gxdwbm;
+	}
+	public void setGxdwbm(String gxdwbm) {
+		this.gxdwbm = gxdwbm;
+	}
+	public String getGxdwmc() {
+		return gxdwmc;
+	}
+	public void setGxdwmc(String gxdwmc) {
+		this.gxdwmc = gxdwmc;
+	}
+	public Date getKssj() {
+		return kssj;
+	}
+	public void setKssj(Date kssj) {
+		this.kssj = kssj;
+	}
+	public Date getJssj() {
+		return jssj;
+	}
+	public void setJssj(Date jssj) {
+		this.jssj = jssj;
+	}
+	public String getGhjjdwcs() {
+		return ghjjdwcs;
+	}
+	public void setGhjjdwcs(String ghjjdwcs) {
+		this.ghjjdwcs = ghjjdwcs;
+	}
+	public String getSsxq() {
+		return ssxq;
+	}
+	public void setSsxq(String ssxq) {
+		this.ssxq = ssxq;
 	}
 	
 	
