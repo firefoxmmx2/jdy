@@ -369,3 +369,10 @@ function rrTrim(str,trimstr){
 	}
 	return str;
 }
+
+/**
+ * 自动关闭
+ */
+function close_dialog(el){
+	$(el).parents('div.page-layout').eq(0).hideAndRemove("show");
+}
