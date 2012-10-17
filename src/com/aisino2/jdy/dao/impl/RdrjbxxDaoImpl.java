@@ -61,5 +61,32 @@ public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
 		map.put("pageSort", sCol);
 		return queryForPage("Rdrjbxx.getListPage", map, pageno,pagesize);
 	}
+    /**
+     * 公安端--个人频繁更换寄件单位统计查询
+     */
+	public Page grpfghjjdwtjcxForPage(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort) {
+		String sCol="";
+		if(sort == null)
+			sort = "";
+		else if(!sort.equals("asc") && !sort.equals("desc"))
+			sort = " asc ";
+		if (sort!=null){
+			if("0".equals(sort))
+				sCol = " Rdrjbxx.id "+ sort;
+			else if("1".equals(sort))
+				sCol = " Rdrjbxx.xm "+ sort;
+			else if("2".equals(sort))
+				sCol = " Rdrjbxx.zjhm "+ sort;
+			else if("3".equals(sort))
+				sCol = " Rdrjbxx.zjlx "+ sort;
+			else 
+				sCol=" Rdrjbxx.id ";
+		}else{
+			sCol=" Rdrjbxx.id ";
+		}
+		map.put("pageSort", sCol);
+		return queryForPage("grpfghjjdwtjcxgad.getListPage", map, pageno,pagesize);
+	}
 
 }
