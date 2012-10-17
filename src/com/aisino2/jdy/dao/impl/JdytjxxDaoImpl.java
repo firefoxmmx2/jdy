@@ -204,4 +204,33 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 		return queryForPage("getQyjbxxList", paras, pageno, pagesize);
 	}
 
+
+	public Page findLssjForPage(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort) {
+		String sCol=" ywxx.ywdjsj ";
+		if(sort == null)
+			sort = "";
+		else if(!sort.equals("asc") && !sort.equals("desc"))
+			sort = " asc ";
+		if (dir!=null){
+			if("0".equals(dir))
+				sCol = " ry.xm "+ sort;
+			else if("1".equals(dir))
+				sCol = " ry.zjhm "+ sort;
+			else if("2".equals(dir))
+				sCol = " ywxx.ywdjsj "+ sort;
+			else if("3".equals(dir))
+				sCol = " ry.jdrylx "+ sort;
+			else if("4".equals(dir))
+				sCol = " qyjbxx.qymc "+ sort;
+			else if("5".equals(dir))
+				sCol = " qyjbxx.gxdwmc "+ sort;
+			else 
+				sCol = " ry.xxdz "+ sort;
+		}
+		
+		map.put("pageSort", sCol);
+		return queryForPage("getLssjListPage", map, pageno,pagesize);
+	}
+
 }
