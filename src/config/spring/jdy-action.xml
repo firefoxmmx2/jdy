@@ -26,4 +26,8 @@
   <bean id="JddxzpxxAction" class="com.aisino2.jdy.action.JddxzpxxAction" scope="prototype">  
       <property name="jddxzpxxService" ref="JddxzpxxServiceImpl"/> 
   </bean> 
+<!-- 寄递人员信息action  (个人频繁变更寄件单位统计) -->
+  <bean id="RdrjbxxAction" class="com.aisino2.jdy.action.RdrjbxxAction" scope="prototype">  
+      <property name="rdrjbxxService" ref="RdrjbxxServiceImpl"/> 
+  </bean> 
 </beans>
