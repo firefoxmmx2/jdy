@@ -159,10 +159,10 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		}
 		//删除照片信息
 		Jddxzpxx setJddxzpxx = new Jddxzpxx();
-		if(ljjbxx.getJjr().getZpxx().getId()!=null){
+		if(ljjbxx.getJjr().getZpxx()!=null &&ljjbxx.getJjr().getZpxx().getId()!=null){
 			jddxzpxxDao.delete(ljjbxx.getJjr().getZpxx());
 		}
-		if(ljjbxx.getSjr().getZpxx().getId()!=null){
+		if(ljjbxx.getSjr().getZpxx()!=null &&ljjbxx.getSjr().getZpxx().getId()!=null){
 			jddxzpxxDao.delete(ljjbxx.getSjr().getZpxx());
 		}
 		//从新获取照片信息数据插入数据库
@@ -210,10 +210,10 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 				if(jdp==null)
 					continue;
 				//删除标志，当他为Y的时候，出数据库中删除这个寄递品
-				if(StringUtil.isNotEmpty(jdp.getSfscbz()) && jdp.getSfscbz().equals("Y")){
+				if("Y".equals(jdp.getSfscbz())){
 					jdpxxDao.delete(jdp);
 				}
-				else if( jdp.getSfscbz().equals("N")){
+				else if( "N".equals(jdp.getSfscbz())){
 					jdp.setLjjbxx(ljjbxx);
 					jdpxxDao.insert(jdp);
 				}

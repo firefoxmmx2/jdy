@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/public/user-info.jsp" %>
-
+<%@include file="/public/ImgerToBase64.jsp" %>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
 <script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script><!-- 寄递物品类型联动的js -->
@@ -22,6 +22,8 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 	var pjxx_detail_url="jdy/query_pjxx.action";
 	var searchLongUrl="jdy/querycxForExport_pjxx.action";
 	var excelUrl="jdy/exportExcel_pjxx.action";
+	var pjxxImportUrl="jdy/importPjxx_pjxx.action";
+	
 	$(function(){
 		
 		$('#pjxx_sjr_zjlx').selectBox({code:'dm_zjlx'});
@@ -40,6 +42,8 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 		
 		loadPagePjxxQuery(pjxx_grid_div);
 		daggleDiv(pjxx_detail_div);
+		
+		daggleDiv('pjjbxxImportDialog');
 	});
 	
 	function loadPagePjxxQuery(divpageid){
@@ -301,10 +305,68 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 		//报表请求
 		setExcelLong("pjxxexcel",bbmc);	
 	}
+	
+	function setImportPjxx() {
+		detailDialog('pjjbxxImportDialog',300,'#',null,function(json){
+			var html= '<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">'+
+			'		    <tr>'+
+			'		      <td align="left" class="title1">派件导入</td>'+
+			'		      <td align="right"><a href="#" id="closeDiv" onclick="close_dialog(this);" class="close"></a></td>'+
+			'		    </tr>'+
+			'		</table>'+
+			'		<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top:10px;">'+
+			'			<tr>'+
+			'				<td align="right">文件：</td>'+	
+			'				<td>'+
+			'					<input readonly="readonly" type="text" id="xlsFile" class="inputstyle">'+
+			'				</td>'+
+			'				<td>'+
+			'					<a href="#" class="addbutton" id="uploadbtn" onclick="openHyfj_zxdw();">浏览</a>'+
+			'				</td>'+
+			'			</tr>'+
+			'			<tr>'+
+			'				<td colspan="2"></td>'+	
+			'				<td>'+
+			'					<a href="#" class="addbutton" id="uploadbtn" onclick="importPjxx();">确认</a>'+
+			'				</td>'+
+			'			</tr>'+
+			'		</table>';
+			$('#pjjbxxImportDialog').html(html);
+		});
+	}
 	//揽件信息导入方法
 	function importPjxx(){
-		return;
+		if($('#xlsFile').val()){
+			$.post(pjxxImportUrl,{'uploadFile':$('#uploadFile').val()},function(json){
+				if(json.result!="success"){
+					jAlert(json.result,"提示");
+				}
+				else{
+					jAlert("导入成功","提示");
+					$('#pjjbxxImportDialog').hideAndRemove("show");
+				}
+			},'json');
+		}
+		
 	}
+	
+	//浏览方法
+	function openHyfj_zxdw(){
+		ImgerToBase1.SetFileSize= 10240;
+        ImgerToBase1.OpenFile();
+        ImgerToBase_zxdw();
+    }
+	//显示附件浏览的附件 
+    function ImgerToBase_zxdw(){
+        //显示图片路径
+        var pathfileName = ImgerToBase1.getFile();
+        if (pathfileName != null && pathfileName != "") {
+            $("#uploadFile").val(ImgerToBase1.getBase64());
+            $("#xlsFile").val(ImgerToBase1.getFileName());
+        }  
+    }
+	
+    
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="pjjbxx_man_qyd">
@@ -315,6 +377,7 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
     <td class="tdbg">
     	<input type="hidden" name="pjxx.pjr.cyrybh" id="pjxx_pjr_cyrybh"/>
     	<input type="hidden" name="pjxx.ljjbxx.qyjbxx.qybm" id="pjxx_qyjbxx_qybm" value="<%=qybm %>" />
+    	<input type="hidden" id="uploadFile" >
     	<%--是否删除标志 --%>
     	<input type="hidden" name="pjxx.sfscbz" id="pjxx_sfscbz" value="N"/>
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
@@ -348,7 +411,7 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
     		    	<tr>
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="pjxxQueryPageList(1);">查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setPjxxAdd();'>添加</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='importPjxx();'>导入</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="qu_erys" onclick='setImportPjxx();'>导入</a></td>
     		    	  <td ><a href="#" class="addbutton" id="pjxxexcel" onclick='exportPjxx();'>导出</a></td>
     		    	</tr>
     		  	</table>
@@ -386,4 +449,8 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 	    </tr>
 	  </thead>
 	</table>	
+</div>
+
+<div id="pjjbxxImportDialog" class="page-layout" src="#"
+		style="top:5px; left:160px;display: none;">
 </div>

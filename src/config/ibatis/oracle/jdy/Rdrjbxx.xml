@@ -117,7 +117,7 @@
 	<update id="Rdrjbxx.update" parameterClass="Rdrjbxx">
 		update t_Rdrjbxx Rdrjbxx
 			set
-			<dynamic prepend=",">
+			<dynamic prepend=" ">
 				<isNotNull property="xm" prepend=","> 
 					xm=#xm#
 				</isNotNull>

@@ -4,10 +4,13 @@
   <!-- 寄递业揽件信息action -->
   <bean id="ljxxAction" class="com.aisino2.jdy.action.LjxxAction" scope="prototype">  
       <property name="ljjbxxService" ref="LjjbxxServiceImpl"/> 
+      <property name="qyryxxService" ref="qyryxxService"/>
   </bean>  
 <!--   派件信息 -->
   <bean id="PjxxAction" class="com.aisino2.jdy.action.PjxxAction" scope="prototype">
       <property name="pjjbxxService" ref="PjjbxxServiceImpl"/>
+      <property name="qyryxxService" ref="qyryxxService"/>
+      <property name="ljjbxxService" ref="LjjbxxServiceImpl"/> 
   </bean>
 <!--   寄递业统计信息 -->
   <bean id="JdytjAction" class="com.aisino2.jdy.action.JdytjAction" scope="prototype">

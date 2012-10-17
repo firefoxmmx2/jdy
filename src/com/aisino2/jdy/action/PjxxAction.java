@@ -1,6 +1,9 @@
 package com.aisino2.jdy.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,16 +17,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 
+import sun.misc.BASE64Decoder;
+
 import com.aisino2.cache.CacheManager;
+import com.aisino2.common.ItemChange;
 import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
+import com.aisino2.jdy.domain.Jdpxx;
+import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Pjjbxx;
+import com.aisino2.jdy.domain.Rdrjbxx;
+import com.aisino2.jdy.service.ILjjbxxService;
 import com.aisino2.jdy.service.IPjjbxxService;
+import com.aisino2.publicsystem.domain.Qyjbxx;
 import com.aisino2.publicsystem.domain.Qyryxx;
+import com.aisino2.publicsystem.service.IQyryxxService;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.User;
@@ -37,6 +53,8 @@ import com.opensymphony.xwork2.ActionContext;
  */
 public class PjxxAction extends PageAction {
 	private IPjjbxxService pjjbxxService;
+	private IQyryxxService qyryxxService;
+	private ILjjbxxService ljjbxxService;
 	/**
 	 * 派件信息参数
 	 */
@@ -68,6 +86,25 @@ public class PjxxAction extends PageAction {
 	private List<Pjjbxx> lPjjbxxList;
 
 	private boolean overUpdateTime;
+
+	private String uploadFile;
+	
+	
+	public String getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(String uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+
+	public void setLjjbxxService(ILjjbxxService ljjbxxService) {
+		this.ljjbxxService = ljjbxxService;
+	}
+
+	public void setQyryxxService(IQyryxxService qyryxxService) {
+		this.qyryxxService = qyryxxService;
+	}
 
 	public boolean isOverUpdateTime() {
 		return overUpdateTime;
@@ -296,20 +333,22 @@ public class PjxxAction extends PageAction {
 				overUpdateTime = false;
 			pjxx.setOverUpdateTime(String.valueOf(overUpdateTime));
 		}
-		//照片内容不为空将照片内容转换成base64Decoder编码
-		if(pjxx.getLjjbxx().getJjr().getZpxx()!=null){
-			if(pjxx.getLjjbxx().getJjr().getZpxx().getZpnr()!=null){
+		// 照片内容不为空将照片内容转换成base64Decoder编码
+		if (pjxx.getLjjbxx().getJjr().getZpxx() != null) {
+			if (pjxx.getLjjbxx().getJjr().getZpxx().getZpnr() != null) {
 				String jjrzpnr;
 				sun.misc.BASE64Encoder base64Encoder = new sun.misc.BASE64Encoder();
-				jjrzpnr = base64Encoder.encodeBuffer(pjxx.getLjjbxx().getJjr().getZpxx().getZpnr());
+				jjrzpnr = base64Encoder.encodeBuffer(pjxx.getLjjbxx().getJjr()
+						.getZpxx().getZpnr());
 				pjxx.getLjjbxx().setJjrzpxx(jjrzpnr);
 			}
 		}
-		if(pjxx.getLjjbxx().getSjr().getZpxx()!=null){
-			if(pjxx.getLjjbxx().getSjr().getZpxx().getZpnr()!=null){
+		if (pjxx.getLjjbxx().getSjr().getZpxx() != null) {
+			if (pjxx.getLjjbxx().getSjr().getZpxx().getZpnr() != null) {
 				String sjrzpnr;
 				sun.misc.BASE64Encoder base64Encoder = new sun.misc.BASE64Encoder();
-				sjrzpnr = base64Encoder.encodeBuffer(pjxx.getLjjbxx().getSjr().getZpxx().getZpnr());
+				sjrzpnr = base64Encoder.encodeBuffer(pjxx.getLjjbxx().getSjr()
+						.getZpxx().getZpnr());
 				pjxx.getLjjbxx().setSjrzpxx(sjrzpnr);
 			}
 		}
@@ -526,5 +565,182 @@ public class PjxxAction extends PageAction {
 			e.printStackTrace();
 			this.result = e.getMessage();
 		}
+	}
+/**
+ * 导入派件信息
+ * @return
+ * @throws Exception
+ */
+	public String importPjxx() throws Exception {
+		List<String> failLjxxs = new ArrayList<String>();
+		if(!StringUtil.isNotEmpty(uploadFile)){
+			this.result = "excel文件没有导入成功";
+			return SUCCESS;
+		}
+		BASE64Decoder decoder=new BASE64Decoder();
+		byte[] xlsfileByte=decoder.decodeBuffer(uploadFile);
+		
+		InputStream xlsin = new ByteArrayInputStream(xlsfileByte);
+		HttpSession session = this.getRequest().getSession();
+		User currUser = (User) session.getAttribute(Constants.userKey);
+		int jdpxxSize = 6;
+		int jdpxxColumn = 22;
+		try {
+			HSSFWorkbook wb = new HSSFWorkbook(xlsin);
+			HSSFSheet sheet = wb.getSheetAt(0);
+			Qyryxx tbr = new Qyryxx();
+			tbr.setCyrybh(currUser.getUseraccount());
+			Qyjbxx qyjbxx = new Qyjbxx();
+			qyjbxx.setQybm(currUser.getSsdwbm());
+			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+				HSSFRow row = sheet.getRow(i);
+				Ljjbxx ljxx = new Ljjbxx();
+				ljxx.setWldh(getCellString(row.getCell(0)));
+				ljxx.setQyjbxx(qyjbxx);
+				ljxx = ljjbxxService.getLjjbxx(ljxx);
+				
+				if (ljxx == null) {
+					Rdrjbxx jjr = new Rdrjbxx();
+					jjr.setXm(getCellString(row.getCell(1)));
+					jjr.setZjlx(getCellString(row.getCell(2)));
+					jjr.setZjhm(getCellString(row.getCell(3)));
+					jjr.setSsx(getCellString(row.getCell(4)));
+					jjr.setSsxmc(ItemChange.codeChange("dm_xzqh", jjr.getSsx()));
+					jjr.setXxdz(getCellString(row.getCell(5)));
+					jjr.setLxdh(getCellString(row.getCell(6)));
+					jjr.setGddh(getCellString(row.getCell(7)));
+					ljxx.setJjr(jjr);
+					Rdrjbxx sjr = new Rdrjbxx();
+					sjr.setXm(getCellString(row.getCell(8)));
+					sjr.setZjlx(getCellString(row.getCell(9)));
+					sjr.setZjhm(getCellString(row.getCell(10)));
+					sjr.setSsx(getCellString(row.getCell(11)));
+					sjr.setSsxmc(ItemChange.codeChange("dm_xzqh", sjr.getSsx()));
+					sjr.setXxdz(getCellString(row.getCell(12)));
+					sjr.setLxdh(getCellString(row.getCell(13)));
+					sjr.setGddh(getCellString(row.getCell(14)));
+					ljxx.setSjr(sjr);
+					Qyryxx ljr = new Qyryxx();
+					ljr.setXm(getCellString(row.getCell(15)));
+					ljr.setQybm(currUser.getDepartcode() == null ? currUser
+							.getDepartment().getDepartcode() : currUser
+							.getDepartcode());
+					ljxx.setLjr((Qyryxx) qyryxxService.getListQyryxx(ljr)
+							.get(0));
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					ljxx.setLjsj(sdf.parse(getCellString(row.getCell(16))));
+
+					ljxx.setLjtbr(tbr);
+					// jdpxx
+					ljxx.setJdp_list(new ArrayList<Jdpxx>());
+					int column = jdpxxColumn;
+					while (true) {
+						boolean ret = false;
+						for (int j = column; j < column + jdpxxSize; j++)
+							if ((ret = ret || row.getCell(j) != null))
+								break;
+						if (!ret) {
+							break;
+						}
+
+						Jdpxx jdpxx = new Jdpxx();
+						jdpxx.setJdpmc(getCellString(row.getCell(column)));
+						column++;
+						jdpxx.setJdpdlx(getCellString(row.getCell(column)));
+						column++;
+						jdpxx.setJdplx(getCellString(row.getCell(column)));
+						column++;
+						jdpxx.setJdpsm(getCellString(row.getCell(column)));
+						column++;
+						jdpxx.setJdpzl(getCellString(row.getCell(column)));
+						column++;
+						jdpxx.setJdptj(getCellString(row.getCell(column)));
+						column++;
+						jdpxx.setSfscbz("N");
+						jdpxx.setJdpdlxmc(ItemChange.codeChange("dm_jdwpdl", jdpxx.getJdpdlx()));
+						jdpxx.setJdplxmc(ItemChange.codeChange("dm_jdwpdl", jdpxx.getJdplx()));
+						ljxx.getJdp_list().add(jdpxx);
+					}
+				}
+				
+				Pjjbxx pjxx = new Pjjbxx();
+				pjxx.setPjtbr(tbr);
+				pjxx.setPjtbsj(new Date());
+				pjxx.setLjjbxx(ljxx);
+				Qyryxx pjr = new Qyryxx();
+				pjr.setXm(getCellString(row.getCell(15)));
+				pjr.setQybm(currUser.getSsdwbm());
+				pjr = (Qyryxx) qyryxxService.getListQyryxx(pjr)
+						.get(0);
+				pjxx.setPjr(pjr);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				pjxx.setPjsj(sdf.parse(getCellString(row.getCell(16))));
+				
+				String dsrxm = getCellString(row.getCell(17));
+				String dsrzjlx  = getCellString(row.getCell(18));
+				String dsrzjhm = getCellString(row.getCell(19));
+				if(StringUtil.isNotEmpty(dsrxm) && StringUtil.isNotEmpty(dsrzjlx) && StringUtil.isNotEmpty(dsrzjhm)){
+					Rdrjbxx dsr = new Rdrjbxx();
+					dsr.setZjhm(dsrzjhm);
+					dsr.setXm(dsrxm);
+					dsr.setZjlx(dsrzjlx);
+					pjxx.setDsr(dsr);
+				}
+				
+				try {
+					pjjbxxService.insertPjjbxx(pjxx);
+				} catch (Exception e) {
+					log.debug(e, e.fillInStackTrace());
+					log.error(e);
+					if (e.getMessage().contains("ORA-00001"))
+						failLjxxs.add(ljxx.getWldh());
+				}
+
+			}
+		} catch (Exception e) {
+			log.error(e);
+			log.debug(e, e.fillInStackTrace());
+			this.result = "导入模板级解析错误，导入失败";
+			return SUCCESS;
+		} finally {
+			xlsin.close();
+		}
+		this.result = SUCCESS;
+		if (failLjxxs.size() > 0 && failLjxxs.size() < 15)
+			this.result = "导入成功，但是物流单号：" + failLjxxs + "重复导入忽略";
+		else if(failLjxxs.size()>15)
+			this.result = "导入成功，但是部分数据因为重复被忽略,详细参看系统日志";
+		return SUCCESS;
+	}
+
+	private String getCellString(HSSFCell cell) {
+		Object result = null;
+		if (cell != null) {
+
+			int cellType = cell.getCellType();
+
+			switch (cellType) {
+
+			case HSSFCell.CELL_TYPE_STRING:
+				result = cell.getRichStringCellValue().getString();
+				break;
+			case HSSFCell.CELL_TYPE_NUMERIC:
+				result = (long) cell.getNumericCellValue();
+				break;
+			case HSSFCell.CELL_TYPE_FORMULA:
+				result = (long) cell.getNumericCellValue();
+				break;
+			case HSSFCell.CELL_TYPE_ERROR:
+				result = null;
+				break;
+			case HSSFCell.CELL_TYPE_BOOLEAN:
+				result = cell.getBooleanCellValue();
+				break;
+			case HSSFCell.CELL_TYPE_BLANK:
+				result = null;
+				break;
+			}
+		}
+		return result != null ? String.valueOf(result) : null;
 	}
 }
