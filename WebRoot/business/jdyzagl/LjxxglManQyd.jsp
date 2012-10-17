@@ -4,13 +4,14 @@ import="com.aisino2.sysadmin.domain.User,com.aisino2.sysadmin.Constants"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
-<%@page import="com.aisino2.common.QjblUtil"%>
+<%@include file="/public/ImgerToBase64.jsp" %>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script><!-- 寄递业公共js -->
 <script type="text/javascript" src="business/jdyzagl/js/gspicturejdy.js"></script><!-- 身份证扫描js -->
 <!--寄递物品类型联动的js -->
 <script language="javascript" type="text/javascript" src="javascript/selectboxlink.js"></script> 
 <script type="text/javascript">
 var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
+var importUrl = "jdy/importLjxx_ljxx.action";
 //默认加载执行内容
 $(document).ready(function() {
 	pageUrl="jdy/queryListlj_ljxx.action";
@@ -45,6 +46,8 @@ $(document).ready(function() {
 	
 	
 	daggleDiv(detailid);
+	daggleDiv("ljxxImportDialog");
+	
 }); 
 //页面gird加载方法
 function setPageListlj(pageno,url){	
@@ -207,9 +210,64 @@ function searchLongBack(json){
 	//报表请求
 	setExcelLong("ljxxexcel",bbmc);	
 }
+
+//打开导入窗口
+function setImportLjxx(){
+	detailDialog('ljxxImportDialog',300,'#',null,function(json){
+		var html= '<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">'+
+		'		    <tr>'+
+		'		      <td align="left" class="title1">揽件导入</td>'+
+		'		      <td align="right"><a href="#" id="closeDiv" onclick="close_dialog(this);" class="close"></a></td>'+
+		'		    </tr>'+
+		'		</table>'+
+		'		<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top:10px;">'+
+		'			<tr>'+
+		'				<td align="right">文件：</td>'+	
+		'				<td>'+
+		'					<input readonly="readonly" type="text" id="xlsFile" class="inputstyle">'+
+		'				</td>'+
+		'				<td>'+
+		'					<a href="#" class="addbutton" id="uploadbtn" onclick="openHyfj_zxdw();">浏览</a>'+
+		'				</td>'+
+		'			</tr>'+
+		'			<tr>'+
+		'				<td colspan="2"></td>'+	
+		'				<td>'+
+		'					<a href="#" class="addbutton" id="uploadbtn" onclick="importLjxx();">确认</a>'+
+		'				</td>'+
+		'			</tr>'+
+		'		</table>';
+		$('#ljxxImportDialog').html(html);
+	});
+}
 //揽件信息导入方法
 function importLjxx(){
-	return;
+	if($('#xlsFile').val()){
+		$.post(importUrl,{'uploadFile':$('#uploadFile').val()},function(json){
+			if(json.result!="success"){
+				jAlert(json.result,"提示");
+			}
+			else{
+				jAlert("导入成功","提示");
+				$('#ljxxImportDialog').hideAndRemove("show");
+			}
+		},'json');
+	}
+}
+//浏览方法
+function openHyfj_zxdw(){
+	ImgerToBase1.SetFileSize= 10240;
+    ImgerToBase1.OpenFile();
+    ImgerToBase_zxdw();
+}
+//显示附件浏览的附件 
+function ImgerToBase_zxdw(){
+    //显示图片路径
+    var pathfileName = ImgerToBase1.getFile();
+    if (pathfileName != null && pathfileName != "") {
+        $("#uploadFile").val(ImgerToBase1.getBase64());
+        $("#xlsFile").val(ImgerToBase1.getFileName());
+    }  
 }
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="ljjbxx_man_qyd">
@@ -227,6 +285,7 @@ function importLjxx(){
     	<input type="hidden" id="lj_sjr_xxdz" name="lj.sjr.xxdz">
     	<input type="hidden" id="lj_sjr_xm" name="lj.sjr.xm">
     	<%-- -- 兼容数据关联读分析的揽件信息查询  add by 2012-9-18 --%>
+    	<input type="hidden" id="uploadFile" >
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" >
 				<tr>
 					<td width="10%" class="pagedistd">物流单号</td>
@@ -258,7 +317,7 @@ function importLjxx(){
     		    	<tr>
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListlj(1);">查询</a></td>
     		    	  <td ><a href="#" class="addbutton" id="addbutton" onclick='setljAdd();'>添加</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="exceldcbutton" onclick='importLjxx();'>导入</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="exceldcbutton" onclick='setImportLjxx();'>导入</a></td>
     		    	  <td width="62"><a href="#" class="exceldcbutton" onclick='setExportExcel();' id="ljxxexcel">导出</a></td>
     		    	</tr>
     		  	</table>
@@ -269,7 +328,7 @@ function importLjxx(){
   </tr>
 </table>
 <div id="ljjbxxadd_detail" class="page-layout" src="#"
-		style="top:5px; left:160px;">
+		style="top:5px; left:160px;display: none;">
 </div>	
 
 <div id="LjjbxxDate" style="width:100%;">
@@ -291,3 +350,7 @@ function importLjxx(){
 	  </thead>
 	</table>	
 </div>
+
+<div id="ljxxImportDialog" class="page-layout" src="#"
+		style="top:5px; left:160px;display: none;">
+</div>	

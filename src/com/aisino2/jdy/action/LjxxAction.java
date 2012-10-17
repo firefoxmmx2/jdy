@@ -1,6 +1,6 @@
 package com.aisino2.jdy.action;
 
-import java.io.FileInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -22,11 +22,15 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 
+import sun.misc.BASE64Decoder;
+
+import com.aisino2.common.ItemChange;
 import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Jdpxx;
+import com.aisino2.jdy.domain.Jdytjxx;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.ILjjbxxService;
@@ -55,6 +59,15 @@ public class LjxxAction extends PageAction {
 	private List<Ljjbxx> lLjjbxx = new ArrayList();
 	private String wldh;
 	private boolean overUpdateTime;// 判断时间是否超过今日24点的标志
+	private String uploadFile;
+
+	public String getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(String uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 
 	public void setQyryxxService(IQyryxxService qyryxxService) {
 		this.qyryxxService = qyryxxService;
@@ -872,9 +885,14 @@ public class LjxxAction extends PageAction {
 	 * 导入揽件信息 excel
 	 */
 	public String importLjxx() throws Exception {
+		if (!StringUtil.isNotEmpty(uploadFile)) {
+			this.result = "揽件导入文件上传失败";
+			return SUCCESS;
+		}
+		BASE64Decoder decoder = new BASE64Decoder();
+		byte[] xlsFileByte = decoder.decodeBuffer(uploadFile);
 		List<String> failLjxxs = new ArrayList<String>();
-		InputStream xlsin = new FileInputStream(
-				"/home/hooxin/Work/物流单揽件批量导入模板.xls");
+		InputStream xlsin = new ByteArrayInputStream(xlsFileByte);
 		HttpSession session = this.getRequest().getSession();
 		User currUser = (User) session.getAttribute(Constants.userKey);
 		int jdpxxSize = 6;
@@ -883,7 +901,7 @@ public class LjxxAction extends PageAction {
 			HSSFWorkbook wb = new HSSFWorkbook(xlsin);
 			HSSFSheet sheet = wb.getSheetAt(0);
 
-			for (int i = 1; i < sheet.getLastRowNum(); i++) {
+			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 				HSSFRow row = sheet.getRow(i);
 				Ljjbxx ljxx = new Ljjbxx();
 				ljxx.setWldh(getCellString(row.getCell(0)));
@@ -892,7 +910,7 @@ public class LjxxAction extends PageAction {
 				jjr.setZjlx(getCellString(row.getCell(2)));
 				jjr.setZjhm(getCellString(row.getCell(3)));
 				jjr.setSsx(getCellString(row.getCell(4)));
-				// jjr.setSsxmc();
+				jjr.setSsxmc(ItemChange.codeChange("dm_xzqh", jjr.getSsx()));
 				jjr.setXxdz(getCellString(row.getCell(5)));
 				jjr.setLxdh(getCellString(row.getCell(6)));
 				jjr.setGddh(getCellString(row.getCell(7)));
@@ -902,16 +920,14 @@ public class LjxxAction extends PageAction {
 				sjr.setZjlx(getCellString(row.getCell(9)));
 				sjr.setZjhm(getCellString(row.getCell(10)));
 				sjr.setSsx(getCellString(row.getCell(11)));
-				// sjr.setSsxmc();
+				sjr.setSsxmc(ItemChange.codeChange("dm_xzqh", sjr.getSsx()));
 				sjr.setXxdz(getCellString(row.getCell(12)));
 				sjr.setLxdh(getCellString(row.getCell(13)));
 				sjr.setGddh(getCellString(row.getCell(14)));
 				ljxx.setSjr(sjr);
 				Qyryxx ljr = new Qyryxx();
 				ljr.setXm(getCellString(row.getCell(15)));
-				ljr.setQybm(currUser.getDepartcode() == null ? currUser
-						.getDepartment().getDepartcode() : currUser
-						.getDepartcode());
+				ljr.setQybm(currUser.getSsdwbm());
 				ljxx.setLjr((Qyryxx) qyryxxService.getListQyryxx(ljr).get(0));
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				ljxx.setLjsj(sdf.parse(getCellString(row.getCell(16))));
@@ -946,7 +962,10 @@ public class LjxxAction extends PageAction {
 					column++;
 					jdpxx.setJdptj(getCellString(row.getCell(column)));
 					column++;
-
+					jdpxx.setSfscbz("N");
+					jdpxx.setJdpdlxmc(ItemChange.codeChange("dm_jdwpdl", jdpxx.getJdpdlx()));
+					jdpxx.setJdplxmc(ItemChange.codeChange("dm_jdwpdl", jdpxx.getJdplx()));
+					
 					ljxx.getJdp_list().add(jdpxx);
 
 				}
@@ -955,21 +974,25 @@ public class LjxxAction extends PageAction {
 				} catch (Exception e) {
 					log.debug(e, e.fillInStackTrace());
 					log.error(e);
-					if(e.getMessage().equals("ORA-00001"))
+					if (e.getMessage().contains("ORA-00001"))
 						failLjxxs.add(ljxx.getWldh());
 				}
 
 			}
 		} catch (Exception e) {
 			log.error(e);
-			log.debug(e,e.fillInStackTrace());
+			log.debug(e, e.fillInStackTrace());
 			this.result = "导入模板级解析错误，导入失败";
+			return SUCCESS;
 		} finally {
 			xlsin.close();
 		}
-		this.result = SUCCESS;
-		if(failLjxxs.size()>0)
-			this.result ="导入成功，但是物流单号："+ failLjxxs + "重复导入忽略";
+		if (failLjxxs.size() > 0 && failLjxxs.size()<15)
+			this.result = "导入成功，但是物流单号：" + failLjxxs + "重复导入忽略";
+		else if(failLjxxs.size()>15)
+			this.result="导入成功，但是部分数据因为重复被忽略,详细参看系统日志";
+		else
+			this.result = SUCCESS;
 		return SUCCESS;
 	}
 
