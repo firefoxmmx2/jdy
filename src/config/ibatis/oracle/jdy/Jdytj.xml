@@ -397,6 +397,7 @@
 		t_rdrjbxx ry, t_qyjbxx qy
 		where ywxx.ryid = ry.id
 		and ywxx.qybm = qy.qybm
+		and ry.jdrylx is not null
 		<include refid="lssjgjWhere"/> 
 	</select>
 <!-- 	历史数据轨迹统计 -->
@@ -411,6 +412,7 @@
 					       t_rdrjbxx ry, t_qyjbxx qy
 					 where ywxx.ryid = ry.id
 					   and ywxx.qybm = qy.qybm
+					   and ry.jdrylx is not null
 						<include refid="lssjgjWhere"/>
 					order by $pageSort$
 				)  z

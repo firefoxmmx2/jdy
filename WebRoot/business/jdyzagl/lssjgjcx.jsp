@@ -52,8 +52,8 @@
 	                                ingridPageParams:sXML,
 	                                ingridExtraParams:params,
 									pageNumber: pageno,
-									isHaveMorenPaixuClass: true, //加默认排序样式
-									morenPaixuCol: 2, //第一默认排序	
+									//isHaveMorenPaixuClass: true, //加默认排序样式
+									//morenPaixuCol: 2, //第一默认排序	
 									changeHref:function(table){
 						                var trs =$(table).find("tr");
 						                if(trs.length==0){
@@ -62,9 +62,10 @@
 											daochuNum = 1;
 										}	
 									},
-									morenPaixuFangshi:'desc', //默认排序方式
+									//morenPaixuFangshi:'desc', //默认排序方式 
 									alignCenterColIndex: [3,9],
 									hideColIndex:[7,8],
+									noSortColIndex:[0,1,4,5,6,7,8,9],
 									colWidths: ["10%","15%","12%","8%","15%","15%","17%","0%","0%","8%"]									
 								});				
 	}	
