@@ -101,4 +101,11 @@ public interface IJdytjxxDao {
 	 */
 	Page getJdyQyjbxxList(Map<String,Object> paras, int pageno, int pagesize,
 			String dir, String sort);
+	
+	/**
+	 * 物品分类统计
+	 * @param map
+	 * @return
+	 */
+	List<Jdytjxx> getWpfltj(Map<String, Object> map);
 }

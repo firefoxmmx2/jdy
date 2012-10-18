@@ -52,4 +52,10 @@ public interface IJdytjxxService {
 	 */
 	Page getJdyQyjbxxList(Map<String,Object> paras, int pageno, int pagesize,
 			String dir, String sort);
+	/**
+	 * 物品分类统计查询
+	 * @param map
+	 * @return
+	 */
+	public List<Jdytjxx> getWpfltj(Map<String, Object> map);
 }
