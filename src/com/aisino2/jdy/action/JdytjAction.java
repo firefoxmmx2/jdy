@@ -872,4 +872,46 @@ public class JdytjAction extends PageAction {
 				{ "昨日派件数", "pjs" },{ "联系电话", "lxdh" }, { "状态", "zt" } };
 		exportGun(tabletitle,jdytjxx_list);
 	}
+	
+	/**
+	 * 寄递业物品分类统计查询
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryJdyWpfltj() throws Exception{
+		Map<String, Object> paramap = new HashMap<String, Object>();
+
+		if (tjsjf != null)
+			paramap.put("ljsjf", tjsjf);
+		if (tjsjt != null)
+			paramap.put("ljsjt", tjsjt);
+
+		if (StringUtil.isNotEmpty(gxdwbm))
+			paramap.put("gxdwbm", StringUtil.trimEven0(gxdwbm));
+		paramap.put("show_number", show_number);
+		jdytjxx_list = jdytjxx_service.getWpfltj(paramap);
+
+		this.totalpage = 1;
+		this.totalrows = jdytjxx_list.size();
+
+		setTabledataForWpfltj(jdytjxx_list);
+		
+		this.result = "success";
+		return SUCCESS;
+	}
+	
+	private void setTabledataForWpfltj(List<Jdytjxx> datalist){
+		List lPro = new ArrayList();
+		lPro.add("jdplx");
+		lPro.add("jdplx");
+		lPro.add("cs");
+		
+		List lCol = new ArrayList();
+
+		Jdytjxx setJdytjxx = new Jdytjxx();
+		this.setData(setJdytjxx, datalist, lPro, lCol);
+
+		this.tabledata = this.getData();
+		totalrows = this.getTotalrows();
+	}
 }

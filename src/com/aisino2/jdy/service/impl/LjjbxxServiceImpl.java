@@ -1,10 +1,13 @@
 package com.aisino2.jdy.service.impl;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.aisino.commons.beanutils.BeanUtils;
 
 import com.aisino2.common.ImageUtil;
 import com.aisino2.common.StringUtil;
@@ -14,10 +17,12 @@ import com.aisino2.jdy.dao.IJddxzpxxDao;
 import com.aisino2.jdy.dao.IJdpxxDao;
 import com.aisino2.jdy.dao.ILjjbxxDao;
 import com.aisino2.jdy.dao.IRdrjbxxDao;
+import com.aisino2.jdy.dao.IRdrjbxx_lsDao;
 import com.aisino2.jdy.domain.Jddxzpxx;
 import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Rdrjbxx;
+import com.aisino2.jdy.domain.Rdrjbxx_ls;
 import com.aisino2.jdy.service.IJdyBjService;
 import com.aisino2.jdy.service.ILjjbxxService;
 import com.aisino2.publicsystem.domain.Qyjbxx;
@@ -32,6 +37,8 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	private IRdrjbxxDao rdrjbxxDao;
 	/**人员照片信息**/
 	private IJddxzpxxDao jddxzpxxDao;
+	
+	
 
 	private Ljjbxx setLjjbxx;
 	private IQyjbxxService qyjbxxService;
@@ -68,7 +75,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 	
 
 	
-	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) {
+	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) throws Exception {
 	
 			/***向寄递对象--人员信息表插入数据***/
 			ljjbxx.getJjr().setJdrylx("10"); //设置寄递人员类型 寄件
@@ -79,35 +86,41 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 				setJddxzpxx.setRdrjbxx_id(ljjbxx.getJjr().getId());//寄件人ID
 				setJddxzpxx.setScsj(new Date());//上传时间
 				byte[] jjrzp;
-				try {
-					jjrzp = ImageUtil.getImageByte(ljjbxx.getJjrzpxx());
-					setJddxzpxx.setZpnr(jjrzp);//寄件人照片内容
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				jjrzp = ImageUtil.getImageByte(ljjbxx.getJjrzpxx());
+				setJddxzpxx.setZpnr(jjrzp);//寄件人照片内容
 				jddxzpxxDao.insert(setJddxzpxx);
 				
 			}
-			/***向寄递对象--人员信息表插入数据***/
+//			/***向基地对象--寄件人--人员信息历史表插入数据***/
+//			Rdrjbxx_ls setRdrjbxx_ls = new Rdrjbxx_ls();
+//			BeanUtils.copyProperties(setRdrjbxx_ls, ljjbxx.getJjr());//将人员实体中的属性相同的数据设置到人员历史实体中
+//			//setRdrjbxx_ls.setLjjbxx_id(ljjbxx.getDjxh());//登记序号这里不好得到所以暂时不打入，查询时要用到再做关联
+//			setRdrjbxx_ls.setRyid(ljjbxx.getJjr().getId());//寄件人ID
+//			setRdrjbxx_ls.setGxdwbm(ljjbxx.getQyjbxx().getGxdwbm());//管辖单位编码
+//			setRdrjbxx_ls.setGxdwmc(ljjbxx.getQyjbxx().getGxdwmc());//管辖单位名称
+////			Method m = setRdrjbxx_ls.getClass().getDeclaredMethod("getXm");反射的例子
+////			Method[] ms = setRdrjbxx_ls.getClass().getDeclaredMethods();
+////			System.out.println(m.invoke(setRdrjbxx_ls));
+//			rdrjbxx_lsDao.insert(setRdrjbxx_ls);
+			/***向寄递对象--人员信息表插入数据***/  
 			ljjbxx.getSjr().setJdrylx("20"); //设置寄递人员类型 收件
 			ljjbxx.setSjr(rdrjbxxDao.insert(ljjbxx.getSjr()));
-			if(ljjbxx.getSjrzpxx()!=null){
+			if(ljjbxx.getSjrzpxx()!=null && StringUtil.isNotEmpty(ljjbxx.getSjrzpxx())){
 				/****插入人员照片信息*****/
 				setJddxzpxx.setRdrjbxx_id(ljjbxx.getSjr().getId());//寄件人ID
 				setJddxzpxx.setScsj(new Date());//上传时间
 				byte[] sjrzp;
-				try {
-					sjrzp = ImageUtil.getImageByte(ljjbxx.getSjrzpxx());
-					setJddxzpxx.setZpnr(sjrzp);//收件人照片内容
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				sjrzp = ImageUtil.getImageByte(ljjbxx.getSjrzpxx());
+				setJddxzpxx.setZpnr(sjrzp);//收件人照片内容
 				jddxzpxxDao.insert(setJddxzpxx);
 			}
+//			/***向基地对象--收件人--人员信息历史表插入数据***/
+//			BeanUtils.copyProperties(setRdrjbxx_ls, ljjbxx.getSjr());//将人员实体中的属性相同的数据设置到人员历史实体中
+//			//setRdrjbxx_ls.setLjjbxx_id(ljjbxx.getDjxh());//登记序号这里不好得到所以暂时不打入，查询时要用到再做关联
+//			setRdrjbxx_ls.setRyid(ljjbxx.getSjr().getId());//寄件人ID
+//			setRdrjbxx_ls.setGxdwbm(ljjbxx.getQyjbxx().getGxdwbm());//管辖单位编码
+//			setRdrjbxx_ls.setGxdwmc(ljjbxx.getQyjbxx().getGxdwmc());//管辖单位名称
+//			rdrjbxx_lsDao.insert(setRdrjbxx_ls);
 			/***向揽件信息表打入揽件数据***/
 			ljjbxx.setLjtbsj(new Date());
 			ljjbxx = ljjbxxDao.insert(ljjbxx);
@@ -125,7 +138,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		return ljjbxx;
 	}
 
-	public void updateLjjbxx(Ljjbxx ljjbxx) {
+	public void updateLjjbxx(Ljjbxx ljjbxx) throws Exception {
 		if(ljjbxx==null || !StringUtil.isNotEmpty(ljjbxx.getDjxh()))
 			throw new RuntimeException("需要修改的揽件信息登记序号为空");
 		//修改寄件人
@@ -143,10 +156,10 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		}
 		//删除照片信息
 		Jddxzpxx setJddxzpxx = new Jddxzpxx();
-		if(ljjbxx.getJjr().getZpxx().getId()!=null){
+		if(ljjbxx.getJjr().getZpxx()!=null &&ljjbxx.getJjr().getZpxx().getId()!=null){
 			jddxzpxxDao.delete(ljjbxx.getJjr().getZpxx());
 		}
-		if(ljjbxx.getSjr().getZpxx().getId()!=null){
+		if(ljjbxx.getSjr().getZpxx()!=null &&ljjbxx.getSjr().getZpxx().getId()!=null){
 			jddxzpxxDao.delete(ljjbxx.getSjr().getZpxx());
 		}
 		//从新获取照片信息数据插入数据库
@@ -154,14 +167,8 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			setJddxzpxx.setRdrjbxx_id(ljjbxx.getJjr().getId());//寄件人ID
 			setJddxzpxx.setScsj(new Date());//上传时间
 			byte[] jjrzp;
-			try {
-				jjrzp = ImageUtil.getImageByte(ljjbxx.getJjrzpxx());
-				setJddxzpxx.setZpnr(jjrzp);//寄件人照片内容
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			jjrzp = ImageUtil.getImageByte(ljjbxx.getJjrzpxx());
+			setJddxzpxx.setZpnr(jjrzp);//寄件人照片内容
 			jddxzpxxDao.insert(setJddxzpxx);
 			
 		}
@@ -200,10 +207,10 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 				if(jdp==null)
 					continue;
 				//删除标志，当他为Y的时候，出数据库中删除这个寄递品
-				if(StringUtil.isNotEmpty(jdp.getSfscbz()) && jdp.getSfscbz().equals("Y")){
+				if("Y".equals(jdp.getSfscbz())){
 					jdpxxDao.delete(jdp);
 				}
-				else if( jdp.getSfscbz().equals("N")){
+				else if( "N".equals(jdp.getSfscbz())){
 					jdp.setLjjbxx(ljjbxx);
 					jdpxxDao.insert(jdp);
 				}

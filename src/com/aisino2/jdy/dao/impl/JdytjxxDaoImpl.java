@@ -233,4 +233,11 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 		return queryForPage("getLssjListPage", map, pageno,pagesize);
 	}
 
+	/**
+	 * 物品分类统计
+	 */
+	public List<Jdytjxx> getWpfltj(Map<String, Object> map) {
+		return queryForList("Jdytjxx.wpfltj", map);
+	}
+
 }

@@ -1,7 +1,9 @@
 package com.aisino2.jdy.service.impl;
 
 import java.util.Date;
+import java.util.Map;
 
+import com.aisino2.core.dao.Page;
 import com.aisino2.jdy.dao.IJddxzpxxDao;
 import com.aisino2.jdy.dao.IRdrjbxxDao;
 import com.aisino2.jdy.domain.Jddxzpxx;
@@ -65,6 +67,24 @@ public class RdrjbxxServiceImpl implements IRdrjbxxService {
 	public Rdrjbxx getRdrjbxx(Rdrjbxx rdrjbxx) {
 		
 		return rdrjbxxDao.get(rdrjbxx);
+	}
+
+	/**
+	 * 个人频繁更换基建单位统计查询
+	 */
+	public Page grpfghjjdwtjcxForPage(Map<String, Object> para, int pageno,
+			int pagesize, String dir, String sort) {
+		return rdrjbxxDao.grpfghjjdwtjcxForPage(para, pageno, pagesize, dir, sort);
+		
+	}
+	
+	/**
+	 * 个人频繁更换基建单位统计查询--详细信息列表
+	 */
+	public Page grpfghjjdwtjcxdalForPage(Map<String, Object> para, int pageno,
+			int pagesize, String dir, String sort) {
+		return rdrjbxxDao.grpfghjjdwtjcxdalForPage(para, pageno, pagesize, dir, sort);
+		
 	}
 
 }

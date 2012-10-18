@@ -42,6 +42,14 @@ public class Jdytjxx implements Serializable {
 	
 	private Integer departlevel;
 	
+	private String jdplx;
+	
+	public String getJdplx() {
+		return jdplx;
+	}
+	public void setJdplx(String jdplx) {
+		this.jdplx = jdplx;
+	}
 	public Integer getDepartlevel() {
 		return departlevel;
 	}

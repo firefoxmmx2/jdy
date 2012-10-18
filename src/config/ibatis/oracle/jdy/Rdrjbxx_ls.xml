@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Rdrjbxx_ls_ls" type="com.aisino2.jdy.domain.Rdrjbxx_ls_ls"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	
+<!-- 寄递对象历史信息结果集 -->
+	<resultMap class="Rdrjbxx_ls" id="Rdrjbxx_ls_rm">
+		<result property="id" column="id"/>
+		<result property="xm" column="xm"/>
+		<result property="zjlx" column="zjlx"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="ssx" column="ssx"/>
+		<result property="xxdz" column="xxdz"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="gddh" column="gddh"/>
+		<result property="dw" column="dw"/>
+		<result property="ssxmc" column="ssxmc"/>
+		<result property="jdrylx" column="jdrylx"/>
+		<result property="xb" column="xb"/>
+		<result property="ljjbxx_id" column="ljjbxx_id"/>
+		<result property="ryid" column="ryid"/>
+		<result property="gxdwbm" column="gxdwbm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<!-- 寄件次数 -->
+		<result property="jjcs" column="jjcs"/>
+	</resultMap>
+<!-- 个人频繁更换寄件单位主界面统计 -->
+	<sql id="Rdrjbxx_lsPageWhere">
+		<isNotEmpty prepend="and" property="ljsjf">
+			ljjbxx.ljtbsj >= #ljsjf#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ljsjt">
+			ljjbxx.ljtbsj &lt;= #ljsjt#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jjcs">
+			Rdrjbxx_ls.jjcs>=#jjcs#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id">
+			Rdrjbxx_ls.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id">
+			Rdrjbxx_ls.ssx=#ssx#
+		</isNotEmpty>
+	</sql>
+	<insert id="Rdrjbxx_ls.insert" parameterClass="Rdrjbxx_ls">
+		insert into t_Rdrjbxx_ls(
+			<dynamic prepend=" ">
+				<isNotNull property="id" prepend=","> 
+					id
+				</isNotNull>
+				<isNotNull property="xm" prepend=","> 
+					xm
+				</isNotNull>
+				<isNotNull property="zjlx" prepend=","> 
+					zjlx
+				</isNotNull>
+				<isNotNull property="zjhm" prepend=","> 
+					zjhm
+				</isNotNull>
+				<isNotNull property="ssx" prepend=","> 
+					ssx
+				</isNotNull>
+				<isNotNull property="xxdz" prepend=","> 
+					xxdz
+				</isNotNull>
+				<isNotNull property="lxdh" prepend=","> 
+					lxdh
+				</isNotNull>
+				<isNotNull property="gddh" prepend=","> 
+					gddh
+				</isNotNull>
+				<isNotNull property="dw" prepend=","> 
+					dw
+				</isNotNull>
+				<isNotNull property="ssxmc" prepend=","> 
+					ssxmc
+				</isNotNull>
+				<isNotNull property="jdrylx" prepend=","> 
+					jdrylx
+				</isNotNull>
+				<isNotNull property="xb" prepend=","> 
+					xb
+				</isNotNull>
+				<isNotNull property="ljjbxx_id" prepend=","> 
+					ljjbxx_id
+				</isNotNull>
+				<isNotNull property="ryid" prepend=","> 
+					ryid
+				</isNotNull>
+				<isNotNull property="gxdwbm" prepend=","> 
+					gxdwbm
+				</isNotNull>
+				<isNotNull property="gxdwmc" prepend=","> 
+					gxdwmc
+				</isNotNull>
+				
+			</dynamic>
+		)
+		values(
+			<dynamic>
+				<isNotNull property="id" prepend=""> 
+					#id#
+				</isNotNull>
+				<isNotNull property="xm" prepend=","> 
+					#xm#
+				</isNotNull>
+				<isNotNull property="zjlx" prepend=","> 
+					#zjlx#
+				</isNotNull>
+				<isNotNull property="zjhm" prepend=","> 
+					#zjhm#
+				</isNotNull>
+				<isNotNull property="ssx" prepend=","> 
+					#ssx#
+				</isNotNull>
+				<isNotNull property="xxdz" prepend=","> 
+					#xxdz#
+				</isNotNull>
+				<isNotNull property="lxdh" prepend=","> 
+					#lxdh#
+				</isNotNull>
+				<isNotNull property="gddh" prepend=","> 
+					#gddh#
+				</isNotNull>
+				<isNotNull property="dw" prepend=","> 
+					#dw#
+				</isNotNull>
+				<isNotNull property="ssxmc" prepend=","> 
+					#ssxmc#
+				</isNotNull>
+				<isNotNull property="jdrylx" prepend=","> 
+					#jdrylx#
+				</isNotNull>
+				<isNotNull property="xb" prepend=","> 
+					#xb#
+				</isNotNull>
+				<isNotNull property="ljjbxx_id" prepend=","> 
+					#ljjbxx_id#
+				</isNotNull>
+				<isNotNull property="ryid" prepend=","> 
+					#ryid#
+				</isNotNull>
+				<isNotNull property="gxdwbm" prepend=","> 
+					#gxdwbm#
+				</isNotNull>
+				<isNotNull property="gxdwmc" prepend=","> 
+					#gxdwmc#
+				</isNotNull>
+			</dynamic>
+		)
+	</insert>
+<!-- 个人频繁更换寄件单位主界面统计 -->	
+	<select id="Rdrjbxx_ls.getListPageCount" resultClass="Integer" parameterClass="map" >
+		select count(1) from t_Rdrjbxx_ls Rdrjbxx_ls
+		where 
+		<dynamic prepend=" ">
+			<include refid="Rdrjbxx_lsPageWhere"/>
+		</dynamic>
+	
+	</select>
+	<select id="Rdrjbxx_ls.getListPage" resultMap="Rdrjbxx_ls_rm" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select Rdrjbxx_ls.*
+		from t_Rdrjbxx_ls Rdrjbxx_ls 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="Rdrjbxx_lsPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+</sqlMap>

@@ -28,6 +28,8 @@ var jdytjxx_query_page_func;
 var jdytjxx_detail_width=1000;
 var qyjbxx_dataid;
 var qyjbxx_requestType="detail";
+var jdytjxx_wp_queryTable;
+var jdytjxx_chartType="bar";
 $(document).ready(function() {
 	
 	jdytjxx__table_id="jdytjxx_table_gr";
@@ -53,6 +55,8 @@ $(document).ready(function() {
 		jdytjxx__table_id='jdytjxx_table_qy';
 		jdytjxx_tabletitle="揽件量统计排名";
 		
+		$('#table_lbzs_bmxx').show();
+		$('#table_txzs_bmxx').show();
 		if(!jdytjxx_qy_queryTable)
 			jdytjxx_qy_queryTable=$("#"+jdytjxx__table_id);
 		if($('#jdlx',jdytjxx_qy_queryTable).length)
@@ -71,6 +75,8 @@ $(document).ready(function() {
 		jdytjxx__table_id="jdytjxx_table_gr";
 		jdytjxx_tabletitle="寄件量统计排名";
 		
+		$('#table_lbzs_bmxx').show();
+		$('#table_txzs_bmxx').show();
 		if(!jdytjxx_queryTable)
 			jdytjxx_queryTable=$("#"+jdytjxx__table_id);
 		if($('#jddxlx',jdytjxx_queryTable).length)
@@ -88,6 +94,8 @@ $(document).ready(function() {
 		jdytjxx__table_id='jdytjxx_table_qy';
 		jdytjxx_tabletitle="派件量统计排名";
 		
+		$('#table_lbzs_bmxx').show();
+		$('#table_txzs_bmxx').show();
 		if(!jdytjxx_qy_queryTable)
 			jdytjxx_qy_queryTable=$("#"+jdytjxx__table_id);
 		if($('#jdlx',jdytjxx_qy_queryTable).length)
@@ -105,6 +113,8 @@ $(document).ready(function() {
 		jdytjxx__table_id="jdytjxx_table_gr";
 		jdytjxx_tabletitle="收件量统计排名";
 		
+		$('#table_lbzs_bmxx').show();
+		$('#table_txzs_bmxx').show();
 		if(!jdytjxx_queryTable)
 			jdytjxx_queryTable=$("#"+jdytjxx__table_id);
 		if($('#jddxlx',jdytjxx_queryTable).length)
@@ -115,13 +125,32 @@ $(document).ready(function() {
 		//默认点击列表
 		show_biaoqianBmXx({},'lb');
 	});
-	
+	//辖区内物品分类统计
+	$('#jdytjxx_tjlx_wpfltj').click(function(){
+		jdytjxx_pageUrl="jdy/queryJdyWpfltj_jdytjxx.action";
+		jdytjxx_divnid="jdytjxx_data_wp_div";
+		jdytjxx__table_id="jdytjxx_table_wp";
+		jdytjxx_tabletitle="物品分类统计";
+
+		$('#table_lbzs_bmxx').hide();
+		$('#table_txzs_bmxx').hide();
+		
+		if(!jdytjxx_wp_queryTable)
+			jdytjxx_wp_queryTable=$("#"+jdytjxx__table_id);
+		wpfltj_loadPage(jdytjxx_divnid);
+		//默认点击图表
+		show_biaoqianBmXx({},'tx');
+		$('#jdytjxx_tx_ct').hide();
+	});
 	$('.listdata').hide();
 	
 	//默认触发企业揽件量统计设置
 	$('#jdytjxx_tjlx_qyljltj').attr('checked',true).click();
 	
-	
+	$('#jdytjxx_tx_ct input:radio').click(function(){
+		jdytjxx_chartType=$(this).val();
+		show_biaoqianBmXx({},'tx');
+	});
 }); 
 //显示标签方法
 function show_biaoqianBmXx(aObj,id){
@@ -135,13 +164,16 @@ function show_biaoqianBmXx(aObj,id){
 	   	$(".listdata").hide();
 	   	$("#"+jdytjxx_divnid).show();
  	}else{
- 		
+ 		$('#jdytjxx_tx_ct').show();
  		$("#table_lbzs_bmxx").removeClass("nav11").addClass("nav1");
  		$("#table_txzs_bmxx").removeClass("nav1").addClass("nav11");
  		$(".listdata").hide();
  		
 	   	$("#jdytjxx_tx_div").show();
-	   	ceshiBar();
+	   	if(jdytjxx_chartType=='bar')
+	   		ceshiBar();
+	   	else
+	   		ceshiPie();
  	}
 }
 //生成柱状图
@@ -154,12 +186,62 @@ function ceshiBar(){
 				columns:[1],
 				data:myTableDataBmXx,
 				title:jdytjxx_tabletitle,
-				width:pageWidth-183,
-				height:pageHeight-270,
+				width:pageWidth,
+				height:pageHeight-290,
 				isTotal:true
 			});
 		}
-	}	
+}
+/**
+ * 生成饼状图
+ */
+function ceshiPie(){
+	$("#jdytjxx_tx_div").empty();
+	if(myTableDataBmXx!=null&&myTableDataBmXx!=""){
+		$("#jdytjxx_tx_div").fusionChart({
+			prefix:'ddd',
+			type:'pie',
+			columns:[1],
+			data:myTableDataBmXx,
+			title:jdytjxx_tabletitle,
+			width:pageWidth,
+			height:pageHeight-290,
+			isTotal:true
+		});
+	}
+}
+/**
+ * 物品分类统计图
+ */
+function displayWpflTjImage(){
+	$("#jdytjxx_tx_div").empty();
+	$('<div id="jdytjxx_tx_bar" style="float:left;"></div>').appendTo("#jdytjxx_tx_div");
+	$('<div id="jdytjxx_tx_pie"></div>').appendTo('#jdytjxx_tx_div');
+	
+	if(myTableDataBmXx!=null&&myTableDataBmXx!=""){
+		$("#jdytjxx_tx_bar").fusionChart({
+			prefix:'ddd',
+			type:'bar',
+			columns:[1],
+			data:myTableDataBmXx,
+			title:jdytjxx_tabletitle,
+			width:pageWidth/2,
+			height:pageHeight-270,
+			isTotal:true
+		});
+		$("#jdytjxx_tx_pie").fusionChart({
+			prefix:'ddd',
+			type:'pie',
+			columns:[1],
+			data:myTableDataBmXx,
+			title:jdytjxx_tabletitle,
+			width:pageWidth/2,
+			height:pageHeight-270,
+			isTotal:true
+		});
+		
+	}
+}
 function geteExcelHead_baybmxxtj(divid){
 	var theadHtml = $("#"+divid).find("table:first").find("thead:first");
 	theadHtml.find("td").remove();
@@ -188,16 +270,69 @@ function jddxtj_loadPage(divpageid){
 	jdytjxx_tables=$("#"+divpageid).html();
 	$("#"+jdytjxx_detailid).hide();
 	jdytjxx_query_page_func=jdyjddxtj_page_query;
-	jdyjddxtj_page_query(1,'#');
+	jdytjxx_query_page_func(1,'#');
+	myTableDataBmXx=null;
 }
 
 function qydxtj_loadPage(divpageid){
 	jdytjxx_tables=$("#"+divpageid).html();
 	$("#"+jdytjxx_detailid).hide();
 	jdytjxx_query_page_func=jdyqydxtj_page_query;
-	jdyqydxtj_page_query(1,'#');
+	jdytjxx_query_page_func(1,'#');
+	myTableDataBmXx=null;
 }
+function wpfltj_loadPage(divpageid){
+	jdytjxx_tables=$("#"+divpageid).html();
+	$("#"+jdytjxx_detailid).hide();
+	jdytjxx_query_page_func=wpfltj_page_query;
+	jdytjxx_query_page_func(1,'#');
+	myTableDataBmXx=null;
+}
+function wpfltj_page_query(pageno,url){
+	if (jdytjxxManVerify()){
+		var aybmxxtj_gxdwbm=$("#jdytjxx_gxdwbm").val();
+		if(aybmxxtj_gxdwbm==''||aybmxxtj_gxdwbm==null){
+			$("#jdytjxx_gxdwbm").val(<%=gxdwbm%>);
+			$("#jdytjxx_departlevel").val(<%=departlevel%>);
+		} 
+		
+		if($('#'+jdytjxx__table_id).length == 0){
+			$('#'+jdytjxx_divnid).html(jdytjxx_wp_queryTable);
+		}
 
+		
+		url=set_jdytjxx_list(pageno,url);
+		
+		
+		var mygrid1 = $("#"+jdytjxx__table_id).ingrid({
+										paging:false,	 
+										url: url,	
+										height: pageHeight-263,
+                                        ingridPageParams:sXML,
+                                        ingridExtraParams:params,
+                                        onRowSelect:null,
+                                        changeHref:function(table){
+                                        	myTableDataBmXx=null;
+	                                    	var $chart_table = $(table).clone();
+// 	                                    	$chart_table.find('tr').each(function(){
+// 	                                    		var $tr = $(this);
+// 	                                    		$tr.find('td:nth(0)').remove();
+// 	                                    		$tr.find('th:nth(0)').remove();
+// 	                                    	});
+	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
+// 	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
+											displayWpflTjImage();
+// 	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
+	                                    		 
+// 	                                    	 }
+                                    },
+										pageNumber: pageno,
+										sorting: false,
+										isPlayResultNull:false,
+										colWidths: ["50%","50%"]									
+									});				
+		}
+}
 function jdyjddxtj_page_query(pageno,url){
 	if (jdytjxxManVerify()){
 		var aybmxxtj_gxdwbm=$("#jdytjxx_gxdwbm").val();
@@ -284,55 +419,98 @@ function jdyqydxtj_page_query(pageno,url){
 									});				
 		}
 }
-
-	function jdytjxxManVerify(){
-		var sj1 = $("#jdytjxx_tjsjf").val();
-		var sj2 = $("#jdytjxx_tjsjt").val();
-		if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
-			if(sj1>sj2){
-				jAlert('受理时间不能大于受理时间至','提示信息')
-				return false;
-			}else{
-				return true;
-			}
+/**
+ * 物品分类排名查询
+ */
+function jdywpfltj_page_query(pageno,url){
+	if (jdytjxxManVerify()){
+		var aybmxxtj_gxdwbm=$("#jdytjxx_gxdwbm").val();
+		if(aybmxxtj_gxdwbm==''||aybmxxtj_gxdwbm==null){
+			$("#jdytjxx_gxdwbm").val(<%=gxdwbm%>);
+			$("#jdytjxx_departlevel").val(<%=departlevel%>);
+		} 
+		
+		if($('#'+jdytjxx__table_id).length == 0){
+			$('#'+jdytjxx_divnid).html(jdytjxx_qy_queryTable);
 		}
-		return true;
+		url=set_jdytjxx_list(pageno,url);
+		
+		var mygrid1 = $("#"+jdytjxx__table_id).ingrid({
+										paging:false,	 
+										url: url,	
+										height: pageHeight-263,
+                                        ingridPageParams:sXML,
+                                        ingridExtraParams:params,
+                                        onRowSelect:null,
+                                        changeHref:function(table){
+                                        	myTableDataBmXx=null;
+	                                    	var $chart_table = $(table).clone();
+// 	                                    	$chart_table.find('tr').each(function(){
+// 	                                    		var $tr = $(this);
+// 	                                    		$tr.find('td:nth(0)').remove();
+// 	                                    		$tr.find('th:nth(0)').remove();
+// 	                                    	});
+	                                    	myTableDataBmXx= $(jdytjxx_qy_queryTable).clone().append($chart_table.find('tbody').html()).hide();
+	                                    	//myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
+	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
+	                                    		 displayWpflTjImage();
+	                                    	 }
+                                        },
+										pageNumber: pageno,
+										sorting: false,
+										isPlayResultNull:false,
+										colWidths: ["5%","15%","5%","25%","25%","20%","5%"]									
+									});				
+		}
+}
+function jdytjxxManVerify(){
+	var sj1 = $("#jdytjxx_tjsjf").val();
+	var sj2 = $("#jdytjxx_tjsjt").val();
+	if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
+		if(sj1>sj2){
+			jAlert('受理时间不能大于受理时间至','提示信息')
+				return false;
+		}else{
+			return true;
+		}
 	}
-	function getSubDepartMentSum_baybmxxtj(id,level){
-		aybmxxtj_gxdwbm=id;
-		aybmxxtj_departlevel=level;
-		/* setWidth('BaybqmqktjSubDeptDetail',800);
-		setUrl('BaybqmqktjSubDeptDetail','business/bazagl/SubDeptBaybmxxtjMan.jsp');
-		bindDocument('BaybqmqktjSubDeptDetail');
-		$("#closeDivTag").val('sub'); */
-		return GB_showCenter("下级部门统计情况",'<%=path_baybmxxtj%>/business/bazagl/SubDeptBaybmxxtjMan.jsp',510,800);
-	}
-	
-	//导出Excel，20100804,excel导出功能修改， 从session直接获取查询结果
-	function setExportExcel_aybmxxtj(){	
-	  	//alert(daochuNum);
-	  	if(aybmxxtj_daochuNum==1){
-			if (jdytjxxManVerify()){
-				//setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
-	  		    //报表标题
-				var bbmc="保安员报名情况统计查询";
-				//报表请求	
-				//setExcelLong("yyrb",bbmc);
-				var surl=jdytjxx_excelUrl+"?tabletitle="+jdytjxx_tabletitle+"&bbmc="+bbmc;
-				surl=encodeURI(surl);
-				location.href = surl;
-	  		}
-	  	}else{
-	  		jAlert("无查询结果不能导出！","提示信息");
-	  	}		
-	}
-	
-	//显示企业详情
-	function setQyDetail(id){
-		qyjbxx_dataid=id;
-		var qyjbxx_detail_page="basic/publicsystem/QyjbxxDetail-gzth.jsp";
-		detailDialog(jdytjxx_detailid, jdytjxx_detail_width, qyjbxx_detail_page);
-	}
+	return true;
+}
+function getSubDepartMentSum_baybmxxtj(id,level){
+	aybmxxtj_gxdwbm=id;
+	aybmxxtj_departlevel=level;
+	/* setWidth('BaybqmqktjSubDeptDetail',800);
+	   setUrl('BaybqmqktjSubDeptDetail','business/bazagl/SubDeptBaybmxxtjMan.jsp');
+	   bindDocument('BaybqmqktjSubDeptDetail');
+	   $("#closeDivTag").val('sub'); */
+	return GB_showCenter("下级部门统计情况",'<%=path_baybmxxtj%>/business/bazagl/SubDeptBaybmxxtjMan.jsp',510,800);
+}
+
+//导出Excel，20100804,excel导出功能修改， 从session直接获取查询结果
+function setExportExcel_aybmxxtj(){	
+	//alert(daochuNum);
+	if(aybmxxtj_daochuNum==1){
+		if (jdytjxxManVerify()){
+			//setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
+			//报表标题
+			var bbmc="保安员报名情况统计查询";
+			//报表请求	
+			//setExcelLong("yyrb",bbmc);
+			var surl=jdytjxx_excelUrl+"?tabletitle="+jdytjxx_tabletitle+"&bbmc="+bbmc;
+			surl=encodeURI(surl);
+			location.href = surl;
+		}
+	}else{
+		jAlert("无查询结果不能导出！","提示信息");
+	}		
+}
+
+//显示企业详情
+function setQyDetail(id){
+	qyjbxx_dataid=id;
+	var qyjbxx_detail_page="basic/publicsystem/QyjbxxDetail-gzth.jsp";
+	detailDialog(jdytjxx_detailid, jdytjxx_detail_width, qyjbxx_detail_page);
+}
 </script>
 
 <body>
@@ -366,20 +544,23 @@ function jdyqydxtj_page_query(pageno,url){
 					<td class="pagetd">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td><label><input type="radio" id="jdytjxx_tjlx_qyljltj" name="aa">辖区内揽件量排名前十的企业</label></td>
+								<td><label><input type="radio" id="jdytjxx_tjlx_qyljltj" name="aa">辖区内企业揽件量排名</label></td>
 							</tr>
 							<tr>
-								<td><label><input type="radio" id="jdytjxx_tjlx_grjjltj" name="aa">辖区内寄件量排名前十的个人</label></td>
+								<td><label><input type="radio" id="jdytjxx_tjlx_grjjltj" name="aa">辖区内个人寄件量排名</label></td>
+							</tr>
+							<tr>
+								<td><label><input type="radio" id="jdytjxx_tjlx_wpfltj" name="aa">辖区内物品分类统计排名</label></td>
 							</tr>
 						</table>
 					</td>
-					<td class="pagetd" colspan="2">
+					<td class="pagetd" colspan="3">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td><label><input type="radio" id="jdytjxx_tjlx_qypjltj" name="aa">辖区内派件量排名前十的企业</label></td>
+								<td><label><input type="radio" id="jdytjxx_tjlx_qypjltj" name="aa">辖区内企业派件量排名</label></td>
 							</tr>
 							<tr>
-								<td><label><input type="radio" id="jdytjxx_tjlx_grsjltj" name="aa">辖区内收件量排名前十的个人</label></td>
+								<td><label><input type="radio" id="jdytjxx_tjlx_grsjltj" name="aa">辖区内个人收件量排名</label></td>
 							</tr>
 						</table>
 					</td>
@@ -430,20 +611,22 @@ function jdyqydxtj_page_query(pageno,url){
 	</tr>
 	<tr>
 		<td colspan="3">
+			<%--个人排名数据表格--%>
 			<div id="jdytjxx_data_gr_div" style="width: 100%;" class="listdata">
 				<table id="jdytjxx_table_gr" width="100%">
 	  				<thead>
 	    				<tr>       
-	     					<th name="l_seqnum" datatype="String" sumflag="0">排序号</th>
-	     					<th name="l_xm" datatype="String" ><span id="jddxlx"></span>姓名</th>
-	     					<th name="l_cs" datatype="Integer" sumflag="0">次数</th>
-	     					<th name="l_xxdz" datatype="String">地址</th>
-	     					<th name="l_lxdh" datatype="String">电话</th>
-	     					<th name="l_zjhm" datatype="String">证件号码</th>
+							 <th name="l_seqnum" datatype="String" sumflag="0">排序号</th>      
+							 <th name="l_xm" datatype="String" ><span id="jddxlx"></span>姓名</th>
+							 <th name="l_cs" datatype="Integer" sumflag="0">次数</th>            
+							 <th name="l_xxdz" datatype="String">地址</th>                       
+							 <th name="l_lxdh" datatype="String">电话</th>                       
+							 <th name="l_zjhm" datatype="String">证件号码</th>                 
 	    				</tr>
 	  				</thead>
 				</table>	
 			</div>
+			<%--企业排名数据表格--%>
 			<div id="jdytjxx_data_qy_div" style="width: 100%;" class="listdata">
 				<table id="jdytjxx_table_qy" width="100%">
 	  				<thead>
@@ -459,8 +642,30 @@ function jdyqydxtj_page_query(pageno,url){
 	  				</thead>
 				</table>	
 			</div>
+			<%--物品分类统计数据表格--%>
+			<div id="jdytjxx_data_wp_div" style="width: 100%;" class="listdata">
+				<table id="jdytjxx_table_wp" width="100%">
+	  				<thead>
+	    				<tr>       
+	     					<th name="l_wpzlmc" datatype="String" sumflag="0">物品种类</th>
+	     					<th name="l_cs" datatype="Integer" sumflag="0">数目</th>
+							<%-- <th name="l_xxdz" datatype="String" sumflag="0">地址</th>--%>
+							<%-- <th name="l_lxdh" datatype="String" >单位电话</th>     --%>
+							<%-- <th name="l_gxdwmc" datatype="String">管辖单位</th>    --%>
+							<%--<th name="">操作</th>                                     --%>
+	    				</tr>
+	  				</thead>
+				</table>	
+			</div>
+
+			<div>
+				<div id="jdytjxx_tx_ct"  style="text-align: left;">
+					<label><input type="radio" name="chartType" value="bar" checked="checked">柱状图</label>
+					<label><input type="radio" name="chartType" value="pie">饼状图</label>
+				</div>
+				<div id="jdytjxx_tx_div"></div>
+			</div>
 			
-			<div id="jdytjxx_tx_div"></div>
 		</td>
 	</tr>
 </table>	
