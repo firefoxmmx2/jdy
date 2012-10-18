@@ -121,7 +121,7 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 
 	public Page findLssjForPage(Map<String, Object> params, int pageno,
 			int pagesize, String sort, String dir) {
-		return jdytjxxDao.findLssjForPage(params, pageno, pagesize, dir, sort);
+		return jdytjxxDao.findLssjForPage(params, pageno, pagesize, sort, dir);
 	}
 
 

@@ -206,7 +206,7 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 
 
 	public Page findLssjForPage(Map<String, Object> map, int pageno,
-			int pagesize, String dir, String sort) {
+			int pagesize, String sort, String dir) {
 		String sCol=" ywxx.ywdjsj ";
 		if(sort == null)
 			sort = "";

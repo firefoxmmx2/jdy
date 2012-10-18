@@ -111,7 +111,7 @@ public interface IJdytjxxDao {
 	 * @param sort
 	 * @return
 	 */
-	Page findLssjForPage(Map<String, Object> map, int pageno, int pagesize,	String dir, String sort);
+	Page findLssjForPage(Map<String, Object> map, int pageno, int pagesize,	String sort, String dir);
 	
 	/**
 	 * 物品分类统计

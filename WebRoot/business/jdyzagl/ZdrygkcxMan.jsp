@@ -61,7 +61,7 @@
 						onRowSelect : null,
 						//hideColIndex : [7, 8, 9],
 						isHaveMorenPaixuClass: true, //加默认排序样式
-						morenPaixuCol: 4, //第一默认排序	
+						morenPaixuCol: 5, //第一默认排序	
 						morenPaixuFangshi:'desc', //默认排序方式 
 						//alignCenterColIndex: [1,2,8],
 						changeHref : function(table) {
