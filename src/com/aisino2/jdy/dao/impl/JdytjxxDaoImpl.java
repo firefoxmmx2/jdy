@@ -222,9 +222,9 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 			else if("3".equals(dir))
 				sCol = " ry.jdrylx "+ sort;
 			else if("4".equals(dir))
-				sCol = " qyjbxx.qymc "+ sort;
+				sCol = " qy.qymc "+ sort;
 			else if("5".equals(dir))
-				sCol = " qyjbxx.gxdwmc "+ sort;
+				sCol = " qy.gxdwmc "+ sort;
 			else 
 				sCol = " ry.xxdz "+ sort;
 		}

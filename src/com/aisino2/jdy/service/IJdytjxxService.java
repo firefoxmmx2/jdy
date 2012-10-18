@@ -58,4 +58,28 @@ public interface IJdytjxxService {
 	 * @return
 	 */
 	public List<Jdytjxx> getWpfltj(Map<String, Object> map);
+	
+	/**
+	 * 历史数据轨迹查询
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page findLssjForPage(Map<String, Object> params, int pageno, int pagesize,
+			String sort, String dir);
+	
+	/**
+	 * 重点人员管控查询
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page findZdryForPage(Map<String, Object> params, int pagesize, int pagerow,
+			String sort, String dir);
 }
