@@ -31,5 +31,9 @@
     <action name="*_rdrjbxx" method="{1}" class="RdrjbxxAction">
       <result type="json"/>
     </action>
+      <!--    历史数据轨迹查询 -->
+    <action name="*_lssjxx" method="{1}" class="lssjxxAction">
+      <result type="json"/>
+    </action>
   </package>
 </struts>

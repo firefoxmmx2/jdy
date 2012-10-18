@@ -65,6 +65,18 @@
 		<result property="cs" column="cs"/>
 	</resultMap>
 	
+	<!-- 	历史数据查询统计结果集 -->
+	<resultMap class="Jdytjxx" id="lssj_result">
+		<result property="xm" column="xm"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="ywdjsj" column="ywdjsj"/>
+		<result property="ywlx" column="ywlx"/>
+		<result property="xxdz" column="xxdz"/>
+		<result property="djxh" column="djxh"/>
+		<result property="wldh" column="wldh"/>
+		<result property="qymc" column="qymc"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+	</resultMap>
 	
 	<sql id="SjgltjPageWhere">
 		<isNotEmpty prepend="and" property="xm">
@@ -103,6 +115,24 @@
 	<sql id="JdytjxxOutterWhere">
 		<isNotEmpty prepend="and" property="show_number">
 			rownum &lt;= #show_number#
+		</isNotEmpty>
+	</sql>
+	
+	<sql id="lssjgjWhere">
+		<isNotEmpty prepend="and" property="xm">
+			ry.xm = #xm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="zjhm">
+			ry.zjhm = #zjhm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="beforeDate">
+			ywxx.ywdjsj &gt;= to_date(#beforeDate#,'yyyy-mm-dd')
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="currentDate">
+			ywxx.ywdjsj &lt;= to_date(#currentDate#,'yyyy-mm-dd')
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			qy.gxdwbm like '$gxdwbm$%'
 		</isNotEmpty>
 	</sql>
 	
@@ -356,5 +386,35 @@
 		  <dynamic prepend="where">
 			<include refid="JdytjxxOutterWhere"/>
 		  </dynamic> 
+	</select>
+	
+	<!-- 	历史数据轨迹统计记数 -->
+	<select id="getLssjListPageCount" parameterClass="map" resultClass="int">
+		select count(1) 
+		from (select t.jjr_id ryid, t.djxh, t.wldh, t.ljtbsj ywdjsj, t.qybm from t_ljjbxx t
+					union all
+				 select t.sjr_id ryid, t.djxh, t.wldh, t.ljtbsj ywdjsj, t.qybm from t_ljjbxx t) ywxx,
+		t_rdrjbxx ry, t_qyjbxx qy
+		where ywxx.ryid = ry.id
+		and ywxx.qybm = qy.qybm
+		<include refid="lssjgjWhere"/> 
+	</select>
+<!-- 	历史数据轨迹统计 -->
+	<select id="getLssjListPage" parameterClass="map" resultMap="lssj_result">
+		select x.* from (
+			select rownum rowno,z.* from 
+				(
+					select ry.xm, ry.zjhm, ywxx.ywdjsj, ry.jdrylx ywlx, ry.xxdz, ywxx.djxh, ywxx.wldh, qy.qymc, qy.gxdwmc
+					  from (select t.jjr_id ryid, t.djxh, t.wldh, t.ljtbsj ywdjsj, t.qybm from t_ljjbxx t
+					               union all
+					            select t.sjr_id ryid, t.djxh, t.wldh, t.ljtbsj ywdjsj, t.qybm from t_ljjbxx t) ywxx,
+					       t_rdrjbxx ry, t_qyjbxx qy
+					 where ywxx.ryid = ry.id
+					   and ywxx.qybm = qy.qybm
+						<include refid="lssjgjWhere"/>
+					order by $pageSort$
+				)  z
+		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		
 	</select>
 </sqlMap>
