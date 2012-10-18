@@ -4,6 +4,7 @@
 <%@include file="../../public/common.jsp" %>
 
 <script type="text/javascript">
+var daochuNumdal = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
 $(document).ready(function() {
 	$("#rdrjbxx_xm").val(dataid);
 	daggleDiv(grpfghdwcx);
@@ -12,6 +13,11 @@ $(document).ready(function() {
 	pagehmdUrl="jdy/grpfghdwcxdal_rdrjbxx.action";
 	tableshmd=$("#"+divnidhmdczrz).html();
 	$("#grpfghdwcx").hide(); 	
+	//导出用到参数
+	searchLongUrldal="jdy/querycxdalForExport_rdrjbxx.action";
+	excelUrldal="jdy/exportExceldal_rdrjbxx.action";
+	tabletitledal = "";
+	geteExcelHead("QczlhmdczrzData");
 	//根据姓名关联查询详细信息
 	setPageListhmdczrz(1);
 }); 
@@ -28,9 +34,35 @@ function setPageListhmdczrz(pageno,url){
 										ingridPageParams: sXML,
 										ingridExtraParams:params,
 										hideColIndex:[0],
+										changeHref:function(table){
+											if($(table).find("tr").length==0){
+											    daochuNumdal = 0;
+											}else{
+											    daochuNumdal = 1;
+											}	
+										},
 										colWidths: ["7%","15%","15%","15%","15%","15%","15%","15%","32%"]									
 									});				
 }	
+//导出Excel
+function setExportExceldal(){	
+  	if(daochuNumdal==1){
+  	  params =getSubmitParams("#grpfghdwcxgad_detail [name*=rdrjbxx.]");
+  	  jQuery.post(searchLongUrldal,params,searchLongBackdal,"json");
+  	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
+  	}else{
+  		jAlert("无查询结果不能导出！",'验证信息',null,null);
+  	}		
+}
+//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
+function searchLongBackdal(json){  
+    //报表标题
+	var bbmcdal="频繁更换单位详情";
+	//报表请求
+	var surl=excelUrldal+"?tabletitle="+tabletitledal+"&bbmc="+bbmcdal;
+	surl=encodeURI(surl);
+	location.href = surl;
+}
 </script>
 
 <body>
@@ -71,7 +103,7 @@ function setPageListhmdczrz(pageno,url){
 </div>
 <table  border="0" align="center"  cellpadding="2"  cellspacing="0">
  	<tr>
- 	  <td ><a href="#" class="addbutton" id="jdywxx" onclick=''>导出</a></td>
+ 	  <td ><a href="#" class="addbutton" id="fpghjjdwdal" onclick='setExportExceldal()'>导出</a></td>
  	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick='$("#grpfghdwcx").hideAndRemove("show");'>返回</a></td>
  	</tr>
 </table>
