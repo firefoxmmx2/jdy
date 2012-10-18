@@ -73,20 +73,47 @@ public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
 			sort = " asc ";
 		if (sort!=null){
 			if("0".equals(sort))
-				sCol = " Rdrjbxx.id "+ sort;
+				sCol = " a.xm "+ sort;
 			else if("1".equals(sort))
-				sCol = " Rdrjbxx.xm "+ sort;
+				sCol = " a.ljsj "+ sort;
 			else if("2".equals(sort))
-				sCol = " Rdrjbxx.zjhm "+ sort;
+				sCol = " a.ljsj "+ sort;
 			else if("3".equals(sort))
-				sCol = " Rdrjbxx.zjlx "+ sort;
+				sCol = " a.gxdwbm "+ sort;
 			else 
-				sCol=" Rdrjbxx.id ";
+				sCol=" a.xm ";
 		}else{
-			sCol=" Rdrjbxx.id ";
+			sCol=" a.xm ";
 		}
 		map.put("pageSort", sCol);
 		return queryForPage("grpfghjjdwtjcxgad.getListPage", map, pageno,pagesize);
+	}
+	/**
+     * 公安端--个人频繁更换寄件单位统计查询----详细信息列表
+     */
+	public Page grpfghjjdwtjcxdalForPage(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort) {
+		String sCol="";
+		if(sort == null)
+			sort = "";
+		else if(!sort.equals("asc") && !sort.equals("desc"))
+			sort = " asc ";
+		if (sort!=null){
+			if("0".equals(sort))
+				sCol = " a.xm "+ sort;
+			else if("1".equals(sort))
+				sCol = " a.ljsj "+ sort;
+			else if("2".equals(sort))
+				sCol = " a.ljsj "+ sort;
+			else if("3".equals(sort))
+				sCol = " a.gxdwbm "+ sort;
+			else 
+				sCol=" a.xm ";
+		}else{
+			sCol=" a.xm ";
+		}
+		map.put("pageSort", sCol);
+		return queryForPage("fghjjdwtjcxdal.getListPage", map, pageno,pagesize);
 	}
 
 }

@@ -217,6 +217,74 @@ public class Rdrjbxx implements Serializable {
 	public void setSsxq(String ssxq) {
 		this.ssxq = ssxq;
 	}
+	/****
+	 * 个人频繁更换寄件单位详细列表界面字段
+	 */
+	private String xh;//序号
+	private String jjrxm;//寄件人姓名
+	private String jjsj;//寄件时间
+	private String cjqy;//承寄企业
+	private String wldh;//物流单号
+	private String sjrxm;//收件姓名
+	private String sjrdh;//收件人电话
+	private String sjrxxdz;//收件详细地址
+	private String djxh;//登记序号
 	
+	
+	public String getDjxh() {
+		return djxh;
+	}
+	public void setDjxh(String djxh) {
+		this.djxh = djxh;
+	}
+	public String getXh() {
+		return xh;
+	}
+	public void setXh(String xh) {
+		this.xh = xh;
+	}
+	public String getJjrxm() {
+		return jjrxm;
+	}
+	public void setJjrxm(String jjrxm) {
+		this.jjrxm = jjrxm;
+	}
+	public String getJjsj() {
+		return jjsj;
+	}
+	public void setJjsj(String jjsj) {
+		this.jjsj = jjsj;
+	}
+	public String getCjqy() {
+		return cjqy;
+	}
+	public void setCjqy(String cjqy) {
+		this.cjqy = cjqy;
+	}
+	public String getWldh() {
+		return wldh;
+	}
+	public void setWldh(String wldh) {
+		this.wldh = wldh;
+	}
+	public String getSjrxm() {
+		return sjrxm;
+	}
+	public void setSjrxm(String sjrxm) {
+		this.sjrxm = sjrxm;
+	}
+	public String getSjrdh() {
+		return sjrdh;
+	}
+	public void setSjrdh(String sjrdh) {
+		this.sjrdh = sjrdh;
+	}
+	public String getSjrxxdz() {
+		return sjrxxdz;
+	}
+	public void setSjrxxdz(String sjrxxdz) {
+		this.sjrxxdz = sjrxxdz;
+	}
+
 	
 }

@@ -43,4 +43,14 @@ public interface IRdrjbxxService {
 	 * @return
 	 */
 	Page grpfghjjdwtjcxForPage(Map<String, Object> para,int pagesize, int pageno,String dir,String sort);
+	/**
+	 * 公安端 公安端--个人频繁更换寄件单位统计查询--详细信息列表
+	 * @param para 
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page grpfghjjdwtjcxdalForPage(Map<String, Object> para,int pagesize, int pageno,String dir,String sort);
 }
