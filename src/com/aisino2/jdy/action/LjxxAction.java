@@ -328,30 +328,30 @@ public class LjxxAction extends PageAction {
 		lCol.add(lDelete);
 		for (Ljjbxx lj : lData) {
 			lj.setJjrxm(lj.getJjr().getXm());// 寄件人姓名
-			if (lj.getJjr().getZjlx().equals("11")) {
+			if ("11".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("身份证");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("13")) {
+			if ("13".equals(lj.getJjr().getZjlx()) ) {
 				lj.setJjrzjlx("户口薄");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("90")) {
+			if ("90".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("军官证");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("91")) {
+			if ("91".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("警官证");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("92")) {
+			if ("92".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("士兵证");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("93")) {
+			if ("93".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("护照");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("99")) {
+			if ("99".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("其他");// 寄件人证件类型
 			}
 			lj.setJjrzjhm(lj.getJjr().getZjhm());// 寄件人证件号码
 			lj.setLjyxm(lj.getLjr().getXm());// 揽件人姓名
-			if (lj.getSfpjbz() == "" || lj.getSfpjbz() == null) {// 派件标志
+			if (!StringUtil.isNotEmpty(lj.getSfpjbz())) {// 派件标志
 				lj.setSfpjbz("N");
 			}
 
@@ -505,25 +505,25 @@ public class LjxxAction extends PageAction {
 			lj.setJdpxxid(lj.getJdpxx().getId());// 寄递品信息ID
 			lj.setJdpmc(lj.getJdpxx().getJdpmc());// 寄递品名称
 			lj.setJjrxm(lj.getJjr().getXm());// 寄件人姓名
-			if (lj.getJjr().getZjlx().equals("11")) {
+			if ("11".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("身份证");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("13")) {
+			if ("13".equals(lj.getJjr().getZjlx()) ) {
 				lj.setJjrzjlx("户口薄");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("90")) {
+			if ("90".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("军官证");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("91")) {
+			if ("91".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("警官证");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("92")) {
+			if ("92".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("士兵证");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("93")) {
+			if ("93".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("护照");// 寄件人证件类型
 			}
-			if (lj.getJjr().getZjlx().equals("99")) {
+			if ("99".equals(lj.getJjr().getZjlx())) {
 				lj.setJjrzjlx("其他");// 寄件人证件类型
 			}
 			lj.setJjrzjhm(lj.getJjr().getZjhm());// 寄件人证件号码
@@ -675,25 +675,25 @@ public class LjxxAction extends PageAction {
 			lLjjbxx = pageinfo.getData();
 			for (Ljjbxx lj : lLjjbxx) {
 				lj.setJjrxm(lj.getJjr().getXm());// 寄件人姓名
-				if (lj.getJjr().getZjlx().equals("11")) {
+				if ("11".equals(lj.getJjr().getZjlx())) {
 					lj.setJjrzjlx("身份证");// 寄件人证件类型
 				}
-				if (lj.getJjr().getZjlx().equals("13")) {
+				if ("13".equals(lj.getJjr().getZjlx()) ) {
 					lj.setJjrzjlx("户口薄");// 寄件人证件类型
 				}
-				if (lj.getJjr().getZjlx().equals("90")) {
+				if ("90".equals(lj.getJjr().getZjlx())) {
 					lj.setJjrzjlx("军官证");// 寄件人证件类型
 				}
-				if (lj.getJjr().getZjlx().equals("91")) {
+				if ("91".equals(lj.getJjr().getZjlx())) {
 					lj.setJjrzjlx("警官证");// 寄件人证件类型
 				}
-				if (lj.getJjr().getZjlx().equals("92")) {
+				if ("92".equals(lj.getJjr().getZjlx())) {
 					lj.setJjrzjlx("士兵证");// 寄件人证件类型
 				}
-				if (lj.getJjr().getZjlx().equals("93")) {
+				if ("93".equals(lj.getJjr().getZjlx())) {
 					lj.setJjrzjlx("护照");// 寄件人证件类型
 				}
-				if (lj.getJjr().getZjlx().equals("99")) {
+				if ("99".equals(lj.getJjr().getZjlx())) {
 					lj.setJjrzjlx("其他");// 寄件人证件类型
 				}
 				lj.setJjrzjhm(lj.getJjr().getZjhm());// 寄件人证件号码
