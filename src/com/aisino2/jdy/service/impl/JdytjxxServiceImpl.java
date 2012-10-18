@@ -118,4 +118,16 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 		return jdytjxxDao.getWpfltj(map);
 	}
 
+
+	public Page findLssjForPage(Map<String, Object> params, int pageno,
+			int pagesize, String sort, String dir) {
+		return jdytjxxDao.findLssjForPage(params, pageno, pagesize, dir, sort);
+	}
+
+
+	public Page findZdryForPage(Map<String, Object> params, int pageno,
+			int pagesize, String sort, String dir) {
+		return null;
+	}
+
 }
