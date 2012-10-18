@@ -16,6 +16,11 @@ $(document).ready(function() {
 	divnid="grpfghdwcxdiv";
 	tableid="grpfghdwcxTable";
 	tables=$("#"+divnid).html();
+	//导出用到参数
+	searchLongUrl="jdy/querycxForExport_rdrjbxx.action";
+	excelUrl="jdy/exportExcel_rdrjbxx.action";
+	tabletitle = "";
+	geteExcelHead("grpfghdwcxdiv");
 	//setPageList(1,'#');
 	//时间设置
 	$('.datef').attr("readOnly",true).datepicker(true,'0');
@@ -89,6 +94,23 @@ function grpfghdwcxDetail(id){
 	setUrl("grpfghdwcx","business/jdyzagl/grpfghjjdwcxtj_Detail.jsp");
 	bindDocument("grpfghdwcx");
 }
+//导出Excel
+function setExportExcel(){	
+  	if(daochuNum==1){
+  		params =getSubmitParams("#grpfghdwcx_gad [name*=rdrjbxx.]");
+  	  jQuery.post(searchLongUrl,params,searchLongBack,"json");
+  	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
+  	}else{
+  		jAlert("无查询结果不能导出！",'验证信息',null,null);
+  	}		
+}
+//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
+function searchLongBack(json){  
+    //报表标题
+	var bbmc="频繁更换单位信息";
+	//报表请求
+	setExcelLong("fpghjjdw",bbmc);	
+}
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="grpfghdwcx_gad">
    <input type="hidden" id="rdrjbxx_gxdwbm" name="rdrjbxx.gxdwbm" value="<%=gxdwbm%>"><!-- 管辖单位编码 -->
@@ -121,7 +143,7 @@ function grpfghdwcxDetail(id){
 	    		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
 	    		    	<tr>
 	    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageList(1);">查询</a></td>
-	    		    	  <td ><a href="#" class="addbutton" id="jdywxx" onclick=''>导出</a></td>
+	    		    	  <td ><a href="#" class="addbutton" id="fpghjjdw" onclick='setExportExcel()'>导出</a></td>
 	    		    	</tr>
 	    		  	</table>
 	    		  </td>
