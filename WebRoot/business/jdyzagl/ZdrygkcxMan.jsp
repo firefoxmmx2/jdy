@@ -45,7 +45,6 @@
 		if (manVerify_zdry()) {
 			$("#" + divnid).html(tables);
 			params = getSubmitParams("#zdry_man_table  [name*=jdytjxx.]");
-			alert($("#zdry_ksrq").val());
 			if (url == null || url == "undefined") {
 				url = pageUrl;
 			}
@@ -56,15 +55,11 @@
 						ingridPageParams : sXML,
 						ingridExtraParams : params,
 						pageNumber : pageno,
-						//colIndex: [0],
 						noSortColIndex : [0,1,7],
-						//noSortColIndex:[11],
+						noSortColIndex:[11],
 						onRowSelect : null,
-						//hideColIndex : [7, 8, 9],
-						isHaveMorenPaixuClass: true, //加默认排序样式
-						morenPaixuCol: 5, //第一默认排序	
-						morenPaixuFangshi:'desc', //默认排序方式 
-						//alignCenterColIndex: [1,2,8],
+						hideColIndex : [7, 8],
+						alignCenterColIndex: [3,5,6,7],
 						changeHref : function(table) {
 							if ($(table).find("tr").length == 0) {
 								daochuNum = 0;
@@ -72,7 +67,7 @@
 								daochuNum = 1;
 							}
 						},
-						colWidths : [ "10%", "8%", "14%", "12%", "18%", "18%", "10%", "10%"]
+						colWidths : [ "10%", "8%", "14%", "12%", "18%", "18%", "10%", "0%","0%","10%"]
 					});
 		}
 	}
@@ -185,6 +180,8 @@
 				<th name="l_gxdwmc" datatype="string" sumflag="0">管辖单位</th>
 				<th name="l_ywdjsj" datatype="date" sumflag="0">寄递业务日期</th>
 				<th name="l_ywlx" datatype="string" sumflag="0">业务类型</th>
+				<th name="l_djxh" >登记序号</th>
+				<th name="l_wldh">物流单号</th>
 				<th name="">业务详情</th>
 			</tr>
 		</thead>

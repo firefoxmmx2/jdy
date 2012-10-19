@@ -154,10 +154,10 @@
 	<!-- 重点人员管控查询条件 -->
 	<sql id="zdryListWhere">
 		<isNotEmpty prepend="and" property="ksrq">
-			lj.ljtbsj &gt;= #ksrq :TIMESTAMP#
+			lj.ljtbsj &gt;= #ksrq:TIMESTAMP#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="jsrq">
-			lj.ljtbsj &lt;= #jsrq :TIMESTAMP#
+			lj.ljtbsj &lt;= #jsrq:TIMESTAMP#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="gxdwbm">
 			zdry.gxdwbm like '$gxdwbm$%'

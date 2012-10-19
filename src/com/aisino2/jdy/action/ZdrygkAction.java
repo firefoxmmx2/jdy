@@ -147,7 +147,7 @@ public class ZdrygkAction extends PageAction {
 		List lCol = new ArrayList();
 
 		List lDetail = new ArrayList();
-		lDetail.add("setLssjxxDetail");
+		lDetail.add("setZdryDetail");
 		lDetail.add("详情");
 		lCol.add(lDetail);
 
