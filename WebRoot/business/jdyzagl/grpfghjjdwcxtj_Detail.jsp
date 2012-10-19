@@ -1,25 +1,27 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-<%@include file="../../public/common.jsp" %>
-
 <script type="text/javascript">
 var daochuNumdal = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
+tabletitledal = "";
 $(document).ready(function() {
 	$("#rdrjbxx_xm").val(dataid);
-	daggleDiv(grpfghdwcx);
 	divnidhmdczrz="QczlhmdczrzData";
 	tableidhmd="QczlhmdczrzTable";
 	pagehmdUrl="jdy/grpfghdwcxdal_rdrjbxx.action";
 	tableshmd=$("#"+divnidhmdczrz).html();
-	$("#grpfghdwcx").hide(); 	
 	//导出用到参数
-	searchLongUrldal="jdy/querycxdalForExport_rdrjbxx.action";
+	grpfghdwxqdc="jdy/querycxdalForExport_rdrjbxx.action";
 	excelUrldal="jdy/exportExceldal_rdrjbxx.action";
-	tabletitledal = "";
-	geteExcelHead("QczlhmdczrzData");
+	//解决div
+	var theadHtml = $("#QczlhmdczrzData").find("table:first").find("thead:first");
+	theadHtml.find("td").remove();
+	tabletitledal=theadHtml.html();
+	
 	//根据姓名关联查询详细信息
 	setPageListhmdczrz(1);
+	
+	daggleDiv(detailid);
 }); 
 function setPageListhmdczrz(pageno,url){	
 		params =getSubmitParams("#grpfghdwcxgad_detail [name*=rdrjbxx.]");
@@ -48,8 +50,7 @@ function setPageListhmdczrz(pageno,url){
 function setExportExceldal(){	
   	if(daochuNumdal==1){
   	  params =getSubmitParams("#grpfghdwcxgad_detail [name*=rdrjbxx.]");
-  	  jQuery.post(searchLongUrldal,params,searchLongBackdal,"json");
-  	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
+  	  jQuery.post(grpfghdwxqdc,params,searchLongBackdal,"json");
   	}else{
   		jAlert("无查询结果不能导出！",'验证信息',null,null);
   	}		
@@ -59,7 +60,7 @@ function searchLongBackdal(json){
     //报表标题
 	var bbmcdal="频繁更换单位详情";
 	//报表请求
-	var surldal=excelUrldal+"?tabletitle="+tabletitledal+"&bbmc="+bbmcdal;
+	var surldal=excelUrldal+"?tabletitledal="+tabletitledal+"&bbmcdal="+bbmcdal;
 	surldal=encodeURI(surldal);
 	location.href = surldal;
 }
