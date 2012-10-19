@@ -106,9 +106,9 @@
 	//导出Excel
 	function setExportExcel_Zdry() {
 		if (daochuNum == 1) {
-			params = null;
+			params = getSubmitParams("#zdry_man_table  [name*=jdytjxx.]");
+			alert(params);
 			jQuery.post(searchLongUrl, params, searchLongBack, "json");
-			//setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
 		} else {
 			jAlert("无查询结果不能导出！", '验证信息', null, null);
 		}
@@ -116,9 +116,9 @@
 	//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
 	function searchLongBack(json) {
 		//报表标题
-		var bbmc = "揽件信息";
+		var bbmc = "重点人员信息";
 		//报表请求
-		setExcelLong("ljxxexcel", bbmc);
+		setExcelLong("zdryexcel", bbmc);
 	}
 	//揽件信息导入方法
 	function importLjxx() {
@@ -180,8 +180,8 @@
 				<th name="l_gxdwmc" datatype="string" sumflag="0">管辖单位</th>
 				<th name="l_ywdjsj" datatype="date" sumflag="0">寄递业务日期</th>
 				<th name="l_ywlx" datatype="string" sumflag="0">业务类型</th>
-				<th name="l_djxh" >登记序号</th>
-				<th name="l_wldh">物流单号</th>
+				<th name="">登记序号</th>
+				<th name="">物流单号</th>
 				<th name="">业务详情</th>
 			</tr>
 		</thead>
