@@ -141,8 +141,8 @@ public class LssjgjAction extends PageAction {
 		User userMan = (User) session.getAttribute(Constants.userKey);
 		String departCode = userMan.getDepartment().getDepartcode();
 		params.put("gxdwbm", StringUtil.trimEven0(departCode));
-		
-		Page pageinfo = jdytjxx_service.findLssjForPage(params, pagesize, pagerow, sort, dir);
+		//注意：dir为排序方式，sort为排序列号
+		Page pageinfo = jdytjxx_service.findLssjForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
 		lJdytjxx = pageinfo.getData();
