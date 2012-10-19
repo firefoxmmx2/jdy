@@ -57,9 +57,11 @@ public class Jdytjxx implements Serializable {
 	/*
 	 * 重点人员管控查询用到
 	 */
+	private String xb;//性别
 	private Date ksrq;//查询定义开始日期;
 	private Date jsrq;//查询定义结束日期
 	private String rylx;//重点人员管控类型
+	private Zdryxx zdryxx;//重点人员
 	
 	public String getJdplx() {
 		return jdplx;
@@ -258,6 +260,18 @@ public class Jdytjxx implements Serializable {
 	}
 	public void setRylx(String rylx) {
 		this.rylx = rylx;
+	}
+	public Zdryxx getZdryxx() {
+		return zdryxx;
+	}
+	public void setZdryxx(Zdryxx zdryxx) {
+		this.zdryxx = zdryxx;
+	}
+	public String getXb() {
+		return xb;
+	}
+	public void setXb(String xb) {
+		this.xb = xb;
 	}
 	
 	
