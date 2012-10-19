@@ -244,26 +244,26 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 	 */
 	public Page findZdryForPage(Map<String, Object> map, int pageno,
 			int pagesize, String sort, String dir) {
-		String sCol=" ljxx.ljdjrq ";
+		String sCol=" lj.ljtbsj ";
 		if(sort == null)
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
 		if (dir!=null){
 			if("0".equals(dir))
-				sCol = " zdryxx.xm "+ sort;
+				sCol = " zdry.xm "+ sort;
 			else if("1".equals(dir))
-				sCol = " zdryxx.xb "+ sort;
+				sCol = " zdry.xb "+ sort;
 			else if("2".equals(dir))
-				sCol = " zdryxx.zjhm "+ sort;
+				sCol = " zdry.zjhm "+ sort;
 			else if("3".equals(dir))
-				sCol = " zdryxx.rylx "+ sort;
+				sCol = " zdry.rylx "+ sort;
 			else if("4".equals(dir))
-				sCol = " zdryxx.gxdwmc "+ sort;
+				sCol = " zdry.gxdwmc "+ sort;
 			else if("5".equals(dir))
-				sCol = " ljxx.ljdjrq "+ sort;
+				sCol = " lj.ljtbsj "+ sort;
 			else 
-				sCol = " zdryxx.rylx "+ sort;
+				sCol = " zdry.rylx "+ sort;
 		}
 		map.put("pageSort", sCol);
 		return queryForPage("getZdryListPage", map, pageno,pagesize);
