@@ -1,24 +1,17 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
 <%
 	String path_baybmxxtj=request.getContextPath();
 %>
 <script type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>
-<script type="text/javascript" src="business/jdyzagl/js/jquery.json-2.3.min.js"></script>
 
 <script type="text/javascript">
-
 	//揽件
 	var ljxx_div="ljxxData";
 	var ljxx_page_url="business/jdyzagl/LjxxglManQyd.jsp";
 	var ljxx_width=1024;
 	var ljxx_dialog_div;
-	function close_ljxx_dialog(){
-		$('#'+ljxx_dialog_div).hideAndRemove("show");
-	}
 	/**
 	揽件详情方法
 	*/
@@ -127,10 +120,10 @@
 	function sjglPageQuery(pageno,url){
 		if (manVerify_sjgl()){
 			 $("#"+sjgl_div).html(sjgl_tabledata);
-				params =getSubmitParams("#sjgldfx_man [name*=rdrjbxx.]");
 				if (url==null || url=="undefined"){
 					url=sjgl_page_url;
 				}
+			var params = getSubmitParams($('input:checked[name="paramType"]').parent().find(':input[name!="paramType"]'));
 			var mygrid1 = $("#"+sjgl_table).ingrid({ 
 											url: url,	
 											height: pageHeight-286,
@@ -138,7 +131,7 @@
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
 											noSortColIndex:[5],	
-											colIndex: [0,1,2],
+// 											colIndex: [0,1,2],
 											onRowSelect:null,
 											ingridComplete:function(){
 												$('#'+sjgl_div+" table tbody tr").each(function(){
@@ -154,19 +147,19 @@
 																$(this).parents('tr').eq(0).find('td:nth(4)').text()
 														);
 													});
-													
-													row.find('td').each(function(idx){
-														var datafield = $(this).parents('table').eq(0)
-															.find('thead tr th:nth('+idx+')')
-															.attr('datafield');
-														if(datafield){
-															$(this).click(function(){
-																var param = {};
-																param[datafield] = $(this).text();
-																sjglDetail(param);
-															})
-														}
-													});
+// 													@fixed 根据最新的需求去掉点击弹出子窗口查询
+// 													row.find('td').each(function(idx){
+// 														var datafield = $(this).parents('table').eq(0)
+// 															.find('thead tr th:nth('+idx+')')
+// 															.attr('datafield');
+// 														if(datafield){
+// 															$(this).click(function(){
+// 																var param = {};
+// 																param[datafield] = $(this).text();
+// 																sjglDetail(param);
+// 															})
+// 														}
+// 													});
 												});
 												
 											},
@@ -176,17 +169,25 @@
 			}
 	}
 	
+	//查询验证
 	function manVerify_sjgl(){
+		var paramTypeVal = $('input[name=paramType]:checked').val();
+		if(paramTypeVal=='xm' && !$('#sjgl_xm').val()){
+			jAlert('姓名必须填写','警告');
+			return false;
+		}
+		if(paramTypeVal=='lxdh' && !$('#sjgl_lxdh').val()){
+			jAlert('联系电话必须填写','警告');
+			return false;
+		}
+		if(paramTypeVal=='xxdz' && !$('#sjgl_ssx').val()){
+			jAlert("省市县必须填写","警告");
+			return false;
+		}
 		return true;
 	}
 	
-	$(function(){
-		sjgl_tabledata = $('#'+sjgl_div).html();
-		sjglPageQuery(1,"#");
-		
-		daggleDiv(ljxx_div);
-		daggleDiv(sjgl_detail_div);
-	})
+
 	
 	/**
 	导出数据关联度数据
@@ -213,11 +214,41 @@
 			}
 			$('#excelSjglForm input:hidden[name=pagerow]').val(pagerow);
 		});
+		
+		$('input[name="paramType"]:checked').parent().find(':input[name!="paramType"]').each(function(){
+			$('#excelSjglForm input[name='+$(this).attr('name')+']').val(this.value);
+		});
 		$('#excelSjglForm').attr('action',sjgl_excel_url)
 			.attr("target","_blank")
 			.attr('type','post')
 			.submit();
+		
 	}
+	
+	//载入后入口
+	$(function(){
+		sjgl_tabledata = $('#'+sjgl_div).html();
+		sjglPageQuery(1,"#");
+		
+		daggleDiv(ljxx_div);
+		daggleDiv(sjgl_detail_div);
+
+// 		$('#sjgl_ssxmc').attr('readonly',true);
+		//提交数据选择
+		$('input[name=paramType]').each(function(){
+			var paramType = $(this);
+			paramType.parent().find('input[name!="paramType"]').click(function(){
+				paramType.click();
+				if($(this).attr('id')=='sjgl_ssxmc'){
+					getDict_item('sjgl_ssxmc','sjgl_ssx','dm_xzqh');
+				}
+					
+			});
+		});
+		//默认选择第一个查询条件
+		$('input[name=paramType]').eq(0).click();
+		
+	});
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="sjgldfx_man">
@@ -231,14 +262,41 @@
     		<input type="hidden" name="pagerow">
     		<input type="hidden" name="sort">
     		<input type="hidden" name="dir">
+    		<input type="hidden" name="rdrjbxx.xm">
+    		<input type="hidden" name="rdrjbxx.lxdh">
+    		<input type="hidden" name="rdrjbxx.ssx">
+    		<input type="hidden" name="rdrjbxx.xxdz">
+		</form>
 	    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
-					<tr>
-						<td width="10%" class="pagedistd">姓名</td>
-						<td width="23%" class="pagetd"><input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle"></td>
-						<td width="10%" class="pagedistd">联系电话</td>
-						<td width="23%" class="pagetd"><input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle"></td>
-						<td width="10%" class="pagedistd">地址</td>
-						<td width="23%" class="pagetd"><input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputsytle"></td>
+					<tr height="30">
+						<td width="25%" >
+							<div>
+								<label>
+									<input type="radio" name="paramType" value="xm"><span>姓名</span>
+									<input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle">
+								</label>
+							</div>
+						</td>
+						<td width="25%" >
+							<div>
+								<label>
+									<input type="radio" name="paramType" value="lxdh"><span>联系电话</span>
+									<input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle">
+								</label>
+							</div>
+						</td>
+						<td>
+							<div style="padding-left: 10px;text-align: left;">
+								<label>
+									<input type="radio" name="paramType" value="xxdz"><span>地址</span>
+									<span>省市县</span>
+									<input type="hidden" name="rdrjbxx.ssx" id="sjgl_ssx">
+									<input type="text" id="sjgl_ssxmc" class="inputstyle">
+									<span>街道门号</span>
+									<input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputstyle">
+								</label>
+							</div>
+						</td>
 					</tr>
 	    		<tr>
 	    		  <td colspan="6">
@@ -251,7 +309,6 @@
 	    		  </td>
 	    		</tr>
 	    	</table> 
-    	</form>
     	
     </td>
   </tr>

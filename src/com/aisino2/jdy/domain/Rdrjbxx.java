@@ -67,7 +67,13 @@ public class Rdrjbxx implements Serializable {
 	 * 寄递人员类型
 	 */
 	private String jdrylx;
-	
+	/**
+	 * 返回寄递人员全部地址
+	 * @return
+	 */
+	public String getJdrydz(){
+		return ssxmc+xxdz;
+	}
 	public String getJdrylxmc() {
 		return jdrylxmc;
 	}

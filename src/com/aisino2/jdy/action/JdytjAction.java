@@ -389,13 +389,10 @@ public class JdytjAction extends PageAction {
 				throw new RuntimeException("数据关联度分析查询参数传递错误");
 			Map<String, Object> paras = new HashMap<String, Object>();
 
-			if (rdrjbxx.getXm() != null)
 				paras.put("xm", rdrjbxx.getXm());
-			if (rdrjbxx.getXxdz() != null)
 				paras.put("xxdz", rdrjbxx.getXxdz());
-			if (rdrjbxx.getLxdh() != null)
 				paras.put("lxdh", rdrjbxx.getLxdh());
-
+				paras.put("ssx", rdrjbxx.getSsx());
 			Page page = jdytjxx_service.getSjgltj(paras, pagesize, pagerow,
 					sort, dir);
 
@@ -426,7 +423,7 @@ public class JdytjAction extends PageAction {
 		lPro.add("xm");
 		lPro.add("xm");
 		lPro.add("lxdh");
-		lPro.add("xxdz");
+		lPro.add("jdrydz");
 		lPro.add("jdrylxmc");
 		lPro.add("jdrylx");
 
@@ -514,7 +511,7 @@ public class JdytjAction extends PageAction {
 			if (setRdrjbxx.getLxdh() != null)
 				row.getCell(1).setCellValue(setRdrjbxx.getLxdh());
 			if (setRdrjbxx.getXxdz() != null) {
-				row.getCell(2).setCellValue(setRdrjbxx.getXxdz());
+				row.getCell(2).setCellValue(setRdrjbxx.getJdrydz());
 			}
 			if (setRdrjbxx.getJdrylxmc() != null)
 				row.getCell(3).setCellValue(setRdrjbxx.getJdrylxmc());

@@ -25,12 +25,13 @@
 		<result property="lxdh" column="lxdh"/>
 		<result property="gxdwmc" column="gxdwmc"/>
 	</resultMap>
-	
+<!-- 	寄递数据关联查询结果 -->
 	<resultMap class="Rdrjbxx" id="sjgltj_rm">
 		<result property="xm" column="xm"/>
 		<result property="lxdh" column="lxdh"/>
 		<result property="xxdz" column="xxdz"/>
 		<result property="jdrylx" column="jdrylx"/>
+		<result property="ssxmc" column="ssxmc"/>
 	</resultMap>
 	
 <!-- 	寄递业运行情况 -->
@@ -101,6 +102,9 @@
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="xxdz">
 			rdrjbxx.xxdz like '%$xxdz$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ssx">
+			rdrjbxx.ssx = #ssx#
 		</isNotEmpty>
 	</sql>
 	<sql id="JdytjxxWhere">
@@ -236,14 +240,14 @@
 	<select id="Jdytjxx.sjgltj" parameterClass="map" resultMap="sjgltj_rm">
 		select x.* from (
 			select rownum rowno,z.* from 
-				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
+				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.ssxmc,rdrjbxx.xxdz xxdz,rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
 					</dynamic>
-					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
+					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.ssxmc,rdrjbxx.xxdz,rdrjbxx.jdrylx
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
 	</select>
 	
