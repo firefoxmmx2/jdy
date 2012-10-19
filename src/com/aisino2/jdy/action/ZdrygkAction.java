@@ -119,8 +119,13 @@ public class ZdrygkAction extends PageAction {
 		lJdytjxx = pageinfo.getData();
 		
 		for (Jdytjxx jdytjxx : lJdytjxx) {
+			//字典项性别翻译,翻译后赋值给业务类型字段
+			Dict_item dict_item = CacheManager.getCacheDictitemOne("dm_xb", jdytjxx.getXb());
+			if (dict_item != null) {
+				jdytjxx.setXb(dict_item.getDisplay_name());
+			}
 			//字典项人员类型翻译,翻译后赋值给业务类型字段
-			Dict_item dict_item = CacheManager.getCacheDictitemOne("dm_jdy_rylx", jdytjxx.getYwlx());
+			dict_item = CacheManager.getCacheDictitemOne("dm_jdy_rylx", jdytjxx.getYwlx());
 			if (dict_item != null) {
 				jdytjxx.setYwlx(dict_item.getDisplay_name());
 			}
@@ -191,8 +196,13 @@ public class ZdrygkAction extends PageAction {
 			totalrows = pageinfo.getTotalRows();
 			lJdytjxx = pageinfo.getData();
 			for (Jdytjxx jdytjxx : lJdytjxx) {
+				//字典项性别翻译,翻译后赋值给业务类型字段
+				Dict_item dict_item = CacheManager.getCacheDictitemOne("dm_xb", jdytjxx.getXb());
+				if (dict_item != null) {
+					jdytjxx.setXb(dict_item.getDisplay_name());
+				}
 				//字典项人员类型翻译,翻译后赋值给业务类型字段
-				Dict_item dict_item = CacheManager.getCacheDictitemOne("dm_jdy_rylx", jdytjxx.getYwlx());
+				dict_item = CacheManager.getCacheDictitemOne("dm_jdy_rylx", jdytjxx.getYwlx());
 				if (dict_item != null) {
 					jdytjxx.setYwlx(dict_item.getDisplay_name());
 				}

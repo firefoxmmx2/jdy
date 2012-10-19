@@ -107,7 +107,6 @@
 	function setExportExcel_Zdry() {
 		if (daochuNum == 1) {
 			params = getSubmitParams("#zdry_man_table  [name*=jdytjxx.]");
-			alert(params);
 			jQuery.post(searchLongUrl, params, searchLongBack, "json");
 		} else {
 			jAlert("无查询结果不能导出！", '验证信息', null, null);
@@ -119,10 +118,6 @@
 		var bbmc = "重点人员信息";
 		//报表请求
 		setExcelLong("zdryexcel", bbmc);
-	}
-	//揽件信息导入方法
-	function importLjxx() {
-		return;
 	}
 </script>
 
