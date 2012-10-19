@@ -104,13 +104,10 @@ public class ZdrygkAction extends PageAction {
 	public String queryList() throws Exception {
 		HttpSession session = this.getRequest().getSession();
 		
-		Jdytjxx setjdytjxx = new Jdytjxx();
-		setjdytjxx = (Jdytjxx) this.setClass(setjdytjxx, null);
-		
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("ksrq", setjdytjxx.getKsrq());
-		params.put("jsrq", setjdytjxx.getJsrq());
-		params.put("gxdwbm", StringUtil.trimEven0(setjdytjxx.getGxdwbm()));
+		params.put("ksrq", jdytjxx.getKsrq());
+		params.put("jsrq", jdytjxx.getJsrq());
+		params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
 		
 		session.setAttribute("zdrygkdaochu", params);
 
