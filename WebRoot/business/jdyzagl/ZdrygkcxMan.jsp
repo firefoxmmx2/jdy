@@ -44,7 +44,8 @@
 	function setPageList_Zdry(pageno, url) {
 		if (manVerify_zdry()) {
 			$("#" + divnid).html(tables);
-			params = getSubmitParams("#zdry_man_table[name*=lj.]");
+			params = getSubmitParams("#zdry_man_table  [name*=jdytjxx.]");
+			alert($("#zdry_ksrq").val());
 			if (url == null || url == "undefined") {
 				url = pageUrl;
 			}
@@ -129,12 +130,12 @@
 		return;
 	}
 </script>
-<!-- 管辖单位编码，默认为当前登录用户管辖单位编码 -->
-<input type="hidden" id="zdry_gxdwbm" name="lj.qyjbxx.gxdwbm" value="<%=gxdwbm%>">
-<!-- 当前登录用户级别 -->
-<input type="hidden" id="current_departlevel" value="<%=departlevel %>">
 
 <table width="100%" cellpadding="0" cellspacing="0" class="tableborder" id="zdry_man_table">
+	<!-- 管辖单位编码，默认为当前登录用户管辖单位编码 -->
+	<input type="hidden" id="zdry_gxdwbm" name="jdytjxx.gxdwbm" value="<%=gxdwbm%>">
+	<!-- 当前登录用户级别 -->
+	<input type="hidden" id="current_departlevel" value="<%=departlevel %>">
 	<tr>
 		<td class="queryfont">重点管控人员数据查询</td>
 	</tr>
@@ -144,15 +145,15 @@
 				<tr>
 					<td width="10%" class="pagedistd" style="color: red;">开始日期</td>
 					<td width="23%" class="pagetd">
-						<input type="text" id="zdry_ksrq" name="lj.ljsjf" class="inputstyle datef" value="" />
+						<input type="text" id="zdry_ksrq" name="jdytjxx.ksrq" class="inputstyle datef" value="" />
 					</td>
 					<td width="10%" class="pagedistd" style="color: red;">结束日期</td>
 					<td width="23%" class="pagetd">
-						<input type="text" id="zdry_jsrq" name="lj.ljsjt" class="inputstyle datet" value="" />
+						<input type="text" id="zdry_jsrq" name="jdytjxx.jsrq" class="inputstyle datet" value="" />
 					</td>
 					<td width="10%" class="pagedistd" style="color: red;">所属管辖单位</td>
 					<td width="23%" class="pagetd">
-						<input type="text" id="zdry_gxdwmc" name="lj.ljr.xm" class="inputstyle" value="" />
+						<input type="text" id="zdry_gxdwmc" name="jdytjxx.gxdwmc" class="inputstyle" value="" />
 					</td>
 				</tr>
 				<tr>
