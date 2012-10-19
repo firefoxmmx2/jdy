@@ -102,15 +102,17 @@ public class ZdrygkAction extends PageAction {
 	}
 
 	public String queryList() throws Exception {
-		HttpSession session = this.getRequest().getSession();
 		
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("ksrq", jdytjxx.getKsrq());
-		params.put("jsrq", jdytjxx.getJsrq());
-		params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
-		
-		session.setAttribute("zdrygkdaochu", params);
-
+		if(jdytjxx.getKsrq()!=null){
+			params.put("ksrq", jdytjxx.getKsrq());
+		}
+		if(jdytjxx.getJsrq()!=null){
+			params.put("jsrq", jdytjxx.getJsrq());
+		}
+		if(jdytjxx.getGxdwbm()!=null){
+			params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
+		}
 		Page pageinfo = jdytjxx_service.findZdryForPage(params, pagesize, pagerow, sort, dir);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
@@ -174,15 +176,20 @@ public class ZdrygkAction extends PageAction {
 			maxRows = "0";
 		}
 		try {
-			// 如果派件查询参数不为空的话，配置数据库的查询参数
 			Map<String, Object> params = new HashMap<String, Object>();
-			params = (Map)session.getAttribute("Lssjxxdaochu");
-			
-			Page pageinfo = jdytjxx_service.findLssjForPage(params, 1, Integer.parseInt(maxRows), sort, dir);
+			if(jdytjxx.getKsrq()!=null){
+				params.put("ksrq", jdytjxx.getKsrq());
+			}
+			if(jdytjxx.getJsrq()!=null){
+				params.put("jsrq", jdytjxx.getJsrq());
+			}
+			if(jdytjxx.getGxdwbm()!=null){
+				params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
+			}
+			Page pageinfo = jdytjxx_service.findZdryForPage(params, 1, Integer.parseInt(maxRows), sort, dir);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
 			lJdytjxx = pageinfo.getData();
-			
 			for (Jdytjxx jdytjxx : lJdytjxx) {
 				//字典项人员类型翻译,翻译后赋值给业务类型字段
 				Dict_item dict_item = CacheManager.getCacheDictitemOne("dm_jdy_rylx", jdytjxx.getYwlx());
