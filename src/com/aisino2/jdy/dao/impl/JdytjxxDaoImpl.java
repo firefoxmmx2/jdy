@@ -239,5 +239,34 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 	public List<Jdytjxx> getWpfltj(Map<String, Object> map) {
 		return queryForList("Jdytjxx.wpfltj", map);
 	}
+	/**
+	 * 重点人员管控信息dao
+	 */
+	public Page findZdryForPage(Map<String, Object> map, int pageno,
+			int pagesize, String sort, String dir) {
+		String sCol=" ljxx.ljdjrq ";
+		if(sort == null)
+			sort = "";
+		else if(!sort.equals("asc") && !sort.equals("desc"))
+			sort = " asc ";
+		if (dir!=null){
+			if("0".equals(dir))
+				sCol = " zdryxx.xm "+ sort;
+			else if("1".equals(dir))
+				sCol = " zdryxx.xb "+ sort;
+			else if("2".equals(dir))
+				sCol = " zdryxx.zjhm "+ sort;
+			else if("3".equals(dir))
+				sCol = " zdryxx.rylx "+ sort;
+			else if("4".equals(dir))
+				sCol = " zdryxx.gxdwmc "+ sort;
+			else if("5".equals(dir))
+				sCol = " ljxx.ljdjrq "+ sort;
+			else 
+				sCol = " zdryxx.rylx "+ sort;
+		}
+		map.put("pageSort", sCol);
+		return queryForPage("getZdryListPage", map, pageno,pagesize);
+	}
 
 }

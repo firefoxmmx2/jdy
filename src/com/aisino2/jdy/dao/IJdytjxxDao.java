@@ -119,4 +119,14 @@ public interface IJdytjxxDao {
 	 * @return
 	 */
 	List<Jdytjxx> getWpfltj(Map<String, Object> map);
+	/**
+	 * 重点人员管控信息
+	 * @param paras
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page findZdryForPage(Map<String, Object> map, int pageno, int pagesize,	String sort, String dir);
 }
