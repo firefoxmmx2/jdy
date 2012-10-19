@@ -314,19 +314,19 @@ public class RdrjbxxAction extends PageAction {
 				HttpSession session = request.getSession();
 				User user = (User) session.getAttribute(Constants.userKey);
 				try {
-					String bbmc = request.getParameter("bbmc");
-					String tabletitle = request.getParameter("tabletitle");
+					String bbmc = request.getParameter("bbmcdal");
+					String tabletitle = request.getParameter("tabletitledal");
 					// Excel输出
 					List lResult = new ArrayList(); // //开头excel
 					List qyryList = (List) session.getAttribute("Grpfghjjdwtjdal");
-					Rdrjbxx setRdrjbxx = new Rdrjbxx();
+					Rdrjbxx setRdrjbxx1 = new Rdrjbxx();
 					List lColumn = this.getExcelColumn(tabletitle);
 					lResult.add(bbmc);
 					lResult.add(lColumn);
 					lResult.add(response);
 					lResult.add(qyryList);
-					lResult.add(setRdrjbxx);
-					this.setExcelCreate("Rdrjbxx", lResult);
+					lResult.add(setRdrjbxx1);
+					this.setExcelCreate("Rdrjbxxdal", lResult);
 					this.result = "ok";
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
