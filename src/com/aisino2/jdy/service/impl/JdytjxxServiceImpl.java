@@ -124,10 +124,12 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 		return jdytjxxDao.findLssjForPage(params, pageno, pagesize, sort, dir);
 	}
 
-
+	/**
+	 * 重点人员管控统计service
+	 */
 	public Page findZdryForPage(Map<String, Object> params, int pageno,
 			int pagesize, String sort, String dir) {
-		return null;
+		return jdytjxxDao.findZdryForPage(params, pageno, pagesize, sort, dir);
 	}
 
 }
