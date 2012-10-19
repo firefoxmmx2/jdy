@@ -88,7 +88,7 @@ function searchLongBackdal(json){
 	<table id="QczlhmdczrzTable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="l_djxh" datatype="string" sumflag="0">登记序号</th>
+	    	<th name="">登记序号</th>
 	     	<th name="l_xh" datatype="string" sumflag="0">序号</th>
 	    	<th name="l_jjrxm" datatype="string" sumflag="0">寄件人</th>
 	    	<th name="l_jjsj" datatype="string" sumflag="0">寄件时间</th>
