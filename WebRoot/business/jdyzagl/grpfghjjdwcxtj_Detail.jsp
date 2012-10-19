@@ -59,9 +59,9 @@ function searchLongBackdal(json){
     //报表标题
 	var bbmcdal="频繁更换单位详情";
 	//报表请求
-	var surl=excelUrldal+"?tabletitle="+tabletitledal+"&bbmc="+bbmcdal;
-	surl=encodeURI(surl);
-	location.href = surl;
+	var surldal=excelUrldal+"?tabletitle="+tabletitledal+"&bbmc="+bbmcdal;
+	surldal=encodeURI(surldal);
+	location.href = surldal;
 }
 </script>
 

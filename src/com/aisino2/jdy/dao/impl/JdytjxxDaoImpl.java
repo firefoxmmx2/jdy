@@ -204,11 +204,69 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 		return queryForPage("getQyjbxxList", paras, pageno, pagesize);
 	}
 
+
+	public Page findLssjForPage(Map<String, Object> map, int pageno,
+			int pagesize, String sort, String dir) {
+		String sCol=" ywxx.ywdjsj ";
+		if(sort == null)
+			sort = "";
+		else if(!sort.equals("asc") && !sort.equals("desc"))
+			sort = " asc ";
+		if (dir!=null){
+			if("0".equals(dir))
+				sCol = " ry.xm "+ sort;
+			else if("1".equals(dir))
+				sCol = " ry.zjhm "+ sort;
+			else if("2".equals(dir))
+				sCol = " ywxx.ywdjsj "+ sort;
+			else if("3".equals(dir))
+				sCol = " ry.jdrylx "+ sort;
+			else if("4".equals(dir))
+				sCol = " qy.qymc "+ sort;
+			else if("5".equals(dir))
+				sCol = " qy.gxdwmc "+ sort;
+			else 
+				sCol = " ry.xxdz "+ sort;
+		}
+		
+		map.put("pageSort", sCol);
+		return queryForPage("getLssjListPage", map, pageno,pagesize);
+	}
+
 	/**
 	 * 物品分类统计
 	 */
 	public List<Jdytjxx> getWpfltj(Map<String, Object> map) {
 		return queryForList("Jdytjxx.wpfltj", map);
+	}
+	/**
+	 * 重点人员管控信息dao
+	 */
+	public Page findZdryForPage(Map<String, Object> map, int pageno,
+			int pagesize, String sort, String dir) {
+		String sCol=" lj.ljtbsj ";
+		if(sort == null)
+			sort = "";
+		else if(!sort.equals("asc") && !sort.equals("desc"))
+			sort = " asc ";
+		if (dir!=null){
+			if("0".equals(dir))
+				sCol = " zdry.xm "+ sort;
+			else if("1".equals(dir))
+				sCol = " zdry.xb "+ sort;
+			else if("2".equals(dir))
+				sCol = " zdry.zjhm "+ sort;
+			else if("3".equals(dir))
+				sCol = " zdry.rylx "+ sort;
+			else if("4".equals(dir))
+				sCol = " zdry.gxdwmc "+ sort;
+			else if("5".equals(dir))
+				sCol = " lj.ljtbsj "+ sort;
+			else 
+				sCol = " zdry.rylx "+ sort;
+		}
+		map.put("pageSort", sCol);
+		return queryForPage("getZdryListPage", map, pageno,pagesize);
 	}
 
 }

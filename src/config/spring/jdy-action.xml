@@ -33,4 +33,12 @@
   <bean id="RdrjbxxAction" class="com.aisino2.jdy.action.RdrjbxxAction" scope="prototype">  
       <property name="rdrjbxxService" ref="RdrjbxxServiceImpl"/> 
   </bean> 
+  <!-- 历史数据轨迹查询action -->
+  <bean id="lssjxxAction" class="com.aisino2.jdy.action.LssjgjAction" scope="prototype">
+      <property name="jdytjxx_service" ref="JdytjxxServiceImpl"/>
+  </bean>
+<!-- 重点人员管控信息action   -->
+  <bean id="ZdrygkAction" class="com.aisino2.jdy.action.ZdrygkAction" scope="prototype">  
+      <property name="jdytjxx_service" ref="JdytjxxServiceImpl"/> 
+  </bean> 
 </beans>

@@ -19,7 +19,7 @@ function updatePicture(y){
 		$("#lj_sjrzjhm").val(y.ocrIdentityId);//证件号码
 		getHjsxDD(y.ocrIdentityId,"dm_xzqh","lj_sjrssx","sjrssxmc");//从身份号码中得到户籍省县
 		//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
-		$("#lj_sjrxxdz").val(y.ocrAddR);//详细地址
+		//$("#lj_sjrxxdz").val(y.ocrAddR);//详细地址
 		//$("#lj_sjrzpdata").val(y.GetImage());//照片
 		$("#lj_sjrzpdata").val(y.GetImage());//照片
 		
@@ -37,7 +37,7 @@ function updatePicture(y){
 		$("#pjxxadd_sjrzjhm").val(y.ocrIdentityId);//证件号码
 		getHjsxDD(y.ocrIdentityId,"dm_xzqh","pjxxadd_jjrssxdm","pjxxadd_sjrssx");//从身份号码中得到户籍省县
 		//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
-		$("#pjxxadd_sjrxxdz").val(y.ocrAddR);//详细地址
+		//$("#pjxxadd_sjrxxdz").val(y.ocrAddR);//详细地址
 		$("#pjxxadd_sjrzpdata").val(y.GetImage());//照片
 	}else if($("#pdbzw").val()=="pjjbxxmod"){
 		$("#pjjbxxmod_sjrxm").val("");//姓名
@@ -53,7 +53,7 @@ function updatePicture(y){
 		$("#pjjbxxmod_sjrzjhm").val(y.ocrIdentityId);//证件号码
 		getHjsxDD(y.ocrIdentityId,"dm_xzqh","pjjbxxmod_jjrssxdm","pjjbxxmod_sjrssx");//从身份号码中得到户籍省县
 		//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
-		$("#pjjbxxmod_sjrxxdz").val(y.ocrAddR);//详细地址
+		//$("#pjjbxxmod_sjrxxdz").val(y.ocrAddR);//详细地址
 		$("#pjjbxxmod_sjrzpdata").val(y.GetImage());//照片
 	}
 	

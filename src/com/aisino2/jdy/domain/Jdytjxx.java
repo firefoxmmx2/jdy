@@ -1,6 +1,7 @@
 package com.aisino2.jdy.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 
@@ -43,6 +44,24 @@ public class Jdytjxx implements Serializable {
 	private Integer departlevel;
 	
 	private String jdplx;
+	
+	/*
+	 * 历史数据轨迹查询用到
+	 */
+	private String sjfw;//查询历史数据时限定的时间范围
+	private Date ywdjsj;//业务登记时间
+	private String ywlx;//业务类型：寄件，收件，代收
+	private String djxh;//业务登记序号
+	private String wldh;//物流单号
+	
+	/*
+	 * 重点人员管控查询用到
+	 */
+	private String xb;//性别
+	private Date ksrq;//查询定义开始日期;
+	private Date jsrq;//查询定义结束日期
+	private String rylx;//重点人员管控类型
+	private Zdryxx zdryxx;//重点人员
 	
 	public String getJdplx() {
 		return jdplx;
@@ -193,6 +212,66 @@ public class Jdytjxx implements Serializable {
 	}
 	public void setQyid(Integer qyid) {
 		this.qyid = qyid;
+	}
+	public String getSjfw() {
+		return sjfw;
+	}
+	public void setSjfw(String sjfw) {
+		this.sjfw = sjfw;
+	}
+	public Date getYwdjsj() {
+		return ywdjsj;
+	}
+	public void setYwdjsj(Date ywdjsj) {
+		this.ywdjsj = ywdjsj;
+	}
+	public String getYwlx() {
+		return ywlx;
+	}
+	public void setYwlx(String ywlx) {
+		this.ywlx = ywlx;
+	}
+	public String getDjxh() {
+		return djxh;
+	}
+	public void setDjxh(String djxh) {
+		this.djxh = djxh;
+	}
+	public String getWldh() {
+		return wldh;
+	}
+	public void setWldh(String wldh) {
+		this.wldh = wldh;
+	}
+	public Date getKsrq() {
+		return ksrq;
+	}
+	public void setKsrq(Date ksrq) {
+		this.ksrq = ksrq;
+	}
+	public Date getJsrq() {
+		return jsrq;
+	}
+	public void setJsrq(Date jsrq) {
+		this.jsrq = jsrq;
+	}
+	public String getRylx() {
+		return rylx;
+	}
+	public void setRylx(String rylx) {
+		this.rylx = rylx;
+	}
+	public Zdryxx getZdryxx() {
+		return zdryxx;
+	}
+	public void setZdryxx(Zdryxx zdryxx) {
+		this.zdryxx = zdryxx;
+	}
+	public String getXb() {
+		return xb;
+	}
+	public void setXb(String xb) {
+		this.xb = xb;
 	}
 	
 	
