@@ -30,13 +30,13 @@ var qyjbxx_dataid;
 var qyjbxx_requestType="detail";
 var jdytjxx_wp_queryTable;
 var jdytjxx_chartType="bar";
+var jdytjxx_excel_url;
 $(document).ready(function() {
 	
 	jdytjxx__table_id="jdytjxx_table_gr";
 	jdytjxx_detailid="jdytjxx_detail";
 		//*****导出Excel 		 
 	geteExcelHead_baybmxxtj("jdytjxx_data_gr_div");	
-	jdytjxx_excelUrl="";
 	
 	daggleDiv(jdytjxx_detailid);
 	$("#jdytjxx_tjsjf").datepicker(true,"0");
@@ -54,6 +54,7 @@ $(document).ready(function() {
 		jdytjxx_divnid="jdytjxx_data_qy_div";
 		jdytjxx__table_id='jdytjxx_table_qy';
 		jdytjxx_tabletitle="揽件量统计排名";
+		jdytjxx_excel_url="jdy/exportQyljltj_jdytjxx.action";
 		
 		$('#table_lbzs_bmxx').show();
 		$('#table_txzs_bmxx').show();
@@ -74,7 +75,7 @@ $(document).ready(function() {
 		jdytjxx_divnid="jdytjxx_data_gr_div";
 		jdytjxx__table_id="jdytjxx_table_gr";
 		jdytjxx_tabletitle="寄件量统计排名";
-		
+		jdytjxx_excel_url="jdy/exportGrjjltj_jdytjxx.action";
 		$('#table_lbzs_bmxx').show();
 		$('#table_txzs_bmxx').show();
 		if(!jdytjxx_queryTable)
@@ -93,7 +94,7 @@ $(document).ready(function() {
 		jdytjxx_divnid="jdytjxx_data_qy_div";
 		jdytjxx__table_id='jdytjxx_table_qy';
 		jdytjxx_tabletitle="派件量统计排名";
-		
+		jdytjxx_excel_url="jdy/exportQypjltj_jdytjxx.action";
 		$('#table_lbzs_bmxx').show();
 		$('#table_txzs_bmxx').show();
 		if(!jdytjxx_qy_queryTable)
@@ -112,7 +113,7 @@ $(document).ready(function() {
 		jdytjxx_divnid="jdytjxx_data_gr_div";
 		jdytjxx__table_id="jdytjxx_table_gr";
 		jdytjxx_tabletitle="收件量统计排名";
-		
+		jdytjxx_excel_url="jdy/exportGrsjltj_jdytjxx.action";
 		$('#table_lbzs_bmxx').show();
 		$('#table_txzs_bmxx').show();
 		if(!jdytjxx_queryTable)
@@ -131,7 +132,7 @@ $(document).ready(function() {
 		jdytjxx_divnid="jdytjxx_data_wp_div";
 		jdytjxx__table_id="jdytjxx_table_wp";
 		jdytjxx_tabletitle="物品分类统计";
-
+		jdytjxx_excel_url="jdy/exportJdyWpfltj_jdytjxx.action";
 		$('#table_lbzs_bmxx').hide();
 		$('#table_txzs_bmxx').hide();
 		
@@ -303,7 +304,7 @@ function wpfltj_page_query(pageno,url){
 		
 		url=set_jdytjxx_list(pageno,url);
 		
-		
+		params.show_number = undefined;
 		var mygrid1 = $("#"+jdytjxx__table_id).ingrid({
 										paging:false,	 
 										url: url,	
@@ -488,21 +489,17 @@ function getSubDepartMentSum_baybmxxtj(id,level){
 
 //导出Excel，20100804,excel导出功能修改， 从session直接获取查询结果
 function setExportExcel_aybmxxtj(){	
-	//alert(daochuNum);
-	if(aybmxxtj_daochuNum==1){
-		if (jdytjxxManVerify()){
-			//setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
-			//报表标题
-			var bbmc="保安员报名情况统计查询";
-			//报表请求	
-			//setExcelLong("yyrb",bbmc);
-			var surl=jdytjxx_excelUrl+"?tabletitle="+jdytjxx_tabletitle+"&bbmc="+bbmc;
-			surl=encodeURI(surl);
-			location.href = surl;
-		}
-	}else{
-		jAlert("无查询结果不能导出！","提示信息");
-	}		
+	if($('#jdytjxx_tjlx_wpfltj').attr('checked')){
+		$('#jdytjxx_show_number').val('');
+	}
+	else{
+		$('#jdytjxx_show_number').val($('#jdytjxx_show_number').attr('defaultValue'));
+	}
+	//设置分页信息
+	$('#excelTjForm').attr('action',jdytjxx_excel_url)
+		.attr("target","_blank")
+		.attr('type','post')
+		.submit();	
 }
 
 //显示企业详情
@@ -515,6 +512,7 @@ function setQyDetail(id){
 
 <body>
 <div style="width:100%;overflow:hidden" id="jdytjxx_ct">
+<form id="excelTjForm" action="">
 	<input type="hidden" id="d_pxjgjbxxid" value="">
 	<input type="hidden" id="jdytjxx_gxdwbm" name="gxdwbm" value="<%=gxdwbm%>">
 	<input type="hidden" id="jdytjxx_departlevel" value="<%=departlevel %>">	
@@ -523,7 +521,7 @@ function setQyDetail(id){
 	<input type="hidden" id="jdytjxx_cardID" value="n">
 	<input type="hidden" id="jdytjxx_tag" value="">
 	<input type="hidden" id="closeDivTag" value="self">
-	<input type="hidden" id="jdytjxx_show_number" name="show_number" value="10">
+	<input type="hidden" id="jdytjxx_show_number" name="show_number" value="10" defaultValue="10">
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder">
   <tr>
     <td class="queryfont">寄递数据分析统计</td>
@@ -668,5 +666,6 @@ function setQyDetail(id){
 			
 		</td>
 	</tr>
-</table>	
+</table>
+</form>	
 </div>
