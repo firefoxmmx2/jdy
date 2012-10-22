@@ -911,4 +911,85 @@ public class JdytjAction extends PageAction {
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
+	
+	public void exportJdyWpfltj() throws Exception{
+		String maxRows = QjblUtil.queryQjblVal("exportmaxrows");
+		if (maxRows == null || "".equals(maxRows)) {
+			maxRows = "9999999999999";
+		}
+		this.pagesize = 1;
+		this.pagerow = Integer.parseInt(maxRows);
+		queryJdyWpfltj();
+		
+		String[][] tabletitle = { { "物品分类", "jdplx" }, { "数目", "cs" } };
+		exportGun(tabletitle,jdytjxx_list);
+	}
+	
+	public void exportGrsjltj() throws Exception{
+		String maxRows = QjblUtil.queryQjblVal("exportmaxrows");
+		if (maxRows == null || "".equals(maxRows)) {
+			maxRows = "9999999999999";
+		}
+		this.pagesize = 1;
+		this.pagerow = Integer.parseInt(maxRows);
+		queryGrsjltj();
+		String[][] tabletitle = { { "序号", "seqnum" }, 
+				{ "姓名", "xm" },
+				{"数目","cs"},
+				{"详细地址","xxdz"},
+				{"联系电话","lxdh"},
+				{"证件号码","zjhm"}};
+		exportGun(tabletitle,jdytjxx_list);
+	}
+	
+	public void exportQypjltj() throws Exception{
+		String maxRows = QjblUtil.queryQjblVal("exportmaxrows");
+		if (maxRows == null || "".equals(maxRows)) {
+			maxRows = "9999999999999";
+		}
+		this.pagesize = 1;
+		this.pagerow = Integer.parseInt(maxRows);
+		queryQypjltj();
+		String[][] tabletitle = { { "序号", "seqnum" }, 
+				{ "企业名称", "qymc" },
+				{"数目","cs"},
+				{"详细地址","xxdz"},
+				{"联系电话","lxdh"},
+				{"管辖单位","gxdwmc"}};
+		exportGun(tabletitle,jdytjxx_list);
+	}
+	
+	public void exportGrjjltj() throws Exception{
+		String maxRows = QjblUtil.queryQjblVal("exportmaxrows");
+		if (maxRows == null || "".equals(maxRows)) {
+			maxRows = "9999999999999";
+		}
+		this.pagesize = 1;
+		this.pagerow = Integer.parseInt(maxRows);
+		queryGrjjltj();
+		String[][] tabletitle = { { "序号", "seqnum" }, 
+				{ "姓名", "xm" },
+				{"数目","cs"},
+				{"详细地址","xxdz"},
+				{"联系电话","lxdh"},
+				{"证件号码","zjhm"}};
+		exportGun(tabletitle,jdytjxx_list);
+	}
+	
+	public void exportQyljltj() throws Exception{
+		String maxRows = QjblUtil.queryQjblVal("exportmaxrows");
+		if (maxRows == null || "".equals(maxRows)) {
+			maxRows = "9999999999999";
+		}
+		this.pagesize = 1;
+		this.pagerow = Integer.parseInt(maxRows);
+		queryQyljltj();
+		String[][] tabletitle = { { "序号", "seqnum" }, 
+				{ "企业名称", "qymc" },
+				{"数目","cs"},
+				{"详细地址","xxdz"},
+				{"联系电话","lxdh"},
+				{"管辖单位","gxdwmc"}};
+		exportGun(tabletitle,jdytjxx_list);
+	}
 }
