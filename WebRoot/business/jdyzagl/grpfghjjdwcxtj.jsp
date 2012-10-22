@@ -46,7 +46,7 @@ function setPageList(pageno,url){
 	if($("#rdrjbxx_gxdwbm").val()==null || $("#rdrjbxx_gxdwbm").val()==""){
 		$("#rdrjbxx_gxdwbm").val(<%=gxdwbm%>);
 	}
-	if (true){//manVerify_grpfghdwcx()
+	if (manVerify_grpfghdwcx()){//manVerify_grpfghdwcx()
 	    $("#"+divnid).html(tables);
 		params =getSubmitParams("#grpfghdwcx_gad [name*=rdrjbxx.]");
 		if (url==null || url=="undefined"){
@@ -80,7 +80,15 @@ function manVerify_grpfghdwcx(){
 		return false;
 	if (!checkControlValue("rdrjbxx_pjtbsjt1","String",1,30,null,1,"结束时间"))
 		return false;
-	if (!checkControlValue("rdrjbxx_ghjjdwcs","Select",1,8,null,1,"更换寄件单位次数超过"))
+	var sj1 = $("#rdrjbxx_pjtbsjf1").val();
+	var sj2 = $("#rdrjbxx_pjtbsjt1").val();
+	if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
+		if(sj1>sj2){
+			jAlert('开始时间不能大于结束时间','提示信息')
+			return false;
+		}
+	}
+	if (!checkControlValue("rdrjbxx_ghjjdwcs","Integer",2,999,null,1,"更换寄件单位次数超过"))
 		return false;
 	if (!checkControlValue("rdrjbxx_gxdwmc","String",1,70,null,1,"治安管理机构"))
 		return false;
