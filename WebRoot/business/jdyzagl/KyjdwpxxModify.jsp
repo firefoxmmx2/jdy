@@ -7,8 +7,23 @@
 <script type="text/javascript">
 $(document).ready(function() {	
 	$('#jdpxx_id_mod').val(dataid);
+	//禁寄物品类型
+	$('#jdpxx_jjwplx').selectBox({code:'dm_jdyjjwplx'});
+	$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
 	//可疑物品类别
 	$('#jdpxx_kywplb_mod').selectBox({code:'dm_kywplb'});
+	$('#jdpxx_kywplb_mod').change(function(){
+		$('#jdpxx_jjwplx').setValue('');
+		if($(this).val()=='2'){
+			if($('#jdpxx_jjwplx').hasClass('readonly'))
+				$('#jdpxx_jjwplx').removeClass('readonly').setAttr('readonly',false);
+		}
+		else{
+			if(!$('#jdpxx_jjwplx').hasClass('readonly'))
+				$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
+		}
+			
+	});
 	//报告时间
 	$("#jdpxx_basj").attr("readOnly",true).datepicker();
 	//揽件人
@@ -31,6 +46,7 @@ function kyjdwpback_mod(json){
 			$("#kyjdwpxx_bgrbm").val(data.jdpxx.kyjdwpxx.bgr.cyrybh);//报告人编码 
 			$("#jdpxx_basj").val(setNull(data.jdpxx.kyjdwpxx.bgsj));//报告时间 
 			$("#kyjdwpxx_ljjbxx_djxh_mod").val(data.jdpxx.ljjbxx.djxh);//需要将登记序号打入可疑寄递物品信息表中
+			$('#jdpxx_jjwplx').setValue(setNull(data.jdpxx.kyjdwpxx.jjwplx));
 			//初始化数据
 			$('#kyjdwpxx_mod_qyd [name*=jdpxx.]').each(function(idx){
 				$this = $(this);
@@ -145,8 +161,14 @@ function kywpaddmodback(json){
 		<td class="pagetd"><select class="select1" id="jdpxx_kywplb_mod" name="jdpxx.kyjdwpxx.kywplb" value=""><option></option></select></td>
 	</tr>
 	<tr>
+		<td class="distd"></td>
+		<td class="detailtd"></td>
+		<td>禁寄物品种类</td>
+		<td class="pagetd"><select class="select1" id="jdpxx_jjwplx" name="jdpxx.kyjdwpxx.jjwplx" ><option></option></select></td>
+	</tr>
+	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
-		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="kyjdwpxx.kywpms" value=""></textarea></td>
+		<td class="detailtd"><textarea style="width:90%;"  id="jdpxx_kywpms" name="kyjdwpxx.kywpms" value=""></textarea></td>
 	</tr>
 	<tr height="20">
 		<td class="red">报告人</td>

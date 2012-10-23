@@ -157,7 +157,7 @@ function kywpaddaddback(json){
 		<td class="red">可疑物品类别</td>
 		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="kyjdwpxx.kywplb" ><option></option></select></td>
 	</tr>
-		<tr>
+	<tr>
 		<td class="distd"></td>
 		<td class="detailtd"></td>
 		<td>禁寄物品种类</td>

@@ -8,6 +8,10 @@
 $(document).ready(function() {	
 	$('#jdpxx_id_det').val(dataid);
 	//可疑物品类别
+	//禁寄物品类型
+	$('#jdpxx_jjwplx').selectBox({code:'dm_jdyjjwplx'});
+	$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
+	//可疑物品类别
 	$('#jdpxx_kywplb').selectBox({code:'dm_kywplb'});
 	$("#jdpxx_kywplb").setAttr("readonly","readonly");//删除class属性
 	kyjdwpback_mod();
@@ -18,8 +22,6 @@ function kyjdwpback_mod(json){
 	$.post("jdy/djpxxquery_jdpxx.action",params,function(data){
 		if(data.jdpxx){
 			$("#kyjdwpxx_jdpxx_id").val(data.jdpxx.id);
-			//alert(data.jdpxx.kyjdwpxx.kywpms);
-			//$("#jdpxx_basj").val(data.jdpxx.kyjdwpxx.bgsj)
 			//初始化数据
 			$('#kyjdwpxx_det_qyd [name*=jdpxx.]').each(function(idx){
 				$this = $(this);
@@ -27,9 +29,9 @@ function kyjdwpback_mod(json){
 					try{
 						$this.setValue(setNull(eval("data." + $this.attr("name"))));
 					}catch (e) {
-						//alert($this.attr("name"));
-						//alert(eval("data." + $this.attr("name")))
-						//return;
+// 						alert($this.attr("name"));
+// 						alert(eval("data." + $this.attr("name")))
+// 						return;
 					}
 					
 				}
@@ -101,8 +103,14 @@ function kyjdwpback_mod(json){
 		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="jdpxx.kyjdwpxx.kywplb" value="" ><option></option></select></td>
 	</tr>
 	<tr>
+		<td class="distd"></td>
+		<td class="detailtd"></td>
+		<td>禁寄物品种类</td>
+		<td class="pagetd"><select class="select1" id="jdpxx_jjwplx" name="jdpxx.kyjdwpxx.jjwplx" ><option></option></select></td>
+	</tr>
+	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
-		<td class="detailtd"><textarea style="height: 60px;width: 200px;" id="jdpxx_kywpms" name="jdpxx.kyjdwpxx.kywpms" value="" class="readonly"></textarea></td>
+		<td class="detailtd" colspan="3"><textarea style="height: 60px;width: 90%;" id="jdpxx_kywpms" name="jdpxx.kyjdwpxx.kywpms" value="" class="readonly"></textarea></td>
 	</tr>
 	<tr height="20">
 		<td class="distd">报告人</td>

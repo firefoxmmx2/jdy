@@ -15,6 +15,7 @@
 		<result property="bgr" column="bgrbm" select="getQyryxxByCyrybh"/>
 		<result property="bgsj" column="bgsj"/>
 		<result property="kyywdjxh" column="kyywdjxh"/>
+		<result property="jjwplx" column="jjwplx"/>
 	</resultMap>
 <!--        企业端可疑物品关联查询                              -->	
 	<resultMap class="kyjdwpxx" id="qydkyjdwpxxcx">
