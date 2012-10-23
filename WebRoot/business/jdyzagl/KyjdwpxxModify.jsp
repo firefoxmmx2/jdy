@@ -9,7 +9,7 @@ $(document).ready(function() {
 	$('#jdpxx_id_mod').val(dataid);
 	//禁寄物品类型
 	$('#jdpxx_jjwplx').selectBox({code:'dm_jdyjjwplx'});
-	$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
+	
 	//可疑物品类别
 	$('#jdpxx_kywplb_mod').selectBox({code:'dm_kywplb'});
 	$('#jdpxx_kywplb_mod').change(function(){
@@ -70,6 +70,9 @@ function kyjdwpback_mod(json){
 					}
 				}
 			});
+			
+			if($('#jdpxx_kywplb_mod').val()!='2')
+				$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
 		}
 		else{
 			jAlert('该派件信息已经不存在','提示');
