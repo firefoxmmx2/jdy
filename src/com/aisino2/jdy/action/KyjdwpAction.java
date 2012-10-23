@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.aisino2.cache.CacheManager;
 import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
@@ -23,6 +24,8 @@ import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Kyjdwpxx;
 import com.aisino2.jdy.service.IKyjdwpxxService;
 import com.aisino2.sysadmin.Constants;
+import com.aisino2.sysadmin.domain.Dict;
+import com.aisino2.sysadmin.domain.Dict_item;
 import com.aisino2.sysadmin.domain.User;
 import com.opensymphony.xwork2.ActionContext;
 /**
@@ -37,9 +40,32 @@ public class KyjdwpAction extends PageAction{
 	private int totalrows = 0;
 	private String result = "";
 	private List<Kyjdwpxx> lKyjdwpxx = new ArrayList();
+	/**
+	 * 是否是禁寄物品查询
+	 */
+	private String isJjwpcx="0";
+	/**
+	 * 禁寄物品类型翻译字典
+	 */
+	private Map<String, String> jjwplxDict;
 	
-	
-	
+	public Map<String,String> getJjwplxDict(){
+		if(jjwplxDict==null){
+			jjwplxDict = new HashMap<String, String>();
+			Dict_item dict_item = new Dict_item();
+			dict_item.setDict_code("dm_jdyjjwplx");
+			List<Dict_item> itemlist = CacheManager.getCacheDictitem(dict_item);
+			for(Dict_item item : itemlist)
+				jjwplxDict.put(item.getFact_value(), item.getDisplay_name());
+		}
+		return jjwplxDict;
+	};
+	public String getIsJjwpcx() {
+		return isJjwpcx;
+	}
+	public void setIsJjwpcx(String isJjwpcx) {
+		this.isJjwpcx = isJjwpcx;
+	}
 	public List<Kyjdwpxx> getlKyjdwpxx() {
 		return lKyjdwpxx;
 	}
@@ -144,6 +170,12 @@ public class KyjdwpAction extends PageAction{
 		if(kyjdwpxx.getKyjdwpxxcxbz()!=null){
 			params.put("kyjdwpxxcxbz", kyjdwpxx.getKyjdwpxxcxbz());
 		}
+		//////////////@fixed 添加禁寄物品类型////////////
+		//是否是禁寄物品查询
+		params.put("isJjwpcx", isJjwpcx);
+//		禁寄物品类型条件
+		params.put("jjwplx", kyjdwpxx.getJjwplx());
+		///////////////添加禁寄物品类型////////////////
 		Page pageinfo = kyjdwpxxService.findKyjdwpxxsForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
@@ -151,7 +183,13 @@ public class KyjdwpAction extends PageAction{
 		
 		if(kyjdwpxx.getKyjdwpxxcxbz().equals("gadcxbz")){
 			setTableDategad_ljjbxx(pageinfo.getData());
-		}else{
+		}
+//////////////@fixed 添加禁寄物品类型////////////
+		if("1".equals(isJjwpcx)){
+			setTableDateJjwpGad_ljjbxx(pageinfo.getData());
+		}
+///////////////添加禁寄物品类型////////////////
+		else{
 			setTableDate_ljjbxx(pageinfo.getData());
 		}
 		
@@ -259,7 +297,6 @@ public class KyjdwpAction extends PageAction{
 	}
 	/***揽件基本信息主页面公安端setable方法***/
 	private void setTableDategad_ljjbxx(List<Kyjdwpxx> lData) {
-		// TODO Auto-generated method stub
 		List lPro = new ArrayList();
 		lPro.add("ljjbxx_id");
 		lPro.add("jdpmc");//
@@ -308,6 +345,48 @@ public class KyjdwpAction extends PageAction{
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
+	
+//////////////@fixed 添加禁寄物品类型////////////
+	public void setTableDateJjwpGad_ljjbxx(List<Kyjdwpxx> lData) throws Exception{
+		List lPro = new ArrayList();
+		lPro.add("ljjbxx_id");
+		lPro.add("jjrxm");
+		lPro.add("jjwplx");
+		lPro.add("ljtbsj");//
+		lPro.add("gxdwmc");
+		lPro.add("xxdz");
+		lPro.add("sjrxm");//
+		lPro.add("qyid");//
+		
+		List lCol = new ArrayList();
+		
+		List lDetail = new ArrayList();
+		lDetail.add("setKyjdwpxxDetail");
+		lDetail.add("详情");
+		lCol.add(lDetail);
+		for(Kyjdwpxx kyjdwpxx : lData){
+			//kyjdwp.setLjjbxx_id(kyjdwpxx.getLjjbxx_id());//可疑物品信息ID
+			kyjdwpxx.setWldhlb(kyjdwpxx.getLjjbxx().getWldh());//物流单号
+			kyjdwpxx.setJdpmc(kyjdwpxx.getJdpxx().getJdpmc());//寄递品名称
+			kyjdwpxx.setJjrxm(kyjdwpxx.getJjr().getXm());//寄件人姓名
+			kyjdwpxx.setSjrxm(kyjdwpxx.getSjr().getXm());//收件人姓名==
+			kyjdwpxx.setJdpdlxmc(kyjdwpxx.getJdpxx().getJdpdlxmc());//寄递品大类名称
+			kyjdwpxx.setJdplxmc(kyjdwpxx.getJdpxx().getJdplxmc());//寄递品小类名称
+			kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
+			kyjdwpxx.setLjtbsj(kyjdwpxx.getLjjbxx().getLjtbsj());//揽件填报时间
+			kyjdwpxx.setQymc(kyjdwpxx.getLjjbxx().getQyjbxx().getQymc());//企业名称
+			kyjdwpxx.setQyid(kyjdwpxx.getLjjbxx().getQyjbxx().getQyid());//企业ID
+			//禁寄物品类型名称
+			kyjdwpxx.setJjwplx(getJjwplxDict().get(kyjdwpxx.getJjwplx()));
+			kyjdwpxx.setXxdz(kyjdwpxx.getSjr().getJdrydz());
+			kyjdwpxx.setGxdwmc(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwmc());
+		}
+		Kyjdwpxx setkyjdwpxx = new Kyjdwpxx();
+		this.setData(setkyjdwpxx, lData, lPro, lCol);
+		this.tabledata = this.getData();
+		totalrows = this.getTotalrows();
+	}
+///////////////添加禁寄物品类型////////////////
 	/***
 	 * 可疑寄递物品信息导出时的查询，公安端
 	 * @return

@@ -59,9 +59,25 @@ public class Kyjdwpxx implements Serializable {
 	
 	private String djsjbz;//用于判断是否可进行修改
 	
+	/**
+	 *  禁寄物品类型
+	 */
+	private String jjwplx;
+	//查询用收件人地址
+	private String xxdz;
 	
-	
-	
+	public String getXxdz() {
+		return xxdz;
+	}
+	public void setXxdz(String xxdz) {
+		this.xxdz = xxdz;
+	}
+	public String getJjwplx() {
+		return jjwplx;
+	}
+	public void setJjwplx(String jjwplx) {
+		this.jjwplx = jjwplx;
+	}
 	public String getDjsjbz() {
 		return djsjbz;
 	}
@@ -110,10 +126,16 @@ public class Kyjdwpxx implements Serializable {
 	private Date ljtbsj;//揽件填报时间
 	private String qymc;//企业名称
 	private Integer qyid;//企业ID
+	private String gxdwmc; //管辖单位名称
 	
 	
 	
-	
+	public String getGxdwmc() {
+		return gxdwmc;
+	}
+	public void setGxdwmc(String gxdwmc) {
+		this.gxdwmc = gxdwmc;
+	}
 	public Integer getQyid() {
 		return qyid;
 	}

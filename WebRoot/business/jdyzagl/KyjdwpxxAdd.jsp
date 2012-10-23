@@ -6,8 +6,24 @@
 <script type="text/javascript">
 $(document).ready(function() {	
 	$('#jdpxx_id').val(dataid);
+	//@fixed 添加的禁寄物品类型
+	//禁寄物品类型
+	$('#jdpxx_jjwplx').selectBox({code:'dm_jdyjjwplx'});
+	$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
 	//可疑物品类别
 	$('#jdpxx_kywplb').selectBox({code:'dm_kywplb'});
+	$('#jdpxx_kywplb').change(function(){
+		$('#jdpxx_jjwplx').setValue('');
+		if($(this).val()=='2'){
+			if($('#jdpxx_jjwplx').hasClass('readonly'))
+				$('#jdpxx_jjwplx').removeClass('readonly').setAttr('readonly',false);
+		}
+		else{
+			if(!$('#jdpxx_jjwplx').hasClass('readonly'))
+				$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
+		}
+			
+	});
 	//报告时间
 	$("#jdpxx_basj").val('<%=dateNow%>').attr("readOnly",true).datepicker();
 	//揽件人
@@ -135,14 +151,21 @@ function kywpaddaddback(json){
 		<td class="distd">代收人证件类型</td>
 		<td class="detailtd"><input type="text" id="jdpxx_pjjbxx_dsr_zjlx" name="jdpxx.pjjbxx.dsr.zjlx" class="readonly" value="" /></td>
 	</tr>
+	<tr>
 		<td class="distd">代收人证件号码</td>
 		<td class="detailtd"><input type="text" id="jdpxx_pjjbxx_dsr_zjhm"  name="jdpxx.pjjbxx.dsr.zjhm" class="readonly" value="" /></td>
 		<td class="red">可疑物品类别</td>
 		<td class="pagetd"><select class="select1" id="jdpxx_kywplb" name="kyjdwpxx.kywplb" ><option></option></select></td>
 	</tr>
+		<tr>
+		<td class="distd"></td>
+		<td class="detailtd"></td>
+		<td>禁寄物品种类</td>
+		<td class="pagetd"><select class="select1" id="jdpxx_jjwplx" name="kyjdwpxx.jjwplx" ><option></option></select></td>
+	</tr>
 	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
-		<td class="detailtd"><textarea  id="jdpxx_kywpms" name="kyjdwpxx.kywpms"></textarea></td>
+		<td class="detailtd" colspan="3"><textarea  id="jdpxx_kywpms" name="kyjdwpxx.kywpms" style="width:90%;"></textarea></td>
 	</tr>
 	<tr height="20">
 		<td class="red">报告人</td>
