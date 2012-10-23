@@ -107,24 +107,35 @@ public class LssjgjAction extends PageAction {
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (jdytjxx.getSjfw() != null) {// 时间范围
 			// 获取当前时间
-			String currentDate = "";//当前时间
-			Date dt = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			currentDate = sdf.format(dt);
-			String beforeDate = "";//当前时间前推时间
+//			String currentDate = "";//当前时间
+//			Date dt = new Date();
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//			currentDate = sdf.format(dt);
+//			String beforeDate = "";//当前时间前推时间
+			Date currentDate = new Date();
+			Date beforeDate;
 			Calendar calendar = Calendar.getInstance();// 日历对象
 			if ("half".equals(jdytjxx.getSjfw())) {// 设置时间范围为半年
-				calendar.setTime(dt);
+//				calendar.setTime(dt);
+//				calendar.add(Calendar.MONTH, -6);
+//				beforeDate = sdf.format(calendar.getTime());
+				calendar.setTime(currentDate);
 				calendar.add(Calendar.MONTH, -6);
-				beforeDate = sdf.format(calendar.getTime());
+				beforeDate = calendar.getTime();
 			}else if("one".equals(jdytjxx.getSjfw())){// 设置时间范围为一年
-				calendar.setTime(dt);
+//				calendar.setTime(dt);
+//				calendar.add(Calendar.YEAR, -1);
+//				beforeDate = sdf.format(calendar.getTime());
+				calendar.setTime(currentDate);
 				calendar.add(Calendar.YEAR, -1);
-				beforeDate = sdf.format(calendar.getTime());
+				beforeDate = calendar.getTime();
 			}else{// 设置时间范围为两年
-				calendar.setTime(dt);
+//				calendar.setTime(dt);
+//				calendar.add(Calendar.YEAR, -2);
+//				beforeDate = sdf.format(calendar.getTime());
+//				calendar.setTime(currentDate);
 				calendar.add(Calendar.YEAR, -2);
-				beforeDate = sdf.format(calendar.getTime());
+				beforeDate = calendar.getTime();
 			}
 			params.put("beforeDate", beforeDate);
 			params.put("currentDate", currentDate);
