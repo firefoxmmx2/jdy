@@ -244,6 +244,13 @@
 				}
 					
 			});
+			
+			paramType.click(function(){
+				$('input[name=paramType]').each(function(){
+					if(paramType.val()!=$(this).val())
+						$(this).parent().find('input[name!="paramType"]').val('')
+				});
+			});
 		});
 		//默认选择第一个查询条件
 		$('input[name=paramType]').eq(0).click();
