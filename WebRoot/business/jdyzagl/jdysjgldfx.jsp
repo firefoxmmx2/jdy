@@ -40,7 +40,7 @@
 			$('<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">'+
 				    '<tr>'+
 				      '<td align="left" class="title1">揽件信息</td>'+
-				      '<td align="right"><a href="#" id="closeDiv" onclick="close_ljxx_dialog();" class="close"></a></td>'+
+				      '<td align="right"><a href="#" id="closeDiv" onclick="close_dialog(this);" class="close"></a></td>'+
 				    '</tr>'+
 				'</table>').insertBefore($('#ljjbxx_man_qyd'));
 			
