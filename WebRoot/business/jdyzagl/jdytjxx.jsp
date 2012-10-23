@@ -324,7 +324,7 @@ function wpfltj_page_query(pageno,url){
 //     	                                    		$tr.find('td:nth(0)').remove();
 //     	                                    		$tr.find('th:nth(0)').remove();
 //     	                                    	});
-    	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
+    	                                    	myTableDataBmXx= $(jdytjxx_wp_queryTable).clone().append($chart_table.find('tbody').html()).hide();
 //     	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
 												if(myTableDataBmXx)
     												displayWpflTjImage();
