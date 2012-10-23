@@ -29,6 +29,7 @@ function setPageListhmdczrz(pageno,url){
 			url=pagehmdUrl;
 		}
 		var mygrid1 = $("#"+tableidhmd).ingrid({ 
+										onRowSelect:null,
 										ingridPageWidth: 900,
 										url: url,	
 										height: pageHeight-235,
