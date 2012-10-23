@@ -145,7 +145,7 @@ function setkyjdwpdaoc(){
 //导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
 function searchLongBack(json){  
     //报表标题
-	var bbmc="禁寄物品信息";
+	var bbmc="禁寄物品查询统计";
 	//报表请求
 	setExcelLong("kyjdwpxxexcel",bbmc);	
 }
