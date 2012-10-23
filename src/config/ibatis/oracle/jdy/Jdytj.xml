@@ -144,11 +144,17 @@
 		<isNotEmpty prepend="and" property="zjhm">
 			ry.zjhm = #zjhm#
 		</isNotEmpty>
-		<isNotEmpty prepend="and" property="beforeDate">
+		<!-- <isNotEmpty prepend="and" property="beforeDate">
 			ywxx.ywdjsj &gt;= to_date(#beforeDate#,'yyyy-mm-dd')
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="currentDate">
 			ywxx.ywdjsj &lt;= to_date(#currentDate#,'yyyy-mm-dd')
+		</isNotEmpty> -->
+		<isNotEmpty prepend="and" property="beforeDate">
+			ywxx.ywdjsj &gt;= #beforeDate:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="currentDate">
+			ywxx.ywdjsj &lt;= #currentDate:TIMESTAMP#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="gxdwbm">
 			qy.gxdwbm like '$gxdwbm$%'

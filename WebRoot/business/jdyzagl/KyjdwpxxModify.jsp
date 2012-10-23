@@ -9,7 +9,7 @@ $(document).ready(function() {
 	$('#jdpxx_id_mod').val(dataid);
 	//禁寄物品类型
 	$('#jdpxx_jjwplx').selectBox({code:'dm_jdyjjwplx'});
-	$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
+	
 	//可疑物品类别
 	$('#jdpxx_kywplb_mod').selectBox({code:'dm_kywplb'});
 	$('#jdpxx_kywplb_mod').change(function(){
@@ -70,6 +70,9 @@ function kyjdwpback_mod(json){
 					}
 				}
 			});
+			
+			if($('#jdpxx_kywplb_mod').val()!='2')
+				$('#jdpxx_jjwplx').addClass('readonly').setAttr('readonly',true);
 		}
 		else{
 			jAlert('该派件信息已经不存在','提示');
@@ -85,6 +88,8 @@ function yangzhengff(){
 	if (!checkControlValue("jdpxx_bgrxm","Select",1,14,null,1,"报告人"))
 		return false;
 	if (!checkControlValue("jdpxx_basj","Date",null,null,null,1,"报告日期"))
+		return false;
+	if($('#jdpxx_kywplb_mod').val()!='2' && !checkControlValue("jdpxx_jjwplx","Select",1,8,null,1,"禁寄物品种类"))
 		return false;
 	return true;
 }
