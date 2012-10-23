@@ -185,7 +185,7 @@ public class KyjdwpAction extends PageAction{
 			setTableDategad_ljjbxx(pageinfo.getData());
 		}
 //////////////@fixed 添加禁寄物品类型////////////
-		if("1".equals(isJjwpcx)){
+		else if("1".equals(isJjwpcx)){
 			setTableDateJjwpGad_ljjbxx(pageinfo.getData());
 		}
 ///////////////添加禁寄物品类型////////////////
