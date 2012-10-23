@@ -289,6 +289,9 @@ function wpfltj_loadPage(divpageid){
 	jdytjxx_query_page_func(1,'#');
 	myTableDataBmXx=null;
 }
+/**
+ * 物品分类排名查询
+ */
 function wpfltj_page_query(pageno,url){
 	if (jdytjxxManVerify()){
 		var aybmxxtj_gxdwbm=$("#jdytjxx_gxdwbm").val();
@@ -313,19 +316,23 @@ function wpfltj_page_query(pageno,url){
                                         ingridExtraParams:params,
                                         onRowSelect:null,
                                         changeHref:function(table){
-                                        	myTableDataBmXx=null;
-	                                    	var $chart_table = $(table).clone();
-// 	                                    	$chart_table.find('tr').each(function(){
-// 	                                    		var $tr = $(this);
-// 	                                    		$tr.find('td:nth(0)').remove();
-// 	                                    		$tr.find('th:nth(0)').remove();
-// 	                                    	});
-	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
-// 	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
-											displayWpflTjImage();
-// 	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
-	                                    		 
-// 	                                    	 }
+                                        	try{
+                                        		myTableDataBmXx=null;
+    	                                    	var $chart_table = $(table).clone();
+//     	                                    	$chart_table.find('tr').each(function(){
+//     	                                    		var $tr = $(this);
+//     	                                    		$tr.find('td:nth(0)').remove();
+//     	                                    		$tr.find('th:nth(0)').remove();
+//     	                                    	});
+    	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
+//     	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
+												if(myTableDataBmXx)
+    												displayWpflTjImage();
+												else
+													$('#jdytjxx_tx_div').text('没有统计数据');
+                                        	}catch(e){
+                                        		$('#jdytjxx_tx_div').text('没有统计数据');
+                                        	}
                                     },
 										pageNumber: pageno,
 										sorting: false,
@@ -358,18 +365,22 @@ function jdyjddxtj_page_query(pageno,url){
                                         ingridExtraParams:params,
                                         onRowSelect:null,
                                         changeHref:function(table){
-                                        	myTableDataBmXx=null;
-	                                    	var $chart_table = $(table).clone();
-	                                    	$chart_table.find('tr').each(function(){
-	                                    		var $tr = $(this);
-	                                    		$tr.find('td:nth(0)').remove();
-	                                    		$tr.find('th:nth(0)').remove();
-	                                    	});
-	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
-	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
-	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
-	                                    		 ceshiBar();
-	                                    	 }
+                                        	try{
+                                        		myTableDataBmXx=null;
+    	                                    	var $chart_table = $(table).clone();
+    	                                    	$chart_table.find('tr').each(function(){
+    	                                    		var $tr = $(this);
+    	                                    		$tr.find('td:nth(0)').remove();
+    	                                    		$tr.find('th:nth(0)').remove();
+    	                                    	});
+    	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
+    	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
+    	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
+    	                                    		 show_biaoqianBmXx({},'tx');
+    	                                    	 }
+                                        	}catch(e){
+                                        		
+                                        	}
                                     },
 										pageNumber: pageno,
 										sorting: false,
@@ -400,18 +411,23 @@ function jdyqydxtj_page_query(pageno,url){
                                         ingridExtraParams:params,
                                         onRowSelect:null,
                                         changeHref:function(table){
-                                        	myTableDataBmXx=null;
-	                                    	var $chart_table = $(table).clone();
-	                                    	$chart_table.find('tr').each(function(){
-	                                    		var $tr = $(this);
-	                                    		$tr.find('td:nth(0)').remove();
-	                                    		$tr.find('th:nth(0)').remove();
-	                                    	});
-	                                    	myTableDataBmXx= $(jdytjxx_qy_queryTable).clone().append($chart_table.find('tbody').html()).hide();
-	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
-	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
-	                                    		 ceshiBar();
-	                                    	 }
+                                        	try{
+                                        		myTableDataBmXx=null;
+    	                                    	var $chart_table = $(table).clone();
+    	                                    	$chart_table.find('tr').each(function(){
+    	                                    		var $tr = $(this);
+    	                                    		$tr.find('td:nth(0)').remove();
+    	                                    		$tr.find('th:nth(0)').remove();
+    	                                    	});
+    	                                    	myTableDataBmXx= $(jdytjxx_qy_queryTable).clone().append($chart_table.find('tbody').html()).hide();
+    	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
+    	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
+    	                                    		 show_biaoqianBmXx({},'tx');
+    	                                    	 }
+                                        	}catch(e){
+                                        		
+                                        	}
+                                        	
                                         },
 										pageNumber: pageno,
 										sorting: false,
@@ -420,56 +436,13 @@ function jdyqydxtj_page_query(pageno,url){
 									});				
 		}
 }
-/**
- * 物品分类排名查询
- */
-function jdywpfltj_page_query(pageno,url){
-	if (jdytjxxManVerify()){
-		var aybmxxtj_gxdwbm=$("#jdytjxx_gxdwbm").val();
-		if(aybmxxtj_gxdwbm==''||aybmxxtj_gxdwbm==null){
-			$("#jdytjxx_gxdwbm").val(<%=gxdwbm%>);
-			$("#jdytjxx_departlevel").val(<%=departlevel%>);
-		} 
-		
-		if($('#'+jdytjxx__table_id).length == 0){
-			$('#'+jdytjxx_divnid).html(jdytjxx_qy_queryTable);
-		}
-		url=set_jdytjxx_list(pageno,url);
-		
-		var mygrid1 = $("#"+jdytjxx__table_id).ingrid({
-										paging:false,	 
-										url: url,	
-										height: pageHeight-263,
-                                        ingridPageParams:sXML,
-                                        ingridExtraParams:params,
-                                        onRowSelect:null,
-                                        changeHref:function(table){
-                                        	myTableDataBmXx=null;
-	                                    	var $chart_table = $(table).clone();
-// 	                                    	$chart_table.find('tr').each(function(){
-// 	                                    		var $tr = $(this);
-// 	                                    		$tr.find('td:nth(0)').remove();
-// 	                                    		$tr.find('th:nth(0)').remove();
-// 	                                    	});
-	                                    	myTableDataBmXx= $(jdytjxx_qy_queryTable).clone().append($chart_table.find('tbody').html()).hide();
-	                                    	//myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
-	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
-	                                    		 displayWpflTjImage();
-	                                    	 }
-                                        },
-										pageNumber: pageno,
-										sorting: false,
-										isPlayResultNull:false,
-										colWidths: ["5%","15%","5%","25%","25%","20%","5%"]									
-									});				
-		}
-}
+
 function jdytjxxManVerify(){
 	var sj1 = $("#jdytjxx_tjsjf").val();
 	var sj2 = $("#jdytjxx_tjsjt").val();
 	if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
 		if(sj1>sj2){
-			jAlert('受理时间不能大于受理时间至','提示信息')
+			jAlert('统计时间不能大于统计时间至','提示信息')
 				return false;
 		}else{
 			return true;
