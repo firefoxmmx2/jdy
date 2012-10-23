@@ -181,7 +181,7 @@ public class KyjdwpAction extends PageAction{
 		totalrows = pageinfo.getTotalRows();
 		lKyjdwpxx = pageinfo.getData();
 		
-		if(kyjdwpxx.getKyjdwpxxcxbz().equals("gadcxbz")){
+		if("gadcxbz".equals(kyjdwpxx.getKyjdwpxxcxbz())){
 			setTableDategad_ljjbxx(pageinfo.getData());
 		}
 //////////////@fixed 添加禁寄物品类型////////////
