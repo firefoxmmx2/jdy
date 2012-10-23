@@ -215,6 +215,7 @@
 			$('#excelSjglForm input:hidden[name=pagerow]').val(pagerow);
 		});
 		
+		$('#excelSjglForm input').val('');
 		$('input[name="paramType"]:checked').parent().find(':input[name!="paramType"]').each(function(){
 			$('#excelSjglForm input[name='+$(this).attr('name')+']').val(this.value);
 		});
@@ -243,6 +244,13 @@
 					getDict_item('sjgl_ssxmc','sjgl_ssx','dm_xzqh');
 				}
 					
+			});
+			
+			paramType.click(function(){
+				$('input[name=paramType]').each(function(){
+					if(paramType.val()!=$(this).val())
+						$(this).parent().find('input[name!="paramType"]').val('')
+				});
 			});
 		});
 		//默认选择第一个查询条件
