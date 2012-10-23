@@ -82,6 +82,8 @@ function yangzhengff(){
 		return false;
 	if (!checkControlValue("jdpxx_basj","Date",null,null,null,1,"报告日期"))
 		return false;
+	if($('#jdpxx_kywplb').val()!='2' && !checkControlValue("jdpxx_jjwplx","Select",1,8,null,1,"禁寄物品种类"))
+		return false;
 	return true;
 }
 //可疑物品insert方法
