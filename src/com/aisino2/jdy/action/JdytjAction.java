@@ -423,7 +423,7 @@ public class JdytjAction extends PageAction {
 		lPro.add("xm");
 		lPro.add("xm");
 		lPro.add("lxdh");
-		lPro.add("jdrydz");
+		lPro.add("xxdz");
 		lPro.add("jdrylxmc");
 		lPro.add("jdrylx");
 
