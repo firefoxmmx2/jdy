@@ -425,6 +425,7 @@ public class KyjdwpAction extends PageAction{
 				if(kyjdwpxx.getKyjdwpxxcxbz()!=null){
 					params.put("kyjdwpxxcxbz", kyjdwpxx.getKyjdwpxxcxbz());
 				}
+				params.put("jjwplx", kyjdwpxx.getJjwplx());
 				Page pageinfo = kyjdwpxxService.findKyjdwpxxsForPage(params, 1, Integer.parseInt(maxRows), dir, sort);
 				totalpage = pageinfo.getTotalPages();
 				totalrows = pageinfo.getTotalRows();
