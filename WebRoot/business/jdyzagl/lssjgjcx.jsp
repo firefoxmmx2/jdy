@@ -127,7 +127,7 @@
 					<td width="23%" class="pagetd"><input type="text" id="lssj_zjhm" name="jdytjxx.zjhm" class="inputstyle" value=""></td>
 					<td width="10%" class="pagedistd">时间范围</td>
 					<td width="23%" class="pagetd">
-						<select id="lssj_sjfw" name="jdytjxx.sjfw" class="select1">
+						<select id="lssj_sjfw" name="jdytjxx.sjfw" class="select1" style='font-size:10px; border:solid 1px #7f9db9'>
 							<option value='half'>半年</option>
 							<option value='one' selected="selected">一年</option>
 							<option value='two'>两年</option>

@@ -113,7 +113,7 @@ public class ZdrygkAction extends PageAction {
 		if(jdytjxx.getGxdwbm()!=null){
 			params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
 		}
-		Page pageinfo = jdytjxx_service.findZdryForPage(params, pagesize, pagerow, sort, dir);
+		Page pageinfo = jdytjxx_service.findZdryForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
 		lJdytjxx = pageinfo.getData();
@@ -191,7 +191,7 @@ public class ZdrygkAction extends PageAction {
 			if(jdytjxx.getGxdwbm()!=null){
 				params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
 			}
-			Page pageinfo = jdytjxx_service.findZdryForPage(params, 1, Integer.parseInt(maxRows), sort, dir);
+			Page pageinfo = jdytjxx_service.findZdryForPage(params, 1, Integer.parseInt(maxRows), dir, sort);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
 			lJdytjxx = pageinfo.getData();
