@@ -215,6 +215,7 @@
 			$('#excelSjglForm input:hidden[name=pagerow]').val(pagerow);
 		});
 		
+		$('#excelSjglForm input').val('');
 		$('input[name="paramType"]:checked').parent().find(':input[name!="paramType"]').each(function(){
 			$('#excelSjglForm input[name='+$(this).attr('name')+']').val(this.value);
 		});
