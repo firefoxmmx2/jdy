@@ -240,9 +240,9 @@
 			var paramType = $(this);
 			paramType.parent().find('input[name!="paramType"]').click(function(){
 				paramType.click();
-				if($(this).attr('id')=='sjgl_ssxmc'){
-					getDict_item('sjgl_ssxmc','sjgl_ssx','dm_xzqh');
-				}
+// 				if($(this).attr('id')=='sjgl_ssxmc'){
+// 					getDict_item('sjgl_ssxmc','sjgl_ssx','dm_xzqh');
+// 				}
 					
 			});
 			
@@ -272,7 +272,6 @@
     		<input type="hidden" name="dir">
     		<input type="hidden" name="rdrjbxx.xm">
     		<input type="hidden" name="rdrjbxx.lxdh">
-    		<input type="hidden" name="rdrjbxx.ssx">
     		<input type="hidden" name="rdrjbxx.xxdz">
 		</form>
 	    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
@@ -297,10 +296,10 @@
 							<div style="padding-left: 10px;text-align: left;">
 								<label>
 									<input type="radio" name="paramType" value="xxdz"><span>地址</span>
-									<span>省市县</span>
-									<input type="hidden" name="rdrjbxx.ssx" id="sjgl_ssx">
-									<input type="text" id="sjgl_ssxmc" class="inputstyle">
-									<span>街道门号</span>
+<!-- 									<span>省市县</span> -->
+<!-- 									<input type="hidden" name="rdrjbxx.ssx" id="sjgl_ssx"> -->
+<!-- 									<input type="text" id="sjgl_ssxmc" class="inputstyle"> -->
+<!-- 									<span>街道门号</span> -->
 									<input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputstyle">
 								</label>
 							</div>
