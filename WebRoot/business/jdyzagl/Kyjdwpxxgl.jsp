@@ -61,7 +61,7 @@ function manVerify_bm(){
 	var sj2 = $("#kyjdwpxx_sbsjt").val();
 	if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
 		if(sj1>sj2){
-			jAlert('填报时间时间不能大于填报时间至','提示信息')
+			jAlert('上报时间不能大于上报时间至','提示信息')
 			return false;
 		}
 	}
