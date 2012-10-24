@@ -82,7 +82,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
 			/****插入人员照片信息*****/
 			Jddxzpxx setJddxzpxx = new Jddxzpxx();
-			if(ljjbxx.getJjrzpxx()!=null){
+			if(ljjbxx.getJjrzpxx()!=null && StringUtil.isNotEmpty(ljjbxx.getJjrzpxx())){
 				setJddxzpxx.setRdrjbxx_id(ljjbxx.getJjr().getId());//寄件人ID
 				setJddxzpxx.setScsj(new Date());//上传时间
 				byte[] jjrzp;
@@ -142,7 +142,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		if(ljjbxx==null || !StringUtil.isNotEmpty(ljjbxx.getDjxh()))
 			throw new RuntimeException("需要修改的揽件信息登记序号为空");
 		//修改寄件人
-		if(ljjbxx.getJjr()!=null && StringUtil.isNotEmpty(ljjbxx.getJjr().getZjhm())){
+		if(ljjbxx.getJjr()!=null){
 			Rdrjbxx setJjrtemp = new Rdrjbxx();
 			setJjrtemp=rdrjbxxDao.get(ljjbxx.getJjr());
 			//寄件人不存在的时候，需要将该人员添加到比对报警表去
@@ -173,7 +173,7 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 			
 		}
 		//修改收件人
-		if(ljjbxx.getSjr()!=null && StringUtil.isNotEmpty(ljjbxx.getSjr().getZjhm())){
+		if(ljjbxx.getSjr()!=null){
 			Rdrjbxx setJjrtemp1 = new Rdrjbxx();
 			setJjrtemp1=rdrjbxxDao.get(ljjbxx.getSjr());
 			//收件人不存在的时候，需要将该人员添加到比对报警表去
