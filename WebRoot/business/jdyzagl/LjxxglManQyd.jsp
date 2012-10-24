@@ -159,7 +159,7 @@ function setLjxxDetail(id){
 function setLjxxDelete(id){
 	$("#"+ljjbxxadd_detail).hide();
 	sFlag="false";
-	jConfirm('确定删除吗？', '删除提示', function(r) {
+	jConfirm('是否决定删除该揽件登记信息？', '删除提示', function(r) {
     	if(r==true){
     		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
 		}
