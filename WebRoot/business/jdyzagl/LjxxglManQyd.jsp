@@ -156,6 +156,19 @@ function setLjxxDetail(id){
 	bindDocument("ljjbxxadd_detail");
 }
 //揽件信息删除
+function setLjxxDelete(id){
+	$("#"+ljjbxxadd_detail).hide();
+	sFlag="false";
+	jConfirm('确定删除吗？', '删除提示', function(r) {
+    	if(r==true){
+    		$.post("jdy/delete_ljxx.action",{'lj.djxh':id},function(json){ if(json.result == 'success') { setPageListlj(1); } },'json');
+		}
+		else{
+		   return false;
+		}
+	});
+}
+
 //function setLjxxDelete(id) {
 //	var kybzw=$("#"+id+" td:nth(7)").text();//得到可疑标志 的值
 //	$('#ljdjxh').val(id);
