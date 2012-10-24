@@ -604,32 +604,50 @@ public class PjxxAction extends PageAction {
 					jjr.setXm(getCellString(row.getCell(1)));
 					jjr.setZjlx(getCellString(row.getCell(2)));
 					jjr.setZjhm(getCellString(row.getCell(3)));
-					jjr.setSsx(getCellString(row.getCell(4)));
-					jjr.setSsxmc(ItemChange.codeChange("dm_xzqh", jjr.getSsx()));
-					jjr.setXxdz(getCellString(row.getCell(5)));
-					jjr.setLxdh(getCellString(row.getCell(6)));
-					jjr.setGddh(getCellString(row.getCell(7)));
+//					jjr.setSsx(getCellString(row.getCell(4)));
+//					jjr.setSsxmc(ItemChange.codeChange("dm_xzqh", jjr.getSsx()));
+					jjr.setXxdz(getCellString(row.getCell(4)));
+					jjr.setLxdh(getCellString(row.getCell(5)));
+					jjr.setGddh(getCellString(row.getCell(6)));
 					ljxx.setJjr(jjr);
 					Rdrjbxx sjr = new Rdrjbxx();
-					sjr.setXm(getCellString(row.getCell(8)));
-					sjr.setZjlx(getCellString(row.getCell(9)));
-					sjr.setZjhm(getCellString(row.getCell(10)));
-					sjr.setSsx(getCellString(row.getCell(11)));
-					sjr.setSsxmc(ItemChange.codeChange("dm_xzqh", sjr.getSsx()));
-					sjr.setXxdz(getCellString(row.getCell(12)));
-					sjr.setLxdh(getCellString(row.getCell(13)));
-					sjr.setGddh(getCellString(row.getCell(14)));
+					sjr.setXm(getCellString(row.getCell(7)));
+					sjr.setZjlx(getCellString(row.getCell(8)));
+					sjr.setZjhm(getCellString(row.getCell(9)));
+//					sjr.setSsx(getCellString(row.getCell(10)));
+//					sjr.setSsxmc(ItemChange.codeChange("dm_xzqh", sjr.getSsx()));
+					sjr.setXxdz(getCellString(row.getCell(10)));
+					sjr.setLxdh(getCellString(row.getCell(11)));
+					sjr.setGddh(getCellString(row.getCell(12)));
 					ljxx.setSjr(sjr);
 					Qyryxx ljr = new Qyryxx();
-					ljr.setXm(getCellString(row.getCell(15)));
+					ljr.setXm(getCellString(row.getCell(13)));
 					ljr.setQybm(currUser.getDepartcode() == null ? currUser
 							.getDepartment().getDepartcode() : currUser
 							.getDepartcode());
 					ljxx.setLjr((Qyryxx) qyryxxService.getListQyryxx(ljr)
 							.get(0));
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					ljxx.setLjsj(sdf.parse(getCellString(row.getCell(16))));
-
+					Date ljsj=null;
+					try{
+						Long time = Long.getLong(getCellString(row.getCell(14)));
+						ljsj=new Date(time);
+					}catch(Exception e){
+						
+						try{
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+							ljsj =sdf.parse(getCellString(row.getCell(14)));
+						}catch(Exception e1){
+							try{
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+								ljsj =sdf.parse(getCellString(row.getCell(14)));
+							}catch(Exception e2){
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+								ljsj =sdf.parse(getCellString(row.getCell(14)));
+							}
+						}
+						
+					}
+					ljxx.setLjsj(ljsj);
 					ljxx.setLjtbr(tbr);
 					// jdpxx
 					ljxx.setJdp_list(new ArrayList<Jdpxx>());
@@ -673,13 +691,32 @@ public class PjxxAction extends PageAction {
 				pjr = (Qyryxx) qyryxxService.getListQyryxx(pjr)
 						.get(0);
 				pjxx.setPjr(pjr);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				pjxx.setPjsj(sdf.parse(getCellString(row.getCell(16))));
+				Date pjsj=null;
+				try{
+					Long time = Long.getLong(getCellString(row.getCell(14)));
+					pjsj=new Date(time);
+				}catch(Exception e){
+					
+					try{
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						pjsj =sdf.parse(getCellString(row.getCell(14)));
+					}catch(Exception e1){
+						try{
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+							pjsj =sdf.parse(getCellString(row.getCell(14)));
+						}catch(Exception e2){
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+							pjsj =sdf.parse(getCellString(row.getCell(14)));
+						}
+					}
+					
+				}
+				pjxx.setPjsj(pjsj);
 				
 				String dsrxm = getCellString(row.getCell(17));
 				String dsrzjlx  = getCellString(row.getCell(18));
 				String dsrzjhm = getCellString(row.getCell(19));
-				if(StringUtil.isNotEmpty(dsrxm) && StringUtil.isNotEmpty(dsrzjlx) && StringUtil.isNotEmpty(dsrzjhm)){
+				if(StringUtil.isNotEmpty(dsrxm)){
 					Rdrjbxx dsr = new Rdrjbxx();
 					dsr.setZjhm(dsrzjhm);
 					dsr.setXm(dsrxm);
