@@ -68,7 +68,7 @@ function modifyback(json){
 		$("#ljjbxx_modify [id=lj_jjrzjlx]").val(json.lj.jjr.zjlx);//寄件人证件类型
 		$("#ljjbxx_modify [id=lj_jjrzjhm]").val(json.lj.jjr.zjhm);//寄件人证件号码
 		//$("#ljjbxx_modify [id=jjrssxmc]").val(json.lj.jjr.ssxmc);//寄件地址
-		$("#ljjbxx_modify [id=lj_jjrssx]").val(json.lj.jjr.ssx);//寄件地址代码
+		//$("#ljjbxx_modify [id=lj_jjrssx]").val(json.lj.jjr.ssx);//寄件地址代码
 		$("#ljjbxx_modify [id=lj_jjrxxdz]").val(json.lj.jjr.xxdz);//寄件人现住地详址
 		$("#ljjbxx_modify [id=lj_jjrdw]").val(json.lj.jjr.dw);//寄件人单位
 		$("#ljjbxx_modify [id=lj_jjrlxdh]").val(json.lj.jjr.lxdh);//寄件人手机
@@ -78,7 +78,7 @@ function modifyback(json){
 		$("#ljjbxx_modify [id=lj_sjrzjlx]").val(json.lj.sjr.zjlx);//收件人证件类型
 		$("#ljjbxx_modify [id=lj_sjrzjhm]").val(json.lj.sjr.zjhm);//收件人证件号码
 		//$("#ljjbxx_modify [id=sjrssxmc]").val(json.lj.sjr.ssxmc);//收件地址
-		$("#ljjbxx_modify [id=lj_sjrssx]").val(json.lj.sjr.ssx);//寄件地址代码
+		//$("#ljjbxx_modify [id=lj_sjrssx]").val(json.lj.sjr.ssx);//寄件地址代码
 		$("#ljjbxx_modify [id=lj_sjrxxdz]").val(json.lj.sjr.xxdz);//收件人现住地详址
 		$("#ljjbxx_modify [id=lj_sjrdw]").val(json.lj.sjr.dw);//收件人单位
 		$("#ljjbxx_modify [id=lj_sjrlxdh]").val(json.lj.sjr.lxdh);//收件人手机
@@ -471,8 +471,8 @@ function addback(json){
 </tr>
 <tr>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" id="ljjbxx_modify">
-<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
-<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
+<!--<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">-->
+<!--<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">-->
 <input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
 <input type="hidden" id="lj_ljr_cyrybh_mod" name="lj.ljr.cyrybh">
 <input type="hidden" id="ljjbxxmodif_id" name="lj.djxh" value=""><!-- 修改传递过来的ID号 -->

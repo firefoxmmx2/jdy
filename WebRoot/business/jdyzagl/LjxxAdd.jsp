@@ -369,8 +369,8 @@ function addbackbcxz(json){
 </tr>
 <tr>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" id="ljjbxx_add">
-<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">
-<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">
+<!--<input type="hidden" id="lj_jjrssx" name="lj.jjr.ssx" value="">-->
+<!--<input type="hidden" id="lj_sjrssx" name="lj.sjr.ssx" value="">-->
 <input type="hidden" id="lj_qyjbxx" name="lj.qyjbxx.qybm" value="<%=qybm %>">
 <input type="hidden" id="ljljradd_cyrybh" name="lj.ljr.cyrybh">
 <tr>
