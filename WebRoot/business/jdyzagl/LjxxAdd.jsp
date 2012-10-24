@@ -15,19 +15,19 @@ $(document).ready(function() {
 	$("#lj_jjrzjlx").attr("name","lj.jjr.zjlx");
 	$("#lj_sjrzjlx").attr("name","lj.sjr.zjlx");
 	//添加寄件地址、收件地址的提交名称
-	$("#jjrssxmc").attr("name","lj.jjr.ssxmc");
-	$("#sjrssxmc").attr("name","lj.sjr.ssxmc");
+	//$("#jjrssxmc").attr("name","lj.jjr.ssxmc");
+	//$("#sjrssxmc").attr("name","lj.sjr.ssxmc");
 	//揽件时间选择
 	//$("#ljjbxx_add [id=lj_ljsj]").val('<%=dateNow%>').attr("readOnly",true).datepicker();/没每时分秒
 	$("#ljjbxx_add [id=lj_ljsj]").attr("readonly","true").datepicker(true);
 	//户籍省市县--寄件人
-	$("#jjrssxmc").click( function() {
-		getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
-	});
+	//$("#jjrssxmc").click( function() {
+	//	getDict_item("jjrssxmc", "lj_jjrssx", "dm_xzqh");
+	//});
 	//户籍省市县--收件人
-	$("#sjrssxmc").click( function() {
-		getDict_item("sjrssxmc", "lj_sjrssx", "dm_xzqh");
-	});
+	//$("#sjrssxmc").click( function() {
+	//	getDict_item("sjrssxmc", "lj_sjrssx", "dm_xzqh");
+	//});
 	//证件类型--寄件人
 	getDictItemBox("lj_jjrzjlx","lj_jjrzjlxdm","dm_zjlx");
 	//证件类型--收件人
@@ -243,24 +243,24 @@ function addVerify(){
 		return false;
 	if (!checkControlValue("lj_jjrxm","String",1,30,null,1,"寄件人姓名"))
 		return false;
-	if (!checkControlValue("lj_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
-		return false;
+	//if (!checkControlValue("lj_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
+	//	return false;
 	//if (!checkControlValue("lj_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
 		//return false;
-	if (!checkControlValue("jjrssxmc","String",1,70,null,1,"寄件地址"))
-		return false;
+	//if (!checkControlValue("jjrssxmc","String",1,70,null,1,"寄件地址"))
+		//return false;
 	if (!checkControlValue("lj_jjrxxdz","String",1,70,null,1,"寄件人现住地详址"))
 		return false;
 	if (!checkControlValue("lj_jjrlxdh","String",1,20,null,1,"寄件人手机"))
 		return false;
 	if (!checkControlValue("lj_sjrxm","String",1,30,null,1,"收件人姓名"))
 		return false;
-	if (!checkControlValue("lj_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
-		return false;
+	//if (!checkControlValue("lj_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
+	//	return false;
 	//if (!checkControlValue("lj_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
 		//return false;
-	if (!checkControlValue("sjrssxmc","String",1,70,null,1,"收件地址"))
-		return false;
+	//if (!checkControlValue("sjrssxmc","String",1,70,null,1,"收件地址"))
+		//return false;
 	if (!checkControlValue("lj_sjrxxdz","String",1,70,null,1,"收件人现住地详址"))
 		return false;
 	if (!checkControlValue("lj_sjrlxdh","String",1,20,null,1,"收件人手机"))
