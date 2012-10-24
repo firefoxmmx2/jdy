@@ -167,16 +167,15 @@ public class KyjdwpAction extends PageAction{
 		if(kyjdwpxx.getSbsjt()!=null){//上报截止时间
 			params.put("sbsjt", kyjdwpxx.getSbsjt());
 		}
-		if(kyjdwpxx.getKyjdwpxxcxbz()!=null){
-			params.put("kyjdwpxxcxbz", kyjdwpxx.getKyjdwpxxcxbz());
-		}
+		
+		params.put("kyjdwpxxcxbz", kyjdwpxx.getKyjdwpxxcxbz());//可疑寄递物品企业端、公安端查询标志
 		//////////////@fixed 添加禁寄物品类型////////////
 		//是否是禁寄物品查询
 		params.put("isJjwpcx", isJjwpcx);
 //		禁寄物品类型条件
 		params.put("jjwplx", kyjdwpxx.getJjwplx());
 		///////////////添加禁寄物品类型////////////////
-		Page pageinfo = kyjdwpxxService.findKyjdwpxxsForPage(params, pagesize, pagerow, dir, sort);
+		Page pageinfo = kyjdwpxxService.findKyjdwpxxsForPage(params, pagesize, pagerow, sort, dir);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
 		lKyjdwpxx = pageinfo.getData();
