@@ -896,7 +896,7 @@ public class LjxxAction extends PageAction {
 		HttpSession session = this.getRequest().getSession();
 		User currUser = (User) session.getAttribute(Constants.userKey);
 		int jdpxxSize = 6;
-		int jdpxxColumn = 19;
+		int jdpxxColumn = 17;
 		try {
 			HSSFWorkbook wb = new HSSFWorkbook(xlsin);
 			HSSFSheet sheet = wb.getSheetAt(0);
@@ -909,28 +909,48 @@ public class LjxxAction extends PageAction {
 				jjr.setXm(getCellString(row.getCell(1)));
 				jjr.setZjlx(getCellString(row.getCell(2)));
 				jjr.setZjhm(getCellString(row.getCell(3)));
-				jjr.setSsx(getCellString(row.getCell(4)));
-				jjr.setSsxmc(ItemChange.codeChange("dm_xzqh", jjr.getSsx()));
-				jjr.setXxdz(getCellString(row.getCell(5)));
-				jjr.setLxdh(getCellString(row.getCell(6)));
-				jjr.setGddh(getCellString(row.getCell(7)));
+//				jjr.setSsx(getCellString(row.getCell(4)));
+//				jjr.setSsxmc(ItemChange.codeChange("dm_xzqh", jjr.getSsx()));
+				jjr.setXxdz(getCellString(row.getCell(4)));
+				jjr.setLxdh(getCellString(row.getCell(5)));
+				jjr.setGddh(getCellString(row.getCell(6)));
 				ljxx.setJjr(jjr);
 				Rdrjbxx sjr = new Rdrjbxx();
-				sjr.setXm(getCellString(row.getCell(8)));
-				sjr.setZjlx(getCellString(row.getCell(9)));
-				sjr.setZjhm(getCellString(row.getCell(10)));
-				sjr.setSsx(getCellString(row.getCell(11)));
-				sjr.setSsxmc(ItemChange.codeChange("dm_xzqh", sjr.getSsx()));
-				sjr.setXxdz(getCellString(row.getCell(12)));
-				sjr.setLxdh(getCellString(row.getCell(13)));
-				sjr.setGddh(getCellString(row.getCell(14)));
+				sjr.setXm(getCellString(row.getCell(7)));
+				sjr.setZjlx(getCellString(row.getCell(8)));
+				sjr.setZjhm(getCellString(row.getCell(9)));
+//				sjr.setSsx(getCellString(row.getCell(11)));
+//				sjr.setSsxmc(ItemChange.codeChange("dm_xzqh", sjr.getSsx()));
+				sjr.setXxdz(getCellString(row.getCell(10)));
+				sjr.setLxdh(getCellString(row.getCell(11)));
+				sjr.setGddh(getCellString(row.getCell(12)));
 				ljxx.setSjr(sjr);
 				Qyryxx ljr = new Qyryxx();
-				ljr.setXm(getCellString(row.getCell(15)));
+				ljr.setXm(getCellString(row.getCell(13)));
 				ljr.setQybm(currUser.getSsdwbm());
 				ljxx.setLjr((Qyryxx) qyryxxService.getListQyryxx(ljr).get(0));
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				ljxx.setLjsj(sdf.parse(getCellString(row.getCell(16))));
+				Date ljsj=null;
+				try{
+					Long time = Long.getLong(getCellString(row.getCell(14)));
+					ljsj=new Date(time);
+				}catch(Exception e){
+					
+					try{
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						ljsj =sdf.parse(getCellString(row.getCell(14)));
+					}catch(Exception e1){
+						try{
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+							ljsj =sdf.parse(getCellString(row.getCell(14)));
+						}catch(Exception e2){
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+							ljsj =sdf.parse(getCellString(row.getCell(14)));
+						}
+					}
+					
+				}
+				
+				ljxx.setLjsj(ljsj);
 				Qyryxx ljtbr = new Qyryxx();
 				ljtbr.setCyrybh(currUser.getUseraccount());
 				ljxx.setLjtbr(ljtbr);
@@ -996,7 +1016,7 @@ public class LjxxAction extends PageAction {
 		return SUCCESS;
 	}
 
-	private String getCellString(HSSFCell cell) {
+	private String getCellString(HSSFCell cell)  {
 		Object result = null;
 		if (cell != null) {
 
@@ -1008,7 +1028,7 @@ public class LjxxAction extends PageAction {
 				result = cell.getRichStringCellValue().getString();
 				break;
 			case HSSFCell.CELL_TYPE_NUMERIC:
-				result = (long) cell.getNumericCellValue();
+					result = (long) cell.getNumericCellValue();
 				break;
 			case HSSFCell.CELL_TYPE_FORMULA:
 				result = (long) cell.getNumericCellValue();
