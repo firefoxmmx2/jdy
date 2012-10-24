@@ -236,37 +236,37 @@ public class KyjdwpAction extends PageAction{
 			kyjdwpxx.setJdpmc(kyjdwpxx.getJdpxx().getJdpmc());//寄递品名称
 			kyjdwpxx.setJjrxm(kyjdwpxx.getJjr().getXm());//寄件人姓名
 			//kyjdwpxx.setJjrzjlx(kyjdwpxx.getJjr().getZjlx());//寄件人证件类型
-			if(kyjdwpxx.getJjr().getZjlx().equals("11")){
+			if("11".equals(kyjdwpxx.getJjr().getZjlx())){
 				kyjdwpxx.setJjrzjlx("身份证");//寄件人证件类型
 			}
-			if(kyjdwpxx.getJjr().getZjlx().equals("13")){
+			if("13".equals(kyjdwpxx.getJjr().getZjlx())){
 				kyjdwpxx.setJjrzjlx("户口薄");//寄件人证件类型
 			}
-			if(kyjdwpxx.getJjr().getZjlx().equals("90")){
+			if("90".equals(kyjdwpxx.getJjr().getZjlx())){
 				kyjdwpxx.setJjrzjlx("军官证");//寄件人证件类型
 			}
-			if(kyjdwpxx.getJjr().getZjlx().equals("91")){
+			if("91".equals(kyjdwpxx.getJjr().getZjlx())){
 				kyjdwpxx.setJjrzjlx("警官证");//寄件人证件类型
 			}
-			if(kyjdwpxx.getJjr().getZjlx().equals("92")){
+			if("92".equals(kyjdwpxx.getJjr().getZjlx())){
 				kyjdwpxx.setJjrzjlx("士兵证");//寄件人证件类型
 			}
-			if(kyjdwpxx.getJjr().getZjlx().equals("93")){
+			if("93".equals(kyjdwpxx.getJjr().getZjlx())){
 				kyjdwpxx.setJjrzjlx("护照");//寄件人证件类型
 			}
-			if(kyjdwpxx.getJjr().getZjlx().equals("99")){
+			if("99".equals(kyjdwpxx.getJjr().getZjlx())){
 				kyjdwpxx.setJjrzjlx("其他");//寄件人证件类型
 			}
 			kyjdwpxx.setJjrzjhm(kyjdwpxx.getJjr().getZjhm());//寄件人证件号码
 			kyjdwpxx.setJdpdlxmc(kyjdwpxx.getJdpxx().getJdpdlxmc());//寄递品大类名称
 			kyjdwpxx.setJdplxmc(kyjdwpxx.getJdpxx().getJdplxmc());//寄递品小类名称
-			if(kyjdwpxx.getKywplb().equals("1")){//可疑物品类别
+			if("1".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 				kyjdwpxx.setKywplb("丢失");
 			}
-			if(kyjdwpxx.getKywplb().equals("2")){//可疑物品类别
+			if("2".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 				kyjdwpxx.setKywplb("禁寄品");
 			}
-			if(kyjdwpxx.getKywplb().equals("3")){//可疑物品类别
+			if("3".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 				kyjdwpxx.setKywplb("其他");
 			}
 			kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
@@ -325,13 +325,13 @@ public class KyjdwpAction extends PageAction{
 			kyjdwpxx.setSjrxm(kyjdwpxx.getSjr().getXm());//收件人姓名==
 			kyjdwpxx.setJdpdlxmc(kyjdwpxx.getJdpxx().getJdpdlxmc());//寄递品大类名称
 			kyjdwpxx.setJdplxmc(kyjdwpxx.getJdpxx().getJdplxmc());//寄递品小类名称
-			if(kyjdwpxx.getKywplb().equals("1")){//可疑物品类别
+			if("1".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 				kyjdwpxx.setKywplb("丢失");
 			}
-			if(kyjdwpxx.getKywplb().equals("2")){//可疑物品类别
+			if("2".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 				kyjdwpxx.setKywplb("禁寄品");
 			}
-			if(kyjdwpxx.getKywplb().equals("3")){//可疑物品类别
+			if("3".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 				kyjdwpxx.setKywplb("其他");
 			}
 			kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
@@ -439,13 +439,13 @@ public class KyjdwpAction extends PageAction{
 					kyjdwpxx.setSjrxm(kyjdwpxx.getSjr().getXm());//收件人姓名==
 					kyjdwpxx.setJdpdlxmc(kyjdwpxx.getJdpxx().getJdpdlxmc());//寄递品大类名称
 					kyjdwpxx.setJdplxmc(kyjdwpxx.getJdpxx().getJdplxmc());//寄递品小类名称
-					if(kyjdwpxx.getKywplb().equals("1")){//可疑物品类别
+					if("1".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 						kyjdwpxx.setKywplb("丢失");
 					}
-					if(kyjdwpxx.getKywplb().equals("2")){//可疑物品类别
+					if("2".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 						kyjdwpxx.setKywplb("禁寄品");
 					}
-					if(kyjdwpxx.getKywplb().equals("3")){//可疑物品类别
+					if("3".equals(kyjdwpxx.getKywplb())){//可疑物品类别
 						kyjdwpxx.setKywplb("其他");
 					}
 					kyjdwpxx.setBgrxm(kyjdwpxx.getBgr().getXm());//报告人姓名
