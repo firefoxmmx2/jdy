@@ -66,24 +66,24 @@ public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
      */
 	public Page grpfghjjdwtjcxForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {
-		String sCol="";
+		String sCol=" xm ";
 		if(sort == null)
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
-		if (sort!=null){
-			if("0".equals(sort))
-				sCol = " a.xm "+ sort;
-			else if("1".equals(sort))
-				sCol = " a.ljsj "+ sort;
-			else if("2".equals(sort))
-				sCol = " a.ljsj "+ sort;
-			else if("3".equals(sort))
-				sCol = " a.gxdwbm "+ sort;
+		if (dir!=null){
+			if("0".equals(dir))
+				sCol = " xm "+ sort;
+			else if("1".equals(dir))
+				sCol = " kssj "+ sort;
+			else if("2".equals(dir))
+				sCol = " jssj "+ sort;
+			else if("3".equals(dir))
+				sCol = " gxdwmc "+ sort;
+			else if("4".equals(dir))
+				sCol = " ghjjdwcs "+ sort;
 			else 
-				sCol=" a.xm ";
-		}else{
-			sCol=" a.xm ";
+				sCol=" xm ";
 		}
 		map.put("pageSort", sCol);
 		return queryForPage("grpfghjjdwtjcxgad.getListPage", map, pageno,pagesize);
@@ -93,24 +93,32 @@ public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
      */
 	public Page grpfghjjdwtjcxdalForPage(Map<String, Object> map, int pageno,
 			int pagesize, String dir, String sort) {
-		String sCol="";
+		String sCol=" xh ";
 		if(sort == null)
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
-		if (sort!=null){
-			if("0".equals(sort))
-				sCol = " a.xm "+ sort;
-			else if("1".equals(sort))
-				sCol = " a.ljsj "+ sort;
-			else if("2".equals(sort))
-				sCol = " a.ljsj "+ sort;
-			else if("3".equals(sort))
-				sCol = " a.gxdwbm "+ sort;
+		if (dir!=null){
+			if("0".equals(dir))
+				sCol = " djxh "+ sort;
+			else if("1".equals(dir))
+				sCol = " xh "+ sort;
+			else if("2".equals(dir))
+				sCol = " jjrxm "+ sort;
+			else if("3".equals(dir))
+				sCol = " jjsj "+ sort;
+			else if("4".equals(dir))
+				sCol = " cjqy "+ sort;
+			else if("5".equals(dir))
+				sCol = " wldh "+ sort;
+			else if("6".equals(dir))
+				sCol = " sjrxm "+ sort;
+			else if("7".equals(dir))
+				sCol = " sjrdh "+ sort;
+			else if("8".equals(dir))
+				sCol = " sjrxxdz "+ sort;
 			else 
-				sCol=" a.xm ";
-		}else{
-			sCol=" a.xm ";
+				sCol=" xh ";
 		}
 		map.put("pageSort", sCol);
 		return queryForPage("fghjjdwtjcxdal.getListPage", map, pageno,pagesize);
