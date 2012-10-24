@@ -234,13 +234,26 @@ public class RdrjbxxAction extends PageAction {
 		public String grpfghdwcxdal() throws Exception {
 		
 			Map<String, Object> params = new HashMap<String, Object>();
-		    //管辖单位编码
+		    //姓名
 		    if(rdrjbxx.getXm()!=null && StringUtil.isNotEmpty(rdrjbxx.getXm())){
 		    	rdrjbxx.setXm(
 		    			StringUtil.trimEven0(rdrjbxx.getXm()));
 		    	params.put("xm", rdrjbxx.getXm());
 		    }
-		    
+		   //开始时间
+		    if(rdrjbxx.getKssj()!=null){
+		    	params.put("kssj", rdrjbxx.getKssj());
+		    }
+		    //结束时间
+		    if(rdrjbxx.getJssj()!=null){
+		    	params.put("jssj", rdrjbxx.getJssj());
+		    }
+		    //管辖单位编码
+		    if(rdrjbxx.getGxdwbm()!=null && StringUtil.isNotEmpty(rdrjbxx.getGxdwbm())){
+		    	rdrjbxx.setGxdwbm(
+		    			StringUtil.trimEven0(rdrjbxx.getGxdwbm()));
+		    	params.put("gxdwbm", rdrjbxx.getGxdwbm());
+		    }
 
 			Page pageinfo = rdrjbxxService.grpfghjjdwtjcxdalForPage(params, pagesize,pagerow, sort, dir);
 			totalpage = pageinfo.getTotalPages();
