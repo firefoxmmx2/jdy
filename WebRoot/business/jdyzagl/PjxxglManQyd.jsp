@@ -332,6 +332,7 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 			'			</tr>'+
 			'		</table>';
 			$('#pjjbxxImportDialog').html(html);
+			$('#pjjbxxImportDialog').css('top',document.body.offsetHeight/2-30+'px');
 		});
 	}
 	//揽件信息导入方法
@@ -339,10 +340,10 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 		if($('#xlsFile').val()){
 			$.post(pjxxImportUrl,{'uploadFile':$('#uploadFile').val()},function(json){
 				if(json.result!="success"){
-					jAlert(json.result,"提示");
+					alert(json.result);
 				}
 				else{
-					jAlert("导入成功","提示");
+					alert("导入成功");
 					$('#pjjbxxImportDialog').hideAndRemove("show");
 				}
 			},'json');

@@ -227,6 +227,7 @@ function searchLongBack(json){
 //打开导入窗口
 function setImportLjxx(){
 	detailDialog('ljxxImportDialog',300,'#',null,function(json){
+		
 		var html= '<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">'+
 		'		    <tr>'+
 		'		      <td align="left" class="title1">揽件导入</td>'+
@@ -251,6 +252,7 @@ function setImportLjxx(){
 		'			</tr>'+
 		'		</table>';
 		$('#ljxxImportDialog').html(html);
+		$('#ljxxImportDialog').css('top',document.body.offsetHeight/2-30+'px');
 	});
 }
 //揽件信息导入方法
@@ -258,10 +260,10 @@ function importLjxx(){
 	if($('#xlsFile').val()){
 		$.post(importUrl,{'uploadFile':$('#uploadFile').val()},function(json){
 			if(json.result!="success"){
-				jAlert(json.result,"提示");
+				alert(json.result);
 			}
 			else{
-				jAlert("导入成功","提示");
+				alert("导入成功");
 				$('#ljxxImportDialog').hideAndRemove("show");
 			}
 		},'json');
