@@ -53,7 +53,7 @@ public class KyjdwpxxServiceImpl implements IKyjdwpxxService {
 		if(kyjdwpxx.getKyywdjxh() == null)
 			throw new RuntimeException("需要修改的寄递品ID不能为空");
 		//当可疑类型不为禁寄物品的时候，清空禁寄物品类型。
-		if(!"2".equals(kyjdwpxx.getJjwplx()))
+		if(!"2".equals(kyjdwpxx.getKywplb()))
 			kyjdwpxx.setJjwplx("");
 		kyjdwpxxDao.update(kyjdwpxx);
 	}
