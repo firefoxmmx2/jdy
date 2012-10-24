@@ -114,7 +114,7 @@ public class RdrjbxxAction extends PageAction {
 	    	params.put("ssx", rdrjbxx.getSsx());
 	    }
 
-		Page pageinfo = rdrjbxxService.grpfghjjdwtjcxForPage(params, pagesize,pagerow, tabledata, result);
+		Page pageinfo = rdrjbxxService.grpfghjjdwtjcxForPage(params, pagesize,pagerow, sort, dir);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
 		lRdrjbxx = pageinfo.getData();
@@ -242,7 +242,7 @@ public class RdrjbxxAction extends PageAction {
 		    }
 		    
 
-			Page pageinfo = rdrjbxxService.grpfghjjdwtjcxdalForPage(params, pagesize,pagerow, tabledata, result);
+			Page pageinfo = rdrjbxxService.grpfghjjdwtjcxdalForPage(params, pagesize,pagerow, sort, dir);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
 			lRdrjbxx = pageinfo.getData();
