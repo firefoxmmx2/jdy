@@ -58,56 +58,74 @@ public class KyjdwpxxDaoImpl extends BaseDao implements IKyjdwpxxDao {
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
 		if (dir!=null){
-			if(map.get("kyjdwpxxcxbz").toString().equals("qydcxbz")){
-				if("0".equals(dir))
-					sCol = " ljjbxx.wldh "+ sort;
-				else if("1".equals(dir))
-					sCol = " jdpxx.jdpmc "+ sort;
-				else if("2".equals(dir))
-					sCol = " jjr.xm "+ sort;
-				else if("3".equals(dir))
-					sCol = " jjr.zjlx "+ sort;
-				else if("4".equals(dir))
-					sCol = " jjr.zjhm "+ sort;
-				else if("5".equals(dir))
-					sCol = " jdpxx.jdpdlxmc "+ sort;
-				else if("6".equals(dir))
-					sCol = " jdpxx.jdplxmc "+ sort;
-				else if("7".equals(dir))
-					sCol = "bgr.xm "+ sort;
-				else if("8".equals(dir))
-					sCol = "kyjdwpxx.bgsj "+ sort;
-				else if("9".equals(dir))
-					sCol = "kyjdwpxx.kywplb "+ sort;
-				else 
-					sCol=" ljjbxx.wldh ";
-			}else{
-				if("0".equals(dir))
-					sCol = " jdpxx.jdpmc "+ sort;
-				else if("1".equals(dir))
-					sCol = " qyjbxx.qymc "+ sort;
-				else if("2".equals(dir))
-					sCol = " ljjbxx.wldh "+ sort;
-				else if("3".equals(dir))
-					sCol = " kyjdwpxx.kywplb "+ sort;
-				else if("4".equals(dir))
-					sCol = " bgr.xm "+ sort;
-				else if("5".equals(dir))
-					sCol = " kyjdwpxx.bgsj "+ sort;
-				else if("6".equals(dir))
-					sCol = " jjr.xm "+ sort;
-				else if("7".equals(dir))
-					sCol = "sjr.xm "+ sort;
-				else if("8".equals(dir))
-					sCol = "jdpxx.jdpdlx "+ sort;
-				else if("9".equals(dir))
-					sCol = "jdpxx.jdpdlxmc "+ sort;
-				else if("10".equals(dir))
-					sCol = "jdpxx.jdplxmc "+ sort;
-				else if("11".equals(dir))
-					sCol = "ljjbxx.ljtbsj "+ sort;
-				else 
-					sCol=" ljjbxx.wldh ";
+			if(null!=map.get("kyjdwpxxcxbz")){
+				if(map.get("kyjdwpxxcxbz").toString().equals("qydcxbz")){
+					if("0".equals(dir))
+						sCol = " ljjbxx.wldh "+ sort;
+					else if("1".equals(dir))
+						sCol = " jdpxx.jdpmc "+ sort;
+					else if("2".equals(dir))
+						sCol = " jjr.xm "+ sort;
+					else if("3".equals(dir))
+						sCol = " jjr.zjlx "+ sort;
+					else if("4".equals(dir))
+						sCol = " jjr.zjhm "+ sort;
+					else if("5".equals(dir))
+						sCol = " jdpxx.jdpdlxmc "+ sort;
+					else if("6".equals(dir))
+						sCol = " jdpxx.jdplxmc "+ sort;
+					else if("7".equals(dir))
+						sCol = "bgr.xm "+ sort;
+					else if("8".equals(dir))
+						sCol = "kyjdwpxx.bgsj "+ sort;
+					else if("9".equals(dir))
+						sCol = "kyjdwpxx.kywplb "+ sort;
+					else 
+						sCol=" ljjbxx.wldh ";
+				}else if("gadcxbz".equals(map.get("kyjdwpxxcxbz").toString())){
+					if("0".equals(dir))
+						sCol = " jdpxx.jdpmc "+ sort;
+					else if("1".equals(dir))
+						sCol = " qyjbxx.qymc "+ sort;
+					else if("2".equals(dir))
+						sCol = " ljjbxx.wldh "+ sort;
+					else if("3".equals(dir))
+						sCol = " kyjdwpxx.kywplb "+ sort;
+					else if("4".equals(dir))
+						sCol = " bgr.xm "+ sort;
+					else if("5".equals(dir))
+						sCol = " kyjdwpxx.bgsj "+ sort;
+					else if("6".equals(dir))
+						sCol = " jjr.xm "+ sort;
+					else if("7".equals(dir))
+						sCol = "sjr.xm "+ sort;
+					else if("9".equals(dir))
+						sCol = "jdpxx.jdpdlxmc "+ sort;
+					else if("10".equals(dir))
+						sCol = "jdpxx.jdplxmc "+ sort;
+					else if("11".equals(dir))
+						sCol = "ljjbxx.ljtbsj "+ sort;
+					else 
+						sCol=" ljjbxx.wldh ";
+				}
+			}
+			if(null!=map.get("isJjwpcx")){
+				if("1".equals(map.get("isJjwpcx").toString())){
+					if("0".equals(dir))
+						sCol = " jjr.xm "+ sort;
+					else if("1".equals(dir))
+						sCol = " kyjdwpxx.jjwplx "+ sort;
+					else if("2".equals(dir))
+						sCol = " ljjbxx.ljtbsj "+ sort;
+					else if("3".equals(dir))
+						sCol = " qyjbxx.gxdwmc "+ sort;
+					else if("4".equals(dir))
+						sCol = " sjr.xxdz "+ sort;
+					else if("5".equals(dir))
+						sCol = " sjr.xm "+ sort;
+					else 
+						sCol=" qyjbxx.qyid ";
+				}
 			}
 			
 		}
