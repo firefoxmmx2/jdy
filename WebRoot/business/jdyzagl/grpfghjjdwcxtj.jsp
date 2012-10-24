@@ -30,9 +30,9 @@ $(document).ready(function() {
 		getGxdwTree("rdrjbxx_gxdwmc","rdrjbxx_gxdwbm",null,"jdytjxx_departlevel");
 	});
 	//户籍省市县--寄件人
-	$("#rdrjbxx_ssxmc").click( function() {
-		getDict_item("rdrjbxx_ssxmc", "rdrjbxx_ssx", "dm_xzqh");
-	});
+	//$("#rdrjbxx_ssxmc").click( function() {
+	//	getDict_item("rdrjbxx_ssxmc", "rdrjbxx_ssx", "dm_xzqh");
+	//});
 	$("#"+tableid).ingrid({ 
 							url: "#",	
 							height: pageHeight-260,
@@ -123,7 +123,7 @@ function searchLongBack(json){
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="grpfghdwcx_gad">
    <input type="hidden" id="rdrjbxx_gxdwbm" name="rdrjbxx.gxdwbm" value="<%=gxdwbm%>"><!-- 管辖单位编码 -->
    <input type="hidden" id="jdytjxx_departlevel" value="<%=departlevel %>"><!-- 级别 -->
-   <input type="hidden" id="rdrjbxx_ssx" name="rdrjbxx.ssx" value=""><!-- 省市县代码 -->
+   <!--  <input type="hidden" id="rdrjbxx_ssx" name="rdrjbxx.ssx" value=""> 省市县代码     页面去掉该查查条件 ---->
   <tr>
     <td class="queryfont">个人寄件时频繁更换单位统计</td>
   </tr>
@@ -143,8 +143,10 @@ function searchLongBack(json){
     			<tr>
 					<td width="10%" class="red">治安管理机构</td>
 					<td width="23%" class="pagetd"><input type="text" id="rdrjbxx_gxdwmc" name="rdrjbxx.gxdwmc"  class="inputstyle" value=""  readonly /></td>
+					<!--  
 					<td width="30%" class="pagedistd">寄件目的地（省市县/区）</td>
 					<td width="23%" class="detailtd"><input type="text" id="rdrjbxx_ssxmc"  name="rdrjbxx.ssxmc"  class="inputstyle" value="" readonly /></td>
+					-->
 				</tr>
 	    		<tr>
 	    		  <td colspan="6">
