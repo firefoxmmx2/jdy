@@ -354,7 +354,7 @@ public class KyjdwpAction extends PageAction{
 		lPro.add("jjwplx");
 		lPro.add("ljtbsj");//
 		lPro.add("gxdwmc");
-		lPro.add("xxdz");
+		lPro.add("sjrxxdz");
 		lPro.add("sjrxm");//
 		lPro.add("qyid");//
 		
@@ -378,7 +378,7 @@ public class KyjdwpAction extends PageAction{
 			kyjdwpxx.setQyid(kyjdwpxx.getLjjbxx().getQyjbxx().getQyid());//企业ID
 			//禁寄物品类型名称
 			kyjdwpxx.setJjwplx(getJjwplxDict().get(kyjdwpxx.getJjwplx()));
-			kyjdwpxx.setXxdz(kyjdwpxx.getSjr().getJdrydz());
+			kyjdwpxx.setSjrxxdz(kyjdwpxx.getSjr().getJdrydz());
 			kyjdwpxx.setGxdwmc(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwmc());
 		}
 		Kyjdwpxx setkyjdwpxx = new Kyjdwpxx();
@@ -453,6 +453,13 @@ public class KyjdwpAction extends PageAction{
 					kyjdwpxx.setLjtbsj(kyjdwpxx.getLjjbxx().getLjtbsj());//揽件填报时间
 					kyjdwpxx.setQymc(kyjdwpxx.getLjjbxx().getQyjbxx().getQymc());//企业名称
 					kyjdwpxx.setQyid(kyjdwpxx.getLjjbxx().getQyjbxx().getQyid());//企业ID
+					//禁忌品时 导出  要页面增加的字段
+					if(null!=isJjwpcx){
+						if("1".equals(isJjwpcx)){
+							kyjdwpxx.setSjrxxdz(kyjdwpxx.getSjr().getJdrydz());//收件人详细地址
+							kyjdwpxx.setGxdwmc(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwmc());//管辖单位名称
+						}
+					}
 				}
 		    	session.setAttribute("Kyjdwpxxdaoc", lKyjdwpxx);
 				this.result = "success";
