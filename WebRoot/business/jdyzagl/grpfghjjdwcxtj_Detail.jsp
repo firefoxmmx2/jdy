@@ -5,7 +5,15 @@
 var daochuNumdal = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
 tabletitledal = "";
 $(document).ready(function() {
-	$("#rdrjbxx_xm").val(dataid);
+	//清空所有要传递的值
+	$("#rdrjbxx_xm").val("");
+	$("#cd_kssj").val("");
+	$("#cd_jssj").val("");
+	$("#cd_gxdwbm").val("");
+	$("#rdrjbxx_xm").val(dataid);//姓名
+	$("#cd_kssj").val($("#rdrjbxx_pjtbsjf1").val());//开始时间
+	$("#cd_jssj").val($("#rdrjbxx_pjtbsjt1").val());//结束时间
+	$("#cd_gxdwbm").val($("#rdrjbxx_gxdwbm").val());//管辖单位编码
 	divnidhmdczrz="QczlhmdczrzData";
 	tableidhmd="QczlhmdczrzTable";
 	pagehmdUrl="jdy/grpfghdwcxdal_rdrjbxx.action";
@@ -29,6 +37,7 @@ function setPageListhmdczrz(pageno,url){
 			url=pagehmdUrl;
 		}
 		var mygrid1 = $("#"+tableidhmd).ingrid({ 
+										onRowSelect:null,
 										ingridPageWidth: 900,
 										url: url,	
 										height: pageHeight-235,
@@ -80,6 +89,9 @@ function searchLongBackdal(json){
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" id="grpfghdwcxgad_detail">
     <input type="hidden" id="rdrjbxx_xm" name="rdrjbxx.xm" value=""><!--主页面传递过来的姓名 -->
+    <input type="hidden" id="cd_kssj" name="rdrjbxx.kssj" value=""><!--主页面传递过来的开始时间 -->
+    <input type="hidden" id="cd_jssj" name="rdrjbxx.jssj" value=""><!--主页面传递过来的结束时间 -->
+    <input type="hidden" id="cd_gxdwbm" name="rdrjbxx.gxdwbm" value=""><!--主页面传递过来的管辖单位编码-->
 	<tr>
 		<td height="10"></td>
 	</tr>

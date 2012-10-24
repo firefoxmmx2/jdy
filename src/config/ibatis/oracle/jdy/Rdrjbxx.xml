@@ -66,12 +66,21 @@
 			r.ssx=#ssx#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="gxdwbm">
-			q.gxdwbm like '%$gxdwbm$%'
+			q.gxdwbm like '$gxdwbm$%'
 		</isNotEmpty>
 	</sql>
 	<sql id="pfghjjdwdalWhere">
 		<isNotEmpty prepend="and" property="xm">
 			r.xm=#xm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="kssj">
+			l.ljsj >= #kssj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jssj">
+			l.ljsj &lt;= #jssj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			q.gxdwbm like '$gxdwbm$%'
 		</isNotEmpty>
 	</sql>
 	<insert id="Rdrjbxx.insert" parameterClass="Rdrjbxx">

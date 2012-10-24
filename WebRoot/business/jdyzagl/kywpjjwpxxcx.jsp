@@ -203,7 +203,7 @@ function searchLongBack(json){
 	     	<th name="l_jjwplx" datatype="string" sumflag="0">禁寄类型</th>
 	     	<th name="l_ljtbsj" datatype="string" sumflag="0">寄件时间</th>
 	    	<th name="l_gxdwmc" datatype="string" sumflag="0">管辖单位</th>
-	    	<th name="l_xxdz" datatype="string" sumflag="0">收件人地址</th>
+	    	<th name="l_sjrxxdz" datatype="string" sumflag="0">收件人地址</th>
 	    	<th name="l_sjrxm" datatype="string" sumflag="0">收件人</th>
 	    	<th name="l_qyid" datatype="string" sumflag="0">企业ID</th>
 			<th name="">操作</th>

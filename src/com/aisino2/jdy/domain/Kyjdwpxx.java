@@ -127,9 +127,17 @@ public class Kyjdwpxx implements Serializable {
 	private String qymc;//企业名称
 	private Integer qyid;//企业ID
 	private String gxdwmc; //管辖单位名称
+	//=====禁忌品查询界面所需字段 收件人详细地址
+	private String sjrxxdz;
 	
 	
 	
+	public String getSjrxxdz() {
+		return sjrxxdz;
+	}
+	public void setSjrxxdz(String sjrxxdz) {
+		this.sjrxxdz = sjrxxdz;
+	}
 	public String getGxdwmc() {
 		return gxdwmc;
 	}
