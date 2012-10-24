@@ -136,6 +136,7 @@ function setKyjdwpxxDetail(id){
 function setkyjdwpdaoc(){	
   	if(daochuNum==1){
   	  params =getSubmitParams("#kyjdwpxx_man [name*=kyjdwpxx.]");
+  	  params.isJjwpcx = "1";
   	  jQuery.post(searchLongUrl,params,searchLongBack,"json");
   	  //setSearchLong(); //传全部参数将查询结果放入json，对应后台Action方法中将结果集放入session，用于处理超长参数的数据导出
   	}else{
@@ -160,7 +161,6 @@ function searchLongBack(json){
     <td class="tdbg">
     	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="kyjdwpxx_man">
     	 <input type="hidden" id="lj_gxdwbm" name="kyjdwpxx.ljjbxx.qyjbxx.gxdwbm" value="<%=gxdwbm%>"><!-- 管辖单位编码 -->
-    	 <input type="hidden" id="kyjdwpxxcxbz" name="kyjdwpxx.kyjdwpxxcxbz" value="gadcxbz"><!-- 可疑寄递物品查询标志 -->
     	 <input type="hidden" id="jdytjxx_departlevel" value="<%=departlevel %>"><!-- 级别 -->
     	  <input type="hidden" id="p_allhylbdm" value="'Y'"><!-- 级别 -->
     	  <input type="hidden" name="isJjwpcx" value="1">

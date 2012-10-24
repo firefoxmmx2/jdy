@@ -425,6 +425,8 @@ public class KyjdwpAction extends PageAction{
 				if(kyjdwpxx.getKyjdwpxxcxbz()!=null){
 					params.put("kyjdwpxxcxbz", kyjdwpxx.getKyjdwpxxcxbz());
 				}
+				//isJjwpcx属于禁忌品查询界面的导出；jjwplx表示禁忌品类型怕以后要加
+				params.put("isJjwpcx", isJjwpcx);
 				params.put("jjwplx", kyjdwpxx.getJjwplx());
 				Page pageinfo = kyjdwpxxService.findKyjdwpxxsForPage(params, 1, Integer.parseInt(maxRows), dir, sort);
 				totalpage = pageinfo.getTotalPages();
