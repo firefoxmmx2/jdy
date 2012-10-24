@@ -378,7 +378,7 @@ public class KyjdwpAction extends PageAction{
 			kyjdwpxx.setQyid(kyjdwpxx.getLjjbxx().getQyjbxx().getQyid());//企业ID
 			//禁寄物品类型名称
 			kyjdwpxx.setJjwplx(getJjwplxDict().get(kyjdwpxx.getJjwplx()));
-			kyjdwpxx.setXxdz(kyjdwpxx.getSjr().getJdrydz());
+			kyjdwpxx.setXxdz(kyjdwpxx.getSjr().getXxdz());
 			kyjdwpxx.setGxdwmc(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwmc());
 		}
 		Kyjdwpxx setkyjdwpxx = new Kyjdwpxx();
