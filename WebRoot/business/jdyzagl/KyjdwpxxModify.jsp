@@ -169,7 +169,7 @@ function kywpaddmodback(json){
 		<td class="distd"></td>
 		<td class="detailtd"></td>
 		<td>禁寄物品种类</td>
-		<td class="pagetd"><select class="select1" id="jdpxx_jjwplx" name="jdpxx.kyjdwpxx.jjwplx" ><option></option></select></td>
+		<td class="pagetd"><select class="select1" id="jdpxx_jjwplx" name="kyjdwpxx.jjwplx" ><option></option></select></td>
 	</tr>
 	<tr>
  		<td class="distd" style="padding-left: 1px;">可疑物品描述</td>
