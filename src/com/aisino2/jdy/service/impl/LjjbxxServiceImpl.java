@@ -76,7 +76,34 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 
 	
 	public Ljjbxx insertLjjbxx(Ljjbxx ljjbxx) throws Exception {
-	
+
+		if(ljjbxx == null)
+			throw new RuntimeException("揽件实体为空");
+		if(!StringUtil.isNotEmpty(ljjbxx.getWldh()))
+			throw new RuntimeException("物流单号必须填写");
+		if(ljjbxx.getLjsj()==null)
+			throw new RuntimeException("揽件时间必须填写");
+		if(ljjbxx.getLjr()==null)
+			throw new RuntimeException("揽件人实体为空");
+		if(!StringUtil.isNotEmpty(ljjbxx.getLjr().getCyrybh()))
+			throw new RuntimeException("揽件人从业人员编号必须填写");
+		if(ljjbxx.getJjr()==null)
+			throw new RuntimeException("寄件人必须填写");
+		if(!StringUtil.isNotEmpty(ljjbxx.getJjr().getXm()))
+			throw new RuntimeException("寄件人姓名必须填写");
+		if(!StringUtil.isNotEmpty(ljjbxx.getJjr().getXxdz()))
+			throw new RuntimeException("寄件人地址必须填写");
+		if(!StringUtil.isNotEmpty(ljjbxx.getJjr().getLxdh()))
+			throw new RuntimeException("寄件人电话必须填写");
+		if(ljjbxx.getSjr()==null)
+			throw new RuntimeException("收件人必须填写");
+		if(!StringUtil.isNotEmpty(ljjbxx.getSjr().getXm()))
+			throw new RuntimeException("收件人姓名必须填写");
+		if(!StringUtil.isNotEmpty(ljjbxx.getSjr().getXxdz()))
+			throw new RuntimeException("收件人地址必须填写");
+		if(!StringUtil.isNotEmpty(ljjbxx.getSjr().getLxdh()))
+			throw new RuntimeException("收件人电话必须填写");
+		
 			/***向寄递对象--人员信息表插入数据***/
 			ljjbxx.getJjr().setJdrylx("10"); //设置寄递人员类型 寄件
 			ljjbxx.setJjr(rdrjbxxDao.insert(ljjbxx.getJjr()));
