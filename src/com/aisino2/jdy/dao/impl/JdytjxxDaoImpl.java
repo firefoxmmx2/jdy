@@ -263,7 +263,7 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 			else if("5".equals(dir))
 				sCol = " lj.ljtbsj "+ sort;
 			else 
-				sCol = " zdry.rylx "+ sort;
+				sCol = " ry.jdrylx "+ sort;
 		}
 		map.put("pageSort", sCol);
 		return queryForPage("getZdryListPage", map, pageno,pagesize);
