@@ -13,8 +13,8 @@ $(document).ready(function() {
 	$("#ljjbxx_detail [id^=lj_jjrzjlx]").removeAttr("class").attr("disabled","true");//删除class属性
 	$("#ljjbxx_detail [id^=lj_sjrzjlx]").removeAttr("class").attr("disabled","true");//删除class属性
 	$("#jj_sj_yr .red").removeAttr("class").attr("class","distd");
-	$("#ljjbxx_detail [id=jjrssxmc]").attr("class","readonly");
-	$("#ljjbxx_detail [id=sjrssxmc]").attr("class","readonly");
+	//$("#ljjbxx_detail [id=jjrssxmc]").attr("class","readonly");
+	//$("#ljjbxx_detail [id=sjrssxmc]").attr("class","readonly");
 	//去掉身份证扫描框
 	$('#ljjbxx_detail a:contains("二代证读取")').each(function(){
 		$(this).parents("table").eq(0).remove();
@@ -42,7 +42,7 @@ function modifyback(json){
 	$("#ljjbxx_detail [id=lj_jjrxm]").val(json.lj.jjr.xm);//寄件人姓名
 	$("#ljjbxx_detail [id=lj_jjrzjlx]").val(setNull(json.lj.jjr.zjlx));//寄件人证件类型
 	$("#ljjbxx_detail [id=lj_jjrzjhm]").val(json.lj.jjr.zjhm);//寄件人证件号码
-	$("#ljjbxx_detail [id=jjrssxmc]").val(json.lj.jjr.ssxmc);//寄件地址
+	//$("#ljjbxx_detail [id=jjrssxmc]").val(json.lj.jjr.ssxmc);//寄件地址
 	$("#ljjbxx_detail [id=lj_jjrssx]").val(json.lj.jjr.ssx);//寄件地址代码
 	$("#ljjbxx_detail [id=lj_jjrxxdz]").val(json.lj.jjr.xxdz);//寄件人现住地详址
 	$("#ljjbxx_detail [id=lj_jjrdw]").val(json.lj.jjr.dw);//寄件人单位
@@ -52,7 +52,7 @@ function modifyback(json){
 	$("#ljjbxx_detail [id=lj_sjrxm]").val(json.lj.sjr.xm);//收件人姓名
 	$("#ljjbxx_detail [id=lj_sjrzjlx]").val(setNull(json.lj.sjr.zjlx));//收件人证件类型
 	$("#ljjbxx_detail [id=lj_sjrzjhm]").val(json.lj.sjr.zjhm);//收件人证件号码
-	$("#ljjbxx_detail [id=sjrssxmc]").val(json.lj.sjr.ssxmc);//收件地址
+	//$("#ljjbxx_detail [id=sjrssxmc]").val(json.lj.sjr.ssxmc);//收件地址
 	$("#ljjbxx_detail [id=lj_sjrssx]").val(json.lj.sjr.ssx);//寄件地址代码
 	$("#ljjbxx_detail [id=lj_sjrxxdz]").val(json.lj.sjr.xxdz);//收件人现住地详址
 	$("#ljjbxx_detail [id=lj_sjrdw]").val(json.lj.sjr.dw);//收件人单位

@@ -13,7 +13,7 @@ function updatePicturejjr(x){
 		$("#lj_jjrzjlx").val("");//证件类型
 		$("#lj_jjrzjhm").val("");//证件号码
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
-		$("#jjrssxmc").val("");//寄件地址
+		 //$("#jjrssxmc").val("");//寄件地址
 		$("#lj_jjrxxdz").val("");//详细地址
 		$("#lj_jjrzpdata").val("");//照片
 		
@@ -21,7 +21,7 @@ function updatePicturejjr(x){
 	    $("#lj_jjrxm").val(x.ocrCName);//姓名
 		$("#lj_jjrzjlx").val("身份证");//证件类型
 		$("#lj_jjrzjhm").val(x.ocrIdentityId);//证件号码
-		getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
+		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
 		//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
 		//$("#lj_jjrxxdz").val(x.ocrAddR);//详细地址
 		$("#lj_jjrzpdata").val(x.GetImage());//照片
@@ -31,7 +31,7 @@ function updatePicturejjr(x){
 		$("#pjxxadd_jjrzjlx").val("");//证件类型
 		$("#pjxxadd_jjrzjhm").val("");//证件号码
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
-		$("#pjxxadd_jjrssxmc").val("");//寄件地址
+		//$("#pjxxadd_jjrssxmc").val("");//寄件地址
 		$("#pjxxadd_jjrxxdz").val("");//详细地址
 		$("#pjxxadd_jjrzpdata").val("");//照片
 		
@@ -39,7 +39,7 @@ function updatePicturejjr(x){
 	    $("#pjxxadd_jjrxm").val(x.ocrCName);//姓名
 		$("#pjxxadd_jjrzjlx").setValue("身份证");//证件类型
 		$("#pjxxadd_jjrzjhm").val(x.ocrIdentityId);//证件号码
-		getHjsxDD(x.ocrIdentityId,"dm_xzqh","pjxxadd_jjrssxdm","pjxxadd_jjrssx");//从身份号码中得到户籍省县
+		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","pjxxadd_jjrssxdm","pjxxadd_jjrssx");//从身份号码中得到户籍省县
 		//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
 		//$("#pjxxadd_jjrxxdz").val(x.ocrAddR);//详细地址
 		$("#pjxxadd_jjrzpdata").val(x.GetImage());//照片
@@ -48,7 +48,7 @@ function updatePicturejjr(x){
 		$("#pjjbxxmod_jjrzjlx").val("");//证件类型
 		$("#pjjbxxmod_jjrzjhm").val("");//证件号码
 		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","lj_jjrssx","jjrssxmc");//从身份号码中得到户籍省县
-		$("#pjjbxxmod_jjrssxmc").val("");//寄件地址
+		//$("#pjjbxxmod_jjrssxmc").val("");//寄件地址
 		$("#pjjbxxmod_jjrxxdz").val("");//详细地址
 		$("#pjjbxxmod_jjrzpdata").val("");//照片
 		
@@ -56,7 +56,7 @@ function updatePicturejjr(x){
 	    $("#pjjbxxmod_jjrxm").val(x.ocrCName);//姓名
 		$("#pjjbxxmod_jjrzjlx").setValue("身份证");//证件类型
 		$("#pjjbxxmod_jjrzjhm").val(x.ocrIdentityId);//证件号码
-		getHjsxDD(x.ocrIdentityId,"dm_xzqh","pjjbxxmod_jjrssxdm","pjjbxxmod_jjrssx");//从身份号码中得到户籍省县
+		//getHjsxDD(x.ocrIdentityId,"dm_xzqh","pjjbxxmod_jjrssxdm","pjjbxxmod_jjrssx");//从身份号码中得到户籍省县
 		//$("#jjrssxmc").val(x.ocrAddR);//寄件地址
 		//$("#pjjbxxmod_jjrxxdz").val(x.ocrAddR);//详细地址
 		$("#pjjbxxmod_jjrzpdata").val(x.GetImage());//照片
@@ -86,7 +86,7 @@ function open_zp(){
 						<td class="detailtd"><input type="text" id="lj_jjrxm" name="lj.jjr.xm" class="inputstyle" value="" /></td>
 				    </tr>
 				    <tr height="20">
-						<td class="red">证件类型</td>
+						<td class="distd">证件类型</td>
 						<td class="detailtd">
 					          <select id="lj_jjrzjlx">
 								<option></option>
@@ -97,10 +97,10 @@ function open_zp(){
 						<td class="distd">证件号码</td>
 						<td class="detailtd"><input type="text" id="lj_jjrzjhm" name="lj.jjr.zjhm" class="inputstyle" value="" /></td>
 					</tr>
-					<tr height="20">
-						<td class="red">寄件地址</td>
-						<td class="detailtd"><input type="text" id="jjrssxmc"  class="inputstyle" value="" /></td>
-					</tr>
+<!--					<tr height="20">-->
+<!--						<td class="red">寄件地址</td>-->
+<!--						<td class="detailtd"><input type="text" id="jjrssxmc"  class="inputstyle" value="" /></td>-->
+<!--					</tr>-->
 				  </table>
 				 </td>
 				 <td>
@@ -113,7 +113,7 @@ function open_zp(){
 			 <td colspan="2">
 			   <table>
 			     <tr height="20">
-					<td class="red">现住地详址</td>
+					<td class="red">寄件地址</td>
 					<td class="detailtd" colspan="5"><input type="text" style="width:220px"  id="lj_jjrxxdz"  name="lj.jjr.xxdz" /></td>
 				 </tr>
 				 <tr height="20">

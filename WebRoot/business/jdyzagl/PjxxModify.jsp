@@ -20,10 +20,10 @@ $(function() {
 		$this.removeAttr("value");
 	});
 	
-	$('#jjrssxmc').attr('id','pjjbxxmod_jjrssx');
-	$('#sjrssxmc').attr('id','pjjbxxmod_sjrssx');
-	$('#pjjbxxmod_jjrssx').attr("name","pjxx.ljjbxx.jjr.ssxmc");
-	$('#pjjbxxmod_sjrssx').attr("name","pjxx.ljjbxx.sjr.ssxmc");
+	//$('#jjrssxmc').attr('id','pjjbxxmod_jjrssx');
+	//$('#sjrssxmc').attr('id','pjjbxxmod_sjrssx');
+	//$('#pjjbxxmod_jjrssx').attr("name","pjxx.ljjbxx.jjr.ssxmc");
+	//$('#pjjbxxmod_sjrssx').attr("name","pjxx.ljjbxx.sjr.ssxmc");
 	//添加寄递对象证件类型的提交名称
 	$("#pjjbxxmod_jjrzjlx").attr("name","pjxx.ljjbxx.jjr.zjlx");
 	$("#pjjbxxmod_sjrzjlx").attr("name","pjxx.ljjbxx.sjr.zjlx");
@@ -35,13 +35,13 @@ $(function() {
 		getTyRY_item('pjjbxxmod_pjr_xm','pjjbxxmod_pjr_cyrybh',null,'<%=gxdwbm%>',null,'<%=qybm%>');
 	});
 	//户籍省市县--寄件人
-	$("#pjjbxxmod_jjrssx").click( function() {
-		getDict_item("pjjbxxmod_jjrssx", "pjjbxxmod_jjrssxdm", "dm_xzqh");
-	});
+	//$("#pjjbxxmod_jjrssx").click( function() {
+	//	getDict_item("pjjbxxmod_jjrssx", "pjjbxxmod_jjrssxdm", "dm_xzqh");
+	//});
 	//户籍省市县--收件人
-	$("#pjjbxxmod_sjrssx").click( function() {
-		getDict_item("pjjbxxmod_sjrssx", "pjjbxxmod_sjrssxdm", "dm_xzqh");
-	});
+	//$("#pjjbxxmod_sjrssx").click( function() {
+	//	getDict_item("pjjbxxmod_sjrssx", "pjjbxxmod_sjrssxdm", "dm_xzqh");
+	//});
 	//代收人的证件类型
 	getDictItemBox("pjjbxxmod_dsrzjlx","","dm_zjlx");
 	//证件类型--寄件人
@@ -311,24 +311,24 @@ function pjxx_mod_verify(){
 		return false;
 	if (!checkControlValue("pjjbxxmod_jjrxm","String",1,30,null,1,"寄件人姓名"))
 		return false;
-	if (!checkControlValue("pjjbxxmod_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
-		return false;
+	//if (!checkControlValue("pjjbxxmod_jjrzjlx","Select",1,8,null,1,"寄件人证件类型"))
+	//	return false;
 	//if (!checkControlValue("pjjbxxmod_jjrzjhm","String",1,18,null,1,"寄件人证件号码"))
 		//return false;
-	if (!checkControlValue("pjjbxxmod_jjrssx","String",1,70,null,1,"寄件地址"))
-		return false;
+	//if (!checkControlValue("pjjbxxmod_jjrssx","String",1,70,null,1,"寄件地址"))
+	//	return false;
 	if (!checkControlValue("pjjbxxmod_jjrxxdz","String",1,70,null,1,"寄件人现住地详址"))
 		return false;
 	if (!checkControlValue("pjjbxxmod_jjrlxdh","String",1,20,null,1,"寄件人手机"))
 		return false;
 	if (!checkControlValue("pjjbxxmod_sjrxm","String",1,30,null,1,"收件人姓名"))
 		return false;
-	if (!checkControlValue("pjjbxxmod_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
-		return false;
+	//if (!checkControlValue("pjjbxxmod_sjrzjlx","Select",1,8,null,1,"收件人证件类型"))
+	// 	return false;
 	//if (!checkControlValue("pjjbxxmod_sjrzjhm","String",1,18,null,1,"收件人证件号码"))
 		//return false;
-	if (!checkControlValue("pjjbxxmod_sjrssx","String",1,70,null,1,"收件地址"))
-		return false;
+	//if (!checkControlValue("pjjbxxmod_sjrssx","String",1,70,null,1,"收件地址"))
+	//	return false;
 	if (!checkControlValue("pjjbxxmod_sjrxxdz","String",1,70,null,1,"收件人现住地详址"))
 		return false;
 	if (!checkControlValue("pjjbxxmod_sjrlxdh","String",1,20,null,1,"收件人手机"))
@@ -473,8 +473,8 @@ function loadData(){
 					$(this).parents("table").eq(0).remove();
 				});
 				//去掉寄件人和收件人的选择器
-				$('#pjjbxxmod_jjrssx').unbind('click');
-				$('#pjjbxxmod_sjrssx').unbind('click');
+				//$('#pjjbxxmod_jjrssx').unbind('click');
+				//$('#pjjbxxmod_sjrssx').unbind('click');
 				//去掉派件人的人员选择器
 				$('#pjjbxxmod_pjr_xm').unbind('click');
 				//去掉寄递品添加按钮
@@ -507,8 +507,8 @@ function loadData(){
 <tr>
 <td>
 <input type="hidden" name="pjxx.pjr.cyrybh" id="pjjbxxmod_pjr_cyrybh">
-<input type="hidden" name="pjxx.ljjbxx.jjr.ssx" id="pjjbxxmod_jjrssxdm">
-<input type="hidden" name="pjxx.ljjbxx.sjr.ssx" id="pjjbxxmod_sjrssxdm">
+<!--<input type="hidden" name="pjxx.ljjbxx.jjr.ssx" id="pjjbxxmod_jjrssxdm">-->
+<!--<input type="hidden" name="pjxx.ljjbxx.sjr.ssx" id="pjjbxxmod_sjrssxdm">-->
 <input type="hidden" name="pjxx.id" id="pjjbxxmod_id">
 <%-- 修正寄件人和收件人没用ID的问题 --%>
 <input type="hidden" name="pjxx.ljjbxx.jjr.id" id="pjjbxxmod_jjrid">
