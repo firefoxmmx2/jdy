@@ -77,7 +77,7 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 											//hideColIndex:[1],
 											isHaveMorenPaixuClass: true, //加默认排序样式
 											morenPaixuCol: 7, //第一默认排序	
-											morenPaixuFangshi:'desc', //默认排序方式 
+											//morenPaixuFangshi:'desc', //默认排序方式 
 											alignCenterColIndex: [1,2,8],
 											changeHref:function(table){
 												//$(table).find("tr").each(function(){
