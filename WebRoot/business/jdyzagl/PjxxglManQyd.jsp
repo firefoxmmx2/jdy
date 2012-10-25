@@ -203,7 +203,7 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 				jAlert("该条揽件信息存在可疑寄递物品，不能进行删除操作！","提示");
 				return;
 			}
-			jConfirm("是否决定删除该派件登记信息","提示",function(r){
+			jConfirm("确定删除吗？","提示",function(r){
 				if(r){
 					$.post(pjxx_detail_url,{'pjxx.id':id},function(json){
 						if(json.overUpdateTime){
