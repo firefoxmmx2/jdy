@@ -402,8 +402,8 @@ public class PjxxAction extends PageAction {
 			Dict_item dict_item = new Dict_item();
 			dict_item.setDict_code("dm_zjlx");
 			dict_item.setFact_value(pj.getLjjbxx().getSjr().getZjlx());
-			pj.setSjr_zjlx(CacheManager.getCacheDictitemOne(dict_item)
-					.getDisplay_name());
+			pj.setSjr_zjlx(CacheManager.getCacheDictitemOne(dict_item)!=null?
+					CacheManager.getCacheDictitemOne(dict_item).getDisplay_name():null);
 			Date now = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar updateOverTimeCalender = Calendar.getInstance();
@@ -504,8 +504,8 @@ public class PjxxAction extends PageAction {
 				Dict_item dict_item = new Dict_item();
 				dict_item.setDict_code("dm_zjlx");
 				dict_item.setFact_value(pj.getLjjbxx().getSjr().getZjlx());
-				pj.setSjr_zjlx(CacheManager.getCacheDictitemOne(dict_item)
-						.getDisplay_name());
+				pj.setSjr_zjlx(CacheManager.getCacheDictitemOne(dict_item)!=null?
+						CacheManager.getCacheDictitemOne(dict_item).getDisplay_name():null);
 				Date now = new Date();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				Calendar updateOverTimeCalender = Calendar.getInstance();
