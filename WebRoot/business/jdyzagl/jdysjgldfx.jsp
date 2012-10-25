@@ -193,36 +193,38 @@
 	导出数据关联度数据
 	*/
 	function exportSjgl(){
-		//设置分页信息
-		$('#'+sjgl_div).find('.grid-sort-desc','.grid-sort-asc').each(function(idx){
-			th = $(this);
-			var sort = idx;
-			var dir = th.hasClass('grid-sort-desc') ? 'desc' : 'asc';
+		if(manVerify_sjgl()){
+			//设置分页信息
+			$('#'+sjgl_div).find('.grid-sort-desc','.grid-sort-asc').each(function(idx){
+				th = $(this);
+				var sort = idx;
+				var dir = th.hasClass('grid-sort-desc') ? 'desc' : 'asc';
+				
+				$('#excelSjglForm input:hidden[name=sort]').val(sort);
+				$('#excelSjglForm input:hidden[name=dir]').val(dir);
+			});
+			//当前页数
+			$('#excelSjglForm input:hidden[name=pagesize]').val($('#pageNo',$('#'+sjgl_div)).val());
+			//总页数
+			$('#'+sjgl_div).find('.grid-page-viewing-records-info').each(function(){
+				var pageinfo = $(this).text();
+				var pagerow = 20;
+				var group = /^([\d]+)[\u4e00-\u9fa5|\w]*$/.exec(pageinfo.split(" ")[1].split("/")[0])
+				if(group){
+					pagerow = group[1];
+				}
+				$('#excelSjglForm input:hidden[name=pagerow]').val(pagerow);
+			});
 			
-			$('#excelSjglForm input:hidden[name=sort]').val(sort);
-			$('#excelSjglForm input:hidden[name=dir]').val(dir);
-		});
-		//当前页数
-		$('#excelSjglForm input:hidden[name=pagesize]').val($('#pageNo',$('#'+sjgl_div)).val());
-		//总页数
-		$('#'+sjgl_div).find('.grid-page-viewing-records-info').each(function(){
-			var pageinfo = $(this).text();
-			var pagerow = 20;
-			var group = /^([\d]+)[\u4e00-\u9fa5|\w]*$/.exec(pageinfo.split(" ")[1].split("/")[0])
-			if(group){
-				pagerow = group[1];
-			}
-			$('#excelSjglForm input:hidden[name=pagerow]').val(pagerow);
-		});
-		
-		$('#excelSjglForm input').val('');
-		$('input[name="paramType"]:checked').parent().find(':input[name!="paramType"]').each(function(){
-			$('#excelSjglForm input[name='+$(this).attr('name')+']').val(this.value);
-		});
-		$('#excelSjglForm').attr('action',sjgl_excel_url)
-			.attr("target","_blank")
-			.attr('type','post')
-			.submit();
+			$('#excelSjglForm input').val('');
+			$('input[name="paramType"]:checked').parent().find(':input[name!="paramType"]').each(function(){
+				$('#excelSjglForm input[name='+$(this).attr('name')+']').val(this.value);
+			});
+			$('#excelSjglForm').attr('action',sjgl_excel_url)
+				.attr("target","_blank")
+				.attr('type','post')
+				.submit();
+		}
 		
 	}
 	
