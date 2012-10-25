@@ -95,6 +95,14 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 	}	
 	//验证
 	function manVerify_pjxx(){
+		var sj1 = $("#lj_pjtbsjf1").val();
+		var sj2 = $("#lj_pjtbsjt1").val();
+		if(sj1!=null && sj1!="" && sj2!=null && sj2!=""){
+			if(sj1>sj2){
+				jAlert('开始时间不能大于结束时间','提示信息')
+				return false;
+			}
+		}
 		return true;
 	}
 	/**
