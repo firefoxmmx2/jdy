@@ -44,6 +44,11 @@
 	<resultMap class="Rdrjbxx" id="rdrjbxx_zpxx_rm" extends="rdrjbxx_rm">
 		<result property="zpxx" column="id" select="jddxzpxx.getByRdrjbxxId"/>
 	</resultMap>
+	<resultMap class="Rdrjbxx" id="rdrjbxx_dsr_rm">
+		<result property="xm" column="xm"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="zjlx" column="zjlx"/>
+	</resultMap>
 	
 	<sql id="RdrjbxxWhere">
 		<isNotEmpty prepend="and" property="id">
@@ -248,6 +253,9 @@
 	</select>
 	
 	<select id="Rdrjbxx.getById" parameterClass="Integer" resultMap="rdrjbxx_zpxx_rm">
+		select * from t_rdrjbxx where id=#value#
+	</select>
+	<select id="Rdrjbxxdsr.getById" parameterClass="Integer" resultMap="rdrjbxx_dsr_rm">
 		select * from t_rdrjbxx where id=#value#
 	</select>
 <!-- 公安端个人频繁更换寄件单位统计查询   -->    
