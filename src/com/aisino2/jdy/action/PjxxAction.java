@@ -584,7 +584,7 @@ public class PjxxAction extends PageAction {
 		HttpSession session = this.getRequest().getSession();
 		User currUser = (User) session.getAttribute(Constants.userKey);
 		int jdpxxSize = 6;
-		int jdpxxColumn = 22;
+		int jdpxxColumn = 20;
 		try {
 			HSSFWorkbook wb = new HSSFWorkbook(xlsin);
 			HSSFSheet sheet = wb.getSheetAt(0);
@@ -632,8 +632,7 @@ public class PjxxAction extends PageAction {
 							.get(0));
 					Date ljsj=null;
 					try{
-						Long time = Long.valueOf(getCellString(row.getCell(14)));
-						ljsj=new Date(time);
+						ljsj=row.getCell(14).getDateCellValue();
 					}catch(Exception e){
 						
 						try{
@@ -689,15 +688,14 @@ public class PjxxAction extends PageAction {
 				pjxx.setPjtbsj(new Date());
 				pjxx.setLjjbxx(ljxx);
 				Qyryxx pjr = new Qyryxx();
-				pjr.setXm(getCellString(row.getCell(15)));
+				pjr.setXm(getCellString(row.getCell(13)));
 				pjr.setQybm(currUser.getSsdwbm());
 				pjr = (Qyryxx) qyryxxService.getListQyryxx(pjr)
 						.get(0);
 				pjxx.setPjr(pjr);
 				Date pjsj=null;
 				try{
-					Long time = Long.valueOf(getCellString(row.getCell(14)));
-					pjsj=new Date(time);
+					pjsj=row.getCell(14).getDateCellValue();
 				}catch(Exception e){
 					
 					try{
@@ -716,9 +714,9 @@ public class PjxxAction extends PageAction {
 				}
 				pjxx.setPjsj(pjsj);
 				
-				String dsrxm = getCellString(row.getCell(17));
-				String dsrzjlx  = getCellString(row.getCell(18));
-				String dsrzjhm = getCellString(row.getCell(19));
+				String dsrxm = getCellString(row.getCell(15));
+				String dsrzjlx  = getCellString(row.getCell(16));
+				String dsrzjhm = getCellString(row.getCell(17));
 				if(StringUtil.isNotEmpty(dsrxm)){
 					Rdrjbxx dsr = new Rdrjbxx();
 					dsr.setZjhm(dsrzjhm);

@@ -931,8 +931,7 @@ public class LjxxAction extends PageAction {
 				ljxx.setLjr((Qyryxx) qyryxxService.getListQyryxx(ljr).get(0));
 				Date ljsj=null;
 				try{
-					Long time = Long.getLong(getCellString(row.getCell(14)));
-					ljsj=new Date(time);
+					ljsj=row.getCell(14).getDateCellValue();
 				}catch(Exception e){
 					
 					try{

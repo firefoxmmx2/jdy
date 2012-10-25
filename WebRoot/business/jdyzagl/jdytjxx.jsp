@@ -385,10 +385,10 @@ function jdyjddxtj_page_query(pageno,url){
     	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
     	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
     	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
-    	                                    		 show_biaoqianBmXx({},'tx');
+    	                                    			show_biaoqianBmXx({},'tx');
     	                                    	 }
                                         	}catch(e){
-                                        		
+                                        		$('#jdytjxx_tx_div').text('没有统计数据');
                                         	}
                                     },
 										pageNumber: pageno,
@@ -431,10 +431,10 @@ function jdyqydxtj_page_query(pageno,url){
     	                                    	myTableDataBmXx= $(jdytjxx_qy_queryTable).clone().append($chart_table.find('tbody').html()).hide();
     	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
     	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
-    	                                    		 show_biaoqianBmXx({},'tx');
+     	                                    			show_biaoqianBmXx({},'tx');
     	                                    	 }
                                         	}catch(e){
-                                        		
+                                        		$('#jdytjxx_tx_div').text('没有统计数据');
                                         	}
                                         	
                                         },

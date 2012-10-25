@@ -30,17 +30,17 @@ public class JdyBjServiceImpl implements IJdyBjService {
 		if (ljjbxx.getSjr() == null
 				|| !StringUtil.isNotEmpty(ljjbxx.getSjr().getXm()))
 			throw new RuntimeException("需要添加公共比对的揽件收件人姓名为空");
-		//if (ljjbxx.getSjr() == null
-				//|| !StringUtil.isNotEmpty(ljjbxx.getSjr().getZjhm()))
-			//throw new RuntimeException("需要添加公共比对的揽件收件人证件号码为空");
+		// if (ljjbxx.getSjr() == null
+		// || !StringUtil.isNotEmpty(ljjbxx.getSjr().getZjhm()))
+		// throw new RuntimeException("需要添加公共比对的揽件收件人证件号码为空");
 		if (ljjbxx.getJjr() == null || ljjbxx.getJjr().getId() == null)
 			throw new RuntimeException("需要添加公共比对揽件寄件人主键为空");
 		if (ljjbxx.getJjr() == null
 				|| !StringUtil.isNotEmpty(ljjbxx.getJjr().getXm()))
 			throw new RuntimeException("需要添加公共比对揽件寄件人姓名为空");
-		//if (ljjbxx.getJjr() == null
-				//|| !StringUtil.isNotEmpty(ljjbxx.getJjr().getZjhm()))
-			//throw new RuntimeException("需要添加公共比对揽件寄件人证件号码为空");
+		// if (ljjbxx.getJjr() == null
+		// || !StringUtil.isNotEmpty(ljjbxx.getJjr().getZjhm()))
+		// throw new RuntimeException("需要添加公共比对揽件寄件人证件号码为空");
 		if (ljjbxx.getQyjbxx() == null
 				|| !StringUtil.isNotEmpty(ljjbxx.getQyjbxx().getQymc()))
 			throw new RuntimeException("需要添加公共比对揽件企业名称为空");
@@ -60,24 +60,26 @@ public class JdyBjServiceImpl implements IJdyBjService {
 				|| !StringUtil.isNotEmpty(ljjbxx.getQyjbxx().getHylb()))
 			throw new RuntimeException("需要添加公共比对揽件企业行业类别名称为空");
 		// 寄件人
-		if(ljjbxx.getJjr() != null
-				&& StringUtil.isNotEmpty(ljjbxx.getJjr().getZjhm())){
+		if (ljjbxx.getJjr() != null
+				&& StringUtil.isNotEmpty(ljjbxx.getJjr().getZjhm())) {
 			ggbdsjService.insertGgbdsj(ljjbxx.getJjr().getXm(), ljjbxx.getJjr()
-					.getZjhm(), ljjbxx.getQyjbxx().getQymc(), ljjbxx.getQyjbxx()
-					.getJydz(), ljjbxx.getQyjbxx().getGxdwbm(), ljjbxx.getQyjbxx()
-					.getGxdwmc(), ljjbxx.getQyjbxx().getHylbdm(), ljjbxx
-					.getQyjbxx().getHylb(), "t_rdrjbxx", ljjbxx.getJjr().getId()
-					.toString(), ljjbxx.getDjxh(), wxsj);
+					.getZjhm(), ljjbxx.getQyjbxx().getQymc(), ljjbxx
+					.getQyjbxx().getJydz(), ljjbxx.getQyjbxx().getGxdwbm(),
+					ljjbxx.getQyjbxx().getGxdwmc(), ljjbxx.getQyjbxx()
+							.getHylbdm(), ljjbxx.getQyjbxx().getHylb(),
+					"t_rdrjbxx", ljjbxx.getJjr().getId().toString(), ljjbxx
+							.getDjxh(), wxsj);
 		}
 		// 收件人
-		if(ljjbxx.getSjr() != null
-				&& StringUtil.isNotEmpty(ljjbxx.getSjr().getZjhm())){
-		ggbdsjService.insertGgbdsj(ljjbxx.getSjr().getXm(), ljjbxx.getSjr()
-				.getZjhm(), ljjbxx.getQyjbxx().getQymc(), ljjbxx.getQyjbxx()
-				.getJydz(), ljjbxx.getQyjbxx().getGxdwbm(), ljjbxx.getQyjbxx()
-				.getGxdwmc(), ljjbxx.getQyjbxx().getHylbdm(), ljjbxx
-				.getQyjbxx().getHylb(), "t_rdrjbxx", ljjbxx.getSjr().getId()
-				.toString(), ljjbxx.getDjxh(), wxsj);
+		if (ljjbxx.getSjr() != null
+				&& StringUtil.isNotEmpty(ljjbxx.getSjr().getZjhm())) {
+			ggbdsjService.insertGgbdsj(ljjbxx.getSjr().getXm(), ljjbxx.getSjr()
+					.getZjhm(), ljjbxx.getQyjbxx().getQymc(), ljjbxx
+					.getQyjbxx().getJydz(), ljjbxx.getQyjbxx().getGxdwbm(),
+					ljjbxx.getQyjbxx().getGxdwmc(), ljjbxx.getQyjbxx()
+							.getHylbdm(), ljjbxx.getQyjbxx().getHylb(),
+					"t_rdrjbxx", ljjbxx.getSjr().getId().toString(), ljjbxx
+							.getDjxh(), wxsj);
 		}
 	}
 
@@ -96,15 +98,17 @@ public class JdyBjServiceImpl implements IJdyBjService {
 		}
 
 		// 代收人
-		if (pjjbxx.getDsr() != null && pjjbxx.getDsr().getId() != null) {
-			
-			if (pjjbxx.getDsr() == null
-					|| !StringUtil.isNotEmpty(pjjbxx.getDsr().getXm()))
-				throw new RuntimeException("需要添加公共比对的派件代收人姓名为空");
-			if (pjjbxx.getDsr() == null
-					|| !StringUtil.isNotEmpty(pjjbxx.getDsr().getZjhm()))
-				throw new RuntimeException("需要添加公共比对的派件代收人证件号码为空");
-			
+		if (pjjbxx.getDsr() != null && pjjbxx.getDsr().getId() != null
+				&& StringUtil.isNotEmpty(pjjbxx.getDsr().getXm())
+				&& StringUtil.isNotEmpty(pjjbxx.getDsr().getZjhm())) {
+//
+//			if (pjjbxx.getDsr() == null
+//					|| !StringUtil.isNotEmpty(pjjbxx.getDsr().getXm()))
+//				throw new RuntimeException("需要添加公共比对的派件代收人姓名为空");
+//			if (pjjbxx.getDsr() == null
+//					|| !StringUtil.isNotEmpty(pjjbxx.getDsr().getZjhm()))
+//				throw new RuntimeException("需要添加公共比对的派件代收人证件号码为空");
+
 			ggbdsjService.insertGgbdsj(pjjbxx.getDsr().getXm(), pjjbxx.getDsr()
 					.getZjhm(), pjjbxx.getLjjbxx().getQyjbxx().getQymc(),
 					pjjbxx.getLjjbxx().getQyjbxx().getJydz(), pjjbxx
