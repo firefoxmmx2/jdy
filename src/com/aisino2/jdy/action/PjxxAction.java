@@ -601,6 +601,8 @@ public class PjxxAction extends PageAction {
 				
 				if (ljxx == null) {
 					ljxx = new Ljjbxx();
+					ljxx.setWldh(getCellString(row.getCell(0)));
+					ljxx.setQyjbxx(qyjbxx);
 					Rdrjbxx jjr = new Rdrjbxx();
 					jjr.setXm(getCellString(row.getCell(1)));
 					jjr.setZjlx(getCellString(row.getCell(2)));
@@ -732,6 +734,8 @@ public class PjxxAction extends PageAction {
 					log.error(e);
 					if (e.getMessage().contains("ORA-00001"))
 						failLjxxs.add(ljxx.getWldh());
+					else
+						throw e;
 				}
 
 			}
