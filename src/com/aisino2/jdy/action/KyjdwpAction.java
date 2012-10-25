@@ -353,7 +353,7 @@ public class KyjdwpAction extends PageAction{
 		lPro.add("jjwplx");
 		lPro.add("ljtbsj");//
 		lPro.add("gxdwmc");
-		lPro.add("xxdz");
+		lPro.add("sjrxxdz");
 		lPro.add("sjrxm");//
 		lPro.add("qyid");//
 		
