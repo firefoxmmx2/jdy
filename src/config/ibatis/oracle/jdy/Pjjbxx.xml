@@ -29,6 +29,11 @@
 		<result property="ljjbxx" column="ljjbxx_id" select="ljjbxx.getByDjxh"/>
 		<result property="dsr" column="dsr_id" select="Rdrjbxx.getById"/>
 	</resultMap>
+<!-- 	派件明细 包含关联内容-->
+	<resultMap class="pjjbxx" id="pjjbxx_mx_rm_dsr">
+		<result property="pjtbsj" column="pjtbsj"/>
+		<result property="dsr" column="dsr_id" select="Rdrjbxxdsr.getById"/>
+	</resultMap>
 <!-- 	派件信息列表结果 包含部分关联内容 -->
 	<resultMap class="pjjbxx" id="pjjbxx_list_rm" extends="pjjbxx_base_rm">
 		<result property="pjtbr.cyrybh" column="pjtbrbh"/>
@@ -270,6 +275,10 @@
 <!-- 	通过ID号获取唯一揽件数据 -->
 	<select id="pjjbxx.getById" parameterClass="String" resultMap="pjjbxx_mx_rm">
 		select * from t_pjjbxx pjjbxx where pjjbxx.ljjbxx_id=#value#
+	</select>
+<!-- 	通过ID号获取唯一最后一次派件信息数据 -->
+	<select id="pjjbxxmax_pjtbsj_getByid" parameterClass="String" resultMap="pjjbxx_mx_rm_dsr">
+		select max(pjtbsj) pjtbsj, max(dsr_id) dsr_id  from t_pjjbxx pjjbxx where pjjbxx.ljjbxx_id=#value# group by ljjbxx_id
 	</select>
 	
 <!-- 	获取派件信息列表 -->
