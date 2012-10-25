@@ -180,8 +180,8 @@
 			jAlert('联系电话必须填写','警告');
 			return false;
 		}
-		if(paramTypeVal=='xxdz' && !$('#sjgl_ssx').val()){
-			jAlert("省市县必须填写","警告");
+		if(paramTypeVal=='xxdz' && !$('#sjgl_xxdz').val()){
+			jAlert("地址必须填写","警告");
 			return false;
 		}
 		return true;
