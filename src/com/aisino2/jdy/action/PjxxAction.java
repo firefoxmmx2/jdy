@@ -600,6 +600,7 @@ public class PjxxAction extends PageAction {
 				ljxx = ljjbxxService.getLjjbxx(ljxx);
 				
 				if (ljxx == null) {
+					ljxx = new Ljjbxx();
 					Rdrjbxx jjr = new Rdrjbxx();
 					jjr.setXm(getCellString(row.getCell(1)));
 					jjr.setZjlx(getCellString(row.getCell(2)));
@@ -629,7 +630,7 @@ public class PjxxAction extends PageAction {
 							.get(0));
 					Date ljsj=null;
 					try{
-						Long time = Long.getLong(getCellString(row.getCell(14)));
+						Long time = Long.valueOf(getCellString(row.getCell(14)));
 						ljsj=new Date(time);
 					}catch(Exception e){
 						
@@ -693,7 +694,7 @@ public class PjxxAction extends PageAction {
 				pjxx.setPjr(pjr);
 				Date pjsj=null;
 				try{
-					Long time = Long.getLong(getCellString(row.getCell(14)));
+					Long time = Long.valueOf(getCellString(row.getCell(14)));
 					pjsj=new Date(time);
 				}catch(Exception e){
 					
