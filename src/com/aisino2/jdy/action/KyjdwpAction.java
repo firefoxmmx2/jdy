@@ -452,6 +452,12 @@ public class KyjdwpAction extends PageAction{
 					kyjdwpxx.setLjtbsj(kyjdwpxx.getLjjbxx().getLjtbsj());//揽件填报时间
 					kyjdwpxx.setQymc(kyjdwpxx.getLjjbxx().getQyjbxx().getQymc());//企业名称
 					kyjdwpxx.setQyid(kyjdwpxx.getLjjbxx().getQyjbxx().getQyid());//企业ID
+					//禁寄物品页面查询添加
+					if("1".equals(isJjwpcx)){
+						kyjdwpxx.setJjwplx(getJjwplxDict().get(kyjdwpxx.getJjwplx()));
+						kyjdwpxx.setSjrxxdz(kyjdwpxx.getSjr().getXxdz());
+						kyjdwpxx.setGxdwmc(kyjdwpxx.getLjjbxx().getQyjbxx().getGxdwmc());
+					}
 				}
 		    	session.setAttribute("Kyjdwpxxdaoc", lKyjdwpxx);
 				this.result = "success";
