@@ -58,73 +58,73 @@ public class JdpxxAction extends PageAction{
 	public String djpxxquery() throws Exception{
 		
 		jdpxx =jdpxxService.getJdpxx(jdpxx);
-		if(jdpxx.getLjjbxx().getJjr().getZjlx()!=null){
-				if(jdpxx.getLjjbxx().getJjr().getZjlx().equals("11")){
+		if(null!=jdpxx.getLjjbxx().getJjr().getZjlx()){
+				if("11".equals(jdpxx.getLjjbxx().getJjr().getZjlx())){
 					jdpxx.getLjjbxx().getJjr().setZjlx("身份证");
 				}
-				if(jdpxx.getLjjbxx().getJjr().getZjlx().equals("13")){
+				if("13".equals(jdpxx.getLjjbxx().getJjr().getZjlx())){
 					jdpxx.getLjjbxx().getJjr().setZjlx("户口薄");
 				}
-				if(jdpxx.getLjjbxx().getJjr().getZjlx().equals("90")){
+				if("90".equals(jdpxx.getLjjbxx().getJjr().getZjlx())){
 					jdpxx.getLjjbxx().getJjr().setZjlx("军官证");
 				}
-				if(jdpxx.getLjjbxx().getJjr().getZjlx().equals("91")){
+				if("91".equals(jdpxx.getLjjbxx().getJjr().getZjlx())){
 					jdpxx.getLjjbxx().getJjr().setZjlx("警官证");
 				}
-				if(jdpxx.getLjjbxx().getJjr().getZjlx().equals("92")){
+				if("92".equals(jdpxx.getLjjbxx().getJjr().getZjlx())){
 					jdpxx.getLjjbxx().getJjr().setZjlx("士兵证");
 				}
-				if(jdpxx.getLjjbxx().getJjr().getZjlx().equals("93")){
+				if("93".equals(jdpxx.getLjjbxx().getJjr().getZjlx())){
 					jdpxx.getLjjbxx().getJjr().setZjlx("护照");
 				}
-				if(jdpxx.getLjjbxx().getJjr().getZjlx().equals("99")){
+				if("99".equals(jdpxx.getLjjbxx().getJjr().getZjlx())){
 					jdpxx.getLjjbxx().getJjr().setZjlx("其他");
 				}
 		}
-		if(jdpxx.getLjjbxx().getSjr().getZjlx()!=null){
-				if(jdpxx.getLjjbxx().getSjr().getZjlx().equals("11")){
+		if(null!=jdpxx.getLjjbxx().getSjr().getZjlx()){
+				if("11".equals(jdpxx.getLjjbxx().getSjr().getZjlx())){
 					jdpxx.getLjjbxx().getSjr().setZjlx("身份证");
 				}
-				if(jdpxx.getLjjbxx().getSjr().getZjlx().equals("13")){
+				if("13".equals(jdpxx.getLjjbxx().getSjr().getZjlx())){
 					jdpxx.getLjjbxx().getSjr().setZjlx("户口薄");
 				}
-				if(jdpxx.getLjjbxx().getSjr().getZjlx().equals("90")){
+				if("90".equals(jdpxx.getLjjbxx().getSjr().getZjlx())){
 					jdpxx.getLjjbxx().getSjr().setZjlx("军官证");
 				}
-				if(jdpxx.getLjjbxx().getSjr().getZjlx().equals("91")){
+				if("91".equals(jdpxx.getLjjbxx().getSjr().getZjlx())){
 					jdpxx.getLjjbxx().getSjr().setZjlx("警官证");
 				}
-				if(jdpxx.getLjjbxx().getSjr().getZjlx().equals("92")){
+				if("92".equals(jdpxx.getLjjbxx().getSjr().getZjlx())){
 					jdpxx.getLjjbxx().getSjr().setZjlx("士兵证");
 				}
-				if(jdpxx.getLjjbxx().getSjr().getZjlx().equals("93")){
+				if("93".equals(jdpxx.getLjjbxx().getSjr().getZjlx())){
 					jdpxx.getLjjbxx().getSjr().setZjlx("护照");
 				}
-				if(jdpxx.getLjjbxx().getSjr().getZjlx().equals("99")){
+				if("99".equals(jdpxx.getLjjbxx().getSjr().getZjlx())){
 					jdpxx.getLjjbxx().getSjr().setZjlx("其他");
 				}
 		}
-		if(jdpxx.getPjjbxx()!=null){
-			if(jdpxx.getPjjbxx().getDsr()!=null){
-				if(jdpxx.getPjjbxx().getDsr().getZjlx().equals("11")){
+		if(null!=jdpxx.getPjjbxx()){
+			if(null!=jdpxx.getPjjbxx().getDsr()){
+				if("11".equals(jdpxx.getPjjbxx().getDsr().getZjlx())){
 					jdpxx.getPjjbxx().getDsr().setZjlx("身份证");
 				}
-				if(jdpxx.getPjjbxx().getDsr().getZjlx().equals("13")){
+				if("13".equals(jdpxx.getPjjbxx().getDsr().getZjlx())){
 					jdpxx.getPjjbxx().getDsr().setZjlx("户口薄");
 				}
-				if(jdpxx.getPjjbxx().getDsr().getZjlx().equals("90")){
+				if("90".equals(jdpxx.getPjjbxx().getDsr().getZjlx())){
 					jdpxx.getPjjbxx().getDsr().setZjlx("军官证");
 				}
-				if(jdpxx.getPjjbxx().getDsr().getZjlx().equals("91")){
+				if("91".equals(jdpxx.getPjjbxx().getDsr().getZjlx())){
 					jdpxx.getPjjbxx().getDsr().setZjlx("警官证");
 				}
-				if(jdpxx.getPjjbxx().getDsr().getZjlx().equals("92")){
+				if("92".equals(jdpxx.getPjjbxx().getDsr().getZjlx())){
 					jdpxx.getPjjbxx().getDsr().setZjlx("士兵证");
 				}
-				if(jdpxx.getPjjbxx().getDsr().getZjlx().equals("93")){
+				if("93".equals(jdpxx.getPjjbxx().getDsr().getZjlx())){
 					jdpxx.getPjjbxx().getDsr().setZjlx("护照");
 				}
-				if(jdpxx.getPjjbxx().getDsr().getZjlx().equals("99")){
+				if("99".equals(jdpxx.getPjjbxx().getDsr().getZjlx())){
 					jdpxx.getPjjbxx().getDsr().setZjlx("其他");
 				}
 			}
