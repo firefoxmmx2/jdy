@@ -996,6 +996,8 @@ public class LjxxAction extends PageAction {
 					log.error(e);
 					if (e.getMessage().contains("ORA-00001"))
 						failLjxxs.add(ljxx.getWldh());
+					else
+						throw e;
 				}
 
 			}
