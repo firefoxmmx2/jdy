@@ -152,6 +152,15 @@ $(document).ready(function() {
 		jdytjxx_chartType=$(this).val();
 		show_biaoqianBmXx({},'tx');
 	});
+	
+	$('input[name=aa]').click(function(){
+		if($('#jdytjxx_tjlx_wpfltj').attr('checked')){
+			$('#jdytjxx_show_number').val('');
+		}
+		else{
+			$('#jdytjxx_show_number').val($('#jdytjxx_show_number').attr('defaultValue'));
+		}
+	});
 }); 
 //显示标签方法
 function show_biaoqianBmXx(aObj,id){
@@ -462,12 +471,7 @@ function getSubDepartMentSum_baybmxxtj(id,level){
 
 //导出Excel，20100804,excel导出功能修改， 从session直接获取查询结果
 function setExportExcel_aybmxxtj(){	
-	if($('#jdytjxx_tjlx_wpfltj').attr('checked')){
-		$('#jdytjxx_show_number').val('');
-	}
-	else{
-		$('#jdytjxx_show_number').val($('#jdytjxx_show_number').attr('defaultValue'));
-	}
+	
 	//设置分页信息
 	$('#excelTjForm').attr('action',jdytjxx_excel_url)
 		.attr("target","_blank")
