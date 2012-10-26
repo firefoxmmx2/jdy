@@ -133,13 +133,15 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 			
 		}
 		map.put("pageSort", sCol);
-		if(map.get("gadqydcxqbbz").toString().equals("gadkywpcx")){
-			return queryForPage("jdpxxgadcx.getListPage", map, pageno,pagesize);
+		if(null!=map.get("gadqydcxqbbz")){
+			if("gadkywpcx".equals(map.get("gadqydcxqbbz").toString())){
+				return queryForPage("jdpxxgadcx.getListPage", map, pageno,pagesize);
+			}
+			else if("qydkywpcx".equals(map.get("gadqydcxqbbz").toString())){
+				return queryForPage("jdpxxqydkyaddcx.getListPage", map, pageno,pagesize);
+			}
 		}
-		else{
-			return queryForPage("jdpxxqydkyaddcx.getListPage", map, pageno,pagesize);
-		}
-		
+		return null;
 	}
 
 	public String generateDjxh(String qybm) {
