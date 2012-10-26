@@ -138,7 +138,7 @@ var daochuNum = 0;//是否可以导出Excle标志，0-无法导出，1-可以导
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="jdywxxcx_gyd">
   <input type="hidden" id="lj_gxdwbm" name="lj.qyjbxx.gxdwbm" value="<%=gxdwbm%>"><!-- 管辖单位编码 -->
   <input type="hidden" id="lj_gadjdywxxcx" name="lj.ywcxbz" value="gadjdywxxcx"><!-- 公安端寄递物品信息查询标志 -->
-  <input type="hidden" id="gadqydcxqbbz_ljman" name="lj.gadqydcxqbbz" value="gadkywpcx" /><!-- 安端端、企业端查询寄递物品区别标志 -->
+  <input type="hidden" id="gadcxqbbz_ljman" name="lj.gadqydcxqbbz" value="gadkywpcx" /><!-- 安端端、企业端查询寄递物品区别标志 -->
    <input type="hidden" id="jdytjxx_departlevel" value="<%=departlevel %>"><!-- 级别 -->
     	  <input type="hidden" id="p_allhylbdm" value="'Y'"><!-- 级别 -->
   <tr>
