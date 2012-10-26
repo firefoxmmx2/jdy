@@ -418,7 +418,7 @@ public class LjxxAction extends PageAction {
 		if (lj.getLjsjt() != null) {
 			params.put("ljsjt", lj.getLjsjt());
 		}
-		if (lj.getGadqydcxqbbz() != null) {
+		if ( null!=lj.getGadqydcxqbbz()) {
 			params.put("gadqydcxqbbz", lj.getGadqydcxqbbz());
 		}
 		Page pageinfo = ljjbxxService.gadjdpxxForPage(params, pagesize,
@@ -427,9 +427,9 @@ public class LjxxAction extends PageAction {
 		totalrows = pageinfo.getTotalRows();
 		lLjjbxx = pageinfo.getData();
 
-		if (lj.getYwcxbz().equals("qydjdywxxcx")) {
+		if ("qydjdywxxcx".equals(lj.getYwcxbz())) {
 			setTableDate_qydjdpxxcx(pageinfo.getData());
-		} else if (lj.getYwcxbz().equals("gadjdywxxcx")) {
+		} else if ("gadjdywxxcx".equals(lj.getYwcxbz())) {
 			setTableDate_gadjdpxxcx(pageinfo.getData());
 		}
 
