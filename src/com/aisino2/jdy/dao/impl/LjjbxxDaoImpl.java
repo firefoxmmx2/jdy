@@ -67,10 +67,8 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 			else if("4".equals(dir))
 				sCol = " jjr.zjhm "+ sort;
 			else if("5".equals(dir))
-				sCol = "ljjbxx.ljsj "+ sort;
+				sCol = " ljr.xm "+ sort;
 			else if("6".equals(dir))
-				sCol = "ljr.xm "+ sort;
-			else if("7".equals(dir))
 				sCol = "ljjbxx.ljtbsj "+ sort;
 			else 
 				sCol=" ljjbxx.djxh ";
@@ -89,56 +87,61 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
 		if (dir!=null){
-			if(map.get("gadqydcxqbbz").toString().equals("gadkywpcx")){
-				if("0".equals(dir))
-					sCol = " qyjbxx.qymc "+ sort;
-				else if("1".equals(dir))
-					sCol = " ljjbxx.wldh "+ sort;
-				else if("2".equals(dir))
-					sCol = " jjr.xm "+ sort;
-				else if("3".equals(dir))
-					sCol = " jjr.zjhm "+ sort;
-				else if("4".equals(dir))
-					sCol = " sjr.xm "+ sort;
-				else if("5".equals(dir))
-					sCol = " jdpxx.jdpdlx "+ sort;
-				else if("6".equals(dir))
-					sCol = " jdpxx.jdplx "+ sort;
-				else if("7".equals(dir))
-					sCol = "ljjbxx.ljtbsj "+ sort;
-				else
-					sCol=" ljjbxx.wldh ";
-			}else{
-				if("0".equals(dir))
-					sCol = " jdpxx.id "+ sort;
-				else if("1".equals(dir))
-					sCol = "ljjbxx.djxh "+ sort;//寄递品名称
-				else if("2".equals(dir))
-					sCol = "jdpxx.jdpmc "+ sort;//寄递品名称
-				else if("3".equals(dir))
-					sCol = " ljjbxx.wldh "+ sort;
-				else if("4".equals(dir))
-					sCol = " jjr.xm "+ sort;
-				else if("5".equals(dir))
-					sCol = "jjr.zjlx "+ sort;//寄递品名称
-				else if("6".equals(dir))
-					sCol = " jjr.zjhm "+ sort;
-				else if("7".equals(dir))
-					sCol = " ljr.cyrybh "+ sort;
-				else if("8".equals(dir))
-					sCol = "ljjbxx.ljtbsj "+ sort;
-				else 
-					sCol=" ljjbxx.wldh ";
+			if(null!=map.get("gadqydcxqbbz")){
+				if("gadkywpcx".equals(map.get("gadqydcxqbbz").toString())){
+					if("0".equals(dir))
+						sCol = " qyjbxx.qymc "+ sort;
+					else if("1".equals(dir))
+						sCol = " ljjbxx.wldh "+ sort;
+					else if("2".equals(dir))
+						sCol = " jjr.xm "+ sort;
+					else if("3".equals(dir))
+						sCol = " jjr.zjhm "+ sort;
+					else if("4".equals(dir))
+						sCol = " sjr.xm "+ sort;
+					else if("5".equals(dir))
+						sCol = " jdpxx.jdpdlx "+ sort;
+					else if("6".equals(dir))
+						sCol = " jdpxx.jdplx "+ sort;
+					else if("7".equals(dir))
+						sCol = "ljjbxx.ljtbsj "+ sort;
+					else
+						sCol=" ljjbxx.wldh ";
+				}else if("qydkywpcx".equals(map.get("gadqydcxqbbz").toString())){
+					if("0".equals(dir))
+						sCol = " jdpxx.id "+ sort;
+					else if("1".equals(dir))
+						sCol = "ljjbxx.djxh "+ sort;//寄递品名称
+					else if("2".equals(dir))
+						sCol = "jdpxx.jdpmc "+ sort;//寄递品名称
+					else if("3".equals(dir))
+						sCol = " ljjbxx.wldh "+ sort;
+					else if("4".equals(dir))
+						sCol = " jjr.xm "+ sort;
+					else if("5".equals(dir))
+						sCol = "jjr.zjlx "+ sort;//寄递品名称
+					else if("6".equals(dir))
+						sCol = " jjr.zjhm "+ sort;
+					else if("7".equals(dir))
+						sCol = " ljr.cyrybh "+ sort;
+					else if("8".equals(dir))
+						sCol = "ljjbxx.ljtbsj "+ sort;
+					else 
+						sCol=" ljjbxx.wldh ";
+				}
 			}
+			
 		}
 		map.put("pageSort", sCol);
-		if(map.get("gadqydcxqbbz").toString().equals("gadkywpcx")){
-			return queryForPage("jdpxxgadcx.getListPage", map, pageno,pagesize);
+		if(null!=map.get("gadqydcxqbbz")){
+			if("gadkywpcx".equals(map.get("gadqydcxqbbz").toString())){
+				return queryForPage("jdpxxgadcx.getListPage", map, pageno,pagesize);
+			}
+			else if("qydkywpcx".equals(map.get("gadqydcxqbbz").toString())){
+				return queryForPage("jdpxxqydkyaddcx.getListPage", map, pageno,pagesize);
+			}
 		}
-		else{
-			return queryForPage("jdpxxqydkyaddcx.getListPage", map, pageno,pagesize);
-		}
-		
+		return null;
 	}
 
 	public String generateDjxh(String qybm) {
