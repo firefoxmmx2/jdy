@@ -183,11 +183,15 @@ public class LjjbxxServiceImpl extends BaseService implements ILjjbxxService{
 		}
 		//删除照片信息
 		Jddxzpxx setJddxzpxx = new Jddxzpxx();
-		if(ljjbxx.getJjr().getZpxx()!=null &&ljjbxx.getJjr().getZpxx().getId()!=null){
-			jddxzpxxDao.delete(ljjbxx.getJjr().getZpxx());
+		if(null!=ljjbxx.getJjr()){
+			if(ljjbxx.getJjr().getZpxx()!=null &&ljjbxx.getJjr().getZpxx().getId()!=null){
+				jddxzpxxDao.delete(ljjbxx.getJjr().getZpxx());
+			}
 		}
-		if(ljjbxx.getSjr().getZpxx()!=null &&ljjbxx.getSjr().getZpxx().getId()!=null){
-			jddxzpxxDao.delete(ljjbxx.getSjr().getZpxx());
+		if(null!=ljjbxx.getSjr()){
+			if(ljjbxx.getSjr().getZpxx()!=null &&ljjbxx.getSjr().getZpxx().getId()!=null){
+				jddxzpxxDao.delete(ljjbxx.getSjr().getZpxx());
+			}
 		}
 		//从新获取照片信息数据插入数据库
 		if(ljjbxx.getJjrzpxx()!=null && ljjbxx.getJjrzpxx().trim().length()!=0){
