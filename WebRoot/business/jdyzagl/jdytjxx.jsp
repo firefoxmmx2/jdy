@@ -67,7 +67,7 @@ $(document).ready(function() {
 		if($('#jdlx').length)
 			$('#jdlx').text('揽件量');
 		//默认点击列表
-		show_biaoqianBmXx({},'lb');
+		show_biaoqianBmXx($('#bmxxtjTuxing_b'),'lb');
 	});
 	//辖区内寄件量排名前十的个人
 	$('#jdytjxx_tjlx_grjjltj').click(function(){
@@ -86,7 +86,7 @@ $(document).ready(function() {
 		if($('#jddxlx').length)
 			$('#jddxlx').text('寄件人');
 		//默认点击列表
-		show_biaoqianBmXx({},'lb');
+		show_biaoqianBmXx($('#bmxxtjTuxing_b'),'lb');
 	});
 	//辖区内派件量排名前十的企业
 	$('#jdytjxx_tjlx_qypjltj').click(function(){
@@ -105,7 +105,7 @@ $(document).ready(function() {
 		if($('#jdlx').length)
 			$('#jdlx').text('派件量');
 		//默认点击列表
-		show_biaoqianBmXx({},'lb');
+		show_biaoqianBmXx($('#bmxxtjTuxing_b'),'lb');
 	});
 	//辖区内收件量排名前十的个人
 	$('#jdytjxx_tjlx_grsjltj').click(function(){
@@ -124,7 +124,7 @@ $(document).ready(function() {
 		if($('#jddxlx').length)
 			$('#jddxlx').text('收件人');
 		//默认点击列表
-		show_biaoqianBmXx({},'lb');
+		show_biaoqianBmXx($('#bmxxtjTuxing_b'),'lb');
 	});
 	//辖区内物品分类统计
 	$('#jdytjxx_tjlx_wpfltj').click(function(){
@@ -140,7 +140,7 @@ $(document).ready(function() {
 			jdytjxx_wp_queryTable=$("#"+jdytjxx__table_id);
 		wpfltj_loadPage(jdytjxx_divnid);
 		//默认点击图表
-		show_biaoqianBmXx({},'tx');
+		show_biaoqianBmXx($('#bmxxtjTuxing_a'),'tx');
 		$('#jdytjxx_tx_ct').hide();
 	});
 	$('.listdata').hide();
@@ -150,7 +150,7 @@ $(document).ready(function() {
 	
 	$('#jdytjxx_tx_ct input:radio').click(function(){
 		jdytjxx_chartType=$(this).val();
-		show_biaoqianBmXx({},'tx');
+		show_biaoqianBmXx($('#bmxxtjTuxing_a'),'tx');
 	});
 	
 	$('input[name=aa]').click(function(){
@@ -385,7 +385,7 @@ function jdyjddxtj_page_query(pageno,url){
     	                                    	myTableDataBmXx= $(jdytjxx_queryTable).clone().append($chart_table.find('tbody').html()).hide();
     	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
     	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
-    	                                    			show_biaoqianBmXx({},'tx');
+    	                                    			show_biaoqianBmXx($('#bmxxtjTuxing_a'),'tx');
     	                                    	 }
                                         	}catch(e){
                                         		$('#jdytjxx_tx_div').text('没有统计数据');
@@ -431,7 +431,7 @@ function jdyqydxtj_page_query(pageno,url){
     	                                    	myTableDataBmXx= $(jdytjxx_qy_queryTable).clone().append($chart_table.find('tbody').html()).hide();
     	                                    	myTableDataBmXx.find('tr:first').find('th:nth(0)').remove();
     	                                    	 if($('#bmxxtjTuxing_a').hasClass('selected')){
-     	                                    			show_biaoqianBmXx({},'tx');
+     	                                    			show_biaoqianBmXx($('#bmxxtjTuxing_a'),'tx');
     	                                    	 }
                                         	}catch(e){
                                         		$('#jdytjxx_tx_div').text('没有统计数据');
