@@ -794,7 +794,7 @@ public class LjxxAction extends PageAction {
 			if (lj.getLjsjt() != null) {
 				params.put("ljsjt", lj.getLjsjt());
 			}
-			if (lj.getGadqydcxqbbz() != null) {
+			if (null!=lj.getGadqydcxqbbz()) {
 				params.put("gadqydcxqbbz", lj.getGadqydcxqbbz());
 			}
 			Page pageinfo = ljjbxxService.gadjdpxxForPage(params, 1,
