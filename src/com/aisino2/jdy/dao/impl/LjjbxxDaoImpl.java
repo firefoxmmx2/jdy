@@ -67,10 +67,8 @@ public class LjjbxxDaoImpl extends BaseDao implements ILjjbxxDao {
 			else if("4".equals(dir))
 				sCol = " jjr.zjhm "+ sort;
 			else if("5".equals(dir))
-				sCol = "ljjbxx.ljsj "+ sort;
+				sCol = " ljr.xm "+ sort;
 			else if("6".equals(dir))
-				sCol = "ljr.xm "+ sort;
-			else if("7".equals(dir))
 				sCol = "ljjbxx.ljtbsj "+ sort;
 			else 
 				sCol=" ljjbxx.djxh ";

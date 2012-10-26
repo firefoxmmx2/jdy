@@ -43,7 +43,7 @@ function setPageListlj(pageno,url){
 										hideColIndex:[0],
 										isHaveMorenPaixuClass: true, //加默认排序样式
 										morenPaixuCol: 8, //第一默认排序	
-										morenPaixuFangshi:'desc', //默认排序方式 
+										//morenPaixuFangshi:'desc', //默认排序方式 
 										alignCenterColIndex: [1,2,8],
 										changeHref:function(table){
 											$(table).find("tr").each(function(){
@@ -132,5 +132,5 @@ function setLjxxKy(id){
 </div>
 
 <tr height="25" align="center">
-	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#kyjdwp_detail").hideAndRemove("show");'>退出</a></td>
+	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='$("#kyjdwp_detail").hideAndRemove("show");'>返回</a></td>
 </tr>
