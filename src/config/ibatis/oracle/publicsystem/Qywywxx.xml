@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="qywywxx" type="com.aisino2.publicsystem.domain.Qywywxx"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--企业无业务信息(t_qywywxx)-->
+	<resultMap id="qywywxxResult" class="qywywxx">
+		<result property="qywywxxid" column="qywywxxid" />
+		<result property="qyid" column="qyid" />
+		<result property="ksyysj" column="ksyysj" />
+		<result property="jsyysj" column="jsyysj" />
+		<result property="csfe" column="csfe" />
+		<result property="zafzrxm" column="zafzrxm" />
+		<result property="sffsaj" column="sffsaj" />
+		<result property="sfglbmjc" column="sfglbmjc" />
+		<result property="djrq" column="djrq" />
+		<result property="txrxm" column="txrxm" />
+		<result property="drwywqksm" column="drwywqksm" />
+	</resultMap>
+	<!--企业无业务信息(t_qywywxx)-->
+	<resultMap id="qywywxxListResult" class="qywywxx">
+		<result property="qywywxxid" column="qywywxxid"/>
+		<result property="djrq" column="djrq"/>
+		<result property="ksyysj" column="ksyysj"/>
+		<result property="jsyysj" column="jsyysj"/>
+		<result property="csfe" column="csfe"/>
+		<result property="sffsaj" column="sffsaj"/>
+		<result property="sfglbmjc" column="sfglbmjc"/>
+	</resultMap>
+	<!--企业无业务信息(t_qywywxx)-->
+	<resultMap id="qywywxxgadListResult" class="qywywxx">
+		<result property="qywywxxid" column="qywywxxid"/>
+		<result property="djrq" column="djrq"/>
+		<result property="ksyysj" column="ksyysj"/>
+		<result property="jsyysj" column="jsyysj"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="qymc" column="qymc"/>
+		<result property="hylb" column="hylb"/>
+		<result property="sffsaj" column="sffsaj"/>
+	</resultMap>
+	<sql id="t_qywywxxgadlistWhere">
+	   <isNotEmpty prepend="and" property="hylbdm">
+				b.hylbdm in ($hylbdm$)
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="qyzflbm">
+				b.qyzflbm =#qyzflbm#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="gxdwbm">
+				b.gxdwbm like '$gxdwbm$%'
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="qymc">
+				b.qymc =#qymc#
+	   </isNotEmpty>
+	    <isNotEmpty prepend="and" property="ksyysj">
+				a.ksyysj &gt;=#ksyysj:TIMESTAMP#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="jsyysj">
+				a.jsyysj &lt;=#jsyysj:TIMESTAMP#
+		</isNotEmpty>	
+	</sql>
+	<sql id="t_qywywxxWhere">
+			<isNotEmpty prepend="and" property="qyid">
+				a.qyid=#qyid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qywywxxid">
+				a.qywywxxid=#qywywxxid#
+			</isNotEmpty>
+	</sql>
+	<sql id="t_qywywxxPageWhere" >
+		<include refid="t_qywywxxWhere" />
+		<isNotEmpty prepend="and" property="ksyysj">
+				a.ksyysj &gt;=#ksyysj:TIMESTAMP#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jsyysj">
+				a.jsyysj &lt;=#jsyysj:TIMESTAMP#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="zafzrxm">
+				a.zafzrxm like '%$zafzrxm$%'
+		</isNotEmpty>
+	</sql>
+	<sql id="t_qywywxxListWhere" >
+		<include refid="t_qywywxxWhere" />	</sql>
+	<sql id="t_qywywxxSelectWhere"  >
+		<include refid="t_qywywxxWhere" />	</sql>
+	<!--企业无业务信息(t_qywywxx)-->
+	<insert id="insertQywywxx"  parameterClass="qywywxx">
+		insert into t_qywywxx (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="qyid">
+				qyid
+			</isNotNull>
+			<isNotNull prepend="," property="qywywxxid">
+				qywywxxid
+			</isNotNull>
+			<isNotNull prepend="," property="ksyysj">
+				ksyysj
+			</isNotNull>
+			<isNotNull prepend="," property="jsyysj">
+				jsyysj
+			</isNotNull>
+			<isNotNull prepend="," property="csfe">
+				csfe
+			</isNotNull>
+			<isNotNull prepend="," property="zafzrxm">
+				zafzrxm
+			</isNotNull>
+			<isNotNull prepend="," property="sffsaj">
+				sffsaj
+			</isNotNull>
+			<isNotNull prepend="," property="sfglbmjc">
+				sfglbmjc
+			</isNotNull>
+			<isNotNull prepend="," property="djrq">
+				djrq
+			</isNotNull>
+			<isNotNull prepend="," property="txrxm">
+				txrxm
+			</isNotNull>
+			<isNotNull prepend="," property="drwywqksm">
+				drwywqksm
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="qyid">
+				#qyid#
+			</isNotNull>
+			<isNotNull prepend="," property="qywywxxid">
+				#qywywxxid#
+			</isNotNull>
+			<isNotNull prepend="," property="ksyysj">
+				#ksyysj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="jsyysj">
+				#jsyysj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="csfe">
+				#csfe#
+			</isNotNull>
+			<isNotNull prepend="," property="zafzrxm">
+				#zafzrxm#
+			</isNotNull>
+			<isNotNull prepend="," property="sffsaj">
+				#sffsaj#
+			</isNotNull>
+			<isNotNull prepend="," property="sfglbmjc">
+				#sfglbmjc#
+			</isNotNull>
+			<isNotNull prepend="," property="djrq">
+				#djrq:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="txrxm">
+				#txrxm#
+			</isNotNull>
+			<isNotNull prepend="," property="drwywqksm">
+				#drwywqksm#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--企业无业务信息(t_qywywxx)-->
+	<update id="updateQywywxx" parameterClass="qywywxx">
+		update t_qywywxx a set a.qywywxxid=a.qywywxxid
+		<dynamic prepend="">
+			<isNotNull prepend="," property="ksyysj">	
+					a.ksyysj=#ksyysj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="jsyysj">
+					a.jsyysj=#jsyysj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="sffsaj">
+				    a.sffsaj=#sffsaj#
+			</isNotNull>
+			<isNotNull prepend="," property="sfglbmjc">
+				    a.sfglbmjc=#sfglbmjc#
+			</isNotNull>
+			<isNotNull prepend="," property="drwywqksm">
+				    a.drwywqksm=#drwywqksm#
+			</isNotNull>
+		</dynamic>
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_qywywxxWhere" />
+		</dynamic>
+	</update>
+	<!--企业无业务信息(t_qywywxx)-->
+	<delete id="deleteQywywxx" parameterClass="qywywxx">
+		delete from t_qywywxx a where 
+		<dynamic prepend="">
+			<include refid="t_qywywxxWhere" />
+		</dynamic>
+	</delete>
+	<!--企业无业务信息(t_qywywxx)-->
+	<select id="getQywywxxList" resultMap="qywywxxListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.qywywxxid qywywxxid,a.djrq djrq,a.ksyysj ksyysj,a.jsyysj jsyysj,a.csfe csfe,a.sffsaj sffsaj,a.sfglbmjc sfglbmjc
+		from t_qywywxx a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_qywywxxPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--企业无业务信息(t_qywywxx)-->
+	<select id="getQywywxxListCount" resultClass="int" parameterClass="map">
+		select count(1) a from t_qywywxx a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_qywywxxPageWhere" />
+		</dynamic>
+	</select>
+	<!--企业无业务信息(t_qywywxx)-->
+	<select id="getQywywxxListNoPage" resultMap="qywywxxListResult" parameterClass="qywywxx">
+		select a.qyid qyid,a.qywywxxid qywywxxid,a.ksyysj ksyysj,a.jsyysj jsyysj,a.csfe csfe,a.zafzrxm zafzrxm,a.sffsaj sffsaj,a.sfglbmjc sfglbmjc,a.djrq djrq,a.txrxm txrxm,a.drwywqksm drwywqksm
+		from t_qywywxx a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_qywywxxListWhere" />
+		</dynamic>
+		order by a.qyid,a.qywywxxid
+	</select>
+	<!--企业无业务信息(t_qywywxx)-->
+	<select id="getQywywxx" resultMap="qywywxxResult" parameterClass="qywywxx">
+		select a.qywywxxid qywywxxid,a.qyid qyid,a.ksyysj ksyysj,a.jsyysj jsyysj,a.csfe csfe,a.zafzrxm zafzrxm,a.sffsaj sffsaj,a.sfglbmjc sfglbmjc,a.djrq djrq,a.txrxm txrxm,a.drwywqksm drwywqksm
+		from t_qywywxx a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_qywywxxSelectWhere" />
+		</dynamic>
+		order by a.qyid,a.qywywxxid
+	</select>
+	<!-- 判断企业是否当天已经上报过 -->
+	<select id="getExist" resultClass="int" parameterClass="map">
+		select count(1) a from t_qywywxx a
+		where a.qyid = #qyid# and
+		a.ksyysj &gt;= to_date('$ksyysj$ 00:00:00','YYYY-MM-DD hh24:mi:ss') 
+		and a.jsyysj &lt;= to_date('$ksyysj$ 23:59:59','YYYY-MM-DD hh24:mi:ss')
+		<dynamic prepend="">
+			<isNotNull prepend="and" property="qywywxxid">
+				    a.qywywxxid not in (#qywywxxid#)
+			</isNotNull>
+		</dynamic>
+	</select>
+	<!--公安端无业务信息查询 -->
+	<select id="getgadQywywxxList" resultMap="qywywxxgadListResult" parameterClass="map">
+	select x.* from (
+	select rownum rowno,z.* from (select a.qywywxxid,
+       a.djrq,
+       a.ksyysj,
+       a.jsyysj,
+       b.gxdwmc,
+       b.qymc,
+       b.hylb,
+       a.sffsaj
+    from t_qywywxx a, t_qyjbxx b
+    where a.qyid = b.qyid and b.zxbz = '0' 
+    <dynamic prepend="">
+	   <include refid="t_qywywxxgadlistWhere" />	
+    </dynamic>
+    order by $pageSort$) z)x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+	</select>
+	<select id="getgadQywywxxListCount" resultClass="int" parameterClass="map">
+    select count(1)
+    from t_qywywxx a, t_qyjbxx b
+    where a.qyid = b.qyid and b.zxbz = '0'
+    <dynamic prepend="">
+	   <include refid="t_qywywxxgadlistWhere" />	
+    </dynamic>
+	</select>
+</sqlMap>

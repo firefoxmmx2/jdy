@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Rdrjbxx" type="com.aisino2.jdy.domain.Rdrjbxx"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	
+	<!-- 寄递对象信息结果集 -->
+	<resultMap class="Rdrjbxx" id="rdrjbxx_rm">
+		<result property="id" column="id"/>
+		<result property="xm" column="xm"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="zjlx" column="zjlx"/>
+		<result property="ssx" column="ssx"/>
+		<result property="xxdz" column="xxdz"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="gddh" column="gddh"/>
+		<result property="ssxmc" column="ssxmc"/>
+		<result property="dw" column="dw"/>
+<!-- 		新增寄递人员类型 -->
+		<result property="jdrylx" column="jdrylx"/>
+	</resultMap>
+<!--  公安端个人频繁更换寄件单位统计查询  -->	
+	<resultMap class="Rdrjbxx" id="grpfghjjdwtjcxgad">
+		<result property="xm" column="xm"/>
+		<result property="kssj" column="kssj"/>
+		<result property="jssj" column="jssj"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="ghjjdwcs" column="ghjjdwcs"/>
+	</resultMap>
+	<resultMap class="Rdrjbxx" id="grpfghjjdwtjcxdalgad">
+		<result property="djxh" column="djxh"/>
+		<result property="xh" column="xh"/>
+		<result property="jjrxm" column="jjrxm"/>
+		<result property="jjsj" column="jjsj"/>
+		<result property="cjqy" column="cjqy"/>
+		<result property="wldh" column="wldh"/>
+		<result property="sjrxm" column="sjrxm"/>
+		<result property="sjrdh" column="sjrdh"/>
+		<result property="sjrxxdz" column="sjrxxdz"/>
+	</resultMap>
+<!-- 	寄递对象信息带照片 -->
+	<resultMap class="Rdrjbxx" id="rdrjbxx_zpxx_rm" extends="rdrjbxx_rm">
+		<result property="zpxx" column="id" select="jddxzpxx.getByRdrjbxxId"/>
+	</resultMap>
+	<resultMap class="Rdrjbxx" id="rdrjbxx_dsr_rm">
+		<result property="xm" column="xm"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="zjlx" column="zjlx"/>
+	</resultMap>
+	
+	<sql id="RdrjbxxWhere">
+		<isNotEmpty prepend="and" property="id">
+			Rdrjbxx.id=#id#
+		</isNotEmpty>
+	</sql>
+	
+	<sql id="RdrjbxxPageWhere">
+		<include refid="RdrjbxxWhere"/>
+	</sql>
+<!-- 公安端个人频繁更换寄件单位统计查询   -->   
+	<sql id="pfghjjdwWhere">
+		<isNotEmpty prepend="and" property="kssj">
+			l.ljsj >= #kssj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jssj">
+			l.ljsj &lt;= #jssj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ssx">
+			r.ssx=#ssx#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			q.gxdwbm like '$gxdwbm$%'
+		</isNotEmpty>
+	</sql>
+	<sql id="pfghjjdwdalWhere">
+		<isNotEmpty prepend="and" property="xm">
+			r.xm=#xm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="kssj">
+			l.ljsj >= #kssj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jssj">
+			l.ljsj &lt;= #jssj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			q.gxdwbm like '$gxdwbm$%'
+		</isNotEmpty>
+	</sql>
+	<insert id="Rdrjbxx.insert" parameterClass="Rdrjbxx">
+		insert into t_rdrjbxx(
+			<dynamic prepend=" ">
+				<isNotNull property="id" prepend=","> 
+					id
+				</isNotNull>
+				<isNotNull property="xm" prepend=","> 
+					xm
+				</isNotNull>
+				<isNotNull property="zjhm" prepend=","> 
+					zjhm
+				</isNotNull>
+				<isNotNull property="zjlx" prepend=","> 
+					zjlx
+				</isNotNull>
+				<isNotNull property="ssx" prepend=","> 
+					ssx
+				</isNotNull>
+				<isNotNull property="xxdz" prepend=","> 
+					xxdz
+				</isNotNull>
+				<isNotNull property="lxdh" prepend=","> 
+					lxdh
+				</isNotNull>
+				<isNotNull property="gddh" prepend=","> 
+					gddh
+				</isNotNull>
+				<isNotNull property="ssxmc" prepend=","> 
+					ssxmc
+				</isNotNull>
+				<isNotNull property="dw" prepend=","> 
+					dw
+				</isNotNull>
+				<isNotNull property="jdrylx" prepend=","> 
+					jdrylx
+				</isNotNull>
+				
+			</dynamic>
+		)
+		values(
+			<dynamic>
+				<isNotNull property="id" prepend=""> 
+					#id#
+				</isNotNull>
+				<isNotNull property="xm" prepend=","> 
+					#xm#
+				</isNotNull>
+				<isNotNull property="zjhm" prepend=","> 
+					#zjhm#
+				</isNotNull>
+				<isNotNull property="zjlx" prepend=","> 
+					#zjlx#
+				</isNotNull>
+				<isNotNull property="ssx" prepend=","> 
+					#ssx#
+				</isNotNull>
+				<isNotNull property="xxdz" prepend=","> 
+					#xxdz#
+				</isNotNull>
+				<isNotNull property="lxdh" prepend=","> 
+					#lxdh#
+				</isNotNull>
+				<isNotNull property="gddh" prepend=","> 
+					#gddh#
+				</isNotNull>
+				<isNotNull property="ssxmc" prepend=","> 
+					#ssxmc#
+				</isNotNull>
+				<isNotNull property="dw" prepend=","> 
+					#dw#
+				</isNotNull>
+				<isNotNull property="jdrylx" prepend=","> 
+					#jdrylx#
+				</isNotNull>
+			</dynamic>
+		)
+	</insert>
+	
+	<update id="Rdrjbxx.update" parameterClass="Rdrjbxx">
+		update t_Rdrjbxx Rdrjbxx
+			set
+			<dynamic prepend=" ">
+				<isNotNull property="xm" prepend=","> 
+					xm=#xm#
+				</isNotNull>
+				<isNotNull property="zjhm" prepend=","> 
+					zjhm=#zjhm#
+				</isNotNull>
+				<isNotNull property="zjlx" prepend=","> 
+					zjlx=#zjlx#
+				</isNotNull>
+				<isNotNull property="ssx" prepend=","> 
+					ssx=#ssx#
+				</isNotNull>
+				<isNotNull property="xxdz" prepend=","> 
+					xxdz=#xxdz#
+				</isNotNull>
+				<isNotNull property="lxdh" prepend=","> 
+					lxdh=#lxdh#
+				</isNotNull>
+				<isNotNull property="gddh" prepend=","> 
+					gddh=#gddh#
+				</isNotNull>
+				<isNotNull property="ssxmc" prepend=","> 
+					ssxmc=#ssxmc#
+				</isNotNull>
+				<isNotNull property="dw" prepend=","> 
+					dw=#dw#
+				</isNotNull>
+				<isNotNull property="jdrylx" prepend=","> 
+					jdrylx = #jdrylx#
+				</isNotNull>
+			</dynamic>
+			
+			where 
+				<dynamic prepend=" ">
+					<include refid="RdrjbxxWhere"/>
+				</dynamic>
+				
+	</update>
+	
+	<delete id="Rdrjbxx.delete" parameterClass="Rdrjbxx">
+		delete from t_Rdrjbxx Rdrjbxx where 
+			<dynamic prepend=" ">
+				<include refid="RdrjbxxWhere"/>
+			</dynamic>
+	</delete>
+	
+	<select id="Rdrjbxx.get" resultMap="rdrjbxx_zpxx_rm" parameterClass="Rdrjbxx" >
+		select  Rdrjbxx.* from t_Rdrjbxx Rdrjbxx 
+	    where 
+		<dynamic prepend=" ">
+			<include refid="RdrjbxxWhere"/>
+		</dynamic>
+	</select>
+	
+	<select id="Rdrjbxx.getList" resultMap="rdrjbxx_rm" parameterClass="Rdrjbxx">
+		select Rdrjbxx.* from t_Rdrjbxx Rdrjbxx 
+		where
+		<dynamic prepend=" ">
+			<include refid="RdrjbxxPageWhere"/>
+		</dynamic>
+	</select>
+	
+	<select id="Rdrjbxx.getListPageCount" resultClass="Integer" parameterClass="map" >
+		select count(1) from t_Rdrjbxx Rdrjbxx
+		where 
+		<dynamic prepend=" ">
+			<include refid="RdrjbxxPageWhere"/>
+		</dynamic>
+	
+	</select>
+	<select id="Rdrjbxx.getListPage" resultMap="rdrjbxx_rm" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select Rdrjbxx.*
+		from t_Rdrjbxx Rdrjbxx 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="RdrjbxxPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	
+	<select id="Rdrjbxx.getById" parameterClass="Integer" resultMap="rdrjbxx_zpxx_rm">
+		select * from t_rdrjbxx where id=#value#
+	</select>
+	<select id="Rdrjbxxdsr.getById" parameterClass="Integer" resultMap="rdrjbxx_dsr_rm">
+		select * from t_rdrjbxx where id=#value#
+	</select>
+<!-- 公安端个人频繁更换寄件单位统计查询   -->    
+    <select id="grpfghjjdwtjcxgad.getListPageCount" resultClass="Integer" parameterClass="map" >
+		select count(1) from( select count(1) ghjjdwcs
+		   from(
+           select xm xm, count(1)
+           from t_rdrjbxx r, t_ljjbxx l, t_qyjbxx q
+           where 1=1
+                 and r.id=l.jjr_id
+                 and l.qybm=q.qybm
+		<dynamic prepend="">
+			<include refid="pfghjjdwWhere" />
+		</dynamic>
+		group by r.xm,q.qybm) a  group by a.xm  having count(1)>=#ghjjdwcs#) zts
+	</select>
+	<select id="grpfghjjdwtjcxgad.getListPage" resultMap="grpfghjjdwtjcxgad" parameterClass="map">
+	select x.* from (
+		select rownum rowno,z.* from(
+		select a.xm xm,min(a.kssj) kssj,max(a.jssj) jssj,min(a.gxdwmc) gxdwmc,sum(a.jdcs) ghjjdwcs from(
+           select r.xm,count(1) jdcs,min(ljsj) kssj,max(ljsj) jssj,min(gxdwmc) gxdwmc
+           from t_rdrjbxx r, t_ljjbxx l, t_qyjbxx q
+           where 1=1
+                 and r.id=l.jjr_id
+                 and l.qybm=q.qybm
+        <dynamic prepend="">
+			<include refid="pfghjjdwWhere" />
+		</dynamic>
+            group by r.xm,q.qybm) a  group by a.xm  having count(1)>=#ghjjdwcs#
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+	</select>
+<!-- 公安端个人频繁更换寄件单位统计查询      详细信息列表   -->    
+    <select id="fghjjdwtjcxdal.getListPageCount" resultClass="Integer" parameterClass="map" >
+		select count(1) from( select a.xm,a.ljsj,a.qymc,a.wldh,ryb.xm,ryb.lxdh,ryb.xxdz from 
+		(select  r.xm,l.ljsj,q.qymc,l.wldh,l.sjr_id
+		 from t_rdrjbxx r,t_ljjbxx l,t_qyjbxx q where 1=1  and r.id=l.jjr_id and l.qybm=q.qybm 
+		<dynamic prepend="">
+			<include refid="pfghjjdwdalWhere" />
+		</dynamic>
+		) a,
+		 t_rdrjbxx ryb
+		 where a.sjr_id=ryb.id)
+	</select>
+	<select id="fghjjdwtjcxdal.getListPage" resultMap="grpfghjjdwtjcxdalgad" parameterClass="map">
+	select x.* from (
+		select rownum rowno,z.* from(
+		select a.djxh djxh,rownum xh, a.xm jjrxm,a.ljsj jjsj,a.qymc cjqy,a.wldh wldh,ryb.xm sjrxm,ryb.lxdh sjrdh,ryb.xxdz sjrxxdz from 
+		(select  r.xm,l.ljsj,q.qymc,l.wldh,l.sjr_id,l.djxh
+		 from t_rdrjbxx r,t_ljjbxx l,t_qyjbxx q where 1=1  and r.id=l.jjr_id and l.qybm=q.qybm 
+		<dynamic prepend="">
+			<include refid="pfghjjdwdalWhere" />
+		</dynamic>
+		) a,
+		 t_rdrjbxx ryb
+		 where a.sjr_id=ryb.id
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+	</select>
+</sqlMap>

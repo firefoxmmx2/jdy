@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">  
+  <!-- 寄递业揽件信息action -->
+  <bean id="ljxxAction" class="com.aisino2.jdy.action.LjxxAction" scope="prototype">  
+      <property name="ljjbxxService" ref="LjjbxxServiceImpl"/> 
+      <property name="qyryxxService" ref="qyryxxService"/>
+  </bean>  
+<!--   派件信息 -->
+  <bean id="PjxxAction" class="com.aisino2.jdy.action.PjxxAction" scope="prototype">
+      <property name="pjjbxxService" ref="PjjbxxServiceImpl"/>
+      <property name="qyryxxService" ref="qyryxxService"/>
+      <property name="ljjbxxService" ref="LjjbxxServiceImpl"/> 
+  </bean>
+<!--   寄递业统计信息 -->
+  <bean id="JdytjAction" class="com.aisino2.jdy.action.JdytjAction" scope="prototype">
+      <property name="jdytjxx_service" ref="JdytjxxServiceImpl"/>
+      <property name="dict_itemService" ref="dict_itemService"/>
+  </bean>
+<!-- 寄递品信息action -->
+  <bean id="jdpxxAction" class="com.aisino2.jdy.action.JdpxxAction" scope="prototype">  
+      <property name="jdpxxService" ref="JdpxxServiceImpl"/> 
+  </bean>  
+<!-- 寄递品信息action -->
+  <bean id="kyjdwpAction" class="com.aisino2.jdy.action.KyjdwpAction" scope="prototype">  
+      <property name="kyjdwpxxService" ref="KyjdwpxxServiceImpl"/> 
+  </bean>   
+<!-- 人员照片信息action -->
+  <bean id="JddxzpxxAction" class="com.aisino2.jdy.action.JddxzpxxAction" scope="prototype">  
+      <property name="jddxzpxxService" ref="JddxzpxxServiceImpl"/> 
+  </bean> 
+<!-- 寄递人员信息action  (个人频繁变更寄件单位统计) -->
+  <bean id="RdrjbxxAction" class="com.aisino2.jdy.action.RdrjbxxAction" scope="prototype">  
+      <property name="rdrjbxxService" ref="RdrjbxxServiceImpl"/> 
+  </bean> 
+  <!-- 历史数据轨迹查询action -->
+  <bean id="lssjxxAction" class="com.aisino2.jdy.action.LssjgjAction" scope="prototype">
+      <property name="jdytjxx_service" ref="JdytjxxServiceImpl"/>
+  </bean>
+<!-- 重点人员管控信息action   -->
+  <bean id="ZdrygkAction" class="com.aisino2.jdy.action.ZdrygkAction" scope="prototype">  
+      <property name="jdytjxx_service" ref="JdytjxxServiceImpl"/> 
+  </bean> 
+</beans>

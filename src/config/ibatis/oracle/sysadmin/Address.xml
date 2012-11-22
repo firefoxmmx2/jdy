@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="address" type="com.aisino2.sysadmin.domain.Address"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--地址(T_ADDRESS)-->
+	<resultMap id="addressResult" class="address">
+		<result property="addressid" column="addressid" />
+		<result property="departid" column="departid" />
+		<result property="addresscode" column="addresscode" />
+		<result property="addressname" column="addressname" />
+		<result property="addresslevel" column="addresslevel" />
+		<result property="parentaddressid" column="parentaddressid" />
+		<result property="addressfullcode" column="addressfullcode" />
+		<result property="nodeorder" column="nodeorder" />
+		<result property="isleaf" column="isleaf" />
+		<result property="addresssimplepin" column="addresssimplepin" />
+		<result property="addressallpin" column="addressallpin" />
+		<result property="addressbrevitycode" column="addressbrevitycode" />
+	</resultMap>
+	<!--  by王鑫 -->
+	<resultMap id="selectparenttreeResult" class="address">
+		<result property="addressid" column="addressid" />
+		<result property="addressname" column="addressname" />
+	</resultMap>
+	<!--地址(T_ADDRESS)-->
+	<resultMap id="addressListResult" class="address">
+		<result property="addressid" column="addressid"/>
+		<result property="departid" column="departid"/>
+		<result property="addresscode" column="addresscode"/>
+		<result property="addressname" column="addressname"/>
+		<result property="addresslevel" column="addresslevel"/>
+		<result property="parentaddressid" column="parentaddressid"/>
+		<result property="addressfullcode" column="addressfullcode"/>
+		<result property="nodeorder" column="nodeorder"/>
+		<result property="isleaf" column="isleaf"/>
+		<result property="addresssimplepin" column="addresssimplepin"/>
+		<result property="addressallpin" column="addressallpin"/>
+		<result property="addressbrevitycode" column="addressbrevitycode"/>
+	</resultMap>
+	<sql id="T_ADDRESSWhere">
+			<isNotEmpty prepend="and" property="addressid">
+				a.addressid=#addressid#
+			</isNotEmpty>
+	</sql>
+	<sql id="T_ADDRESSCODEWhere">
+			<isNotEmpty prepend="and" property="addressid">
+				a.addressid=#addressid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="addresscode">
+				a.addresscode=#addresscode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="departid">
+				a.departid=#departid#
+			</isNotEmpty>
+	</sql>
+	<sql id="T_ADDRESSPageWhere" >
+		<include refid="T_ADDRESSWhere" />	</sql>
+	<sql id="T_ADDRESSListWhere" >
+		<include refid="T_ADDRESSWhere" />	</sql>
+	<sql id="T_ADDRESSSelectWhere"  >
+		<include refid="T_ADDRESSWhere" />	</sql>
+	<!--地址(T_ADDRESS)-->
+	<insert id="insertAddress"  parameterClass="address">
+		insert into T_ADDRESS (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="addressid">
+				addressid
+			</isNotNull>
+			<isNotNull prepend="," property="departid">
+				departid
+			</isNotNull>
+			<isNotNull prepend="," property="addresscode">
+				addresscode
+			</isNotNull>
+			<isNotNull prepend="," property="addressname">
+				addressname
+			</isNotNull>
+			<isNotNull prepend="," property="addresslevel">
+				addresslevel
+			</isNotNull>
+			<isNotNull prepend="," property="parentaddressid">
+				parentaddressid
+			</isNotNull>
+			<isNotNull prepend="," property="addressfullcode">
+				addressfullcode
+			</isNotNull>
+			<isNotNull prepend="," property="nodeorder">
+				nodeorder
+			</isNotNull>
+			<isNotNull prepend="," property="isleaf">
+				isleaf
+			</isNotNull>
+			<isNotNull prepend="," property="addresssimplepin">
+				addresssimplepin
+			</isNotNull>
+			<isNotNull prepend="," property="addressallpin">
+				addressallpin
+			</isNotNull>
+			<isNotNull prepend="," property="addressbrevitycode">
+				addressbrevitycode
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="addressid">
+				#addressid#
+			</isNotNull>
+			<isNotNull prepend="," property="departid">
+				#departid#
+			</isNotNull>
+			<isNotNull prepend="," property="addresscode">
+				#addresscode#
+			</isNotNull>
+			<isNotNull prepend="," property="addressname">
+				#addressname#
+			</isNotNull>
+			<isNotNull prepend="," property="addresslevel">
+				#addresslevel#
+			</isNotNull>
+			<isNotNull prepend="," property="parentaddressid">
+				#parentaddressid#
+			</isNotNull>
+			<isNotNull prepend="," property="addressfullcode">
+				#addressfullcode#
+			</isNotNull>
+			<isNotNull prepend="," property="nodeorder">
+				#nodeorder#
+			</isNotNull>
+			<isNotNull prepend="," property="isleaf">
+				#isleaf#
+			</isNotNull>
+			<isNotNull prepend="," property="addresssimplepin">
+				#addresssimplepin#
+			</isNotNull>
+			<isNotNull prepend="," property="addressallpin">
+				#addressallpin#
+			</isNotNull>
+			<isNotNull prepend="," property="addressbrevitycode">
+				#addressbrevitycode#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--地址(T_ADDRESS)-->
+	<update id="updateAddress" parameterClass="address">
+		update T_ADDRESS a set a.addressid=a.addressid
+		<dynamic prepend="">
+			<isNotNull prepend="," property="addresscode">
+				addresscode=#addresscode#
+			</isNotNull>
+			<isNotNull prepend="," property="addressname">
+				addressname=#addressname#
+			</isNotNull>
+			<isNotNull prepend="," property="addresslevel">
+				addresslevel=#addresslevel#
+			</isNotNull>
+			<isNotNull prepend="," property="parentaddressid">
+				parentaddressid=#parentaddressid#
+			</isNotNull>
+			<isNotNull prepend="," property="addressfullcode">
+				addressfullcode=#addressfullcode#
+			</isNotNull>
+			<isNotNull prepend="," property="departid">
+				departid=#departid#
+			</isNotNull>
+			<isNotNull prepend="," property="nodeorder">
+				nodeorder=#nodeorder#
+			</isNotNull>
+			<isNotNull prepend="," property="isleaf">
+				isleaf=#isleaf#
+			</isNotNull>
+			<isNotNull prepend="," property="addresssimplepin">
+				addresssimplepin=#addresssimplepin#
+			</isNotNull>
+			<isNotNull prepend="," property="addressallpin">
+				addressallpin=#addressallpin#
+			</isNotNull>
+			<isNotNull prepend="," property="addressbrevitycode">
+				addressbrevitycode=#addressbrevitycode#
+			</isNotNull>
+		</dynamic>
+		where a.addressid=#addressid#
+	</update>
+	<!--地址(T_ADDRESS)-->
+	<delete id="deleteAddress" parameterClass="address">
+		delete from T_ADDRESS a where a.addressid=#addressid#
+	</delete>
+	<!--地址(T_ADDRESS)-->
+	<select id="getAddressList" resultMap="addressListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.addressid addressid,a.departid departid,a.addresscode addresscode,a.addressname addressname,a.addresslevel addresslevel,a.parentaddressid parentaddressid,a.addressfullcode addressfullcode,a.nodeorder nodeorder,a.isleaf isleaf,a.addresssimplepin addresssimplepin,a.addressallpin addressallpin,a.addressbrevitycode addressbrevitycode
+		from T_ADDRESS a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_ADDRESSPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--地址(T_ADDRESS)-->
+	<select id="getAddressListCount" resultClass="int" parameterClass="map">
+		select count(1) a from T_ADDRESS a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_ADDRESSPageWhere" />
+		</dynamic>
+	</select>
+	<!--根据id查询上级名称(T_ADDRESS)  by王鑫-->
+	<select id="getselectparenttree" resultMap="selectparenttreeResult" parameterClass="address">
+		select a.addressid addressid,a.addressname addressname
+		from T_ADDRESS a
+		start with a.addressid = #addressid#
+		connect by prior a.parentaddressid = a.addressid
+		order by a.addressid
+	</select>
+	<!--地址(T_ADDRESS)-->
+	<select id="getAddressListNoPage" resultMap="addressListResult" parameterClass="address">
+		select a.addressid addressid,a.departid departid,a.addresscode addresscode,a.addressname addressname,a.addresslevel addresslevel,a.parentaddressid parentaddressid,a.addressfullcode addressfullcode,a.nodeorder nodeorder,a.isleaf isleaf,a.addresssimplepin addresssimplepin,a.addressallpin addressallpin,a.addressbrevitycode addressbrevitycode
+		from T_ADDRESS a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_ADDRESSListWhere" />
+		</dynamic>
+		order by a.addressid
+	</select>
+	
+	<resultMap id="queryAddress" class="address">
+		<result property="addressid" column="addressid" />
+		<result property="departid" column="departid" />
+		<result property="departname" column="departname" />
+		<result property="addresscode" column="addresscode" />
+		<result property="addressname" column="addressname" />
+		<result property="addresslevel" column="addresslevel" />
+		<result property="parentaddressid" column="parentaddressid" />
+		<result property="addressfullcode" column="addressfullcode" />
+		<result property="nodeorder" column="nodeorder" />
+		<result property="isleaf" column="isleaf" />
+		<result property="addresssimplepin" column="addresssimplepin" />
+		<result property="addressallpin" column="addressallpin" />
+		<result property="addressbrevitycode" column="addressbrevitycode" />
+	</resultMap>
+	<!--地址(T_ADDRESS)-->
+	<select id="getAddressSinge" resultMap="queryAddress" parameterClass="address">
+		select a.addressid addressid,a.departid departid,b.departname departname,a.addresscode addresscode,a.addressname addressname,a.addresslevel addresslevel,a.parentaddressid parentaddressid,a.addressfullcode addressfullcode,a.nodeorder nodeorder,a.isleaf isleaf,a.addresssimplepin addresssimplepin,a.addressallpin addressallpin,a.addressbrevitycode addressbrevitycode
+		from T_ADDRESS a,t_department b
+		where a.departid=b.departid
+		<dynamic prepend="">
+			<include refid="T_ADDRESSCODEWhere" />
+		</dynamic>
+		order by a.addressid
+	</select>
+	<!--地址(T_ADDRESS)  创建地址树-->
+	<select id="createTree" resultMap="addressListResult" parameterClass="address">
+		select a.addressid addressid,a.departid departid,a.addresscode addresscode,a.addressname addressname,a.addresslevel addresslevel,a.parentaddressid parentaddressid,a.addressfullcode addressfullcode,a.nodeorder nodeorder,a.isleaf isleaf,a.addresssimplepin addresssimplepin,a.addressallpin addressallpin,a.addressbrevitycode addressbrevitycode
+		from T_ADDRESS a
+		start with a.addressid = #addressid# 
+		connect by prior  a.addressid = a.parentaddressid
+	</select>
+	<!--地址(T_ADDRESS) 分页查询-->
+	<select id="getAddressListforPage" resultMap="addressListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.addressid addressid,a.departid departid,a.addresscode addresscode,a.addressname addressname,a.addresslevel addresslevel,a.parentaddressid parentaddressid,a.addressfullcode addressfullcode,a.nodeorder nodeorder,a.isleaf isleaf,a.addresssimplepin addresssimplepin,a.addressallpin addressallpin,a.addressbrevitycode addressbrevitycode
+		from T_ADDRESS a 
+		where 1=1
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="addresscode">
+			 	a.addresscode = #addresscode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="addressname">
+			 	a.addressname like '%$addressname$%'
+			</isNotEmpty>
+		</dynamic>
+		start with a.addressid = #addressid# connect by prior  a.addressid = a.parentaddressid
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--地址(T_ADDRESS) 分页查询记录数-->
+	<select id="getAddressListforPageCount" resultClass="int" parameterClass="map">
+		select count(1) a from T_ADDRESS a
+		where 1=1
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="addresscode">
+			 	a.addresscode = #addresscode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="addressname">
+			 	a.addressname like '%$addressname$%'
+			</isNotEmpty>
+		</dynamic>
+		start with a.addressid = #addressid# connect by prior  a.addressid = a.parentaddressid
+	</select>
+	
+	<!--地址(T_ADDRESS)-->
+	<select id="getListforPage" resultMap="addressResult" parameterClass="map">
+		select x.* from ( select a.addressid addressid,a.departid
+		departid,a.addresscode addresscode,a.addressname
+		addressname,a.addresslevel addresslevel,a.parentaddressid
+		parentaddressid,a.addressfullcode addressfullcode,a.nodeorder
+		nodeorder,a.isleaf isleaf,a.addresssimplepin
+		addresssimplepin,a.addressallpin
+		addressallpin,a.addressbrevitycode addressbrevitycode from
+		T_ADDRESS a where a.departid=#departid#
+		order by a.addresslevel)x where rownum &lt; 3
+		</select>
+	
+	<!--地址(T_ADDRESS)-->
+	<select id="getListforPageCount" resultClass="int" parameterClass="map">
+		select count(1) from T_ADDRESS a where rownum &lt; 3 and
+		a.departid=#departid#
+	</select>
+</sqlMap>

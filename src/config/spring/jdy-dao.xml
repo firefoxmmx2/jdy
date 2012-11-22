@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+<!-- 	寄递对象 -->
+	<bean id="RdrjbxxDaoImpl" class="com.aisino2.jdy.dao.impl.RdrjbxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+<!-- 	寄递对象照片信息 -->
+	<bean id="JddxzpxxDaoImpl" class="com.aisino2.jdy.dao.impl.JddxzpxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+<!-- 	寄递品信息 -->
+	<bean id="JdpxxDaoImpl" class="com.aisino2.jdy.dao.impl.JdpxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+<!-- 	揽件基本信息 -->
+	<bean id="LjjbxxDaoImpl" class="com.aisino2.jdy.dao.impl.LjjbxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+<!-- 	可疑物品信息 -->
+	<bean id="KyjdwpxxDaoImpl" class="com.aisino2.jdy.dao.impl.KyjdwpxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+<!-- 	派件信息 -->
+	<bean id="PjjbxxDaoImpl" class="com.aisino2.jdy.dao.impl.PjjbxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+<!-- 	寄递业统计 -->
+	<bean id="JdytjxxDaoImpl" class="com.aisino2.jdy.dao.impl.JdytjxxDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+<!-- 	基地对象历史信息 -->
+	<bean id="Rdrjbxx_lsDaoImpl" class="com.aisino2.jdy.dao.impl.Rdrjbxx_lsDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+</beans>

@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="icktjrb" type="com.aisino2.icksystem.domain.Icktjrb"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<resultMap id="icktjrbResult" class="icktjrb">
+		<result property="icktjrbid" column="icktjrbid" />
+		<result property="tjrq" column="tjrq" />
+		<result property="qyid" column="qyid" />
+		<result property="hylbdm" column="hylbdm" />
+		<result property="hylb" column="hylb" />
+		<result property="qybm" column="qybm" />
+		<result property="qymc" column="qymc" />
+		<result property="gxdwbm" column="gxdwbm" />
+		<result property="gxdwmc" column="gxdwmc" />
+		<result property="ssdxjgajgdm" column="ssdxjgajgdm" />
+		<result property="ssdxjgajgmc" column="ssdxjgajgmc" />
+		<result property="ssddsjgdm" column="ssddsjgdm" />
+		<result property="ssddsjgmc" column="ssddsjgmc" />
+		<result property="lrcyrys" column="lrcyrys" />
+		<result property="slicks" column="slicks" />
+		<result property="fficks" column="fficks" />
+		<result property="skcs" column="skcs" />
+		<result property="skicks" column="skicks" />
+	</resultMap>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<resultMap id="icktjrbListResult" class="icktjrb">
+		<result property="lrcss" column="lrcss"/>
+		<result property="lrcyrys" column="lrcyrys"/>
+		<result property="slicks" column="slicks"/>
+		<result property="fficks" column="fficks"/>
+		<result property="skicks" column="skicks"/>
+		<result property="drskicks" column="drskicks"/>
+		<result property="ssddsjgdm" column="ssddsjgdm"/>
+		<result property="ssddsjgmc" column="ssddsjgmc"/>
+		<result property="ssdxjgajgdm" column="ssdxjgajgdm"/>
+		<result property="ssdxjgajgmc" column="ssdxjgajgmc"/>
+		<result property="gxdwbm" column="gxdwbm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+	</resultMap>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<resultMap id="icktjrbcsmxListResult" class="icktjrb">
+		<result property="qyid" column="qyid"/>
+		<result property="qybm" column="qybm"/>
+		<result property="qymc" column="qymc"/>
+		<result property="gxdwbm" column="gxdwbm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="zjztmc" column="zjztmc"/>
+		<result property="lrcyrys" column="lrcyrys"/>
+		<result property="slicks" column="slicks"/>
+		<result property="fficks" column="fficks"/>
+		<result property="skicks" column="skicks"/>
+		<result property="drskicks" column="drskicks"/>
+	</resultMap>
+	<sql id="t_icktjrbWhere">
+			<isNotEmpty prepend="and" property="icktjrbid">
+				a.icktjrbid=#icktjrbid#
+			</isNotEmpty>
+	</sql>
+	<sql id="t_icktjrbPageWhere" >
+		<include refid="t_icktjrbWhere" />	</sql>
+	<sql id="t_icktjrbListWhere" >
+		<include refid="t_icktjrbWhere" />	</sql>
+	<sql id="t_icktjrbSelectWhere"  >
+		<include refid="t_icktjrbWhere" />	</sql>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<insert id="insertIcktjrb"  parameterClass="icktjrb">
+		insert into t_icktjrb (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="icktjrbid">
+				icktjrbid
+			</isNotNull>
+			<isNotNull prepend="," property="tjrq">
+				tjrq
+			</isNotNull>
+			<isNotNull prepend="," property="qyid">
+				qyid
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				hylbdm
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				hylb
+			</isNotNull>
+			<isNotNull prepend="," property="qybm">
+				qybm
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				qymc
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				gxdwbm
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				gxdwmc
+			</isNotNull>
+			<isNotNull prepend="," property="ssdxjgajgdm">
+				ssdxjgajgdm
+			</isNotNull>
+			<isNotNull prepend="," property="ssdxjgajgmc">
+				ssdxjgajgmc
+			</isNotNull>
+			<isNotNull prepend="," property="ssddsjgdm">
+				ssddsjgdm
+			</isNotNull>
+			<isNotNull prepend="," property="ssddsjgmc">
+				ssddsjgmc
+			</isNotNull>
+			<isNotNull prepend="," property="lrcyrys">
+				lrcyrys
+			</isNotNull>
+			<isNotNull prepend="," property="slicks">
+				slicks
+			</isNotNull>
+			<isNotNull prepend="," property="fficks">
+				fficks
+			</isNotNull>
+			<isNotNull prepend="," property="skcs">
+				skcs
+			</isNotNull>
+			<isNotNull prepend="," property="skicks">
+				skicks
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="icktjrbid">
+				#icktjrbid#
+			</isNotNull>
+			<isNotNull prepend="" property="tjrq">
+				<isNotEqual prepend="," property="tjrq" compareValue="-999999999999">
+					#tjrq:TIMESTAMP#
+				</isNotEqual>
+			</isNotNull>
+			<isNotNull prepend="," property="qyid">
+				#qyid#
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				#hylbdm#
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				#hylb#
+			</isNotNull>
+			<isNotNull prepend="," property="qybm">
+				#qybm#
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				#qymc#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				#gxdwbm#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				#gxdwmc#
+			</isNotNull>
+			<isNotNull prepend="," property="ssdxjgajgdm">
+				#ssdxjgajgdm#
+			</isNotNull>
+			<isNotNull prepend="," property="ssdxjgajgmc">
+				#ssdxjgajgmc#
+			</isNotNull>
+			<isNotNull prepend="," property="ssddsjgdm">
+				#ssddsjgdm#
+			</isNotNull>
+			<isNotNull prepend="," property="ssddsjgmc">
+				#ssddsjgmc#
+			</isNotNull>
+			<isNotNull prepend="," property="lrcyrys">
+				#lrcyrys#
+			</isNotNull>
+			<isNotNull prepend="," property="slicks">
+				#slicks#
+			</isNotNull>
+			<isNotNull prepend="," property="fficks">
+				#fficks#
+			</isNotNull>
+			<isNotNull prepend="," property="skcs">
+				#skcs#
+			</isNotNull>
+			<isNotNull prepend="," property="skicks">
+				#skicks#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<update id="updateIcktjrb" parameterClass="icktjrb">
+		update t_icktjrb a set a.icktjrbid=a.icktjrbid
+		<dynamic prepend="">
+			<isNotNull prepend="" property="tjrq">
+				<isNotEqual prepend="," property="tjrq" compareValue="-999999999999">
+					tjrq=#tjrq:TIMESTAMP#
+				</isNotEqual>
+			</isNotNull>
+			<isNotNull prepend="," property="qyid">
+				qyid=#qyid#
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				hylbdm=#hylbdm#
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				hylb=#hylb#
+			</isNotNull>
+			<isNotNull prepend="," property="qybm">
+				qybm=#qybm#
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				qymc=#qymc#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				gxdwbm=#gxdwbm#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				gxdwmc=#gxdwmc#
+			</isNotNull>
+			<isNotNull prepend="," property="ssdxjgajgdm">
+				ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotNull>
+			<isNotNull prepend="," property="ssdxjgajgmc">
+				ssdxjgajgmc=#ssdxjgajgmc#
+			</isNotNull>
+			<isNotNull prepend="," property="ssddsjgdm">
+				ssddsjgdm=#ssddsjgdm#
+			</isNotNull>
+			<isNotNull prepend="," property="ssddsjgmc">
+				ssddsjgmc=#ssddsjgmc#
+			</isNotNull>
+			<isNotNull prepend="," property="lrcyrys">
+				lrcyrys=#lrcyrys#
+			</isNotNull>
+			<isNotNull prepend="," property="slicks">
+				slicks=#slicks#
+			</isNotNull>
+			<isNotNull prepend="," property="fficks">
+				fficks=#fficks#
+			</isNotNull>
+			<isNotNull prepend="," property="skcs">
+				skcs=#skcs#
+			</isNotNull>
+			<isNotNull prepend="," property="skicks">
+				skicks=#skicks#
+			</isNotNull>
+		</dynamic>
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_icktjrbWhere" />
+		</dynamic>
+	</update>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<delete id="deleteIcktjrb" parameterClass="icktjrb">
+		delete from t_icktjrb a where 1=1 
+		<dynamic prepend="">
+			<include refid="t_icktjrbWhere" />
+		</dynamic>
+	</delete>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<select id="getIcktjrbListNoPage" resultMap="icktjrbListResult" parameterClass="icktjrb">
+		select a.icktjrbid icktjrbid,a.tjrq tjrq,a.qyid qyid,a.hylbdm hylbdm,a.hylb hylb,a.qybm qybm,a.qymc qymc,a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.ssdxjgajgdm ssdxjgajgdm,a.ssdxjgajgmc ssdxjgajgmc,a.ssddsjgdm ssddsjgdm,a.ssddsjgmc ssddsjgmc,a.lrcyrys lrcyrys,a.slicks slicks,a.fficks fficks,a.skcs skcs,a.skicks skicks
+		from t_icktjrb a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_icktjrbListWhere" />
+		</dynamic>
+		order by a.icktjrbid
+	</select>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<select id="getIcktjrb" resultMap="icktjrbResult" parameterClass="icktjrb">
+		select a.icktjrbid icktjrbid,a.tjrq tjrq,a.qyid qyid,a.hylbdm hylbdm,a.hylb hylb,a.qybm qybm,a.qymc qymc,a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.ssdxjgajgdm ssdxjgajgdm,a.ssdxjgajgmc ssdxjgajgmc,a.ssddsjgdm ssddsjgdm,a.ssddsjgmc ssddsjgmc,a.lrcyrys lrcyrys,a.slicks slicks,a.fficks fficks,a.skcs skcs,a.skicks skicks
+		from t_icktjrb a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="t_icktjrbSelectWhere" />
+		</dynamic>
+		order by a.icktjrbid
+	</select>
+	<!-- 下面的为有用的 -->
+	<!--IC卡统计日报(t_icktjrb)-->
+	<select id="getIcktjrbList" resultMap="icktjrbListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(
+		select  count(distinct a.qybm) lrcss,sum(a.lrcyrys) lrcyrys,sum(a.slicks) slicks,sum(a.fficks) fficks,sum(a.skicks) skicks,
+		sum(case when tjrq = #tjrq:DATE# then a.skicks else 0 end) drskicks,
+		$selectTab$
+  		from t_icktjrb a
+ 		where 1=1 
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="tjrq">
+				a.tjrq &lt;=#tjrq:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				a.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				a.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="groupBy">
+				group by $groupBy$
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="pageSort">
+				order by $pageSort$
+			</isNotEmpty>
+		</dynamic>
+		)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<select id="getIcktjrbListCount" resultClass="int" parameterClass="map">
+		select count(1) a from (
+		select  count(distinct a.qybm) lrcss,sum(a.lrcyrys) lrcyrys,sum(a.slicks) slicks,sum(a.fficks) fficks,sum(a.skicks) skicks,
+		sum(case when tjrq = #tjrq:DATE# then a.skicks else 0 end) drskicks,
+		$selectTab$
+  		from t_icktjrb a
+ 		where 1=1 
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="tjrq">
+				a.tjrq &lt;=#tjrq:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				a.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				a.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="groupBy">
+				group by $groupBy$
+			</isNotEmpty>
+			<isNotEmpty prepend="" property="pageSort">
+				order by $pageSort$
+			</isNotEmpty>
+		</dynamic>
+		) z
+	</select>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<select id="getIcktjrbcsmxList" resultMap="icktjrbcsmxListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(
+		select a.qyid,a.qybm,a.qymc,a.gxdwbm,a.gxdwmc,(select zjztmc from t_qyjbxx where qyid = a.qyid) zjztmc,
+        sum(a.lrcyrys) lrcyrys,sum(a.slicks) slicks,sum(a.fficks) fficks,sum(a.skicks) skicks,
+		sum(case when tjrq = #tjrq:DATE# then a.skicks else 0 end) drskicks
+  		from t_icktjrb a,t_qyjbxx b
+ 		where a.qyid=b.qyid
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="tjrq">
+				a.tjrq &lt;=#tjrq:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				a.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				a.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+		</dynamic>
+		group by a.qyid,a.qybm,a.qymc,a.gxdwmc,a.gxdwbm
+		order by $pageSort$
+		)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--IC卡统计日报(t_icktjrb)-->
+	<select id="getIcktjrbcsmxListCount" resultClass="int" parameterClass="map">
+		select count(1) a from (
+		select a.qyid,a.qybm,a.qymc,a.gxdwbm,a.gxdwmc,(select zjztmc from t_qyjbxx where qyid = a.qyid) zjztmc,
+        sum(a.lrcyrys) lrcyrys,sum(a.slicks) slicks,sum(a.fficks) fficks,sum(a.skicks) skicks,
+		sum(case when tjrq = #tjrq:DATE# then a.skicks else 0 end) drskicks
+  		from t_icktjrb a,t_qyjbxx b
+ 		where a.qyid=b.qyid
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="tjrq">
+				a.tjrq &lt;=#tjrq:DATE#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssddsjgdm">
+				a.ssddsjgdm=#ssddsjgdm#
+		   	</isNotEmpty>
+			<isNotEmpty prepend="and" property="ssdxjgajgdm">
+				a.ssdxjgajgdm=#ssdxjgajgdm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+			</isNotEmpty>
+		</dynamic>
+		group by a.qyid,a.qybm,a.qymc,a.gxdwmc,a.gxdwbm
+		order by $pageSort$
+		) z
+	</select>
+	
+</sqlMap>

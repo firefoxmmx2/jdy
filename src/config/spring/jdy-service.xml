@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!--揽件基本信息Service配置-->
+	<bean id="LjjbxxServiceImpl" class="com.aisino2.jdy.service.impl.LjjbxxServiceImpl">
+		<property name="ljjbxxDao" ref="LjjbxxDaoImpl" />
+		<property name="jdpxxDao" ref="JdpxxDaoImpl" />
+		<property name="rdrjbxxDao" ref="RdrjbxxDaoImpl" />
+		<property name="jdyBjService" ref="JdyBjServiceImpl"/>
+		<property name="qyjbxxService" ref="qyjbxxService"/>
+		<property name="jddxzpxxDao" ref="JddxzpxxDaoImpl"/>
+	</bean>
+<!-- 	寄递对象服务 -->
+	<bean id="RdrjbxxServiceImpl" class="com.aisino2.jdy.service.impl.RdrjbxxServiceImpl">
+		<property name="rdrjbxxDao" ref="RdrjbxxDaoImpl"/>
+		<property name="jddxzpxxDao" ref="JddxzpxxDaoImpl"/>
+	</bean>
+<!-- 	派件信息 -->
+	<bean id="PjjbxxServiceImpl" class="com.aisino2.jdy.service.impl.PjjbxxServiceImpl">
+		<property name="pjjbxxDao" ref="PjjbxxDaoImpl" />
+		<property name="ljjbxxService" ref="LjjbxxServiceImpl" />
+		<property name="rdrjbxxService" ref="RdrjbxxServiceImpl" />
+		<property name="jdyBjService" ref="JdyBjServiceImpl"/>
+		<property name="qyjbxxService" ref="qyjbxxService"/>
+	</bean>
+<!-- 	寄递品服务 -->
+	<bean id="JdpxxServiceImpl" class="com.aisino2.jdy.service.impl.JdpxxServiceImpl">
+		<property name="jdpxxDao" ref="JdpxxDaoImpl"/>
+	</bean>
+<!-- 	寄递业比对 -->
+	<bean id="JdyBjServiceImpl" class="com.aisino2.jdy.service.impl.JdyBjServiceImpl">
+		<property name="ggbdsjService" ref="ggbdsjService"/>
+	</bean>
+<!-- 	寄递业统计 -->
+	<bean id="JdytjxxServiceImpl" class="com.aisino2.jdy.service.impl.JdytjxxServiceImpl">
+		<property name="jdytjxxDao" ref="JdytjxxDaoImpl"/>
+	</bean>
+<!-- 	可疑寄递物品 -->
+	<bean id="KyjdwpxxServiceImpl" class="com.aisino2.jdy.service.impl.KyjdwpxxServiceImpl">
+		<property name="kyjdwpxxDao" ref="KyjdwpxxDaoImpl"/>
+		<property name="ljjbxxDao" ref="LjjbxxDaoImpl" />
+		<property name="jdpxxDao" ref="JdpxxDaoImpl" />
+	</bean>
+<!-- 	人员照片信息 -->
+	<bean id="JddxzpxxServiceImpl" class="com.aisino2.jdy.service.impl.JddxzpxxServiceImpl">
+		<property name="jddxzpxxDao" ref="JddxzpxxDaoImpl"/>
+	</bean>
+</beans>

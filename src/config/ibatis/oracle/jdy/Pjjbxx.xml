@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="pjjbxx" type="com.aisino2.jdy.domain.Pjjbxx"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+<!-- 	公共派件信息 -->
+	<resultMap class="pjjbxx" id="pjjbxx_base_rm">
+		<result property="id" column="id"/>
+		<result property="pjsj" column="pjsj"/>
+		<result property="pjtbsj" column="pjtbsj"/>
+<!-- 		是否战场标志 -->
+		<result property="sfscbz" column="sfscbz" />
+<!-- 		状态 -->
+		<result property="zt" column="zt" />
+	</resultMap>
+<!-- 	派件基本信息 不包含关联内容 -->
+	<resultMap class="pjjbxx" id="pjjbxx_rm" extends="pjjbxx_base_rm">
+		<result property="pjtbr.cyrybh" column="pjtbrbh"/>
+		<result property="pjr.cyrybh" column="pjrbh"/>
+		<result property="ljjbxx.djxh" column="ljjbxx_id"/>
+		<result property="dsr.id" column="dsr_id"/>
+	</resultMap>
+<!-- 	派件明细 包含关联内容-->
+	<resultMap class="pjjbxx" id="pjjbxx_mx_rm" extends="pjjbxx_base_rm">
+		<result property="pjtbr" column="pjtbrbh" select="getQyryxxByCyrybh"/>
+		<result property="pjr" column="pjrbh" select="getQyryxxByCyrybh"/>
+		<result property="ljjbxx" column="ljjbxx_id" select="ljjbxx.getByDjxh"/>
+		<result property="dsr" column="dsr_id" select="Rdrjbxx.getById"/>
+	</resultMap>
+<!-- 	派件明细 包含关联内容-->
+	<resultMap class="pjjbxx" id="pjjbxx_mx_rm_dsr">
+		<result property="pjtbsj" column="pjtbsj"/>
+		<result property="dsr" column="dsr_id" select="Rdrjbxxdsr.getById"/>
+	</resultMap>
+<!-- 	派件信息列表结果 包含部分关联内容 -->
+	<resultMap class="pjjbxx" id="pjjbxx_list_rm" extends="pjjbxx_base_rm">
+		<result property="pjtbr.cyrybh" column="pjtbrbh"/>
+		<result property="pjtbr.xm" column="pjtbr_xm"/>
+<!-- 		<result property="pjtbr.qyid" column="pjtbr_qyid"/> -->
+		<result property="pjr.cyrybh" column="pjrbh"/>
+		<result property="pjr.xm" column="pjr_xm"/>
+<!-- 		<result property="pjr.qyid" column="pjr_qyid"/> -->
+		<result property="ljjbxx.djxh" column="ljjbxx_djxh"/>
+		<result property="ljjbxx.wldh" column="ljjbxx_wldh"/>
+<!-- 		添加可疑寄递标识 -->
+		<result property="ljjbxx.kybz" column="ljjbxx_kybz"/>
+<!-- 		寄件人 -->
+		<result property="ljjbxx.jjr.xm" column="ljjbxx_jjr_xm"/>
+		<result property="ljjbxx.jjr.id" column="ljjbxx_jjr_id"/>
+		<result property="ljjbxx.jjr.zjhm" column="ljjbxx_jjr_zjhm"/>
+		<result property="ljjbxx.jjr.zjlx" column="ljjbxx_jjr_zjlx"/>
+<!-- 		收件人 -->
+		<result property="ljjbxx.sjr.xm" column="ljjbxx_sjr_xm"/>
+		<result property="ljjbxx.sjr.id" column="ljjbxx_sjr_id"/>
+		<result property="ljjbxx.sjr.zjhm" column="ljjbxx_sjr_zjhm"/>
+		<result property="ljjbxx.sjr.zjlx" column="ljjbxx_sjr_zjlx"/>
+		
+	</resultMap>
+	<sql id="pjjbxxFrom">
+		<isNotEmpty prepend=" " property="ljjbxx">
+			<isNotEmpty prepend="," property="ljjbxx.jdpxx">
+				t_jdpxx jdpxx
+			</isNotEmpty>
+		</isNotEmpty>
+	</sql>
+	<sql id="pjjbxxWhere">
+		<isNotEmpty prepend="and" property="id">
+			pjjbxx.id = #id#
+		</isNotEmpty>
+	</sql>
+	
+	<sql id="pjjbxxPageWhere">
+		<include refid="pjjbxxWhere"/>
+		<isNotEmpty prepend=" " property="ljjbxx">
+<!-- 		物流单号  -->
+			<isNotEmpty prepend="and" property="ljjbxx.wldh">
+				ljjbxx.wldh=#ljjbxx.wldh#
+			</isNotEmpty>
+<!-- 			收件人 -->
+			<isNotEmpty prepend=" " property="ljjbxx.sjr">
+				<isNotEmpty prepend="and" property="ljjbxx.sjr.xm">
+					sjr.xm like '%$ljjbxx.sjr.xm$%'
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ljjbxx.sjr.zjlx">
+					sjr.zjlx = #ljjbxx.sjr.zjlx#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ljjbxx.sjr.zjhm">
+					sjr.zjhm = #ljjbxx.sjr.zjhm#
+				</isNotEmpty>
+			</isNotEmpty>
+<!-- 			企业信息 -->
+			<isNotEmpty prepend=" " property="ljjbxx.qyjbxx">
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.qyid">
+					qyjbxx.qyid = #ljjbxx.qyjbxx.qyid#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.qybm">
+					qyjbxx.qybm = #ljjbxx.qyjbxx.qybm#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.qymc">
+					qyjbxx.qymc like '$ljjbxx.qyjbxx.qymc$%'
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.gxdwbm">
+					qyjbxx.gxdwbm like '$ljjbxx.qyjbxx.gxdwbm$%'
+				</isNotEmpty>
+			</isNotEmpty>
+			
+			<!-- 		寄递品 -->
+			<isNotEmpty prepend=" " property="ljjbxx.jdpxx">
+				and jdpxx.ljjbxx_id=ljjbxx.djxh
+<!-- 			大类 -->
+				<isNotEmpty prepend="and" property="ljjbxx.jdpxx.jdpdlx">
+					jdpxx.jdpdlx=#ljjbxx.jdpxx.jdpdlx# 
+				</isNotEmpty>
+<!-- 				小类 -->
+				<isNotEmpty prepend="and" property="ljjbxx.jdpxx.jdplx">
+					jdpxx.jdplx=#ljjbxx.jdpxx.jdplx#
+				</isNotEmpty>
+			</isNotEmpty>
+		
+		</isNotEmpty>
+<!-- 		派件人 -->
+		<isNotEmpty prepend=" " property="pjr">
+			<isNotEmpty prepend="and" property="pjr.cyrybh"> 
+				pjjbxx.pjrbh = #pjr.cyrybh#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="pjr.xm">
+				pjr.xm like '%$pjr.xm$%'
+			</isNotEmpty>
+		</isNotEmpty>
+<!-- 		派件登记时间 -->
+		<isNotEmpty prepend="and" property="pjtbsjf">
+			pjjbxx.pjtbsj >= #pjtbsjf#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="pjtbsjt">
+			pjjbxx.pjtbsj &lt;= #pjtbsjt#
+		</isNotEmpty>
+		
+<!-- 		派件时间 -->
+		<isNotEmpty prepend="and" property="pjsjf">
+			pjjbxx.pjsj >= #pjsjf#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="pjsjt">
+			pjjbxx.pjsj &lt;= #pjsjt#
+		</isNotEmpty>
+		
+<!-- 		是否删除 -->
+		<isNotEmpty prepend="and" property="sfscbz">
+			pjjbxx.sfscbz = #sfscbz#
+		</isNotEmpty>
+		
+<!-- 		派件状态 -->
+		<isNotEmpty prepend="and" property="zt">
+			pjjbxx.zt = #zt#
+		</isNotEmpty>
+		
+	</sql>
+	
+<!-- 	插入派件 -->
+	<insert id="pjjbxx.insert" parameterClass="pjjbxx">
+		insert into t_pjjbxx pjjbxx
+		(
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				id
+			</isNotNull>
+			<isNotNull prepend="," property="pjsj">
+				pjsj
+			</isNotNull>
+			<isNotNull prepend="," property="pjtbsj">
+				pjtbsj
+			</isNotNull>
+			<isNotNull prepend="," property="pjtbr.cyrybh">
+				pjtbrbh
+			</isNotNull>
+			<isNotNull prepend="," property="pjr.cyrybh">
+				pjrbh
+			</isNotNull>
+			<isNotNull prepend="," property="dsr.id">
+				dsr_id
+			</isNotNull>
+			<isNotNull prepend="," property="ljjbxx.djxh">
+				ljjbxx_id
+			</isNotNull>
+			<isNotNull prepend="," property="zt">
+				zt
+			</isNotNull>
+		</dynamic>
+		)
+		values
+		(
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				#id#
+			</isNotNull>
+			<isNotNull prepend="," property="pjsj">
+				#pjsj#
+			</isNotNull>
+			<isNotNull prepend="," property="pjtbsj">
+				#pjtbsj#
+			</isNotNull>
+			<isNotNull prepend="," property="pjtbr.cyrybh">
+				#pjtbr.cyrybh#
+			</isNotNull>
+			<isNotNull prepend="," property="pjr.cyrybh">
+				#pjr.cyrybh#
+			</isNotNull>
+			<isNotNull prepend="," property="dsr.id">
+				#dsr.id#
+			</isNotNull>
+			<isNotNull prepend="," property="ljjbxx.djxh">
+				#ljjbxx.djxh#
+			</isNotNull>
+			<isNotNull prepend="," property="zt">
+				#zt#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	
+<!-- 	删除派件 -->
+	<delete id="pjjbxx.delete" parameterClass="pjjbxx">
+		delete from t_pjjbxx pjjbxx 
+		where 
+		<dynamic prepend=" ">
+			<include refid="pjjbxxWhere"/>
+		</dynamic>
+	</delete>
+	
+<!-- 	更新派件信息 -->
+	<update id="pjjbxx.update" parameterClass="pjjbxx">
+		update t_pjjbxx pjjbxx
+		set id = id
+		<dynamic prepend=",">
+			<isNotNull prepend="," property="pjsj">
+				pjsj = #pjsj#
+			</isNotNull>
+			<isNotNull prepend="," property="pjtbsj">
+				pjtbsj = #pjtbsj#
+			</isNotNull>
+			<isNotNull prepend="," property="pjtbr.cyrybh">
+				pjtbrbh = #pjtbr.cyrybh#
+			</isNotNull>
+			<isNotNull prepend="," property="pjr.cyrybh">
+				pjrbh = #pjr.cyrybh#
+			</isNotNull>
+			<isNotNull prepend="," property="dsr.id">
+				dsr_id = #dsr.id#
+			</isNotNull>
+			<isNotNull prepend="," property="ljjbxx.djxh">
+				ljjbxx_id = #ljjbxx.djxh#
+			</isNotNull>
+			<isNotNull prepend="," property="sfscbz">
+				sfscbz = #sfscbz#
+			</isNotNull>
+			<isNotNull prepend="," property="zt">
+				zt = #zt#
+			</isNotNull>
+		</dynamic>
+		where
+		<dynamic prepend=" ">
+			<include refid="pjjbxxWhere"/>
+		</dynamic>
+	</update>
+	
+<!-- 	获取单一派件信息 -->
+	<select id="pjjbxx.get" parameterClass="pjjbxx" resultMap="pjjbxx_mx_rm">
+		select pjjbxx.* from t_pjjbxx pjjbxx
+		where
+		<dynamic prepend=" ">
+			<include refid="pjjbxxWhere"/>
+		</dynamic>
+	</select>
+<!-- 	通过ID号获取唯一揽件数据 -->
+	<select id="pjjbxx.getById" parameterClass="String" resultMap="pjjbxx_mx_rm">
+		select * from t_pjjbxx pjjbxx where pjjbxx.ljjbxx_id=#value#
+	</select>
+<!-- 	通过ID号获取唯一最后一次派件信息数据 -->
+	<select id="pjjbxxmax_pjtbsj_getByid" parameterClass="String" resultMap="pjjbxx_mx_rm_dsr">
+		select max(pjtbsj) pjtbsj, max(dsr_id) dsr_id  from t_pjjbxx pjjbxx where pjjbxx.ljjbxx_id=#value# group by ljjbxx_id
+	</select>
+	
+<!-- 	获取派件信息列表 -->
+	<select id="pjjbxx.getList" parameterClass="pjjbxx" resultMap="pjjbxx_list_rm">
+		select distinct pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj,pjjbxx.sfscbz,pjjbxx.zt
+			,jjr.xm ljjbxx_jjr_xm, jjr.id ljjbxx_jjr_id, jjr.zjlx ljjbxx_jjr_zjlx, jjr.zjhm ljjbxx_jjr_zjhm
+			,sjr.xm ljjbxx_sjr_xm, sjr.id ljjbxx_sjr_id, sjr.zjlx ljjbxx_sjr_zjlx, sjr.zjhm ljjbxx_sjr_zjhm
+			,pjjbxx.pjrbh, pjr.xm pjr_xm
+			,pjjbxx.pjtbrbh, pjtbr.xm pjtbr_xm
+			,ljjbxx.djxh ljjbxx_djxh,ljjbxx.wldh ljjbxx_wldh,ljjbxx.kybz ljjbxx_kybz
+		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
+<!-- 			关联企业信息 -->
+			,t_qyjbxx qyjbxx
+		where pjjbxx.ljjbxx_id=ljjbxx.djxh and ljjbxx.jjr_id = jjr.id and ljjbxx.sjr_id = sjr.id 
+			  and pjjbxx.pjrbh=pjr.cyrybh and pjjbxx.pjtbrbh = pjtbr.cyrybh
+<!-- 			关联企业信息 -->			  
+			  and qyjbxx.qybm = ljjbxx.qybm
+		<dynamic prepend=" ">
+			<include refid="pjjbxxPageWhere"/>
+		</dynamic>			  
+	</select>
+	
+<!-- 	获取派件信息列表分页 记数-->
+	<select id="pjjbxx.getListPageCount" parameterClass="map" resultClass="Integer"> 
+		select count(
+		distinct
+		 pjjbxx.id)
+		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
+			<!-- 			关联企业信息 -->
+			,t_qyjbxx qyjbxx
+			<dynamic>
+				<include refid="pjjbxxFrom"/>
+			</dynamic>
+		where pjjbxx.ljjbxx_id=ljjbxx.djxh and ljjbxx.jjr_id = jjr.id and ljjbxx.sjr_id = sjr.id 
+			  and pjjbxx.pjrbh=pjr.cyrybh and pjjbxx.pjtbrbh = pjtbr.cyrybh
+			  <!-- 			关联企业信息 -->			  
+			  and qyjbxx.qybm = ljjbxx.qybm
+		<dynamic prepend=" ">
+			<include refid="pjjbxxPageWhere"/>
+		</dynamic>	
+	</select>
+	
+<!-- 	获取派件信息列表分页 -->
+	<select id="pjjbxx.getListPage" parameterClass="map" resultMap="pjjbxx_list_rm">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(	select distinct pjjbxx.id, pjjbxx.pjsj, pjjbxx.pjtbsj,pjjbxx.sfscbz,pjjbxx.zt
+			,jjr.xm ljjbxx_jjr_xm, jjr.id ljjbxx_jjr_id, jjr.zjlx ljjbxx_jjr_zjlx, jjr.zjhm ljjbxx_jjr_zjhm
+			,sjr.xm ljjbxx_sjr_xm, sjr.id ljjbxx_sjr_id, sjr.zjlx ljjbxx_sjr_zjlx, sjr.zjhm ljjbxx_sjr_zjhm
+			,pjjbxx.pjrbh, pjr.xm pjr_xm
+			,pjjbxx.pjtbrbh, pjtbr.xm pjtbr_xm
+			,ljjbxx.djxh ljjbxx_djxh,ljjbxx.wldh ljjbxx_wldh,ljjbxx.kybz ljjbxx_kybz
+			
+		from t_pjjbxx pjjbxx, t_qyryxx pjr, t_qyryxx pjtbr, t_rdrjbxx jjr , t_rdrjbxx sjr, t_ljjbxx ljjbxx
+		<!-- 			关联企业信息 -->
+			,t_qyjbxx qyjbxx
+			<dynamic>
+				<include refid="pjjbxxFrom"/>
+			</dynamic>
+		where pjjbxx.ljjbxx_id=ljjbxx.djxh and ljjbxx.jjr_id = jjr.id and ljjbxx.sjr_id = sjr.id 
+			  and pjjbxx.pjrbh=pjr.cyrybh and pjjbxx.pjtbrbh = pjtbr.cyrybh
+			   <!-- 			关联企业信息 -->			  
+			  and qyjbxx.qybm = ljjbxx.qybm
+		<dynamic prepend=" ">
+			<include refid="pjjbxxPageWhere"/>
+		</dynamic>	
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	
+	
+</sqlMap>

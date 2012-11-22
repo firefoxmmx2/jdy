@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="jlxxx" type="com.aisino2.sysadmin.domain.Jlxxx"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--街路巷信息(T_JLXXX)-->
+	<resultMap id="jlxxxResult" class="jlxxx">
+		<result property="jlxid" column="jlxid" />
+		<result property="addressid" column="addressid" />
+		<result property="jlxdm" column="jlxdm" />
+		<result property="jlxmc" column="jlxmc" />
+	</resultMap>
+	<!--街路巷信息(T_JLXXX)-->
+	<resultMap id="jlxxxListResult" class="jlxxx">
+		<result property="jlxid" column="jlxid"/>
+		<result property="addressid" column="addressid"/>
+		<result property="jlxdm" column="jlxdm"/>
+		<result property="jlxmc" column="jlxmc"/>
+	</resultMap>
+	<sql id="T_JLXXXWhere">
+			<isNotEmpty prepend="and" property="jlxid">
+				a.jlxid=#jlxid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="addressid">
+				a.addressid=#addressid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jlxdm">
+				a.jlxdm like '%$jlxdm$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jlxmc">
+				a.jlxmc like '%$jlxmc$%'
+			</isNotEmpty>
+	</sql>
+	<sql id="T_JLXXXPageWhere" >
+		<include refid="T_JLXXXWhere" />	</sql>
+	<sql id="T_JLXXXListWhere" >
+		<include refid="T_JLXXXWhere" />	</sql>
+	<sql id="T_JLXXXSelectWhere"  >
+		<include refid="T_JLXXXWhere" />	</sql>
+	<!--街路巷信息(T_JLXXX)-->
+	<insert id="insertJlxxx"  parameterClass="jlxxx">
+		insert into T_JLXXX (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="jlxid">
+				jlxid
+			</isNotNull>
+			<isNotNull prepend="," property="addressid">
+				addressid
+			</isNotNull>
+			<isNotNull prepend="," property="jlxdm">
+				jlxdm
+			</isNotNull>
+			<isNotNull prepend="," property="jlxmc">
+				jlxmc
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="jlxid">
+				#jlxid#
+			</isNotNull>
+			<isNotNull prepend="," property="addressid">
+				#addressid#
+			</isNotNull>
+			<isNotNull prepend="," property="jlxdm">
+				#jlxdm#
+			</isNotNull>
+			<isNotNull prepend="," property="jlxmc">
+				#jlxmc#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--街路巷信息(T_JLXXX)-->
+	<update id="updateJlxxx" parameterClass="jlxxx">
+		update T_JLXXX a set a.addressid=a.addressid 
+		<dynamic prepend="">
+			<isNotNull prepend="," property="addressid">
+				addressid=#addressid#
+			</isNotNull>
+			<isNotNull prepend="," property="jlxdm">
+				jlxdm=#jlxdm#
+			</isNotNull>
+			<isNotNull prepend="," property="jlxmc">
+				jlxmc=#jlxmc#
+			</isNotNull>
+		</dynamic>
+		where jlxid=#jlxid#
+	</update>
+	<!--街路巷信息(T_JLXXX)-->
+	<delete id="deleteJlxxx" parameterClass="jlxxx">
+		delete from T_JLXXX a where a.jlxid=a.jlxid
+		<dynamic prepend="">
+			<include refid="T_JLXXXWhere" />
+		</dynamic>
+	</delete>
+	<!--街路巷信息(T_JLXXX)-->
+	<select id="getJlxxxList" resultMap="jlxxxListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.jlxid jlxid,a.addressid addressid,a.jlxdm jlxdm,a.jlxmc jlxmc
+		from T_JLXXX a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_JLXXXPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--街路巷信息(T_JLXXX)-->
+	<select id="getJlxxxListCount" resultClass="int" parameterClass="map">
+		select count(1) a from T_JLXXX a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_JLXXXPageWhere" />
+		</dynamic>
+	</select>
+	<!--街路巷信息(T_JLXXX)-->
+	<select id="getJlxxxListNoPage" resultMap="jlxxxListResult" parameterClass="jlxxx">
+		select a.jlxid jlxid,a.addressid addressid,a.jlxdm jlxdm,a.jlxmc jlxmc
+		from T_JLXXX a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_JLXXXListWhere" />
+		</dynamic>
+		order by a.jlxid,a.addressid
+	</select>
+	<!--街路巷信息(T_JLXXX)-->
+	<select id="getJlxxx" resultMap="jlxxxResult" parameterClass="jlxxx">
+		select a.jlxid jlxid,a.addressid addressid,a.jlxdm jlxdm,a.jlxmc jlxmc
+		from T_JLXXX a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_JLXXXSelectWhere" />
+		</dynamic>
+		order by a.jlxid,a.addressid
+	</select>
+</sqlMap>

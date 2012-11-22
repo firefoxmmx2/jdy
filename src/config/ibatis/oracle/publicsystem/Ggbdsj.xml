@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="ggbdsj" type="com.aisino2.publicsystem.domain.Ggbdsj"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<resultMap id="ggbdsjResult" class="ggbdsj">
+		<result property="bdsjid" column="bdsjid" />
+		<result property="xm" column="xm" />
+		<result property="zjhm" column="zjhm" />
+		<result property="qymc" column="qymc" />
+		<result property="qydz" column="qydz" />
+		<result property="gxdwbm" column="gxdwbm" />
+		<result property="gxdwmc" column="gxdwmc" />
+		<result property="hylbdm" column="hylbdm" />
+		<result property="hylb" column="hylb" />
+		<result property="ywbm" column="ywbm" />
+		<result property="ywbzj" column="ywbzj" />
+		<result property="ywbyzj" column="ywbyzj" />
+		<result property="xrsj" column="xrsj" />
+		<result property="gxsj" column="gxsj" />
+		<result property="wxsj" column="wxsj" />
+		<result property="biduiflag" column="biduiflag" />
+		<result property="sfyx" column="sfyx" />
+	</resultMap>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<resultMap id="ggbdsjListResult" class="ggbdsj">
+		<result property="bdsjid" column="bdsjid"/>
+		<result property="xm" column="xm"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="qymc" column="qymc"/>
+		<result property="qydz" column="qydz"/>
+		<result property="gxdwbm" column="gxdwbm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="hylbdm" column="hylbdm"/>
+		<result property="hylb" column="hylb"/>
+		<result property="ywbm" column="ywbm"/>
+		<result property="ywbzj" column="ywbzj"/>
+		<result property="ywbyzj" column="ywbyzj" />
+		<result property="xrsj" column="xrsj"/>
+		<result property="gxsj" column="gxsj"/>
+		<result property="wxsj" column="wxsj" />
+		<result property="biduiflag" column="biduiflag"/>
+		<result property="sfyx" column="sfyx" />
+	</resultMap>
+	<sql id="T_GGBDSJWhere">
+			<isNotEmpty prepend="and" property="bdsjid">
+				a.bdsjid=#bdsjid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ywbm">
+				a.ywbm=#ywbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ywbzj">
+				a.ywbzj=#ywbzj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ywbyzj">
+			    a.ywbyzj=#ywbyzj#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDSJPageWhere" >
+		<include refid="T_GGBDSJWhere" />	
+		<isNotEmpty prepend="and" property="zjhm">
+				a.zjhm=#zjhm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			    a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDSJListWhere" >
+		<include refid="T_GGBDSJWhere" />
+		<isNotEmpty prepend="and" property="zjhm">
+				a.zjhm=#zjhm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			    a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDSJSelectWhere"  >
+		<include refid="T_GGBDSJWhere" />
+		<isNotEmpty prepend="and" property="zjhm">
+				a.zjhm=#zjhm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+				a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			    a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<insert id="insertGgbdsj"  parameterClass="ggbdsj">
+		insert into T_GGBDSJ (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="bdsjid">
+				bdsjid
+			</isNotNull>
+			<isNotNull prepend="," property="xm">
+				xm
+			</isNotNull>
+			<isNotNull prepend="," property="zjhm">
+				zjhm
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				qymc
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				qydz
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				gxdwbm
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				gxdwmc
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				hylbdm
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				hylb
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				ywbm
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				ywbzj
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				ywbyzj
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				xrsj
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				gxsj
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				wxsj
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				biduiflag
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				sfyx
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="bdsjid">
+				#bdsjid#
+			</isNotNull>
+			<isNotNull prepend="," property="xm">
+				#xm#
+			</isNotNull>
+			<isNotNull prepend="," property="zjhm">
+				#zjhm#
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				#qymc#
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				#qydz#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				#gxdwbm#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				#gxdwmc#
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				#hylbdm#
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				#hylb#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				#ywbm#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				#ywbzj#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				#ywbyzj#
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				#xrsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				#gxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				#wxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				#biduiflag#
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				#sfyx#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<update id="updateGgbdsj" parameterClass="ggbdsj">
+		update T_GGBDSJ a set a.bdsjid=a.bdsjid
+		<dynamic prepend="">
+			<isNotNull prepend="," property="xm">
+				xm=#xm#
+			</isNotNull>
+			<isNotNull prepend="," property="zjhm">
+				zjhm=#zjhm#
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				qymc=#qymc#
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				qydz=#qydz#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				gxdwbm=#gxdwbm#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				gxdwmc=#gxdwmc#
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				hylbdm=#hylbdm#
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				hylb=#hylb#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				ywbm=#ywbm#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				ywbzj=#ywbzj#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				ywbyzj=#ywbyzj#
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				xrsj=#xrsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				gxsj=#gxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				wxsj=#wxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				biduiflag=#biduiflag#
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				sfyx=#sfyx#
+			</isNotNull>
+		</dynamic>
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJWhere" />
+		</dynamic>
+	</update>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<delete id="deleteGgbdsj" parameterClass="ggbdsj">
+		delete from T_GGBDSJ a where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJWhere" />
+		</dynamic>
+	</delete>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<select id="getGgbdsjList" resultMap="ggbdsjListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.bdsjid bdsjid,a.xm xm,a.zjhm zjhm,a.qymc qymc,a.qydz qydz,a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,
+		a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDSJ a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<select id="getGgbdsjListCount" resultClass="int" parameterClass="map">
+		select count(1) a from T_GGBDSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJPageWhere" />
+		</dynamic>
+	</select>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<select id="getGgbdsjListNoPage" resultMap="ggbdsjListResult" parameterClass="ggbdsj">
+		select a.bdsjid bdsjid,a.xm xm,a.zjhm zjhm,a.qymc qymc,a.qydz qydz,a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,
+		a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJListWhere" />
+		</dynamic>
+		order by a.bdsjid
+	</select>
+	<!--公共比对数据表(T_GGBDSJ)-->
+	<select id="getGgbdsj" resultMap="ggbdsjResult" parameterClass="ggbdsj">
+		select a.bdsjid bdsjid,a.xm xm,a.zjhm zjhm,a.qymc qymc,a.qydz qydz,a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,
+		a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDSJSelectWhere" />
+		</dynamic>
+		order by a.bdsjid
+	</select>
+</sqlMap>

@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Jdytjxx" type="com.aisino2.jdy.domain.Jdytjxx"/>
+
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+<!-- 	寄递对象统计结果 -->
+	<resultMap class="Jdytjxx" id="jdxxtj_rm">
+		<result property="xm" column="xm"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="xxdz" column="xxdz"/>
+		<result property="cs" column="cs"/>
+	</resultMap>
+	
+<!-- 	企业对象统计结果 -->
+
+	<resultMap class="Jdytjxx" id="qydxtj_rm">
+		<result property="qyid" column="qyid"/>
+		<result property="qymc" column="qymc"/>
+		<result property="cs" column="cs"/>
+		<result property="xxdz" column="jydz"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+	</resultMap>
+<!-- 	寄递数据关联查询结果 -->
+	<resultMap class="Rdrjbxx" id="sjgltj_rm">
+		<result property="xm" column="xm"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="xxdz" column="xxdz"/>
+		<result property="jdrylx" column="jdrylx"/>
+	</resultMap>
+	
+<!-- 	寄递业运行情况 -->
+	<resultMap class="Jdytjxx" id="jdy_yxqk_rm">
+		<result property="gxdwbm" column='gxdwbm'/>
+		<result property="gxdwmc" column='gxdwmc'/>
+		<result property="qyzs" column='qyzs'/>
+		<result property="zjs" column='zjs'/>
+		<result property="cyrys" column='cyrys'/>
+		<result property="ljs" column='ljs'/>
+		<result property="pjs" column='pjs'/>
+		<result property="wscqys" column='wscqys'/>
+<!-- 		<result property="departlevel" column="departlevel"/> -->
+		
+	</resultMap>
+	
+<!-- 	寄递业企业揽件派件统计 -->
+	<resultMap class="Jdytjxx" id="jdy_qyljpjtj_rm">
+		<result property="qyid" column="qyid"/>
+		<result property="qybm" column="qybm"/>
+		<result property="qymc" column="qymc"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="ljs" column="ljs"/>
+		<result property="pjs" column="pjs"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="zt" column="zt"/>
+	</resultMap>
+	
+<!-- 	物品分类统计结果集 -->
+	<resultMap class="Jdytjxx" id="jdy_wpfltj_rm">
+		<result property="jdplx" column="jdplx"/>
+		<result property="cs" column="cs"/>
+	</resultMap>
+	
+	<!-- 	历史数据查询统计结果集 -->
+	<resultMap class="Jdytjxx" id="lssj_result">
+		<result property="xm" column="xm"/>
+		<result property="zjhm" column="zjhm"/>
+		<result property="ywdjsj" column="ywdjsj"/>
+		<result property="ywlx" column="ywlx"/>
+		<result property="xxdz" column="xxdz"/>
+		<result property="djxh" column="djxh"/>
+		<result property="wldh" column="wldh"/>
+		<result property="qymc" column="qymc"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+	</resultMap>
+	
+	<!-- 	重点管控人员查询结果集 -->
+	<resultMap class="Jdytjxx" id="zdry_result">
+		<result property="xm" column="zdry_xm"/>
+		<result property="xb" column="zdry_xb"/>
+		<result property="zjhm" column="zdry_zjhm"/>
+		<result property="rylx" column="zdry_rylx"/>
+		<result property="gxdwbm" column="zdry_gxdwbm"/>
+		<result property="gxdwmc" column="zdry_gxdwmc"/>
+		<result property="ywdjsj" column="ljxx_ywrq"/>
+		<result property="djxh" column="ljxx_djxh"/>
+		<result property="wldh" column="ljxx_wldh"/>
+		<result property="ywlx" column="ryxx_ywlx"/>
+	</resultMap>
+	
+	<sql id="SjgltjPageWhere">
+		<isNotEmpty prepend="and" property="xm">
+			rdrjbxx.xm like '%$xm$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="lxdh">
+			rdrjbxx.lxdh = #lxdh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="xxdz">
+			rdrjbxx.xxdz like '%$xxdz$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ssx">
+			rdrjbxx.ssx = #ssx#
+		</isNotEmpty>
+	</sql>
+	<sql id="JdytjxxWhere">
+		<isNotEmpty prepend="and" property="pjsjf">
+			p.pjsj >= #pjsjf#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="and" property="pjsjt">
+			p.pjsj &lt;= #pjsjt#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="and" property="ljsjf">
+			l.ljsj >= #ljsjf#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="and" property="ljsjt">
+			l.ljsj &lt;= #ljsjt#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="and" property="gxdwbm">
+			q.gxdwbm like '$gxdwbm$%'
+		</isNotEmpty>
+		
+	</sql>
+	
+	<sql id="JdytjxxOutterWhere">
+		<isNotEmpty prepend="and" property="show_number">
+			rownum &lt;= #show_number#
+		</isNotEmpty>
+	</sql>
+	
+	<!-- 历史数据查询条件 -->
+	<sql id="lssjgjWhere">
+		<isNotEmpty prepend="and" property="xm">
+			ry.xm = #xm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="zjhm">
+			ry.zjhm = #zjhm#
+		</isNotEmpty>
+		<!-- <isNotEmpty prepend="and" property="beforeDate">
+			ywxx.ywdjsj &gt;= to_date(#beforeDate#,'yyyy-mm-dd')
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="currentDate">
+			ywxx.ywdjsj &lt;= to_date(#currentDate#,'yyyy-mm-dd')
+		</isNotEmpty> -->
+		<isNotEmpty prepend="and" property="beforeDate">
+			ywxx.ywdjsj &gt;= #beforeDate:DATE#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="currentDate">
+			ywxx.ywdjsj &lt;= #currentDate:TIMESTAMP#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			qy.gxdwbm like '$gxdwbm$%'
+		</isNotEmpty>
+	</sql>
+	
+	<!-- 重点人员管控查询条件 -->
+	<sql id="zdryListWhere">
+		<isNotEmpty prepend="and" property="ksrq">
+			lj.ljtbsj &gt;= #ksrq:TIMESTAMP#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jsrq">
+			lj.ljtbsj &lt;= #jsrq:TIMESTAMP#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="gxdwbm">
+			zdry.gxdwbm like '$gxdwbm$%'
+		</isNotEmpty>
+	</sql>
+	
+	
+<!-- 	个人寄件量统计 -->
+	<select id="Jdytjxx.jjltj" parameterClass="map" resultMap="jdxxtj_rm">
+		select * from (
+		  select  jjr.xm,count(jjr.id) cs,jjr.xxdz,jjr.lxdh,jjr.zjhm 
+		  from t_ljjbxx l , t_qyjbxx q , t_rdrjbxx jjr
+		  where l.jjr_id=jjr.id and l.qybm = q.qybm
+		  <dynamic prepend="and">
+		  	<include refid="JdytjxxWhere"/>
+		  </dynamic> 
+		  group by jjr.xm, jjr.xxdz, jjr.lxdh, jjr.zjhm 
+		  order by cs desc) z 
+		<dynamic prepend="where">
+			<include refid="JdytjxxOutterWhere"/>
+		</dynamic> 
+		 
+	</select>
+<!-- 	个人收件量统计 -->
+	<select id="Jdytjxx.sjltj" parameterClass="map" resultMap="jdxxtj_rm">
+		select * from (
+		  select  sjr.xm,count(sjr.id) cs,sjr.xxdz,sjr.lxdh,sjr.zjhm 
+		  from t_ljjbxx l , t_qyjbxx q , t_rdrjbxx sjr
+		  where l.sjr_id=sjr.id and l.qybm = q.qybm 
+		  <dynamic prepend="and">
+		  	<include refid="JdytjxxWhere"/>
+		  </dynamic> 
+		  group by sjr.xm, sjr.xxdz, sjr.lxdh, sjr.zjhm 
+		  order by cs desc
+		) z
+		<dynamic prepend="where">
+			<include refid="JdytjxxOutterWhere"/>
+		</dynamic> 
+	</select>
+	
+<!-- 	企业揽件量统计 -->
+	<select id="Jdytjxx.qyljltj" parameterClass="map" resultMap="qydxtj_rm">
+		select * from (
+		  select  q.qyid, q.qymc,count(1) cs,q.jydz,q.lxdh,q.gxdwmc 
+		  from t_ljjbxx l , t_qyjbxx q
+		  where l.qybm = q.qybm
+		  <dynamic prepend="and">
+		  	<include refid="JdytjxxWhere"/>
+		  </dynamic> 
+		  group by q.qyid, q.qymc, q.jydz, q.lxdh, q.gxdwmc 
+		  order by cs desc
+		) z
+		<dynamic prepend="where">
+			<include refid="JdytjxxOutterWhere"/>
+		</dynamic> 
+	</select>
+	
+<!-- 	企业派件量统计 -->
+	<select id="Jdytjxx.qypjltj" parameterClass="map" resultMap="qydxtj_rm">
+		select * from (
+		  select  q.qyid, q.qymc,count(1) cs,q.jydz,q.lxdh,q.gxdwmc 
+		  from t_ljjbxx l , t_qyjbxx q, t_pjjbxx p
+		  where l.qybm = q.qybm and p.ljjbxx_id = l.djxh
+		  <dynamic prepend="and">
+		  	<include refid="JdytjxxWhere"/>
+		  </dynamic>  
+		  group by q.qyid, q.qymc, q.jydz, q.lxdh, q.gxdwmc 
+		  order by cs desc
+		) z
+		<dynamic prepend="where">
+			<include refid="JdytjxxOutterWhere"/>
+		</dynamic> 
+	</select>
+	
+<!-- 	数据关联读分析统计查询 -->
+	<select id="Jdytjxx.sjgltj" parameterClass="map" resultMap="sjgltj_rm">
+		select x.* from (
+			select rownum rowno,z.* from 
+				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz xxdz,rdrjbxx.jdrylx
+					from t_rdrjbxx rdrjbxx 
+					where 1=1
+					<dynamic prepend="">
+						<include refid="SjgltjPageWhere" />
+						and rdrjbxx.jdrylx != '30'
+					</dynamic>
+					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+	</select>
+	
+	<select id="Jdytjxx.sjgltjCount" parameterClass="map" resultClass="int">
+		select count(1) from (select 1
+					from t_rdrjbxx rdrjbxx 
+					where 1=1
+					<dynamic prepend="">
+						<include refid="SjgltjPageWhere" />
+						and rdrjbxx.jdrylx != '30'
+					</dynamic>
+					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx)
+	</select>
+	
+<!-- 	寄递业运行情况统计记数 -->
+	<select id="Jdytjxx.yxqktjCount" parameterClass="map" resultClass="int">
+		select count(1) from (
+			select 
+			  '' gxdwbm
+			from dual
+			union all
+			select 
+			  gxdwbm gxdwbm
+			from t_qyjbxx t where t.hylbdm='Y' <isNotEmpty prepend="and" property="gxdwbm"> t.gxdwbm like '$gxdwbm$%' </isNotEmpty>  group by t.gxdwmc,t.gxdwbm,t.hylbdm
+		)
+	</select>
+<!-- 	寄递业运行情况统计 -->
+	<select id="Jdytjxx.yxqktj" parameterClass="map" resultMap="jdy_yxqk_rm">
+		select x.* from (
+			select rownum rowno,z.* from 
+				(
+					select 
+					  '' gxdwbm,
+					  '合计' gxdwmc,
+					  count(qyid) qyzs,
+					  (select count(qyid) from t_qyjbxx where zjztdm='1' and hylbdm=t.hylbdm and gxdwbm like '$gxdwbm$%') zjs,
+					  (select count(ryid) from t_qyryxx ry, t_qyjbxx qy where  ry.qyid = qy.qyid and qy.hylbdm = t.hylbdm and gxdwbm like '$gxdwbm$%' ) cyrys ,
+					  (select count(djxh) from t_ljjbxx l,t_qyjbxx qy  where scbzw = '0' and l.qybm=qy.qybm and qy.gxdwbm like '$gxdwbm$%' and ljtbsj > trunc(sysdate-1,'DD') and ljtbsj &lt; trunc(sysdate,'DD')) ljs,
+					  (select count(id) from  t_pjjbxx pj,t_ljjbxx lj,t_qyjbxx qy WHERE pj.ljjbxx_id = lj.djxh AND lj.qybm = qy.qybm and qy.gxdwbm like '$gxdwbm$%' AND pj.SFSCBZ      ='N' and pjtbsj > trunc(sysdate-1,'DD') and pjtbsj &lt; trunc(sysdate,'DD')) pjs,
+					  (select count(1) from t_qyjbxx where gxdwbm like '$gxdwbm$%' and hylbdm = t.hylbdm  and qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = t.hylbdm 
+					      and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD'))) wscqys
+<!-- 					  ,'' departlevel -->
+					from t_qyjbxx t,t_department d 
+					where t.gxdwbm = d.departcode 
+						and d.departlevel >= #departlevel# 
+						and t.hylbdm='Y'
+						and t.scbz = 0
+						and t.gxdwbm like '$gxdwbm$%'
+					group by t.hylbdm
+					union all
+					select * from (
+						select 
+						  gxdwbm gxdwbm,
+						  gxdwmc gxdwmc,
+						  count(qyid) qyzs,
+						  (select count(qyid) from t_qyjbxx where zjztdm='1' and hylbdm=t.hylbdm and gxdwbm=t.gxdwbm) zjs,
+						  (select count(ryid) from t_qyryxx ry, t_qyjbxx qy where ry.qyid = qy.qyid and qy.hylbdm = t.hylbdm and  ry.hylbdm = t.hylbdm  and qy.gxdwbm=t.gxdwbm) cyrys,
+						  (select count(djxh) from t_ljjbxx lj, t_qyjbxx qy where lj.qybm = qy.qybm and qy.gxdwbm = t.gxdwbm and  lj.scbzw = '0' and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD')) ljs,
+						  (select count(id) from t_pjjbxx pj, t_ljjbxx lj, t_qyjbxx qy where pj.ljjbxx_id = lj.djxh and lj.qybm = qy.qybm and qy.gxdwbm = t.gxdwbm and pj.SFSCBZ='N' and pj.pjtbsj > trunc(sysdate-1,'DD') and pj.pjtbsj &lt; trunc(sysdate,'DD')) pjs,
+						  (select count(1) from t_qyjbxx where hylbdm = t.hylbdm and gxdwbm = t.gxdwbm and qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = t.hylbdm and qy.gxdwbm=t.gxdwbm 
+						      and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD'))) wscqys
+<!-- 						  ,departlevel departlevel  -->
+						from t_qyjbxx t,t_department d 
+						where 
+							t.gxdwbm = d.departcode 
+							and d.departcode >= #departlevel# 
+							and  t.hylbdm='Y'
+							and t.scbz = 0 
+							and t.gxdwbm like '$gxdwbm$%'
+							  
+						group by t.gxdwmc,t.gxdwbm,t.hylbdm,d.departlevel
+						order by $pageSort$
+					)
+					
+				)  z
+		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		
+	</select>
+	
+	<select id="Jdytjxx.wscqycxCount" parameterClass="map" resultClass="int">
+		select count(1) from t_qyjbxx a where a.hylbdm = 'Y' 
+			<isNotEmpty prepend="and" property="gxdwbm">
+				a.gxdwbm like '$gxdwbm$%'
+			</isNotEmpty>
+			and a.qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj where qy.qybm=lj.qybm and qy.hylbdm = a.hylbdm
+								<isNotEmpty prepend="and" property="gxdwbm">
+									 qy.gxdwbm like '$gxdwbm$%'
+								</isNotEmpty> 
+						      and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD'))
+	</select>
+	
+	<select id="Jdytjxx.wscqycx" parameterClass="map" resultMap="qyjbxxListResult">
+	
+	select x.* from (
+			select rownum rowno,z.* from 
+				(
+					select 
+							a.qyid qyid,a.hylbdm hylbdm,a.hylb hylb,a.qybm qybm,a.qymc qymc,
+							a.qyzflbm qyzflbm,a.qyzflmc qyzflmc,a.qyfflbm qyfflbm,
+							a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.lxdh lxdh,a.frdb frdb,
+							a.jjlxbm jjlxbm,a.jjlxmc jjlxmc,a.zabdm zabdm,a.zajbmc zajbmc,
+							a.yyztdm yyztdm,a.yyztmc yyztmc,a.zrs zrs,a.zt zt,a.zxbz zxbz,a.zjztdm,a.zjztmc,
+							a.sgscxfjjs sgscxfjjs,a.jydz jydz 
+					from t_qyjbxx a where a.hylbdm = 'Y' 
+						<isNotEmpty prepend="and" property="gxdwbm">
+							a.gxdwbm like '$gxdwbm$%'
+						</isNotEmpty>
+						and a.qyid  not in (select qyid from t_qyjbxx qy, t_ljjbxx lj 
+												where qy.qybm=lj.qybm 
+													and qy.hylbdm = a.hylbdm
+											<isNotEmpty prepend="and" property="gxdwbm">
+												 qy.gxdwbm like '$gxdwbm$%'
+											</isNotEmpty> 
+									      and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD'))
+					order by $pageSort$
+				)  z
+		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		
+	</select>
+	
+	<sql id="qyljpjqktjPageWhere">
+		<isNotEmpty prepend="and" property="gxdwbm">
+			t.gxdwbm like '$gxdwbm$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="departlevel">
+			d.departlevel = #departlevel#
+		</isNotEmpty>
+	</sql>
+<!-- 	寄递业揽件派件情况统计记数 -->
+	<select id="Jdytjxx.qyljpjqktjCount" parameterClass="map" resultClass="int">
+		select count(1) from t_qyjbxx t,t_department d where t.gxdwbm = d.departcode and t.hylbdm = 'Y' 
+		<include refid="qyljpjqktjPageWhere"/> 
+	</select>
+<!-- 	寄递业揽件派件情况统计 -->
+	<select id="Jdytjxx.qyljpjqktj" parameterClass="map" resultMap="jdy_qyljpjtj_rm">
+		select x.* from (
+			select rownum rowno,z.* from 
+				(
+					select 
+						t.qyid,
+						t.qybm,
+						t.qymc,
+						t.gxdwmc,
+						(select count(1) from t_ljjbxx lj where lj.qybm = t.qybm and lj.scbzw = '0' and lj.ljtbsj > trunc(sysdate-1,'DD') and lj.ljtbsj &lt; trunc(sysdate,'DD') ) ljs,
+						(select count(1) from t_pjjbxx pj,t_ljjbxx lj where pj.ljjbxx_id = lj.djxh and lj.qybm = t.qybm and pj.sfscbz = 'N' and pj.pjtbsj > trunc(sysdate-1,'DD') and pj.pjtbsj &lt; trunc(sysdate,'DD')) pjs,
+						t.lxdh,t.zt
+					from t_qyjbxx t,t_department d
+					where
+						t.gxdwbm = d.departcode
+						and t.hylbdm = 'Y'
+						<include refid="qyljpjqktjPageWhere"/>
+					order by $pageSort$
+				)  z
+		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		
+	</select>
+	
+<!-- 	寄递业物品分类统计 -->
+	<select id="Jdytjxx.wpfltj" parameterClass="map" resultMap="jdy_wpfltj_rm">
+		select * from (
+		  select  jp.jdplxmc jdplx,count(jp.id) cs 
+		  from t_jdpxx jp,t_ljjbxx l , t_qyjbxx q
+		  where l.djxh=jp.ljjbxx_id and l.qybm = q.qybm
+		  <dynamic prepend="and">
+		  	<include refid="JdytjxxWhere"/>
+		  </dynamic> 
+		  group by jp.jdplxmc 
+		  order by cs desc) z 
+		  <dynamic prepend="where">
+			<include refid="JdytjxxOutterWhere"/>
+		  </dynamic> 
+	</select>
+	
+	<!-- 	历史数据轨迹统计记数 -->
+	<select id="getLssjListPageCount" parameterClass="map" resultClass="int">
+		select count(1) 
+		from (select t.jjr_id ryid, t.djxh, t.wldh, t.ljtbsj ywdjsj, t.qybm from t_ljjbxx t
+					union all
+				 select t.sjr_id ryid, t.djxh, t.wldh, t.ljtbsj ywdjsj, t.qybm from t_ljjbxx t) ywxx,
+		t_rdrjbxx ry, t_qyjbxx qy
+		where ywxx.ryid = ry.id
+		and ywxx.qybm = qy.qybm
+		and ry.jdrylx is not null
+		<include refid="lssjgjWhere"/> 
+	</select>
+<!-- 	历史数据轨迹统计 -->
+	<select id="getLssjListPage" parameterClass="map" resultMap="lssj_result">
+		select x.* from (
+			select rownum rowno,z.* from 
+				(
+					select ry.xm, ry.zjhm, ywxx.ywdjsj, ry.jdrylx ywlx, ry.xxdz, ywxx.djxh, ywxx.wldh, qy.qymc, qy.gxdwmc
+					  from (select t.jjr_id ryid, t.djxh, t.wldh, t.ljtbsj ywdjsj, t.qybm from t_ljjbxx t
+					               union all
+					            select t.sjr_id ryid, t.djxh, t.wldh, t.ljtbsj ywdjsj, t.qybm from t_ljjbxx t) ywxx,
+					       t_rdrjbxx ry, t_qyjbxx qy
+					 where ywxx.ryid = ry.id
+					   and ywxx.qybm = qy.qybm
+					   and ry.jdrylx is not null
+						<include refid="lssjgjWhere"/>
+					order by $pageSort$
+				)  z
+		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		
+	</select>
+	
+	<!-- 	重点人员管控查询记数 -->
+	<select id="getZdryListPageCount" parameterClass="map" resultClass="int">
+		select count(1)
+		  from t_ljjbxx lj, t_rdrjbxx ry, t_zdrygk zdry
+		 where ry.zjhm is not null
+		   and ry.jdrylx is not null
+		   and zdry.zjhm = ry.zjhm
+		   and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+		<include refid="zdryListWhere"/> 
+	</select>
+	
+	<!-- 	重点人员管控分页查询 -->
+	<select id="getZdryListPage" parameterClass="map" resultMap="zdry_result">
+		select x.* from (
+			select rownum rowno,z.* from 
+				(
+					select zdry.xm zdry_xm,
+						       zdry.xb zdry_xb,
+						       zdry.zjhm zdry_zjhm,
+						       zdry.rylx zdry_rylx,
+						       zdry.gxdwbm zdry_gxdwbm,
+						       zdry.gxdwmc zdry_gxdwmc,
+						       lj.ljtbsj ljxx_ywrq,
+						       lj.djxh ljxx_djxh,
+						       lj.wldh ljxx_wldh,
+						       ry.jdrylx ryxx_ywlx 
+						  from t_ljjbxx lj, t_rdrjbxx ry, t_zdrygk zdry
+						where ry.zjhm is not null 
+						and ry.jdrylx is not null
+						and zdry.zjhm = ry.zjhm
+						and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+						<include refid="zdryListWhere"/>
+					order by $pageSort$
+				)  z
+		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		
+	</select>
+</sqlMap>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="addressdetail" type="com.aisino2.sysadmin.domain.Addressdetail"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<resultMap id="addressdetailResult" class="addressdetail">
+		<result property="dzxzid" column="dzxzid" />
+		<result property="addressid" column="addressid" />
+		<result property="dzxzmc" column="dzxzmc" />
+		<result property="dzxzdm" column="dzxzdm"/>
+	</resultMap>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<resultMap id="addressdetailListResult" class="addressdetail">
+		<result property="dzxzid" column="dzxzid"/>
+		<result property="addressid" column="addressid"/>
+		<result property="dzxzmc" column="dzxzmc"/>
+		<result property="dzxzdm" column="dzxzdm"/>
+	</resultMap>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<resultMap id="selectaddressResult" class="addressdetail">
+		<result property="dzxzid" column="dzxzid"/>
+		<result property="addressid" column="addressid"/>
+		<result property="dzxzmc" column="dzxzmc"/>
+	</resultMap>
+	<resultMap id="addresstreeListResult" class="addressdetail">
+	  <result property="dzxzid" column="dzxzid"/>
+		<result property="addressid" column="addressid"/>
+		<result property="dzxzmc" column="dzxzmc"/>
+		<result property="dzxzdm" column="dzxzdm" />
+		<result property="jlxid" column="jlxid" />
+		<result property="updatetime" column="updatetime" />
+		<result property="jlxdm" column="jlxdm" />
+		<result property="jlxmc" column="jlxmc" />
+	</resultMap>
+	<sql id="T_ADDRESSDETAILWhere">
+			<isNotEmpty prepend="and" property="dzxzid">
+				a.dzxzid=#dzxzid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jlxid">
+				a.jlxid=#jlxid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="addressid">
+				a.addressid=#addressid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dzxzdm">
+				a.dzxzdm like '%$dzxzdm$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dzxzmc">
+				a.dzxzmc like '%$dzxzmc$%'
+			</isNotEmpty>
+	</sql>
+	<sql id="T_ADDRESSDETAILPageWhere" >
+		<include refid="T_ADDRESSDETAILWhere" />	</sql>
+	<sql id="T_ADDRESSDETAILListWhere" >
+		<include refid="T_ADDRESSDETAILWhere" />	</sql>
+	<sql id="T_ADDRESSDETAILSelectWhere"  >
+		<include refid="T_ADDRESSDETAILWhere" />	</sql>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<insert id="insertAddressdetail"  parameterClass="addressdetail">
+		insert into T_ADDRESSDETAIL (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="dzxzid">
+				dzxzid
+			</isNotNull>
+			<isNotNull prepend="," property="addressid">
+				addressid
+			</isNotNull>
+			<isNotNull prepend="," property="jlxid">
+				jlxid
+			</isNotNull>
+			<isNotNull prepend="," property="dzxzdm">
+				dzxzdm
+			</isNotNull>
+			<isNotNull prepend="," property="dzxzmc">
+				dzxzmc
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="dzxzid">
+				#dzxzid#
+			</isNotNull>
+			<isNotNull prepend="," property="addressid">
+				#addressid#
+			</isNotNull>
+			<isNotNull prepend="," property="jlxid">
+				#jlxid#
+			</isNotNull>
+			<isNotNull prepend="," property="dzxzdm">
+				#dzxzdm#
+			</isNotNull>
+			<isNotNull prepend="," property="dzxzmc">
+				#dzxzmc#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<update id="updateAddressdetail" parameterClass="addressdetail">
+		update T_ADDRESSDETAIL a set a.addressid=a.addressid
+		<dynamic prepend="">
+			<isNotNull prepend="," property="addressid">
+				addressid=#addressid#
+			</isNotNull>
+			<isNotNull prepend="," property="jlxid">
+				jlxid=#jlxid#
+			</isNotNull>
+			<isNotNull prepend="," property="dzxzdm">
+				dzxzdm=#dzxzdm#
+			</isNotNull>
+			<isNotNull prepend="," property="dzxzmc">
+				dzxzmc=#dzxzmc#
+			</isNotNull>
+		</dynamic>
+		where dzxzid=#dzxzid#
+	</update>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<delete id="deleteAddressdetail" parameterClass="addressdetail">
+		delete from T_ADDRESSDETAIL a where dzxzid=#dzxzid#
+	</delete>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<select id="getAddressdetailList" resultMap="addressdetailListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.dzxzid dzxzid,a.addressid addressid,a.dzxzmc dzxzmc,a.dzxzdm
+		from T_ADDRESSDETAIL a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_ADDRESSDETAILPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<select id="getAddressdetailListCount" resultClass="int" parameterClass="map">
+		select count(1) a from T_ADDRESSDETAIL a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_ADDRESSDETAILPageWhere" />
+		</dynamic>
+	</select>
+	<!-- 地址树分页查询 -->
+	<select id="getAddressdetailtreeList" resultMap="addresstreeListResult" parameterClass="map">
+	select x.* from 
+	(select rownum rowno,z.* from(
+	  select a.dzxzid dzxzid,a.addressid addressid,a.dzxzmc dzxzmc,a.dzxzdm dzxzdm,a.jlxid jlxid,a.updatetime updatetime,b.jlxdm jlxdm,b.jlxmc jlxmc
+	  from t_addressdetail a,t_jlxxx b
+	  where a.addressid=b.addressid and a.jlxid=b.jlxid
+	  <dynamic prepend="">
+	    <isNotEmpty prepend="and" property="addressid">
+			 	a.addressid = #addressid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dzxzmc">
+			 	a.dzxzmc like '%$dzxzmc$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jlxmc">
+			 	b.jlxmc like '%$jlxmc$%'
+			</isNotEmpty>
+	 </dynamic>
+	)z)x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 	
+	</select>
+	<!-- 地址树分页查询 -->
+	<select id="getAddressdetailtreeListCount" resultClass="int" parameterClass="map">
+		select count(1) from 
+		(select a.dzxzid dzxzid,a.addressid addressid,a.dzxzmc dzxzmc,a.dzxzdm dzxzdm,a.jlxid jlxid,a.updatetime updatetime,b.jlxdm jlxdm,b.jlxmc jlxmc
+	  from t_addressdetail a,t_jlxxx b
+	  where a.addressid=b.addressid and a.jlxid=b.jlxid
+		<dynamic prepend="">
+			<isNotEmpty prepend="and" property="addressid">
+				a.addressid = #addressid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dzxzmc">
+			 	a.dzxzmc like '%$dzxzmc$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jlxmc">
+			 	b.jlxmc like '%$jlxmc$%'
+			</isNotEmpty>
+	    </dynamic>
+	    )x
+	</select>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<select id="getSelectaddressdetail" resultMap="selectaddressResult" parameterClass="addressdetail">
+	   select a.dzxzid dzxzid,a.addressid addressid,a.dzxzmc dzxzmc
+	   from t_addressdetail a
+	   where 1=1
+	   <dynamic prepend="">
+		  <isNotEmpty prepend="and" property="addressid">
+			 	a.addressid = #addressid#
+		  </isNotEmpty>
+		   <isNotEmpty prepend="and" property="dzxzid">
+			 	a.dzxzid = #dzxzid#
+		  </isNotEmpty>
+	   </dynamic>
+	</select>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<select id="getAddressdetailListNoPage" resultMap="addressdetailListResult" parameterClass="addressdetail">
+		select a.dzxzid dzxzid,a.addressid addressid,a.dzxzmc dzxzmc,a.dzxzdm
+		from T_ADDRESSDETAIL a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_ADDRESSDETAILListWhere" />
+		</dynamic>
+		order by a.dzxzid,a.addressid
+	</select>
+	<!--地址详址(T_ADDRESSDETAIL)-->
+	<select id="getAddressdetail" resultMap="addressdetailResult" parameterClass="addressdetail">
+		select a.dzxzid dzxzid,a.addressid addressid,a.dzxzmc dzxzmc,a.dzxzdm
+		from T_ADDRESSDETAIL a
+		where 1=1
+		<dynamic prepend="">
+		<isNotEmpty prepend="and" property="dzxzid">
+				a.dzxzid=#dzxzid#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="jlxid">
+				a.jlxid=#jlxid#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="addressid">
+				a.addressid=#addressid#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="dzxzdm">
+				a.dzxzdm = #dzxzdm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="dzxzmc">
+				a.dzxzmc = #dzxzmc#
+		</isNotEmpty>
+		</dynamic>
+		order by a.dzxzid,a.addressid
+	</select>
+</sqlMap>

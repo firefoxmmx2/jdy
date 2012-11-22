@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="jdpxx" type="com.aisino2.jdy.domain.Jdpxx"/>
+	<typeAlias alias="ljjbxx" type="com.aisino2.jdy.domain.Ljjbxx"/>
+	<typeAlias alias="rdrjbxx" type="com.aisino2.jdy.domain.Rdrjbxx"/>
+	<typeAlias alias="pjjbxx" type="com.aisino2.jdy.domain.Pjjbxx"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	
+	<resultMap class="jdpxx" id="jdpxx_rm">
+		<result property="id" column="id"/>
+		<result property="jdplx" column="jdplx"/>
+		<result property="jdpmc" column="jdpmc"/>
+		<result property="jdpsm" column="jdpsm"/>
+		<result property="ljjbxx.djxh" column="ljjbxx_id"/>
+<!-- 		8.16 添加 寄递品体积和寄递品重量 -->
+		<result property="jdptj" column="jdptj"/>
+		<result property="jdpzl" column="jdpzl"/>
+<!-- 		添加冗余字段大类，大类名称和类型名称 -->
+		<result property="jdplxmc" column="jdplxmc"/>
+		<result property="jdpdlx" column="jdpdlx"/>
+		<result property="jdpdlxmc" column="jdpdlxmc"/>
+	</resultMap>
+<!-- 		寄递品信息关联查询结果集 -->	
+	<resultMap class="jdpxx" id="jdpxx_glcx">
+	    <!-- 寄递品信息表 -->
+		<result property="id" column="id"/>
+		<result property="jdplx" column="jdplx"/>
+		<result property="jdpmc" column="jdpmc"/>
+		<result property="jdpsm" column="jdpsm"/>
+		<result property="jdptj" column="jdptj"/>
+		<result property="jdpzl" column="jdpzl"/>
+		<result property="jdplxmc" column="jdplxmc"/>
+		<result property="jdpdlx" column="jdpdlx"/>
+		<result property="jdpdlxmc" column="jdpdlxmc"/>
+		<!-- 基地对象表 -->
+		<result property="ljjbxx" column="ljjbxx_id" select="ljjbxx.getByDjxh"/>
+		<result property="pjjbxx" column="ljjbxx_id" select="pjjbxxmax_pjtbsj_getByid"/> 
+		
+		<result property="kyjdwpxx" column="id" select="kyjdwpxx.getkyjdwpxxid"/>
+		
+		<!-- 
+		<result property="pjjbxx" column="djxh" select="pjjbxx.getById"/>
+		<result property="jjr" column="id" select="Rdrjbxx.getById"/>
+		<result property="sjr" column="id" select="Rdrjbxx.getById"/>
+		<result property="dsr" column="id" select="Rdrjbxx.getById"/>
+		
+		<result property="ljjbxx" column="djxh" select="ljjbxx.getByDjxh"/>
+		<result property="ljjbxx" column="ljjbxx.djxh" select="pjjbxx.getById"/>
+		 -->
+		
+		
+	</resultMap>
+	
+	
+	<resultMap class="jdpxx" id="jdpxx_ljxx_rm" extends="jdpxx_rm">
+		<result property="ljjbxx" column="ljjbxx_id" select="ljjbxx.getById"/>
+	</resultMap>
+
+	<sql id="jdpxxWhere">
+		<isNotEmpty prepend="and" property="id"> 
+			jdpxx.id = #id#
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="ljjbxx">
+			<isNotEmpty prepend="and" property="ljjbxx.djxh">
+				jdpxx.ljjbxx_id=#ljjbxx.djxh#
+			</isNotEmpty>
+		</isNotEmpty>
+		
+	</sql>
+
+	<sql id="jdpxxPageWhere">
+		<include refid="jdpxxWhere"/>
+	</sql>
+
+	<insert id="jdpxx.insert" parameterClass="jdpxx">
+		insert into t_jdpxx (
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				id
+			</isNotNull>
+			<isNotNull prepend="," property="jdplx">
+				jdplx
+			</isNotNull>
+			<isNotNull prepend="," property="jdpsm">
+				jdpsm
+			</isNotNull>
+			<isNotNull prepend="," property="jdpmc">
+				jdpmc
+			</isNotNull>
+			<isNotNull prepend="," property="ljjbxx.djxh">
+				ljjbxx_id
+			</isNotNull>
+			<isNotNull prepend="," property="jdptj">
+				jdptj
+			</isNotNull>
+			<isNotNull prepend="," property="jdpzl">
+				jdpzl
+			</isNotNull>
+			<isNotNull prepend="," property="jdplxmc">
+				jdplxmc
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlx">
+				jdpdlx
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlxmc">
+				jdpdlxmc
+			</isNotNull>
+		</dynamic>
+		)
+		values(
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				#id#
+			</isNotNull>
+			<isNotNull prepend="," property="jdplx">
+				#jdplx#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpsm">
+				#jdpsm#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpmc">
+				#jdpmc#
+			</isNotNull>
+			<isNotNull prepend="," property="ljjbxx.djxh">
+				#ljjbxx.djxh#
+			</isNotNull>
+			<isNotNull prepend="," property="jdptj">
+				#jdptj#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpzl">
+				#jdpzl#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="jdplxmc">
+				#jdplxmc#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlx">
+				#jdpdlx#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlxmc">
+				#jdpdlxmc#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>	
+	
+	<delete id="jdpxx.delete" parameterClass="jdpxx">
+		delete from t_jdpxx jdpxx
+		where
+		<dynamic prepend=" ">
+			<include refid="jdpxxWhere"/>
+		</dynamic>
+	</delete>
+	
+	<update id="jdpxx.update" parameterClass="jdpxx">
+		update t_jdpxx jdpxx 
+		set id=id
+		<dynamic prepend=",">
+			<isNotNull prepend="," property="jdplx">
+				jdplx=#jdplx#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpsm">
+				jdpsm=#jdpsm#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpmc">
+				jdpmc=#jdpmc#
+			</isNotNull>
+			<isNotNull prepend="," property="ljjbxx.djxh">
+				ljjbxx_id=#ljjbxx.djxh#
+			</isNotNull>
+			<isNotNull prepend="," property="jdptj">
+				jdptj=#jdptj#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpzl">
+				jdpzl=#jdpzl#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="jdplxmc">
+				jdplxmc=#jdplxmc#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlx">
+				jdpdlx=#jdpdlx#
+			</isNotNull>
+			<isNotNull prepend="," property="jdpdlxmc">
+				jdpdlxmc=#jdpdlxmc#
+			</isNotNull>
+			<isNotNull prepend="," property="kybz">
+				kybz=#kybz#
+			</isNotNull>
+			
+		</dynamic>
+		where
+		<dynamic prepend=" ">
+			<include refid="jdpxxWhere"/>
+		</dynamic>
+	</update>
+	
+	<select id="jdpxx.getList" parameterClass="jdpxx" resultMap="jdpxx_rm">
+		select jdpxx.* from t_jdpxx jdpxx 
+		where
+		<dynamic prepend=" ">
+			<include refid="jdpxxPageWhere"/>
+		</dynamic>
+	</select>
+	
+	<select id="jdpxx.getListPageCount" parameterClass="map" resultClass="Integer">
+		select count(1)
+		from t_jdpxx jdpxx 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="jdpxxPageWhere" />
+		</dynamic>
+	</select>
+	
+	<select id="jdpxx.getListPage"  parameterClass="map" resultMap="jdpxx_rm">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select jdpxx.*
+		from t_jdpxx jdpxx 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="jdpxxPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	
+	<select id="jdpxx.getListByLjjbxxId"  parameterClass="String" resultMap="jdpxx_rm">
+		select * from t_jdpxx where ljjbxx_id=#value#
+	</select>
+	
+	<select id="jdpxx.get" parameterClass="jdpxx" resultMap="jdpxx_glcx">
+		select * from t_jdpxx jdpxx
+		where 1=1
+		<dynamic prepend="and">
+			<include refid="jdpxxWhere"/>
+		</dynamic>
+	</select>
+<!--    根据ljjbxx_id号查询该揽件信息是否还存在可以寄递物品    -->
+    <resultMap class="jdpxx" id="jdpxx_kyjdwp">
+		<result property="id" column="id"/>
+	</resultMap>
+	<sql id="jdpxx_kyjdwpWhere">
+		<isNotEmpty prepend="" property="ljjbxx">
+			<isNotEmpty prepend="and" property="ljjbxx.djxh">
+				jdpxx.ljjbxx_id=#ljjbxx.djxh#
+			</isNotEmpty>
+		</isNotEmpty>
+		
+	</sql>
+	<select id="jdpxx.getkyjdwp" parameterClass="jdpxx" resultMap="jdpxx_kyjdwp">
+		select jdpxx.id from t_jdpxx jdpxx
+		where 1=1  and jdpxx.kybz='Y'
+		<dynamic prepend="and">
+			<include refid="jdpxx_kyjdwpWhere"/>
+		</dynamic>
+	</select>
+</sqlMap>

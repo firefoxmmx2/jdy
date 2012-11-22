@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+  <package name="jdy" extends="json-default" namespace="/jdy">
+    <!-- 揽件信息action -->
+    <action name="*_ljxx" method="{1}" class="ljxxAction">
+      <result type="json"/>
+    </action>
+<!--     派件信息 -->
+    <action name="*_pjxx" method="{1}" class="PjxxAction">
+      <result type="json"/>
+    </action>
+<!--     寄递业统计 -->
+    <action name="*_jdytjxx" method="{1}" class="JdytjAction">
+      <result type="json"/>
+    </action>
+<!--     寄递品信息 -->
+    <action name="*_jdpxx" method="{1}" class="jdpxxAction">
+      <result type="json"/>
+    </action>
+<!--     可以寄递物品信息 -->
+    <action name="*_kyjdwp" method="{1}" class="kyjdwpAction">
+      <result type="json"/>
+    </action>
+<!--     人员照片信息 -->
+    <action name="*_jddxzpxx" method="{1}" class="JddxzpxxAction">
+      <result type="json"/>
+    </action>
+<!--     寄递对象信息 -->
+    <action name="*_rdrjbxx" method="{1}" class="RdrjbxxAction">
+      <result type="json"/>
+    </action>
+      <!--    历史数据轨迹查询 -->
+    <action name="*_lssjxx" method="{1}" class="lssjxxAction">
+      <result type="json"/>
+    </action>
+<!--    重点人员统计action -->
+    <action name="*_zdry" method="{1}" class="ZdrygkAction">
+      <result type="json"/>
+    </action>
+  </package>
+</struts>

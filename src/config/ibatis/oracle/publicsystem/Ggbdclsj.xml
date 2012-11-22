@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="ggbdclsj" type="com.aisino2.publicsystem.domain.Ggbdclsj"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<resultMap id="ggbdclsjResult" class="ggbdclsj">
+		<result property="bdclsjid" column="bdclsjid" />
+		<result property="wpmc" column="wpmc" />
+		<result property="wpjp" column="wpjp" />
+		<result property="wpqp" column="wpqp" />
+		<result property="cph" column="cph" />
+		<result property="fdjh" column="fdjh" />
+		<result property="cjh" column="cjh" />
+		<result property="qymc" column="qymc" />
+		<result property="qydz" column="qydz" />
+		<result property="gxdwbm" column="gxdwbm" />
+		<result property="gxdwmc" column="gxdwmc" />
+		<result property="hylbdm" column="hylbdm" />
+		<result property="hylb" column="hylb" />
+		<result property="ywbm" column="ywbm" />
+		<result property="ywbzj" column="ywbzj" />
+		<result property="ywbyzj" column="ywbyzj" />
+		<result property="xrsj" column="xrsj" />
+		<result property="gxsj" column="gxsj" />
+		<result property="wxsj" column="wxsj" />
+		<result property="biduiflag" column="biduiflag" />
+		<result property="sfyx" column="sfyx" />
+	</resultMap>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<resultMap id="ggbdclsjListResult" class="ggbdclsj">
+		<result property="bdclsjid" column="bdclsjid"/>
+		<result property="wpmc" column="wpmc"/>
+		<result property="wpjp" column="wpjp"/>
+		<result property="wpqp" column="wpqp"/>
+		<result property="cph" column="cph"/>
+		<result property="fdjh" column="fdjh"/>
+		<result property="cjh" column="cjh"/>
+		<result property="qymc" column="qymc"/>
+		<result property="qydz" column="qydz"/>
+		<result property="gxdwbm" column="gxdwbm"/>
+		<result property="gxdwmc" column="gxdwmc"/>
+		<result property="hylbdm" column="hylbdm"/>
+		<result property="hylb" column="hylb"/>
+		<result property="ywbm" column="ywbm"/>
+		<result property="ywbzj" column="ywbzj"/>
+		<result property="ywbyzj" column="ywbyzj" />
+		<result property="xrsj" column="xrsj"/>
+		<result property="gxsj" column="gxsj"/>
+		<result property="wxsj" column="wxsj" />
+		<result property="biduiflag" column="biduiflag"/>
+		<result property="sfyx" column="sfyx" />
+	</resultMap>
+	<sql id="T_GGBDCLSJWhere">
+		<isNotEmpty prepend="and" property="bdclsjid">
+			a.bdclsjid=#bdclsjid#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ywbm">
+			a.ywbm=#ywbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ywbzj">
+			a.ywbzj=#ywbzj#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ywbyzj">
+			a.ywbyzj=#ywbyzj#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDCLSJPageWhere" >
+		<include refid="T_GGBDCLSJWhere" />	
+		<isNotEmpty prepend="and" property="cph">
+			a.cph=#cph#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fdjh">
+			a.fdjh=#fdjh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="cjh">
+			a.cjh=#cjh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+			a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+			a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDCLSJListWhere" >
+		<include refid="T_GGBDCLSJWhere" />	
+		<isNotEmpty prepend="and" property="cph">
+			a.cph=#cph#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fdjh">
+			a.fdjh=#fdjh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="cjh">
+			a.cjh=#cjh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+			a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+			a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<sql id="T_GGBDCLSJSelectWhere"  >
+		<include refid="T_GGBDCLSJWhere" />	
+		<isNotEmpty prepend="and" property="cph">
+			a.cph=#cph#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fdjh">
+			a.fdjh=#fdjh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="cjh">
+			a.cjh=#cjh#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="hylbdm">
+			a.hylbdm=#hylbdm#
+		</isNotEmpty>	
+		<isNotEmpty prepend="and" property="gxdwbm">
+			a.gxdwbm=#gxdwbm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sfyx">
+			a.sfyx=#sfyx#
+		</isNotEmpty>
+	</sql>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<insert id="insertGgbdclsj"  parameterClass="ggbdclsj">
+		insert into T_GGBDCLSJ (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="bdclsjid">
+				bdclsjid
+			</isNotNull>
+			<isNotNull prepend="," property="wpmc">
+				wpmc
+			</isNotNull>
+			<isNotNull prepend="," property="wpjp">
+				wpjp
+			</isNotNull>
+			<isNotNull prepend="," property="wpqp">
+				wpqp
+			</isNotNull>
+			<isNotNull prepend="," property="cph">
+				cph
+			</isNotNull>
+			<isNotNull prepend="," property="fdjh">
+				fdjh
+			</isNotNull>
+			<isNotNull prepend="," property="cjh">
+				cjh
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				qymc
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				qydz
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				gxdwbm
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				gxdwmc
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				hylbdm
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				hylb
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				ywbm
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				ywbzj
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				ywbyzj
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				xrsj
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				gxsj
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				wxsj
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				biduiflag
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				sfyx
+			</isNotNull>
+		</dynamic>
+		) values (
+		<dynamic prepend="">
+			<isNotNull prepend="" property="bdclsjid">
+				#bdclsjid#
+			</isNotNull>
+			<isNotNull prepend="," property="wpmc">
+				#wpmc#
+			</isNotNull>
+			<isNotNull prepend="," property="wpjp">
+				#wpjp#
+			</isNotNull>
+			<isNotNull prepend="," property="wpqp">
+				#wpqp#
+			</isNotNull>
+			<isNotNull prepend="," property="cph">
+				#cph#
+			</isNotNull>
+			<isNotNull prepend="," property="fdjh">
+				#fdjh#
+			</isNotNull>
+			<isNotNull prepend="," property="cjh">
+				#cjh#
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				#qymc#
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				#qydz#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				#gxdwbm#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				#gxdwmc#
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				#hylbdm#
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				#hylb#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				#ywbm#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				#ywbzj#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				#ywbyzj#
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				#xrsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				#gxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				#wxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				#biduiflag#
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				#sfyx#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<update id="updateGgbdclsj" parameterClass="ggbdclsj">
+		update T_GGBDCLSJ a set a.bdclsjid=a.bdclsjid
+		<dynamic prepend="">
+			<isNotNull prepend="," property="wpmc">
+				wpmc=#wpmc#
+			</isNotNull>
+			<isNotNull prepend="," property="wpjp">
+				wpjp=#wpjp#
+			</isNotNull>
+			<isNotNull prepend="," property="wpqp">
+				wpqp=#wpqp#
+			</isNotNull>
+			<isNotNull prepend="," property="cph">
+				cph=#cph#
+			</isNotNull>
+			<isNotNull prepend="," property="fdjh">
+				fdjh=#fdjh#
+			</isNotNull>
+			<isNotNull prepend="," property="cjh">
+				cjh=#cjh#
+			</isNotNull>
+			<isNotNull prepend="," property="qymc">
+				qymc=#qymc#
+			</isNotNull>
+			<isNotNull prepend="," property="qydz">
+				qydz=#qydz#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwbm">
+				gxdwbm=#gxdwbm#
+			</isNotNull>
+			<isNotNull prepend="," property="gxdwmc">
+				gxdwmc=#gxdwmc#
+			</isNotNull>
+			<isNotNull prepend="," property="hylbdm">
+				hylbdm=#hylbdm#
+			</isNotNull>
+			<isNotNull prepend="," property="hylb">
+				hylb=#hylb#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbm">
+				ywbm=#ywbm#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbzj">
+				ywbzj=#ywbzj#
+			</isNotNull>
+			<isNotNull prepend="," property="ywbyzj">
+				ywbyzj=#ywbyzj#
+			</isNotNull>
+			<isNotNull prepend="," property="xrsj">
+				xrsj=#xrsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="gxsj">
+				gxsj=#gxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="wxsj">
+				wxsj=#wxsj:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="biduiflag">
+				biduiflag=#biduiflag#
+			</isNotNull>
+			<isNotNull prepend="," property="sfyx">
+				sfyx=#sfyx#
+			</isNotNull>
+		</dynamic>
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDCLSJWhere" />
+		</dynamic>
+	</update>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<delete id="deleteGgbdclsj" parameterClass="ggbdclsj">
+		delete from T_GGBDCLSJ a where 1=1 
+		<dynamic prepend="">
+			<include refid="T_GGBDCLSJWhere" />
+		</dynamic>
+	</delete>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<select id="getGgbdclsjList" resultMap="ggbdclsjListResult" parameterClass="map">
+		select x.* from (
+		select rownum rowno,z.* from 
+		(select a.bdclsjid bdclsjid,a.wpmc wpmc,a.wpjp wpjp,a.wpqp wpqp,a.cph cph,a.fdjh fdjh,a.cjh cjh,a.qymc qymc,a.qydz qydz,
+		a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,
+		a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDCLSJ a 
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDCLSJPageWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<select id="getGgbdclsjListCount" resultClass="int" parameterClass="map">
+		select count(1) a from T_GGBDCLSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDCLSJPageWhere" />
+		</dynamic>
+	</select>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<select id="getGgbdclsjListNoPage" resultMap="ggbdclsjListResult" parameterClass="ggbdclsj">
+		select a.bdclsjid bdclsjid,a.wpmc wpmc,a.wpjp wpjp,a.wpqp wpqp,a.cph cph,a.fdjh fdjh,a.cjh cjh,a.qymc qymc,a.qydz qydz,
+		a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,
+		a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDCLSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDCLSJListWhere" />
+		</dynamic>
+		order by a.bdclsjid
+	</select>
+	<!--公共比对车辆数据表(T_GGBDCLSJ)-->
+	<select id="getGgbdclsj" resultMap="ggbdclsjResult" parameterClass="ggbdclsj">
+		select a.bdclsjid bdclsjid,a.wpmc wpmc,a.wpjp wpjp,a.wpqp wpqp,a.cph cph,a.fdjh fdjh,a.cjh cjh,a.qymc qymc,a.qydz qydz,
+		a.gxdwbm gxdwbm,a.gxdwmc gxdwmc,a.hylbdm hylbdm,a.hylb hylb,a.ywbm ywbm,a.ywbzj ywbzj,a.ywbyzj ywbyzj,a.xrsj xrsj,a.gxsj gxsj,a.wxsj wxsj,
+		a.biduiflag biduiflag,a.sfyx sfyx
+		from T_GGBDCLSJ a
+		where 1=1
+		<dynamic prepend="">
+			<include refid="T_GGBDCLSJSelectWhere" />
+		</dynamic>
+		order by a.bdclsjid
+	</select>
+</sqlMap>
