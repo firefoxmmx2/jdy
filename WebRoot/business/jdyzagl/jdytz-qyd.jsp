@@ -84,7 +84,7 @@
 			//alert($("#ljxx_ljrxm").val());
 			//alert($("#lj_ljr_cyrybh").val());
 			//alert($("#ljxx_ljsjf").val());
-			params = {'lj.qyjbxx.qybm':qybm,'lj.ljtbsjf':'<%=dateNow%>','lj.ljtbsjt':'<%=dateNow%>'};
+			params = {'lj.qyjbxx.qybm':qybm};
 			if (url==null || url=="undefined"){
 				url=ljxx_page_url;
 			}
