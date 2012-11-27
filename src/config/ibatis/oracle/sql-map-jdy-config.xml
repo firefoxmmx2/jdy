@@ -21,4 +21,6 @@
 	<sqlMap resource="config/ibatis/oracle/jdy/Jddxzpxx.xml"/>
 <!-- 	寄递业统计信息 -->
 	<sqlMap resource="config/ibatis/oracle/jdy/Jdytj.xml"/>
+<!-- 	预警参数配置 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Yjcs.xml"/>
 </sqlMapConfig>
