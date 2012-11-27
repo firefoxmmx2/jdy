@@ -12,5 +12,5 @@ public interface IYjcsDao {
 	void update(Yjcs yjcs);
 	
 	List<Yjcs> query(Map<String, Object> param);
-	Map querySQL(String sql) throws SQLException;
+	List querySQL(String sql) throws SQLException;
 }

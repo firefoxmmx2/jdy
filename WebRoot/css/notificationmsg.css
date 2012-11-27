@@ -1,4 +1,4 @@
-ï»¿#msg1 {
+#msg1 {
 	bottom: 0px;
 	right: 0px;
 	position: absolute;
@@ -11,7 +11,6 @@
 	font-size: 13px;
 	z-index: 99999
 }
-
 #modal .modaltop {
 	width: 192px;
 	background-color: Transparent;
@@ -21,7 +20,6 @@
 	color: #ffffff;
 	text-align: right;
 }
-
 #modal .modaltitle {
 	padding: 4px;
 	font-size: 12px;
@@ -29,16 +27,55 @@
 	color: #ffffff;
 	float: left;
 }
-
 #modal .modalbody {
 	padding: 10px;
 	text-align: left;
 }
-
 #modalbody {
-	font-family: 'å®‹ä½“';
+	font-family: 'ËÎÌå';
 	font-size: 12px;
 	padding-left: 8px;
 	color: #3186c8;
 	font-weight: lighter
+}
+
+#msg2 {
+	bottom: 0px;
+	right: 0px;
+	position: absolute;
+	width: 300px;
+	height: 200px;
+	border: solid 1px black;
+	margin: 0px 0px 0px 20px;
+	background-color: white;
+	display: none;
+	font-size: 13px;
+	z-index: 99999
+}
+
+#modal2 .modaltop2 {
+	width: 292px;
+	background-color: Transparent;
+	background-image: url(../images/window_titlebg.jpg);
+	background-repeat: repeat-x;
+	padding: 4px;
+	color: #ffffff;
+	text-align: right;
+}
+
+#modal2 .modaltitle {
+	padding: 4px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #ffffff;
+	float: left;
+}
+
+#modal2 .modalbody {
+	text-align: left;
+	overflow: hidden;
+	height: 150px;
+	white-space:   nowrap;
+    overflow:      hidden;
+    text-overflow: ellipsis;
 }

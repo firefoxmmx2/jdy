@@ -156,15 +156,50 @@ background-attachment: fixed;}
 	$(document).ready(function(){
 		daggleDiv("password_modify");
 	});
-	
-	
+	//消息滚动
+	function scrollNews(obj) {  
+	    var $self = obj.find("ul:first");  
+	    var lineHeight = $self.find("li:first").height(); //获取行高   
+	    $self.animate({ "marginTop": -lineHeight + "px" }, 500, function() {  
+	        $self.css({ marginTop: 0 }).find("li:first").appendTo($self); //appendTo能直接移动元素   
+	    })  
+	}
+	function getMsg(){
+		$.ajax({
+ 		   type: "POST",
+ 		   url: "jdy/queryMsg_xxts.action",
+ 		   dataType:"html",
+ 		   success: function(msg){
+ 			  if(msg!=""){
+ 				 $("#msgUl").empty();
+ 	 		     $("#msgUl").append(msg);
+ 	 		     $('#msg2').slideDown(1000,function(){
+ 	 		    	 setTimeout(function(){$('#msg2').slideUp(1000)},60 * 1000);
+ 	 		    	 if($("#msgUl").find("li").length>9){
+ 	 		    		 var scrollTimer;  
+ 	  	    		    $("#twitter").hover(function() {  
+ 	  	    		    	window.clearInterval(scrollTimer);  
+ 	  	    		    }, function() {  
+ 	  	    		        scrollTimer = setInterval(function() {  
+ 	  	    		            scrollNews( $("#twitter"));  
+ 	  	    		        }, 3000);
+ 	  	    		    }).trigger("mouseleave"); 
+ 	 		    	 }
+ 	 	          }); 
+ 			  }
+ 		   }
+ 		});
+	}
 	
 	function initPromptBox(msg){
-     $('#closebutton').click(function(){ $('#msg1').slideUp(1000); });
-     $('#msg1').slideDown(1000,function(){
-     	setTimeout(function(){$('#msg1').slideUp(1000);},60 * 1000);
-     	//alert(t);
-     });
+     //$('#closebutton').click(function(){ $('#msg1').slideUp(1000); });
+     $('#closebutton1').click(function(){ $('#msg2').slideUp(1000); });
+     //$('#msg1').slideDown(1000,function(){setTimeout(function(){$('#msg1').slideUp(1000);},60 * 1000); });
+     getMsg();
+     setInterval(function(){
+    	 getMsg();
+     },120*1000);
+     
      if(showmessageflag==GADQYD){
          var kyqk = "您有"+countkyqk+"条可疑情况还未处理！";
          var xctb = "您有"+countxctb+"条协查通报还未回复！";
@@ -927,6 +962,7 @@ function ceshi(yiDongWay){
     <td class="fontpart" id="loginlogNUm" ></td>
   </tr>
 </table>
+<!-- 
 <div id="msg1">
             <div id="modal">
                 <div class="modaltop">
@@ -939,7 +975,22 @@ function ceshi(yiDongWay){
                     <strong><span id="modalbody"></span></strong>
                 </div>
             </div>
-        </div>
+        </div> 
+ -->
+ <div id="msg2">
+            <div id="modal2">
+                <div class="modaltop2">
+                    <div class="modaltitle">信息提示：</div>
+                    <span id="closebutton1" style="CURSOR: hand">
+	                    <img src="images/window/window_close.jpg" border="0" />
+	                </span>
+	            </div>
+                <div class="modalbody" id="twitter">
+                  <ul id="msgUl">
+                   </ul> 
+                </div>
+            </div>
+        </div> 
 </div>
 				<table width="155" border="0" align="right" cellpadding="0"
 							cellspacing="0">

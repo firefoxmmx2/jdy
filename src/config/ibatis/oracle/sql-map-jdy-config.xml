@@ -23,4 +23,6 @@
 	<sqlMap resource="config/ibatis/oracle/jdy/Jdytj.xml"/>
 <!-- 	预警参数配置 -->
 	<sqlMap resource="config/ibatis/oracle/jdy/Yjcs.xml"/>
+<!-- 	消息提示 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Xxts.xml"/>
 </sqlMapConfig>

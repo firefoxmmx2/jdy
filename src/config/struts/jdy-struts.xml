@@ -39,5 +39,9 @@
     <action name="*_zdry" method="{1}" class="ZdrygkAction">
       <result type="json"/>
     </action>
+<!--    消息提示action -->
+    <action name="*_xxts" method="{1}" class="XxtsAction">
+      <result type="json"/>
+    </action>
   </package>
 </struts>

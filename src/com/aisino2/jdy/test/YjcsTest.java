@@ -17,7 +17,7 @@ import com.aisino2.jdy.domain.Yjcs;
 public class YjcsTest {
 	private ApplicationContext context;
 	@Before
-	public void setUp() throws Exception {
+	public void setUp()  {
 		String[] resources = new String[]{
 				"/config/spring/applicationContext.xml",
 				"/config/spring/applicationContext-jdy.xml",
@@ -28,21 +28,28 @@ public class YjcsTest {
 
 	@Test
 	public void test() throws SQLException {
-		
 		IYjcsDao yjcsDao = (IYjcsDao)context.getBean("YjcsDaoImpl");
-		Yjcs yjcs = new Yjcs();
-		yjcs.setYjmc("测试");
-		yjcs.setYjxxms("测试2");
-		yjcs.setYhlb("222");
-		yjcs.setYjgzsj("0 0/5 0 * * ? * *");
-		yjcs.setCjr("测试3");
-		yjcs.setYjyj("select count(1) total from t_ljjbxx");
-		yjcsDao.insert(yjcs);
-		List yjcslist = yjcsDao.query(null);
-		assertEquals(yjcslist.size(), 1);
-		Map map = yjcsDao.querySQL(yjcs.getYjyj());
-		Map valuemap = (Map)map.get(1);
-		assertNotNull(valuemap.get("total"));
+		try{
+			
+			Yjcs yjcs = new Yjcs();
+			yjcs.setYjmc("测试");
+			yjcs.setYjxxms("测试2");
+			yjcs.setYhlb("222");
+			yjcs.setYjgzsj("0 0/5 0 * * ? * *");
+			yjcs.setCjr("测试3");
+			yjcs.setYjyj("select count(1) TOTAL from t_ljjbxx");
+			yjcsDao.insert(yjcs);
+			List yjcslist = yjcsDao.query(null);
+			assertEquals(yjcslist.size(), 1);
+			Map map = (Map) yjcsDao.querySQL(yjcs.getYjyj()).get(0);
+			System.out.println(map);
+			assertNotNull(map.get("TOTAL"));
+		}
+		finally{
+			yjcsDao.remove(null);
+			System.out.println(1);
+		}
+		
 	}
 
 }

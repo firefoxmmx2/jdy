@@ -18,6 +18,18 @@ public class Yjcs {
 	private String yjgzsj;
 	private Date cjsj;
 	private String cjr;
+	/**
+	 * 开关状态 1 表示活跃, 0 表示停用 
+	 */
+	private String zt;
+	
+	
+	public String getZt() {
+		return zt;
+	}
+	public void setZt(String zt) {
+		this.zt = zt;
+	}
 	public Integer getId() {
 		return id;
 	}

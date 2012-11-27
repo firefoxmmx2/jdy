@@ -41,8 +41,8 @@ public class YjcsDaoImpl extends BaseDao implements IYjcsDao {
 		return this.queryForList("Yjcs.query", param);
 	}
 
-	public Map querySQL(String sql) throws SQLException {
-		return this.getSqlMapClient().queryForMap("Yjcs.querySqlMap", sql,"id");
+	public List querySQL(String sql) throws SQLException {
+		return this.queryForList("Yjcs.querySqlMap", sql);
 	}
 
 }
