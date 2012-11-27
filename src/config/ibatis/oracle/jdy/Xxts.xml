@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Xxts" type="com.aisino2.jdy.domain.Xxts"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	
+	<!-- 消息提示jjqueen-->
+	<resultMap class="Xxts" id="xxts">
+		<result property="id" column="id"/>
+		<result property="xxbt" column="xxbt"/>
+		<result property="xxnr" column="xxnr"/>
+		<result property="lj" column="lj"/>
+		<result property="clhs" column="clhs"/>
+	</resultMap>
+	<select id="queryMsgs" parameterClass="Xxts" resultMap="xxts" >
+	 select t.id,t.xxbt,t.xxnr,t.lj,t.clhs from t_xxts t ,t_xxyhys u
+	 where u.xx_id(+)=t.id 
+	 <dynamic>
+	  <isNotEmpty prepend="and" property="">
+	    u.jsyh_id=''
+	  </isNotEmpty>
+	 </dynamic>
+	</select>
+	
+	<insert id="insertXxts" parameterClass="Xxts">
+	  insert into t_xxts (
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				id
+			</isNotNull>
+			<isNotNull prepend="," property="xxbt">
+				xxbt
+			</isNotNull>
+			<isNotNull prepend="," property="xxnr">
+				xxnr
+			</isNotNull>
+			<isNotNull prepend="," property="lj">
+				lj
+			</isNotNull>
+			<isNotNull prepend="," property="clhs">
+				clhs
+			</isNotNull>
+			<isNotNull prepend="," property="fsr">
+				fsr
+			</isNotNull>
+			<isNotNull prepend="," property="tssj">
+				tssj
+			</isNotNull>
+		</dynamic>
+		)
+		values(
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				#id#
+			</isNotNull>
+			<isNotNull prepend="," property="xxbt">
+				#xxbt#
+			</isNotNull>
+			<isNotNull prepend="," property="xxnr">
+				#xxnr#
+			</isNotNull>
+			<isNotNull prepend="," property="lj">
+				#lj#
+			</isNotNull>
+			<isNotNull prepend="," property="clhs">
+				#clhs#
+			</isNotNull>
+			<isNotNull prepend="," property="fsr">
+				#fsr#
+			</isNotNull>
+			<isNotNull prepend="," property="tssj">
+				#tssj#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+
+</sqlMap>
