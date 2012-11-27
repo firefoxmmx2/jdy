@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Yjcs" type="com.aisino2.jdy.domain.Yjcs"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	
+	
+	<resultMap class="Yjcs" id="yjcs_rm">
+		<result property="id" column="id"/>
+		<result property="yjmc" column="yjmc"/>
+		<result property="yjxxms" column="yjxxms"/>
+		<result property="yjyj" column="yjyj"/>
+		<result property="yhlb" column="yhlb"/>
+		<result property="yjgzsj" column="yjgzsj"/>
+		<result property="cjsj" column="cjsj"/>
+		<result property="cjr" column="cjr"/>
+	</resultMap>
+	
+	<sql id="yjcs_where">
+		<isNotEmpty prepend="and" property="id">
+			t.id = #id#
+		</isNotEmpty>
+		<isNotEmpty propend="and" property="yhlb">
+			t.yhlb = #yhlb#
+		</isNotEmpty>
+	</sql>
+	
+	<sql id="yjcs_query_where">
+		<include refid="yjcs_where"/>
+		
+		<isNotEmpty propend="and" property="yjmc">
+			t.yjmc like '%$yjmc$%'
+		</isNotEmpty>
+		<isNotEmpty propend="and" property="cjr">
+			t.cjr like '%$cjr$%'
+		</isNotEmpty>
+		
+	</sql>
+	<insert id="Yjcs.insert" parameterClass="Yjcs">
+		insert into t_yjcs
+		(
+			<dynamic prepend=" ">
+				<isNotNull prepend="," property="id">
+					id
+				</isNotNull>
+				<isNotNull prepend="," property="yjmc">
+					yjmc
+				</isNotNull>
+				<isNotNull prepend="," property="yjxxms">
+					yjxxms
+				</isNotNull>
+				<isNotNull prepend="," property="yjyj">
+					yjyj
+				</isNotNull>
+				<isNotNull prepend="," property="yhlb">
+					yhlb
+				</isNotNull>
+				<isNotNull prepend="," property="yjgzsj">
+					yjgzsj
+				</isNotNull>
+				<isNotNull prepend="," property="cjsj">
+					cjsj
+				</isNotNull>
+				<isNotNull prepend="," property="cjr">
+					cjr
+				</isNotNull>
+			</dynamic>
+		)
+		values(
+			<dynamic prepend=" ">
+				<isNotNull prepend="," property="id">
+					#id#
+				</isNotNull>
+				<isNotNull prepend="," property="yjmc">
+					#yjmc#
+				</isNotNull>
+				<isNotNull prepend="," property="yjxxms">
+					#yjxxms#
+				</isNotNull>
+				<isNotNull prepend="," property="yjyj">
+					#yjyj#
+				</isNotNull>
+				<isNotNull prepend="," property="yhlb">
+					#yhlb#
+				</isNotNull>
+				<isNotNull prepend="," property="yjgzsj">
+					#yjgzsj#
+				</isNotNull>
+				<isNotNull prepend="," property="cjsj">
+					#cjsj#
+				</isNotNull>
+				<isNotNull prepend="," property="cjr">
+					#cjr#
+				</isNotNull>
+			</dynamic>
+		)
+	</insert>
+	
+	<delete id="Yjcs.remove" parameterClass="Yjcs">
+		delete from t_yjcs t
+		<dynamic prepend="where">
+			<include refid="yjcs_where"/>
+		</dynamic>
+	</delete>
+	
+	<update id="Yjcs.update" parameterClass="Yjcs">
+		update t_yjcs t set 
+		<dynamic prepend=",">
+				<isNotNull prepend="," property="yjmc">
+					yjmc=#yjmc#
+				</isNotNull>
+				<isNotNull prepend="," property="yjxxms">
+					yjxxms=#yjxxms#
+				</isNotNull>
+				<isNotNull prepend="," property="yjyj">
+					yjyj=#yjyj#
+				</isNotNull>
+				<isNotNull prepend="," property="yhlb">
+					yhlb=#yhlb#
+				</isNotNull>
+				<isNotNull prepend="," property="yjgzsj">
+					yjgzsj=#yjgzsj#
+				</isNotNull>
+				<isNotNull prepend="," property="cjsj">
+					cjsj=#cjsj#
+				</isNotNull>
+				<isNotNull prepend="," property="cjr">
+					cjr=#cjr#
+				</isNotNull>
+			</dynamic>
+			where 
+			<dynamic prepend="and">
+				<include refid="yjcs_where"/>
+			</dynamic>
+	</update>
+	
+	<select id="Yjcs.query" parameterClass="map" resultMap="yjcs_rm">
+		select t.* from t_yjcs t 
+		<dynamic prepend="where">
+			<include refid="yjcs_page_where"/>
+		</dynamic>
+	</select>
+	
+	<select id="Yjcs.querySqlMap" parameterClass="String" resultClass="java.util.LinkedHashMap">
+		$value$
+	</select>
+</sqlMap>

@@ -37,4 +37,8 @@
 		<property name="sqlMapClient" ref="sqlMapJdysys" />
 	</bean>
 	
+<!-- 	预警参数 -->
+	<bean id="YjcsDaoImpl" class="com.aisino2.jdy.dao.impl.YjcsDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
 </beans>
