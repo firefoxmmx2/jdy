@@ -32,4 +32,9 @@
 	<bean id="Rdrjbxx_lsDaoImpl" class="com.aisino2.jdy.dao.impl.Rdrjbxx_lsDaoImpl">
 		<property name="sqlMapClient" ref="sqlMapJdysys" />
 	</bean>
+<!-- 	消息提示 -->
+	<bean id="XxtsDaoImpl" class="com.aisino2.jdy.dao.impl.XxtsDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+	
 </beans>
