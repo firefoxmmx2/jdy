@@ -15,17 +15,17 @@
 	    </property>
 	</bean>
  
-<!-- 	<bean id="dataSysadmin" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
-<!--     	<property name="jndiName" value="java:comp/env/jdbc/OracleSysadmin"/> -->
-<!-- 	</bean> -->
+	<bean id="dataSysadmin" class="org.springframework.jndi.JndiObjectFactoryBean">
+    	<property name="jndiName" value="java:comp/env/jdbc/OracleSysadmin"/>
+	</bean>
  	
 <!--  	单元测试用 -->
-	<bean id="dataSysadmin" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-    	<property name="driverClassName" value="oracle.jdbc.OracleDriver" />      
-        <property name="url" value="jdbc:oracle:thin:@192.168.1.202:1521:test" />      
-        <property name="username" value="mansysws" />      
-        <property name="password" value="mansysws" />   
-	</bean>
+<!-- 	<bean id="dataSysadmin" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!--     	<property name="driverClassName" value="oracle.jdbc.OracleDriver" />       -->
+<!--         <property name="url" value="jdbc:oracle:thin:@192.168.1.202:1521:test" />       -->
+<!--         <property name="username" value="mansysws" />       -->
+<!--         <property name="password" value="mansysws" />    -->
+<!-- 	</bean> -->
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     	<property name="dataSource" ref="dataSysadmin"/>
