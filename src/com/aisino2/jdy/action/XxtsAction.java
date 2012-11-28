@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Xxts;
+import com.aisino2.jdy.domain.Xxyh;
 import com.aisino2.jdy.service.IXxtsService;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.User;
@@ -24,7 +25,7 @@ import com.opensymphony.xwork2.ActionContext;
  * @author jjqueen
  */
 public class XxtsAction extends PageAction {
-	private Xxts xxts;
+	private Xxts xxts=new Xxts();
 	public Xxts getXxts() {
 		return xxts;
 	}
@@ -76,7 +77,7 @@ public class XxtsAction extends PageAction {
         xxts.setJsyh(user);
         lxxts=xxtsService.queryMsgs(xxts);
 		for(Xxts oneXx : lxxts){
-			tabledata=tabledata+"<li><a onclick=eval("+oneXx.getClhs()+") title='"+oneXx.getXxnr()+"'>"+oneXx.getXxbt()+":"+oneXx.getXxnr()+"</a></li>";
+			tabledata=tabledata+"<li><a onclick=\""+oneXx.getClhs()+"()\" title='"+oneXx.getXxnr()+"'>"+oneXx.getXxbt()+":"+oneXx.getXxnr()+"</a></li>";
 		}
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
