@@ -120,5 +120,4 @@
 	<delete id="deleteXxyh" parameterClass="Xxts">
 	  delete from t_xxyhys t where t.jsyh_id=#jsyh.userid#
 	</delete>
-
 </sqlMap>

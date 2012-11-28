@@ -22,7 +22,7 @@
 		<isNotEmpty prepend="and" property="id">
 			t.id = #id#
 		</isNotEmpty>
-		<isNotEmpty propend="and" property="yhlb">
+		<isNotEmpty prepend="and" property="yhlb">
 			t.yhlb = #yhlb#
 		</isNotEmpty>
 	</sql>
@@ -30,10 +30,10 @@
 	<sql id="yjcs_query_where">
 		<include refid="yjcs_where"/>
 		
-		<isNotEmpty propend="and" property="yjmc">
+		<isNotEmpty prepend="and" property="yjmc">
 			t.yjmc like '%$yjmc$%'
 		</isNotEmpty>
-		<isNotEmpty propend="and" property="cjr">
+		<isNotEmpty prepend="and" property="cjr">
 			t.cjr like '%$cjr$%'
 		</isNotEmpty>
 		
@@ -139,7 +139,7 @@
 	<select id="Yjcs.query" parameterClass="map" resultMap="yjcs_rm">
 		select t.* from t_yjcs t 
 		<dynamic prepend="where">
-			<include refid="yjcs_page_where"/>
+			<include refid="yjcs_query_where"/>
 		</dynamic>
 	</select>
 	
