@@ -251,19 +251,19 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 			sort = " asc ";
 		if (dir!=null){
 			if("0".equals(dir))
-				sCol = " zdry.xm "+ sort;
+				sCol = " bkry.xm "+ sort;
 			else if("1".equals(dir))
-				sCol = " zdry.xb "+ sort;
+				sCol = " bkry.xbdm "+ sort;
 			else if("2".equals(dir))
-				sCol = " zdry.zjhm "+ sort;
+				sCol = " bkry.gmsfhm "+ sort;
 			else if("3".equals(dir))
-				sCol = " zdry.rylx "+ sort;
+				sCol = " bkry.ajlb "+ sort;
 			else if("4".equals(dir))
-				sCol = " zdry.gxdwmc "+ sort;
+				sCol = " bkry.fwdw "+ sort;
 			else if("5".equals(dir))
 				sCol = " lj.ljtbsj "+ sort;
 			else 
-				sCol = " ry.jdrylx "+ sort;
+				sCol = " bkry.ajlb "+ sort;
 		}
 		map.put("pageSort", sCol);
 		return queryForPage("getZdryListPage", map, pageno,pagesize);
