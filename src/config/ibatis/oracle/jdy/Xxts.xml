@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Xxts" type="com.aisino2.jdy.domain.Xxts"/>
+	<typeAlias alias="Xxyh" type="com.aisino2.jdy.domain.Xxyh"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	
+	<!-- 消息提示jjqueen-->
+	<resultMap class="Xxts" id="xxts">
+		<result property="id" column="id"/>
+		<result property="xxbt" column="xxbt"/>
+		<result property="xxnr" column="xxnr"/>
+		<result property="lj" column="lj"/>
+		<result property="clhs" column="clhs"/>
+		<result property="tssj" column="tssj"/>
+		<result property="jsyh.userid" column="fsr"/>
+	</resultMap>
+	<select id="queryMsgs" parameterClass="Xxts" resultMap="xxts" >
+	 select t.id,t.xxbt,t.xxnr,t.lj,t.clhs,t.tssj from t_xxts t ,t_xxyhys u
+	 where u.xx_id(+)=t.id 
+	 <dynamic>
+	  <isNotEmpty prepend="and" property="jsyh.userid">
+	    u.jsyh_id=#jsyh.userid#
+	  </isNotEmpty>
+	 </dynamic>
+	</select>
+	
+	<insert id="insertXxts" parameterClass="Xxts">
+	  insert into t_xxts (
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				id
+			</isNotNull>
+			<isNotNull prepend="," property="xxbt">
+				xxbt
+			</isNotNull>
+			<isNotNull prepend="," property="xxnr">
+				xxnr
+			</isNotNull>
+			<isNotNull prepend="," property="lj">
+				lj
+			</isNotNull>
+			<isNotNull prepend="," property="clhs">
+				clhs
+			</isNotNull>
+			<isNotNull prepend="," property="fsr.userid">
+				fsr
+			</isNotNull>
+			<isNotNull prepend="," property="tssj">
+				tssj
+			</isNotNull>
+		</dynamic>
+		)
+		values(
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				#id#
+			</isNotNull>
+			<isNotNull prepend="," property="xxbt">
+				#xxbt#
+			</isNotNull>
+			<isNotNull prepend="," property="xxnr">
+				#xxnr#
+			</isNotNull>
+			<isNotNull prepend="," property="lj">
+				#lj#
+			</isNotNull>
+			<isNotNull prepend="," property="clhs">
+				#clhs#
+			</isNotNull>
+			<isNotNull prepend="," property="fsr.userid">
+				#fsr.userid#
+			</isNotNull>
+			<isNotNull prepend="," property="tssj">
+				#tssj#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	<insert id="insertXxyh" parameterClass="Xxyh">
+	  insert into t_xxyhys (
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				id
+			</isNotNull>
+			<isNotNull prepend="," property="xx_id">
+				xx_id
+			</isNotNull>
+			<isNotNull prepend="," property="jsyh.userid">
+				xxnr
+			</isNotNull>
+			<isNotNull prepend="," property="zt">
+				zt
+			</isNotNull>
+		</dynamic>
+		)
+		values(
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">
+				#id#
+			</isNotNull>
+			<isNotNull prepend="," property="xx_id">
+				#xx_id#
+			</isNotNull>
+			<isNotNull prepend="," property="jsyh.userid">
+				#jsyh.userid#
+			</isNotNull>
+			<isNotNull prepend="," property="zt">
+				#zt#
+			</isNotNull>
+		</dynamic>
+		)
+	</insert>
+	
+	<delete id="deleteXxts" parameterClass="Xxts">
+	  delete from t_xxts t,t_xxyhys h where t.id=h.xx_id
+	  and h.jsyh_id=#jsyh.userid#
+	</delete>
+	
+	<delete id="deleteXxyh" parameterClass="Xxts">
+	  delete from t_xxyhys t where t.jsyh_id=#jsyh.userid#
+	</delete>
+</sqlMap>

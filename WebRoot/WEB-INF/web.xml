@@ -12,9 +12,7 @@
 		</param-value>
 	</context-param>
 	<context-param>
-		<param-name>
-			javax.servlet.jsp.jstl.fmt.localizationContext
-		</param-name>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
 		<param-value>config/i18n/messages_zh_CN</param-value>
 	</context-param>
 	<filter>
@@ -43,8 +41,6 @@
 			org.apache.struts2.dispatcher.ActionContextCleanUp
 		</filter-class>
 	</filter>
-
-
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>
@@ -83,7 +79,13 @@
 		<filter-name>cacheFilter</filter-name>
 		<filter-class>com.aisino2.cache.CacheFilter</filter-class>
 	</filter>
+	<filter>
+		<display-name>YjcsFilter</display-name>
+		<filter-name>YjcsFilter</filter-name>
+		<filter-class>com.aisino2.jdy.schudule.filter.YjcsFilter</filter-class>
+	</filter>
 
+	<!-- mapping -->
 	<filter-mapping>
 		<filter-name>Set Character Encoding</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -97,7 +99,6 @@
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
@@ -105,12 +106,10 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
-
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
 	<filter-mapping>
 		<filter-name>struts-cleanup</filter-name>
 		<url-pattern>*.action</url-pattern>
@@ -131,8 +130,10 @@
 		<filter-name>cacheFilter</filter-name>
 		<url-pattern>/</url-pattern>
 	</filter-mapping>
-
-
+	<filter-mapping>
+		<filter-name>YjcsFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
@@ -188,19 +189,18 @@
 		<location>/public/403.jsp</location>
 	</error-page>
 
-<!-- 	<taglib> -->
-<!-- 		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri> -->
-<!-- 		<taglib-location>/WEB-INF/tld/c.tld</taglib-location> -->
-<!-- 	</taglib> -->
-<!-- 	<taglib> -->
-<!-- 		<taglib-uri>/tags/struts-menu</taglib-uri> -->
-<!-- 		<taglib-location>/WEB-INF/tld/struts-menu.tld</taglib-location> -->
-<!-- 	</taglib> -->
-<!-- 	<taglib> -->
-<!-- 		<taglib-uri>/tags/struts-menu-el</taglib-uri> -->
-<!-- 		<taglib-location> -->
-<!-- 			/WEB-INF/tld/struts-menu-el.tld -->
-<!-- 		</taglib-location> -->
-<!-- 	</taglib> -->
+	<taglib>
+		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+		<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/tags/struts-menu</taglib-uri>
+		<taglib-location>/WEB-INF/tld/struts-menu.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/tags/struts-menu-el</taglib-uri>
+		<taglib-location>
+			/WEB-INF/tld/struts-menu-el.tld
+		</taglib-location>
+	</taglib>
 </web-app>
-

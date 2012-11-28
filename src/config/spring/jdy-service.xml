@@ -44,4 +44,13 @@
 	<bean id="JddxzpxxServiceImpl" class="com.aisino2.jdy.service.impl.JddxzpxxServiceImpl">
 		<property name="jddxzpxxDao" ref="JddxzpxxDaoImpl"/>
 	</bean>
+	<!-- 	消息提示 -->
+	<bean id="XxtsServiceImpl" class="com.aisino2.jdy.service.impl.XxtsServiceImpl">
+		<property name="xxtsDao" ref="XxtsDaoImpl"/>
+	</bean>
+	
+<!-- 	预警参数 -->
+	<bean id="YjcsServiceImpl" class="com.aisino2.jdy.service.impl.YjcsServiceImpl">
+		<property name="yjcsDao" ref="YjcsDaoImpl"/>
+	</bean>
 </beans>

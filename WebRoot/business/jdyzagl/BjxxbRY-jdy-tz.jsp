@@ -96,9 +96,7 @@ function setPageList_RY(pageno,url){
 		<input type="hidden" id="m_bjxxid" value="">
 		<%-- 当前选择的记录的报警信息ID，用来给子div用 --%>
 		 <input type="hidden" id="m_startDate" value="<%=new Date() %>" />
-		<%--添加行业类别代码 --%>
-		<input type="hidden" id="p_hylbdm" value="Y">
-		
+			 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td height="3"></td>
