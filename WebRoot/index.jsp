@@ -155,6 +155,12 @@ background-attachment: fixed;}
 	var countxctb;
 	$(document).ready(function(){
 		daggleDiv("password_modify");
+		getMsg();
+	     setInterval(function(){
+	    	 getMsg();
+	     },120*1000);
+
+	     $('#closebutton1').click(function(){ $('#msg2').slideUp(1000); });
 	});
 	//消息滚动
 	function scrollNews(obj) {  
@@ -193,12 +199,7 @@ background-attachment: fixed;}
 	
 	function initPromptBox(msg){
      //$('#closebutton').click(function(){ $('#msg1').slideUp(1000); });
-     $('#closebutton1').click(function(){ $('#msg2').slideUp(1000); });
      //$('#msg1').slideDown(1000,function(){setTimeout(function(){$('#msg1').slideUp(1000);},60 * 1000); });
-     getMsg();
-     setInterval(function(){
-    	 getMsg();
-     },120*1000);
      
      if(showmessageflag==GADQYD){
          var kyqk = "您有"+countkyqk+"条可疑情况还未处理！";

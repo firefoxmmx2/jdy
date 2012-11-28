@@ -41,8 +41,8 @@ public class XxtsServiceImpl implements IXxtsService {
 	 * 删除消息
 	 */
 	public void deleteMsg(Xxts xxts){
+		xxtsDao.deleteXxts(xxts);
 		for(Xxyh xxyh : xxts.getXxyh_list()){
-			xxtsDao.deleteXxts(xxyh);
 			xxtsDao.deleteXxyh(xxyh);
 		}
 	}
