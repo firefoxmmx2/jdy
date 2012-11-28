@@ -28,17 +28,23 @@ public class XxtsServiceImpl implements IXxtsService {
 	/**
 	 *  插入消息（T_xxts t_t_xxyhys 表中）
 	 */
-	public void insertMsg(Xxts xxts,Xxyh xxyh){
-		xxtsDao.insertXxts(xxts);
-		xxyh.setXx_id(xxts.getId());
-		xxtsDao.insertXxyh(xxyh);
+	public void insertMsg(Xxts xxts){
+		xxts=xxtsDao.insertXxts(xxts);
+		for(Xxyh xxyh : xxts.getXxyh_list()){
+		   xxyh.setXx_id(xxts.getId());
+		   xxyh.setJsyh(xxts.getJsyh());
+		   xxtsDao.insertXxyh(xxyh);
+		}
+		
 	}
 	
 	/**
 	 * 删除消息
 	 */
-	public void deleteMsg(Xxts xxts,Xxyh xxyh){
-		xxtsDao.deleteXxts(xxts);
-		xxtsDao.deleteXxyh(xxyh);
+	public void deleteMsg(Xxts xxts){
+		for(Xxyh xxyh : xxts.getXxyh_list()){
+			xxtsDao.deleteXxts(xxts);
+			xxtsDao.deleteXxyh(xxyh);
+		}
 	}
 }
