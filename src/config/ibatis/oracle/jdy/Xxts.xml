@@ -14,14 +14,15 @@
 		<result property="xxnr" column="xxnr"/>
 		<result property="lj" column="lj"/>
 		<result property="clhs" column="clhs"/>
+		<result property="tssj" column="tssj"/>
 		<result property="jsyh.userid" column="fsr"/>
 	</resultMap>
 	<select id="queryMsgs" parameterClass="Xxts" resultMap="xxts" >
-	 select t.id,t.xxbt,t.xxnr,t.lj,t.clhs from t_xxts t ,t_xxyhys u
+	 select t.id,t.xxbt,t.xxnr,t.lj,t.clhs,t.tssj from t_xxts t ,t_xxyhys u
 	 where u.xx_id(+)=t.id 
 	 <dynamic>
-	  <isNotEmpty prepend="and" property="">
-	    u.jsyh_id=''
+	  <isNotEmpty prepend="and" property="jsyh.userid">
+	    u.jsyh_id=#jsyh.userid#
 	  </isNotEmpty>
 	 </dynamic>
 	</select>
@@ -114,7 +115,8 @@
 	</insert>
 	
 	<delete id="deleteXxts" parameterClass="Xxts">
-	  delete from t_xxts t where t.id=#id#
+	  delete from t_xxts t,t_xxyhys h where t.id=h.xx_id
+	  and h.jsyh_id=#jsyh.userid#
 	</delete>
 	
 	<delete id="deleteXxyh" parameterClass="Xxts">
