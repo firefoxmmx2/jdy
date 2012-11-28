@@ -32,7 +32,6 @@ public class XxtsServiceImpl implements IXxtsService {
 		xxts=xxtsDao.insertXxts(xxts);
 		for(Xxyh xxyh : xxts.getXxyh_list()){
 		   xxyh.setXx_id(xxts.getId());
-		   xxyh.setJsyh(xxts.getJsyh());
 		   xxtsDao.insertXxyh(xxyh);
 		}
 		
@@ -43,7 +42,7 @@ public class XxtsServiceImpl implements IXxtsService {
 	 */
 	public void deleteMsg(Xxts xxts){
 		for(Xxyh xxyh : xxts.getXxyh_list()){
-			xxtsDao.deleteXxts(xxts);
+			xxtsDao.deleteXxts(xxyh);
 			xxtsDao.deleteXxyh(xxyh);
 		}
 	}

@@ -10,6 +10,6 @@ public interface IXxtsDao {
 	List<Xxts> queryMsgs(Xxts xxts);
 	Xxts insertXxts(Xxts xxts);
 	Xxyh insertXxyh(Xxyh xxyh);
-	void deleteXxts(Xxts xxts);
+	void deleteXxts(Xxyh xxyh);
 	void deleteXxyh(Xxyh xxyh);
 }

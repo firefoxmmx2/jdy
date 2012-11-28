@@ -23,8 +23,8 @@ public class XxtsDaoImpl extends BaseDao implements IXxtsDao {
 		insert("insertXxyh", xxyh);
 		return xxyh;
 	}
-	public void deleteXxts(Xxts xxts){
-		delete("deleteXxts", xxts);
+	public void deleteXxts(Xxyh xxyh){
+		delete("deleteXxts", xxyh);
 	}
 	public void deleteXxyh(Xxyh xxyh){
 		delete("deleteXxyh",xxyh);
