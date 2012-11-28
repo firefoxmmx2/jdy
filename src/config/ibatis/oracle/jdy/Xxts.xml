@@ -113,8 +113,9 @@
 		)
 	</insert>
 	
-	<delete id="deleteXxts" parameterClass="Xxyh">
+	<delete id="deleteXxts" parameterClass="Xxts">
 	  delete from t_xxts t  where t.Id In (Select h.xx_id From t_xxyhys h Where h.jsyh_id=#jsyh.userid#)
+	  and t.xxbt=#xxbt#
 	</delete>
 	
 	<delete id="deleteXxyh" parameterClass="Xxyh">
