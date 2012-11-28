@@ -12,18 +12,19 @@
 		<result property="yjmc" column="yjmc"/>
 		<result property="yjxxms" column="yjxxms"/>
 		<result property="yjyj" column="yjyj"/>
-		<result property="yhlb" column="yhlb"/>
+		<result property="roleids" column="roleids"/>
 		<result property="yjgzsj" column="yjgzsj"/>
 		<result property="cjsj" column="cjsj"/>
 		<result property="cjr" column="cjr"/>
+		<result property="clhs" column="clhs"/>
 	</resultMap>
 	
 	<sql id="yjcs_where">
 		<isNotEmpty prepend="and" property="id">
 			t.id = #id#
 		</isNotEmpty>
-		<isNotEmpty prepend="and" property="yhlb">
-			t.yhlb = #yhlb#
+		<isNotEmpty prepend="and" property="roleids">
+			t.roleids = #roleids#
 		</isNotEmpty>
 	</sql>
 	
@@ -54,8 +55,8 @@
 				<isNotNull prepend="," property="yjyj">
 					yjyj
 				</isNotNull>
-				<isNotNull prepend="," property="yhlb">
-					yhlb
+				<isNotNull prepend="," property="roleids">
+					roleids
 				</isNotNull>
 				<isNotNull prepend="," property="yjgzsj">
 					yjgzsj
@@ -82,8 +83,8 @@
 				<isNotNull prepend="," property="yjyj">
 					#yjyj#
 				</isNotNull>
-				<isNotNull prepend="," property="yhlb">
-					#yhlb#
+				<isNotNull prepend="," property="roleids">
+					#roleids#
 				</isNotNull>
 				<isNotNull prepend="," property="yjgzsj">
 					#yjgzsj#
@@ -117,8 +118,8 @@
 				<isNotNull prepend="," property="yjyj">
 					yjyj=#yjyj#
 				</isNotNull>
-				<isNotNull prepend="," property="yhlb">
-					yhlb=#yhlb#
+				<isNotNull prepend="," property="roleids">
+					roleids=#roleids#
 				</isNotNull>
 				<isNotNull prepend="," property="yjgzsj">
 					yjgzsj=#yjgzsj#

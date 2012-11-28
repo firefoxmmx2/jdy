@@ -30,4 +30,11 @@ public interface IYjcsService {
 	 * @return
 	 */
 	List<Yjcs> query(Map<String, Object> param);
+	
+	/**
+	 * 执行sql放回单个MAP
+	 * @param sql
+	 * @return
+	 */
+	Map<String, Object> querySQL(String sql);
 }

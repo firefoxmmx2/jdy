@@ -1,6 +1,5 @@
 package com.aisino2.jdy.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,5 +11,5 @@ public interface IYjcsDao {
 	void update(Yjcs yjcs);
 	
 	List<Yjcs> query(Map<String, Object> param);
-	List querySQL(String sql) throws SQLException;
+	Map<String, Object> querySQL(String sql);
 }

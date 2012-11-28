@@ -1,6 +1,5 @@
 package com.aisino2.jdy.dao.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -41,8 +40,8 @@ public class YjcsDaoImpl extends BaseDao implements IYjcsDao {
 		return this.queryForList("Yjcs.query", param);
 	}
 
-	public List querySQL(String sql) throws SQLException {
-		return this.queryForList("Yjcs.querySqlMap", sql);
+	public Map<String, Object> querySQL(String sql) {
+		return (Map<String, Object>) this.queryForObject("Yjcs.querySqlMap", sql);
 	}
 
 }
