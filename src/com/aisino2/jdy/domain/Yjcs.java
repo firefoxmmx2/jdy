@@ -22,8 +22,29 @@ public class Yjcs {
 	 * 开关状态 1 表示活跃, 0 表示停用 
 	 */
 	private String zt;
+	/**
+	 * 处理回调函数 
+	 */
+	private String clhs;
+	/**
+	 * 角色id 可以为多个通过逗号连接
+	 */
+	private String roleids;
 	
 	
+	
+	public String getRoleids() {
+		return roleids;
+	}
+	public void setRoleids(String roleids) {
+		this.roleids = roleids;
+	}
+	public String getClhs() {
+		return clhs;
+	}
+	public void setClhs(String clhs) {
+		this.clhs = clhs;
+	}
 	public String getZt() {
 		return zt;
 	}
