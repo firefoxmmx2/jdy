@@ -15,9 +15,15 @@
 	$(document).ready(function() {
 		pageUrl = "jdy/queryList_zdry.action";
 		detailWidth = "950";
-		detailid = "ljjbxxadd_detail";
+		ljdetailid = "ljjbxxadd_detail";
+		daggleDiv(ljdetailid);
+		//布控人员撤销
+		detailid="bkry_detail";
+		bkmodWidth="750";
+		bkmodHtml="basic/basicsystem/BkryckDetail.jsp";
 		daggleDiv(detailid);
-		
+		detailUrl="basicsystem/query_bkry.action";
+		modUrl="basicsystem/modify_bkry.action";
 		//导出用到参数
 		searchLongUrl = "jdy/queryForExport_zdry.action";
 		excelUrl = "jdy/exportExcel_zdry.action";
@@ -37,12 +43,12 @@
 		divnid = "ZdryData";
 		tableid = "ZdryTable";
 		tables = $("#" + divnid).html();
-		setPageList_Zdry(1, '#');
+		setPageList(1, '#');
 	});
 	
 	//页面gird加载方法
-	function setPageList_Zdry(pageno, url) {
-		if (manVerify_zdry()) {
+	function setPageList(pageno, url) {
+		if (manVerify_zdry()) {//manVerify_zdry()
 			$("#" + divnid).html(tables);
 			params = getSubmitParams("#zdry_man_table  [name*=jdytjxx.]");
 			if (url == null || url == "undefined") {
@@ -57,7 +63,7 @@
 						pageNumber : pageno,
 						noSortColIndex : [0,1,9],
 						onRowSelect : null,
-						hideColIndex : [7, 8],
+						hideColIndex : [8,9],
 						alignCenterColIndex: [3,5,6,7],
 						changeHref : function(table) {
 							if ($(table).find("tr").length == 0) {
@@ -65,8 +71,17 @@
 							} else {
 								daochuNum = 1;
 							}
+							$('tr',table).each(function(){
+								var $tr=$(this);
+								//登记序号隐藏   此操作
+								//var sfczdjxh=$tr.find('td:nth(8)').html().replace("&nbsp;","","g");
+								var sfczdjxh=$tr.find('td:nth(8)').text();
+								if(sfczdjxh=="无关联数据"){
+									$tr.find('td:last a[title=寄递业务详情]').remove();
+								}
+							});
 						},
-						colWidths : [ "10%", "8%", "14%", "12%", "18%", "18%", "10%", "0%","0%","10%"]
+						colWidths : [ "8%", "4%", "14%", "10%", "12%", "12%", "7%", "16%","0%","0%","13%"]
 					});
 		}
 	}
@@ -96,10 +111,17 @@
 	//详情方法
 	function setZdryDetail(id) {
 		$("#ljjbxxadd_detail").empty();
-		dataid = id;
+		dataid = $("#"+id+" td:nth(8)").text();
 		setWidth("ljjbxxadd_detail", 950);
 		setUrl("ljjbxxadd_detail", "business/jdyzagl/LjxxDetail.jsp");
 		bindDocument("ljjbxxadd_detail");
+	}
+	//处理操作
+	function setZdryCl(id){
+		dataid=id;
+		setWidth(detailid,bkmodWidth);
+		setUrl(detailid,bkmodHtml);
+		bindDocument(detailid);
 	}
 
 	//导出Excel
@@ -150,7 +172,7 @@
 						<table border="0" align="right" cellpadding="2" cellspacing="0">
 							<tr>
 								<td><a href="#" class="searchbutton" id="qu_erys"
-									onclick="setPageList_Zdry(1);">查询</a></td>
+									onclick="setPageList(1);">查询</a></td>
 								<td width="62"><a href="#" class="exceldcbutton"
 									onclick='setExportExcel_Zdry();' id="zdryexcel">导出</a></td>
 							</tr>
@@ -162,7 +184,9 @@
 </table>
 <div id="ljjbxxadd_detail" class="page-layout" src="#"
 	style="top: 5px; left: 160px;display:none;"></div>
-
+<div id="bkry_detail"  class="page-layout" src="#"
+				style="top:100px; left:160px; width:500px;display:none;">
+</div>
 <div id="ZdryData" style="width: 100%;">
 	<table id="ZdryTable" width="100%">
 		<thead>
@@ -174,8 +198,9 @@
 				<th name="l_gxdwmc" datatype="string" sumflag="0">管辖单位</th>
 				<th name="l_ywdjsj" datatype="date" sumflag="0">寄递业务日期</th>
 				<th name="l_ywlx" datatype="string" sumflag="0">业务类型</th>
-				<th name="">登记序号</th>
 				<th name="">物流单号</th>
+				<th name="">登记序号</th>
+				<th name="l_bkryid">布控人员ID</th>
 				<th name="">业务详情</th>
 			</tr>
 		</thead>
