@@ -44,7 +44,7 @@
 			<isNotNull prepend="," property="clhs">
 				clhs
 			</isNotNull>
-			<isNotNull prepend="," property="fsr.userid">
+			<isNotNull prepend="," property="fsr">
 				fsr
 			</isNotNull>
 			<isNotNull prepend="," property="tssj">
@@ -69,8 +69,8 @@
 			<isNotNull prepend="," property="clhs">
 				#clhs#
 			</isNotNull>
-			<isNotNull prepend="," property="fsr.userid">
-				#fsr.userid#
+			<isNotNull prepend="," property="fsr">
+				#fsr#
 			</isNotNull>
 			<isNotNull prepend="," property="tssj">
 				#tssj#
