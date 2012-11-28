@@ -14,7 +14,7 @@
 		<result property="xxnr" column="xxnr"/>
 		<result property="lj" column="lj"/>
 		<result property="clhs" column="clhs"/>
-		<result property="jsyh.jsyh" column="fsr"/>
+		<result property="jsyh.userid" column="fsr"/>
 	</resultMap>
 	<select id="queryMsgs" parameterClass="Xxts" resultMap="xxts" >
 	 select t.id,t.xxbt,t.xxnr,t.lj,t.clhs from t_xxts t ,t_xxyhys u
@@ -117,7 +117,7 @@
 	  delete from t_xxts t where t.id=#id#
 	</delete>
 	
-	<delete id="deleteXxts" parameterClass="Xxts">
+	<delete id="deleteXxyh" parameterClass="Xxts">
 	  delete from t_xxyhys t where t.jsyh_id=#jsyh.userid#
 	</delete>
 
