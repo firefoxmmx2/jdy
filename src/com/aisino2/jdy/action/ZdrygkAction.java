@@ -140,7 +140,7 @@ public class ZdrygkAction extends PageAction {
 	/*** 历史数据轨迹查询主页面setable方法 ***/
 	private void setTableDate_zdry(List<Jdytjxx> lData) {
 		List lPro = new ArrayList();
-		lPro.add("djxh");
+		lPro.add("bkryid");
 		lPro.add("xm");
 		lPro.add("xb");
 		lPro.add("zjhm");
@@ -150,14 +150,29 @@ public class ZdrygkAction extends PageAction {
 		lPro.add("ywlx");
 		lPro.add("wldh");
 		lPro.add("djxh");
+		lPro.add("bkryid");
 
 		List lCol = new ArrayList();
 
 		List lDetail = new ArrayList();
 		lDetail.add("setZdryDetail");
-		lDetail.add("详情");
+		lDetail.add("寄递业务详情");
+		
+		List lCl = new ArrayList();
+		lCl.add("setZdryCl");
+		lCl.add("处理");
+		
 		lCol.add(lDetail);
-
+		lCol.add(lCl);
+		for(Jdytjxx jdytjxx:lData){
+			if(jdytjxx.getDjxh()==null){
+			   jdytjxx.setDjxh("无关联数据");
+			}
+			String wldh=jdytjxx.getWldh();
+			if(jdytjxx.getWldh()==null){
+				jdytjxx.setWldh("无关联数据");
+			}
+		}
 		Jdytjxx setTjxx = new Jdytjxx();
 		// this.setDataCustomer(setLjxx, lData, lPro, null, lCol);
 		this.setData(setTjxx, lData, lPro, lCol);
