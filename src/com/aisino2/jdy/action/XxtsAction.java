@@ -73,6 +73,7 @@ public class XxtsAction extends PageAction {
 		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
 		HttpSession session = request.getSession();
         User user = (User) session.getAttribute(Constants.userKey);
+        xxts.setJsyh(user);
         lxxts=xxtsService.queryMsgs(xxts);
 		for(Xxts oneXx : lxxts){
 			tabledata=tabledata+"<li><a onclick=eval("+oneXx.getClhs()+") title='"+oneXx.getXxnr()+"'>"+oneXx.getXxbt()+":"+oneXx.getXxnr()+"</a></li>";
