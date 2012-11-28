@@ -21,6 +21,8 @@ public class Xxts {
 	private User jsyh;
 	private String zt;
 	
+	public static final String ZT_READED = "1";
+	public static final String ZT_UNREAD = "0";
 	
 	public List<Xxyh> getXxyh_list() {
 		return xxyh_list;
