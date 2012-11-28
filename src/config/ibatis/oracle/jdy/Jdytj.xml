@@ -80,12 +80,13 @@
 	
 	<!-- 	重点管控人员查询结果集 -->
 	<resultMap class="Jdytjxx" id="zdry_result">
-		<result property="xm" column="zdry_xm"/>
-		<result property="xb" column="zdry_xb"/>
-		<result property="zjhm" column="zdry_zjhm"/>
-		<result property="rylx" column="zdry_rylx"/>
-		<result property="gxdwbm" column="zdry_gxdwbm"/>
-		<result property="gxdwmc" column="zdry_gxdwmc"/>
+		<result property="bkryid" column="bkry_id"/>
+		<result property="xm" column="bkry_xm"/>
+		<result property="xb" column="bkry_xbdm"/>
+		<result property="zjhm" column="bkry_gmsfhm"/>
+		<result property="rylx" column="bkry_ajlb"/>
+		<result property="gxdwbm" column="bkry_fwdwbm"/>
+		<result property="gxdwmc" column="bkry_fwdw"/>
 		<result property="ywdjsj" column="ljxx_ywrq"/>
 		<result property="djxh" column="ljxx_djxh"/>
 		<result property="wldh" column="ljxx_wldh"/>
@@ -163,13 +164,13 @@
 	<!-- 重点人员管控查询条件 -->
 	<sql id="zdryListWhere">
 		<isNotEmpty prepend="and" property="ksrq">
-			lj.ljtbsj &gt;= #ksrq:TIMESTAMP#
+			bkry.tbsj &gt;= #ksrq:TIMESTAMP#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="jsrq">
-			lj.ljtbsj &lt;= #jsrq:TIMESTAMP#
+			bkry.tbsj &lt;= #jsrq:TIMESTAMP#
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="gxdwbm">
-			zdry.gxdwbm like '$gxdwbm$%'
+			bkry.fwdwbm like '$gxdwbm$%'
 		</isNotEmpty>
 	</sql>
 	
@@ -460,35 +461,33 @@
 	
 	<!-- 	重点人员管控查询记数 -->
 	<select id="getZdryListPageCount" parameterClass="map" resultClass="int">
-		select count(1)
-		  from t_ljjbxx lj, t_rdrjbxx ry, t_zdrygk zdry
-		 where ry.zjhm is not null
-		   and ry.jdrylx is not null
-		   and zdry.zjhm = ry.zjhm
-		   and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+		 select count(1)
+		from  t_bkry bkry left join t_rdrjbxx ry on bkry.zjhm=ry.zjhm  
+           	  left join t_ljjbxx lj on (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+        where bkry.ckbs = '0'
 		<include refid="zdryListWhere"/> 
 	</select>
 	
 	<!-- 	重点人员管控分页查询 -->
 	<select id="getZdryListPage" parameterClass="map" resultMap="zdry_result">
 		select x.* from (
-			select rownum rowno,z.* from 
-				(
-					select zdry.xm zdry_xm,
-						       zdry.xb zdry_xb,
-						       zdry.zjhm zdry_zjhm,
-						       zdry.rylx zdry_rylx,
-						       zdry.gxdwbm zdry_gxdwbm,
-						       zdry.gxdwmc zdry_gxdwmc,
-						       lj.ljtbsj ljxx_ywrq,
-						       lj.djxh ljxx_djxh,
-						       lj.wldh ljxx_wldh,
-						       ry.jdrylx ryxx_ywlx 
-						  from t_ljjbxx lj, t_rdrjbxx ry, t_zdrygk zdry
-						where ry.zjhm is not null 
-						and ry.jdrylx is not null
-						and zdry.zjhm = ry.zjhm
-						and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+			select rownum rowno,z.* 
+				from (
+					select 
+						   bkry.bkryid   bkry_id,
+					       bkry.xm       bkry_xm,
+					       bkry.xbdm     bkry_xbdm,
+					       bkry.gmsfhm   bkry_gmsfhm,
+					       bkry.ajlb     bkry_ajlb,
+					       bkry.fwdwbm   bkry_fwdwbm,
+					       bkry.fwdw     bkry_fwdw,
+					       lj.ljtbsj   ljxx_ywrq,
+					       lj.djxh     ljxx_djxh,
+					       lj.wldh     ljxx_wldh,
+					       ry.jdrylx   ryxx_ywlx
+					  from  t_bkry bkry left join t_rdrjbxx ry on bkry.zjhm=ry.zjhm  
+           					left join t_ljjbxx lj on (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+           			  where bkry.ckbs = '0'
 						<include refid="zdryListWhere"/>
 					order by $pageSort$
 				)  z
