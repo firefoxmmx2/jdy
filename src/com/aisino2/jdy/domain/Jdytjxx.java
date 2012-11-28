@@ -62,7 +62,15 @@ public class Jdytjxx implements Serializable {
 	private Date jsrq;//查询定义结束日期
 	private String rylx;//重点人员管控类型
 	private Zdryxx zdryxx;//重点人员
+	private String bkryid;//布控人员ID
 	
+	
+	public String getBkryid() {
+		return bkryid;
+	}
+	public void setBkryid(String bkryid) {
+		this.bkryid = bkryid;
+	}
 	public String getJdplx() {
 		return jdplx;
 	}
