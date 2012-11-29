@@ -174,11 +174,18 @@ background-attachment: fixed;}
 		$.ajax({
  		   type: "POST",
  		   url: "jdy/queryMsg_xxts.action",
- 		   dataType:"html",
+ 		   dataType:"json",
  		   success: function(msg){
- 			  if(msg!=""){
+ 			  if(msg!=""&&msg.lxxts!=""&&msg.lxxts.length>0){
  				 $("#msgUl").empty();
- 	 		     $("#msgUl").append(msg);
+ 				  for(var i=0;i<msg.lxxts.length;i++){
+ 					  var xxts=msg.lxxts[i];
+ 					  var xxbt=xxts.xxbt;
+ 					  var xxnr=xxts.xxnr;
+ 					  eval("var clhs ="+xxts.clhs);;
+ 					 $("#msgUl").append("<li><a href='#' title='"+xxbt+":"+xxnr+"'>"+xxbt+":"+xxnr+"</a></li>");
+ 					$("#msgUl").find("li:last").find('a').click(clhs);
+ 				  }
  	 		     $('#msg2').slideDown(1000,function(){
  	 		    	 setTimeout(function(){$('#msg2').slideUp(1000)},60 * 1000);
  	 		    	 if($("#msgUl").find("li").length>9){
