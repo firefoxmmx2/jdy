@@ -7,6 +7,16 @@ import java.util.Date;
  *
  */
 public class Yjcs {
+	
+	/**
+	 * 启用状态 
+	 */
+	public static final String ZT_ON = "1";
+	/**
+	 * 停用状态
+	 */
+	public static final String ZT_OFF = "0";
+	
 	private Integer id;
 	private String yjmc;
 	private String yjxxms;
@@ -30,7 +40,6 @@ public class Yjcs {
 	 * 角色id 可以为多个通过逗号连接
 	 */
 	private String roleids;
-	
 	
 	
 	public String getRoleids() {
