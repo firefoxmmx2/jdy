@@ -14,6 +14,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.context.ApplicationContext;
 
+import com.aisino2.common.StringUtil;
 import com.aisino2.jdy.domain.Xxts;
 import com.aisino2.jdy.domain.Xxyh;
 import com.aisino2.jdy.domain.Yjcs;
@@ -65,7 +66,7 @@ public class YujinJob implements Job {
 		if(java.util.regex.Pattern.matches("\\{[\\w_\\d]*\\}", target.getYjyj())){
 			for(String departcode : userdepartcodemap.keySet()){
 				Map<String, Object> para = new HashMap<String, Object>();
-				para.put("gxdwbm", departcode);
+				para.put("gxdwbm", StringUtil.trimEven0(departcode));
 				String real_sql = getMsgFormTemplate(target.getYjyj(), para);
 				
 				Map<String, Object> var  = yjcsService.querySQL(real_sql);
