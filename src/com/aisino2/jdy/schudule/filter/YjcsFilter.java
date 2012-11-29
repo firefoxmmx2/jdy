@@ -69,7 +69,7 @@ public class YjcsFilter implements Filter {
 	 */
 	public void buildYjcsSchedule() throws SchedulerException, ParseException{
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("zt", "1");
+		params.put("zt", Yjcs.ZT_ON);
 		List<Yjcs> yjcs_list = yjcsService.query(params);
 		if (yjcs_list.size() == 0)
 			return;
