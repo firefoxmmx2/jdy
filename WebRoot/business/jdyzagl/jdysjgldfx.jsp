@@ -110,6 +110,12 @@
 	var sjgl_detail_widh= 1024;
 	var sjgl_detail_page_url = 'business/jdyzagl/jdysjgldfxDetail.jsp';
 	var sjgl_excel_url = "jdy/exportSjgltj_jdytjxx.action";
+	//动态创建查询条件
+	var sjgl_search_condition = {
+	                            	 '1':{tablename:'tysfxx',title:"同一身份信息使用不同联系方式查询"},
+	                      	         '2':{tablename:'tylxfs',title:"同一联系方式出现不同身份信息查询"}
+	                            };
+	var validate_style=0;
 	
 	function sjglDetail(param){
 		detailDialog(sjgl_detail_div,sjgl_detail_widh,sjgl_detail_page_url,param);
@@ -123,7 +129,9 @@
 				if (url==null || url=="undefined"){
 					url=sjgl_page_url;
 				}
-			var params = getSubmitParams($('input:checked[name="paramType"]').parent().find(':input[name!="paramType"]'));
+// 			var params = getSubmitParams($('input:checked[name="paramType"]').parent().find(':input[name!="paramType"]'));
+			
+			var params = getSubmitParams('#baManTablebm input[name*=rdrjbxx.]');
 			var mygrid1 = $("#"+sjgl_table).ingrid({ 
 											url: url,	
 											height: pageHeight-286,
@@ -171,19 +179,34 @@
 	
 	//查询验证
 	function manVerify_sjgl(){
-		var paramTypeVal = $('input[name=paramType]:checked').val();
-		if(paramTypeVal=='xm' && !$('#sjgl_xm').val()){
-			jAlert('姓名必须填写','警告');
-			return false;
+// 		var paramTypeVal = $('input[name=paramType]:checked').val();
+// 		if(paramTypeVal=='xm' && !$('#sjgl_xm').val()){
+// 			jAlert('姓名必须填写','警告');
+// 			return false;
+// 		}
+// 		if(paramTypeVal=='lxdh' && !$('#sjgl_lxdh').val()){
+// 			jAlert('联系电话必须填写','警告');
+// 			return false;
+// 		}
+// 		if(paramTypeVal=='xxdz' && !$('#sjgl_xxdz').val()){
+// 			jAlert("地址必须填写","警告");
+// 			return false;
+// 		}
+		if(validate_style){
+			//类型显示
+			var type = $('#type').val();
+			//个人身份查询验证
+			if(type == "1" && !$('#sjgl_xm').val()){
+				jAlert('姓名必须填写','警告');
+				return false;
+			}
+			//联系电话查询验证
+			if(type == '2' && !$('#sjgl_lxdh').val() ){
+				jAlert("联系电话必须填写","警告");
+				return false;
+			}
 		}
-		if(paramTypeVal=='lxdh' && !$('#sjgl_lxdh').val()){
-			jAlert('联系电话必须填写','警告');
-			return false;
-		}
-		if(paramTypeVal=='xxdz' && !$('#sjgl_xxdz').val()){
-			jAlert("地址必须填写","警告");
-			return false;
-		}
+		
 		return true;
 	}
 	
@@ -217,12 +240,11 @@
 			});
 			
 			$('#excelSjglForm input').val('');
-			$('input[name="paramType"]:checked').parent().find(':input[name!="paramType"]').each(function(){
+			$('#baManTablebm input[name*=rdrjbxx.]').each(function(){
 				$('#excelSjglForm input[name='+$(this).attr('name')+']').val(this.value);
 			});
 			$('#excelSjglForm').attr('action',sjgl_excel_url)
 				.attr("target","_blank")
-				.attr('type','post')
 				.submit();
 		}
 		
@@ -232,42 +254,53 @@
 	$(function(){
 		sjgl_tabledata = $('#'+sjgl_div).html();
 		sjglPageQuery(1,"#");
+		//第一次加载以后启用验证
+		validate_style = 1;
 		
 		daggleDiv(ljxx_div);
 		daggleDiv(sjgl_detail_div);
 
 // 		$('#sjgl_ssxmc').attr('readonly',true);
 		//提交数据选择
-		$('input[name=paramType]').each(function(){
-			var paramType = $(this);
-			paramType.parent().find('input[name!="paramType"]').click(function(){
-				paramType.click();
-// 				if($(this).attr('id')=='sjgl_ssxmc'){
-// 					getDict_item('sjgl_ssxmc','sjgl_ssx','dm_xzqh');
-// 				}
-					
-			});
+// 		$('input[name=paramType]').each(function(){
+// 			var paramType = $(this);
+// 			paramType.parent().find('input[name!="paramType"]').click(function(){
+// 				paramType.click();
+// 			});
 			
-			paramType.click(function(){
-				$('input[name=paramType]').each(function(){
-					if(paramType.val()!=$(this).val())
-						$(this).parent().find('input[name!="paramType"]').val('')
-				});
-			});
-		});
-		//默认选择第一个查询条件
-		$('input[name=paramType]').eq(0).click();
-		
+// 			paramType.click(function(){
+// 				$('input[name=paramType]').each(function(){
+// 					if(paramType.val()!=$(this).val())
+// 						$(this).parent().find('input[name!="paramType"]').val('')
+// 				});
+// 			});
+// 		});
+// 		//默认选择第一个查询条件
+// 		$('input[name=paramType]').eq(0).click();
+		//构建查询条件
+		var type = $('#type').val();
+		buildSearch(type);
 	});
+	
+	/***
+	* 构建查询条件
+	*/
+	function buildSearch(type){
+		if(!type)
+			throw("构建查询条件type不能为空");
+		var use_search_cond = sjgl_search_condition[type];
+		$('#'+use_search_cond.tablename).show();
+		$("#sjgl_title").text(use_search_cond.title);
+	}
 </script>
 
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="sjgldfx_man">
   <tr>
-    <td class="queryfont">数据关联度查询</td>
+    <td id="sjgl_title" class="queryfont">数据关联度查询</td>
   </tr>
   <tr>
     <td class="tdbg">
-    	<form action="" id="excelSjglForm">
+    	<form action="" id="excelSjglForm" method="post">
     		<input type="hidden" name="pagesize">
     		<input type="hidden" name="pagerow">
     		<input type="hidden" name="sort">
@@ -275,38 +308,60 @@
     		<input type="hidden" name="rdrjbxx.xm">
     		<input type="hidden" name="rdrjbxx.lxdh">
     		<input type="hidden" name="rdrjbxx.xxdz">
+    		<input type="hidden" name="rdrjbxx.zjhm">
 		</form>
+		<%
+			//添加一个type开关,用于控制页面显示模式和提交参数
+			//type = 1 表示  “同一身份信息使用不同联系方式”
+			//type = 2 表示  “同一联系方式出现不同身份信息”
+			String type = request.getParameter("type") == null? "1":request.getParameter("type");
+		%>
+		<input type="hidden" id="type" value="<%=type%>">
 	    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
-					<tr height="30">
-						<td width="25%" >
-							<div>
-								<label>
-									<input type="radio" name="paramType" value="xm"><span>姓名</span>
-									<input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle">
-								</label>
-							</div>
-						</td>
-						<td width="25%" >
-							<div>
-								<label>
-									<input type="radio" name="paramType" value="lxdh"><span>联系电话</span>
-									<input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle">
-								</label>
-							</div>
-						</td>
-						<td>
-							<div style="padding-left: 10px;text-align: left;">
-								<label>
-									<input type="radio" name="paramType" value="xxdz"><span>地址</span>
-<!-- 									<span>省市县</span> -->
-<!-- 									<input type="hidden" name="rdrjbxx.ssx" id="sjgl_ssx"> -->
-<!-- 									<input type="text" id="sjgl_ssxmc" class="inputstyle"> -->
-<!-- 									<span>街道门号</span> -->
-									<input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputstyle">
-								</label>
-							</div>
-						</td>
-					</tr>
+	    		<tr height="30">
+	    			<td width="100%" colspan="6" align="left">
+	    				<table style="display: none;" id="tysfxx" border="0" cellspacing="0" cellpadding="2">
+	    					<tr>
+	    						<td class="red">姓名:</td>
+	    						<td><input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle"></td>
+	    						<td>身份证号:</td>
+	    						<td><input type="text" id="sjgl_zjhm" name="rdrjbxx.zjhm" class="inputstyle"></td>
+	    					</tr>
+	    				</table>
+	    				<table style="display: none;" id="tylxfs"  border="0" cellspacing="0" cellpadding="2">
+	    					<tr>
+	    						<td class="red">联系电话:</td>
+	    						<td><input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle"></td>
+	    					</tr>
+	    				</table>
+	    			</td>
+	    		</tr>
+<!-- 					<tr height="30"> -->
+<!-- 						<td width="25%" > -->
+<!-- 							<div> -->
+<!-- 								<label> -->
+<!-- 									<input type="radio" name="paramType" value="xm"><span>姓名</span> -->
+<!-- 									<input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle"> -->
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</td> -->
+<!-- 						<td width="25%" > -->
+<!-- 							<div> -->
+<!-- 								<label> -->
+<!-- 									<input type="radio" name="paramType" value="lxdh"><span>联系电话</span> -->
+<!-- 									<input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle"> -->
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</td> -->
+<!-- 						<td> -->
+<!-- 							<div style="padding-left: 10px;text-align: left;"> -->
+<!-- 								<label> -->
+<!-- 									<input type="radio" name="paramType" value="xxdz"><span>地址</span> -->
+<!-- 									<input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputstyle"> -->
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</td> -->
+<!-- 					</tr> -->
 	    		<tr>
 	    		  <td colspan="6">
 	    		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
