@@ -43,5 +43,9 @@
     <action name="*_xxts" method="{1}" class="XxtsAction">
       <result type="json"/>
     </action>
+<!--    物品类别预警设置action -->
+    <action name="*_wpyjsz" method="{1}" class="WpyjszAction">
+      <result type="json"/>
+    </action>
   </package>
 </struts>

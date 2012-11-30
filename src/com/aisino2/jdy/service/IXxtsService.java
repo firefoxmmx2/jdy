@@ -15,5 +15,6 @@ import com.aisino2.jdy.domain.Xxyh;
 public interface IXxtsService {
 	List<Xxts> queryMsgs(Xxts xxts);
 	void insertMsg(Xxts xxts);
+	void updateXxyhzt(Xxyh xxyh);
 	void deleteMsg(Xxts xxts);
 }

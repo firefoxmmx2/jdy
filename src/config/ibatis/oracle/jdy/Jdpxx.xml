@@ -257,4 +257,33 @@
 			<include refid="jdpxx_kyjdwpWhere"/>
 		</dynamic>
 	</select>
+	
+	<!-- 查询预警寄递物品 -->
+	<select id="jdpxx.getYjwpListPage" parameterClass="map" resultMap="jdpxx_rm">
+	select x.* from (
+		select rownum rowno,z.* from 
+		(	
+Select a.item_id Id,a.display_name jdplxmc,b.display_name jdpdlxmc From t_dict_item a ,
+(Select t.item_id, t.display_name ,t.fact_value, t.super_item_id
+from t_dict_item t Where t.dict_code Like '%dm_jdwp%' And t.super_item_id = '0' ) b
+Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value='0'
+ order by a.item_id)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<select id="jdpxx.getYjwpListPageCount" parameterClass="map" resultClass="Integer">
+   select count(1) from
+   (
+   Select a.item_id Id,a.display_name jdplxmc,b.display_name jdpdlxmc From t_dict_item a ,
+(Select t.item_id, t.display_name ,t.fact_value, t.super_item_id
+from t_dict_item t Where t.dict_code Like '%dm_jdwp%' And t.super_item_id = '0' ) b
+Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value='0'
+ order by a.item_id
+   )
+	</select>
+	
+	<!-- 设置预警物品 -->
+	<update id="jdpxx.setYjwp" parameterClass="map">
+	 update t_dict_item t set t.append_value= sysdate Where t.dict_code Like '%dm_jdwp%'
+	 and t.item_id=#itemId#
+	</update>
+	
 </sqlMap>

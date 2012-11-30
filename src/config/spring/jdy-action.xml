@@ -45,4 +45,8 @@
   <bean id="XxtsAction" class="com.aisino2.jdy.action.XxtsAction" scope="prototype">  
       <property name="xxtsService" ref="XxtsServiceImpl"/> 
   </bean> 
+  <!-- 物品类别预警设置 action   -->
+  <bean id="WpyjszAction" class="com.aisino2.jdy.action.WpyjszjAction" scope="prototype">  
+      <property name="jdpxxService" ref="JdpxxServiceImpl"/> 
+  </bean> 
 </beans>

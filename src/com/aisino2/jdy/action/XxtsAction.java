@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Xxts;
+import com.aisino2.jdy.domain.Xxyh;
 import com.aisino2.jdy.service.IXxtsService;
 import com.aisino2.sysadmin.Constants;
 import com.aisino2.sysadmin.domain.User;
@@ -29,12 +30,6 @@ public class XxtsAction extends PageAction {
 	}
 	public void setXxts(Xxts xxts) {
 		this.xxts = xxts;
-	}
-	public String getTabledata() {
-		return tabledata;
-	}
-	public void setTabledata(String tabledata) {
-		this.tabledata = tabledata;
 	}
 	public int getTotalrows() {
 		return totalrows;
@@ -54,8 +49,13 @@ public class XxtsAction extends PageAction {
 	public void setLxxts(List<Xxts> lxxts) {
 		this.lxxts = lxxts;
 	}
-	private String tabledata = "";
-	private int totalrows = 0;
+	private String xxid;
+	public String getXxid() {
+		return xxid;
+	}
+	public void setXxid(String xxid) {
+		this.xxid = xxid;
+	}
 	private String result = "";
 	private List<Xxts> lxxts = new ArrayList<Xxts>();
 	private IXxtsService xxtsService;
@@ -63,7 +63,11 @@ public class XxtsAction extends PageAction {
 	public void setXxtsService(IXxtsService xxtsService) {
 		this.xxtsService = xxtsService;
 	}
-	
+	/**
+	 * 获取当前用户的提示消息
+	 * @return
+	 * @throws Exception
+	 */
 	public String queryMsg() throws Exception{
 		ActionContext ctx = ActionContext.getContext();
 		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
@@ -74,5 +78,21 @@ public class XxtsAction extends PageAction {
         return this.SUCCESS;
 	}
 
+	public String setXxtsZt() throws Exception{
+		try {
+			ActionContext ctx = ActionContext.getContext();
+			HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute(Constants.userKey);
+			Xxyh xxyh=new Xxyh();
+			xxyh.setJsyh(user);
+			xxyh.setXx_id(Integer.parseInt(this.xxid));
+			xxtsService.updateXxyhzt(xxyh);
+			this.result=SUCCESS;
+		} catch (Exception e) {
+			this.result = e.getMessage();
+		}
+		return SUCCESS;
+	}
 
 }
