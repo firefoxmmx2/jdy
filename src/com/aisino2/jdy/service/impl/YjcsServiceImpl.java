@@ -37,7 +37,7 @@ public class YjcsServiceImpl implements IYjcsService {
 	}
 
 
-	public Map<String, Object> querySQL(String sql) {
+	public Map<String, Object> executeSQL(String sql) {
 		return yjcsDao.querySQL(sql);
 	}
 

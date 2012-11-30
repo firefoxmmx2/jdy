@@ -17,6 +17,8 @@
 		<result property="cjsj" column="cjsj"/>
 		<result property="cjr" column="cjr"/>
 		<result property="clhs" column="clhs"/>
+		<result property="yjzq" column="yjzq"/>
+		<result property="yjzh" column="yjzh"/>
 	</resultMap>
 	
 	<sql id="yjcs_where">
@@ -67,6 +69,12 @@
 				<isNotNull prepend="," property="cjr">
 					cjr
 				</isNotNull>
+				<isNotNull prepend="," property="yjzq">
+					yjzq
+				</isNotNull>
+				<isNotNull prepend="," property="yjzh">
+					yjzh
+				</isNotNull>
 			</dynamic>
 		)
 		values(
@@ -94,6 +102,12 @@
 				</isNotNull>
 				<isNotNull prepend="," property="cjr">
 					#cjr#
+				</isNotNull>
+				<isNotNull prepend="," property="yjzq">
+					#yjzq#
+				</isNotNull>
+				<isNotNull prepend="," property="yjzh">
+					#yjzh#
 				</isNotNull>
 			</dynamic>
 		)
@@ -129,6 +143,12 @@
 				</isNotNull>
 				<isNotNull prepend="," property="cjr">
 					cjr=#cjr#
+				</isNotNull>
+				<isNotNull prepend="," property="yjzq">
+					yjzq = #yjzq#
+				</isNotNull>
+				<isNotNull prepend="," property="yjzh">
+					yjzh = #yjzh#
 				</isNotNull>
 			</dynamic>
 			where 

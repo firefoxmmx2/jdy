@@ -40,8 +40,31 @@ public class Yjcs {
 	 * 角色id 可以为多个通过逗号连接
 	 */
 	private String roleids;
+
+	
+	/**
+	 * 预警之前,执行sql
+	 */
+	private String yjzq;
+	/**
+	 * 预警之后,执行sql
+	 */
+	private String yjzh;
 	
 	
+	
+	public String getYjzq() {
+		return yjzq;
+	}
+	public void setYjzq(String yjzq) {
+		this.yjzq = yjzq;
+	}
+	public String getYjzh() {
+		return yjzh;
+	}
+	public void setYjzh(String yjzh) {
+		this.yjzh = yjzh;
+	}
 	public String getRoleids() {
 		return roleids;
 	}

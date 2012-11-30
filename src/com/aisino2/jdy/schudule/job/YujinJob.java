@@ -62,61 +62,27 @@ public class YujinJob implements Job {
 				}
 			}
 		}
+		//预警前的执行准备
+		if(StringUtil.isNotEmpty(target.getYjzq()))
+			yjcsService.executeSQL(target.getYjzq());
 		
+		//预警执行
 		if(java.util.regex.Pattern.matches("\\{[\\w_\\d]*\\}", target.getYjyj())){
 			for(String departcode : userdepartcodemap.keySet()){
 				Map<String, Object> para = new HashMap<String, Object>();
 				para.put("gxdwbm", StringUtil.trimEven0(departcode));
 				String real_sql = getMsgFormTemplate(target.getYjyj(), para);
 				
-				Map<String, Object> var  = yjcsService.querySQL(real_sql);
-//				不为空的时候插入消息
-				if(var!=null && !var.isEmpty()){
-					
-					//设置消息信息
-					Xxts msg = new Xxts();
-					msg.setXxbt(target.getYjmc());
-					msg.setXxnr(getMsgFormTemplate(target.getYjxxms(), var));
-					msg.setClhs(target.getClhs());
-					Date now = new Date();
-					msg.setTssj(now);
-					msg.setFsr("系统");
-					
-					List<Xxyh> xxyh_list = new ArrayList<Xxyh>();
-					for(User jsyh : userdepartcodemap.get(departcode)){
-						Xxyh xxyh =new Xxyh();
-						xxyh.setJsyh(jsyh);
-						xxyh.setZt(Xxts.ZT_UNREAD);
-						xxyh_list.add(xxyh);
-					}
-					msg.setXxyh_list(xxyh_list);
-					//先清楚以前的数据
-					xxtsService.deleteMsg(msg);
-					//插入新数据
-					xxtsService.insertMsg(msg);
-				}
-			}
-		}
-		else{
-			Map<String, Object> var  = yjcsService.querySQL(target.getYjyj());
-//			不为空的时候插入消息
-			if(var!=null && !var.isEmpty()){
-				
 				//设置消息信息
 				Xxts msg = new Xxts();
 				msg.setXxbt(target.getYjmc());
-				msg.setXxnr(getMsgFormTemplate(target.getYjxxms(), var));
 				msg.setClhs(target.getClhs());
 				Date now = new Date();
 				msg.setTssj(now);
 				msg.setFsr("系统");
 				
 				List<Xxyh> xxyh_list = new ArrayList<Xxyh>();
-				Set<User> user_set_all = new HashSet<User>();
-				for(String departcode : userdepartcodemap.keySet()){
-					user_set_all.addAll(userdepartcodemap.get(departcode));
-				}
-				for(User jsyh : user_set_all){
+				for(User jsyh : userdepartcodemap.get(departcode)){
 					Xxyh xxyh =new Xxyh();
 					xxyh.setJsyh(jsyh);
 					xxyh.setZt(Xxts.ZT_UNREAD);
@@ -125,11 +91,51 @@ public class YujinJob implements Job {
 				msg.setXxyh_list(xxyh_list);
 				//先清楚以前的数据
 				xxtsService.deleteMsg(msg);
+				
+				Map<String, Object> var  = yjcsService.executeSQL(real_sql);
+//				不为空的时候插入消息
+				if(var!=null && !var.isEmpty()){
+					msg.setXxnr(getMsgFormTemplate(target.getYjxxms(), var));
+					//插入新数据
+					xxtsService.insertMsg(msg);
+				}
+			}
+		}
+		else{
+			Map<String, Object> var  = yjcsService.executeSQL(target.getYjyj());
+			//设置消息信息
+			Xxts msg = new Xxts();
+			msg.setXxbt(target.getYjmc());
+			msg.setClhs(target.getClhs());
+			Date now = new Date();
+			msg.setTssj(now);
+			msg.setFsr("系统");
+			
+			List<Xxyh> xxyh_list = new ArrayList<Xxyh>();
+			Set<User> user_set_all = new HashSet<User>();
+			for(String departcode : userdepartcodemap.keySet()){
+				user_set_all.addAll(userdepartcodemap.get(departcode));
+			}
+			for(User jsyh : user_set_all){
+				Xxyh xxyh =new Xxyh();
+				xxyh.setJsyh(jsyh);
+				xxyh.setZt(Xxts.ZT_UNREAD);
+				xxyh_list.add(xxyh);
+			}
+			msg.setXxyh_list(xxyh_list);
+			//先清楚以前的数据
+			xxtsService.deleteMsg(msg);
+//			不为空的时候插入消息
+			if(var!=null && !var.isEmpty()){
+				msg.setXxnr(getMsgFormTemplate(target.getYjxxms(), var));
 				//插入新数据
 				xxtsService.insertMsg(msg);
 			}
 		}
 		
+		//预警执行后的处理
+		if(StringUtil.isNotEmpty(target.getYjzh()))
+			yjcsService.executeSQL(target.getYjzh());
 	}
 
 	private String getMsgFormTemplate(String msgTemplate, Map<String, Object> map){
