@@ -393,6 +393,11 @@ public class JdytjAction extends PageAction {
 				paras.put("xxdz", rdrjbxx.getXxdz());
 				paras.put("lxdh", rdrjbxx.getLxdh());
 				paras.put("ssx", rdrjbxx.getSsx());
+				//添加证件号码
+				paras.put("zjhm", rdrjbxx.getZjhm());
+				if(StringUtil.isNotEmpty(rdrjbxx.getZjhm()))
+					//设置证件类型为身份证号码
+					paras.put("zjlx", "11");
 			Page page = jdytjxx_service.getSjgltj(paras, pagesize, pagerow,
 					sort, dir);
 

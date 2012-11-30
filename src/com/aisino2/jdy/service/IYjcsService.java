@@ -36,5 +36,5 @@ public interface IYjcsService {
 	 * @param sql
 	 * @return
 	 */
-	Map<String, Object> querySQL(String sql);
+	Map<String, Object> executeSQL(String sql);
 }
