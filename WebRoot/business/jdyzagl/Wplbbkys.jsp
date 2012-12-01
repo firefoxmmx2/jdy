@@ -41,16 +41,28 @@ function setPageListWplbbkys(pageno,url){
 		});	
 		
 }
-
+//验证方法 
+function manVerify_yjwp(){
+	if (!checkControlValue("jdwpxl","String",1,30,null,1,"寄递品小类"))
+		return false;
+	
+	return true;
+}
 function addYjwp(){
-	var itemId=$("#jdwpxl").val();
-	alert(itemId);
-	jQuery.post(addYjwpUrl, {"itemId":itemId}, function(){
-		setPageListWplbbkys(1);
-	}, "") 
+	//if(!$("#jdwpyjxx").length){$(document).find('body').eq(0).append('<div id="jdwpyjxx" class="page-layout" src="#" style="top:10px; left:160px; display: none;"></div>');}
+	//detailDialog("jdwpyjxx", 800, "business/jdyzagl/Jdwplbyjcl.jsp");
+	if(manVerify_yjwp()){
+		var itemId=$("#jdwpxl").val();
+		jQuery.post(addYjwpUrl, {"itemId":itemId}, function(){
+			setPageListWplbbkys(1);
+		}, "") 
+	}
+	
 }
 function removeYjwp(id){
-	alert(id);
+	jQuery.post(addYjwpUrl, {"itemId":id,"result":"del"}, function(){
+		setPageListWplbbkys(1);
+	}, "") 
 }
 </script>
 

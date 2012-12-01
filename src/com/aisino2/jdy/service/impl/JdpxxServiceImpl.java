@@ -66,7 +66,19 @@ public class JdpxxServiceImpl implements IJdpxxService {
 			int pagesize, String dir, String sort){
 		return jdpxxDao.findYjwpForPage(map, pageno, pagesize, dir, sort);
 	}
-	
+	/**
+	 * 查询预警寄递物品处理信息
+	 * @param map
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	public Page findYjwuclList(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort){
+		return jdpxxDao.findYjwuclList(map, pageno, pagesize, dir, sort);
+	}
 	/**
 	 * 添加预警寄递物品
 	 */

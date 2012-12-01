@@ -54,6 +54,10 @@ import com.opensymphony.xwork2.ActionContext;
  */
 public class WpyjszjAction extends PageAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3315419313131646663L;
 	private String tabledata = "";
 	private int totalrows = 0;
 	private String result = "";
@@ -68,7 +72,15 @@ public class WpyjszjAction extends PageAction {
 
 	private Jdpxx jdpxx;
 	private IJdpxxService jdpxxService;
-	private List<Jdpxx> lJdpxx=new ArrayList<Jdpxx>();
+	private List lJdpxx=new ArrayList();
+	public List getlJdpxx() {
+		return lJdpxx;
+	}
+
+	public void setlJdpxx(List lJdpxx) {
+		this.lJdpxx = lJdpxx;
+	}
+
 	public void setJdpxxService(IJdpxxService jdpxxService) {
 		this.jdpxxService = jdpxxService;
 	}
@@ -81,13 +93,6 @@ public class WpyjszjAction extends PageAction {
 		this.jdpxx = jdpxx;
 	}
 
-	public List<Jdpxx> getlJdpxx() {
-		return lJdpxx;
-	}
-
-	public void setlJdpxx(List<Jdpxx> lJdpxx) {
-		this.lJdpxx = lJdpxx;
-	}
 
 	public void setTabledata(String tabledata) {
 		this.tabledata = tabledata;
@@ -113,11 +118,14 @@ public class WpyjszjAction extends PageAction {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	
+	/**
+	 *  查询预警物品
+	 * @return
+	 */
 	public String findYjwpPage(){
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
-			Page pageinfo = jdpxxService.findYjwpForPage(params, pagerow, pagesize, "", "");
+			Page pageinfo = jdpxxService.findYjwpForPage(params,pagesize,pagerow, "", "");
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
 			lJdpxx = pageinfo.getData();
@@ -131,7 +139,7 @@ public class WpyjszjAction extends PageAction {
 		return SUCCESS;
 	}
 
-	private void setTableData(List<Jdpxx> lData) throws ParseException {
+	private void setTableData(List lData) throws ParseException {
 		List lPro = new ArrayList();
 		lPro.add("id");
 		lPro.add("jdpdlxmc");
@@ -151,11 +159,71 @@ public class WpyjszjAction extends PageAction {
 		totalrows = this.getTotalrows();
 	}
 	
+	/**
+	 * 设置预警物品
+	 * 根据页面参数当传入的参数有del 为当前预警的物品删除
+	 * @return
+	 */
 	public String setYjwp(){
 		Map map=new HashMap();
 		map.put("itemId", this.itemId);
+		if(this.result!=null&&!"".endsWith(this.result))
+			map.put("del", "del");
+		else
+			map.put("update", "update");
 		jdpxxService.setYjwp(map);
 		this.result = "success";
 		return SUCCESS;
+	}
+	/**
+	 *  查询揽件中有预警物品的处理信息
+	 * @return
+	 */
+	public String findYjwuclList(){
+		try {
+			Map<String, Object> params = new HashMap<String, Object>();
+			Page pageinfo = jdpxxService.findYjwuclList(params,pagesize,pagerow, "", "");
+			totalpage = pageinfo.getTotalPages();
+			totalrows = pageinfo.getTotalRows();
+			lJdpxx = pageinfo.getData();
+			setYjwuclTableData(lJdpxx);
+		} catch (ParseException e) {
+			this.result=e.getMessage();
+			e.printStackTrace();
+		}
+
+		this.result = "success";
+		return SUCCESS;
+	}
+	
+	private void setYjwuclTableData(List lData) throws ParseException {
+		List lPro = new ArrayList();
+		lPro.add("jdpxxid");
+		lPro.add("qymc");
+		lPro.add("wldh");
+		lPro.add("jjrxm");
+		lPro.add("jjrzjhm");
+		lPro.add("sjrxm");
+		lPro.add("jdpdlxmc");
+		lPro.add("jdplxmc");
+		lPro.add("ljtbsj");
+
+		List lCol = new ArrayList(); 
+
+		List lDetail = new ArrayList();
+		lDetail.add("getDetail");
+		lDetail.add("详情");
+		lCol.add(lDetail);
+		
+		List lDispose = new ArrayList();
+		lDispose.add("removeYjwpxx");
+		lDispose.add("处理");
+		lCol.add(lDispose);
+
+		
+		Ljjbxx setjdpxx = new Ljjbxx();
+		this.setData(setjdpxx, lData, lPro, lCol);
+		this.tabledata = this.getData();
+		totalrows = this.getTotalrows();
 	}
 }

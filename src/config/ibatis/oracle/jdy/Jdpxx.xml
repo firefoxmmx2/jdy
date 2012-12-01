@@ -58,6 +58,29 @@
 	<resultMap class="jdpxx" id="jdpxx_ljxx_rm" extends="jdpxx_rm">
 		<result property="ljjbxx" column="ljjbxx_id" select="ljjbxx.getById"/>
 	</resultMap>
+	
+	<resultMap class="jdpxx" id="yjwp_rm" >
+		<result property="id" column="id"/>
+		<result property="jdpdlxmc" column="jdpdlxmc"/>
+		<result property="jdplxmc" column="jdplxmc"/>
+	</resultMap>
+	<resultMap class="jdpxx" id="yjwp_rm" >
+		<result property="id" column="id"/>
+		<result property="jdpdlxmc" column="jdpdlxmc"/>
+		<result property="jdplxmc" column="jdplxmc"/>
+	</resultMap>
+	<!-- 预警物品处理信息 -->
+	<resultMap class="ljjbxx" id="yjwpclxx_rm" >
+		<result property="jdpxxid" column="jdpid"/>
+		<result property="qymc" column="Qymc"/>
+		<result property="wldh" column="Wldh"/>
+		<result property="jjrxm" column="Jjrxm"/>
+		<result property="jjrzjhm" column="Jjrsfzh"/>
+		<result property="sjrxm" column="Sjrxm"/>
+		<result property="jdpdlxmc" column="Dlmc"/>
+		<result property="jdplxmc" column="xlmc"/>
+		<result property="ljtbsj" column="Ljtbsj"/>
+	</resultMap>
 
 	<sql id="jdpxxWhere">
 		<isNotEmpty prepend="and" property="id"> 
@@ -259,15 +282,15 @@
 	</select>
 	
 	<!-- 查询预警寄递物品 -->
-	<select id="jdpxx.getYjwpListPage" parameterClass="map" resultMap="jdpxx_rm">
+	<select id="jdpxx.getYjwpListPage" parameterClass="map" resultMap="yjwp_rm">
 	select x.* from (
 		select rownum rowno,z.* from 
 		(	
 Select a.item_id Id,a.display_name jdplxmc,b.display_name jdpdlxmc From t_dict_item a ,
 (Select t.item_id, t.display_name ,t.fact_value, t.super_item_id
 from t_dict_item t Where t.dict_code Like '%dm_jdwp%' And t.super_item_id = '0' ) b
-Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value='0'
- order by a.item_id)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value Is Not Null
+ order by a.append_value desc)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 	<select id="jdpxx.getYjwpListPageCount" parameterClass="map" resultClass="Integer">
    select count(1) from
@@ -275,15 +298,85 @@ Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_i
    Select a.item_id Id,a.display_name jdplxmc,b.display_name jdpdlxmc From t_dict_item a ,
 (Select t.item_id, t.display_name ,t.fact_value, t.super_item_id
 from t_dict_item t Where t.dict_code Like '%dm_jdwp%' And t.super_item_id = '0' ) b
-Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value='0'
- order by a.item_id
+Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value Is Not Null
    )
 	</select>
 	
 	<!-- 设置预警物品 -->
 	<update id="jdpxx.setYjwp" parameterClass="map">
-	 update t_dict_item t set t.append_value= sysdate Where t.dict_code Like '%dm_jdwp%'
-	 and t.item_id=#itemId#
+	 update t_dict_item t set
+	 <isNotEmpty prepend=" " property="update">
+	 t.append_value= sysdate  Where t.dict_code Like '%dm_jdwp%' and t.fact_value=#itemId#
+	</isNotEmpty>
+	<isNotEmpty prepend=" " property="del">
+	t.append_value= Null  Where t.dict_code Like '%dm_jdwp%' and t.item_id=#itemId#
+	</isNotEmpty>
 	</update>
+	
+	<!-- 查询预警寄递物品处理信息-->
+	<select id="jdpxx.findYjwuclList" parameterClass="map" resultMap="yjwpclxx_rm">
+	select x.* from (
+		select rownum rowno,z.* from 
+		(	
+Select t.Wldh,
+       q.Qymc,
+       j.Xm Jjrxm,
+       j.Zjhm Jjrsfzh,
+       s.Xm Sjrxm,
+       d.Display_Name Dlmc,
+       x.Display_Name xlmc,
+       t.Ljtbsj,
+       w.Id jdpid
+  From t_Ljjbxx t,
+       t_Qyjbxx q,
+       t_Rdrjbxx j,
+       t_Rdrjbxx s,
+       t_Jdpxx w,
+       t_Dict_Item x,
+       (Select d.Item_Id, d.Display_Name, d.Fact_Value, d.Super_Item_Id
+          From t_Dict_Item d
+         Where d.Dict_Code Like '%dm_jdwp%'
+           And d.Super_Item_Id = '0') d
+ Where t.Qybm = q.Qybm
+   And t.Jjr_Id = j.Id
+   And t.Sjr_Id = s.Id
+   And t.Djxh = w.Ljjbxx_Id
+   And w.Jdplx = x.Fact_Value
+   And x.Super_Item_Id = d.Item_Id
+   And x.Dict_Code Like '%dm_jdwp%'
+   And x.append_value Is Not Null
+ Order By t.ljtbsj Desc)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+	</select>
+	<select id="jdpxx.findYjwuclListCount" parameterClass="map" resultClass="Integer">
+   select count(1) from
+   (
+ Select t.Wldh,
+       q.Qymc,
+       j.Xm Jjrxm,
+       j.Zjhm Jjrsfzh,
+       s.Xm Sjrxm,
+       d.Display_Name Dlmc,
+       x.Display_Name xlmc,
+       t.Ljtbsj
+  From t_Ljjbxx t,
+       t_Qyjbxx q,
+       t_Rdrjbxx j,
+       t_Rdrjbxx s,
+       t_Jdpxx w,
+       t_Dict_Item x,
+       (Select d.Item_Id, d.Display_Name, d.Fact_Value, d.Super_Item_Id
+          From t_Dict_Item d
+         Where d.Dict_Code Like '%dm_jdwp%'
+           And d.Super_Item_Id = '0') d
+ Where t.Qybm = q.Qybm
+   And t.Jjr_Id = j.Id
+   And t.Sjr_Id = s.Id
+   And t.Djxh = w.Ljjbxx_Id
+   And w.Jdplx = x.Fact_Value
+   And x.Super_Item_Id = d.Item_Id
+   And x.Dict_Code Like '%dm_jdwp%'
+   And x.append_value Is Not Null)
+	</select>
+	
 	
 </sqlMap>

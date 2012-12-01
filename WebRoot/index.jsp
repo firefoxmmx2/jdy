@@ -123,7 +123,7 @@
 		<script language="JavaScript" src="javascript/FusionCharts.js"></script>
 		<script language="JavaScript" src="javascript/ChartsCreate.js"></script>
     <link href="css/notificationmsg.css" rel="stylesheet" type="text/css" />
-			
+		<script language="javascript" type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>	
 			
 	    <style type="text/css">
 	    

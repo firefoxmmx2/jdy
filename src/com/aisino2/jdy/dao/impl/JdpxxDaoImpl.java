@@ -82,7 +82,19 @@ public class JdpxxDaoImpl extends BaseDao implements IJdpxxDao {
 			int pagesize, String dir, String sort) {
 		return queryForPage("jdpxx.getYjwpListPage", map, pageno,pagesize);
 	}
-	
+	/**
+	 * 查询预警寄递物品处理信息
+	 * @param map
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	public Page findYjwuclList(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort){
+		return queryForPage("jdpxx.findYjwuclList", map, pageno,pagesize);
+	}
 	/**
 	 * 添加预警寄递物品
 	 */
