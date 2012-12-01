@@ -123,7 +123,7 @@
 				data:myTableDataBmXxtz,
 				title:'运行情况',
 				width:505,
-				height:pageHeight-370,
+				height:pageHeight-390,
 				isTotal:true
 			});
 			$("#jdytjxx_tx_pie").fusionChart({
@@ -133,7 +133,7 @@
 				data:myTableDataBmXxtz,
 				title:'运行情况',
 				width:505,
-				height:pageHeight-370,
+				height:pageHeight-390,
 				isTotal:true
 			});
 			
