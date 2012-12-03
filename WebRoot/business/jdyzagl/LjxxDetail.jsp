@@ -179,7 +179,10 @@ function addTrEvent(tr){
 }
 //关闭所有DIV
 function close_div(){
-	$("#ljjbxxadd_detail").hideAndRemove("show");
+	if($("#jdwpyjxx").html()!=null)
+		$("#yjcl_detail").hideAndRemove("show");
+	else
+		$("#ljjbxxadd_detail").hideAndRemove("show");
 }
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">

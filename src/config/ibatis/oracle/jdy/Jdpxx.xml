@@ -71,7 +71,7 @@
 	</resultMap>
 	<!-- 预警物品处理信息 -->
 	<resultMap class="ljjbxx" id="yjwpclxx_rm" >
-		<result property="jdpxxid" column="jdpid"/>
+		<result property="ywcxbz" column="ywcxbz"/>
 		<result property="qymc" column="Qymc"/>
 		<result property="wldh" column="Wldh"/>
 		<result property="jjrxm" column="Jjrxm"/>
@@ -213,6 +213,12 @@
 			<isNotNull prepend="," property="kybz">
 				kybz=#kybz#
 			</isNotNull>
+			<isNotNull prepend="," property="kybz">
+				kybz=#kybz#
+			</isNotNull>
+			<isNotNull prepend="," property="yjbz">
+				yjbz=#yjbz#
+			</isNotNull>
 			
 		</dynamic>
 		where
@@ -326,7 +332,7 @@ Select t.Wldh,
        d.Display_Name Dlmc,
        x.Display_Name xlmc,
        t.Ljtbsj,
-       w.Id jdpid
+       w.Id||'_'||t.djxh ywcxbz
   From t_Ljjbxx t,
        t_Qyjbxx q,
        t_Rdrjbxx j,
@@ -345,7 +351,8 @@ Select t.Wldh,
    And x.Super_Item_Id = d.Item_Id
    And x.Dict_Code Like '%dm_jdwp%'
    And x.append_value Is Not Null
- Order By t.ljtbsj Desc)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+   And w.yjbz!='N'
+ Order By $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 	<select id="jdpxx.findYjwuclListCount" parameterClass="map" resultClass="Integer">
    select count(1) from
@@ -375,7 +382,8 @@ Select t.Wldh,
    And w.Jdplx = x.Fact_Value
    And x.Super_Item_Id = d.Item_Id
    And x.Dict_Code Like '%dm_jdwp%'
-   And x.append_value Is Not Null)
+   And x.append_value Is Not Null
+   And w.yjbz!='N')
 	</select>
 	
 	

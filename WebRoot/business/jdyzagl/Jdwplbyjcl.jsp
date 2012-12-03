@@ -8,7 +8,7 @@ var Wplbbkyscl_grid_table="yjcltable";
 var Wplbbkyscl_grid_div="yjwptabledata";
 var Wplbbkyscl_table_html="";
 var yjwpclpageUrl="jdy/findYjwuclList_wpyjsz.action";
-var addYjwpUrl="jdy/setYjwp_wpyjsz.action";
+var updateJdpbzUrl="jdy/setJdpyjbz_wpyjsz.action";
 $(document).ready(function() {
 	loadPageWplbbkys(Wplbbkyscl_grid_div);
 }); 
@@ -17,7 +17,7 @@ function loadPageWplbbkys(divpageid){
 	setPageListWplbbkyscl(1);
 }
 function setListYjcl(pageno,url){
- 	//$("#"+Wplbbkyscl_grid_div).html(Wplbbkyscl_table_html);
+ 	$("#"+Wplbbkyscl_grid_div).html(Wplbbkyscl_table_html);
 	//params = getSubmitParams("#wplbbkys_man [id*=wp_]",params);
 	if (url==null || url=="undefined"){
 		url=yjwpclpageUrl;
@@ -29,29 +29,30 @@ function setPageListWplbbkyscl(pageno,url){
 		var mygrid1 = $("#"+Wplbbkyscl_grid_table).ingrid({ 
 			url: url,	
 			onRowSelect:null,
-			ingridPageWidth:800,
+			ingridPageWidth:850,
 			height: pageHeight-286,
             ingridPageParams:sXML,
             ingridExtraParams:params,
 			pageNumber: pageno,
-			colWidths: ["20%","10","10%","10%","10%","10%","10%","15%","5%"]									
+			noSortColIndex:[8],
+			colWidths: ["20%","5%","10%","10%","10%","10%","10%","15%","10%"]									
 		});	
 		
 }
-
+var dataid;
 function getDetail(id){
-	if(manVerify_yjwp()){
-		var itemId=$("#jdwpxl").val();
-		jQuery.post(addYjwpUrl, {"itemId":itemId}, function(){
-			setPageListWplbbkyscl(1);
-		}, "") 
-	}
+	$("#yjcl_detail").empty();
+	daggleDiv("yjcl_detail");
+	dataid=id.split('_')[1]
+	setWidth("yjcl_detail",950);
+	setUrl("yjcl_detail","business/jdyzagl/LjxxDetail.jsp");
+	bindDocument("yjcl_detail");
 	
 }
-function removeYjwpxx(id){
-	jQuery.post(addYjwpUrl, {"itemId":id,"result":"del"}, function(){
-		setPageListWplbbkyscl(1);
-	}, "") 
+function setJdpyjbz(id){
+	var jdpid=id.split('_')[0]
+	jQuery.post(updateJdpbzUrl, {"itemId":jdpid}, function(){setPageListWplbbkyscl(1);}, "") 
+	
 }
 </script>
 
@@ -71,7 +72,7 @@ function removeYjwpxx(id){
 	<table id="yjcltable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="l_qymc" datatype="string" sumflag="0">企业民称</th>
+	    	<th name="l_qymc" datatype="string" sumflag="0">企业名称</th>
 	    	<th name="l_wldh" datatype="string" sumflag="0">物流单号</th>
 	    	<th name="l_jjrxm" datatype="string" sumflag="0">寄件人</th>
 	    	<th name="l_jjrzjhm" datatype="string" sumflag="0">寄件人证件号码</th>
@@ -83,5 +84,8 @@ function removeYjwpxx(id){
 	    </tr>
 	  </thead>
 	</table>	
-</div>
+</div><div id="yjcl_detail" class="page-layout" src="#"
+		style="top:5px; left:160px;display: none;">
+</div>	
+
 </body>

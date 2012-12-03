@@ -37,6 +37,7 @@ function setPageListWplbbkys(pageno,url){
             ingridPageParams:sXML,
             ingridExtraParams:params,
 			pageNumber: pageno,
+			noSortColIndex:[0,1,2],
 			colWidths: ["40%","40%","20%"]									
 		});	
 		
