@@ -383,8 +383,14 @@ public class RdrjbxxAction extends PageAction {
 						Integer.parseInt(maxRows), tabledata, result);
 				totalpage = pageinfo.getTotalPages();
 				totalrows = pageinfo.getTotalRows();
-				lRdrjbxx = pageinfo.getData();
-				session.setAttribute("Grpfghjjdwtjdal", lRdrjbxx);
+				
+				if("YWLC".equals(rdrjbxx.getYjhywlcqbbz())){
+					lRdrjbxx = pageinfo.getData();
+					session.setAttribute("Grpfghjjdwtjdal", lRdrjbxx);
+				}else{
+					lGrpfghjjdw_yjcl= pageinfo.getData();
+					session.setAttribute("Grpfghjjdwtjdal", lGrpfghjjdw_yjcl);
+				}
 				this.result = "success";
 				return SUCCESS;
 			}
@@ -412,6 +418,42 @@ public class RdrjbxxAction extends PageAction {
 					lResult.add(response);
 					lResult.add(qyryList);
 					lResult.add(setRdrjbxx1);
+					this.setExcelCreate("Rdrjbxxdal", lResult);
+					this.result = "ok";
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					this.result = e.getMessage();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					this.result = e.getMessage();
+				}
+			}
+			/***
+			 *个人频繁更换寄件单位----预警---- 执行导出
+			 */
+			public void exportExceldalyj() throws Exception {
+				ActionContext ctx = ActionContext.getContext();
+				HttpServletRequest request = (HttpServletRequest) ctx
+						.get(ServletActionContext.HTTP_REQUEST);
+				HttpServletResponse response = (HttpServletResponse) ctx
+						.get(ServletActionContext.HTTP_RESPONSE);
+				HttpSession session = request.getSession();
+				User user = (User) session.getAttribute(Constants.userKey);
+				try {
+					String bbmc = request.getParameter("bbmcdal");
+					String tabletitle = request.getParameter("tabletitledalyj");
+					// Excel输出
+					List lResult = new ArrayList(); // //开头excel
+					List qyryList = (List) session.getAttribute("Grpfghjjdwtjdal");
+					Grpfghjjdw_yjcl  setGrpfghjjdw_yjcl = new Grpfghjjdw_yjcl();
+					List lColumn = this.getExcelColumn(tabletitle);
+					lResult.add(bbmc);
+					lResult.add(lColumn);
+					lResult.add(response);
+					lResult.add(qyryList);
+					lResult.add(setGrpfghjjdw_yjcl);
 					this.setExcelCreate("Rdrjbxxdal", lResult);
 					this.result = "ok";
 				} catch (IOException e) {
