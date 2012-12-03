@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -67,7 +68,8 @@ public class YujinJob implements Job {
 			yjcsService.executeSQL(target.getYjzq());
 		
 		//预警执行
-		if(java.util.regex.Pattern.matches("\\{[\\w_\\d]*\\}", target.getYjyj())){
+		Pattern p = java.util.regex.Pattern.compile("\\{[\\w\\d_]*\\}");
+		if(p.matcher(target.getYjyj()).find()){
 			for(String departcode : userdepartcodemap.keySet()){
 				Map<String, Object> para = new HashMap<String, Object>();
 				para.put("gxdwbm", StringUtil.trimEven0(departcode));
