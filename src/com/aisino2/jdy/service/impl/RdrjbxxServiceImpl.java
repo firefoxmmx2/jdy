@@ -6,6 +6,7 @@ import java.util.Map;
 import com.aisino2.core.dao.Page;
 import com.aisino2.jdy.dao.IJddxzpxxDao;
 import com.aisino2.jdy.dao.IRdrjbxxDao;
+import com.aisino2.jdy.domain.Grpfghjjdw_yjcl;
 import com.aisino2.jdy.domain.Jddxzpxx;
 import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IRdrjbxxService;
@@ -85,6 +86,14 @@ public class RdrjbxxServiceImpl implements IRdrjbxxService {
 			int pagesize, String dir, String sort) {
 		return rdrjbxxDao.grpfghjjdwtjcxdalForPage(para, pageno, pagesize, dir, sort);
 		
+	}
+	/**
+	 * 个人频繁更换基建单位  处理方法
+	 */
+	public void grpfghdwclcz(Grpfghjjdw_yjcl grpfghjjdw_yjcl) {
+		if(grpfghjjdw_yjcl==null || grpfghjjdw_yjcl.getId()==null)
+			throw new RuntimeException("个人频繁更换寄件单位ID为空");
+		rdrjbxxDao.grpfghdwclcz(grpfghjjdw_yjcl);
 	}
 
 }
