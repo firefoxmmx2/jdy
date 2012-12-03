@@ -1,19 +1,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%> 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ include file="/public/user-info.jsp" %>
 <script type="text/javascript">
 var daochuNumdal = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
 tabletitledal = "";
 $(document).ready(function() {
 	//清空所有要传递的值
-	$("#rdrjbxx_xm").val("");
-	$("#cd_kssj").val("");
-	$("#cd_jssj").val("");
-	$("#cd_gxdwbm").val("");
-	$("#rdrjbxx_xm").val(dataid);//姓名
-	$("#cd_kssj").val($("#rdrjbxx_pjtbsjf1").val());//开始时间
-	$("#cd_jssj").val($("#rdrjbxx_pjtbsjt1").val());//结束时间
-	$("#cd_gxdwbm").val($("#rdrjbxx_gxdwbm").val());//管辖单位编码
 	divnidhmdczrz="QczlhmdczrzData";
 	tableidhmd="QczlhmdczrzTable";
 	pagehmdUrl="jdy/grpfghdwcxdal_rdrjbxx.action";
@@ -27,12 +20,12 @@ $(document).ready(function() {
 	tabletitledal=theadHtml.html();
 	
 	//根据姓名关联查询详细信息
-	setPageListhmdczrz(1);
+	setPageListhmdczrzclcl(1);
 	
 	daggleDiv(detailid);
 }); 
-function setPageListhmdczrz(pageno,url){	
-		params =getSubmitParams("#grpfghdwcxgad_detail [name*=rdrjbxx.]");
+function setPageListhmdczrzclcl(pageno,url){	
+		params =getSubmitParams("#grpfghdw_yjcl [name*=rdrjbxx.]");
 		if (url==null || url=="undefined"){
 			url=pagehmdUrl;
 		}
@@ -52,13 +45,30 @@ function setPageListhmdczrz(pageno,url){
 											    daochuNumdal = 1;
 											}	
 										},
-										colWidths: ["7%","15%","15%","15%","15%","15%","15%","15%","32%"]									
+										colWidths: ["7%","15%","15%","15%","15%","15%","15%","15%","32%","10%"]									
 									});				
 }	
+//处理方法
+function grpfghdwyjcl(id){
+	sFlag="false";
+	jConfirm('确定处理操作吗？', '删除提示', function(r) {
+    	if(r==true){
+    		$.post("jdy/grpfghdwclcz_rdrjbxx.action",{
+    			'rdrjbxx.id':id},
+    			function(json){ 
+    				if(json.result == 'success') { 
+    					//setPageListhmdczrzcl(1); 
+    			} },'json');
+		}
+		else{
+		   return false;
+		}
+	});
+}
 //导出Excel
 function setExportExceldal(){	
   	if(daochuNumdal==1){
-  	  params =getSubmitParams("#grpfghdwcxgad_detail [name*=rdrjbxx.]");
+  	  params =getSubmitParams("#grpfghdw_yjcl [name*=rdrjbxx.]");
   	  jQuery.post(grpfghdwxqdc,params,searchLongBackdal,"json");
   	}else{
   		jAlert("无查询结果不能导出！",'验证信息',null,null);
@@ -87,12 +97,9 @@ function searchLongBackdal(json){
 	<td></td>
 	</tr>
 </table>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" id="grpfghdwcxgad_detail">
-    <input type="hidden" id="rdrjbxx_xm" name="rdrjbxx.xm" value=""><!--主页面传递过来的姓名 -->
-    <input type="hidden" id="cd_kssj" name="rdrjbxx.kssj" value=""><!--主页面传递过来的开始时间 -->
-    <input type="hidden" id="cd_jssj" name="rdrjbxx.jssj" value=""><!--主页面传递过来的结束时间 -->
-    <input type="hidden" id="cd_gxdwbm" name="rdrjbxx.gxdwbm" value=""><!--主页面传递过来的管辖单位编码-->
-    <input type="hidden" id="cd_yjhywlcqbbz" name="rdrjbxx.yjhywlcqbbz" value="YWLC"><!--预警、业务流程区别标志-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="grpfghdw_yjcl">
+    <input type="hidden" id="cd_gxdwbm" name="rdrjbxx.gxdwbm" value="<%=gxdwbm%>"><!--管辖单位编码-->
+    <input type="hidden" id="cd_yjhywlcqbbz" name="rdrjbxx.yjhywlcqbbz" value="YJ"><!--预警、业务流程区别标志-->
 	<tr>
 		<td height="10"></td>
 	</tr>
@@ -101,15 +108,16 @@ function searchLongBackdal(json){
 	<table id="QczlhmdczrzTable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="">登记序号</th>
+	    	<th name="l_djxh">登记序号</th>
 	     	<th name="l_xh" datatype="string" sumflag="0">序号</th>
-	    	<th name="l_jjrxm" datatype="string" sumflag="0">寄件人</th>
+	    	<th name="l_jjr" datatype="string" sumflag="0">寄件人</th>
 	    	<th name="l_jjsj" datatype="string" sumflag="0">寄件时间</th>
-	    	<th name="l_cjqy" datatype="string" sumflag="0">承寄企业</th>
+	    	<th name="l_qymc" datatype="string" sumflag="0">承寄企业</th>
 	    	<th name="l_wldh" datatype="string" sumflag="0">物流单号</th>
-	    	<th name="l_sjrxm" datatype="string" sumflag="0">收件人</th>
+	    	<th name="l_sjr" datatype="string" sumflag="0">收件人</th>
 	    	<th name="l_sjrdh" datatype="string" sumflag="0">收件人电话</th>
 	    	<th name="l_sjrxxdz" datatype="string" sumflag="0">收件人详细地址</th>
+	    	<th name="">操作列</th>
 	    </tr>
 	  </thead>
 	  
@@ -117,7 +125,7 @@ function searchLongBackdal(json){
 </div>
 <table  border="0" align="center"  cellpadding="2"  cellspacing="0">
  	<tr>
- 	  <td ><a href="#" class="addbutton" id="fpghjjdwdal" onclick='setExportExceldal()'>导出</a></td>
+ 	  <td ><a href="#" class="addbutton" id="fpghjjdwyjcl" onclick='setExportExceldal()'>导出</a></td>
  	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick='$("#grpfghdwcx").hideAndRemove("show");'>返回</a></td>
  	</tr>
 </table>
