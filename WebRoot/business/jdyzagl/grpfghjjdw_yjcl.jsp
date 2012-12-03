@@ -3,33 +3,34 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ include file="/public/user-info.jsp" %>
 <script type="text/javascript">
-var daochuNumdal = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
-tabletitledal = "";
+var daochuNumdaldd = 0;//是否可以导出Excle标志，0-无法导出，1-可以导出
+tabletitledalyj = "";
 $(document).ready(function() {
 	//清空所有要传递的值
-	divnidhmdczrz="QczlhmdczrzData";
-	tableidhmd="QczlhmdczrzTable";
-	pagehmdUrl="jdy/grpfghdwcxdal_rdrjbxx.action";
-	tableshmd=$("#"+divnidhmdczrz).html();
+	divnidhmdczrzyjcl="GrpfghjjdwyjData";
+	tableidhmdyjcl="GrpfghjjdwyjTable";
+	pagehmdUrlyj="jdy/grpfghdwcxdal_rdrjbxx.action";
+	tableshmd=$("#"+divnidhmdczrzyjcl).html();
 	//导出用到参数
-	grpfghdwxqdc="jdy/querycxdalForExport_rdrjbxx.action";
-	excelUrldal="jdy/exportExceldal_rdrjbxx.action";
+	grpfghdwxqdcyj="jdy/querycxdalForExport_rdrjbxx.action";
+	excelUrldalyj="jdy/exportExceldalyj_rdrjbxx.action";
 	//解决div
-	var theadHtml = $("#QczlhmdczrzData").find("table:first").find("thead:first");
-	theadHtml.find("td").remove();
-	tabletitledal=theadHtml.html();
+	var theadHtmlyj = $("#GrpfghjjdwyjData").find("table:first").find("thead:first");
+	theadHtmlyj.find("td").remove();
+	tabletitledalyj=theadHtmlyj.html();
 	
 	//根据姓名关联查询详细信息
-	setPageListhmdczrzclcl(1);
+	setPageListpfyj(1);
 	
 	daggleDiv(detailid);
 }); 
-function setPageListhmdczrzclcl(pageno,url){	
+function setPageListpfyj(pageno,url){	
+	    $("#"+divnidhmdczrzyjcl).html(tableshmd);
 		params =getSubmitParams("#grpfghdw_yjcl [name*=rdrjbxx.]");
 		if (url==null || url=="undefined"){
-			url=pagehmdUrl;
+			url=pagehmdUrlyj;
 		}
-		var mygrid1 = $("#"+tableidhmd).ingrid({ 
+		var mygrid1 = $("#"+tableidhmdyjcl).ingrid({ 
 										onRowSelect:null,
 										ingridPageWidth: 900,
 										url: url,	
@@ -38,11 +39,13 @@ function setPageListhmdczrzclcl(pageno,url){
 										ingridPageParams: sXML,
 										ingridExtraParams:params,
 										hideColIndex:[0],
+										isPlayResultNull:null,
 										changeHref:function(table){
 											if($(table).find("tr").length==0){
-											    daochuNumdal = 0;
+												$("#fpghjjdwdalyj").hide();//隐藏导出按钮
+												daochuNumdaldd = 0;
 											}else{
-											    daochuNumdal = 1;
+												daochuNumdaldd = 1;
 											}	
 										},
 										colWidths: ["7%","15%","15%","15%","15%","15%","15%","15%","32%","10%"]									
@@ -53,12 +56,7 @@ function grpfghdwyjcl(id){
 	sFlag="false";
 	jConfirm('确定处理操作吗？', '删除提示', function(r) {
     	if(r==true){
-    		$.post("jdy/grpfghdwclcz_rdrjbxx.action",{
-    			'rdrjbxx.id':id},
-    			function(json){ 
-    				if(json.result == 'success') { 
-    					//setPageListhmdczrzcl(1); 
-    			} },'json');
+    		$.post("jdy/grpfghdwclcz_rdrjbxx.action",{'rdrjbxx.id':id},function(json){ if(json.result == 'success') { setPageListpfyj(1); } },'json');
 		}
 		else{
 		   return false;
@@ -66,20 +64,20 @@ function grpfghdwyjcl(id){
 	});
 }
 //导出Excel
-function setExportExceldal(){	
-  	if(daochuNumdal==1){
+function setExportExcelyj(){	
+  	if(daochuNumdaldd==1){
   	  params =getSubmitParams("#grpfghdw_yjcl [name*=rdrjbxx.]");
-  	  jQuery.post(grpfghdwxqdc,params,searchLongBackdal,"json");
+  	  jQuery.post(grpfghdwxqdcyj,params,searchLongBackyj,"json");
   	}else{
   		jAlert("无查询结果不能导出！",'验证信息',null,null);
   	}		
 }
 //导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
-function searchLongBackdal(json){  
+function searchLongBackyj(json){  
     //报表标题
 	var bbmcdal="频繁更换单位详情";
 	//报表请求
-	var surldal=excelUrldal+"?tabletitledal="+tabletitledal+"&bbmcdal="+bbmcdal;
+	var surldal=excelUrldalyj+"?tabletitledalyj="+tabletitledalyj+"&bbmcdal="+bbmcdal;
 	surldal=encodeURI(surldal);
 	location.href = surldal;
 }
@@ -104,11 +102,11 @@ function searchLongBackdal(json){
 		<td height="10"></td>
 	</tr>
 </table>
-<div id="QczlhmdczrzData" style="width:100%;">
-	<table id="QczlhmdczrzTable" width="100%">
+<div id="GrpfghjjdwyjData" style="width:100%;">
+	<table id="GrpfghjjdwyjTable" width="100%">
 	  <thead>
 	    <tr>       
-	    	<th name="l_djxh">登记序号</th>
+	    	<th name="">登记序号</th>
 	     	<th name="l_xh" datatype="string" sumflag="0">序号</th>
 	    	<th name="l_jjr" datatype="string" sumflag="0">寄件人</th>
 	    	<th name="l_jjsj" datatype="string" sumflag="0">寄件时间</th>
@@ -125,8 +123,8 @@ function searchLongBackdal(json){
 </div>
 <table  border="0" align="center"  cellpadding="2"  cellspacing="0">
  	<tr>
- 	  <td ><a href="#" class="addbutton" id="fpghjjdwyjcl" onclick='setExportExceldal()'>导出</a></td>
- 	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick='$("#grpfghdwcx").hideAndRemove("show");'>返回</a></td>
+ 	  <td ><a href="#" class="addbutton" id="fpghjjdwdalyj" onclick='setExportExcelyj()'>导出</a></td>
+ 	  <td ><a href="#" class="searchbutton" id="qu_erysyj" onclick='$("#grpfghdwcx").hideAndRemove("show");'>返回</a></td>
  	</tr>
 </table>
 

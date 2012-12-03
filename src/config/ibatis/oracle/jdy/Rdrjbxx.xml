@@ -46,6 +46,7 @@
 		<result property="id" column="id"/>
 		<result property="xh" column="xh"/>
 		<result property="jjr" column="jjr"/>
+		<result property="jjsj" column="jjsj"/>
 		<result property="qymc" column="qymc"/>
 		<result property="wldh" column="wldh"/>
 		<result property="sjr" column="sjr"/>
@@ -342,7 +343,7 @@
 	<!-- 公安端个人频繁更换寄件单位统     预警      详细信息列表   -->    
     <select id="pfghjjdwyj.getListPageCount" resultClass="Integer" parameterClass="map" >
 		select count(1) from( 
-			select id id,jjr jjr,qymc qymc,wldh wldh,sjr sjr,sjrdh sjrdh,sjrxxdz sjrxxdz,sfcl sfcl,gxdwbm gxdwbm,gxdwmc gxdwmc,djxh djxh
+			select id id,jjr jjr,jjsj jjsj,qymc qymc,wldh wldh,sjr sjr,sjrdh sjrdh,sjrxxdz sjrxxdz,sfcl sfcl,gxdwbm gxdwbm,gxdwmc gxdwmc,djxh djxh
 			from t_grpfghjjdw gr
 			where 1=1
 			      and sfcl='0' 
@@ -354,7 +355,7 @@
 	<select id="pfghjjdwyj.getListPage" resultMap="grpfghjjdwgadyj" parameterClass="map">
 	select x.* from (
 		select rownum rowno,z.* from(
-			select id id,rownum xh,jjr jjr,qymc qymc,wldh wldh,sjr sjr,sjrdh sjrdh,sjrxxdz sjrxxdz,sfcl sfcl,gxdwbm gxdwbm,gxdwmc gxdwmc,djxh djxh
+			select id id,rownum xh,jjr jjr,jjsj jjsj,qymc qymc,wldh wldh,sjr sjr,sjrdh sjrdh,sjrxxdz sjrxxdz,sfcl sfcl,gxdwbm gxdwbm,gxdwmc gxdwmc,djxh djxh
 			from t_grpfghjjdw  gr
 			where 1=1
 			      and sfcl='0' 
