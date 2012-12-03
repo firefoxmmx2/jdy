@@ -6,6 +6,7 @@ import java.util.Map;
 import com.aisino2.core.dao.BaseDao;
 import com.aisino2.core.dao.Page;
 import com.aisino2.jdy.dao.IRdrjbxxDao;
+import com.aisino2.jdy.domain.Grpfghjjdw_yjcl;
 import com.aisino2.jdy.domain.Rdrjbxx;
 
 public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
@@ -98,30 +99,64 @@ public class RdrjbxxDaoImpl extends BaseDao implements IRdrjbxxDao {
 			sort = "";
 		else if(!sort.equals("asc") && !sort.equals("desc"))
 			sort = " asc ";
-		if (dir!=null){
-			if("0".equals(dir))
-				sCol = " djxh "+ sort;
-			else if("1".equals(dir))
-				sCol = " xh "+ sort;
-			else if("2".equals(dir))
-				sCol = " jjrxm "+ sort;
-			else if("3".equals(dir))
-				sCol = " jjsj "+ sort;
-			else if("4".equals(dir))
-				sCol = " cjqy "+ sort;
-			else if("5".equals(dir))
-				sCol = " wldh "+ sort;
-			else if("6".equals(dir))
-				sCol = " sjrxm "+ sort;
-			else if("7".equals(dir))
-				sCol = " sjrdh "+ sort;
-			else if("8".equals(dir))
-				sCol = " sjrxxdz "+ sort;
-			else 
-				sCol=" xh ";
+		if("YWLC".equals(map.get("yjhywlcqbbz"))){
+			if (dir!=null){
+				if("0".equals(dir))
+					sCol = " djxh "+ sort;
+				else if("1".equals(dir))
+					sCol = " xh "+ sort;
+				else if("2".equals(dir))
+					sCol = " jjrxm "+ sort;
+				else if("3".equals(dir))
+					sCol = " jjsj "+ sort;
+				else if("4".equals(dir))
+					sCol = " cjqy "+ sort;
+				else if("5".equals(dir))
+					sCol = " wldh "+ sort;
+				else if("6".equals(dir))
+					sCol = " sjrxm "+ sort;
+				else if("7".equals(dir))
+					sCol = " sjrdh "+ sort;
+				else if("8".equals(dir))
+					sCol = " sjrxxdz "+ sort;
+				else 
+					sCol=" xh ";
+			}
+			map.put("pageSort", sCol);
+			return queryForPage("fghjjdwtjcxdal.getListPage", map, pageno,pagesize);
+		}else{
+			if (dir!=null){
+				if("0".equals(dir))
+					sCol = " djxh "+ sort;
+				else if("1".equals(dir))
+					sCol = " xh "+ sort;
+				else if("2".equals(dir))
+					sCol = " jjr "+ sort;
+				else if("3".equals(dir))
+					sCol = " jjsj "+ sort;
+				else if("4".equals(dir))
+					sCol = " qymc "+ sort;
+				else if("5".equals(dir))
+					sCol = " wldh "+ sort;
+				else if("6".equals(dir))
+					sCol = " sjr "+ sort;
+				else if("7".equals(dir))
+					sCol = " sjrdh "+ sort;
+				else if("8".equals(dir))
+					sCol = " sjrxxdz "+ sort;
+				else 
+					sCol=" xh ";
+			}
+			map.put("pageSort", sCol);
+			return queryForPage("pfghjjdwyj.getListPage", map, pageno,pagesize);
 		}
-		map.put("pageSort", sCol);
-		return queryForPage("fghjjdwtjcxdal.getListPage", map, pageno,pagesize);
+		
+	}
+	/**
+	 * 个人频繁更换基建单位  处理方法
+	 */
+	public void grpfghdwclcz(Grpfghjjdw_yjcl grpfghjjdw_yjcl) {
+		update("grpfghjjdw.update", grpfghjjdw_yjcl);
 	}
 
 }
