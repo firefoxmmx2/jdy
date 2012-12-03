@@ -116,6 +116,7 @@
 	                      	         '2':{tablename:'tylxfs',title:"同一联系方式出现不同身份信息查询"}
 	                            };
 	var validate_style=0;
+	var sjgl_verify_url = 'jdy/verifySlgjtj_jdytjxx.action';
 	
 	function sjglDetail(param){
 		detailDialog(sjgl_detail_div,sjgl_detail_widh,sjgl_detail_page_url,param);
@@ -141,6 +142,27 @@
 											noSortColIndex:[5],	
 // 											colIndex: [0,1,2],
 											onRowSelect:null,
+											changeHref:function(table){
+												//根据处理状态显示文本信息
+												jtable = $(table);
+												jtable.find('tr').each(function(idx){
+													var jrow = $(this);
+													jrow.attr('rowid',idx);
+													var jcell = jrow.find('td:nth(5)');
+													
+													var xm = jrow.find('td:nth(0)').text();
+													var lxdh = jrow.find('td:nth(1)').text();
+													var xxdz = jrow.find('td:nth(2)').text();
+													var rhlx = jrow.find('td:nth(4)').text();
+													if(jcell.text() == '1')
+														jcell.text('已核实不再预警');
+													else{
+														jcell.text('未核实');
+														jrow.find('td:last').append('<a href="#" class="fontbutton" title="核实" onclick="verify(\''+xm+'\',\''+lxdh+'\',\''+xxdz+'\',\''+rhlx+'\',\''+jrow.attr('rowid')+'\');">核实</a>');
+													}
+														
+												});
+											},
 											ingridComplete:function(){
 												$('#'+sjgl_div+" table tbody tr").each(function(){
 													var row = $(this);
@@ -172,11 +194,32 @@
 												
 											},
 											hideColIndex:[4],
-											colWidths: ['20%','20%','20%','20%','0%','20%']								
+											colWidths: ['16.6%','16.6%','16.6%','16.6%','0%','16.6%','16.6%']								
 										});				
 			}
 	}
-	
+	/***
+	* 核实处理
+	*/
+	function verify(xm,lxdh,xxdz,rhlx,rowid){
+		var params = {
+				'rdrjbxx.xm':xm,
+				'rdrjbxx.lxdh':lxdh,
+				'rdrjbxx.xxdz':xxdz,
+				'rdrjbxx.jdrylx':rhlx
+		};
+		$.post(sjgl_verify_url,params,function(data){
+			if(data.result == 'success'){
+				var jrow = $('#'+sjgl_div+' tr[rowid="'+rowid+'"]');
+				jrow.find('td:nth(5)').text('已核实不再预警');
+				jrow.find('td:last a[title="核实"]').remove();
+			}
+			else{
+				jAlert(data.result,'提示');
+			}
+		},'json');
+		
+	}
 	//查询验证
 	function manVerify_sjgl(){
 // 		var paramTypeVal = $('input[name=paramType]:checked').val();
@@ -392,7 +435,8 @@
 	    	<th datafield="sjgl_xxdz">地址</th>
 	    	<th>业务类型</th>
 	    	<th>类型实际值</th>
-	    	<th>业务详情</th>
+	    	<th>预警核实情况</th>
+	    	<th>操作</th>
 	    </tr>
 	  </thead>
 	</table>	

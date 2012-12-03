@@ -160,7 +160,7 @@ background-attachment: fixed;}
 	    	 getMsg();
 	     },120*1000);
 
-	     $('#closebutton1').click(function(){ $('#msg2').slideUp(1000); });
+	     $('#closebutton1').click(function(){ $('#msg2').slideUp(1000,function(){closemusic();}); });
 	});
 	//消息滚动
 	function scrollNews(obj) {  
@@ -192,6 +192,7 @@ background-attachment: fixed;}
  		   dataType:"json",
  		   success: function(msg){
  			  if(msg!=""&&msg.lxxts!=""&&msg.lxxts.length>0){
+ 				 
  				 $("#msgUl").empty();
  				  for(var i=0;i<msg.lxxts.length;i++){
  					  var xxts=msg.lxxts[i];
@@ -203,7 +204,8 @@ background-attachment: fixed;}
  					$("#msgUl").find("li:last").find('a').click(function(){setXxtsZt(xxts.id);});
  				  }
  	 		     $('#msg2').slideDown(1000,function(){
- 	 		    	 setTimeout(function(){$('#msg2').slideUp(1000)},60 * 1000);
+ 	 		    	playmusic();//打开报警音乐
+ 	 		    	 setTimeout(function(){$('#msg2').slideUp(1000,function(){closemusic();})},60 * 1000);
  	 		    	 if($("#msgUl").find("li").length>9){
  	 		    		 var scrollTimer;  
  	  	    		    $("#twitter").hover(function() {  

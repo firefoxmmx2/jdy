@@ -25,6 +25,7 @@ import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Jdytjxx;
+import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IJdytjxxService;
 import com.aisino2.publicsystem.domain.Qyjbxx;
@@ -85,6 +86,31 @@ public class JdytjAction extends PageAction {
 	 * 企业基本信息列表结果用
 	 */
 	private List<Qyjbxx> qyjbxxlist;
+
+	/**
+	 * 揽件信息
+	 */
+	private Ljjbxx ljjbxx;
+	/**
+	 * 数据关联查询条件,不包含已处理过的数据关联结果 
+	 */
+	private String nosjjgdone;
+	
+	public String getNosjjgdone() {
+		return nosjjgdone;
+	}
+
+	public void setNosjjgdone(String nosjjgdone) {
+		this.nosjjgdone = nosjjgdone;
+	}
+
+	public Ljjbxx getLjjbxx() {
+		return ljjbxx;
+	}
+
+	public void setLjjbxx(Ljjbxx ljjbxx) {
+		this.ljjbxx = ljjbxx;
+	}
 
 	public List<Qyjbxx> getQyjbxxlist() {
 		return qyjbxxlist;
@@ -378,6 +404,24 @@ public class JdytjAction extends PageAction {
 	}
 
 	/**
+	 * 数据关联度分析核实
+	 * @return
+	 * @throws Exception
+	 */
+	public String verifySlgjtj() throws Exception{
+		try{
+			if(rdrjbxx == null)
+				throw new RuntimeException("数据关联度分析核实参数传递错误");
+			jdytjxx_service.insertVerifySjgltj(rdrjbxx);
+			this.result = SUCCESS;
+		}catch(RuntimeException e){
+			log.error(e);
+			log.debug(e,e.fillInStackTrace());
+			this.result = e.getMessage();
+		}
+		return SUCCESS;
+	}
+	/**
 	 * 数据关联度分析查询
 	 * 
 	 * @return
@@ -398,6 +442,10 @@ public class JdytjAction extends PageAction {
 				if(StringUtil.isNotEmpty(rdrjbxx.getZjhm()))
 					//设置证件类型为身份证号码
 					paras.put("zjlx", "11");
+				//添加揽件时间筛选
+				if(ljjbxx != null && (ljjbxx.getLjsjf() != null || ljjbxx.getLjsjt() != null))
+					paras.put("ljjbxx", ljjbxx);
+				paras.put("nosjjgdone", nosjjgdone);
 			Page page = jdytjxx_service.getSjgltj(paras, pagesize, pagerow,
 					sort, dir);
 
@@ -431,7 +479,8 @@ public class JdytjAction extends PageAction {
 		lPro.add("xxdz");
 		lPro.add("jdrylxmc");
 		lPro.add("jdrylx");
-
+		lPro.add("zt");
+		
 		List lCols = new ArrayList();
 		List lDetail = new ArrayList();
 		lDetail.add("setLjxxDetail");

@@ -3,10 +3,13 @@ package com.aisino2.jdy.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.service.BaseService;
 import com.aisino2.jdy.dao.IJdytjxxDao;
+import com.aisino2.jdy.dao.ISjgljgDao;
 import com.aisino2.jdy.domain.Jdytjxx;
+import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IJdytjxxService;
 
 /**
@@ -16,9 +19,15 @@ import com.aisino2.jdy.service.IJdytjxxService;
  */
 public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 	private IJdytjxxDao jdytjxxDao;
+	private ISjgljgDao sjgljgDao;
 	
 	
 	
+	public void setSjgljgDao(ISjgljgDao sjgljgDao) {
+		this.sjgljgDao = sjgljgDao;
+	}
+
+
 	public void setJdytjxxDao(IJdytjxxDao jdytjxxDao) {
 		this.jdytjxxDao = jdytjxxDao;
 	}
@@ -130,6 +139,26 @@ public class JdytjxxServiceImpl extends BaseService implements IJdytjxxService {
 	public Page findZdryForPage(Map<String, Object> params, int pageno,
 			int pagesize, String sort, String dir) {
 		return jdytjxxDao.findZdryForPage(params, pageno, pagesize, sort, dir);
+	}
+
+	/**
+	 * 数据关联度分析核实
+	 * */
+	public Rdrjbxx insertVerifySjgltj(Rdrjbxx rdrjbxx) {
+		if(rdrjbxx==null)
+			throw new RuntimeException("核实结果参数为空");
+		if (!StringUtil.isNotEmpty(rdrjbxx.getXm()))
+			throw new RuntimeException("核实结果姓名为空");
+		if (!StringUtil.isNotEmpty(rdrjbxx.getLxdh()))
+			throw new RuntimeException("核实结果联系电话为空");
+		if (!StringUtil.isNotEmpty(rdrjbxx.getXxdz()))
+			throw new RuntimeException("核实结果地址为空");
+		if (!StringUtil.isNotEmpty(rdrjbxx.getJdrylx()))
+			throw new RuntimeException("核实结果人员类型为空");
+		rdrjbxx.setZt(Rdrjbxx.ZT_VERIFIED);
+		sjgljgDao.insertSjgljg(rdrjbxx);
+		
+		return rdrjbxx;
 	}
 
 }

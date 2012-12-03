@@ -1,51 +1,15 @@
 package com.aisino2.jdy.action;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.struts2.ServletActionContext;
-
-import sun.misc.BASE64Encoder;
-
-import com.aisino2.cache.CacheManager;
-import com.aisino2.common.DateToString;
-import com.aisino2.common.ImageUtil;
-import com.aisino2.common.PageUtil;
-import com.aisino2.common.QjblUtil;
-import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
-import com.aisino2.jdy.domain.Jddxzpxx;
 import com.aisino2.jdy.domain.Jdpxx;
-import com.aisino2.jdy.domain.Jdytjxx;
 import com.aisino2.jdy.domain.Ljjbxx;
-import com.aisino2.jdy.domain.Pjjbxx;
 import com.aisino2.jdy.service.IJdpxxService;
-import com.aisino2.jdy.service.IJdytjxxService;
-import com.aisino2.jdy.service.ILjjbxxService;
-import com.aisino2.jdy.service.IPjjbxxService;
-import com.aisino2.publicsystem.domain.Qyjbxx;
-import com.aisino2.publicsystem.domain.Qyryxx;
-import com.aisino2.sysadmin.Constants;
-import com.aisino2.sysadmin.domain.Dict_item;
-import com.aisino2.sysadmin.domain.User;
-import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 物品类别预警设置action
@@ -70,7 +34,7 @@ public class WpyjszjAction extends PageAction {
 		this.itemId = itemId;
 	}
 
-	private Jdpxx jdpxx;
+	private Jdpxx jdpxx=new Jdpxx();
 	private IJdpxxService jdpxxService;
 	private List lJdpxx=new ArrayList();
 	public List getlJdpxx() {
@@ -176,13 +140,24 @@ public class WpyjszjAction extends PageAction {
 		return SUCCESS;
 	}
 	/**
+	 * 设置寄递品预警标识
+	 * @return
+	 */
+	public String setJdpyjbz(){
+		jdpxx.setId(Integer.parseInt(this.itemId));
+		jdpxx.setYjbz("N");
+		jdpxxService.updateJdpxx(jdpxx);
+		this.result = "success";
+		return SUCCESS;
+	}
+	/**
 	 *  查询揽件中有预警物品的处理信息
 	 * @return
 	 */
 	public String findYjwuclList(){
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
-			Page pageinfo = jdpxxService.findYjwuclList(params,pagesize,pagerow, "", "");
+			Page pageinfo = jdpxxService.findYjwuclList(params,pagesize,pagerow, dir, sort);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
 			lJdpxx = pageinfo.getData();
@@ -198,7 +173,7 @@ public class WpyjszjAction extends PageAction {
 	
 	private void setYjwuclTableData(List lData) throws ParseException {
 		List lPro = new ArrayList();
-		lPro.add("jdpxxid");
+		lPro.add("ywcxbz");
 		lPro.add("qymc");
 		lPro.add("wldh");
 		lPro.add("jjrxm");
@@ -216,7 +191,7 @@ public class WpyjszjAction extends PageAction {
 		lCol.add(lDetail);
 		
 		List lDispose = new ArrayList();
-		lDispose.add("removeYjwpxx");
+		lDispose.add("setJdpyjbz");
 		lDispose.add("处理");
 		lCol.add(lDispose);
 

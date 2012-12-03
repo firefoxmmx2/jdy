@@ -25,4 +25,6 @@
 	<sqlMap resource="config/ibatis/oracle/jdy/Yjcs.xml"/>
 <!-- 	消息提示 -->
 	<sqlMap resource="config/ibatis/oracle/jdy/Xxts.xml"/>
+<!-- 	数据关联度分析结果 -->
+	<sqlMap resource="config/ibatis/oracle/jdy/Sjgljg.xml"/>
 </sqlMapConfig>
