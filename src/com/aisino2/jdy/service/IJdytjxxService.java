@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.aisino2.core.dao.Page;
 import com.aisino2.jdy.domain.Jdytjxx;
+import com.aisino2.jdy.domain.Rdrjbxx;
 
 public interface IJdytjxxService {
 	List<Jdytjxx> getJjltj(Map<String, Object> map);
@@ -82,4 +83,10 @@ public interface IJdytjxxService {
 	 */
 	Page findZdryForPage(Map<String, Object> params, int pagesize, int pagerow,
 			String sort, String dir);
+	
+	/**
+	 * 数据关联度分析核实
+	 * @param rdrjbxx
+	 */
+	Rdrjbxx insertVerifySjgltj(Rdrjbxx rdrjbxx);
 }

@@ -31,6 +31,7 @@
 		<result property="lxdh" column="lxdh"/>
 		<result property="xxdz" column="xxdz"/>
 		<result property="jdrylx" column="jdrylx"/>
+		<result property="zt" column="zt"/>
 	</resultMap>
 	
 <!-- 	寄递业运行情况 -->
@@ -252,7 +253,7 @@
 <!-- 	数据关联读分析统计查询 -->
 	<select id="Jdytjxx.sjgltj" parameterClass="map" resultMap="sjgltj_rm">
 		select x.* from (
-			select rownum rowno,z.*,sjjg.zt from 
+			select rownum rowno,z.*,case  when  sjjg.zt is null then '0' else sjjg.zt  end zt from 
 				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz xxdz,rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
 					where 1=1
@@ -265,7 +266,8 @@
                                               and z.lxdh = sjjg.lxdh
                                               and z.xxdz = sjjg.xxdz
                                               and z.jdrylx = sjjg.rhlx 
-                                              and sjjg.zt = 0) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+                                              and sjjg.zt = '1' 
+                                              ) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
 	</select>
 	
 	<select id="Jdytjxx.sjgltjCount" parameterClass="map" resultClass="int">

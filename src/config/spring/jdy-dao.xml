@@ -41,4 +41,9 @@
 	<bean id="YjcsDaoImpl" class="com.aisino2.jdy.dao.impl.YjcsDaoImpl">
 		<property name="sqlMapClient" ref="sqlMapJdysys" />
 	</bean>
+<!-- 	数据关联度处理结果 -->
+	<bean id="SjgljgDaoImpl" class="com.aisino2.jdy.dao.impl.SjgljgDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapJdysys" />
+	</bean>
+	
 </beans>

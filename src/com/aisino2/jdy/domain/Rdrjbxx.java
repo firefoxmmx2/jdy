@@ -10,7 +10,14 @@ import java.util.Date;
  *
  */
 public class Rdrjbxx implements Serializable {
-    
+    /**
+     * 核实状态 已核实
+     */
+    public static final String ZT_VERIFIED = "1";
+    /**
+     * 核实状态 未核实
+     */
+    public static final String ZT_NOVERIFy = "0";
     /**
      * #寄件人收件人主键
      */
@@ -67,6 +74,18 @@ public class Rdrjbxx implements Serializable {
 	 * 寄递人员类型
 	 */
 	private String jdrylx;
+	
+	/**
+	 * 核实状态 
+	 */
+	private String zt;
+	
+	public String getZt() {
+		return zt;
+	}
+	public void setZt(String zt) {
+		this.zt = zt;
+	}
 	/**
 	 * 返回寄递人员全部地址
 	 * @return

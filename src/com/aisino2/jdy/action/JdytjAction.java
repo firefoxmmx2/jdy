@@ -378,6 +378,24 @@ public class JdytjAction extends PageAction {
 	}
 
 	/**
+	 * 数据关联度分析核实
+	 * @return
+	 * @throws Exception
+	 */
+	public String verifySlgjtj() throws Exception{
+		try{
+			if(rdrjbxx == null)
+				throw new RuntimeException("数据关联度分析核实参数传递错误");
+			jdytjxx_service.insertVerifySjgltj(rdrjbxx);
+			this.result = SUCCESS;
+		}catch(RuntimeException e){
+			log.error(e);
+			log.debug(e,e.fillInStackTrace());
+			this.result = e.getMessage();
+		}
+		return SUCCESS;
+	}
+	/**
 	 * 数据关联度分析查询
 	 * 
 	 * @return
@@ -431,7 +449,8 @@ public class JdytjAction extends PageAction {
 		lPro.add("xxdz");
 		lPro.add("jdrylxmc");
 		lPro.add("jdrylx");
-
+		lPro.add("zt");
+		
 		List lCols = new ArrayList();
 		List lDetail = new ArrayList();
 		lDetail.add("setLjxxDetail");

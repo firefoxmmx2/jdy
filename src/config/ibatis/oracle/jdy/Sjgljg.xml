@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Rdrjbxx" type="com.aisino2.jdy.domain.Rdrjbxx"/>
+	<cacheModel id="oneDayCategory" type="LRU">
+		<flushInterval hours="24"/>
+	</cacheModel>
+	
+	<!-- 寄递对象信息结果集 -->
+	<resultMap class="Rdrjbxx" id="sjgljg_rm">
+		<result property="id" column="id"/>
+		<result property="xm" column="xm"/>
+		<result property="xxdz" column="xxdz"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="jdrylx" column="rhlx"/>
+		<result property="zt" column="zt"/>
+	</resultMap>
+	
+	<insert id="Sjgljg.insert" parameterClass="Rdrjbxx">
+		insert into t_sjglcljg (
+			<dynamic prepend=" ">
+				<isNotNull prepend="," property="id">
+					id
+				</isNotNull>
+				<isNotNull prepend="," property="xm">
+					xm
+				</isNotNull>
+				<isNotNull prepend="," property="xxdz">
+					xxdz
+				</isNotNull>
+				<isNotNull prepend="," property="lxdh">
+					lxdh
+				</isNotNull>
+				<isNotNull prepend="," property="jdrylx">
+					rhlx
+				</isNotNull>
+				<isNotNull prepend="," property="zt">
+					zt
+				</isNotNull>
+			</dynamic>
+		)
+		values(
+			<dynamic prepend=" ">
+				<isNotNull prepend="," property="id">
+					#id#
+				</isNotNull>
+				<isNotNull prepend="," property="xm">
+					#xm#
+				</isNotNull>
+				<isNotNull prepend="," property="xxdz">
+					#xxdz#
+				</isNotNull>
+				<isNotNull prepend="," property="lxdh">
+					#lxdh#
+				</isNotNull>
+				<isNotNull prepend="," property="jdrylx">
+					#jdrylx#
+				</isNotNull>
+				<isNotNull prepend="," property="zt">
+					#zt#
+				</isNotNull>
+			</dynamic>
+		)
+	</insert>
+</sqlMap>
