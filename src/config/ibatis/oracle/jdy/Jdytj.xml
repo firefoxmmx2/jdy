@@ -106,6 +106,13 @@
 		<isNotEmpty prepend="and" property="ssx">
 			rdrjbxx.ssx = #ssx#
 		</isNotEmpty>
+		<!-- v2.2新增证件号码,证件类型 -->
+		<isNotEmpty prepend="and" property="zjhm">
+			rdrjbxx.zjhm = #zjhm#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="zjlx">
+			rdrjbxx.zjlx = #zjlx#
+		</isNotEmpty>
 	</sql>
 	<sql id="JdytjxxWhere">
 		<isNotEmpty prepend="and" property="pjsjf">
@@ -245,7 +252,7 @@
 <!-- 	数据关联读分析统计查询 -->
 	<select id="Jdytjxx.sjgltj" parameterClass="map" resultMap="sjgltj_rm">
 		select x.* from (
-			select rownum rowno,z.* from 
+			select rownum rowno,z.*,sjjg.zt from 
 				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz xxdz,rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
 					where 1=1
@@ -254,7 +261,11 @@
 						and rdrjbxx.jdrylx != '30'
 					</dynamic>
 					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
-		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		order by $pageSort$)  z left join t_sjglcljg sjjg on z.xm = sjjg.xm 
+                                              and z.lxdh = sjjg.lxdh
+                                              and z.xxdz = sjjg.xxdz
+                                              and z.jdrylx = sjjg.rhlx 
+                                              and sjjg.zt = 0) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
 	</select>
 	
 	<select id="Jdytjxx.sjgltjCount" parameterClass="map" resultClass="int">

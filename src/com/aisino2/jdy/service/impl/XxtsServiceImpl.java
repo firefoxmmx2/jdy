@@ -36,6 +36,9 @@ public class XxtsServiceImpl implements IXxtsService {
 		}
 		
 	}
+	public void updateXxyhzt(Xxyh xxyh){
+		xxtsDao.updateXxyhzt(xxyh);
+	}
 	
 	/**
 	 * 删除消息
