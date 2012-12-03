@@ -13,9 +13,24 @@ var pageUrl="jdy/findYjwpPage_wpyjsz.action";
 var addYjwpUrl="jdy/setYjwp_wpyjsz.action";
 $(document).ready(function() {
 	//寄递物品联动下拉列表
-	selectboxlink("jdwpdl","jdwpxl","dm_jdwpdl");
+	selectboxlink_new("jdwpdl","jdwpxl","dm_jdwpdl");
 	loadPageWplbbkysQuery(Wplbbkys_grid_div);
 }); 
+function selectboxlink_new(firstId,secondId,dicDM){
+    var firstdm;
+    // 主控件初期化
+    $("#"+firstId).selectBox({code:dicDM,query:0});
+    // 辅控件初期化
+    $("#"+secondId).selectBox({state:"1"});
+	
+    firstdm=$("#"+firstId).find("option:nth(0)").attr("item");
+	//$("#"+secondId).selectBox({code:dicDM,query:firstdm});
+
+    $("#"+firstId).change(function(){
+        firstdm = $("#"+firstId).find("option:selected").attr("item");
+	    $("#"+secondId).selectBox({code:dicDM,query:firstdm});
+    });
+}
 function loadPageWplbbkysQuery(divpageid){
 	Wplbbkys_table_html=$("#"+divpageid).html();
 	setPageListWplbbkys(1);
