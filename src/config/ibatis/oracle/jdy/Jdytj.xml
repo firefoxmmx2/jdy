@@ -114,6 +114,14 @@
 		<isNotEmpty prepend="and" property="zjlx">
 			rdrjbxx.zjlx = #zjlx#
 		</isNotEmpty>
+		<isNotEmpty prepend="" property="ljjbxx">
+			<isNotEmpty prepend="and" property="ljjbxx.ljsjf">
+				lj.ljsj >= #ljjbxx.ljsjf#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ljjbxx.ljsjt">
+				lj.ljsj &lt;= #ljjbxx.ljsjt#
+			</isNotEmpty>
+		</isNotEmpty>
 	</sql>
 	<sql id="JdytjxxWhere">
 		<isNotEmpty prepend="and" property="pjsjf">
@@ -256,6 +264,11 @@
 			select rownum rowno,z.*,case  when  sjjg.zt is null then '0' else sjjg.zt  end zt from 
 				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz xxdz,rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
+					<dynamic prepend=" ">
+						<isNotEmpty prepend=" " property="ljjbxx">
+							join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
+						</isNotEmpty>
+					</dynamic>
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
@@ -266,19 +279,117 @@
                                               and z.lxdh = sjjg.lxdh
                                               and z.xxdz = sjjg.xxdz
                                               and z.jdrylx = sjjg.rhlx 
-                                              and sjjg.zt = '1' 
-                                              ) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+                                              and sjjg.zt = '1'
+                                              	<!-- 弹出未处理并且满足预警参数 -->
+                                              	<isNotEmpty property="tcwcl">
+                                              		join (
+                                              			<!-- 需要预警参数字段,比如姓名,联系电话 -->
+                                              			select 
+                                              					<isEqual property="yjcs_cl" compareValue="1"> xm </isEqual>
+                                              					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 
+                                              			from (
+															SELECT
+															    rdrjbxx.xm,
+															    rdrjbxx.lxdh,
+															    rdrjbxx.xxdz xxdz,
+															    rdrjbxx.jdrylx
+															  FROM t_rdrjbxx rdrjbxx
+															  JOIN t_ljjbxx lj ON lj.jjr_id = rdrjbxx.id OR lj.sjr_id = rdrjbxx.id
+															  WHERE 1=1 
+															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
+															    and lj.ljsj &lt;=trunc(sysdate,'dd')
+															    AND rdrjbxx.jdrylx != '30'
+															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
+															        AND rdrjbxx.lxdh     = sjjg.lxdh
+															        AND rdrjbxx.xxdz     = sjjg.xxdz
+															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+															        AND sjjg.zt    = 1
+															    )
+															  GROUP BY rdrjbxx.xm,
+															    rdrjbxx.lxdh,
+															    rdrjbxx.xxdz,
+															    rdrjbxx.jdrylx
+															) group by
+																<isEqual property="yjcs_cl" compareValue="1"> xm </isEqual>
+                                              					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 
+																 having count(1) > <isNotEmpty property="cgcs">#cgcs#</isNotEmpty> ) c on 
+																<isEqual property="yjcs_cl" compareValue="1"> c.xm = z.xm </isEqual>
+                                              					<isEqual property="yjcs_cl" compareValue="2"> c.lxdh = z.lxdh </isEqual>  
+
+                                              	</isNotEmpty>
+                                              <dynamic prepend="where">
+                                              	<isNotEmpty prepend="and" property="nosjjgdone">
+	                                              	sjjg.zt is null
+	                                              </isNotEmpty>
+                                              </dynamic>
+                                              ) x where 
+                                              rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+                                              
 	</select>
 	
 	<select id="Jdytjxx.sjgltjCount" parameterClass="map" resultClass="int">
-		select count(1) from (select 1
+		select count(1) from (select 
+								rdrjbxx.xm,
+							    rdrjbxx.lxdh,
+							    rdrjbxx.xxdz xxdz,
+							    rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
+					<dynamic prepend=" ">
+						<isNotEmpty prepend=" " property="ljjbxx">
+							join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
+						</isNotEmpty>
+					</dynamic>
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
+						<isNotEmpty property="nosjjgdone">
+						and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
+															        AND rdrjbxx.lxdh     = sjjg.lxdh
+															        AND rdrjbxx.xxdz     = sjjg.xxdz
+															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+															        AND sjjg.zt    = 1
+															    )
+						</isNotEmpty>
 					</dynamic>
-					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx)
+					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx) z 
+						
+                                              	<!-- 弹出未处理并且满足预警参数 -->
+                                              	<isNotEmpty property="tcwcl">
+                                              		join (
+                                              			<!-- 需要预警参数字段,比如姓名,联系电话 -->
+                                              			select 
+                                              				<isEqual property="yjcs_cl" compareValue="1"> xm </isEqual>
+                                              				<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual>
+                                              			from (
+															SELECT
+															    rdrjbxx.xm,
+															    rdrjbxx.lxdh,
+															    rdrjbxx.xxdz xxdz,
+															    rdrjbxx.jdrylx
+															  FROM t_rdrjbxx rdrjbxx
+															  JOIN t_ljjbxx lj ON lj.jjr_id = rdrjbxx.id OR lj.sjr_id = rdrjbxx.id
+															  WHERE 1=1 
+															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
+															    and lj.ljsj &lt;=trunc(sysdate,'dd')
+															    AND rdrjbxx.jdrylx != '30'
+															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
+															        AND rdrjbxx.lxdh     = sjjg.lxdh
+															        AND rdrjbxx.xxdz     = sjjg.xxdz
+															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+															        AND sjjg.zt    = 1
+															    )
+															  GROUP BY rdrjbxx.xm,
+															    rdrjbxx.lxdh,
+															    rdrjbxx.xxdz,
+															    rdrjbxx.jdrylx
+															) group by
+																<isEqual property="yjcs_cl" compareValue="1"> xm </isEqual>
+                                              					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 
+																 having count(1) > <isNotEmpty property="cgcs">#cgcs#</isNotEmpty>) c on 
+																<isEqual property="yjcs_cl" compareValue="1"> c.xm = z.xm </isEqual>
+                                              					<isEqual property="yjcs_cl" compareValue="2"> c.lxdh = z.lxdh </isEqual> 
+                                              	</isNotEmpty>
 	</select>
 	
 <!-- 	寄递业运行情况统计记数 -->

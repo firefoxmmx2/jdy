@@ -3,7 +3,6 @@ package com.aisino2.jdy.action;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -96,6 +95,44 @@ public class JdytjAction extends PageAction {
 	 */
 	private String nosjjgdone;
 	
+	/**
+	 * 预警参数字段 
+	 */
+	private String yjcs_cl;
+	/**
+	 * 超过次数
+	 */
+	private String cgcs;
+	/**
+	 * 关联预警未处理标识
+	 */
+	private String tcwcl;
+	
+	
+	public String getYjcs_cl() {
+		return yjcs_cl;
+	}
+
+	public void setYjcs_cl(String yjcs_cl) {
+		this.yjcs_cl = yjcs_cl;
+	}
+
+	public String getCgcs() {
+		return cgcs;
+	}
+
+	public void setCgcs(String cgcs) {
+		this.cgcs = cgcs;
+	}
+
+	public String getTcwcl() {
+		return tcwcl;
+	}
+
+	public void setTcwcl(String tcwcl) {
+		this.tcwcl = tcwcl;
+	}
+
 	public String getNosjjgdone() {
 		return nosjjgdone;
 	}
@@ -443,9 +480,13 @@ public class JdytjAction extends PageAction {
 					//设置证件类型为身份证号码
 					paras.put("zjlx", "11");
 				//添加揽件时间筛选
-				if(ljjbxx != null && (ljjbxx.getLjsjf() != null || ljjbxx.getLjsjt() != null))
+				if(ljjbxx != null && ((ljjbxx.getLjsjf() != null || ljjbxx.getLjsjt() != null)
+					|| (ljjbxx.getQyjbxx() != null &&  (ljjbxx.getQyjbxx().getGxdwbm() != null))))
 					paras.put("ljjbxx", ljjbxx);
 				paras.put("nosjjgdone", nosjjgdone);
+				paras.put("yjcs_cl", yjcs_cl);
+				paras.put("tcwcl", tcwcl);
+				paras.put("cgcs", cgcs);
 			Page page = jdytjxx_service.getSjgltj(paras, pagesize, pagerow,
 					sort, dir);
 
