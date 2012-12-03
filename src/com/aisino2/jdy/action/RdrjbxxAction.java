@@ -20,6 +20,7 @@ import com.aisino2.common.QjblUtil;
 import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
+import com.aisino2.jdy.domain.Grpfghjjdw_yjcl;
 import com.aisino2.jdy.domain.Rdrjbxx;
 import com.aisino2.jdy.service.IRdrjbxxService;
 import com.aisino2.sysadmin.Constants;
@@ -41,11 +42,15 @@ public class RdrjbxxAction extends PageAction {
 	private String result = "";
 	private List<Rdrjbxx> lRdrjbxx = new ArrayList();
 	private IRdrjbxxService rdrjbxxService;
-
+	private List<Grpfghjjdw_yjcl> lGrpfghjjdw_yjcl = new ArrayList();
 
 
 
 	
+
+	public void setlGrpfghjjdw_yjcl(List<Grpfghjjdw_yjcl> lGrpfghjjdw_yjcl) {
+		this.lGrpfghjjdw_yjcl = lGrpfghjjdw_yjcl;
+	}
 
 	public void setRdrjbxxService(IRdrjbxxService rdrjbxxService) {
 		this.rdrjbxxService = rdrjbxxService;
@@ -232,7 +237,7 @@ public class RdrjbxxAction extends PageAction {
 	 *
 	 */
 		public String grpfghdwcxdal() throws Exception {
-		
+		  
 			Map<String, Object> params = new HashMap<String, Object>();
 		    //姓名
 		    if(rdrjbxx.getXm()!=null && StringUtil.isNotEmpty(rdrjbxx.getXm())){
@@ -254,12 +259,20 @@ public class RdrjbxxAction extends PageAction {
 		    			StringUtil.trimEven0(rdrjbxx.getGxdwbm()));
 		    	params.put("gxdwbm", rdrjbxx.getGxdwbm());
 		    }
+		    params.put("yjhywlcqbbz", rdrjbxx.getYjhywlcqbbz());
 
 			Page pageinfo = rdrjbxxService.grpfghjjdwtjcxdalForPage(params, pagesize,pagerow, sort, dir);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
-			lRdrjbxx = pageinfo.getData();
-			setTableDate_grpfghdwcxdal(pageinfo.getData());
+			
+			if("YWLC".equals(rdrjbxx.getYjhywlcqbbz())){
+				lRdrjbxx = pageinfo.getData();
+				setTableDate_grpfghdwcxdal(pageinfo.getData());
+			}else{
+				lGrpfghjjdw_yjcl = pageinfo.getData();
+				setTableDate_grpfghdwyj(pageinfo.getData());
+			}
+			
 			this.result = "success";
 			return SUCCESS;
 		}
@@ -288,6 +301,51 @@ public class RdrjbxxAction extends PageAction {
 			totalrows = this.getTotalrows();
 		}
 		/**
+		 * 个人频繁更换寄件单位----预警统计---详细信息列表setTable解析函数
+		 */
+		private void setTableDate_grpfghdwyj(List<Grpfghjjdw_yjcl> lData) {
+			// TODO Auto-generated method stub
+			List lPro = new ArrayList();
+			lPro.add("id");
+			lPro.add("djxh");
+			lPro.add("xh");
+			lPro.add("jjr");
+			lPro.add("jjsj");
+			lPro.add("qymc");
+			lPro.add("wldh");
+			lPro.add("sjr");
+			lPro.add("sjrdh");
+			lPro.add("sjrxxdz");
+			
+			List lCol = new ArrayList();
+			List lDetail = new ArrayList();
+			lDetail.add("grpfghdwyjcl");
+			lDetail.add("处理");
+			lCol.add(lDetail);
+
+			Grpfghjjdw_yjcl setGrpf = new Grpfghjjdw_yjcl();
+			
+			this.setData(setGrpf, lData, lPro, lCol);
+			this.tabledata = this.getData();
+			totalrows = this.getTotalrows();
+			
+			
+		}
+		/**
+		 * 个人频繁更换寄件单位----预警----处理
+		 */
+		public String grpfghdwclcz() throws Exception {
+			if ( rdrjbxx== null)
+				throw new RuntimeException("需要删除的个人频繁变更寄件单位表ID参数不能为空");
+			Grpfghjjdw_yjcl setGrpfghjjdw_yjcl = new Grpfghjjdw_yjcl();
+			
+			setGrpfghjjdw_yjcl.setId(rdrjbxx.getId());
+			rdrjbxxService.grpfghdwclcz(setGrpfghjjdw_yjcl);
+
+			this.result = SUCCESS;
+			return SUCCESS;
+		}
+		/**
 		 * 个人频繁更换基建单位统计---详细信息列表---导出
 		 *
 		 */
@@ -304,8 +362,23 @@ public class RdrjbxxAction extends PageAction {
 			    			StringUtil.trimEven0(rdrjbxx.getXm()));
 			    	params.put("xm", rdrjbxx.getXm());
 			    }
-			    
-
+			    //开始时间
+			    if(rdrjbxx.getKssj()!=null){
+			    	params.put("kssj", rdrjbxx.getKssj());
+			    }
+			    //结束时间
+			    if(rdrjbxx.getJssj()!=null){
+			    	params.put("jssj", rdrjbxx.getJssj());
+			    }
+			    //管辖单位编码
+			    if(rdrjbxx.getGxdwbm()!=null && StringUtil.isNotEmpty(rdrjbxx.getGxdwbm())){
+			    	rdrjbxx.setGxdwbm(
+			    			StringUtil.trimEven0(rdrjbxx.getGxdwbm()));
+			    	params.put("gxdwbm", rdrjbxx.getGxdwbm());
+			    }
+			    if(null!=rdrjbxx.getYjhywlcqbbz()){
+			    	params.put("yjhywlcqbbz", rdrjbxx.getYjhywlcqbbz());
+			    }
 				Page pageinfo = rdrjbxxService.grpfghjjdwtjcxdalForPage(params, 1,
 						Integer.parseInt(maxRows), tabledata, result);
 				totalpage = pageinfo.getTotalPages();
