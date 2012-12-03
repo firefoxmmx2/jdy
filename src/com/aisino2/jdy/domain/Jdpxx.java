@@ -80,8 +80,14 @@ public class Jdpxx implements Serializable {
 		this.kybz = kybz;
 	}
 	
+	private String yjbz;
 	
-	
+	public String getYjbz() {
+		return yjbz;
+	}
+	public void setYjbz(String yjbz) {
+		this.yjbz = yjbz;
+	}
 	public Kyjdwpxx getKyjdwpxx() {
 		return kyjdwpxx;
 	}

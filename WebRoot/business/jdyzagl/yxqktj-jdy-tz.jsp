@@ -10,7 +10,7 @@
 	var yxqk_jdy_detailid;
 	var searchUrl_jdytjxx;
 	var currentGxdwbm = '<%=gxdwbm%>';
-	
+	var myTableDataBmXxtz="";
 	$(document).ready( function() {
 		QyjbxxList_Html="business/jdyzagl/jdytjxxQyjbxxList.jsp";
 		QyjbxxListWidth="1000";
@@ -26,6 +26,8 @@
 		$("#y_jzsj").val(getDate(currDate,"-"));
 		currDate.setDate(currDate.getDate()-1);
 		$("#y_qssj").val(getDate(currDate,"-"));
+		
+		$("#yxqklb").hide();//隐藏列表
 		setPageListX(1);
 	});
 
@@ -87,12 +89,56 @@
 					
 				});
 			},
+			changeHref:function(table){
+            	try{
+            		myTableDataBmXxtz=null;
+                	var $chart_table = $(table).clone();
+                	myTableDataBmXxtz= $(tablesX).clone().append($chart_table.find('tbody').html());
+					if(myTableDataBmXxtz){
+						displayWpflTjImage();
+					}else{
+						$('#jdytjxx_tx_div').text('没有统计数据');
+					}
+            	}catch(e){
+            		$('#jdytjxx_tx_div').text('没有统计数据');
+            	}
+        	},
 			colIndex:[1,2,4,5,6],
 			colWidths : [ "30%", "11.6%", "11.6%", "11.6%", "11.6%","11.6%","11.6%"]
 		});
 
 	}
-
+	/**
+	 * 运行情况统计图
+	 */
+	function displayWpflTjImage(){
+		$("#jdytjxx_tx_div").empty();
+		$('<div id="jdytjxx_tx_bar" style="float:left;"></div>').appendTo("#jdytjxx_tx_div");
+		$('<div id="jdytjxx_tx_pie" style="float:right;"></div>').appendTo('#jdytjxx_tx_div');
+		if(myTableDataBmXxtz!=null&&myTableDataBmXxtz!=""){
+			$("#jdytjxx_tx_bar").fusionChart({
+				prefix:'ddd',
+				type:'bar',
+				columns:[1],
+				data:myTableDataBmXxtz,
+				title:'运行情况',
+				width:505,
+				height:pageHeight-390,
+				isTotal:true
+			});
+			$("#jdytjxx_tx_pie").fusionChart({
+				prefix:'ddd',
+				type:'pie',
+				columns:[1],
+				data:myTableDataBmXxtz,
+				title:'运行情况',
+				width:505,
+				height:pageHeight-390,
+				isTotal:true
+			});
+			
+		}
+	}
 	//展开企业列表	
 	function queryQyjbxxList(gxdwbm,zjztdm,isWscqycx){
 		var params = {};
@@ -159,6 +205,17 @@
 	function getYxqkQueryParams(){
 		return {'gxdwbm':'<%=gxdwbm%>','departlevel':'<%=departlevel%>'};
 	}
+	//判断图标展示和列表展示
+	function tbzslbzs1(){
+    	$("#yxqklb").hide();//隐藏列表
+    	$("#jdytjxx_tx_div").show();//显示图形
+	}
+	//判断图标展示和列表展示
+	function tbzslbzs2(){
+    	$("#jdytjxx_tx_div").hide();//隐藏图形
+    	$("#yxqklb").show();//显示列表
+	}
+	
 </script>
 		<input type="hidden" id="y_qssj" />
 		<input type="hidden" id="y_jzsj" />
@@ -168,16 +225,20 @@
 			<tr>
 				<td class="queryfont" width='88%'>
 					<table width="100%" cellpadding="0" cellspacing="0">
-						<td width="90%">&nbsp;</td>
+						<td width="90%">&nbsp;
+						<label><input type="radio" name="chartType" id="chartType1" onclick="tbzslbzs1()" value="1" checked="checked">柱状图/饼状图</label>
+						<label><input type="radio" name="chartType" id="chartType2" onclick="tbzslbzs2()" value="2">列表展示</label>
+						</td>
 						<td width="10%"><a href="#" class="exceldcbutton" onclick='setExportExcel_jdyyxtj();' id="dryxtjexcel">导出</a></td>
 					</table>
 				</td>
 			</tr>
-			<tr>
+			<tr id="yxqklb">
 				<td class="tdbg">
 					<div id="XtyxqkylData" style="width: 100%;">
 						<table id="XtyxqkylTable" width="100%">
 							<thead>
+							<tr>
 								<th name="l_gxdwmc" datatype="string" sumflag="0">
 									公安机关
 								</th>
@@ -202,6 +263,7 @@
 <!-- 								<th> -->
 <!-- 									机构级别 -->
 <!-- 								</th> -->
+								</tr>
 							</thead>
 						</table>
 					</div>
@@ -210,3 +272,6 @@
 		</table>
 <div id="jdccjTj_detail"  class="page-layout" src="#"
 		style="top:5px; left:160px;display: none;"></div>
+<div>
+	<div id="jdytjxx_tx_div"></div>
+</div>

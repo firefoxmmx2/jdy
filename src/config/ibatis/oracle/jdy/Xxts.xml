@@ -18,7 +18,7 @@
 	</resultMap>
 	<select id="queryMsgs" parameterClass="Xxts" resultMap="xxts" >
 	 select t.id,t.xxbt,t.xxnr,t.lj,t.clhs,t.tssj from t_xxts t ,t_xxyhys u
-	 where u.xx_id=t.id 
+	 where u.xx_id=t.id  and u.zt=0
 	 <dynamic>
 	  <isNotEmpty prepend="and" property="jsyh.userid">
 	    u.jsyh_id=#jsyh.userid#
@@ -112,6 +112,10 @@
 		</dynamic>
 		)
 	</insert>
+	
+	<update id="updateXxyhzt" parameterClass="Xxyh">
+	 update t_xxyhys t set t.zt=1 where t.xx_id=#xx_id# and t.jsyh_id=#jsyh.userid#
+	</update>
 	
 	<delete id="deleteXxts" parameterClass="Xxts">
 	  delete from t_xxts t  where t.Id In (Select h.xx_id From t_xxyhys h Where h.jsyh_id=#jsyh.userid#)

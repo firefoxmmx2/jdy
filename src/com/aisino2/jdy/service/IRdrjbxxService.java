@@ -3,6 +3,7 @@ package com.aisino2.jdy.service;
 import java.util.Map;
 
 import com.aisino2.core.dao.Page;
+import com.aisino2.jdy.domain.Grpfghjjdw_yjcl;
 import com.aisino2.jdy.domain.Rdrjbxx;
 
 /**
@@ -53,4 +54,9 @@ public interface IRdrjbxxService {
 	 * @return
 	 */
 	Page grpfghjjdwtjcxdalForPage(Map<String, Object> para,int pagesize, int pageno,String dir,String sort);
+	
+	/**
+	 * 修改个人频繁更换寄件单位表是否处理标志
+	 */
+	void grpfghdwclcz(Grpfghjjdw_yjcl grpfghjjdw_yjcl);
 }

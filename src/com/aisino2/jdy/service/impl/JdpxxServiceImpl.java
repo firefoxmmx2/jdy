@@ -52,5 +52,38 @@ public class JdpxxServiceImpl implements IJdpxxService {
 		jdpxx = jdpxxDao.get(jdpxx);
 		return jdpxx;
 	}
+	
+	/**
+	 * 查询预警寄递物品
+	 * @param map
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	public Page findYjwpForPage(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort){
+		return jdpxxDao.findYjwpForPage(map, pageno, pagesize, dir, sort);
+	}
+	/**
+	 * 查询预警寄递物品处理信息
+	 * @param map
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	public Page findYjwuclList(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort){
+		return jdpxxDao.findYjwuclList(map, pageno, pagesize, dir, sort);
+	}
+	/**
+	 * 添加预警寄递物品
+	 */
+	public void setYjwp(Map map){
+		jdpxxDao.setYjwp(map);
+	}
 
 }

@@ -2,6 +2,7 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
 	<typeAlias alias="Rdrjbxx" type="com.aisino2.jdy.domain.Rdrjbxx"/>
+	<typeAlias alias="Ghdwyj" type="com.aisino2.jdy.domain.Grpfghjjdw_yjcl"/>
 	<cacheModel id="oneDayCategory" type="LRU">
 		<flushInterval hours="24"/>
 	</cacheModel>
@@ -39,6 +40,19 @@
 		<result property="sjrxm" column="sjrxm"/>
 		<result property="sjrdh" column="sjrdh"/>
 		<result property="sjrxxdz" column="sjrxxdz"/>
+	</resultMap>
+<!-- 预警 公安端个人频繁更换寄件单位统计查询  -->	
+	<resultMap class="Ghdwyj" id="grpfghjjdwgadyj">
+		<result property="id" column="id"/>
+		<result property="xh" column="xh"/>
+		<result property="jjr" column="jjr"/>
+		<result property="qymc" column="qymc"/>
+		<result property="wldh" column="wldh"/>
+		<result property="sjr" column="sjr"/>
+		<result property="sjrdh" column="sjrdh"/>
+		<result property="sjrxxdz" column="sjrxxdz"/>
+		<result property="sfcl" column="sfcl"/>
+		<result property="djxh" column="djxh"/>
 	</resultMap>
 <!-- 	寄递对象信息带照片 -->
 	<resultMap class="Rdrjbxx" id="rdrjbxx_zpxx_rm" extends="rdrjbxx_rm">
@@ -86,6 +100,18 @@
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="gxdwbm">
 			q.gxdwbm like '$gxdwbm$%'
+		</isNotEmpty>
+	</sql>
+<!-- 个人频繁更换寄件单位 预警 查询 where条件 -->
+	<sql id="pfghjjdwyjWhere">
+		<isNotEmpty prepend="and" property="gxdwbm">
+			gr.gxdwbm like '$gxdwbm$%'
+		</isNotEmpty>
+	</sql>
+<!-- 个人频繁更换寄件单位 预警  处理        查询 where条件 -->
+	<sql id="pfghjjdwyjclWhere">
+		<isNotEmpty prepend="and" property="id">
+			gr.id = #id#
 		</isNotEmpty>
 	</sql>
 	<insert id="Rdrjbxx.insert" parameterClass="Rdrjbxx">
@@ -313,4 +339,36 @@
 		 where a.sjr_id=ryb.id
 		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
 	</select>
+	<!-- 公安端个人频繁更换寄件单位统     预警      详细信息列表   -->    
+    <select id="pfghjjdwyj.getListPageCount" resultClass="Integer" parameterClass="map" >
+		select count(1) from( 
+			select id id,jjr jjr,qymc qymc,wldh wldh,sjr sjr,sjrdh sjrdh,sjrxxdz sjrxxdz,sfcl sfcl,gxdwbm gxdwbm,gxdwmc gxdwmc,djxh djxh
+			from t_grpfghjjdw gr
+			where 1=1
+			      and sfcl='0' 
+		<dynamic prepend="">
+			<include refid="pfghjjdwyjWhere" />
+		</dynamic>
+		)
+	</select>
+	<select id="pfghjjdwyj.getListPage" resultMap="grpfghjjdwgadyj" parameterClass="map">
+	select x.* from (
+		select rownum rowno,z.* from(
+			select id id,rownum xh,jjr jjr,qymc qymc,wldh wldh,sjr sjr,sjrdh sjrdh,sjrxxdz sjrxxdz,sfcl sfcl,gxdwbm gxdwbm,gxdwmc gxdwmc,djxh djxh
+			from t_grpfghjjdw  gr
+			where 1=1
+			      and sfcl='0' 
+		<dynamic prepend="">
+			<include refid="pfghjjdwyjWhere" />
+		</dynamic>
+		order by $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+	</select>
+	<update id="grpfghjjdw.update" parameterClass="Ghdwyj">
+		update t_grpfghjjdw gr
+			set sfcl='1'
+			where 
+				<dynamic prepend=" ">
+					<include refid="pfghjjdwyjclWhere"/>
+				</dynamic>
+	</update>
 </sqlMap>

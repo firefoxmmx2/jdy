@@ -53,4 +53,31 @@ public interface IJdpxxService {
 	 * @return
 	 */
 	Jdpxx getJdpxx(Jdpxx jdpxx);
+	/**
+	 * 查询预警寄递物品
+	 * @param map
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page findYjwpForPage(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort);
+	/**
+	 * 查询预警寄递物品处理信息
+	 * @param map
+	 * @param pageno
+	 * @param pagesize
+	 * @param dir
+	 * @param sort
+	 * @return
+	 */
+	Page findYjwuclList(Map<String, Object> map, int pageno,
+			int pagesize, String dir, String sort);
+	
+	/**
+	 * 添加预警寄递物品
+	 */
+	void setYjwp(Map map);
 }

@@ -123,7 +123,7 @@
 		<script language="JavaScript" src="javascript/FusionCharts.js"></script>
 		<script language="JavaScript" src="javascript/ChartsCreate.js"></script>
     <link href="css/notificationmsg.css" rel="stylesheet" type="text/css" />
-			
+		<script language="javascript" type="text/javascript" src="business/jdyzagl/js/jdycomm.js"></script>	
 			
 	    <style type="text/css">
 	    
@@ -160,7 +160,7 @@ background-attachment: fixed;}
 	    	 getMsg();
 	     },120*1000);
 
-	     $('#closebutton1').click(function(){ $('#msg2').slideUp(1000); });
+	     $('#closebutton1').click(function(){ $('#msg2').slideUp(1000,function(){closemusic();}); });
 	});
 	//消息滚动
 	function scrollNews(obj) {  
@@ -170,6 +170,21 @@ background-attachment: fixed;}
 	        $self.css({ marginTop: 0 }).find("li:first").appendTo($self); //appendTo能直接移动元素   
 	    })  
 	}
+	//点击消息后修改消息查看状态
+	function setXxtsZt(xxid){
+		$.ajax({
+	 		   type: "POST",
+	 		   url: "jdy/setXxtsZt_xxts.action",
+	 		  data: "xxid="+xxid,
+	 		 dataType:"json",
+	 		 success: function(msg){
+	 			 if(msg!=null&&msg.result!=null){
+	 				$("#msg"+xxid).remove();
+	 			 }
+	 		 }
+	 		});
+	}
+	//获取当前用户的提示消息
 	function getMsg(){
 		$.ajax({
  		   type: "POST",
@@ -177,17 +192,20 @@ background-attachment: fixed;}
  		   dataType:"json",
  		   success: function(msg){
  			  if(msg!=""&&msg.lxxts!=""&&msg.lxxts.length>0){
+ 				 
  				 $("#msgUl").empty();
  				  for(var i=0;i<msg.lxxts.length;i++){
  					  var xxts=msg.lxxts[i];
  					  var xxbt=xxts.xxbt;
  					  var xxnr=xxts.xxnr;
- 					  eval("var clhs ="+xxts.clhs);;
- 					 $("#msgUl").append("<li><a href='#' title='"+xxbt+":"+xxnr+"'>"+xxbt+":"+xxnr+"</a></li>");
+ 					  eval("var clhs ="+xxts.clhs+";");
+ 					 $("#msgUl").append("<li id='msg"+xxts.id+"'><a href='#' title='"+xxbt+":"+xxnr+"'>"+xxbt+":"+xxnr+"</a></li>");
  					$("#msgUl").find("li:last").find('a').click(clhs);
+ 					$("#msgUl").find("li:last").find('a').click(function(){setXxtsZt(xxts.id);});
  				  }
  	 		     $('#msg2').slideDown(1000,function(){
- 	 		    	 setTimeout(function(){$('#msg2').slideUp(1000)},60 * 1000);
+ 	 		    	playmusic();//打开报警音乐
+ 	 		    	 setTimeout(function(){$('#msg2').slideUp(1000,function(){closemusic();})},60 * 1000);
  	 		    	 if($("#msgUl").find("li").length>9){
  	 		    		 var scrollTimer;  
  	  	    		    $("#twitter").hover(function() {  

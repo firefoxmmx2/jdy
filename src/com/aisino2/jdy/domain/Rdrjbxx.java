@@ -90,6 +90,17 @@ public class Rdrjbxx implements Serializable {
 	 * 返回寄递人员全部地址
 	 * @return
 	 */
+	
+	private String yjhywlcqbbz;//预警个人频繁变更寄件单位和业务个人频繁变更寄件单位区别标志
+	
+	
+	
+	public String getYjhywlcqbbz() {
+		return yjhywlcqbbz;
+	}
+	public void setYjhywlcqbbz(String yjhywlcqbbz) {
+		this.yjhywlcqbbz = yjhywlcqbbz;
+	}
 	public String getJdrydz(){
 		return ssxmc+xxdz;
 	}
