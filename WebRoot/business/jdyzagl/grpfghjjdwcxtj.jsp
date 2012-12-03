@@ -46,7 +46,7 @@ function setPageList(pageno,url){
 	if($("#rdrjbxx_gxdwbm").val()==null || $("#rdrjbxx_gxdwbm").val()==""){
 		$("#rdrjbxx_gxdwbm").val(<%=gxdwbm%>);
 	}
-	if (manVerify_grpfghdwcx()){//manVerify_grpfghdwcx()
+	if (true){//manVerify_grpfghdwcx()
 	    $("#"+divnid).html(tables);
 		params =getSubmitParams("#grpfghdwcx_gad [name*=rdrjbxx.]");
 		if (url==null || url=="undefined"){
@@ -119,6 +119,14 @@ function searchLongBack(json){
 	//报表请求
 	setExcelLong("fpghjjdw",bbmc);	
 }
+function grpfghjjdwcl(){
+	$("#grpfghdwcx").empty();
+	setWidth("grpfghdwcx",900);
+	setUrl("grpfghdwcx","business/jdyzagl/grpfghjjdw_yjcl.jsp");
+	bindDocument("grpfghdwcx");
+	
+	//detailDialog("grpfghdwcx","900","business/jdyzagl/grpfghjjdw_yjcl.jsp");
+}
 </script>
 <table width="100%" cellpadding="0" cellspacing="0"  class="tableborder" id="grpfghdwcx_gad">
    <input type="hidden" id="rdrjbxx_gxdwbm" name="rdrjbxx.gxdwbm" value="<%=gxdwbm%>"><!-- 管辖单位编码 -->
@@ -152,6 +160,7 @@ function searchLongBack(json){
 	    		  <td colspan="6">
 	    		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
 	    		    	<tr>
+	    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="grpfghjjdwcl(1);">处理</a></td>
 	    		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageList(1);">查询</a></td>
 	    		    	  <td ><a href="#" class="addbutton" id="fpghjjdw" onclick='setExportExcel()'>导出</a></td>
 	    		    	</tr>
