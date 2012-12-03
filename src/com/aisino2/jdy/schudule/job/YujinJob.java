@@ -55,10 +55,10 @@ public class YujinJob implements Job {
 					User user = new User();
 					user.setUserid(subur.getUserid());
 					user = userService.getUser(user);
-					if(!userdepartcodemap.containsKey(user.getDepartcode())){
-						userdepartcodemap.put(user.getDepartcode(), new HashSet<User>());
+					if(!userdepartcodemap.containsKey(user.getDepartment().getDepartcode())){
+						userdepartcodemap.put(user.getDepartment().getDepartcode(), new HashSet<User>());
 					}
-					userdepartcodemap.get(user.getDepartcode()).add(user);
+					userdepartcodemap.get(user.getDepartment().getDepartcode()).add(user);
 					useridset.add(subur.getUserid());
 				}
 			}
