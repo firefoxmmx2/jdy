@@ -123,6 +123,11 @@
 		setUrl(detailid,bkmodHtml);
 		bindDocument(detailid);
 	}
+	//function kkkk(){
+	//	$(document).find('body').eq(0).append('<div id="zdrygkyjxx" class="page-layout" src="#" style="top:10px; left:160px; display: none;"></div>');
+	//	daggleDiv("zdrygkyjxx");
+	//	detailDialog("zdrygkyjxx", 900, "business/jdyzagl/ZdrygkcxYjcl.jsp");
+	//	}
 
 	//导出Excel
 	function setExportExcel_Zdry() {
@@ -171,6 +176,10 @@
 					<td colspan="6">
 						<table border="0" align="right" cellpadding="2" cellspacing="0">
 							<tr>
+							<!--  预警弹出框测试用
+							<td><a href="#" class="searchbutton" id="qu_erys"
+									onclick="kkkk();">kkkk</a></td>
+							-->
 								<td><a href="#" class="searchbutton" id="qu_erys"
 									onclick="setPageList(1);">查询</a></td>
 								<td width="62"><a href="#" class="exceldcbutton"
@@ -200,7 +209,7 @@
 				<th name="l_ywlx" datatype="string" sumflag="0">业务类型</th>
 				<th name="">物流单号</th>
 				<th name="">登记序号</th>
-				<th name="l_bkryid">布控人员ID</th>
+				<th name="">布控人员ID</th>
 				<th name="">业务详情</th>
 			</tr>
 		</thead>
