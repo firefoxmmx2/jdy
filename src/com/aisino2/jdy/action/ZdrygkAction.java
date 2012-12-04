@@ -104,15 +104,10 @@ public class ZdrygkAction extends PageAction {
 	public String queryList() throws Exception {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
-		if(jdytjxx.getKsrq()!=null){
-			params.put("ksrq", jdytjxx.getKsrq());
-		}
-		if(jdytjxx.getJsrq()!=null){
-			params.put("jsrq", jdytjxx.getJsrq());
-		}
-		if(jdytjxx.getGxdwbm()!=null){
-			params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
-		}
+		
+		params.put("ksrq", jdytjxx.getKsrq());
+		params.put("jsrq", jdytjxx.getJsrq());
+		params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
 		Page pageinfo = jdytjxx_service.findZdryForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
@@ -165,11 +160,11 @@ public class ZdrygkAction extends PageAction {
 		lCol.add(lDetail);
 		lCol.add(lCl);
 		for(Jdytjxx jdytjxx:lData){
-			if(jdytjxx.getDjxh()==null){
+			if(null==jdytjxx.getDjxh()){
 			   jdytjxx.setDjxh("无关联数据");
 			}
 			String wldh=jdytjxx.getWldh();
-			if(jdytjxx.getWldh()==null){
+			if(null==jdytjxx.getWldh()){
 				jdytjxx.setWldh("无关联数据");
 			}
 		}
@@ -197,15 +192,9 @@ public class ZdrygkAction extends PageAction {
 		}
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
-			if(jdytjxx.getKsrq()!=null){
-				params.put("ksrq", jdytjxx.getKsrq());
-			}
-			if(jdytjxx.getJsrq()!=null){
-				params.put("jsrq", jdytjxx.getJsrq());
-			}
-			if(jdytjxx.getGxdwbm()!=null){
-				params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
-			}
+			params.put("ksrq", jdytjxx.getKsrq());
+			params.put("jsrq", jdytjxx.getJsrq());
+			params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
 			Page pageinfo = jdytjxx_service.findZdryForPage(params, 1, Integer.parseInt(maxRows), dir, sort);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
@@ -213,12 +202,12 @@ public class ZdrygkAction extends PageAction {
 			for (Jdytjxx jdytjxx : lJdytjxx) {
 				//字典项性别翻译,翻译后赋值给业务类型字段
 				Dict_item dict_item = CacheManager.getCacheDictitemOne("dm_xb", jdytjxx.getXb());
-				if (dict_item != null) {
+				if (null!=dict_item) {
 					jdytjxx.setXb(dict_item.getDisplay_name());
 				}
 				//字典项人员类型翻译,翻译后赋值给业务类型字段
 				dict_item = CacheManager.getCacheDictitemOne("dm_jdy_rylx", jdytjxx.getYwlx());
-				if (dict_item != null) {
+				if (null!=dict_item) {
 					jdytjxx.setYwlx(dict_item.getDisplay_name());
 				}
 			}
@@ -257,7 +246,7 @@ public class ZdrygkAction extends PageAction {
 			lResult.add(response);
 			lResult.add(qyryList);
 			lResult.add(setJdytjxx);
-			this.setExcelCreate("Zdrygk", lResult);
+			this.setExcelCreate("Jdytjxx", lResult);
 			this.result = "ok";
 		} catch (IOException e) {
 			e.printStackTrace();
