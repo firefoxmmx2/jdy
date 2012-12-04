@@ -39,7 +39,9 @@
 		<isNotEmpty prepend="and" property="cjr">
 			t.cjr like '%$cjr$%'
 		</isNotEmpty>
-		
+		<isNotEmpty prepend="and" property="zt">
+			t.zt = #zt#
+		</isNotEmpty>
 	</sql>
 	<insert id="Yjcs.insert" parameterClass="Yjcs">
 		insert into t_yjcs
