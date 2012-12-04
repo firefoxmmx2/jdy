@@ -33,6 +33,7 @@
 <!-- 	寄递业统计 -->
 	<bean id="JdytjxxServiceImpl" class="com.aisino2.jdy.service.impl.JdytjxxServiceImpl">
 		<property name="jdytjxxDao" ref="JdytjxxDaoImpl"/>
+		<property name="sjgljgDao" ref="SjgljgDaoImpl"/>
 	</bean>
 <!-- 	可疑寄递物品 -->
 	<bean id="KyjdwpxxServiceImpl" class="com.aisino2.jdy.service.impl.KyjdwpxxServiceImpl">

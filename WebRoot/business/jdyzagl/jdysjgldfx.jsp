@@ -116,6 +116,7 @@
 	                      	         '2':{tablename:'tylxfs',title:"同一联系方式出现不同身份信息查询"}
 	                            };
 	var validate_style=0;
+	var sjgl_verify_url = 'jdy/verifySlgjtj_jdytjxx.action';
 	
 	function sjglDetail(param){
 		detailDialog(sjgl_detail_div,sjgl_detail_widh,sjgl_detail_page_url,param);
@@ -129,9 +130,8 @@
 				if (url==null || url=="undefined"){
 					url=sjgl_page_url;
 				}
-// 			var params = getSubmitParams($('input:checked[name="paramType"]').parent().find(':input[name!="paramType"]'));
 			
-			var params = getSubmitParams('#baManTablebm input[name*=rdrjbxx.]');
+			var params = getSubmitParams('#baManTablebm input');
 			var mygrid1 = $("#"+sjgl_table).ingrid({ 
 											url: url,	
 											height: pageHeight-286,
@@ -141,6 +141,27 @@
 											noSortColIndex:[5],	
 // 											colIndex: [0,1,2],
 											onRowSelect:null,
+											changeHref:function(table){
+												//根据处理状态显示文本信息
+												jtable = $(table);
+												jtable.find('tr').each(function(idx){
+													var jrow = $(this);
+													jrow.attr('rowid',idx);
+													var jcell = jrow.find('td:nth(5)');
+													
+													var xm = jrow.find('td:nth(0)').text();
+													var lxdh = jrow.find('td:nth(1)').text();
+													var xxdz = jrow.find('td:nth(2)').text();
+													var rhlx = jrow.find('td:nth(4)').text();
+													if(jcell.text() == '1')
+														jcell.text('已核实不再预警');
+													else{
+														jcell.text('未核实');
+														jrow.find('td:last').append('<a href="#" class="fontbutton" title="核实" onclick="verify(\''+xm+'\',\''+lxdh+'\',\''+xxdz+'\',\''+rhlx+'\',\''+jrow.attr('rowid')+'\');">核实</a>');
+													}
+														
+												});
+											},
 											ingridComplete:function(){
 												$('#'+sjgl_div+" table tbody tr").each(function(){
 													var row = $(this);
@@ -155,43 +176,38 @@
 																$(this).parents('tr').eq(0).find('td:nth(4)').text()
 														);
 													});
-// 													@fixed 根据最新的需求去掉点击弹出子窗口查询
-// 													row.find('td').each(function(idx){
-// 														var datafield = $(this).parents('table').eq(0)
-// 															.find('thead tr th:nth('+idx+')')
-// 															.attr('datafield');
-// 														if(datafield){
-// 															$(this).click(function(){
-// 																var param = {};
-// 																param[datafield] = $(this).text();
-// 																sjglDetail(param);
-// 															})
-// 														}
-// 													});
 												});
 												
 											},
 											hideColIndex:[4],
-											colWidths: ['20%','20%','20%','20%','0%','20%']								
+											colWidths: ['16.6%','16.6%','16.6%','16.6%','0%','16.6%','16.6%']								
 										});				
 			}
 	}
-	
+	/***
+	* 核实处理
+	*/
+	function verify(xm,lxdh,xxdz,rhlx,rowid){
+		var params = {
+				'rdrjbxx.xm':xm,
+				'rdrjbxx.lxdh':lxdh,
+				'rdrjbxx.xxdz':xxdz,
+				'rdrjbxx.jdrylx':rhlx
+		};
+		$.post(sjgl_verify_url,params,function(data){
+			if(data.result == 'success'){
+				var jrow = $('#'+sjgl_div+' tr[rowid="'+rowid+'"]');
+				jrow.find('td:nth(5)').text('已核实不再预警');
+				jrow.find('td:last a[title="核实"]').remove();
+			}
+			else{
+				jAlert(data.result,'提示');
+			}
+		},'json');
+		
+	}
 	//查询验证
 	function manVerify_sjgl(){
-// 		var paramTypeVal = $('input[name=paramType]:checked').val();
-// 		if(paramTypeVal=='xm' && !$('#sjgl_xm').val()){
-// 			jAlert('姓名必须填写','警告');
-// 			return false;
-// 		}
-// 		if(paramTypeVal=='lxdh' && !$('#sjgl_lxdh').val()){
-// 			jAlert('联系电话必须填写','警告');
-// 			return false;
-// 		}
-// 		if(paramTypeVal=='xxdz' && !$('#sjgl_xxdz').val()){
-// 			jAlert("地址必须填写","警告");
-// 			return false;
-// 		}
 		if(validate_style){
 			//类型显示
 			var type = $('#type').val();
@@ -209,8 +225,6 @@
 		
 		return true;
 	}
-	
-
 	
 	/**
 	导出数据关联度数据
@@ -240,7 +254,7 @@
 			});
 			
 			$('#excelSjglForm input').val('');
-			$('#baManTablebm input[name*=rdrjbxx.]').each(function(){
+			$('#baManTablebm input').each(function(){
 				$('#excelSjglForm input[name='+$(this).attr('name')+']').val(this.value);
 			});
 			$('#excelSjglForm').attr('action',sjgl_excel_url)
@@ -250,6 +264,7 @@
 		
 	}
 	
+	var datenow = '<%=dateNow%>';
 	//载入后入口
 	$(function(){
 		sjgl_tabledata = $('#'+sjgl_div).html();
@@ -260,28 +275,12 @@
 		daggleDiv(ljxx_div);
 		daggleDiv(sjgl_detail_div);
 
-// 		$('#sjgl_ssxmc').attr('readonly',true);
-		//提交数据选择
-// 		$('input[name=paramType]').each(function(){
-// 			var paramType = $(this);
-// 			paramType.parent().find('input[name!="paramType"]').click(function(){
-// 				paramType.click();
-// 			});
-			
-// 			paramType.click(function(){
-// 				$('input[name=paramType]').each(function(){
-// 					if(paramType.val()!=$(this).val())
-// 						$(this).parent().find('input[name!="paramType"]').val('')
-// 				});
-// 			});
-// 		});
-// 		//默认选择第一个查询条件
-// 		$('input[name=paramType]').eq(0).click();
 		//构建查询条件
 		var type = $('#type').val();
 		buildSearch(type);
+		
+		
 	});
-	
 	/***
 	* 构建查询条件
 	*/
@@ -309,6 +308,7 @@
     		<input type="hidden" name="rdrjbxx.lxdh">
     		<input type="hidden" name="rdrjbxx.xxdz">
     		<input type="hidden" name="rdrjbxx.zjhm">
+    		<input type="hidden" name="nosjjgdone">
 		</form>
 		<%
 			//添加一个type开关,用于控制页面显示模式和提交参数
@@ -320,6 +320,9 @@
 	    	<table width="100%" border="0" cellspacing="0" cellpadding="2" id="baManTablebm">
 	    		<tr height="30">
 	    			<td width="100%" colspan="6" align="left">
+	    				<input type="hidden" name="ljjbxx.ljsjf">
+	    				<input type="hidden" name="ljjbxx.ljsjt">
+	    				<input type="hidden" name="nosjjgdone">
 	    				<table style="display: none;" id="tysfxx" border="0" cellspacing="0" cellpadding="2">
 	    					<tr>
 	    						<td class="red">姓名:</td>
@@ -336,38 +339,42 @@
 	    				</table>
 	    			</td>
 	    		</tr>
-<!-- 					<tr height="30"> -->
-<!-- 						<td width="25%" > -->
-<!-- 							<div> -->
-<!-- 								<label> -->
-<!-- 									<input type="radio" name="paramType" value="xm"><span>姓名</span> -->
-<!-- 									<input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</td> -->
-<!-- 						<td width="25%" > -->
-<!-- 							<div> -->
-<!-- 								<label> -->
-<!-- 									<input type="radio" name="paramType" value="lxdh"><span>联系电话</span> -->
-<!-- 									<input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</td> -->
-<!-- 						<td> -->
-<!-- 							<div style="padding-left: 10px;text-align: left;"> -->
-<!-- 								<label> -->
-<!-- 									<input type="radio" name="paramType" value="xxdz"><span>地址</span> -->
-<!-- 									<input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputstyle"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</td> -->
-<!-- 					</tr> -->
+				<%--
+				<tr height="30">
+						<td width="25%" >
+							<div>
+								<label>
+									<input type="radio" name="paramType" value="xm"><span>姓名</span>
+									<input type="text" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle">
+								</label>
+							</div>
+						</td>
+						<td width="25%" >
+							<div>
+								<label>
+									<input type="radio" name="paramType" value="lxdh"><span>联系电话</span>
+									<input type="text" id="sjgl_lxdh" name="rdrjbxx.lxdh" class="inputstyle">
+								</label>
+							</div>
+						</td>
+						<td>
+							<div style="padding-left: 10px;text-align: left;">
+								<label>
+									<input type="radio" name="paramType" value="xxdz"><span>地址</span>
+									<input type="text" id="sjgl_xxdz" name="rdrjbxx.xxdz" class="inputstyle">
+								</label>
+							</div>
+						</td>
+					</tr>
+				
+				 --%>
 	    		<tr>
 	    		  <td colspan="6">
 	    		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
 	    		    	<tr>
 	    		    	  <td ><a href="#" class="highsearchbutton" id="sjglQueryButton" onclick="sjglPageQuery(1);">关联查询</a></td>
 	    		    	  <td ><a href="#" class="addbutton" id="sjglExportButton" onclick='exportSjgl();'>导出</a></td>
+	    		    	  <td ><a href="#" class="addbutton" id="test" onclick='func();'>弹出</a></td>
 	    		    	</tr>
 	    		  	</table>
 	    		  </td>
@@ -392,7 +399,8 @@
 	    	<th datafield="sjgl_xxdz">地址</th>
 	    	<th>业务类型</th>
 	    	<th>类型实际值</th>
-	    	<th>业务详情</th>
+	    	<th>预警核实情况</th>
+	    	<th>操作</th>
 	    </tr>
 	  </thead>
 	</table>	

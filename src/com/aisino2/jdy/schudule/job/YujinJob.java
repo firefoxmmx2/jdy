@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -54,10 +55,10 @@ public class YujinJob implements Job {
 					User user = new User();
 					user.setUserid(subur.getUserid());
 					user = userService.getUser(user);
-					if(!userdepartcodemap.containsKey(user.getDepartcode())){
-						userdepartcodemap.put(user.getDepartcode(), new HashSet<User>());
+					if(!userdepartcodemap.containsKey(user.getDepartment().getDepartcode())){
+						userdepartcodemap.put(user.getDepartment().getDepartcode(), new HashSet<User>());
 					}
-					userdepartcodemap.get(user.getDepartcode()).add(user);
+					userdepartcodemap.get(user.getDepartment().getDepartcode()).add(user);
 					useridset.add(subur.getUserid());
 				}
 			}
@@ -67,7 +68,8 @@ public class YujinJob implements Job {
 			yjcsService.executeSQL(target.getYjzq());
 		
 		//预警执行
-		if(java.util.regex.Pattern.matches("\\{[\\w_\\d]*\\}", target.getYjyj())){
+		Pattern p = java.util.regex.Pattern.compile("\\{[\\w\\d_]*\\}");
+		if(p.matcher(target.getYjyj()).find()){
 			for(String departcode : userdepartcodemap.keySet()){
 				Map<String, Object> para = new HashMap<String, Object>();
 				para.put("gxdwbm", StringUtil.trimEven0(departcode));
