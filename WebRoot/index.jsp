@@ -201,7 +201,7 @@ background-attachment: fixed;}
  					  eval("var clhs ="+xxts.clhs+";");
  					 $("#msgUl").append("<li id='msg"+xxts.id+"'><a href='#' title='"+xxbt+":"+xxnr+"'>"+xxbt+":"+xxnr+"</a></li>");
  					$("#msgUl").find("li:last").find('a').click(clhs);
- 					$("#msgUl").find("li:last").find('a').click(function(){setXxtsZt(xxts.id);});
+ 					$("#msgUl").find("li:last").find('a').click(function(){setXxtsZt($(this).parent().attr('id').split("msg")[1]);});
  				  }
  	 		     $('#msg2').slideDown(1000,function(){
  	 		    	playmusic();//打开报警音乐
