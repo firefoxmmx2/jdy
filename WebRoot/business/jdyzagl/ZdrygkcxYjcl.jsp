@@ -15,8 +15,8 @@
 	$(document).ready(function() {
 		pageUrl = "jdy/queryList_zdry.action";
 		detailWidth = "950";
-		ljdetailid = "ljjbxxadd_detail";
-		daggleDiv(ljdetailid);
+		ljdetailidyj = "ljjbxxadd_detail";
+		daggleDiv(ljdetailidyj);
 		//布控人员撤销
 		detailid="bkry_detail";
 		bkmodWidth="750";
@@ -34,7 +34,7 @@
 		divnid = "ZdryData";
 		tableid = "ZdryTable";
 		tables = $("#" + divnid).html();
-		setPageList(1, '#');
+		setPageList(1);
 	});
 	
 	//页面gird加载方法
@@ -49,6 +49,7 @@
 					{
 						url : url,
 						height : pageHeight - 240,
+						ingridPageWidth:900,
 						ingridPageParams : sXML,
 						ingridExtraParams : params,
 						pageNumber : pageno,
@@ -92,36 +93,21 @@
 		bindDocument(detailid);
 	}
 	
-	function(){
-		$(document).find('body').eq(0).append('<div id="zdrygkyjxx" class="page-layout" src="#" style="top:10px; left:160px; display: none;"></div>');
-		daggleDiv("zdrygkyjxx");
-		detailDialog("zdrygkyjxx", 900, "business/jdyzagl/ZdrygkcxYjcl.jsp");
-		}
+	//function(){
+	//	$(document).find('body').eq(0).append('<div id="zdrygkyjxx" class="page-layout" src="#" style="top:10px; left:160px; display: none;"></div>');
+	//	daggleDiv("zdrygkyjxx");
+	//	detailDialog("zdrygkyjxx", 900, "business/jdyzagl/ZdrygkcxYjcl.jsp");
+	//	}
 </script>
-
-<table width="100%" cellpadding="0" cellspacing="0" class="tableborder" id="zdry_yj_table">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" id="zdry_yj_table">
 	<!-- 管辖单位编码，默认为当前登录用户管辖单位编码 -->
 	<input type="hidden" id="zdry_gxdwbm" name="jdytjxx.gxdwbm" value="<%=gxdwbm%>">
 	<!-- 当前登录用户级别 -->
 	<input type="hidden" id="current_departlevel" value="<%=departlevel %>">
-	<tr>
-		<td class="queryfont">重点管控人员数据查询</td>
-	</tr>
-	<tr>
-		<td class="tdbg" style="padding-top:8px">
-			<table width="100%" border="0" cellspacing="0" cellpadding="2">
-				<tr>
-					<td colspan="6">
-						<table border="0" align="right" cellpadding="2" cellspacing="0">
-							<tr>
-								<td><a href="#" class="searchbutton" id="qu_erys"
-									onclick="setPageList(1);">查询</a></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table></td>
-	</tr>
+    <tr>
+      <td align="left" class="title1">重点管控人员预警数据查询</td>
+      <td align="right"><a href="#" id="closeDiv" onclick='$("#zdrygkyjxx").hideAndRemove("show");' class="close"></a></td>
+    </tr>
 </table>
 <div id="ljjbxxadd_detail" class="page-layout" src="#"
 	style="top: 5px; left: 160px;display:none;"></div>
@@ -147,3 +133,8 @@
 		</thead>
 	</table>
 </div>
+<table  border="0" align="center"  cellpadding="2"  cellspacing="0">
+ 	<tr>
+ 	  <td ><a href="#" class="searchbutton" id="qu_erysyj" onclick='$("#zdrygkyjxx").hideAndRemove("show");'>返回</a></td>
+ 	</tr>
+</table>
