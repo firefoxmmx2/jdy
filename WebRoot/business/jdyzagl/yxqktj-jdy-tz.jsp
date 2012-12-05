@@ -11,6 +11,7 @@
 	var searchUrl_jdytjxx;
 	var currentGxdwbm = '<%=gxdwbm%>';
 	var myTableDataBmXxtz="";
+	var xgd="";
 	$(document).ready( function() {
 		QyjbxxList_Html="business/jdyzagl/jdytjxxQyjbxxList.jsp";
 		QyjbxxListWidth="1000";
@@ -28,6 +29,8 @@
 		$("#y_qssj").val(getDate(currDate,"-"));
 		
 		$("#yxqklb").hide();//隐藏列表
+		xgd=document.body.clientHeight-pageHeight/2-90;
+		
 		setPageListX(1);
 	});
 
@@ -123,7 +126,7 @@
 				data:myTableDataBmXxtz,
 				title:'运行情况',
 				width:505,
-				height:pageHeight-390,
+				height:xgd,//pageHeight-390,
 				isTotal:true
 			});
 			$("#jdytjxx_tx_pie").fusionChart({
@@ -133,7 +136,7 @@
 				data:myTableDataBmXxtz,
 				title:'运行情况',
 				width:505,
-				height:pageHeight-390,
+				height:xgd,
 				isTotal:true
 			});
 			
