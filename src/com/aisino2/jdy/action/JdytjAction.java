@@ -563,8 +563,14 @@ public class JdytjAction extends PageAction {
 		this.pagerow = Integer.parseInt(maxRows);
 		slgjtjQuerylist();
 		
+        for(Rdrjbxx rdrjbxx : rdrjbxx_list){
+            if("1".equals(rdrjbxx.getZt()))
+                rdrjbxx.setZt("已核查");
+            else if ("0".equals(rdrjbxx.getZt()))
+                rdrjbxx.setZt("未核查");
+        }
 		String[][] tabletitle = { { "姓名", "xm" }, { "电话", "lxdh" },
-				{ "地址", "xxdz" }, { "业务类型", "jdrylxmc" }};
+				{ "地址", "xxdz" }, { "业务类型", "jdrylxmc" },{"预警核查情况","zt"}};
 		exportGun(tabletitle,rdrjbxx_list);
 		this.result = "success";
 

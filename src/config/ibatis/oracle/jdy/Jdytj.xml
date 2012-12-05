@@ -289,26 +289,26 @@
                                               					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 
                                               			from (
 															SELECT
-															    rdrjbxx.xm,
-															    rdrjbxx.lxdh,
-															    rdrjbxx.xxdz xxdz,
-															    rdrjbxx.jdrylx
+                                                                rdrjbxx.xm,
+                                                                rdrjbxx.lxdh
+															    <!--rdrjbxx.xxdz xxdz,-->
+                                                                <!--rdrjbxx.jdrylx-->
 															  FROM t_rdrjbxx rdrjbxx
 															  JOIN t_ljjbxx lj ON lj.jjr_id = rdrjbxx.id OR lj.sjr_id = rdrjbxx.id
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
-															    and lj.ljsj &lt;=trunc(sysdate,'dd')
+															    and lj.ljsj &lt;=sysdate
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
 															        AND rdrjbxx.xxdz     = sjjg.xxdz
 															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+                                                                    AND rdrjbxx.xm   = sjjg.xm
 															        AND sjjg.zt    = 1
 															    )
-															  GROUP BY rdrjbxx.xm,
-															    rdrjbxx.lxdh,
-															    rdrjbxx.xxdz,
-															    rdrjbxx.jdrylx
+															  GROUP BY
+                                                                    rdrjbxx.xm,
+                                                                    rdrjbxx.lxdh
 															) group by
 																<isEqual property="yjcs_cl" compareValue="1"> xm </isEqual>
                                               					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 
@@ -318,7 +318,7 @@
 
                                               	</isNotEmpty>
                                               <dynamic prepend="where">
-                                              	<isNotEmpty prepend="and" property="nosjjgdone">
+                                              	  <isNotEmpty prepend="and" property="nosjjgdone">
 	                                              	sjjg.zt is null
 	                                              </isNotEmpty>
                                               </dynamic>
@@ -348,6 +348,7 @@
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
 															        AND rdrjbxx.xxdz     = sjjg.xxdz
 															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+                                                                    AND rdrjbxx.xm   = sjjg.xm
 															        AND sjjg.zt    = 1
 															    )
 						</isNotEmpty>
@@ -364,25 +365,24 @@
                                               			from (
 															SELECT
 															    rdrjbxx.xm,
-															    rdrjbxx.lxdh,
-															    rdrjbxx.xxdz xxdz,
-															    rdrjbxx.jdrylx
+															    rdrjbxx.lxdh
+															    
 															  FROM t_rdrjbxx rdrjbxx
 															  JOIN t_ljjbxx lj ON lj.jjr_id = rdrjbxx.id OR lj.sjr_id = rdrjbxx.id
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
-															    and lj.ljsj &lt;=trunc(sysdate,'dd')
+															    and lj.ljsj &lt;=sysdate
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
 															        AND rdrjbxx.xxdz     = sjjg.xxdz
 															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+                                                                    AND rdrjbxx.xm   = sjjg.xm
 															        AND sjjg.zt    = 1
 															    )
-															  GROUP BY rdrjbxx.xm,
-															    rdrjbxx.lxdh,
-															    rdrjbxx.xxdz,
-															    rdrjbxx.jdrylx
+															  GROUP BY 
+                                                                rdrjbxx.xm,
+															    rdrjbxx.lxdh
 															) group by
 																<isEqual property="yjcs_cl" compareValue="1"> xm </isEqual>
                                               					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 

@@ -15,8 +15,8 @@
 	$(document).ready(function() {
 		pageUrl = "jdy/queryList_zdry.action";
 		detailWidth = "950";
-		ljdetailid = "ljjbxxadd_detail";
-		daggleDiv(ljdetailid);
+		ljdetailidyj = "ljjbxxadd_detail";
+		daggleDiv(ljdetailidyj);
 		//布控人员撤销
 		detailid="bkry_detail";
 		bkmodWidth="750";
@@ -24,16 +24,7 @@
 		daggleDiv(detailid);
 		detailUrl="basicsystem/query_bkry.action";
 		modUrl="basicsystem/modify_bkry.action";
-		//导出用到参数
-		searchLongUrl = "jdy/queryForExport_zdry.action";
-		excelUrl = "jdy/exportExcel_zdry.action";
-		tabletitle = "";
-		geteExcelHead("ZdryData");
-
-		//时间设置
-		$('.datef').attr("readOnly", true).datepicker(true, '0');
-		$('.datet').attr("readOnly", true).datepicker(true, '1');
-
+		
 		// 治安管理机构
 		$("#zdry_gxdwmc").click(function(){
 			getGxdwTree("zdry_gxdwmc","zdry_gxdwbm",null,"current_departlevel");
@@ -43,14 +34,14 @@
 		divnid = "ZdryData";
 		tableid = "ZdryTable";
 		tables = $("#" + divnid).html();
-		setPageList(1, '#');
+		setPageList(1);
 	});
 	
 	//页面gird加载方法
 	function setPageList(pageno, url) {
-		if (manVerify_zdry()) {//manVerify_zdry()
+		if (true) {//manVerify_zdry()
 			$("#" + divnid).html(tables);
-			params = getSubmitParams("#zdry_man_table  [name*=jdytjxx.]");
+			params = getSubmitParams("#zdry_yj_table  [name*=jdytjxx.]");
 			if (url == null || url == "undefined") {
 				url = pageUrl;
 			}
@@ -58,6 +49,7 @@
 					{
 						url : url,
 						height : pageHeight - 240,
+						ingridPageWidth:900,
 						ingridPageParams : sXML,
 						ingridExtraParams : params,
 						pageNumber : pageno,
@@ -85,29 +77,6 @@
 					});
 		}
 	}
-	//查询提交时验证方法
-	function manVerify_zdry() {
-		if(isFirst>0){
-			var ksrq = $("#zdry_ksrq").val();
-			var jsrq = $("#zdry_jsrq").val();
-			if (!checkControlValue("zdry_ksrq", "Datetime", null, null, null, 1, "开始日期 "))
-				return false;
-			if (!checkControlValue("zdry_jsrq", "Datetime", null, null, null, 1, "结束日期"))
-				return false;
-			if (ksrq != null && ksrq != "" && jsrq != null && jsrq != "") {
-				if (ksrq > jsrq) {
-					jAlert('开始日期不能大于结束日期', '提示信息')
-					return false;
-				}
-			}
-			if (!checkControlValue("zdry_gxdwmc","String",1,60,null,1,"所属管辖单位")){
-				return false;
-			}
-		}
-		isFirst++;
-		return true;
-	}
-	
 	//详情方法
 	function setZdryDetail(id) {
 		$("#ljjbxxadd_detail").empty();
@@ -123,73 +92,22 @@
 		setUrl(detailid,bkmodHtml);
 		bindDocument(detailid);
 	}
-	//function kkkk(){
+	
+	//function(){
 	//	$(document).find('body').eq(0).append('<div id="zdrygkyjxx" class="page-layout" src="#" style="top:10px; left:160px; display: none;"></div>');
 	//	daggleDiv("zdrygkyjxx");
 	//	detailDialog("zdrygkyjxx", 900, "business/jdyzagl/ZdrygkcxYjcl.jsp");
 	//	}
-
-	//导出Excel
-	function setExportExcel_Zdry() {
-		if (daochuNum == 1) {
-			params = getSubmitParams("#zdry_man_table  [name*=jdytjxx.]");
-			jQuery.post(searchLongUrl, params, searchLongBack, "json");
-		} else {
-			jAlert("无查询结果不能导出！", '验证信息', null, null);
-		}
-	}
-	//导出前对应setSearchLong()的回调方法  由于执行查询时候有延迟，故将导出放入回调函数
-	function searchLongBack(json) {
-		//报表标题
-		var bbmc = "重点人员信息";
-		//报表请求
-		setExcelLong("zdryexcel", bbmc);
-	}
 </script>
-
-<table width="100%" cellpadding="0" cellspacing="0" class="tableborder" id="zdry_man_table">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" id="zdry_yj_table">
 	<!-- 管辖单位编码，默认为当前登录用户管辖单位编码 -->
 	<input type="hidden" id="zdry_gxdwbm" name="jdytjxx.gxdwbm" value="<%=gxdwbm%>">
 	<!-- 当前登录用户级别 -->
 	<input type="hidden" id="current_departlevel" value="<%=departlevel %>">
-	<tr>
-		<td class="queryfont">重点管控人员数据查询</td>
-	</tr>
-	<tr>
-		<td class="tdbg" style="padding-top:8px">
-			<table width="100%" border="0" cellspacing="0" cellpadding="2">
-				<tr>
-					<td width="10%" class="pagedistd" style="color: red;">开始日期</td>
-					<td width="23%" class="pagetd">
-						<input type="text" id="zdry_ksrq" name="jdytjxx.ksrq" class="inputstyle datef" value="" />
-					</td>
-					<td width="10%" class="pagedistd" style="color: red;">结束日期</td>
-					<td width="23%" class="pagetd">
-						<input type="text" id="zdry_jsrq" name="jdytjxx.jsrq" class="inputstyle datet" value="" />
-					</td>
-					<td width="10%" class="pagedistd" style="color: red;">所属管辖单位</td>
-					<td width="23%" class="pagetd">
-						<input type="text" id="zdry_gxdwmc" name="jdytjxx.gxdwmc" class="inputstyle" value="" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="6">
-						<table border="0" align="right" cellpadding="2" cellspacing="0">
-							<tr>
-							<!--  预警弹出框测试用
-							<td><a href="#" class="searchbutton" id="qu_erys"
-									onclick="kkkk();">kkkk</a></td>
-							-->
-								<td><a href="#" class="searchbutton" id="qu_erys"
-									onclick="setPageList(1);">查询</a></td>
-								<td width="62"><a href="#" class="exceldcbutton"
-									onclick='setExportExcel_Zdry();' id="zdryexcel">导出</a></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table></td>
-	</tr>
+    <tr>
+      <td align="left" class="title1">重点管控人员预警数据查询</td>
+      <td align="right"><a href="#" id="closeDiv" onclick='$("#zdrygkyjxx").hideAndRemove("show");' class="close"></a></td>
+    </tr>
 </table>
 <div id="ljjbxxadd_detail" class="page-layout" src="#"
 	style="top: 5px; left: 160px;display:none;"></div>
@@ -209,9 +127,14 @@
 				<th name="l_ywlx" datatype="string" sumflag="0">业务类型</th>
 				<th name="">物流单号</th>
 				<th name="">登记序号</th>
-				<th name="">布控人员ID</th>
+				<th name="l_bkryid">布控人员ID</th>
 				<th name="">业务详情</th>
 			</tr>
 		</thead>
 	</table>
 </div>
+<table  border="0" align="center"  cellpadding="2"  cellspacing="0">
+ 	<tr>
+ 	  <td ><a href="#" class="searchbutton" id="qu_erysyj" onclick='$("#zdrygkyjxx").hideAndRemove("show");'>返回</a></td>
+ 	</tr>
+</table>

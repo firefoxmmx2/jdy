@@ -270,11 +270,11 @@
 		<input type="hidden" id="type" value="<%=type%>">
 		<div id="baManTablebm_xx">
 				<input type="hidden" name="ljjbxx.ljsjf" value="<%=sdf.format(ljsjf.getTime())%>">
-   				<input type="hidden" name="ljjbxx.ljsjt" value="<%=dateNow%>">
+   				<input type="hidden" name="ljjbxx.ljsjt" value="<%=datetime%>">
    				<input type="hidden" name="yjcs_cl" value="<%=yjcs_cl%>">
    				<input type="hidden" name="nosjjgdone" value="1">
    				<input type="hidden" name="tcwcl" value="1">
-   				<input type="hidden" name="cgcs" value="3">
+   				<input type="hidden" name="cgcs" value="<%=cgcs%>">
    				<input type="hidden" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle">
 		</div>
 <!-- 	    	<table width="100%" border="0" cellspacing="0" cellpadding="2"> -->
