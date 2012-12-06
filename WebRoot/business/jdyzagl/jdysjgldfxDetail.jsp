@@ -191,22 +191,27 @@
 	* 核实处理
 	*/
 	function verify(xm,lxdh,xxdz,rhlx,rowid){
-		var params = {
-				'rdrjbxx.xm':xm,
-				'rdrjbxx.lxdh':lxdh,
-				'rdrjbxx.xxdz':xxdz,
-				'rdrjbxx.jdrylx':rhlx
-		};
-		$.post(sjgl_verify_url,params,function(data){
-			if(data.result == 'success'){
-				var jrow = $('#'+sjgl_div_detail+' tr[rowid="'+rowid+'"]');
-				jrow.find('td:nth(5)').text('已核实不再预警');
-				jrow.find('td:last a[title="核实"]').remove();
-			}
-			else{
-				jAlert(data.result,'提示');
-			}
-		},'json');
+		jConfirm("确定核实吗？","提示",function(r){
+            if(r){
+                var params = {
+                        'rdrjbxx.xm':xm,
+                        'rdrjbxx.lxdh':lxdh,
+                        'rdrjbxx.xxdz':xxdz,
+                        'rdrjbxx.jdrylx':rhlx
+                };
+                $.post(sjgl_verify_url,params,function(data){
+                    if(data.result == 'success'){
+                        var jrow = $('#'+sjgl_div+' tr[rowid="'+rowid+'"]');
+                        jrow.find('td:nth(5)').text('已核实不再预警');
+                        jrow.find('td:last a[title="核实"]').remove();
+                    }
+                    else{
+                        jAlert(data.result,'提示');
+                    }
+                },'json');
+
+            }
+        });
 		
 	}
 	//查询验证
@@ -270,11 +275,11 @@
 		<input type="hidden" id="type" value="<%=type%>">
 		<div id="baManTablebm_xx">
 				<input type="hidden" name="ljjbxx.ljsjf" value="<%=sdf.format(ljsjf.getTime())%>">
-   				<input type="hidden" name="ljjbxx.ljsjt" value="<%=dateNow%>">
+   				<input type="hidden" name="ljjbxx.ljsjt" value="<%=datetime%>">
    				<input type="hidden" name="yjcs_cl" value="<%=yjcs_cl%>">
    				<input type="hidden" name="nosjjgdone" value="1">
    				<input type="hidden" name="tcwcl" value="1">
-   				<input type="hidden" name="cgcs" value="3">
+   				<input type="hidden" name="cgcs" value="<%=cgcs%>">
    				<input type="hidden" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle">
 		</div>
 <!-- 	    	<table width="100%" border="0" cellspacing="0" cellpadding="2"> -->

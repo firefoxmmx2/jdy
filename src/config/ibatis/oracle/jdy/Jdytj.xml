@@ -264,15 +264,12 @@
 			select rownum rowno,z.*,case  when  sjjg.zt is null then '0' else sjjg.zt  end zt from 
 				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz xxdz,rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
-					<dynamic prepend=" ">
-						<isNotEmpty prepend=" " property="ljjbxx">
-							join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
-						</isNotEmpty>
-					</dynamic>
+					join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
+                        and lj.scbzw = '0'
 					</dynamic>
 					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
 		order by $pageSort$)  z left join t_sjglcljg sjjg on z.xm = sjjg.xm 
@@ -289,26 +286,27 @@
                                               					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 
                                               			from (
 															SELECT
-															    rdrjbxx.xm,
-															    rdrjbxx.lxdh,
-															    rdrjbxx.xxdz xxdz,
-															    rdrjbxx.jdrylx
+                                                                rdrjbxx.xm,
+                                                                rdrjbxx.lxdh
+															    <!--rdrjbxx.xxdz xxdz,-->
+                                                                <!--rdrjbxx.jdrylx-->
 															  FROM t_rdrjbxx rdrjbxx
 															  JOIN t_ljjbxx lj ON lj.jjr_id = rdrjbxx.id OR lj.sjr_id = rdrjbxx.id
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
-															    and lj.ljsj &lt;=trunc(sysdate,'dd')
+															    and lj.ljsj &lt;=sysdate
+                                                                and lj.scbzw = '0'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
 															        AND rdrjbxx.xxdz     = sjjg.xxdz
 															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+                                                                    AND rdrjbxx.xm   = sjjg.xm
 															        AND sjjg.zt    = 1
 															    )
-															  GROUP BY rdrjbxx.xm,
-															    rdrjbxx.lxdh,
-															    rdrjbxx.xxdz,
-															    rdrjbxx.jdrylx
+															  GROUP BY
+                                                                    rdrjbxx.xm,
+                                                                    rdrjbxx.lxdh
 															) group by
 																<isEqual property="yjcs_cl" compareValue="1"> xm </isEqual>
                                               					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 
@@ -318,7 +316,7 @@
 
                                               	</isNotEmpty>
                                               <dynamic prepend="where">
-                                              	<isNotEmpty prepend="and" property="nosjjgdone">
+                                              	  <isNotEmpty prepend="and" property="nosjjgdone">
 	                                              	sjjg.zt is null
 	                                              </isNotEmpty>
                                               </dynamic>
@@ -334,20 +332,18 @@
 							    rdrjbxx.xxdz xxdz,
 							    rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
-					<dynamic prepend=" ">
-						<isNotEmpty prepend=" " property="ljjbxx">
-							join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
-						</isNotEmpty>
-					</dynamic>
+					join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
+                        and lj.scbzw = '0'
 						<isNotEmpty property="nosjjgdone">
 						and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
 															        AND rdrjbxx.xxdz     = sjjg.xxdz
 															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+                                                                    AND rdrjbxx.xm   = sjjg.xm
 															        AND sjjg.zt    = 1
 															    )
 						</isNotEmpty>
@@ -364,25 +360,25 @@
                                               			from (
 															SELECT
 															    rdrjbxx.xm,
-															    rdrjbxx.lxdh,
-															    rdrjbxx.xxdz xxdz,
-															    rdrjbxx.jdrylx
+															    rdrjbxx.lxdh
+															    
 															  FROM t_rdrjbxx rdrjbxx
 															  JOIN t_ljjbxx lj ON lj.jjr_id = rdrjbxx.id OR lj.sjr_id = rdrjbxx.id
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
-															    and lj.ljsj &lt;=trunc(sysdate,'dd')
+															    and lj.ljsj &lt;=sysdate
+                                                                and lj.scbzw = '0'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
 															        AND rdrjbxx.xxdz     = sjjg.xxdz
 															        AND rdrjbxx.jdrylx   = sjjg.rhlx
+                                                                    AND rdrjbxx.xm   = sjjg.xm
 															        AND sjjg.zt    = 1
 															    )
-															  GROUP BY rdrjbxx.xm,
-															    rdrjbxx.lxdh,
-															    rdrjbxx.xxdz,
-															    rdrjbxx.jdrylx
+															  GROUP BY 
+                                                                rdrjbxx.xm,
+															    rdrjbxx.lxdh
 															) group by
 																<isEqual property="yjcs_cl" compareValue="1"> xm </isEqual>
                                               					<isEqual property="yjcs_cl" compareValue="2"> lxdh </isEqual> 

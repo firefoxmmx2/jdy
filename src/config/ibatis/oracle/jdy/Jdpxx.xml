@@ -288,24 +288,43 @@
 	</select>
 	
 	<!-- 查询预警寄递物品 -->
+	<!-- 
+	Select a.item_id Id,a.display_name jdplxmc,b.display_name jdpdlxmc From t_dict_item a ,
+(Select t.item_id, t.display_name ,t.fact_value, t.super_item_id
+from t_dict_item t Where t.dict_code Like '%dm_jdwp%' And t.super_item_id = '0' ) b
+Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value Is Not Null
+ order by a.append_value desc
+	 -->
 	<select id="jdpxx.getYjwpListPage" parameterClass="map" resultMap="yjwp_rm">
 	select x.* from (
 		select rownum rowno,z.* from 
 		(	
-Select a.item_id Id,a.display_name jdplxmc,b.display_name jdpdlxmc From t_dict_item a ,
-(Select t.item_id, t.display_name ,t.fact_value, t.super_item_id
-from t_dict_item t Where t.dict_code Like '%dm_jdwp%' And t.super_item_id = '0' ) b
-Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value Is Not Null
- order by a.append_value desc)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
+ Select t.Xid Id,t.xname jdplxmc,t.dname jdpdlxmc From
+ (Select d.item_id did,d.fact_value dvalue,d.display_name dname,x.item_id Xid,x.fact_value xvalue,x.display_name xname,x.append_value From t_dict_item d,t_dict_item x
+ Where d.dict_code Like '%dm_jdwp%' And d.super_item_id = '0' And d.item_id=x.super_item_id And x.append_value Is Not Null
+ <isNotEmpty prepend=" and " property="jdpdl">
+   d.fact_value=#jdpdl#
+ </isNotEmpty> 
+ <isNotEmpty prepend=" and " property="jdpxl">
+   x.fact_value=#jdpxl#
+ </isNotEmpty> 
+ ) t
+ order by t.append_value desc)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 	<select id="jdpxx.getYjwpListPageCount" parameterClass="map" resultClass="Integer">
    select count(1) from
    (
-   Select a.item_id Id,a.display_name jdplxmc,b.display_name jdpdlxmc From t_dict_item a ,
-(Select t.item_id, t.display_name ,t.fact_value, t.super_item_id
-from t_dict_item t Where t.dict_code Like '%dm_jdwp%' And t.super_item_id = '0' ) b
-Where a.super_item_id = b.item_id And a.dict_code Like '%dm_jdwp%' And a.super_item_id!='0' And a.append_value Is Not Null
-   )
+    Select t.Xid Id,t.xname jdplxmc,t.dname jdpdlxmc From
+ (Select d.item_id did,d.fact_value dvalue,d.display_name dname,x.item_id Xid,x.fact_value xvalue,x.display_name xname From t_dict_item d,t_dict_item x
+ Where d.dict_code Like '%dm_jdwp%' And d.super_item_id = '0' And d.item_id=x.super_item_id And x.append_value Is Not Null
+  <isNotEmpty prepend=" and " property="jdpdl">
+   d.fact_value=#jdpdl#
+ </isNotEmpty> 
+ <isNotEmpty prepend=" and " property="jdpxl">
+   x.fact_value=#jdpxl#
+ </isNotEmpty>  
+) t
+)
 	</select>
 	
 	<!-- 设置预警物品 -->

@@ -11,9 +11,11 @@ var Wplbbkys_grid_div="tabledata";
 var Wplbbkys_table_html="";
 var pageUrl="jdy/findYjwpPage_wpyjsz.action";
 var addYjwpUrl="jdy/setYjwp_wpyjsz.action";
+var yjaddjdpxx="yjaddjdpxx";
 $(document).ready(function() {
 	//寄递物品联动下拉列表
-	selectboxlink_new("jdwpdl","jdwpxl","dm_jdwpdl");
+	selectboxlink_new("yj_jdpdlx","yj_jdplx","dm_jdwpdl");
+	daggleDiv(yjaddjdpxx);
 	loadPageWplbbkysQuery(Wplbbkys_grid_div);
 }); 
 function selectboxlink_new(firstId,secondId,dicDM){
@@ -37,7 +39,8 @@ function loadPageWplbbkysQuery(divpageid){
 }
 function setList(pageno,url){
  	$("#"+Wplbbkys_grid_div).html(Wplbbkys_table_html);
-	params = getSubmitParams("#wplbbkys_man [id*=wp_]",params);
+ 	setParams("yj_");
+	//params = getSubmitParams("#wplbbkys_man [name*=yj.jdpxx.]");
 	if (url==null || url=="undefined"){
 		url=pageUrl;
 	}
@@ -48,7 +51,7 @@ function setPageListWplbbkys(pageno,url){
 		var mygrid1 = $("#"+Wplbbkys_grid_table).ingrid({ 
 			url: url,	
 			onRowSelect:null,
-			height: pageHeight-286,
+			height: pageHeight-230,
             ingridPageParams:sXML,
             ingridExtraParams:params,
 			pageNumber: pageno,
@@ -57,23 +60,11 @@ function setPageListWplbbkys(pageno,url){
 		});	
 		
 }
-//验证方法 
-function manVerify_yjwp(){
-	if (!checkControlValue("jdwpxl","String",1,30,null,1,"寄递品小类"))
-		return false;
-	
-	return true;
-}
-function addYjwp(){
-	//if(!$("#jdwpyjxx").length){$(document).find('body').eq(0).append('<div id="jdwpyjxx" class="page-layout" src="#" style="top:10px; left:160px; display: none;"></div>');}
-	//detailDialog("jdwpyjxx", 800, "business/jdyzagl/Jdwplbyjcl.jsp");
-	if(manVerify_yjwp()){
-		var itemId=$("#jdwpxl").val();
-		jQuery.post(addYjwpUrl, {"itemId":itemId}, function(){
-			setPageListWplbbkys(1);
-		}, "") 
-	}
-	
+
+function getaddYjwpPage(){
+	setWidth(yjaddjdpxx,500);
+	setUrl(yjaddjdpxx,"business/jdyzagl/YjwpAdd.jsp");
+	bindDocument(yjaddjdpxx);
 }
 function removeYjwp(id){
 	jQuery.post(addYjwpUrl, {"itemId":id,"result":"del"}, function(){
@@ -83,25 +74,23 @@ function removeYjwp(id){
 </script>
 
 <body>
-<table width="100%" cellpadding="5" cellspacing="0"  class="tableborder">
+<table width="100%" cellpadding="0" cellspacing="0"  class="tableborder">
   <tr>
     <td class="queryfont">物品类别预警设置</td>
   </tr>
   <tr>
     <td class="tdbg">
-     <fieldset >
-     <legend>预警物品添加选项</legend>
-      <table width="100%" border="0" cellspacing="0" cellpadding="2" id="wplbbkys_man">
+     <table width="100%" border="0" cellspacing="0" cellpadding="2" id="wplbbkys_man">
 		  <tr>
 					<td width="10%" class="pagedistd">寄递品大类</td>
 					<td width="23%" class="pagetd">
-					  <select id="jdwpdl" name="lj.jdpxx.jdpdlx">
+					  <select id="yj_jdpdlx" name="yj.jdpxx.jdpdlx">
 						<option></option>
 					  </select>
 					</td>
 					<td width="10%" class="pagedistd">寄递品小类</td>
 					<td width="23%" class="pagetd">
-						 <select id="jdwpxl" name="lj.jdpxx.jdplx">
+						 <select id="yj_jdplx" name="yj.jdpxx.jdplx">
 							<option></option>
 						 </select>
 					</td>
@@ -111,13 +100,12 @@ function removeYjwp(id){
     		  	<table  border="0" align="right"  cellpadding="2"  cellspacing="0">
     		    	<tr>
     		    	  <td ><a href="#" class="searchbutton" id="qu_erys" onclick="setPageListWplbbkys(1);">查询</a></td>
-    		    	  <td ><a href="#" class="addbutton" id="jdywxx" onclick='addYjwp();'>新增</a></td>
+    		    	  <td ><a href="#" class="addbutton" id="jdywxx" onclick='getaddYjwpPage();'>新增</a></td>
     		    	</tr>
     		  	</table>
     		  </td>
     		</tr>
     	</table>
-     </fieldset>
     </td>
   </tr>
 </table>	<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -136,5 +124,8 @@ function removeYjwp(id){
 	    </tr>
 	  </thead>
 	</table>	
+</div>
+<div id="yjaddjdpxx" class="page-layout" src="#"
+		style="top:50px; left:160px; display: none;">
 </div>
 </body>
