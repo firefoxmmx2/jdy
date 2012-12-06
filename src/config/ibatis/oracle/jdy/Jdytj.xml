@@ -269,7 +269,7 @@
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
-                        and lj.scbzw = 'N'
+                        and lj.scbzw = '0'
 					</dynamic>
 					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
 		order by $pageSort$)  z left join t_sjglcljg sjjg on z.xm = sjjg.xm 
@@ -295,7 +295,7 @@
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
 															    and lj.ljsj &lt;=sysdate
-                                                                and lj.scbzw = 'N'
+                                                                and lj.scbzw = '0'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
@@ -337,7 +337,7 @@
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
-                        and lj.scbzw = 'N'
+                        and lj.scbzw = '0'
 						<isNotEmpty property="nosjjgdone">
 						and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
@@ -367,7 +367,7 @@
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
 															    and lj.ljsj &lt;=sysdate
-                                                                and lj.scbzw = 'N'
+                                                                and lj.scbzw = '0'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
@@ -608,6 +608,45 @@
 					  from  t_bkry bkry left join t_rdrjbxx ry on bkry.zjhm=ry.zjhm  
            					left join t_ljjbxx lj on (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
            			  where bkry.ckbs = '0'
+						<include refid="zdryListWhere"/>
+					order by $pageSort$
+				)  z
+		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		
+	</select>
+	<!-- 	重点人员管控预警查询记数 -->
+	<select id="getZdryyjListPageCount" parameterClass="map" resultClass="int">
+		 select count(1)
+		 from  t_bkry bkry , t_rdrjbxx ry ,t_ljjbxx lj
+		 where bkry.zjhm=ry.zjhm
+		      and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+		      and bkry.ckbs = '0'
+		      and lj.scbzw='0'
+		<include refid="zdryListWhere"/> 
+	</select>
+	
+	<!-- 	重点人员管控预警分页查询 -->
+	<select id="getZdryyjListPage" parameterClass="map" resultMap="zdry_result">
+		select x.* from (
+			select rownum rowno,z.* 
+				from (
+					select 
+						   bkry.bkryid   bkry_id,
+					       bkry.xm       bkry_xm,
+					       bkry.xbdm     bkry_xbdm,
+					       bkry.gmsfhm   bkry_gmsfhm,
+					       bkry.ajlb     bkry_ajlb,
+					       bkry.fwdwbm   bkry_fwdwbm,
+					       bkry.fwdw     bkry_fwdw,
+					       lj.ljtbsj   ljxx_ywrq,
+					       lj.djxh     ljxx_djxh,
+					       lj.wldh     ljxx_wldh,
+					       ry.jdrylx   ryxx_ywlx
+					  from  t_bkry bkry , t_rdrjbxx ry ,t_ljjbxx lj
+					  where bkry.zjhm=ry.zjhm
+					       and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+					       and bkry.ckbs = '0'
+					       and lj.scbzw='0'
 						<include refid="zdryListWhere"/>
 					order by $pageSort$
 				)  z

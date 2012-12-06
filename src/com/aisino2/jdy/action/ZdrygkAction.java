@@ -108,6 +108,7 @@ public class ZdrygkAction extends PageAction {
 		params.put("ksrq", jdytjxx.getKsrq());
 		params.put("jsrq", jdytjxx.getJsrq());
 		params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
+		params.put("ywhyjqbbz",jdytjxx.getYwhyjqbbz());//2012年12月6日新添加的业务和预警区别标志
 		Page pageinfo = jdytjxx_service.findZdryForPage(params, pagesize, pagerow, dir, sort);
 		totalpage = pageinfo.getTotalPages();
 		totalrows = pageinfo.getTotalRows();
@@ -125,15 +126,56 @@ public class ZdrygkAction extends PageAction {
 				jdytjxx.setYwlx(dict_item.getDisplay_name());
 			}
 		}
+		if("YWBZ".equals(jdytjxx.getYwhyjqbbz())){
+			setTableDate_zdry(lJdytjxx);
+		}else if("YJBZ".equals(jdytjxx.getYwhyjqbbz())){
+			setTableDate_zdryyj(lJdytjxx);
+		}
 		
-		setTableDate_zdry(lJdytjxx);
 
 		this.result = "success";
 		return SUCCESS;
 	}
 
-	/*** 历史数据轨迹查询主页面setable方法 ***/
+	/*** 重点人员查询主页面setable方法 ***/
 	private void setTableDate_zdry(List<Jdytjxx> lData) {
+		List lPro = new ArrayList();
+		lPro.add("bkryid");
+		lPro.add("xm");
+		lPro.add("xb");
+		lPro.add("zjhm");
+		lPro.add("rylx");
+		lPro.add("gxdwmc");
+		lPro.add("ywdjsj");
+		lPro.add("ywlx");
+		lPro.add("wldh");
+		lPro.add("djxh");
+		lPro.add("bkryid");
+
+		List lCol = new ArrayList();
+
+		List lDetail = new ArrayList();
+		lDetail.add("setZdryDetail");
+		lDetail.add("寄递业务详情");
+		
+		lCol.add(lDetail);
+		for(Jdytjxx jdytjxx:lData){
+			if(null==jdytjxx.getDjxh()){
+			   jdytjxx.setDjxh("无关联数据");
+			}
+			String wldh=jdytjxx.getWldh();
+			if(null==jdytjxx.getWldh()){
+				jdytjxx.setWldh("无关联数据");
+			}
+		}
+		Jdytjxx setTjxx = new Jdytjxx();
+		// this.setDataCustomer(setLjxx, lData, lPro, null, lCol);
+		this.setData(setTjxx, lData, lPro, lCol);
+		this.tabledata = this.getData();
+		totalrows = this.getTotalrows();
+	}
+	/*** 重点人员预警查询主页面setable方法 ***/
+	private void setTableDate_zdryyj(List<Jdytjxx> lData) {
 		List lPro = new ArrayList();
 		lPro.add("bkryid");
 		lPro.add("xm");
@@ -174,7 +216,6 @@ public class ZdrygkAction extends PageAction {
 		this.tabledata = this.getData();
 		totalrows = this.getTotalrows();
 	}
-
 
 
 	/***

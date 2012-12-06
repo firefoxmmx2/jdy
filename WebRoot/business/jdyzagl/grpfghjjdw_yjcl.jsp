@@ -54,7 +54,7 @@ function setPageListpfyj(pageno,url){
 //处理方法
 function grpfghdwyjcl(id){
 	sFlag="false";
-	jConfirm('确定处理操作吗？', '删除提示', function(r) {
+	jConfirm('处理提示？', '删除提示', function(r) {
     	if(r==true){
     		$.post("jdy/grpfghdwclcz_rdrjbxx.action",{'rdrjbxx.id':id},function(json){ if(json.result == 'success') { setPageListpfyj(1); } },'json');
 		}
