@@ -269,7 +269,7 @@
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
-                        and lj.scbzw = 'N'
+                        and lj.scbzw = '0'
 					</dynamic>
 					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
 		order by $pageSort$)  z left join t_sjglcljg sjjg on z.xm = sjjg.xm 
@@ -295,7 +295,7 @@
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
 															    and lj.ljsj &lt;=sysdate
-                                                                and lj.scbzw = 'N'
+                                                                and lj.scbzw = '0'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
@@ -337,7 +337,7 @@
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
-                        and lj.scbzw = 'N'
+                        and lj.scbzw = '0'
 						<isNotEmpty property="nosjjgdone">
 						and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
@@ -367,7 +367,7 @@
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
 															    and lj.ljsj &lt;=sysdate
-                                                                and lj.scbzw = 'N'
+                                                                and lj.scbzw = '0'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
