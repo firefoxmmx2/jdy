@@ -213,9 +213,6 @@
 			<isNotNull prepend="," property="kybz">
 				kybz=#kybz#
 			</isNotNull>
-			<isNotNull prepend="," property="kybz">
-				kybz=#kybz#
-			</isNotNull>
 			<isNotNull prepend="," property="yjbz">
 				yjbz=#yjbz#
 			</isNotNull>
