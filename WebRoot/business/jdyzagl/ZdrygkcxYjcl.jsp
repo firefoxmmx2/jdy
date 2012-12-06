@@ -20,7 +20,7 @@
 		//布控人员撤销
 		detailid="bkry_detail";
 		bkmodWidth="750";
-		bkmodHtml="basic/basicsystem/BkryckDetail.jsp";
+		bkmodHtml="business/jdyzagl/ZdrygkcxYjclxq.jsp";
 		daggleDiv(detailid);
 		detailUrl="basicsystem/query_bkry.action";
 		modUrl="basicsystem/modify_bkry.action";
