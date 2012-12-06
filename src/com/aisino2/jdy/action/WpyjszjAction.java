@@ -5,11 +5,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Jdpxx;
 import com.aisino2.jdy.domain.Ljjbxx;
 import com.aisino2.jdy.service.IJdpxxService;
+import com.aisino2.sysadmin.Constants;
+import com.aisino2.sysadmin.domain.User;
+import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 物品类别预警设置action
@@ -155,12 +164,30 @@ public class WpyjszjAction extends PageAction {
 		return SUCCESS;
 	}
 	/**
+	 * 查询预警物品是否已经添加
+	 * @return
+	 */
+	public String queryIsExist(){
+		Map map=new HashMap();
+		map.put("itemId", this.itemId);
+		if(jdpxxService.queryIsExist(map)>0)
+		    this.result="success";
+		else
+			this.result = "failed";
+		return SUCCESS;
+	}
+	/**
 	 *  查询揽件中有预警物品的处理信息
 	 * @return
 	 */
 	public String findYjwuclList(){
 		try {
+			ActionContext ctx = ActionContext.getContext();
+			HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute(Constants.userKey);
 			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("gxdwbm", user.getDepartment().getDepartcode());
 			Page pageinfo = jdpxxService.findYjwuclList(params,pagesize,pagerow, dir, sort);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();

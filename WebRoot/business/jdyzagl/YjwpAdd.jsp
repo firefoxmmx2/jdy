@@ -5,7 +5,7 @@
 <%@include file="../../public/user-info.jsp" %>
 
 <script type="text/javascript">
-
+var isExistUrl="jdy/queryIsExist_wpyjsz.action";
 $(function() {	
 	//寄递物品联动下拉列表
 	selectboxlink_new("yj_jdpdlxadd","yj_jdplxadd","dm_jdwpdl");
@@ -24,9 +24,23 @@ function addYjwp(){
 	//detailDialog("jdwpyjxx", 800, "business/jdyzagl/Jdwplbyjcl.jsp");
 	if(manVerify_yjwp()){
 		var itemId=$("#yj_jdplxadd").val();
-		jQuery.post(addYjwpUrl, {"itemId":itemId}, function(){
-			setPageListWplbbkys(1);
-		}, "") 
+		$.ajax({
+	 		   type: "POST",
+	 		   url: isExistUrl,
+	 		   data: "itemId="+itemId,
+	 		   dataType:"json",
+	 		   success: function(msg){
+	 			var returnResult=eval(msg);
+	 			if(returnResult.result=="failed"){
+	 				jQuery.post(addYjwpUrl, {"itemId":itemId}, function(){
+	 					setPageListWplbbkys(1);
+	 					$("#yjaddjdpxx").hideAndRemove("show");
+	 				}, "") 
+	 			}else{
+	 				jAlert("该类型已经存在",'提示');
+	 			}
+	 		   }
+	 		});
 	}
 	
 }
@@ -34,7 +48,7 @@ function addYjwp(){
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
-      <td align="left" class="title1">预警物品新增</td>
+      <td align="left" class="title1">预警物品类别新增</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#yjaddjdpxx").hideAndRemove("show");' class="close"></a></td>
     </tr>
 </table>

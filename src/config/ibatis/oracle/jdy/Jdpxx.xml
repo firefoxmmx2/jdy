@@ -64,11 +64,6 @@
 		<result property="jdpdlxmc" column="jdpdlxmc"/>
 		<result property="jdplxmc" column="jdplxmc"/>
 	</resultMap>
-	<resultMap class="jdpxx" id="yjwp_rm" >
-		<result property="id" column="id"/>
-		<result property="jdpdlxmc" column="jdpdlxmc"/>
-		<result property="jdplxmc" column="jdplxmc"/>
-	</resultMap>
 	<!-- 预警物品处理信息 -->
 	<resultMap class="ljjbxx" id="yjwpclxx_rm" >
 		<result property="ywcxbz" column="ywcxbz"/>
@@ -368,6 +363,7 @@ Select t.Wldh,
    And x.Dict_Code Like '%dm_jdwp%'
    And x.append_value Is Not Null
    And w.yjbz!='N'
+    And q.gxdwbm=#gxdwbm#
  Order By $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 	<select id="jdpxx.findYjwuclListCount" parameterClass="map" resultClass="Integer">
@@ -399,8 +395,12 @@ Select t.Wldh,
    And x.Super_Item_Id = d.Item_Id
    And x.Dict_Code Like '%dm_jdwp%'
    And x.append_value Is Not Null
-   And w.yjbz!='N')
+   And w.yjbz!='N'
+   And q.gxdwbm=#gxdwbm#)
 	</select>
-	
+	<select id="jdpxx.YjwpisExist" parameterClass="map"  resultMap="yjwp_rm">
+	Select t.Item_Id Id, t.display_name Jdpdlxmc, t.display_name Jdplxmc
+    From t_Dict_Item t where t.dict_code Like '%dm_jdwp%' and t.append_value Is Not Null  and t.fact_value=#itemId#
+	</select>
 	
 </sqlMap>
