@@ -85,10 +85,14 @@ public class WpyjszjAction extends PageAction {
 	/**
 	 *  查询预警物品
 	 * @return
+	 * @throws Exception 
 	 */
-	public String findYjwpPage(){
+	public String findYjwpPage() throws Exception{
 		try {
+			jdpxx=(Jdpxx)this.setClass(new Jdpxx(), null);
 			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("jdpdl", jdpxx.getJdpdlx());
+			params.put("jdpxl", jdpxx.getJdplx());
 			Page pageinfo = jdpxxService.findYjwpForPage(params,pagesize,pagerow, "", "");
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
