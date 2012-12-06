@@ -266,7 +266,12 @@ public class JdytjxxDaoImpl extends BaseDao implements IJdytjxxDao {
 				sCol = " bkry.ajlb "+ sort;
 		}
 		map.put("pageSort", sCol);
-		return queryForPage("getZdryListPage", map, pageno,pagesize);
+		if("YWBZ".equals(map.get("ywhyjqbbz"))){
+			return queryForPage("getZdryListPage", map, pageno,pagesize);
+		}else{
+			return queryForPage("getZdryyjListPage", map, pageno,pagesize);
+		}
+		
 	}
 
 }
