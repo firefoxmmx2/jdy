@@ -63,8 +63,15 @@ public class Jdytjxx implements Serializable {
 	private String rylx;//重点人员管控类型
 	private Zdryxx zdryxx;//重点人员
 	private String bkryid;//布控人员ID
+	private String ywhyjqbbz;//业务和预警查询时的区别标志（YWBZ：业务标志；YJBZ：预警标志）
 	
 	
+	public String getYwhyjqbbz() {
+		return ywhyjqbbz;
+	}
+	public void setYwhyjqbbz(String ywhyjqbbz) {
+		this.ywhyjqbbz = ywhyjqbbz;
+	}
 	public String getBkryid() {
 		return bkryid;
 	}
