@@ -134,7 +134,7 @@
 			var params = getSubmitParams('#baManTablebm input');
 			var mygrid1 = $("#"+sjgl_table).ingrid({ 
 											url: url,	
-											height: pageHeight-286,
+											height: pageHeight-242,
 	                                        ingridPageParams:sXML,
 	                                        ingridExtraParams:params,
 											pageNumber: pageno,
@@ -374,7 +374,6 @@
 	    		    	<tr>
 	    		    	  <td ><a href="#" class="highsearchbutton" id="sjglQueryButton" onclick="sjglPageQuery(1);">关联查询</a></td>
 	    		    	  <td ><a href="#" class="addbutton" id="sjglExportButton" onclick='exportSjgl();'>导出</a></td>
-	    		    	  <td ><a href="#" class="addbutton" id="test" onclick='func();'>弹出</a></td>
 	    		    	</tr>
 	    		  	</table>
 	    		  </td>
