@@ -614,4 +614,43 @@
 		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
 		
 	</select>
+	<!-- 	重点人员管控预警查询记数 -->
+	<select id="getZdryyjListPageCount" parameterClass="map" resultClass="int">
+		 select count(1)
+		 from  t_bkry bkry , t_rdrjbxx ry ,t_ljjbxx lj
+		 where bkry.zjhm=ry.zjhm
+		      and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+		      and bkry.ckbs = '0'
+		      and lj.scbzw='0'
+		<include refid="zdryListWhere"/> 
+	</select>
+	
+	<!-- 	重点人员管控预警分页查询 -->
+	<select id="getZdryyjListPage" parameterClass="map" resultMap="zdry_result">
+		select x.* from (
+			select rownum rowno,z.* 
+				from (
+					select 
+						   bkry.bkryid   bkry_id,
+					       bkry.xm       bkry_xm,
+					       bkry.xbdm     bkry_xbdm,
+					       bkry.gmsfhm   bkry_gmsfhm,
+					       bkry.ajlb     bkry_ajlb,
+					       bkry.fwdwbm   bkry_fwdwbm,
+					       bkry.fwdw     bkry_fwdw,
+					       lj.ljtbsj   ljxx_ywrq,
+					       lj.djxh     ljxx_djxh,
+					       lj.wldh     ljxx_wldh,
+					       ry.jdrylx   ryxx_ywlx
+					  from  t_bkry bkry , t_rdrjbxx ry ,t_ljjbxx lj
+					  where bkry.zjhm=ry.zjhm
+					       and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
+					       and bkry.ckbs = '0'
+					       and lj.scbzw='0'
+						<include refid="zdryListWhere"/>
+					order by $pageSort$
+				)  z
+		) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$
+		
+	</select>
 </sqlMap>
