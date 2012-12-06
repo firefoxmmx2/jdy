@@ -281,6 +281,8 @@
    				<input type="hidden" name="tcwcl" value="1">
    				<input type="hidden" name="cgcs" value="<%=cgcs%>">
    				<input type="hidden" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle">
+   				<input type="hidden" name="ljjbxx.qyjbxx.gxdwbm" 
+   				     value="<%=StringUtil.trimEven0(gxdwbm)%>">
 		</div>
 <!-- 	    	<table width="100%" border="0" cellspacing="0" cellpadding="2"> -->
 	    		
