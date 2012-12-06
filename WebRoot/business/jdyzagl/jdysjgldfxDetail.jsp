@@ -1,5 +1,7 @@
 <%@page import="org.apache.poi.hssf.record.formula.functions.Call"%>
 <%@page import="java.util.Calendar"%>
+<%@page import="com.aisino2.common.StringUtil"%>
+
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
