@@ -621,6 +621,7 @@
 		 where bkry.zjhm=ry.zjhm
 		      and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
 		      and bkry.ckbs = '0'
+		      and bkry.ckyy is null
 		      and lj.scbzw='0'
 		<include refid="zdryListWhere"/> 
 	</select>
@@ -646,6 +647,7 @@
 					  where bkry.zjhm=ry.zjhm
 					       and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
 					       and bkry.ckbs = '0'
+					       and bkry.ckyy is null
 					       and lj.scbzw='0'
 						<include refid="zdryListWhere"/>
 					order by $pageSort$
