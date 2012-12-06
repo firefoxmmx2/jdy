@@ -264,15 +264,12 @@
 			select rownum rowno,z.*,case  when  sjjg.zt is null then '0' else sjjg.zt  end zt from 
 				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz xxdz,rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
-					<dynamic prepend=" ">
-						<isNotEmpty prepend=" " property="ljjbxx">
-							join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
-						</isNotEmpty>
-					</dynamic>
+					join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
+                        and lj.scbzw = 'N'
 					</dynamic>
 					group by rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz,rdrjbxx.jdrylx
 		order by $pageSort$)  z left join t_sjglcljg sjjg on z.xm = sjjg.xm 
@@ -298,6 +295,7 @@
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
 															    and lj.ljsj &lt;=sysdate
+                                                                and lj.scbzw = 'N'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
@@ -334,15 +332,12 @@
 							    rdrjbxx.xxdz xxdz,
 							    rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
-					<dynamic prepend=" ">
-						<isNotEmpty prepend=" " property="ljjbxx">
-							join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
-						</isNotEmpty>
-					</dynamic>
+					join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
 						and rdrjbxx.jdrylx != '30'
+                        and lj.scbzw = 'N'
 						<isNotEmpty property="nosjjgdone">
 						and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
@@ -372,6 +367,7 @@
 															  WHERE 1=1 
 															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
 															    and lj.ljsj &lt;=sysdate
+                                                                and lj.scbzw = 'N'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
