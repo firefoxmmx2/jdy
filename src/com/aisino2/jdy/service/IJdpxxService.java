@@ -80,4 +80,6 @@ public interface IJdpxxService {
 	 * 添加预警寄递物品
 	 */
 	void setYjwp(Map map);
+	
+	int queryIsExist(Map map);
 }

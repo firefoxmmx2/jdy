@@ -86,4 +86,7 @@ public class JdpxxServiceImpl implements IJdpxxService {
 		jdpxxDao.setYjwp(map);
 	}
 
+	public int queryIsExist(Map map){
+		return jdpxxDao.queryIsExist(map);
+	}
 }

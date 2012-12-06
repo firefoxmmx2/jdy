@@ -126,4 +126,9 @@ public class JdpxxDaoImpl extends BaseDao implements IJdpxxDao {
 	public void setYjwp(Map map){
 		update("jdpxx.setYjwp", map);
 	}
+	
+	public int queryIsExist(Map map){
+		List l= queryForList("jdpxx.YjwpisExist", map);
+		return l.size();
+	}
 }
