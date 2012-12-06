@@ -104,6 +104,8 @@
 	<input type="hidden" id="zdry_gxdwbm" name="jdytjxx.gxdwbm" value="<%=gxdwbm%>">
 	<!-- 当前登录用户级别 -->
 	<input type="hidden" id="current_departlevel" value="<%=departlevel %>">
+	<!-- 业务和预警区别标志 -->
+	<input type="hidden" id="zdry_ywhyjqbbz" name="jdytjxx.ywhyjqbbz" value="YJBZ">
     <tr>
       <td align="left" class="title1">重点管控人员预警数据查询</td>
       <td align="right"><a href="#" id="closeDiv" onclick='$("#zdrygkyjxx").hideAndRemove("show");' class="close"></a></td>
