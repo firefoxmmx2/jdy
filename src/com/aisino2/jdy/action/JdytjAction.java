@@ -565,12 +565,12 @@ public class JdytjAction extends PageAction {
 		
         for(Rdrjbxx rdrjbxx : rdrjbxx_list){
             if("1".equals(rdrjbxx.getZt()))
-                rdrjbxx.setZt("已核查");
+                rdrjbxx.setZt("已核实");
             else if ("0".equals(rdrjbxx.getZt()))
-                rdrjbxx.setZt("未核查");
+                rdrjbxx.setZt("未核实");
         }
 		String[][] tabletitle = { { "姓名", "xm" }, { "电话", "lxdh" },
-				{ "地址", "xxdz" }, { "业务类型", "jdrylxmc" },{"预警核查情况","zt"}};
+				{ "地址", "xxdz" }, { "业务类型", "jdrylxmc" },{"预警核实情况","zt"}};
 		exportGun(tabletitle,rdrjbxx_list);
 		this.result = "success";
 
