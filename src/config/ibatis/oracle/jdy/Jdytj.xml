@@ -300,11 +300,11 @@
                                                                 <!--rdrjbxx.jdrylx-->
 															  FROM t_rdrjbxx rdrjbxx
 															  JOIN t_ljjbxx lj ON lj.jjr_id = rdrjbxx.id OR lj.sjr_id = rdrjbxx.id
+															  join t_qyjbxx qy on qy.qybm = lj.qybm
 															  WHERE 1=1 
-															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
-															    and lj.ljsj &lt;=sysdate
-                                                                and lj.scbzw = '0'
-															    AND rdrjbxx.jdrylx != '30'
+															    <include refid="SjgltjPageWhere" />
+																and rdrjbxx.jdrylx != '30'
+										                        and lj.scbzw = '0'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
 															        AND rdrjbxx.lxdh     = sjjg.lxdh
 															        AND rdrjbxx.xxdz     = sjjg.xxdz
@@ -373,9 +373,9 @@
 															    
 															  FROM t_rdrjbxx rdrjbxx
 															  JOIN t_ljjbxx lj ON lj.jjr_id = rdrjbxx.id OR lj.sjr_id = rdrjbxx.id
+															  join t_qyjbxx qy on qy.qybm = lj.qybm
 															  WHERE 1=1 
-															    and lj.ljsj>=add_months(trunc(sysdate,'dd'),-1)
-															    and lj.ljsj &lt;=sysdate
+															    <include refid="SjgltjPageWhere" />
                                                                 and lj.scbzw = '0'
 															    AND rdrjbxx.jdrylx != '30'
 															    and not exists ( select sjjg.xm from t_sjglcljg sjjg where 1=1
