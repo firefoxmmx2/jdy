@@ -14,6 +14,8 @@ $(function() {
 
 //验证方法 
 function manVerify_yjwp(){
+	if (!checkControlValue("yj_jdpdlxadd","String",1,30,null,1,"寄递品大类"))
+		return false;
 	if (!checkControlValue("yj_jdplxadd","String",1,30,null,1,"寄递品小类"))
 		return false;
 	
@@ -59,13 +61,13 @@ function addYjwp(){
 </table>
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0" id="kyjdwpxx_qyd">
 	 <tr>
-					<td width="10%" class="pagedistd">寄递品大类</td>
+					<td width="10%" class="red">寄递品大类</td>
 					<td width="23%" class="pagetd">
 					  <select id="yj_jdpdlxadd" >
 						<option></option>
 					  </select>
 					</td>
-					<td width="10%" class="pagedistd">寄递品小类</td>
+					<td width="10%" class="red">寄递品小类</td>
 					<td width="23%" class="pagetd">
 						 <select id="yj_jdplxadd">
 							<option></option>

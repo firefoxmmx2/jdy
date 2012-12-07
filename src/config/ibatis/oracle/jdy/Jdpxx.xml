@@ -364,6 +364,7 @@ Select t.Wldh,
    And x.append_value Is Not Null
    And w.yjbz!='N'
    And q.gxdwbm like '$gxdwbm$%'
+    And t.scbzw='0'
  Order By $pageSort$)  z) x where rowno &gt;$beginRow$ and rowno &lt;= $endRow$ 
 	</select>
 	<select id="jdpxx.findYjwuclListCount" parameterClass="map" resultClass="Integer">
@@ -396,7 +397,8 @@ Select t.Wldh,
    And x.Dict_Code Like '%dm_jdwp%'
    And x.append_value Is Not Null
    And w.yjbz!='N'
-   And q.gxdwbm like '$gxdwbm$%')
+   And q.gxdwbm like '$gxdwbm$%'
+    And t.scbzw='0')
 	</select>
 	<select id="jdpxx.YjwpisExist" parameterClass="map"  resultMap="yjwp_rm">
 	Select t.Item_Id Id, t.display_name Jdpdlxmc, t.display_name Jdplxmc

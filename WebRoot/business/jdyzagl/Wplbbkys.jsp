@@ -67,9 +67,16 @@ function getaddYjwpPage(){
 	bindDocument(yjaddjdpxx);
 }
 function removeYjwp(id){
-	jQuery.post(addYjwpUrl, {"itemId":id,"result":"del"}, function(){
-		setPageListWplbbkys(1);
-	}, "") 
+	jConfirm('确认删除？', '提示信息', function(r) {
+    	if(r==true){
+    		jQuery.post(addYjwpUrl, {"itemId":id,"result":"del"}, function(){
+    			setPageListWplbbkys(1);
+    		}, "")
+		}
+		else{
+		   return false;
+		}
+	}); 
 }
 </script>
 
