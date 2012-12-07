@@ -294,6 +294,7 @@
            where 1=1
                  and r.id=l.jjr_id
                  and l.qybm=q.qybm
+                 and l.scbzw='0'
 		<dynamic prepend="">
 			<include refid="pfghjjdwWhere" />
 		</dynamic>
@@ -308,6 +309,7 @@
            where 1=1
                  and r.id=l.jjr_id
                  and l.qybm=q.qybm
+                 and l.scbzw='0'
         <dynamic prepend="">
 			<include refid="pfghjjdwWhere" />
 		</dynamic>
@@ -318,7 +320,7 @@
     <select id="fghjjdwtjcxdal.getListPageCount" resultClass="Integer" parameterClass="map" >
 		select count(1) from( select a.xm,a.ljsj,a.qymc,a.wldh,ryb.xm,ryb.lxdh,ryb.xxdz from 
 		(select  r.xm,l.ljsj,q.qymc,l.wldh,l.sjr_id
-		 from t_rdrjbxx r,t_ljjbxx l,t_qyjbxx q where 1=1  and r.id=l.jjr_id and l.qybm=q.qybm 
+		 from t_rdrjbxx r,t_ljjbxx l,t_qyjbxx q where 1=1  and r.id=l.jjr_id and l.qybm=q.qybm  and l.scbzw='0'
 		<dynamic prepend="">
 			<include refid="pfghjjdwdalWhere" />
 		</dynamic>
@@ -331,7 +333,7 @@
 		select rownum rowno,z.* from(
 		select a.djxh djxh,rownum xh, a.xm jjrxm,a.ljsj jjsj,a.qymc cjqy,a.wldh wldh,ryb.xm sjrxm,ryb.lxdh sjrdh,ryb.xxdz sjrxxdz from 
 		(select  r.xm,l.ljsj,q.qymc,l.wldh,l.sjr_id,l.djxh
-		 from t_rdrjbxx r,t_ljjbxx l,t_qyjbxx q where 1=1  and r.id=l.jjr_id and l.qybm=q.qybm 
+		 from t_rdrjbxx r,t_ljjbxx l,t_qyjbxx q where 1=1  and r.id=l.jjr_id and l.qybm=q.qybm  and l.scbzw='0'
 		<dynamic prepend="">
 			<include refid="pfghjjdwdalWhere" />
 		</dynamic>
@@ -343,10 +345,15 @@
 	<!-- 公安端个人频繁更换寄件单位统     预警      详细信息列表   -->    
     <select id="pfghjjdwyj.getListPageCount" resultClass="Integer" parameterClass="map" >
 		select count(1) from( 
-			select id id,jjr jjr,jjsj jjsj,qymc qymc,wldh wldh,sjr sjr,sjrdh sjrdh,sjrxxdz sjrxxdz,sfcl sfcl,gxdwbm gxdwbm,gxdwmc gxdwmc,djxh djxh
-			from t_grpfghjjdw gr
-			where 1=1
-			      and sfcl='0' 
+			 select         
+		             gr.id id,rownum xh,gr.jjr jjr,gr.jjsj jjsj,gr.qymc qymc,gr.wldh wldh,gr.sjr sjr,gr.sjrdh sjrdh,gr.sjrxxdz sjrxxdz,
+		             gr.sfcl sfcl,gr.gxdwbm gxdwbm,gr.gxdwmc gxdwmc,gr.djxh djxh
+			     from     
+		             t_grpfghjjdw gr,  
+		             (select jjr from t_grpfghjjdw  where 1=1 and sfcl='0' group by jjr,gxdwbm having(count(1))>=3  )xx
+			     where  
+			           gr.jjr=xx.jjr
+			           and sfcl='0' 
 		<dynamic prepend="">
 			<include refid="pfghjjdwyjWhere" />
 		</dynamic>
@@ -355,10 +362,15 @@
 	<select id="pfghjjdwyj.getListPage" resultMap="grpfghjjdwgadyj" parameterClass="map">
 	select x.* from (
 		select rownum rowno,z.* from(
-			select id id,rownum xh,jjr jjr,jjsj jjsj,qymc qymc,wldh wldh,sjr sjr,sjrdh sjrdh,sjrxxdz sjrxxdz,sfcl sfcl,gxdwbm gxdwbm,gxdwmc gxdwmc,djxh djxh
-			from t_grpfghjjdw  gr
-			where 1=1
-			      and sfcl='0' 
+			   select         
+		             gr.id id,rownum xh,gr.jjr jjr,gr.jjsj jjsj,gr.qymc qymc,gr.wldh wldh,gr.sjr sjr,gr.sjrdh sjrdh,gr.sjrxxdz sjrxxdz,
+		             gr.sfcl sfcl,gr.gxdwbm gxdwbm,gr.gxdwmc gxdwmc,gr.djxh djxh
+			     from     
+		             t_grpfghjjdw gr,  
+		             (select jjr from t_grpfghjjdw  where 1=1 and sfcl='0' group by jjr,gxdwbm having(count(1))>=3  )xx
+			     where  
+			           gr.jjr=xx.jjr
+			           and sfcl='0' 
 		<dynamic prepend="">
 			<include refid="pfghjjdwyjWhere" />
 		</dynamic>
