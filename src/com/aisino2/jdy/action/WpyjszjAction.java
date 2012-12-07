@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.aisino2.common.StringUtil;
 import com.aisino2.core.dao.Page;
 import com.aisino2.core.web.PageAction;
 import com.aisino2.jdy.domain.Jdpxx;
@@ -187,7 +188,7 @@ public class WpyjszjAction extends PageAction {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute(Constants.userKey);
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("gxdwbm", user.getDepartment().getDepartcode());
+			params.put("gxdwbm", StringUtil.trimEven0(user.getDepartment().getDepartcode()));
 			Page pageinfo = jdpxxService.findYjwuclList(params,pagesize,pagerow, dir, sort);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
