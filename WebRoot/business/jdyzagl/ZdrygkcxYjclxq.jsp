@@ -88,7 +88,6 @@ function updateCkback(json){
 </script>
 <input type="hidden" id="q_bkryid">
 <input type="hidden" id="m_bkryid">
-<input type="hidden" id="m_ckbs" value="99">
 <input type="hidden" id="m_ckczsj">
 <input type="hidden" id="m_ckczy" value="<%=userName%>">
 <input type="hidden" id="m_ckbmbm" value="<%=deptCode%>">

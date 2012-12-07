@@ -121,7 +121,14 @@
 			<isNotEmpty prepend="and" property="ljjbxx.ljsjt">
 				lj.ljsj &lt;= #ljjbxx.ljsjt#
 			</isNotEmpty>
+			<isNotEmpty prepend="" property="ljjbxx.qyjbxx">
+				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.gxdwbm">
+					qy.gxdwbm like '$ljjbxx.qyjbxx.gxdwbm$%'
+				</isNotEmpty>
+			</isNotEmpty>
+			
 		</isNotEmpty>
+		
 	</sql>
 	<sql id="JdytjxxWhere">
 		<isNotEmpty prepend="and" property="pjsjf">
@@ -265,6 +272,7 @@
 				(select rdrjbxx.xm,rdrjbxx.lxdh,rdrjbxx.xxdz xxdz,rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
 					join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
+					join t_qyjbxx qy on lj.qybm = qy.qybm
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
@@ -333,6 +341,7 @@
 							    rdrjbxx.jdrylx
 					from t_rdrjbxx rdrjbxx 
 					join  t_ljjbxx lj on lj.jjr_id = rdrjbxx.id or lj.sjr_id = rdrjbxx.id
+					join t_qyjbxx qy on lj.qybm = qy.qybm
 					where 1=1
 					<dynamic prepend="">
 						<include refid="SjgltjPageWhere" />
@@ -621,6 +630,8 @@
 		 where bkry.zjhm=ry.zjhm
 		      and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
 		      and bkry.ckbs = '0'
+		      and bkry.bkdqsj>=sysdate
+		      and bkry.ckyy is null
 		      and lj.scbzw='0'
 		<include refid="zdryListWhere"/> 
 	</select>
@@ -646,6 +657,8 @@
 					  where bkry.zjhm=ry.zjhm
 					       and (ry.id = lj.jjr_id or ry.id = lj.sjr_id)
 					       and bkry.ckbs = '0'
+					       and bkry.ckyy is null
+					       and bkry.bkdqsj>=sysdate
 					       and lj.scbzw='0'
 						<include refid="zdryListWhere"/>
 					order by $pageSort$

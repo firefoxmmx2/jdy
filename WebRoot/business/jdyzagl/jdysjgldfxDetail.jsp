@@ -1,5 +1,7 @@
 <%@page import="org.apache.poi.hssf.record.formula.functions.Call"%>
 <%@page import="java.util.Calendar"%>
+<%@page import="com.aisino2.common.StringUtil"%>
+
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="../../public/common.jsp" %>
 <%@include file="../../public/user-info.jsp" %>
@@ -281,6 +283,8 @@
    				<input type="hidden" name="tcwcl" value="1">
    				<input type="hidden" name="cgcs" value="<%=cgcs%>">
    				<input type="hidden" id="sjgl_xm" name="rdrjbxx.xm" class="inputstyle">
+   				<input type="hidden" name="ljjbxx.qyjbxx.gxdwbm" 
+   				     value="<%=StringUtil.trimEven0(gxdwbm)%>">
 		</div>
 <!-- 	    	<table width="100%" border="0" cellspacing="0" cellpadding="2"> -->
 	    		
