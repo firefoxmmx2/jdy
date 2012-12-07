@@ -50,8 +50,18 @@ function getDetail(id){
 	
 }
 function setJdpyjbz(id){
-	var jdpid=id.split('_')[0]
-	jQuery.post(updateJdpbzUrl, {"itemId":jdpid}, function(){setPageListWplbbkyscl(1);}, "") 
+	var jdpid=id.split('_')[0];
+	jConfirm('确认处理？', '提示信息', function(r) {
+    	if(r==true){
+    		jQuery.post(updateJdpbzUrl, {"itemId":jdpid}, function(){
+    			setPageListWplbbkyscl(1);
+    			}, "") 
+		}
+		else{
+		   return false;
+		}
+	}); 
+	
 	
 }
 </script>
