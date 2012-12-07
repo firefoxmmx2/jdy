@@ -121,7 +121,7 @@
 			<isNotEmpty prepend="and" property="ljjbxx.ljsjt">
 				lj.ljsj &lt;= #ljjbxx.ljsjt#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="ljjbxx.qyjbxx">
+			<isNotEmpty prepend="" property="ljjbxx.qyjbxx">
 				<isNotEmpty prepend="and" property="ljjbxx.qyjbxx.gxdwbm">
 					qy.gxdwbm like '$ljjbxx.qyjbxx.gxdwbm$%'
 				</isNotEmpty>
