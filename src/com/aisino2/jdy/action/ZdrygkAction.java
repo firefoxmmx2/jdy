@@ -236,6 +236,7 @@ public class ZdrygkAction extends PageAction {
 			params.put("ksrq", jdytjxx.getKsrq());
 			params.put("jsrq", jdytjxx.getJsrq());
 			params.put("gxdwbm", StringUtil.trimEven0(jdytjxx.getGxdwbm()));
+			params.put("ywhyjqbbz",jdytjxx.getYwhyjqbbz());//2012年12月6日新添加的业务和预警区别标志
 			Page pageinfo = jdytjxx_service.findZdryForPage(params, 1, Integer.parseInt(maxRows), dir, sort);
 			totalpage = pageinfo.getTotalPages();
 			totalrows = pageinfo.getTotalRows();
