@@ -350,7 +350,7 @@
 		             gr.sfcl sfcl,gr.gxdwbm gxdwbm,gr.gxdwmc gxdwmc,gr.djxh djxh
 			     from     
 		             t_grpfghjjdw gr,  
-		             (select jjr from t_grpfghjjdw  where 1=1 and sfcl='0' group by jjr,gxdwbm having(count(1))>=3  )xx
+		             (select jjr from t_grpfghjjdw  where 1=1 and sfcl='0' and gxdwbm like '$gxdwbm$%' group by jjr  having(count(1))>=3  )xx
 			     where  
 			           gr.jjr=xx.jjr
 			           and sfcl='0' 
@@ -367,7 +367,7 @@
 		             gr.sfcl sfcl,gr.gxdwbm gxdwbm,gr.gxdwmc gxdwmc,gr.djxh djxh
 			     from     
 		             t_grpfghjjdw gr,  
-		             (select jjr from t_grpfghjjdw  where 1=1 and sfcl='0' group by jjr,gxdwbm having(count(1))>=3  )xx
+		             (select jjr from t_grpfghjjdw  where 1=1 and sfcl='0' and gxdwbm like '$gxdwbm$%' group by jjr  having(count(1))>=3  )xx
 			     where  
 			           gr.jjr=xx.jjr
 			           and sfcl='0' 
