@@ -105,7 +105,7 @@ function open_zp(){
 				 </td>
 				 <td>
 				    <div>
-					  <jsp:include page="../../business/jdyzagl/saomiaoyiPictureJdyjjr.jsp?zh=true&mo=2&pic=picControlscrjjr&wi=80&hi=114&file=true" flush="tru"></jsp:include>
+					  <jsp:include page="../../business/jdyzagl/saomiaoyiPictureJdyjjr.jsp?zh=true&mo=2&pic=picControlscrjjr&wi=80&hi=114&file=true" flush="true"></jsp:include>
 					</div>
 				 </td>
 			 </tr>
