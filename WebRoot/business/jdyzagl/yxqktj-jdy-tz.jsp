@@ -12,6 +12,15 @@
 	var currentGxdwbm = '<%=gxdwbm%>';
 	var myTableDataBmXxtz="";
 	var xgd="";
+	//------物品类别分类展示所添加
+	var jdytjxx_wp_queryTable;
+	var jdytjxx_pageUrl;
+	var jdytjxx_divnid;
+	var jdytjxx__table_id;
+	var jdytjxx_tabletitle;
+	var jdytjxx_excel_url;
+	var jdytjxx_tables;
+	var myTableDataBmXxtzh="";
 	$(document).ready( function() {
 		QyjbxxList_Html="business/jdyzagl/jdytjxxQyjbxxList.jsp";
 		QyjbxxListWidth="1000";
@@ -28,17 +37,20 @@
 		currDate.setDate(currDate.getDate()-1);
 		$("#y_qssj").val(getDate(currDate,"-"));
 		
-		$("#yxqklb").hide();//隐藏列表
+		$("#yxqklb").hide();//隐藏运行情况列表
+		$("#jdytjxx_data_wp_div").hide();//隐藏物品类别显示列表
+		$("#jdytjxx_tx_div").hide();//隐藏运行情况图形
+		$("#dryxtjexcel").hide();//默认隐藏导出按钮
 		xgd=document.body.clientHeight-pageHeight/2-90;
 		
-		setPageListX(1);
+		
+		wpfltj_loadPage("jdytjxx_table_wp");
+		setPageListX(1);//运行情况查询函数
 	});
 
 	function setPageListX(pageno, url) {
-
 		$("#XtyxqkylData").html(tablesX);
 		createXML("y_");
-
 		var params = getYxqkQueryParams();
 		var mygrid1 = $("#XtyxqkylTable").ingrid( {
 			onRowSelect :null,
@@ -208,17 +220,115 @@
 	function getYxqkQueryParams(){
 		return {'gxdwbm':'<%=gxdwbm%>','departlevel':'<%=departlevel%>'};
 	}
+	//辖区内物品分类统计
+	function wpfltj_loadPage(divpageid){
+		jdytjxx_pageUrl="jdy/queryJdyWpfltj_jdytjxx.action";
+		jdytjxx_divnid="jdytjxx_data_wp_div";
+		jdytjxx__table_id="jdytjxx_table_wp";
+		jdytjxx_tabletitle="物品分类统计";
+		jdytjxx_excel_url="jdy/exportJdyWpfltj_jdytjxx.action";
+		if(!jdytjxx_wp_queryTable)
+			jdytjxx_wp_queryTable=$("#"+jdytjxx__table_id);
+		jdytjxx_tables=$("#"+divpageid).html();
+		wpfltj_page_query(1,'#');
+		myTableDataBmXxtz=null;
+	}
+	/**
+	 * 物品分类排名查询
+	 */
+	function wpfltj_page_query(pageno,url){
+		if (true){
+			var aybmxxtj_gxdwbm=$("#jdytjxx_gxdwbm").val();
+			if(aybmxxtj_gxdwbm==''||aybmxxtj_gxdwbm==null){
+				$("#jdytjxx_gxdwbm").val(<%=gxdwbm%>);
+				$("#jdytjxx_departlevel").val(<%=departlevel%>);
+			} 
+			if($('#'+jdytjxx__table_id).length == 0){
+				$('#'+jdytjxx_divnid).html(jdytjxx_wp_queryTable);
+			}
+			url=jdytjxx_pageUrl;
+			params.show_number = undefined;
+			var mygrid1 = $("#"+jdytjxx__table_id).ingrid({
+											paging:false,	 
+											url: url,	
+											height: pageHeight-263,
+	                                        ingridPageParams:sXML,
+	                                        ingridExtraParams:params,
+	                                        onRowSelect:null,
+	                                        changeHref:function(table){
+	                                        	try{
+	                                        		myTableDataBmXxtzh=null;
+	    	                                    	var $chart_tableh = $(table).clone();
+	    	                                    	myTableDataBmXxtzh= $(jdytjxx_wp_queryTable).clone().append($chart_tableh.find('tbody').html()).hide();
+	    	                                    	if(myTableDataBmXxtzh)
+	    												displayWpflTjImageh();
+													else
+														$('#jdytjxx_tx_divh').text('没有统计数据');
+	                                        	}catch(e){
+	                                        		$('#jdytjxx_tx_divh').text('没有统计数据');
+	                                        	}
+	                                    },
+											pageNumber: pageno,
+											sorting: false,
+											isPlayResultNull:false,
+											colWidths: ["50%","50%"]									
+										});				
+			}
+	}	
+	/**
+	 * 物品分类统计图
+	 */
+	function displayWpflTjImageh(){
+		$("#jdytjxx_tx_divh").empty();
+		$('<div id="jdytjxx_tx_barh" style="float:left;"></div>').appendTo("#jdytjxx_tx_divh");
+		$('<div id="jdytjxx_tx_pieh"></div>').appendTo('#jdytjxx_tx_divh');
+		
+		if(myTableDataBmXxtzh!=null&&myTableDataBmXxtzh!=""){
+			$("#jdytjxx_tx_barh").fusionChart({
+				prefix:'dddd',
+				type:'bar',
+				columns:[1],
+				data:myTableDataBmXxtzh,
+				title:jdytjxx_tabletitle,
+				width:505,
+				height:xgd,//pageHeight-390,
+				isTotal:true
+			});
+			$("#jdytjxx_tx_pieh").fusionChart({
+				prefix:'dddd',
+				type:'pie',
+				columns:[1],
+				data:myTableDataBmXxtzh,
+				title:jdytjxx_tabletitle,
+				width:505,
+				height:xgd,
+				isTotal:true
+			});
+			
+		}
+	}
 	//判断图标展示和列表展示
 	function tbzslbzs1(){
-    	$("#yxqklb").hide();//隐藏列表
-    	$("#jdytjxx_tx_div").show();//显示图形
+    	$("#yxqklb").hide();//隐藏运行情况列表
+    	$("#jdytjxx_tx_divh").hide();//隐藏物品分类图形
+    	$("#jdytjxx_tx_div").show();//显示运行情况图形
+    	$("#dryxtjexcel").show();//显示运行情况导出按钮
+    	
 	}
 	//判断图标展示和列表展示
 	function tbzslbzs2(){
-    	$("#jdytjxx_tx_div").hide();//隐藏图形
+    	$("#jdytjxx_tx_div").hide();//隐藏运行情况图形
+    	$("#jdytjxx_tx_divh").hide();//隐藏物品分类图形
     	$("#yxqklb").show();//显示列表
+    	$("#dryxtjexcel").show();//显示运行情况导出按钮
 	}
-	
+	//判断图标展示和列表展示
+	function tbzslbzs3(){
+    	$("#yxqklb").hide();//隐藏运行情况列表
+    	$("#jdytjxx_tx_div").hide();//隐藏运行情况图形
+    	$("#dryxtjexcel").hide();//隐藏运行情况导出按钮
+    	$("#jdytjxx_tx_divh").show();//显示物品分类图形
+	}
 </script>
 		<input type="hidden" id="y_qssj" />
 		<input type="hidden" id="y_jzsj" />
@@ -229,8 +339,9 @@
 				<td class="queryfont" width='88%'>
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<td width="90%">&nbsp;
-						<label><input type="radio" name="chartType" id="chartType1" onclick="tbzslbzs1()" value="1" checked="checked">柱状图/饼状图</label>
-						<label><input type="radio" name="chartType" id="chartType2" onclick="tbzslbzs2()" value="2">列表展示</label>
+						<label><input type="radio" name="chartType" id="chartType3" onclick="tbzslbzs3()" value="3" checked="checked">物品分类统计</label>
+						<label><input type="radio" name="chartType" id="chartType1" onclick="tbzslbzs1()" value="1">运行情况:图表</label>
+						<label><input type="radio" name="chartType" id="chartType2" onclick="tbzslbzs2()" value="2">运行情况:列表展示</label>
 						</td>
 						<td width="10%"><a href="#" class="exceldcbutton" onclick='setExportExcel_jdyyxtj();' id="dryxtjexcel">导出</a></td>
 					</table>
@@ -273,8 +384,22 @@
 				</td>
 			</tr>
 		</table>
+<%--物品分类统计数据表格--%>
+<div id="jdytjxx_data_wp_div" style="width: 100%;" class="listdata">
+	<table id="jdytjxx_table_wp" width="100%">
+				<thead>
+  				<tr>       
+   					<th name="l_wpzlmc" datatype="String" sumflag="0">物品种类</th>
+   					<th name="l_cs" datatype="Integer" sumflag="0">数目</th>
+  				</tr>
+				</thead>
+	</table>	
+</div>
 <div id="jdccjTj_detail"  class="page-layout" src="#"
 		style="top:5px; left:160px;display: none;"></div>
 <div>
 	<div id="jdytjxx_tx_div"></div>
+</div>
+<div>
+	<div id="jdytjxx_tx_divh"></div>
 </div>
