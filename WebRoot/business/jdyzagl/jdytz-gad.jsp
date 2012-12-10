@@ -20,7 +20,7 @@
 	</fieldset>
 	
 	<fieldset>
-		<legend>运行情况</legend>
+		<legend>物品分类统计/运行情况</legend>
 		<div id="yxqkData"></div>
 	</fieldset>
 </div>
