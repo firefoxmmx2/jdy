@@ -137,7 +137,7 @@
 				columns:[1],
 				data:myTableDataBmXxtz,
 				title:'运行情况',
-				width:505,
+				width:500,
 				height:xgd,//pageHeight-390,
 				isTotal:true
 			});
@@ -147,7 +147,7 @@
 				columns:[1],
 				data:myTableDataBmXxtz,
 				title:'运行情况',
-				width:505,
+				width:500,
 				height:xgd,
 				isTotal:true
 			});
@@ -290,7 +290,7 @@
 				columns:[1],
 				data:myTableDataBmXxtzh,
 				title:jdytjxx_tabletitle,
-				width:505,
+				width:500,
 				height:xgd,//pageHeight-390,
 				isTotal:true
 			});
@@ -300,7 +300,7 @@
 				columns:[1],
 				data:myTableDataBmXxtzh,
 				title:jdytjxx_tabletitle,
-				width:505,
+				width:500,
 				height:xgd,
 				isTotal:true
 			});
