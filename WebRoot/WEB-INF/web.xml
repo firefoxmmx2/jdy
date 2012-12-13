@@ -79,11 +79,6 @@
 		<filter-name>cacheFilter</filter-name>
 		<filter-class>com.aisino2.cache.CacheFilter</filter-class>
 	</filter>
-	<filter>
-		<display-name>YjcsFilter</display-name>
-		<filter-name>YjcsFilter</filter-name>
-		<filter-class>com.aisino2.jdy.schudule.filter.YjcsFilter</filter-class>
-	</filter>
 
 	<!-- mapping -->
 	<filter-mapping>
@@ -130,10 +125,6 @@
 		<filter-name>cacheFilter</filter-name>
 		<url-pattern>/</url-pattern>
 	</filter-mapping>
-	<filter-mapping>
-		<filter-name>YjcsFilter</filter-name>
-		<url-pattern>/</url-pattern>
-	</filter-mapping>
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
@@ -161,6 +152,7 @@
 			</param-value>
 		</init-param>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>xfire</servlet-name>
 		<url-pattern>*.ws</url-pattern>
