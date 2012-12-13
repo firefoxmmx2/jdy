@@ -17,7 +17,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 import com.aisino2.jdy.domain.Yjcs;
-import com.aisino2.jdy.schudule.filter.YjcsFilter;
 import com.aisino2.jdy.schudule.job.YujinJob;
 import com.aisino2.jdy.service.IYjcsService;
 
@@ -27,7 +26,7 @@ import com.aisino2.jdy.service.IYjcsService;
 public class YjcsSchuduleFactory extends WebApplicationObjectSupport{
 	private ApplicationContext context;
 	private IYjcsService yjcsService;
-	private Logger log = Logger.getLogger(YjcsFilter.class);
+	private Logger log = Logger.getLogger(YjcsSchuduleFactory.class);
 	
 	public void init(){
 		context = getApplicationContext();
