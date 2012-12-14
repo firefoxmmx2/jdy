@@ -188,7 +188,7 @@ function close_div(){
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
       <td align="left" class="title1">寄递品信息详情</td>
-      <td align="right"><a href="#" id="closeDiv" onclick='close_div();' class="close"></a></td>
+      <td align="right"><a href="#" id="closeDiv" onclick='close_dialog(this);' class="close"></a></td>
     </tr>
 </table>
 <table width="100%" border="0" align="center"  cellpadding="0" cellspacing="0">
@@ -284,8 +284,10 @@ function close_div(){
 </table>
 </tr>
 <tr><td height="3"></td></tr>
+<!-- 
 <tr height="25" align="center">
-	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='close_div();'>返回</a></td>
+	<td colspan="6"><a href="#" id="addbutton" hidefocus="true" class="submitbutton" title="返回" onclick='close_dialog(this);'>返回</a></td>
 </tr>
+ -->
 </table>
 
