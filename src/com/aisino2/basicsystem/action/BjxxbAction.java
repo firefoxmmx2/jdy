@@ -252,6 +252,10 @@ public class BjxxbAction extends PageAction {
 
 		Map map = new HashMap();
 		map.put("bjsj1", getMonthAgo());
+		//寄递业用--添加行业类别代码
+		if(null!=bjxxb.getHylbdm()){
+			map.put("hylbdm", bjxxb.getHylbdm());
+		}
 		Page page = bjxxbService.getListForPage(map, pagesize, pagerow, sort, dir);
 		totalpage = page.getTotalPages();
 		totalrows = page.getTotalRows();
