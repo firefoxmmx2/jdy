@@ -448,7 +448,7 @@
 						from t_qyjbxx t,t_department d 
 						where 
 							t.gxdwbm = d.departcode 
-							and d.departcode >= #departlevel# 
+							and d.departlevel >= #departlevel# 
 							and  t.hylbdm='Y'
 							and t.scbz = 0 
 							and t.gxdwbm like '$gxdwbm$%'
