@@ -16,14 +16,13 @@
 	} else {
 		loginBbh = "";
 	}
-	
     //看 是否session过期掉的这个页面。
     String sessionout=request.getParameter("sessionout");
        if(sessionout==null){
          sessionout="no";
        }
        
-        String skhdcsbm=request.getParameter("skhdcsbm");
+        String skhdcsbm=request.getParameter("skhdcsbm");  
 	    String skhdcsmc=request.getParameter("skhdcsmc");
 	     String kjtuichu=request.getParameter("kjtuichu");//从控件中页面上的退出
 	    if(kjtuichu==null) kjtuichu="noindex";
@@ -168,7 +167,7 @@ function fnreset()
 var sscsbm ="<%=skhdcsbm%>";
 var sscs ="<%=skhdcsmc%>";
 var kjtuichu="<%=kjtuichu%>";
-
+  
 if(sscsbm!='nocsbm'){
 
 creatSessionForCsbmCsmc(sscsbm,sscs);
@@ -210,6 +209,10 @@ creatSessionForCsbmCsmc(sscsbm,sscs);
 			});
 			
 	  }
+//使用PKI证书登陆
+function Pkizsdl(){
+	 window.location.href='calogin.jsp';
+}
 
 
 
@@ -249,7 +252,7 @@ if((typeof(objObject) != "undefined" )){
 		    	$("#p_loginip").val(IPAddr);
 		    }
 		        
-	    }
+	    }f
     }else{
 	     MACAddr = "";
 	     IPAddr = "";
@@ -286,9 +289,10 @@ if((typeof(objObject) != "undefined" )){
         </table>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="30%"></td>
+          <td width="2%"></td>
           <td width="30%"><a href="#" class="loginbotton"  id="sendajax">确认</a></td>
-          <td width="28%"><a href="#"  class="loginbotton" onclick='fnreset()'>取消</a></td>
+          <td width="30%"><a href="#"  class="loginbotton" onclick='fnreset()'>取消</a></td>
+          <td width="30%"><a href="#"  class="loginbotton" onclick='Pkizsdl()'>证书登陆</a></td>
           <td width="12%"></td>
         </tr>
       </table></td>
