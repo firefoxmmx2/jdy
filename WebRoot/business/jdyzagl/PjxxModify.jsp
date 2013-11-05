@@ -513,6 +513,7 @@ function loadData(){
 <%-- 修正寄件人和收件人没用ID的问题 --%>
 <input type="hidden" name="pjxx.ljjbxx.jjr.id" id="pjjbxxmod_jjrid">
 <input type="hidden" name="pjxx.ljjbxx.sjr.id" id="pjjbxxmod_sjrid">
+<input type="hidden" name="pjxx.dsr.id" id=pjxx_dsr_id><!-- 代收人id隐藏域 -->
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
