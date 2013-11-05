@@ -46,7 +46,7 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 		if (pjjbxx.getLjjbxx().getDjxh() == null
 				|| pjjbxx.getLjjbxx().getDjxh().trim().length() == 0) {
 			pjjbxx.getLjjbxx().setSfbj("Y");
-//			补加的揽件信息 揽件人和揽件填报人就是当前填报的从业人员
+			// 补加的揽件信息 揽件人和揽件填报人就是当前填报的从业人员
 			pjjbxx.getLjjbxx().setLjr(pjjbxx.getPjtbr());
 			pjjbxx.getLjjbxx().setLjsj(pjjbxx.getPjtbsj());
 			pjjbxx.getLjjbxx().setLjtbr(pjjbxx.getPjtbr());
@@ -57,8 +57,9 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 		}
 
 		// 新添加一个人员对象为新的代收人。
-		if (pjjbxx.getDsr() != null && StringUtil.isNotEmpty(pjjbxx.getDsr().getXm()) ) {
-			pjjbxx.getDsr().setJdrylx("30"); //设置寄递人员类型 ， 代收
+		if (pjjbxx.getDsr() != null
+				&& StringUtil.isNotEmpty(pjjbxx.getDsr().getXm())) {
+			pjjbxx.getDsr().setJdrylx("30"); // 设置寄递人员类型 ， 代收
 			pjjbxx.setDsr(rdrjbxxService.insertRdrjbxx(pjjbxx.getDsr()));
 		}
 
@@ -85,12 +86,22 @@ public class PjjbxxServiceImpl implements IPjjbxxService {
 			throw new RuntimeException("需要修改的派件ID不能为空");
 
 		// 如果该派件的揽件信息不存在，需要自动创建，并且设置揽件信息的状态为 补件状态。
-		if (pjjbxx.getLjjbxx()!=null && StringUtil.isNotEmpty(pjjbxx.getLjjbxx().getDjxh())) {
+		if (pjjbxx.getLjjbxx() != null
+				&& StringUtil.isNotEmpty(pjjbxx.getLjjbxx().getDjxh())) {
 			ljjbxxService.updateLjjbxx(pjjbxx.getLjjbxx());
 		}
 
 		// 如果在修改派件信息的时候修改的代收人信息，当身份证 和 以前的身份证不一样的时候，
 		// 新添加一个人员对象为新的代收人。
+		if (pjjbxx.getDsr() != null) {// 代收人对象不为空
+			// 判断如果派件信息添加时没有录入代收人没有，此处进行添加
+			if ((pjjbxx.getDsr().getXm() != null
+					|| pjjbxx.getDsr().getZjhm() != null || pjjbxx.getDsr()
+					.getZjhm() != null) && pjjbxx.getDsr().getId() == null) {
+				rdrjbxxService.insertRdrjbxx(pjjbxx.getDsr());
+			}
+
+		}
 		if (pjjbxx.getDsr() != null && pjjbxx.getDsr().getId() != null) {
 			rdrjbxxService.updateRdrjbxx(pjjbxx.getDsr());
 		}
